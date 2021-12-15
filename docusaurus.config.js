@@ -15,7 +15,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'obolnetwork', // Usually your GitHub org/user name.
   projectName: 'obol-docs', // Usually your repo name.
-
+  trailingSlash: false,
   presets: [
     [
       '@docusaurus/preset-classic',
