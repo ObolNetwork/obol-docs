@@ -2,6 +2,6 @@
 sidebar_position: 9
 ---
 
-# 🧪  Testnet
+# 🧪 Testnet
 
-More information coming soon.  
+More information coming soon.

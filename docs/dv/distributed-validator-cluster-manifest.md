@@ -4,24 +4,23 @@ description: Documenting a Distributed Validator Cluster in a standardised file 
 
 # Distributed Validator Cluster Manifest
 
-The manifest file captures the public and private info required to take part in a distributed validator cluster. Each operator has their own version of the cluster manifest containing their DV client secrets.&#x20;
+The manifest file captures the public and private info required to take part in a distributed validator cluster. Each operator has their own version of the cluster manifest containing their DV client secrets.
 
-One manifest can contain a number of distributed validators being operated by the same group of nodes.&#x20;
+One manifest can contain a number of distributed validators being operated by the same group of nodes.
 
 The manifest provides at least the following info.
 
-* The number of operators participating in this cluster.
-* ENRs for each participating operator. (SECP256K1 public keys)
-* Signatures from each key shard authorising their respective operator ENRs
-* A collection of distributed validators operated by this cluster
-  * The BLS public key of the Distributed Validator
-  * The total number of shards and minimum threshold required for signing
-  * The BLS public keys for each shard of this validator
-  *   Public commitments to the secret sharing polynomial.
+- The number of operators participating in this cluster.
+- ENRs for each participating operator. (SECP256K1 public keys)
+- Signatures from each key shard authorising their respective operator ENRs
+- A collection of distributed validators operated by this cluster
 
-      Used to verify partial signatures during signature aggregation.
+  - The BLS public key of the Distributed Validator
+  - The total number of shards and minimum threshold required for signing
+  - The BLS public keys for each shard of this validator
+  - Public commitments to the secret sharing polynomial.
 
-
+    Used to verify partial signatures during signature aggregation.
 
 ### JSON schema
 
@@ -83,4 +82,4 @@ Example file
 }
 ```
 
-This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.&#x20;
+This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.

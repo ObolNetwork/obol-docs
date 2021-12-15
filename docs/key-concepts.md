@@ -7,14 +7,14 @@ description: Some of the key terms in the field of Distributed Validator Technol
 
 ## Distributed Validator
 
-![A Distributed Validator](</img/WhatIsADistributedValidator.png>)
+![A Distributed Validator](/img/WhatIsADistributedValidator.png)
 
 A Distributed Validator is one validator public key on the Ethereum network, being operated in an Active/Active manner through the use of Distributed Validator Technology.
 ​
 
 ## Distributed Validator Node
 
-![A Distributed Validator Node](</img/WhatIsADistributedValidatorNode.png>)
+![A Distributed Validator Node](/img/WhatIsADistributedValidatorNode.png)
 
 A distributed validator node is the set of clients an operator needs to configure and run to fulfil the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like
 , or other monitoring or telemetry clients on the same hardware to ensure optimal performance.
@@ -52,7 +52,7 @@ Examples of validator clients include:
 
 ## Distributed Validator Cluster
 
-![A Distributed Validator Cluster](</img/WhatIsADistributedValidatorCluster.png>)
+![A Distributed Validator Cluster](/img/WhatIsADistributedValidatorCluster.png)
 
 A distributed validator cluster is a collection of distributed validator nodes connected together to service a set of distributed validators generated during a DVK ceremony.
 

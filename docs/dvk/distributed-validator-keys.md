@@ -8,46 +8,46 @@ description: >-
 
 ### DVK Working Group
 
-When operating a proof of stake validator, secure key generation and custody processes are an absolute necessity.&#x20;
+When operating a proof of stake validator, secure key generation and custody processes are an absolute necessity.
 
 As part of Obol Labs efforts to build Distributed Validator Technology, we intend to form a working group amongst key stakeholders in the PoS Ethereum community to help define and build out open source tools as public goods to facilitate the creation of Distributed Validators regardless of use case.
 
 The purpose of this working group is as follows:
 
-* Develop and maintain an open source CLI program for taking part in Distributed Validator Key (DVK) ceremonies
-* Develop and maintain an open source SPA web interface for facilitating DVK ceremonies with authenticated counterparties&#x20;
-* Submit Ethereum Improvement Proposals (EIPS) for
-  * Standardising the configuration of a key generation ceremony
-  * Standardising the encoding of a distributed key share
-  * Standardising the encoding of a distributed validator cluster manifest
-* Educate PoS Ethereum Validators on the benefits and risks of running Distributed Validators
-* Bring the Ethereum community together to collaborate on a tool that will be used by everyone&#x20;
+- Develop and maintain an open source CLI program for taking part in Distributed Validator Key (DVK) ceremonies
+- Develop and maintain an open source SPA web interface for facilitating DVK ceremonies with authenticated counterparties
+- Submit Ethereum Improvement Proposals (EIPS) for
+  - Standardising the configuration of a key generation ceremony
+  - Standardising the encoding of a distributed key share
+  - Standardising the encoding of a distributed validator cluster manifest
+- Educate PoS Ethereum Validators on the benefits and risks of running Distributed Validators
+- Bring the Ethereum community together to collaborate on a tool that will be used by everyone
 
 As part of the effort Obol will be commissioning and open sourcing a far reaching research report on DVT and Multi-Operator Validators.
 
 #### Intended Working Group Participants
 
-* Ethereum Foundation
-* Prysmatic Labs
-* Lighthouse
-* Lodestar
-* Nimbus
-* Consensys/Teku
-* Attestant
-* Coinbase Cloud
-* Lido
-* Rocketpool
-* Blockdaemon
-* Figment
-* Stakefish
-* Stakewise
-* Staking Facilities
+- Ethereum Foundation
+- Prysmatic Labs
+- Lighthouse
+- Lodestar
+- Nimbus
+- Consensys/Teku
+- Attestant
+- Coinbase Cloud
+- Lido
+- Rocketpool
+- Blockdaemon
+- Figment
+- Stakefish
+- Stakewise
+- Staking Facilities
 
 ## Deliverables
 
 ### A CLI program for taking part in DVK ceremonies
 
-One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including [eth2.0-deposit-cli](https://github.com/ethereum/eth2.0-deposit-cli) and [ethdo](https://github.com/wealdtech/ethdo).&#x20;
+One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including [eth2.0-deposit-cli](https://github.com/ethereum/eth2.0-deposit-cli) and [ethdo](https://github.com/wealdtech/ethdo).
 
 Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration file and network access to coordinate with other participant nodes. This tool can be used by a single entity (synchronous) or a group of participants (semi asynchronous).
 
@@ -65,33 +65,32 @@ Another of the many successes in the Ethereum development community is the high 
 
 Two examples of such standards in the consensus client space include:
 
-* &#x20;[EIP-2335](https://eips.ethereum.org/EIPS/eip-2335): A JSON format for the storage and interchange of BLS12-381 private keys.
-* [EIP-3076](https://eips.ethereum.org/EIPS/eip-3076): Slashing Protection Interchange Format
+- [EIP-2335](https://eips.ethereum.org/EIPS/eip-2335): A JSON format for the storage and interchange of BLS12-381 private keys.
+- [EIP-3076](https://eips.ethereum.org/EIPS/eip-3076): Slashing Protection Interchange Format
 
 It is Obol Labs intention to submit new EIPs for a Distributed Validator Key encoding scheme in line with EIP-2335, and a new EIP for encoding the configuration and secrets needed for a DKG process as the working group outlines. Likely ceremony artifacts include:
 
-* Signed validator deposit data files
-* Signed exit validator messages
-* Private key shares for each operator's validator client
-* Cluster manifests for each distributed validator middleware to communicate together in an authenticated manner
+- Signed validator deposit data files
+- Signed exit validator messages
+- Private key shares for each operator's validator client
+- Cluster manifests for each distributed validator middleware to communicate together in an authenticated manner
 
 ## Next Steps
 
 **Project Management:**
 
-The working group will be coordinated by the Obol Labs team, who will be responsible for the implementation and delivery of the community tools. Participants are welcome to  partake in the implementation process if desired.\
-
+The working group will be coordinated by the Obol Labs team, who will be responsible for the implementation and delivery of the community tools. Participants are welcome to partake in the implementation process if desired.\
 
 **Implementation Language:**
 
-* Rust (preferred - can target WASM for Browser)
-* Go
+- Rust (preferred - can target WASM for Browser)
+- Go
 
 **DKG Algorithm Options:**
 
-* [Fouque-Stern](https://hal.inria.fr/inria-00565274/document)
-* [Practical Asynchronous Distributed Key Generation](https://eprint.iacr.org/2021/1591)
-* More to be considered durng the research phase
+- [Fouque-Stern](https://hal.inria.fr/inria-00565274/document)
+- [Practical Asynchronous Distributed Key Generation](https://eprint.iacr.org/2021/1591)
+- More to be considered durng the research phase
 
 ## Phase 0
 
@@ -103,13 +102,13 @@ The Obol Core team will draft the initial EIPs in collaboration with the followi
 \
 **Sub Group:**
 
-* EF Members
-* Jim McDonald
-* Ben Edgington
-* Raul Jordan
-* Vasilly (Lido)
-* Coinbase Cloud
-* Sourav Das
+- EF Members
+- Jim McDonald
+- Ben Edgington
+- Raul Jordan
+- Vasilly (Lido)
+- Coinbase Cloud
+- Sourav Das
 
 ## Phase 1
 
@@ -120,4 +119,3 @@ The Obol Core team will conduct a user feedback session with all working group m
 **Start Date:** TBD
 
 **Completion Date:** Est end of 1Q22
-
