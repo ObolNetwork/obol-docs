@@ -1,7 +1,7 @@
 ---
-sidebar_position: 2
+sidebar_position: 9
 ---
 
-# Obol Network Testnet
+# 🧪  Testnet
 
-More information coming soon. Bear with us. 
+More information coming soon.  

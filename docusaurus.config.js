@@ -53,7 +53,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {to: 'https://blog.obol.tech', label: 'Blog', position: 'left'},
           {
@@ -70,8 +70,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Intro to Obol',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Charon',
+                to: '/docs/dv/introducing-charon',
+              },
+              {
+                label: 'DVK',
+                to: '/docs/dvk/distributed-validator-keys',
               },
             ],
           },
@@ -93,7 +101,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                href: 'https://blog.obol.tech/',
               },
               {
                 label: 'GitHub',
@@ -102,7 +110,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Obol Technologies, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Obol Labs, Inc. `,
       },
       prism: {
         theme: lightCodeTheme,
