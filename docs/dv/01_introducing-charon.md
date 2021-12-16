@@ -16,7 +16,7 @@ Distributed Validator Technology is \*ahem\* _the application of cryptography an
 
 **Threshold Signing:** Being able to sign a message with only a subset of key holders taking part - giving the collection of machines a level of fault tolerance.
 
-So the idea behind distributed validator tech is that so long as less than 33% of the nodes in your cluster crash or go offline at the same time, your Ethereum validator can stay online. The remaining active nodes are still able to come to consensus on what to sign, and can still produce valid signatures for their staking duties. This is known as Active/Active redundancy, a common pattern for minimizing downtime in mission critical systems.
+So the idea behind distributed validator technology is that provided less than 33% of the nodes in your cluster crash or go offline at the same time, your Ethereum validator can stay online. The remaining active nodes are still able to come to consensus on what to sign, and can still produce valid signatures for their staking duties. This is known as Active/Active redundancy, a common pattern for minimizing downtime in mission critical systems.
 
 ### What is Charon?
 

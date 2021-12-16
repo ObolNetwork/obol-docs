@@ -16,25 +16,31 @@ A Distributed Validator is one validator public key on the Ethereum network, bei
 
 ![A Distributed Validator Node](/img/WhatIsADistributedValidatorNode.png)
 
-A distributed validator node is the set of clients an operator needs to configure and run to fulfil the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like
-, or other monitoring or telemetry clients on the same hardware to ensure optimal performance.
+A distributed validator node is the set of clients an operator needs to configure and run to fulfil the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like [mev-boost](https://github.com/flashbots/mev-boost), or other monitoring or telemetry services on the same hardware to ensure optimal performance.
 
 In the above example, the stack includes geth, lighthouse, charon and lodestar.
 
 ### Execution Client
 
 An execution client (formerly known as an Eth1 client) specialises in simulating the EVM and managing the transaction pool.
-Examples of execution clients include
-​
 
-- Nethermind
-- Erigon
-- Consensus Quorum
+Examples of execution clients include:
+
+- [Go-Ethereum](https://geth.ethereum.org/)
+- [Nethermind](https://docs.nethermind.io/nethermind/)
+- [Erigon](https://github.com/ledgerwatch/erigon)
 
 ### Consensus Client
 
 A consensus client focusing on running the proof of stake consensus layer of Ethereum, often referred to as the beacon chain.
+
 Examples of Consensus clients include:
+
+- [Prysm](https://docs.prylabs.network/docs/how-prysm-works/beacon-node)
+- [Teku](https://docs.teku.consensys.net/en/stable/)
+- [Lighthouse](https://lighthouse-book.sigmaprime.io/api-bn.html)
+- [Nimbus](https://nimbus.guide/)
+- [Lodestar](https://github.com/ChainSafe/lodestar)
 
 ### Distributed Validator Client
 
@@ -48,7 +54,13 @@ The only example of a distributed validator client built with a non-custodial mi
 ### Validator Client
 
 A validator client is a piece of code that operates one or more Ethereum validators.
+
 Examples of validator clients include:
+
+- [Vouch](https://www.attestant.io/posts/introducing-vouch/)
+- [Prysm](https://docs.prylabs.network/docs/how-prysm-works/prysm-validator-client/)
+- [Teku](https://docs.teku.consensys.net/en/stable/)
+- [Lighthouse](https://lighthouse-book.sigmaprime.io/api-bn.html)
 
 ## Distributed Validator Cluster
 

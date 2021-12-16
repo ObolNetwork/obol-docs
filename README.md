@@ -174,3 +174,7 @@ Or build your site to include all the locales at once:
 ```bash
 npm run build
 ```
+
+## Notes/Bugs/Gotchas
+
+Configure a documentation page's extra details with these [metadata fields](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-frontmatter).
