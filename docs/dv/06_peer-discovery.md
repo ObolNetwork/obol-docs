@@ -8,7 +8,7 @@ How do you identify legitimate consensus messages between distributed validator 
 
 Middleware clients need to be able to authenticate one another. We achieve this by giving each middleware client something they can use that other clients in the cluster will be able to recognise as legitimate.
 
-At the end of a [DVK generation ceremony](validator-creation.md#stages-of-creating-a-distributed-validator), each operator will have a number of files outputted by their CLI program/browser based on how many distributed validators the group chose to generate together. These files are:
+At the end of a [DVK generation ceremony](./02_validator-creation.md#stages-of-creating-a-distributed-validator), each operator will have a number of files outputted by their CLI program/browser based on how many distributed validators the group chose to generate together. These files are:
 
 - **Validator keystores:** These files will be loaded into the operator's validator client and each file represents one shard of a distributed validator.
 - **A distributed validator cluster manifest:** This file contains the configuration and secrets a distributed validator client like charon needs to join a cluster capable of operating a number of distributed validators.
