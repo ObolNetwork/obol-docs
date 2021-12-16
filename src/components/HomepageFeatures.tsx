@@ -4,51 +4,58 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import clsx from 'clsx';
-import styles from './HomepageFeatures.module.css';
+import React from "react";
+import clsx from "clsx";
+import styles from "./HomepageFeatures.module.css";
+import Link from "@docusaurus/Link";
 
 type FeatureItem = {
   title: string;
   image: string;
+  alt: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Generate Sharded Keys',
-    image: '/img/undraw_docusaurus_mountain.svg',
+    title: "Generate Sharded Keys",
+    image: "/img/noun_Key.png",
+    alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        <code>delphi</code> is a CLI tool to enable distributed key generation for Ethereum validators. 
+        <Link to="/docs/dvk/distributed-validator-keys">Delphi</Link> is a CLI tool to enable distributed key generation
+        for Distributed Validators.
       </>
     ),
   },
   {
-    title: 'Deploy Distributed Validators',
-    image: '/img/undraw_docusaurus_tree.svg',
+    title: "Deploy Distributed Validators",
+    image: "/img/noun_FourCircles.png",
+    alt: "Image copyright Zach Bogart, courtesy of the Noun Project",
     description: (
       <>
-        <code>charon</code> is a HTTP middleware for running Ethereum validators in a redundant manner.
+        <Link to="/docs/dv/introducing-charon">Charon</Link> is a Distributed
+        Validator Client for running Ethereum validators in a redundant manner.
       </>
     ),
   },
   {
-    title: 'Build on the Obol Network',
-    image: '/img/undraw_docusaurus_react.svg',
+    title: "Build on the Obol Network",
+    image: "/img/noun_ethereum.png",
+    alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <code>apollo</code> is a suite of smart contracts for coordinating the creation and destruction of Ethereum validators. 
+        <Link to="/docs/sc/introducing-apollo">Apollo</Link> is a suite of smart contracts for the coordination of Distributed Validators.
       </>
     ),
   },
 ];
 
-function Feature({title, image, description}: FeatureItem) {
+function Feature({ title, image, description, alt }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx("col col--4")}>
       <div className="text--center">
-        <img className={styles.featureSvg} alt={title} src={image} />
+        <img className={styles.featureSvg} alt={alt} src={image} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>

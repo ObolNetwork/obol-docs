@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Obol Network',
-  tagline: 'Building distributed validator technology for Ethereum',
+  tagline: 'Building Distributed Validator Technology for Ethereum',
   url: 'https://docs.obol.tech/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -78,7 +78,7 @@ const config = {
                 to: '/docs/dv/introducing-charon',
               },
               {
-                label: 'DVK',
+                label: 'Delphi',
                 to: '/docs/dvk/distributed-validator-keys',
               },
             ],
