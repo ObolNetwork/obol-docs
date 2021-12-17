@@ -18,7 +18,7 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Generate Sharded Keys",
+    title: "Generate Key Shares",
     image: "/img/noun_Key.png",
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
@@ -55,7 +55,7 @@ function Feature({ title, image, description, alt }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
       <div className="text--center">
-        <img className={styles.featureSvg} alt={alt} src={image} />
+        <img className={styles.featureImg} alt={alt} src={image} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>

@@ -12,6 +12,10 @@
   background: linear-gradient(90deg, #19314b 0%, #37606b 33%, #61ac9f 66%, #81bba3 100%); 
 }
 
+html[data-theme='dark'] .heroBanner {
+  background: linear-gradient(270deg, #19314b 0%, #37606b 33%, #61ac9f 66%, #81bba3 100%); 
+}
+
 @media screen and (max-width: 966px) {
   .heroBanner {
     padding: 2rem;

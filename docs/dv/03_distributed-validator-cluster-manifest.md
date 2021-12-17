@@ -12,12 +12,12 @@ The manifest provides at least the following info.
 
 - The number of operators participating in this cluster.
 - ENRs for each participating operator. (SECP256K1 public keys)
-- Signatures from each key shard authorising their respective operator ENRs
+- Signatures from each key share authorising their respective operator ENRs
 - A collection of distributed validators operated by this cluster
 
   - The BLS public key of the Distributed Validator
-  - The total number of shards and minimum threshold required for signing
-  - The BLS public keys for each shard of this validator
+  - The total number of shares and minimum threshold required for signing
+  - The BLS public keys for each share of this validator
   - Public commitments to the secret sharing polynomial.
 
     Used to verify partial signatures during signature aggregation.

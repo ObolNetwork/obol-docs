@@ -15,7 +15,7 @@ Yes. Charon sits as a middleware between a validator client and it's beacon node
 
 ### Can I migrate my existing validator into a distributed validator?
 
-It will be possible to split an existing validator keystore into a set of sharded keystores suitable for a distributed validator, but it is a trusted distribution process, and if the old staking system is not safely shut down, it could pose a risk of double signing alongside the new distributed validator.
+It will be possible to split an existing validator keystore into a set of key shares suitable for a distributed validator, but it is a trusted distribution process, and if the old staking system is not safely shut down, it could pose a risk of double signing alongside the new distributed validator.
 
 In an ideal scenario, a distributed validator's private key should never exist in full in a single location.
 

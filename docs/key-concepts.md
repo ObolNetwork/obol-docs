@@ -72,12 +72,12 @@ A distributed validator cluster is a collection of distributed validator nodes c
 
 A distributed validator key is a group of BLS private keys, that together operate as a threshold key for participating in proof of stake consensus with.
 
-### Distributed Validator Key Shard
+### Distributed Validator Key Share
 
 One piece of the distributed validator private key.
 
 ### Distributed Validator Key Generation Ceremony
 
-To achieve fault tolerance in a distributed validator, the individual private key shards need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 
+To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 
 
-A distributed validator key generation ceremony is a type of DKG ceremony. A DVK ceremony produces signed validator deposit and exit data, along with all of the validator key shards and their associated metadata.
+A distributed validator key generation ceremony is a type of DKG ceremony. A DVK ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata.

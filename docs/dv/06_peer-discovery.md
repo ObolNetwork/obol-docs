@@ -10,14 +10,14 @@ Middleware clients need to be able to authenticate one another. We achieve this 
 
 At the end of a [DVK generation ceremony](./02_validator-creation.md#stages-of-creating-a-distributed-validator), each operator will have a number of files outputted by their CLI program/browser based on how many distributed validators the group chose to generate together. These files are:
 
-- **Validator keystores:** These files will be loaded into the operator's validator client and each file represents one shard of a distributed validator.
+- **Validator keystores:** These files will be loaded into the operator's validator client and each file represents one share of a distributed validator.
 - **A distributed validator cluster manifest:** This file contains the configuration and secrets a distributed validator client like charon needs to join a cluster capable of operating a number of distributed validators.
 
 ### Authenticating a Distributed Validator Client
 
 So how does the authentication of these DV clients work?
 
-During the final stage of the DVK ceremony, after the validator key shards are generated for each operator; the ceremony program will generate a random SECP256K1 key pair to be used by a charon client for its ENR. The program will sign this ENR public key with every keystore this validator will service, to indicate to all other operators that this randomly generated key is directly authorised by the current operator to communicate at the consensus layer for their distributed validator key shards.
+During the final stage of the DVK ceremony, after the validator key shares are generated for each operator; the ceremony program will generate a random SECP256K1 key pair to be used by a charon client for its ENR. The program will sign this ENR public key with every keystore this validator will service, to indicate to all other operators that this randomly generated key is directly authorised by the current operator to communicate at the consensus layer for their distributed validator key shares.
 
 This sensitive ENR key pair, and the general configuration of the distributed validator client will be output in a single file from the DVK ceremony known shorthand as a `cluster manifest`.
 

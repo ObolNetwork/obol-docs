@@ -5,7 +5,12 @@
   width: 100%;
 }
 
-.featureSvg {
+.featureImg {
   height: 200px;
   width: 200px;
+}
+
+html[data-theme='dark'] .featureImg {
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
 }

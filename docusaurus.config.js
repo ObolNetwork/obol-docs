@@ -42,6 +42,23 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
+        switchConfig: {
+          darkIcon: '🌙',
+          darkIconStyle: {
+            marginLeft: '2px',
+          },
+          // Unicode icons such as '\u2600' will work
+          // Unicode with 5 chars require brackets: '\u{1F602}'
+          lightIcon: '\u2600',
+          lightIconStyle: {
+            marginLeft: '1px',
+          },
+        },
+      },
       navbar: {
         title: 'Obol Network',
         logo: {
@@ -65,6 +82,14 @@ const config = {
       },
       footer: {
         style: 'dark',
+        logo: {
+          alt: "Obol Network Logo",
+          src: "https://obol.tech/ObolIcon.png",
+          srcDark: "https://obol.tech/ObolIconWhite.png",
+          width: "30px",
+          height: "30px",
+          href: "https://obol.tech/"
+      },
         links: [
           {
             title: 'Docs',
