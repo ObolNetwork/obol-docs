@@ -37,3 +37,42 @@ html[data-theme='dark'] .heroBanner {
   align-items: center;
   justify-content: center;
 }
+
+.obolDots {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+.obolDot1 {
+  background-color: #3B93BE;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.obolDot2 {
+  background: #51AAC6;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.obolDot3 {
+  background: #6FD1D7;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.obolDot4 {
+  background: #81BCB9;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+  display: inline-block;
+}

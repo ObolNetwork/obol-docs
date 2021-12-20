@@ -15,6 +15,7 @@
   --ifm-color-primary-lightest: #81bba3;
   --ifm-footer-background-color: #090909;
   --ifm-code-font-size: 95%;
+  font-family: 'Avenir Next';
 }
 
 .docusaurus-highlight-code-line {
