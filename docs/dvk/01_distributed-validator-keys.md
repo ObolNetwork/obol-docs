@@ -49,14 +49,14 @@ As part of the effort Obol will be commissioning and open sourcing a far reachin
 
 One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including [eth2.0-deposit-cli](https://github.com/ethereum/eth2.0-deposit-cli) and [ethdo](https://github.com/wealdtech/ethdo).
 
-Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration file and network access to coordinate with other participant nodes. This tool can be used by a single entity (synchronous) or a group of participants (semi asynchronous).
+Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration file and network access to coordinate with other participant nodes. This tool can be used by a single entity (synchronous) or a group of participants (semi-asynchronous).
 
 ### A Distributed Validator Launchpad
 
-To activate an Ethereum validator you need to deposit 32 ether into the official [deposit contract](https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa). The vast majority of users that have created validators to date have used the [Eth2 Launchpad](https://launchpad.ethereum.org/en/), a public good open source website built by the Ethereum Foundation and members of the Obol Labs core team. This tool has been extremely successful at enabling the safe and informed creation of the majority of validators on Mainnet.
+To activate an Ethereum validator you need to deposit 32 ether into the official [deposit contract](https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa). The vast majority of users that have created validators to date have used the [Eth2 Launchpad](https://launchpad.ethereum.org/en/), a public good, open source website built by the Ethereum Foundation and members of the Obol Labs core team. This tool has been extremely successful at enabling the safe and informed creation of the majority of validators on Mainnet.
 
-To facilitate the generation of distributed validator keys amongst remote users with high trust, Obol Labs intends to develop and maintain a website that enables a group of users to generate the configuration required for a DVK generation ceremony. It may even host a ceremony in browser if feasible. \
-\
+To facilitate the generation of distributed validator keys amongst remote users with high trust, Obol Labs intends to develop and maintain a website that enables a group of users to generate the configuration required for a DVK generation ceremony. It may even host a ceremony in browser if feasible. 
+
 This will be open sourced in similar fashion to the Eth2 Launchpad of today.
 
 ### Standardising the format of DVKs
@@ -81,25 +81,23 @@ It is Obol Labs intention to submit new EIPs for a Distributed Validator Key enc
 
 The working group will be coordinated by the Obol Labs team, who will be responsible for the implementation and delivery of the community tools. Participants are welcome to partake in the implementation process if desired.\
 
-**Implementation Language:**
-
-- Rust (preferred - can target WASM for Browser)
+**Candidate Implementation Language:**
+- Rust 
 - Go
 
 **DKG Algorithm Options:**
-
 - [Fouque-Stern](https://hal.inria.fr/inria-00565274/document)
 - [Practical Asynchronous Distributed Key Generation](https://eprint.iacr.org/2021/1591)
 - More to be considered durng the research phase
 
-## Phase 0
+### Phase 0
 
 **EIP Drafting:**
 
-The Obol Core team will draft the initial EIPs in collaboration with the following (desired) sub group of participants prior to opening the working group up to large audience.\
-\
-**Start Date:** Jan 6, 2021\
-\
+The Obol Core team will draft the initial EIPs in collaboration with the following (desired) sub group of participants prior to opening the working group up to large audience.
+
+**Start Date:** Jan 6, 2021
+
 **Sub Group:**
 
 - EF Members
@@ -110,12 +108,12 @@ The Obol Core team will draft the initial EIPs in collaboration with the followi
 - Coinbase Cloud
 - Sourav Das
 
-## Phase 1
+### Phase 1
 
 **Design Feedback:**
 
-The Obol Core team will conduct a user feedback session with all working group members based on the draft of the EIPs and proposed architecture. Our goal is to better understand the requirements of adoption and utilization of the key stakeholders in the working group. Our intention is to build a tool that a variety of different staking personas can utilize to accelerate adoption of the primitive. Based on feedback from the working group, the Obol team will iterate accordingly to implement the community determined tooling.\
-\
+The Obol Core team will conduct a user feedback session with all working group members based on the draft of the EIPs and proposed architecture. Our goal is to better understand the requirements of adoption and utilization of the key stakeholders in the working group. Our intention is to build a tool that a variety of different staking personas can utilize to accelerate adoption of the primitive. Based on feedback from the working group, the Obol team will iterate accordingly to implement the community determined tooling.
+
 **Start Date:** TBD
 
 **Completion Date:** Est end of 1Q22

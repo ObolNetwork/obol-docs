@@ -19,14 +19,13 @@ The manifest provides at least the following info.
   - The total number of shares and minimum threshold required for signing
   - The BLS public keys for each share of this validator
   - Public commitments to the secret sharing polynomial.
-
-    Used to verify partial signatures during signature aggregation.
+    - Used to verify partial signatures during signature aggregation.
 
 ### JSON schema
 
 The JSON schema of the DV manifest file is as follows.
 
-```
+```json5
 {
   "type": "object",
   "properties": {
@@ -60,7 +59,7 @@ The JSON schema of the DV manifest file is as follows.
 
 Example file
 
-```
+```json
 {
 	"tss": [
 		"87db49c4c40d89f2415cd10765a348df5233ce5cb5f6667cf023680517d494bece8289e047da2488c87bc84a22a3a229",
@@ -82,4 +81,6 @@ Example file
 }
 ```
 
+:::caution 
 This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/01_distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.
+:::
