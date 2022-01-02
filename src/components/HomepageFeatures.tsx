@@ -23,7 +23,7 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/dvk/distributed-validator-keys">Delphi</Link> is a CLI tool to enable distributed key generation
+        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link> is a site to enable distributed key generation
         for Distributed Validators.
       </>
     ),
@@ -45,7 +45,7 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-apollo">Apollo</Link> is a suite of smart contracts for the coordination of Distributed Validators.
+        <Link to="/docs/sc/introducing-obol-managers">Obol Managers</Link> are smart contracts for the coordination of Distributed Validators.
       </>
     ),
   },

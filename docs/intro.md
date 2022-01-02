@@ -33,7 +33,7 @@ Together we will incentivize, build, and maintain distributed technology that ma
 
 The Obol Network develops and maintains four core public goods:
 
-- [Delphi](./dvk/01_distributed-validator-keys.md), a Distributed Validator Key generation CLI tool and User Interface for bootstrapping Distributed Validators
+- The [Distributed Validator Launchpad](./dvk/01_distributed-validator-keys.md), a CLI tool and User Interface for bootstrapping Distributed Validators
 - [Charon](./dv/01_introducing-charon.md), a middleware client that enables validators to run in a fault-tolerant, distributed manner
-- [Apollo](./sc/01_introducing-apollo.md), a suite of solidity smart contracts for the formation of Distributed Validators
-- [Zeus](./testnet.md), a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
+- [Obol Managers](./sc/01_introducing-obol-managers.md), a set of solidity smart contracts for the formation of Distributed Validators
+- [Obol Testnets](./testnet.md), a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
