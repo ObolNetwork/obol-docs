@@ -31,7 +31,7 @@ contract WithdrawalRecipientOwnable is Ownable {
 
 ```
 
-An Ownable Withdrawal Recipient is the most basic type of withdrawal recipient contract. It implements Open Zeppelin's `Ownable` interface and allows one address to call with `withdraw()` function, which pulls all ether from the address into the owners address (or another address specified). Calling withdraw could also fund a fee split to the Obol Network, and/or the protocol that has deployed and instantiated this DV.
+An Ownable Withdrawal Recipient is the most basic type of withdrawal recipient contract. It implements Open Zeppelin's `Ownable` interface and allows one address to call the `withdraw()` function, which pulls all ether from the address into the owners address (or another address specified). Calling withdraw could also fund a fee split to the Obol Network, and/or the protocol that has deployed and instantiated this DV.
 
 ### Immutable Withdrawal Recipient
 
