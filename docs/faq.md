@@ -5,7 +5,7 @@ description: Frequently asked questions
 
 # ❓ FAQ
 
-### Does Obol have a token
+### Does Obol have a token?
 
 No. Distributed validators use only ether.
 
