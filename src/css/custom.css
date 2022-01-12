@@ -15,7 +15,7 @@
   --ifm-color-primary-lightest: #81bba3;
   --ifm-footer-background-color: #090909;
   --ifm-code-font-size: 95%;
-  font-family: 'Avenir Next';
+  font-family: 'Avenir Next', Montserrat, sans-serif;
 }
 
 .docusaurus-highlight-code-line {
