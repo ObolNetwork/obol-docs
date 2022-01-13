@@ -102,9 +102,9 @@ The working group will be coordinated by the Obol Labs team, who will be respons
 
 The Obol Core team will draft the initial EIPs in collaboration with the following (desired) sub group of participants prior to opening the working group up to large audience.
 
-**Start Date:** Feb 7, 2022
+**Draft Delivery Date:** Feb 7, 2022
 
-**Sub Group:**
+**Delivery Group:**
 
 - EF Members
 - Coinbase Cloud
