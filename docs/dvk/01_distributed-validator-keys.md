@@ -14,7 +14,7 @@ As part of Obol Labs efforts to build Distributed Validator Technlology, we are 
 
 The Obol Labs core team will manage and facilitite the working group with participation from a wide variety of participants. We intend to launch with an initial group to decrease overhead and then allow for new members to join based on some pre determined process.
 
-The purpose of this working group is enable a collective transition to distributed validators that includes standardization and communication across key stakeholders. It is the best way for the technology to stand the test of time.
+The purpose of this working group is to enable a collective transition to distributed validators that includes standardization and communication across key stakeholders. At Obol we are taking the grass roots approach to the technology.
 
 Our intended outputs are as follows:
 
