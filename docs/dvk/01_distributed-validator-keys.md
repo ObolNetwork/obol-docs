@@ -1,6 +1,6 @@
 ---
-description: >-
-  An effort to accelerate and standardise the generation of Distributed
+Description: >-
+  An Effort to Accelerate and Standardise the Generation of Distributed
   Validators
 ---
 
