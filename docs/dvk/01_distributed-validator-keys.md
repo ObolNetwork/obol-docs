@@ -116,4 +116,4 @@ The Obol Core team will conduct a user feedback session with all working group m
 
 **Start Date:** TBD
 
-**Completion Date:** Est end of 1Q22
+**Completion Date:** Est end 2Q
