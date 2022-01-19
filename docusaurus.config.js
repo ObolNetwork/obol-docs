@@ -103,7 +103,7 @@ const config = {
                 to: '/docs/dv/introducing-charon',
               },
               {
-                label: 'Delphi',
+                label: 'DV Launchpad',
                 to: '/docs/dvk/distributed-validator-keys',
               },
             ],
