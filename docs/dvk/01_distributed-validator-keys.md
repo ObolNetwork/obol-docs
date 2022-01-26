@@ -112,6 +112,7 @@ The Obol Core team will draft the initial EIPs in collaboration with the followi
 - Ben Edgington
 - Mamy Ratsimbazafy
 - Raul Jordan
+- Sourav Das
 
 ### Phase 1
 
