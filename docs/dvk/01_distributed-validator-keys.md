@@ -46,6 +46,7 @@ In addition, as part of the effort Obol will be working with Georgia Rakusen to 
 - Staking Facilities
 - Chorus One
 - StakeWithUS
+- RockX
 - Open to any and all suggestions
 
 ## Deliverables
