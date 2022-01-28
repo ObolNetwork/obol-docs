@@ -24,7 +24,7 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link>{" "}
+        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link>
         is a site to enable distributed key generation for Distributed
         Validators.
       </>
