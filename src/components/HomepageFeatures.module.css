@@ -15,6 +15,6 @@ html[data-theme="dark"] .featureImg {
   -webkit-filter: invert(100%);
 }
 
-img:hover {
-  transform: scale(1.15);
+img.featureImg:hover {
+  transform: scale(1.1);
 }

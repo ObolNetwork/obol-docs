@@ -24,8 +24,9 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The DV Launchpad is a site to enable distributed key generation for
-        Distributed Validators.
+        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link>{" "}
+        is a site to enable distributed key generation for Distributed
+        Validators.
       </>
     ),
     link: "/docs/dvk/distributed-validator-keys",
@@ -36,8 +37,8 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Zach Bogart, courtesy of the Noun Project",
     description: (
       <>
-        Charon is a Distributed Validator Client for running Ethereum validators
-        in a redundant manner.
+        <Link to="/docs/dv/introducing-charon">Charon</Link> is a Distributed
+        Validator Client for running Ethereum validators in a redundant manner.
       </>
     ),
     link: "/docs/dv/introducing-charon",
@@ -48,8 +49,8 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        Obol Managers are smart contracts for the coordination of Distributed
-        Validators.
+        <Link to="/docs/sc/introducing-obol-managers">Obol Managers</Link> are
+        smart contracts for the coordination of Distributed Validators.
       </>
     ),
     link: "/docs/sc/introducing-obol-managers",
@@ -65,7 +66,9 @@ function Feature({ title, image, description, alt, link }: FeatureItem) {
         </div>
       </Link>
       <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
+        <Link to={link} style={{ textDecoration: "none", color: "#FFF" }}>
+          <h3>{title}</h3>
+        </Link>
         <p>{description}</p>
       </div>
     </div>
