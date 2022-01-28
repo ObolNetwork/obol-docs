@@ -10,7 +10,11 @@
   width: 200px;
 }
 
-html[data-theme='dark'] .featureImg {
+html[data-theme="dark"] .featureImg {
   filter: invert(100%);
   -webkit-filter: invert(100%);
+}
+
+img.featureImg:hover {
+  transform: scale(1.1);
 }

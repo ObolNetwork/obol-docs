@@ -14,6 +14,7 @@ type FeatureItem = {
   image: string;
   alt: string;
   description: JSX.Element;
+  link: string;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -23,10 +24,12 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link> is a site to enable distributed key generation
-        for Distributed Validators.
+        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link>
+        is a site to enable distributed key generation for Distributed
+        Validators.
       </>
     ),
+    link: "/docs/dvk/distributed-validator-keys",
   },
   {
     title: "Deploy Distributed Validators",
@@ -38,6 +41,7 @@ const FeatureList: FeatureItem[] = [
         Validator Client for running Ethereum validators in a redundant manner.
       </>
     ),
+    link: "/docs/dv/introducing-charon",
   },
   {
     title: "Build on the Obol Network",
@@ -45,20 +49,26 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-obol-managers">Obol Managers</Link> are smart contracts for the coordination of Distributed Validators.
+        <Link to="/docs/sc/introducing-obol-managers">Obol Managers</Link> are
+        smart contracts for the coordination of Distributed Validators.
       </>
     ),
+    link: "/docs/sc/introducing-obol-managers",
   },
 ];
 
-function Feature({ title, image, description, alt }: FeatureItem) {
+function Feature({ title, image, description, alt, link }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
-      <div className="text--center">
-        <img className={styles.featureImg} alt={alt} src={image} />
-      </div>
+      <Link to={link}>
+        <div className="text--center">
+          <img className={styles.featureImg} alt={alt} src={image} />
+        </div>
+      </Link>
       <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
+        <Link to={link} style={{ textDecoration: "none", color: "#FFF" }}>
+          <h3>{title}</h3>
+        </Link>
         <p>{description}</p>
       </div>
     </div>
