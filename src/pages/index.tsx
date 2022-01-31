@@ -8,6 +8,8 @@ import HomepageFeatures from "../components/HomepageFeatures";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
+  const { themeConfig } = siteConfig
+  const metadatas = Array(themeConfig.metadatas)
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
@@ -18,6 +20,9 @@ function HomepageHeader() {
           alt={"Obol Network"}
           src={"/img/ObolHorizontalWhite.svg"}
         />
+        {metadatas.map((metadata, i) => (
+          <meta key={`metadata_${i}`} {...metadata} />
+        ))}
         <div className={styles.obolDots}>
           <div className={styles.obolDot1}></div>
           <div className={styles.obolDot2}></div>
