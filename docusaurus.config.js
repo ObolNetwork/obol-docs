@@ -89,7 +89,7 @@ const config = {
           width: "30px",
           height: "30px",
           href: "https://obol.tech/"
-      },
+        },
         links: [
           {
             title: 'Docs',
@@ -142,6 +142,7 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['solidity', 'json5'],
       },
+      metadatas: [{property: "og:image", content: "img/obolnetwork.png"}]
     }),
 };
 
