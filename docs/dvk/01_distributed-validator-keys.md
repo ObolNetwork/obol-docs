@@ -49,14 +49,14 @@ This effort can be broadly broken down into three phases:
 
 #### Working Group Member Responsibilities
 
-##### Obol Working Groups
+#### Obol Working Groups
 
 The overarching responsibility of Working Group members is to help make Obol and Distributed Validator Technology successful and adopted on post-merge Ethereum. Responsibilities will be WG specific as they are rolled out. The first is the DVK Working Group, which is detailed below.
 
-##### DVK Working Group
+#### DVK Working Group
 DVK WG members will have different responsibilities based on their participation phase
 
-###### Phase 0 Participation
+#### Phase 0 Participation
 
 Phase 0 is all about applied cryptography and security. The expected output of this phase is a CLI program for taking part in DVK ceremonies.
 
@@ -70,7 +70,7 @@ Responsibilities
 - Ceremony Security Feedback
 - Experience in Go, Rust, Solidity, or applied cryptography
 
-##### Phase 1 & Phase 1.5 Participation
+#### Phase 1 & Phase 1.5 Participation
 
 Phase 1 & beyond is focused on the development of an open source SPA web interface for facilitating DVK ceremonies with authenticated counterparties and user adoption of distributed validator creation. 
 
@@ -116,7 +116,7 @@ To activate an Ethereum validator you need to deposit 32 ether into the official
 
 To facilitate the generation of distributed validator keys amongst remote users with high trust, the Obol Network intends to develop and maintain a website that enables a group of users to generate the configuration required for a DVK generation ceremony. 
 
-#### Working Group Participants
+### Working Group Participants
 The members of the Phase 0 working group are:
 
 - Coinbase Cloud
@@ -158,11 +158,11 @@ The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort
 - Foundry
 - P2P
 
-#### Working Group Member Incentives
+### Working Group Member Incentives
 
 There will not be incentives directly for participation in the DVK WG.The working group will serve as a mutual test bed for the project and interested participants to begin collaborating and testing where overlap falls so that future collaboration can be incentivized and structured.
 
-#### Next Steps
+### Next Steps
 
 The Obol core team has begun work on all three phases of the effort and will present draft versions for each phase when relevant and launch Discord channels. Below is a status update of where the core team is with each phase as of today.
 
