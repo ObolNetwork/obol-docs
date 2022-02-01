@@ -104,13 +104,13 @@ It is Obol Labs intention to submit new EIPs for a Distributed Validator Key enc
 - Private key shares for each operators validator client
 - Authentication certificates for each distributed validator middleware to communicate together in a cluster
 
-2. A CLI program for Distributed Validator Key (DVK) ceremonies 
+***2. A CLI program for Distributed Validator Key (DVK) ceremonies 
 
 One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including eth2.0-deposit-cli and ethdo.
 
 Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration file and network access to coordinate with other participant nodes.
 
-3. A Distributed Validator LaunchPad
+***3. A Distributed Validator LaunchPad
 
 To activate an Ethereum validator you need to deposit 32 ether into the official deposit contract. The vast majority of users that created validators to date have used the "Eth2 Launchpad", a public good open source website built by the Ethereum Foundation and participants that later went on to found Obol. This tool has been wildly successful in the safe and educational creation of the majority of validators on Mainnet.
 
