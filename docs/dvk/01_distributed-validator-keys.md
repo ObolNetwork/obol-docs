@@ -84,11 +84,11 @@ Responsibilities
 - Create Testnet DV’s
 - Participate in multi-operator validator study
 
-#### Working Group Key Objectives / Deliverables
+### Working Group Key Objectives / Deliverables
 
 The deliverables of this working group are: 
 
-### 1. Standardize the Format of DVKs Through EIPs
+#### 1. Standardize the Format of DVKs Through EIPs
 
 One of the many successes in the Ethereum development community is the high levels of support from all client teams around standardised file formats. It is critical that we all work together as a working group on this specific front.
 
