@@ -20,13 +20,13 @@ The network consists of 4 public goods that will eventually work together throug
 
 The Obol Network develops and maintains four core public goods:
 
--The DVK Launchpad, a CLI tool and User Interface for bootstrapping Distributed Validators
+- The DVK Launchpad, a CLI tool and User Interface for bootstrapping Distributed Validators
 
--Charon, a middleware client that enables validators to run in a fault-tolerant, distributed manner
+- Charon, a middleware client that enables validators to run in a fault-tolerant, distributed manner
 
--Obol Managers, a set of solidity smart contracts for the formation of Distributed Validators
+- Obol Managers, a set of solidity smart contracts for the formation of Distributed Validators
 
--Obol Testnets, a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network.
+- Obol Testnets, a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network.
 
 #### Working Group Formation
 
