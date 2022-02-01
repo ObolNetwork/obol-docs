@@ -49,14 +49,14 @@ This effort can be broadly broken down into three phases:
 
 #### Working Group Member Responsibilities
 
-Obol Working Groups
+##### Obol Working Groups
 
 The overarching responsibility of Working Group members is to help make Obol and Distributed Validator Technology successful and adopted on post-merge Ethereum. Responsibilities will be WG specific as they are rolled out. The first is the DVK Working Group, which is detailed below.
 
-DVK Working Group
+##### DVK Working Group
 DVK WG members will have different responsibilities based on their participation phase
 
-Phase 0 Participation
+###### Phase 0 Participation
 
 Phase 0 is all about applied cryptography and security. The expected output of this phase is a CLI program for taking part in DVK ceremonies.
 
@@ -70,7 +70,7 @@ Responsibilities
 - Ceremony Security Feedback
 - Experience in Go, Rust, Solidity, or applied cryptography
 
-Phase 1 & Phase 1.5 Participation
+##### Phase 1 & Phase 1.5 Participation
 
 Phase 1 & beyond is focused on the development of an open source SPA web interface for facilitating DVK ceremonies with authenticated counterparties and user adoption of distributed validator creation. 
 
