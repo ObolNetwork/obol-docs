@@ -14,7 +14,9 @@ Obol Network is a distributed consensus protocol and ecosystem for Eth2 with a m
 This document intends to outline what Obol is, how the ecosystem is structured, how it plans to evolve, and where you can get involved.
 
 #### The Obol Ecosystem
-Obol Labs is a research and software development team focused on enabling more resilient Proof of Stake validation infrastructure for public blockchain networks through Distributed Validator Technology (DVT).The core team is currently building the Obol Network, a protocol and ecosystem to foster the adoption of DVT and trust minimized staking through multi-operator validation. This will enable low-trust access to Ethereum staking yield, which can be used as a core building block in a variety of Web3 products.
+Obol Labs is a research and software development team focused on enabling more resilient Proof of Stake validation infrastructure for public blockchain networks through Distributed Validator Technology (DVT).
+
+The core team is currently building the Obol Network, a protocol and ecosystem to foster the adoption of DVT and trust minimized staking through multi-operator validation. This will enable low-trust access to Ethereum staking yield, which can be used as a core building block in a variety of Web3 products.
 
 The network consists of 4 public goods that will eventually work together through circular economics.
 
@@ -56,7 +58,7 @@ The overarching responsibility of Working Group members is to help make Obol and
 #### DVK Working Group
 DVK WG members will have different responsibilities based on their participation phase
 
-#### Phase 0 Participation
+##### Phase 0 Participation
 
 Phase 0 is all about applied cryptography and security. The expected output of this phase is a CLI program for taking part in DVK ceremonies.
 
@@ -70,7 +72,7 @@ Responsibilities
 - Ceremony Security Feedback
 - Experience in Go, Rust, Solidity, or applied cryptography
 
-#### Phase 1 & Phase 1.5 Participation
+##### Phase 1 & Phase 1.5 Participation
 
 Phase 1 & beyond is focused on the development of an open source SPA web interface for facilitating DVK ceremonies with authenticated counterparties and user adoption of distributed validator creation. 
 
@@ -104,7 +106,7 @@ It is Obol Labs intention to submit new EIPs for a Distributed Validator Key enc
 - Private key shares for each operators validator client
 - Authentication certificates for each distributed validator middleware to communicate together in a cluster
 
-#### 2. A CLI program for Distributed Validator Key (DVK) ceremonies 
+#### 2. A CLI program for Distributed Validator Key (DVK) Ceremonies 
 
 One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including eth2.0-deposit-cli and ethdo.
 
@@ -128,7 +130,9 @@ The members of the Phase 0 working group are:
 - Mamy Ratsimbazafy 
 - Kobi Gurkan (pending) 
 
-The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following link. Everyone can join the proto community, however woorking group participation will be based on relevance and skill set. Below is an abbreviated list of parties that Obol has connected with about collaborating on the project.
+The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following link. 
+
+Everyone can join the proto community, however working group participation will be based on relevance and skill set. Below is an abbreviated list of parties that Obol would like to start the working group with.
 
 - Ethereum Foundation 
 - Prysmatic Labs
