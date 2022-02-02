@@ -121,14 +121,14 @@ To facilitate the generation of distributed validator keys amongst remote users 
 ### Working Group Participants
 The members of the Phase 0 working group are:
 
-- Coinbase Cloud
-- Ethereum Foundation
+- Coinbase Cloud (specific members pending)
+- Ethereum Foundation (specific members pending)
 - Ben Edgington
 - Jim McDonald
-- Prysmatic Labs 
+- Prysmatic Labs (specific members pending)
 - Sourav Das 
 - Mamy Ratsimbazafy 
-- Kobi Gurkan (pending) 
+- Kobi Gurkan 
 
 The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following link. 
 
@@ -161,6 +161,7 @@ Everyone can join the proto community, however working group participation will 
 - Flashbots
 - Foundry
 - P2P
+- All suggestions welcome!
 
 ### Working Group Member Incentives
 
