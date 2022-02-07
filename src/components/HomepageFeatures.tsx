@@ -24,8 +24,8 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvk/distributed-validator-keys">DV Launchpad</Link>
-        is a site to enable distributed key generation for Distributed
+        The <Link to="/docs/dvk/distributed-validator-keys">Distributed Validator Launchpad</Link> is 
+        an interface to enable distributed key generation for Distributed
         Validators.
       </>
     ),
@@ -38,7 +38,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         <Link to="/docs/dv/introducing-charon">Charon</Link> is a Distributed
-        Validator Client for running Ethereum validators in a redundant manner.
+        Validator Client for running Ethereum validators in a fault tolerant manner.
       </>
     ),
     link: "/docs/dv/introducing-charon",
@@ -55,11 +55,23 @@ const FeatureList: FeatureItem[] = [
     ),
     link: "/docs/sc/introducing-obol-managers",
   },
+  {
+    title: "Join the Upcoming Testnets",
+    image: "/img/noun_laboratory.png",
+    alt: "Image courtesy of the Noun Project",
+    description: (
+      <>
+        <Link to="/docs/testnet">Obol Testnets</Link> are being
+        organised to develop the Charon client and to seed a distributed community of Operators.
+      </>
+    ),
+    link: "/docs/testnet",
+  },
 ];
 
 function Feature({ title, image, description, alt, link }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
+    <div className={clsx("col col--3")}>
       <Link to={link}>
         <div className="text--center">
           <img className={styles.featureImg} alt={alt} src={image} />
