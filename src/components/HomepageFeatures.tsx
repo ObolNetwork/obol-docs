@@ -66,9 +66,7 @@ function Feature({ title, image, description, alt, link }: FeatureItem) {
         </div>
       </Link>
       <div className="text--center padding-horiz--md">
-        <Link to={link} style={{ textDecoration: "none", color: "#FFF" }}>
-          <h3>{title}</h3>
-        </Link>
+        <h3>{title}</h3>
         <p>{description}</p>
       </div>
     </div>
