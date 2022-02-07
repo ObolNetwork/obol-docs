@@ -44,3 +44,11 @@ html[data-theme='dark'] .hero__title {
 html[data-theme='dark'] .hero__subtitle {
   color: #fff;
 }
+
+html[data-theme="dark"] .text--center--title {
+  color: #fff;
+}
+
+html[data-theme="light"] .text--center--title {
+  color: #090909;
+}
