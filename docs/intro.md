@@ -26,10 +26,10 @@ The Obol Network develops and maintains four core public goods:
 - [Obol Managers](./sc/01_introducing-obol-managers.md), a set of solidity smart contracts for the formation of Distributed Validators
 - [Obol Testnets](./testnet.md), a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
 
-![](/img/DVT4.png)
-
 ### Sustainable Public Goods
 
 The Obol Ecosystem is inspired by previous work on Ethereum public goods and experimenting with circular economics. We believe that to unlock innovation in staking use cases, a credibly neutral layer must exist for innovation to flow and evolve vertically. Without this layer highly available uptime will continue to be a moat and stake will accumulate amongst a few products.
 
 The Obol Network will become an open, community governed, self-sustaining project over the coming months and years. Together we will incentivize, build, and maintain distributed validator technology that makes public networks a more secure and resilient foundation to build on top of.
+
+![](/img/DVT4.png)
