@@ -14,6 +14,8 @@ The following is a break down of the intended testnet roadmap.
 
 **State:** Pre-product
 
+**Network:** Ephemeral Dev Networks
+
 **Goals:** 
 - Enable a group of distinct machines to validate together
 - Basic form of DKG can be completed
@@ -21,6 +23,8 @@ The following is a break down of the intended testnet roadmap.
 ## Public Testnet
 
 **State:** Bare Minimum
+
+**Network:** Merged Test Network (e.g. Görli)
 
 **Goals:** 
 - Engage Obol Community 
@@ -30,6 +34,8 @@ The following is a break down of the intended testnet roadmap.
 
 **State:** Client Hardening
 
+**Network:** Merged Test Network (e.g. Görli)
+
 **Goals:** 
 - Break charon in multiple ways
 - Improve DoS resistance
@@ -38,6 +44,8 @@ The following is a break down of the intended testnet roadmap.
 
 **State:** MVP
 
+**Network:** Merged Gnosis Chain
+
 **Goals:** 
 - Distributed Validator returns competetive versus single validator clients
 - Run an unreasonably large percentage of a test network to see the network performance at scale if a majority of validators moved to DV architectures.
@@ -45,6 +53,8 @@ The following is a break down of the intended testnet roadmap.
 ## Red/Blue Net
 
 **State:** Production Ready
+
+**Network:** Merged Gnosis Chain
 
 **Goals:** 
 - Charon nodes cannot be DoS'd 
