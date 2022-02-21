@@ -6,10 +6,10 @@ Description: >-
 
 # Distributed Validator Keys
 
-### Obol DVT Working Group
+### Obol DVK Working Group
 
 #### Purpose
-Obol Network is a distributed consensus protocol and ecosystem for Eth2 with a mission to eliminate single points of technical failure risks on Ethereum via Distributed Validator Technology (DVT). The project has reached the point where increasing the community interaction, participation, and ownership distribution will drive significant impact on the growth of the core technology. 
+Obol Network is a distributed consensus protocol and ecosystem for Ethereum with a mission to eliminate single points of technical failure risks via Distributed Validator Technology (DVT). The project has reached the point where increasing the community interaction, participation, and ownership distribution will drive significant impact on the growth of the core technology. 
 
 This document intends to outline what Obol is, how the ecosystem is structured, how it plans to evolve, and where you can get involved.
 
@@ -34,7 +34,7 @@ The Obol Network develops and maintains four core public goods:
 
 Obol is building critical public goods and as a result, has chosen to design the project in a way that enables diversity by opening the project to external participation into structured working groups early on, to collaborate on the standardisation and build of open source components.
 
-This means that each public good component will have a dedicated working group open to participation by members of the Obol Community. The core team is using this first working group, dedicated to the development of the DV LaunchPad, to let participants experiment with participation in the Obol Ecosystem and mutually look for long term alignment with the project.
+This means that each public good component will have a dedicated working group open to participation by members of the Obol Community. The core team is using this first working group, dedicated to the development of the DV Launchpad, to let participants experiment with participation in the Obol Ecosystem and mutually look for long term alignment with the project.
 
 The Network will utilize a working group formation across the community and will roll out / open different working groups for participation as the ecosystem progresses. For example, the second working group that will be rolled out will be focused on testnets.
 
@@ -99,24 +99,24 @@ Two examples of such standards in the Consensus client space include:
 - EIP-2335: A JSON format for the storage and interchange of BLS12-381 private keys
 - EIP-3076: Slashing Protection Interchange Format
 
-It is Obol Labs intention to submit new EIPs for a Distributed Validator Key encoding scheme in line with EIP-2335, and a new EIP for encoding the configuration and secrets needed for a DKG process that is outputs based on the working groups feedback:
+It is Obol Labs intention to submit new EIPs for a Distributed Validator Key encoding scheme in line with EIP-2335, and a new EIP for encoding the configuration and secrets needed for a DV Cluster that is outputs based on the working groups feedback. Outputs from the DVK ceremony may include:
 
 - Signed validator deposit data files
 - Signed exit validator messages
-- Private key shares for each operators validator client
-- Authentication certificates for each distributed validator middleware to communicate together in a cluster
+- Private key shares for each operator's validator client
+- Distributed Validator Cluster manifests to bind each node together
 
 #### 2. A CLI program for Distributed Validator Key (DVK) Ceremonies 
 
 One of the key successes of Proof of Stake Ethereum's launch was the availability of high quality CLI tools for generating Ethereum validator keys including eth2.0-deposit-cli and ethdo.
 
-Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration file and network access to coordinate with other participant nodes.
+Obol Labs intends to coordinate the development of a similar CLI tool capable of generating distributed validator keys given a standardised configuration and network access to coordinate with other participant nodes.
 
-#### 3. A Distributed Validator LaunchPad
+#### 3. A Distributed Validator Launchpad
 
-To activate an Ethereum validator you need to deposit 32 ether into the official deposit contract. The vast majority of users that created validators to date have used the "Eth2 Launchpad", a public good open source website built by the Ethereum Foundation and participants that later went on to found Obol. This tool has been wildly successful in the safe and educational creation of the majority of validators on Mainnet.
+To activate an Ethereum validator you need to deposit 32 ether into the official deposit contract. The vast majority of users that created validators to date have used the **[~~Eth2~~ Staking Launchpad](https://launchpad.ethereum.org/)**, a public good open source website built by the Ethereum Foundation and participants that later went on to found Obol. This tool has been wildly successful in the safe and educational creation of a significant number of validators on Mainnet.
 
-To facilitate the generation of distributed validator keys amongst remote users with high trust, the Obol Network intends to develop and maintain a website that enables a group of users to generate the configuration required for a DVK generation ceremony. 
+To facilitate the generation of distributed validator keys amongst remote users with high trust, the Obol Network intends to develop and maintain a website that enables a group of users to generate distributed validator keys together using a DKG ceremony in-browser. 
 
 ### Working Group Participants
 The members of the Phase 0 working group are:
@@ -130,7 +130,7 @@ The members of the Phase 0 working group are:
 - Mamy Ratsimbazafy 
 - Kobi Gurkan 
 
-The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following link. 
+The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following [link](https://pwxy2mff03w.typeform.com/to/Kk0TfaYF). 
 
 Everyone can join the proto community, however working group participation will be based on relevance and skill set. Below is an abbreviated list of parties that Obol would like to start the working group with.
 
@@ -148,7 +148,7 @@ Everyone can join the proto community, however working group participation will 
 - Stakewise
 - Chainflow
 - Everstake
-- Roxkx
+- Rockx
 - Skillz
 - Stakin
 - DappNode
@@ -161,6 +161,7 @@ Everyone can join the proto community, however working group participation will 
 - Flashbots
 - Foundry
 - P2P
+- Stader Labs
 - All suggestions welcome!
 
 ### Working Group Member Incentives
@@ -173,10 +174,10 @@ The Obol core team has begun work on all three phases of the effort and will pre
 
 Progress
 
-- Phase 0: 40%
+- Phase 0: 60%
 - Phase 1: 20%
 - Phase 1.5: 30%
 
-The core team will deliver a Phase 0 EIP spec and draft for review on Feb 14th (the earliest). The draft will include a testnet cli tool and documented research to use as a starting point. The core team plans to release the different phases for feedback as they approach 75% completion.
+The core team will deliver a Phase 0 EIP spec and draft for review on March 7th (the earliest). The draft will include a testnet CLI tool and documented research to use as a starting point. The core team plans to release the different phases for feedback as they approach 75% completion.
 
 

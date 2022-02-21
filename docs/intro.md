@@ -21,7 +21,7 @@ Similar to how roll up technology laid the foundation for L2 scaling implementat
 
 The Obol Network develops and maintains four core public goods:
 
-- The [Distributed Validator Launchpad](./dvk/01_distributed-validator-keys.md), a CLI tool and User Interface for bootstrapping Distributed Validators
+- The [Distributed Validator Launchpad](./dvk/01_distributed-validator-keys.md), a CLI tool and dApp for bootstrapping Distributed Validators
 - [Charon](./dv/01_introducing-charon.md), a middleware client that enables validators to run in a fault-tolerant, distributed manner
 - [Obol Managers](./sc/01_introducing-obol-managers.md), a set of solidity smart contracts for the formation of Distributed Validators
 - [Obol Testnets](./testnet.md), a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
@@ -33,3 +33,21 @@ The Obol Ecosystem is inspired by previous work on Ethereum public goods and exp
 The Obol Network will become an open, community governed, self-sustaining project over the coming months and years. Together we will incentivize, build, and maintain distributed validator technology that makes public networks a more secure and resilient foundation to build on top of.
 
 ![](/img/DVT4.png)
+
+## The Vision
+
+The road to decentralising stake is a long one. At Obol we have divided our vision into two key versions of distributed validators. 
+
+### V1 - Trusted Distributed Validators
+
+The first version of distibuted validators will have dispute resolution out of band. Meaning you need to know and communicate with your counterparty operators if there is an issue with your shared cluster. 
+
+A DV without in-band dispute resolution/incentivisation is still extremely valuable. Individuals and staking as a service providers can deploy DVs on their own to make their validators fault tolerant. Groups can run DVs together, but need to bring their own dispute resolution to the table, whether that be a smart contract of their own, a traditional legal service agreement, or simply high trust between the group. 
+
+### V2 - Trustless Distributed Validators
+
+V1 of charon serves a small by count, large by stake-weight group of individuals. The long tail of home and small stakers also deserve to have access to fault tolerant validation, but they may not know enough other operators personally to a sufficient level of trust to run a DV cluster together. 
+
+Version 2 of charon will layer in an incentivisation scheme to ensure any operator not online and taking part in validation is not earning any rewards. Further incentivisation alignment can be achieved with operator bonding requirements that can be slashed for unacceptable performance. 
+
+To add an un-gameable incentivisation layer to threshold validation requires complex interactive cryptography schemes, secure off-chain dispute resolution, and EVM support for proofs of the consensus layer state, as a result, this will be a longer and more complex undertaking than V1, hence the deliniation between the two. 
