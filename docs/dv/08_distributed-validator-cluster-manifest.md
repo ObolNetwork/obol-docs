@@ -4,83 +4,57 @@ description: Documenting a Distributed Validator Cluster in a standardised file 
 
 # Distributed Validator Cluster Manifest
 
-:::caution 
+:::caution
 This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/01_distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.
 :::
 
-The manifest file captures the public and private info required to take part in a distributed validator cluster. Each operator has their own version of the cluster manifest containing their DV client secrets.
+The manifest file captures the public, read-only info required to take part in a distributed validator cluster.
 
 One manifest can contain a number of distributed validators being operated by the same group of nodes.
 
 The manifest provides at least the following info.
 
-- The number of operators participating in this cluster.
-- ENRs for each participating operator. (SECP256K1 public keys)
-- Signatures from each key share authorising their respective operator ENRs
-- A collection of distributed validators operated by this cluster
-
+- ENRs for each participating operator
+  - SECP256K1 public keys
+  - Used to identify a DVC client across the internet
+  - Forms the basis of identity between charon nodes
+- Signature(s) from each key share(s) authorising their respective operator ENRs as acting on their behalf
+  - Used to link validator key shares to DVC ENRs, includes a nonce to allow for ENR key rotation
+- An array of distributed validators operated by this cluster
   - The BLS public key of the Distributed Validator
-  - The total number of shares and minimum threshold required for signing
-  - The BLS public keys for each share of this validator
-  - Public commitments to the secret sharing polynomial.
-    - Used to verify partial signatures during signature aggregation.
+  - The TSS verifiers for the group key, from which BLS public keys can be inferred
 
-### JSON schema
+## Example manifest
 
-The JSON schema of the DV manifest file is as follows.
-
-```json5
+```json5 title="manifest.yaml"
 {
-  "type": "object",
-  "properties": {
-    "tss": {
-      "type": "array",
-      "description": "Public commitments to secret sharing polynomial",
-      "items": {
-        "type": "string",
-        "description": "Hex serialization of BLS12-381 G1 point in compressed form"
-      }
+  "version": "obol/charon/manifest/0.0.1",
+  "description": "dv/2/threshold/3/peer/5",
+  "distributed_validators": [
+    {
+      "root_pubkey": "0xaf7e10e176ad2cd634009fed0e906e95866d47ec16808cc4df32b3bcfcaffbad9158f52531a086f6d9c54152dc4250da",
+      "threshold_verifiers": [
+        "r34Q4XatLNY0AJ/tDpBulYZtR+wWgIzE3zKzvPyv+62RWPUlMaCG9tnFQVLcQlDa",
+        "jRadEC0L5vp+sYPUvRgp9b4x/nzN1qGkiFA+lgpwNjq3BiJjhhikMKY8HQ1PJ0R2",
+        "uQHdtolDJjjXXwnQikhBx9T9Hp20fPXqOS4hP3nZORhtPlVCCvP8IggANkq9o7hF"
+      ]
     },
-    "members": {
-      "type": "array",
-      "description": "BLS12-381 pubkeys of QBFT members",
-      "items": {
-        "type": "string",
-        "description": "Hex serialization of BLS12-381 G1 point in compressed form"
-      }
-    },
-    "enrs": {
-      "type": "array",
-      "description": "Authorized ENRs",
-      "items": {
-        "type": "string",
-        "description": "Serialized ENR"
-      }
+    {
+      "root_pubkey": "0x82313d1fc1b7e2e361935b977068434226a0bc1ec3680a35669b63378f0154e419b1daba3531b0068a7af3159e0f56d7",
+      "threshold_verifiers": [
+        "gjE9H8G34uNhk1uXcGhDQiagvB7DaAo1ZptjN48BVOQZsdq6NTGwBop68xWeD1bX",
+        "ud3X5IV2KqOkBMWRLGpWsuyRQkK0shUKp8pascNEQE3Vo2ujVfs0O+3dPPbi8CYm",
+        "hQl8KQo8usksZjaE04L6vJRPXrv2k7h542adcK8Ibwhvci1hWwppBc54VvKG9VfL"
+      ]
     }
-  }
+  ],
+  "peers": [
+    "enr:-Ie4QFdd7auMcA6Sht4fD5alWeChra30HTW0eIOr6XkYQtivD2Ev1HNdkyhFnT5LcVKB-2aROv2wAW5EJW5NKLx_fUiAgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQK1OEYKGHj2rkQflwpMENJhr9_AAVIMdgRjp-D7dPVUVIN0Y3ABg3VkcAI=",
+    "enr:-Ie4QP4mbZPiuYMGJxpbV1bb5KwYz69pONum1XLQWJNscrABMZMaR8-mco4vZRwHpJfLV-Xq-2MMmGPcWvKGurzoV8SAgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQPXTrrbopT8F81z6nd9BP6OMaiXdU4hovsGz4alw74JkIN0Y3ADg3VkcAQ=",
+    "enr:-Ie4QCvui6MrHdcZmCmpenVBzfJ7kylTt2gHBvG-C5Hy7fZCXeM2Ct0NUBcuQZUQgKwiRpIza1qVUFUttaWO7RHwDx6AgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQLmzL1T7YS3su4_059MUAQD3Dk8PM8Jh_1qq8jUzeaRWoN0Y3AFg3VkcAY=",
+    "enr:-Ie4QCok_dUP2L9mVUPpLdVl_VLcTwESD7Xd4WYRSbPq__srFVsJT4MPxsQOP68BPXw2IMWvThA6SfBs-PMne__srdSAgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQLITI6sd1v-A1ArY0oBvIjGPsJWjc1XvbIxjWr1jvRSA4N0Y3AHg3VkcAg=",
+    "enr:-Ie4QAaRwPBsUloA1AlLmgjRx-zIHipzM06ioU2hH9Uv-mKRNUfScDInXlPGomDslz3QbAu0gxR-Jgq7d3SKHohjI7SAgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQNfEIdLwYgnPux1pXBg5enZ8jlIsPzMtHAJH1tnRfeMiYN0Y3AJg3VkcAo="
+  ]
 }
-```
 
-Example file
-
-```json
-{
-	"tss": [
-		"87db49c4c40d89f2415cd10765a348df5233ce5cb5f6667cf023680517d494bece8289e047da2488c87bc84a22a3a229",
-		"8197ef68c97101e0c6f8f48c4883d2b6e948c79d6b23614220d7e6cb70b3b0473df64d20bd68539365c531e179ee9639",
-		"8d952cf7b27d4c8071eb8bdd3de39a279ceb801d3f6cc21b185535653f4c81d9546b0e3b5d010636abdb6291264c562b"
-	],
-	"members": [
-		"b733fec0e82d482f44c9a3b1622b6f31343d37084825f7e338793ba253164e0f0c01af6bfb7ec8e3e93e5001fe0f6d4a",
-		"87bfd3fb2b1f3803b7879c3aefa19f74b659e4d54d4198503d94116110955beeef3ba3ba9b279b1155932286499fb91c",
-		"a675dd7fbf50e8d9d3c86e6895a18a2ef6f9d311d41afa965a0850688c06bffa0d5fa9495a49a26c1275ce16982796b7",
-		"914ca58d4e1d83659a8773d4c22e066fa965f992c11c957669d6ec7363281785b138723e139df4f86829252cd0c1a0b4"
-	],
-	"enrs": [
-		"enr:-IS4QOFHbEmXaGJLA3SVlxzdIfl-GHj34whXBoZnjis8CB4xY0tmAOtrJLVe4DOTaovuPK-9w957RIAxI8DsXZM9k14BgmlkgnY0gmlwhLrX64GJc2VjcDI1NmsxoQI8CxcDw3mohnRxoOkL-nuxV-QdAk1Nm4Mw3klXkr4sSYN0Y3CCJpU=",
-		"enr:-IS4QIrcdKUzqmlKJDrxSdW4OJz2cW_cwrasXYc7bpEG4RouGmxOUj6R7K1RmtNyTPSR2v62nawk3b7QO8OwTJoD6w4BgmlkgnY0gmlwhMkEDBqJc2VjcDI1NmsxoQMmH-veW70QZOibI2-DUf5W4oqUTVIAnZugMX7vSwy7OoN0Y3CCJpU=",
-		"enr:-IS4QMCn5qdN7bodIX5rqJnKMblyf2qYqeQSCxXewLUkq7UfPKBi8bD8-ytGYF0GZGHWK8WQ3vTaqi610t-ofXw_4mwBgmlkgnY0gmlwhNCgZkWJc2VjcDI1NmsxoQPdLhVvXOOMFoqglBB9zDiJEiSwi7MIMHjyKB4o6Fdv_IN0Y3CCJpU=",
-		"enr:-IS4QKpNR_dnKMH28k46MHi5nXZBpSMWaBb_Bqy0sdOp72IKdXWdVxVND-ur-31qO1FhjalM5Uz2nkBE0968kKndse8BgmlkgnY0gmlwhEvZrWOJc2VjcDI1NmsxoQLiUs6XmW_0fVAhFYkQewDlLYvHrc3MOGCzy2tJQxBrBIN0Y3CCJpU="
-	]
-}
 ```
