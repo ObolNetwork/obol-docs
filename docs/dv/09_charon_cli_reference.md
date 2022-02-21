@@ -1,5 +1,5 @@
 ---
-description: Documenting a Distributed Validator Cluster in a standardised file format
+description: A go-based middleware client for taking part in Distributed Validator clusters.
 ---
 
 # Charon CLI Reference
