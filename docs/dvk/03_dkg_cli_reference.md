@@ -38,6 +38,24 @@ SUBCOMMANDS:
 ```
 
 ```
+$ dkg-poc lead --help
+
+dkg-poc-lead 0.1.0
+
+USAGE:
+    dkg-poc <bind-addr> lead --participants <n-participants> --threshold <threshold>
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -p, --participants <n-participants>    Indicates how many users the leader will wait for to connect
+    -t, --threshold <threshold>            Sets the threshold at which point a group of shareholders can create valid signatures
+
+```
+
+```
 $ dkg-poc participate --help
 
 dkg-poc-participate 0.1.0
