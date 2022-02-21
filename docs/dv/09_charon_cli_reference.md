@@ -10,7 +10,7 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version `0.1.1`. Find the latest release on [our github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`0.1.1`](https://github.com/ObolNetwork/charon/releases/tag/v0.1.1). Find the latest release on [our github](https://github.com/ObolNetwork/charon/releases).
 
 ```markdown
 charon --help    
@@ -44,7 +44,7 @@ Flags:
       --beacon-node-endpoint string    Beacon node endpoint URL (default "http://localhost/")
       --data-dir string                The directory where charon will store all its internal data (default "./charon/data")
   -h, --help                           help for run
-      --jaegar-address string          Listening address for Jaegar tracing
+      --jaeger-address string          Listening address for Jaeger tracing
       --manifest-file string           The path to the manifest file defining distributed validator cluster (default "./charon/manifest.json")
       --monitoring-address string      Listening address (ip and port) for the monitoring API (prometheus, pprof) (default "127.0.0.1:8088")
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
