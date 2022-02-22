@@ -22,13 +22,13 @@ The network consists of 4 public goods that will eventually work together throug
 
 The Obol Network develops and maintains four core public goods:
 
-- The DVK Launchpad, a CLI tool and User Interface for bootstrapping Distributed Validators
+- **The DVK Launchpad** - a CLI tool and User Interface for bootstrapping Distributed Validators
 
-- Charon, a middleware client that enables validators to run in a fault-tolerant, distributed manner
+- **Charon** - a middleware client that enables validators to run in a fault-tolerant, distributed manner
 
-- Obol Managers, a set of solidity smart contracts for the formation of Distributed Validators
+- **Obol Managers ** - a set of solidity smart contracts for the formation of Distributed Validators
 
-- Obol Testnets, a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network.
+- **Obol Testnets** - a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network.
 
 #### Working Group Formation
 
@@ -47,7 +47,7 @@ The distributed validator key (DVK) generation is a critical core capability of 
 This effort can be broadly broken down into three phases:
 - Phase 0: EIP Specification, Drafting & Submission
 - Phase 1: Launchpad Specification and User Feedback
-- Phase 1.5: Complimentary Research
+- Phase 1.5: Complimentary Research (Multi-Operator Validation)
 
 #### Working Group Member Responsibilities
 
@@ -121,16 +121,16 @@ To facilitate the generation of distributed validator keys amongst remote users 
 ### Working Group Participants
 The members of the Phase 0 working group are:
 
-- Coinbase Cloud (specific members pending)
-- Ethereum Foundation (specific members pending)
+- Ethereum Foundation (Carl, Dankrad, Aditya)
 - Ben Edgington
 - Jim McDonald
-- Prysmatic Labs (specific members pending)
+- Prysmatic Labs
 - Sourav Das 
 - Mamy Ratsimbazafy 
-- Kobi Gurkan 
+- Kobi Gurkan
+- Coinbase Cloud (specific members pending) 
 
-The intended universe of Phase 1 & Phase 1.5 will launch with the initial cohort below but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following [link](https://pwxy2mff03w.typeform.com/to/Kk0TfaYF). 
+The intended universe of Phase 1 & Phase 1.5 will launch with no initial members but will immediately be available for submission by participants that have joined the Obol Proto Community, at the following [link](https://pwxy2mff03w.typeform.com/to/Kk0TfaYF). 
 
 Everyone can join the proto community, however working group participation will be based on relevance and skill set. Below is an abbreviated list of parties that Obol would like to start the working group with.
 
