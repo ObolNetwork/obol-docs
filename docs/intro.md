@@ -9,17 +9,17 @@ description: Welcome to the Multi-Operator Validator Network
 
 Obol Labs is a remote first research and software development team focused on POS infrastructure for public blockchain networks. Specific topics of focus are Internet Bonds, Distributed Validator Technology and Multi-Operator Validation. The core team currently includes 10 members that are spread across the world.
 
-The core team is currently building the Obol Network, a protocol to foster trust minimized staking through multi-operator validation. This will enable low-trust access to Ethereum staking yield, which can be used as a core building block in a variety of Web3 products.
+The core team is building the Obol Network, a protocol to foster trust minimized staking through multi-operator validation. This will enable low-trust access to Ethereum staking yield, which can be used as a core building block in a variety of Web3 products.
 
 ## The Network
 
-The network can be best visualized as a work layer that sits directly on top of base layer consensus. This work layer is designed to provide the base layer with more resiliency and decentralization as it scales. In this chapter of Ethereum we will move onto the next great scaling challenge, which is stake centralization. To effectively mititgate these risks, credible neutrality must be used as a primary design principal. 
+The network can be best visualized as a work layer that sits directly on top of base layer consensus. This work layer is designed to provide the base layer with more resiliency and promote decentralization as it scales. As the current chapter of Ethereum matures over the coming years, the community will move onto the next great scaling challenge, which is stake centralization. To effectively mititgate these risks, community building and credible neutrality must be used as a primary design principals. 
 
-Obol as a layer is focused on scaling main chain staking by providing permissionless access to Distributed Validators. The network utilizes a middleware implementation of Distributed Validator Technology (DVT), to enable the operation of distributed validator clusters that can preserve validators current client and remote signing configurations.
+Obol as a layer is focused on scaling main chain staking by providing permissionless access to Distributed Validators (DV's). We believe that DV's will and should make up a large portion of mainnet validator configurations. In preparation for the first wave of adoption the network  currently utilizes a middleware implementation of Distributed Validator Technology (DVT), to enable the operation of distributed validator clusters that can preserve validators current client and remote signing configurations.
 
-Similar to how roll up technology laid the foundation for L2 scaling implementations, we believe DVT will do the same for scaling main chain staking while preserving decentralization. Staking infrastructure is entering its protocol phase of evolution, which must include trust-minimized staking networks that can be plugged into at scale. Layers like Obol are critical to the long term viability and resiliency of public networks, especially networks like Ethereum. We believe DVT will evolve into a widely used primitive and will ensure the security, resiliency, and decentralization of  the public blockchain networks that adopt it.
+Similar to how roll up technology laid the foundation for L2 scaling implementations, we believe DVT will do the same for scaling main chain staking while preserving decentralization. Staking infrastructure is entering its protocol phase of evolution, which must include trust-minimized staking networks that can be plugged into at scale. Layers like Obol are critical to the long term viability and resiliency of public networks, especially networks like Ethereum. We believe DVT will evolve into a widely used primitive and will ensure the security, resiliency, and decentralization of the public blockchain networks that adopt it.
 
-The Obol Network develops and maintains four core public goods:
+The Obol Network consists of four core public goods:
 
 - The [Distributed Validator Launchpad](./dvk/01_distributed-validator-keys.md), a CLI tool and dApp for bootstrapping Distributed Validators
 - [Charon](./dv/01_introducing-charon.md), a middleware client that enables validators to run in a fault-tolerant, distributed manner
@@ -42,7 +42,9 @@ The road to decentralising stake is a long one. At Obol we have divided our visi
 
 The first version of distibuted validators will have dispute resolution out of band. Meaning you need to know and communicate with your counterparty operators if there is an issue with your shared cluster. 
 
-A DV without in-band dispute resolution/incentivisation is still extremely valuable. Individuals and staking as a service providers can deploy DVs on their own to make their validators fault tolerant. Groups can run DVs together, but need to bring their own dispute resolution to the table, whether that be a smart contract of their own, a traditional legal service agreement, or simply high trust between the group. 
+A DV without in-band dispute resolution/incentivisation is still extremely valuable. Individuals and staking as a service providers can deploy DVs on their own to make their validators fault tolerant. Groups can run DVs together, but need to bring their own dispute resolution to the table, whether that be a smart contract of their own, a traditional legal service agreement, or simply high trust between the group.
+
+Obol V1 will utilize retroactive public goods principals to lay the foundation of its economic ecosystem. The Obol Community to respnsibly allocate the collected ETH as grants to projects in the staking ecosystem for the entirety of V1.
 
 ### V2 - Trustless Distributed Validators
 
