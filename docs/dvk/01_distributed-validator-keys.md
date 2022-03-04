@@ -9,7 +9,7 @@ Description: >-
 ### Obol DVK Working Group
 
 #### Purpose
-Obol Network is a distributed consensus protocol and ecosystem for Ethereum with a mission to eliminate single points of technical failure risks via Distributed Validator Technology (DVT). The project has reached the point where increasing the community coordination, participation, and ownership will drive significant impact on the growth of the core technology. As a result, the Obol Labs team will open workstreams and incentives to the community, with the first working group being dedicated to the creation process of distributed validators.
+Obol Network is a distributed consensus protocol and ecosystem with a mission to eliminate single points of technical failure risks on Ethereum via Distributed Validator Technology (DVT). The project has reached the point where increasing the community coordination, participation, and ownership will drive significant impact on the growth of the core technology. As a result, the Obol Labs team will open workstreams and incentives to the community, with the first working group being dedicated to the creation process of distributed validators.
 
 This document intends to outline what Obol is, how the ecosystem is structured, how it plans to evolve, and what the first working group will consist.
 
