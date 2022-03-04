@@ -44,7 +44,7 @@ The first version of distibuted validators will have dispute resolution out of b
 
 A DV without in-band dispute resolution/incentivisation is still extremely valuable. Individuals and staking as a service providers can deploy DVs on their own to make their validators fault tolerant. Groups can run DVs together, but need to bring their own dispute resolution to the table, whether that be a smart contract of their own, a traditional legal service agreement, or simply high trust between the group.
 
-Obol V1 will utilize retroactive public goods principals to lay the foundation of its economic ecosystem. The Obol Community to respnsibly allocate the collected ETH as grants to projects in the staking ecosystem for the entirety of V1.
+Obol V1 will utilize retroactive public goods principals to lay the foundation of its economic ecosystem. The Obol Community will responsibly allocate the collected ETH as grants to projects in the staking ecosystem for the entirety of V1.
 
 ### V2 - Trustless Distributed Validators
 
