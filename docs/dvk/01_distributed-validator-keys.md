@@ -24,7 +24,7 @@ The Obol Network consists of four core public goods:
 
 - **Charon** - a middleware client that enables validators to run in a fault-tolerant, distributed manner
 
-- **Obol Managers ** - a set of solidity smart contracts for the formation of Distributed Validators
+- **Obol Managers** - a set of solidity smart contracts for the formation of Distributed Validators
 
 - **Obol Testnets** - a set of on-going public incentivised testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
 
