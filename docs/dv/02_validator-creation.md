@@ -2,11 +2,11 @@
 description: Creating a Distributed Validator cluster from scratch
 ---
 
-# Distributed Validator Creation
+# Distributed validator creation
 
 ![A sample Distributed Validator cluster](/img/ObolCluster.png)
 
-### Stages of creating a Distributed Validator
+### Stages of creating a distributed validator
 
 To create a distributed validator cluster, you and your group of operators need to complete the following steps:
 

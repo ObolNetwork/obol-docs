@@ -1,8 +1,8 @@
 ---
-sidebar_position: 9
+sidebar_position: 13
 ---
 
-# 🧪 Testnets
+# Testnets
 
 ![Testnet Roadmap](/img/ObolTestnetRoadmap.png)
 
@@ -75,7 +75,7 @@ A core focus of this devnet will be to collect network performance data. This wi
 - Have block proposals in place
 - Build up the analytics plumbing to injest network traces from dump files or distributed tracing endpoints
 
-## Athena Testnet (Public Testnet 1)
+## Athena Public Testnet 1
 
 With tutorials for solo and group flows having been developed and refined. The goal for public testnet 1 is to get distributed validators into the hands of the wider Proto Community for the first time.
 

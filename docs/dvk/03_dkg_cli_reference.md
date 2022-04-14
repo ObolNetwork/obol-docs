@@ -3,7 +3,7 @@ Description: >-
   A rust-based CLI client for hosting and participating in Distributed Validator key generation ceremonies.
 ---
 
-# DKG CLI Reference
+# DKG CLI reference
 
 
 :::caution

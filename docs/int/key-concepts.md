@@ -1,15 +1,18 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Some of the key terms in the field of Distributed Validator Technology
 ---
 
-# 💡 Key Concepts
+# Key concepts
+This page outlines a number of the key concepts behind the various technologies that Obol is developing.
 
-## Distributed Validator
+## Distributed validator
 
 ![A Distributed Validator](/img/WhatIsADistributedValidator.png)
 
-A Distributed Validator is one validator public key on the Ethereum network, being operated in an Active/Active manner through the use of Distributed Validator Technology.
+A distributed validator is an Ethereum proof-of-stake validator that runs on more than one node/machine. This functionality is provided by **Distributed Validator Technology** (DVT).
+
+Distributed validator technology removes the problem of single-point failure. Should <33% of the participating nodes in the DVT cluster go offline, the remaining active nodes are still able to come to consensus on what to sign and produce valid signatures for their staking duties. This is known as Active/Active redundancy, a common pattern for minimizing downtime in mission critical systems.
 ​
 
 ## Distributed Validator Node
