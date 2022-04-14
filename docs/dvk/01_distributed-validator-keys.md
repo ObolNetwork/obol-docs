@@ -12,5 +12,5 @@ To achieve fault tolerance in a distributed validator, the individual private ke
 
 A distributed validator key generation ceremony is a type of DKG ceremony. A DVK ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata.
 
-**There is currently an active working group developing DKG.** Further information can be seen on the [working groups](../int/working-groups.md)) page.
+**There is currently an active working group developing DKG.** Further information can be seen on the [working groups](../int/working-groups.md) page.
 
