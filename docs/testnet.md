@@ -29,7 +29,7 @@ The first devnet aim will be to have a number of trusted operators test out our 
 
 **Network:** Kiln
 
-**Target start date:** 11th May 2022
+**Target start date:** May 2022
 
 **Duration:** 1 week
 
@@ -64,7 +64,7 @@ A core focus of this devnet will be to collect network performance data. This wi
 
 **Network:** Kiln
 
-**Target start date:** 25th May 2022
+**Target start date:** May 2022
 
 **Duration:** 2 weeks
 
@@ -93,7 +93,7 @@ This will be an unincentivised testnet, and will form as the basis for us figuri
 
 **Network:** Kiln or a Merged Test Network (e.g. Görli)
 
-**Target start date:** 13th of June 2022
+**Target start date:** June 2022
 
 **Duration:** 2 week setup, 4 weeks operation
 
@@ -117,7 +117,7 @@ The aim is to find as many memory leaks, DoS vulnerable endpoints and operations
 
 **Network:** Kiln or a Merged Test Network (e.g. Görli)
 
-**Target start date:** 8th of August 2022
+**Target start date:** August 2022
 
 **Duration:** 2-4 weeks operation, depending on how resilient the clients are
 
@@ -144,7 +144,7 @@ At the end of the testnet period, all validators will be exited, and their perfo
 
 **Network:** Merged Gnosis Chain
 
-**Target start date:** 15th of September 2022 ([Dappcon](https://www.dappcon.io/) runs 12th-14th of Sept. )
+**Target start date:** September 2022 ([Dappcon](https://www.dappcon.io/) runs 12th-14th of Sept. )
 
 **Duration:** 6 weeks
 
@@ -173,7 +173,7 @@ The aim of this testnet is to show that even with directly incentivised byzantin
 
 **Network:** Merged Gnosis Chain
 
-**Target start date:** 27th of October 2022 ([Devcon 6](https://devcon.org/en/#road-to-devcon) runs 7th-16th of October. )
+**Target start date:** October 2022 ([Devcon 6](https://devcon.org/en/#road-to-devcon) runs 7th-16th of October. )
 
 **Duration:** 4 weeks
 
