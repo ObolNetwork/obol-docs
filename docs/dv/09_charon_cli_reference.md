@@ -2,7 +2,7 @@
 description: A go-based middleware client for taking part in Distributed Validator clusters.
 ---
 
-# Charon CLI Reference
+# Charon CLI reference
 
 :::caution
 
@@ -10,7 +10,7 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`0.1.1`](https://github.com/ObolNetwork/charon/releases/tag/v0.1.1). Find the latest release on [our github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`0.1.1`](https://github.com/ObolNetwork/charon/releases/tag/v0.1.1). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 ```markdown
 charon --help    

@@ -2,7 +2,7 @@
 description: Documenting a Distributed Validator Cluster in a standardised file format
 ---
 
-# Distributed Validator Cluster Manifest
+# Distributed validator cluster manifest
 
 :::caution
 This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/01_distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.
@@ -12,7 +12,7 @@ The manifest file captures the public, read-only info required to take part in a
 
 One manifest can contain a number of distributed validators being operated by the same group of nodes.
 
-The manifest provides at least the following info.
+The manifest provides at least the following info:
 
 - ENRs for each participating operator
   - SECP256K1 public keys

@@ -2,9 +2,9 @@
 description: Deployment Architecture for a Distributed Validator Client
 ---
 
-# Middleware Daemon
+# Middleware daemon
 
-The Charon daemon serves as a consensus layer API middleware, and connects to the Obol peer-to-peer network to discover its counterparty charon nodes.
+The Charon daemon serves as a consensus layer API middleware and connects to the Obol peer-to-peer network to discover it's counterpart Charon nodes.
 
 ### Operation
 
@@ -14,7 +14,7 @@ A single instance of the middleware can participate in multiple distributed vali
 
 The daemon offers a config reload instruction through Unix signals which is useful to join or leave Obol clusters on-the-fly without interruption.
 
-The _charon_ package will initially be available as a Docker image and through binary builds. An APT package with a systemd integration is planned.
+The `charon` package will initially be available as a Docker image and through binary builds. An APT package with a systemd integration is planned.
 
 ### Initialization
 
