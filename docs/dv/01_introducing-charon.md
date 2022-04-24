@@ -19,8 +19,8 @@ The below graphic visually outlines the internal functionalies of Charon.
 
 ### Get started
 
-The `charon` client is not yet ready for use, but you can play around with the dummy commands by running the following.
+The `charon` client is in an early alpha state, and is not ready for mainnet, see [here](https://github.com/ObolNetwork/charon#supported-consensus-layer-clients) for the latest on charon's readiness.
 
 ```
-docker run docker.pkg.github.com/obolnetwork/charon/charon:v0.0.2 charon --help
+docker run ghcr.io/obolnetwork/charon:v0.3.0 --help
 ```
