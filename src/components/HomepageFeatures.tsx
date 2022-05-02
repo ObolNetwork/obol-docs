@@ -33,8 +33,8 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "Deploy Distributed Validators",
-    image: "/img/noun_FourCircles.png",
-    alt: "Image copyright Zach Bogart, courtesy of the Noun Project",
+    image: "/img/CharonLogo.svg",
+    alt: "Charon Distributed Validator Client Logomark",
     description: (
       <>
         <Link to="/docs/dv/introducing-charon">Charon</Link> is a Distributed

@@ -29,4 +29,4 @@ To create a distributed validator cluster, you and your group of operators need 
 6. Operators can now take backups of the generated private key shares and manifest.lock file. 
 7. All operators load the keys and manifests generated in the ceremony, into their staking deployments.
 8. Operators can run a performance test of the configured cluster to ensure connectivity between all operators at a reasonable latency is observed.
-9. Once all readiness tests have passed, one person activates the distributed validator(s) with a deposit on chain.
+9. Once all readiness tests have passed, one operator activates the distributed validator(s) with a deposit on chain.
