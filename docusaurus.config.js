@@ -46,18 +46,18 @@ const config = {
         defaultMode: 'dark',
         disableSwitch: false,
         respectPrefersColorScheme: true,
-        switchConfig: {
-          darkIcon: '🌙',
-          darkIconStyle: {
-            marginLeft: '2px',
-          },
-          // Unicode icons such as '\u2600' will work
-          // Unicode with 5 chars require brackets: '\u{1F602}'
-          lightIcon: '\u2600',
-          lightIconStyle: {
-            marginLeft: '1px',
-          },
-        },
+        // switchConfig: {
+        //   darkIcon: '🌙',
+        //   darkIconStyle: {
+        //     marginLeft: '2px',
+        //   },
+        //   // Unicode icons such as '\u2600' will work
+        //   // Unicode with 5 chars require brackets: '\u{1F602}'
+        //   lightIcon: '\u2600',
+        //   lightIconStyle: {
+        //     marginLeft: '1px',
+        //   },
+        // },
       },
       navbar: {
         title: 'Obol Network',
@@ -146,7 +146,7 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['solidity', 'json5'],
       },
-      metadatas: [
+      metadata: [
         {property: "og:image", content: "/img/obol_og_image.png"},
         {property: "og:image:width", content: "1200"},
         {property: "og:image:height", content: "630"}

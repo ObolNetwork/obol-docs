@@ -52,7 +52,7 @@ A distributed validator client intercepts the validator client ↔ consensus cli
 - Coming to consensus on a candidate duty for all validators to sign
 - Combining signatures from all validators into a distributed validator signature
 
-The only example of a distributed validator client built with a non-custodial middleware architecture to date is [charon](./dv/01_introducing-charon.md).
+The only example of a distributed validator client built with a non-custodial middleware architecture to date is [charon](../dv/01_introducing-charon.md).
 
 ### Validator Client
 
