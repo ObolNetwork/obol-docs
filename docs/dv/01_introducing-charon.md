@@ -4,7 +4,7 @@ description: Charon -  The Distributed Validator Client
 
 # Introducing Charon
 
-This section introduces and outlines the Charon DVT middleware. For additional context regarding distributed validator technology, see [this section](http://localhost:3000/docs/int/key-concepts#distributed-validator) of the key concept page.
+This section introduces and outlines the Charon middleware. For additional context regarding distributed validator technology, see [this section](../int/key-concepts#distributed-validator) of the key concept page.
 
 ### What is Charon?
 
@@ -22,5 +22,5 @@ The below graphic visually outlines the internal functionalies of Charon.
 The `charon` client is in an early alpha state, and is not ready for mainnet, see [here](https://github.com/ObolNetwork/charon#supported-consensus-layer-clients) for the latest on charon's readiness.
 
 ```
-docker run ghcr.io/obolnetwork/charon:v0.3.0 --help
+docker run ghcr.io/obolnetwork/charon:v0.4.0 --help
 ```

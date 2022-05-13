@@ -1,9 +1,11 @@
 ---
 Description: >-
-  A dapp to securely create Distributed Validator keys alone or with a group.
+  A dapp to securely create Distributed Validators alone or with a group.
 ---
 
-# Distributed validator launchpad
+# Distributed Validator launchpad
+
+![DV Launchpad Promo Image](/img/DistributeYourValidators.svg)
 
 In order to activate an Ethereum validator, 32 ETH must be deposited into the official deposit contract. 
 

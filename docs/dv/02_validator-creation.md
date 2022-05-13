@@ -19,14 +19,14 @@ To create a distributed validator cluster, you and your group of operators need 
     - They review the terms of the cluster configuration.
     - The submit the ENR of their charon client.
     - They sign both the hash of the cluster config and their charon ENR to indicate acceptance of the terms 
-3. Once all operators have submitted signatures for the cluster configuration and ENRs, they can all download the cluster manifest file. 
-4. Every operator loads this cluster manifest file into `charon dkg`. The manifest provides the charon process with the information it needs to complete the DKG ceremony with the other charon clients. 
+3. Once all operators have submitted signatures for the cluster configuration and ENRs, they can all download the cluster definition file. 
+4. Every operator loads this cluster definition file into `charon dkg`. The definition provides the charon process with the information it needs to complete the DKG ceremony with the other charon clients. 
 5. Once all charon clients can communicate with one another, the DKG process completes. All operators end up with:
-    - A manifest lockfile, which contains the original cluster configuration data, combined with the newly generated group public keys and their associated threshold verifiers. This file is needed by the `charon run` command. 
+    - A cluster lockfile, which contains the original cluster configuration data, combined with the newly generated group public keys and their associated threshold verifiers. This file is needed by the `charon run` command. 
     - Validator deposit data
     - Validator exit data
     - Validator private key shares 
-6. Operators can now take backups of the generated private key shares and manifest.lock file. 
-7. All operators load the keys and manifests generated in the ceremony, into their staking deployments.
+6. Operators can now take backups of the generated private key shares and definition.lock file. 
+7. All operators load the keys and cluster lockfiles generated in the ceremony, into their staking deployments.
 8. Operators can run a performance test of the configured cluster to ensure connectivity between all operators at a reasonable latency is observed.
 9. Once all readiness tests have passed, one operator activates the distributed validator(s) with an on-chain deposit.
