@@ -1,7 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/paleNight'); 
+const darkCodeTheme = require('prism-react-renderer/themes/palenight'); 
 // Override code blocks to be Obol coloured
 const customObolDarkTheme = { ...darkCodeTheme, plain: {color:"#bfc7d5",backgroundColor: "#243D42"}}
 
