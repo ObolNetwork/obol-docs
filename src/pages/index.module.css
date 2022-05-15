@@ -8,17 +8,21 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: --ifm-color-primary-dark;
-  background: linear-gradient(90deg, #19314B 0%, #37606B 39.06%, #61AC9F 67.19%, #81BBA3 100%);
+  background: --ifm-background-color;
+  background: linear-gradient(90deg, #16968E 0%, #2FE4AB 100%);
 }
 
 html[data-theme='dark'] .heroBanner {
-  background: linear-gradient(90deg, #19314B 0%, #37606B 39.06%, #61AC9F 67.19%, #81BBA3 100%);
+  background: linear-gradient(90deg, #192d31 0%,  #16968E 100%);
 }
 
 .heroLogo {
   width: 40%;
   padding-bottom: 2rem;
+}
+
+html[data-theme='dark'] .heroLogo {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(45%) saturate(979%) hue-rotate(169deg) brightness(99%) contrast(92%);
 }
 
 @media screen and (max-width: 966px) {
@@ -38,6 +42,10 @@ html[data-theme='dark'] .heroBanner {
   justify-content: center;
 }
 
+html[data-theme='dark'] .button {
+  background-color: #d9ecf3;
+}
+
 .obolDots {
   display: flex;
   justify-content: center;
@@ -46,7 +54,7 @@ html[data-theme='dark'] .heroBanner {
 }
 
 .obolDot1 {
-  background-color: #3B93BE;
+  background-color: #2FE4AB;
   height: 0.6rem;
   width: 0.6rem;
   border-radius: 50%;
@@ -54,7 +62,7 @@ html[data-theme='dark'] .heroBanner {
 }
 
 .obolDot2 {
-  background: #51AAC6;
+  background: #3CD2DD;
   height: 0.6rem;
   width: 0.6rem;
   border-radius: 50%;
@@ -62,7 +70,7 @@ html[data-theme='dark'] .heroBanner {
 }
 
 .obolDot3 {
-  background: #6FD1D7;
+  background: #8C3CDD;
   height: 0.6rem;
   width: 0.6rem;
   border-radius: 50%;
@@ -70,7 +78,7 @@ html[data-theme='dark'] .heroBanner {
 }
 
 .obolDot4 {
-  background: #81BCB9;
+  background: #DD603C;
   height: 0.6rem;
   width: 0.6rem;
   border-radius: 50%;

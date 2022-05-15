@@ -8,11 +8,11 @@
 .featureImg {
   height: 200px;
   width: 200px;
+  filter: invert(4%) sepia(7%) saturate(2877%) hue-rotate(139deg) brightness(97%) contrast(96%);
 }
 
 html[data-theme="dark"] .featureImg {
-  filter: invert(100%);
-  -webkit-filter: invert(100%);
+  filter: invert(99%) sepia(45%) saturate(979%) hue-rotate(169deg) brightness(99%) contrast(92%);
 }
 
 img.featureImg:hover {
