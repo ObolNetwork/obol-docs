@@ -18,7 +18,7 @@ function HomepageHeader() {
         <img
           className={styles.heroLogo}
           alt={"Obol Network"}
-          src={"/img/ObolHorizontalWhite.svg"}
+          src={"/img/ObolHorizontalDarkBG.svg"}
         />
         {metadatas.map((metadata, i) => (
           <meta key={`metadata_${i}`} {...metadata} />
@@ -32,7 +32,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className={styles.button + " button button--secondary button--lg"}
             to="/docs/intro"
           >
             Read the Docs

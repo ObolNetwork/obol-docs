@@ -1,13 +1,14 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
 const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const darkCodeTheme = require('prism-react-renderer/themes/palenight'); 
+// Override code blocks to be Obol coloured
+const customObolDarkTheme = { ...darkCodeTheme, plain: {color:"#bfc7d5",backgroundColor: "#243D42"}}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Obol Network',
-  tagline: 'Building Distributed Validator Technology for Ethereum',
+  tagline: 'Building Distributed Validators for Ethereum',
   url: 'https://docs.obol.tech/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -46,24 +47,13 @@ const config = {
         defaultMode: 'dark',
         disableSwitch: false,
         respectPrefersColorScheme: true,
-        // switchConfig: {
-        //   darkIcon: '🌙',
-        //   darkIconStyle: {
-        //     marginLeft: '2px',
-        //   },
-        //   // Unicode icons such as '\u2600' will work
-        //   // Unicode with 5 chars require brackets: '\u{1F602}'
-        //   lightIcon: '\u2600',
-        //   lightIconStyle: {
-        //     marginLeft: '1px',
-        //   },
-        // },
       },
       navbar: {
         title: 'Obol Network',
         logo: {
           alt: 'Obol Network Logo',
-          src: 'img/ObolIcon.svg',
+          src: '/img/ObolIconDark.svg',
+          srcDark: '/img/ObolIconLight.svg'
         },
         items: [
           {
@@ -88,8 +78,8 @@ const config = {
         style: 'dark',
         logo: {
           alt: "Obol Network Logo",
-          src: "https://obol.tech/ObolIcon.png",
-          srcDark: "https://obol.tech/ObolIconWhite.png",
+          src: "/img/ObolLineWhite.svg",
+          srcDark: "/img/ObolLineWhite.svg",
           width: "30px",
           height: "30px",
           href: "https://obol.tech/"
@@ -143,7 +133,7 @@ const config = {
       },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        darkTheme: customObolDarkTheme,
         additionalLanguages: ['solidity', 'json5'],
       },
       metadata: [

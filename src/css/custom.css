@@ -6,16 +6,23 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #61ac9f;
-  --ifm-color-primary-dark: #37606b;
-  --ifm-color-primary-darker: #19314b;
-  --ifm-color-primary-darkest: #090909;
+  --ifm-color-primary: #16968E;
+  --ifm-color-primary-dark: #2FE4AB;
+  --ifm-color-primary-darker: #16968E;
+  --ifm-color-primary-darkest: #111F22;
   --ifm-color-primary-light: #81bba3;
   --ifm-color-primary-lighter: #81bba3;
-  --ifm-color-primary-lightest: #81bba3;
-  --ifm-footer-background-color: #090909;
+  --ifm-color-primary-lightest: #D9ECF3;
+  --ifm-footer-background-color: #33474D;
   --ifm-code-font-size: 95%;
+  --prism-background-color: #243D42;
   font-family: 'Avenir Next', Montserrat, sans-serif;
+}
+
+html[data-theme="dark"] {
+  --ifm-background-color: #111F22;
+  --ifm-navbar-background-color: #182D32;
+  --prism-background-color: #243D42;
 }
 
 .docusaurus-highlight-code-line {
@@ -30,11 +37,11 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 }
 
 html[data-theme='dark'] footer.footer {
-  background-color: #090909;
+  background-color: #091011;
 }
 
 html[data-theme='light'] footer.footer {
-  background-color: #090909;
+  background-color: #091011;
 }
 
 html[data-theme='dark'] .hero__title {
@@ -50,5 +57,5 @@ html[data-theme="dark"] .text--center--title {
 }
 
 html[data-theme="light"] .text--center--title {
-  color: #090909;
+  color: #011216;
 }
