@@ -24,3 +24,5 @@ The `charon` client is in an early alpha state, and is not ready for mainnet, se
 ```
 docker run ghcr.io/obolnetwork/charon:v0.4.0 --help
 ```
+
+For more information on running charon, take a look at our [quickstart guide](../int/quickstart.md). 
