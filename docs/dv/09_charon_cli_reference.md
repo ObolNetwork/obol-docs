@@ -27,10 +27,8 @@ Available Commands:
   bootnode       Start a discv5 bootnode server
   completion     Generate the autocompletion script for the specified shell
   create         Create artifacts for a distributed validator cluster
-  create-cluster Create a local charon cluster [DEPRECATED]
   dkg            Participate in a Distributed Key Generation ceremony
   enr            Print this client's Ethereum Node Record
-  gen-p2pkey     Generates a new p2p key [DEPRECATED]
   help           Help about any command
   run            Run the charon middleware client
   version        Print version and exit
