@@ -35,7 +35,7 @@ There are two ways to test out a distributed validator.
 
     For simplicities sake, this repo is configured to work with a remote Beacon node such as one from [Infura](https://infura.io/). 
     
-    Create an Eth2 project and copy the `https` URL outlined in the following screenshot:
+    Create an Eth2 project and copy the `https` URL:
 
     ![Example Infura API Endpoint](/img/example-infura-details.png)
 
@@ -45,7 +45,7 @@ There are two ways to test out a distributed validator.
 
     ```sh
     # Create a testnet distributed validator cluster
-    docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.4.0 create cluster --cluster-dir=".charon/cluster"
+    docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:latest create cluster --cluster-dir=".charon/cluster" --withdrawal-address="0x000000000000000000000000000000000000dead"
     ``` 
 1. Start the cluster
     ```sh
@@ -58,11 +58,13 @@ There are two ways to test out a distributed validator.
     open http://localhost:3000/d/laEp8vupp
     ```
 
-1. Activate the validator on the testnet using the existing launchpad with the deposit data created in `.charon/deposit/`. 
+1. Activate the validator on the testnet using the original [staking launchpad](https://prater.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/deposit-data.json`. 
+    - If you use Mac OS, `.charon` the default output folder, does not show up on the launchpad's "Upload Deposit Data" file picker. Rectify this by pressing `Command + Shift + . ` (full stop). This should display hidden folders, allowing you to select the deposit file. 
+
 
 Congratulations, if this all worked you are now running a distributed validator cluster on a testnet. Try turning off a single node of the four and see if the validator stays online or begins missing duties, to see for yourself the fault-tolerance that can be added to proof of stake validation with this new Distributed Validator Technology. 
 
-:::info 
+:::tip 
 Don't forget to be a good testnet steward and exit your validator when you are finished testing with it.* 
 
 **Once charon creates validator exit data in an upcoming release.*
