@@ -32,7 +32,7 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
-This repo is configured with Github Actions to deploy the built site to github pages. Committing or merging to master will update the production documentation site. 
+This repo is configured with Github Actions to deploy the built site to github pages. Committing or merging to master will update the production documentation site.
 
 ### Versioning
 
@@ -41,6 +41,10 @@ Docusaurus can manage multiple versions of your docs.
 #### Create a docs version
 
 Release a version v0.5.0 of your project:
+
+First update the sample command in `./docs/dv/01_introducing-charon.md` and update all CLI sample output in `./docs/dv/09_charon_cli_reference.md`.
+
+Now you are ready to create the next version by running the following command.
 
 ```bash
 yarn run version v0.5.0
@@ -52,6 +56,8 @@ Your docs now have 2 versions:
 
 - `v0.5.0` at `http://localhost:3000/docs/` for the version v0.5.0 docs
 - `current` at `http://localhost:3000/docs/next/` for the **upcoming, unreleased docs**
+
+Now push this to a branch and merge to main to release this version update publicly.
 
 #### Add a Version Dropdown
 
@@ -66,7 +72,7 @@ module.exports = {
       items: [
         // highlight-start
         {
-          type: 'docsVersionDropdown',
+          type: "docsVersionDropdown",
         },
         // highlight-end
       ],
@@ -97,8 +103,8 @@ Modify `docusaurus.config.js` to add support for the `fr` locale:
 ```js title="docusaurus.config.js"
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'fr'],
+    defaultLocale: "en",
+    locales: ["en", "fr"],
   },
 };
 ```
@@ -144,7 +150,7 @@ module.exports = {
       items: [
         // highlight-start
         {
-          type: 'localeDropdown',
+          type: "localeDropdown",
         },
         // highlight-end
       ],
