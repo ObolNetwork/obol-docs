@@ -8,7 +8,7 @@ Description: >-
 
 :::warning
 
-The `dkg-poc` client is a prototype implementation for generating Distributed Validator Keys. Keys generated with this tool will not work with Charon, and they are not suitable for use.
+The `dkg-poc` client is a prototype implementation for generating Distributed Validator Keys. Keys generated with this tool will not work with Charon, and they are not suitable for use. Creating keys for a Distributed Validator should use the [`charon create dkg` command](../dv/09_charon_cli_reference.md#creating-the-configuration-for-a-dkg-ceremony).
 
 :::
 

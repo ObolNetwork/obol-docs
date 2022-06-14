@@ -13,14 +13,14 @@ This document describes the configuration options for running a charon client (o
 ## Cluster Configuration Files
 
 A charon cluster is configured in two steps:
-- `cluster_definition.json` which defines the intended cluster configuration before keys have been created in a distributed key generation ceremony.
-- `cluster.lock` which includes and extends `cluster_definition.json` with distributed validator bls public key shares and verifiers.
+- `cluster-definition.json` which defines the intended cluster configuration before keys have been created in a distributed key generation ceremony.
+- `cluster-lock.json` which includes and extends `cluster-definition.json` with distributed validator BLS public key shares.
 
-The `charon create dkg` command is used to create `cluster_definition.json` file which is used as input to `charon dkg`.
+The `charon create dkg` command is used to create `cluster-definition.json` file which is used as input to `charon dkg`.
 
-The `charon create cluster` command combines both steps into one and just outputs the final `cluster_lock.json` without a DKG step.
+The `charon create cluster` command combines both steps into one and just outputs the final `cluster-lock.json` without a DKG step.
 
-The schema of the `cluster_definition.json` is defined as:
+The schema of the `cluster-definition.json` is defined as:
 ```json
 {
   "version": "v1.0.0",                  // Schema version
@@ -48,9 +48,9 @@ The schema of the `cluster_definition.json` is defined as:
 }
 ```
 
-The above `cluster_definition.json` is provided as input to the DKG which generates keys and the `cluster_lock.json` file.
+The above `cluster-definition.json` is provided as input to the DKG which generates keys and the `cluster-lock.json` file.
 
-The `cluster_lock.json` has the following schema:
+The `cluster-lock.json` has the following schema:
 ```json
 {
   "cluster_definition": {...},                              // Cluster definiition json, identical schema to above,

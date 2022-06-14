@@ -68,12 +68,14 @@ Once all clients in the cluster can establish a connection with one another and 
 No user input is required, charon does the work and outputs the following files to each machine and then exits.
 
 ```sh
-./cluster_definition.json     # The original definition file from the DV Launchpad
-./cluster.lock     # New lockfile based on cluster_definition.json with validator group public keys and threshold BLS verifiers included with the initial cluster config
-./charon/enr_private_key    # Created before the ceremony took place [Back this up]
-./charon/validator_keys/    # Folder of key shares to be backed up and moved to validator client [Back this up]
-./charon/deposit_data       # JSON file of deposit data for the distributed validators
-./charon/exit_data          # JSON file of exit data that ethdo can broadcast
+# Common data
+.cluster-definition.json          # The original definition file from the DV Launchpad or `charon create dkg`
+.cluster-lock.json                # New lockfile based on cluster-definition.json with validator group public keys and threshold BLS verifiers included with the initial cluster config
+.charon/deposit-data.json         # JSON file of deposit data for the distributed validators
+
+# Sensitive operator-specific data
+.charon/charon-enr-private-key    # Created before the ceremony took place [Back this up]
+.charon/validator_keys/           # Folder of key shares to be backed up and moved to validator client [Back this up]
 ```
 
 ## Backing up the ceremony artifacts

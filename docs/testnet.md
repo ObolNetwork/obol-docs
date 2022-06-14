@@ -12,7 +12,7 @@ The following is a break down of the intended testnet roadmap, the features that
 
 # Testnets
 
-- [ ] Dev Net 1
+- [x] Dev Net 1
 - [ ] Dev Net 2
 - [ ] Athena Public Testnet 1
 - [ ] Bia Attack net
