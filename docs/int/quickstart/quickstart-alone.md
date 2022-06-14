@@ -1,29 +1,22 @@
 ---
 sidebar_position: 4
-description: Take part in a distributed validator cluster
+description: Run all nodes in a distributed validator cluster
 ---
 
-# Quickstart
+# Run a cluster alone
 
 :::caution
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
-There are two ways to test out a distributed validator.
-
-- Running the full cluster alone.
-- Running one node in a cluster with a group of other node operators.
-
-## Run a cluster alone
-
-1. Clone the [starter repo](https://github.com/ObolNetwork/charon-docker-compose) and `cd` into the directory.
+1. Clone the [charon-distributed-validator-cluster](https://github.com/ObolNetwork/charon-distributed-validator-cluster) template repo and `cd` into the directory.
 
     ```sh
     # Clone the repo
-    git clone https://github.com/ObolNetwork/charon-docker-compose.git
+    git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
     
     # Change directory
-    cd charon-docker-compose/
+    cd charon-distributed-validator-cluster/
     ```
 
 1. Prepare the environment variables
@@ -45,7 +38,7 @@ There are two ways to test out a distributed validator.
 
     ```sh
     # Create a testnet distributed validator cluster
-    docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:latest create cluster --cluster-dir=".charon/cluster" --withdrawal-address="0x000000000000000000000000000000000000dead"
+    docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:latest create cluster --cluster-dir=".charon" --withdrawal-address="0x000000000000000000000000000000000000dead"
     ``` 
 1. Start the cluster
     ```sh
@@ -65,20 +58,6 @@ There are two ways to test out a distributed validator.
 Congratulations, if this all worked you are now running a distributed validator cluster on a testnet. Try turning off a single node of the four and see if the validator stays online or begins missing duties, to see for yourself the fault-tolerance that can be added to proof of stake validation with this new Distributed Validator Technology. 
 
 :::tip 
-Don't forget to be a good testnet steward and exit your validator when you are finished testing with it.* 
-
-**Once charon creates validator exit data in an upcoming release.*
+Don't forget to be a good testnet steward and exit your validator when you are finished testing with it.
 :::
 
-## Run a cluster with others
-
-This section will be completed alongside version `v0.7.0`. Sit tight.
-<!--
-
-Subsections for run as a group:
-
-- Prepare dkg config
-- Run DKG
-- Prepare node
-- Activate deposit data
--->

@@ -19,6 +19,12 @@ It will be possible to split an existing validator keystore into a set of key sh
 
 In an ideal scenario, a distributed validator's private key should never exist in full in a single location.
 
+### What is an ENR?
+
+An ENR is shorthand for an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778). It is a way to represent a node on a public network, with a reliable mechanism to update its information. At Obol we use ENRs to identify charon nodes to one another such that they can form clusters with the right charon nodes and not impostors. 
+
+ENRs have private keys they use to sign updates to the data contained in their ENR. This private key is by default found at `.charon/charon-enr-private-key`, and should be kept secure, and not checked into version control.
+
 ### Where can I learn more about Distributed Validators?
 
 Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https://twitter.com/ObolNetwork) yet? Maybe join our [discord](https://discord.gg/obol) too.
