@@ -69,8 +69,8 @@ No user input is required, charon does the work and outputs the following files 
 
 ```sh
 # Common data
-.cluster-definition.json          # The original definition file from the DV Launchpad or `charon create dkg`
-.cluster-lock.json                # New lockfile based on cluster-definition.json with validator group public keys and threshold BLS verifiers included with the initial cluster config
+.charon/cluster-definition.json          # The original definition file from the DV Launchpad or `charon create dkg`
+.charon/cluster-lock.json                # New lockfile based on cluster-definition.json with validator group public keys and threshold BLS verifiers included with the initial cluster config
 .charon/deposit-data.json         # JSON file of deposit data for the distributed validators
 
 # Sensitive operator-specific data
