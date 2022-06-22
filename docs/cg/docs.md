@@ -228,7 +228,7 @@ The following rules and guidelines define how to use and store images.
 
 #### Storage location
 
-All images must be placed in the `/website/static/img` folder. For multiple images attributed to a single topic, a new folder within `/img/ the may be needed.
+All images must be placed in the `/static/img` folder. For multiple images attributed to a single topic, a new folder within `/img/` may be needed.
 
 #### File names
 

@@ -30,21 +30,18 @@ The schema of the `cluster-definition.json` is defined as:
   "name": "best cluster",               // Optional name field, cosmetic.
   "fee_recipient_address":"0x123..abfc",// ETH1 fee_recipient address
   "withdrawal_address": "0x123..abfc",  // ETH1 withdrawal address
-  "algorithm": "foo_dkg_v1" ,           // Optional DKG algorithm
+  "dkg_algorithm": "foo_dkg_v1" ,           // Optional DKG algorithm
   "fork_version": "0x00112233",         // Fork version lock, enum of known values
   "operators": [
     {
       "address": "0x123..abfc",         // ETH1 operator identify address
+      "config_signature": "123...ef",   // Signature of config hash by Eth1 priv key
       "enr": "enr://abcdef...12345",    // charon client ENR
-      "signature": "123456...abcdef",   // Signature of enr by ETH1 address priv key
-      "nonce": 1                        // Nonce of signature
+      "enr_signature": "123456...ef",   // Signature of enr by Eth1 address priv key
+      "nonce": 0                        // Nonce of signature
     }
   ],
-  "definition_hash": "abcdef...abcedef",// Hash of above field (except free text)
-  "operator_signatures": [              // Operator signatures (seals) of definition hash
-    "123456...abcdef",
-    "123456...abcdef"
-  ]
+  "definition_hash": "abcdef...abcede", // Hash of above field (except free text)
 }
 ```
 
@@ -57,7 +54,7 @@ The `cluster-lock.json` has the following schema:
   "distributed_validators": [                               // Length equaled to num_validators.
     {
       "distributed_public_key":  "0x123..abfc",             // DV root pubkey
-      "threshold_verifiers": [ "oA8Z...2XyT", "g1q...icu"], // length of threshold
+      "public_shares": [ "oA8Z...2XyT", "g1q...icu"],       // Public Key Shares
       "fee_recipient": "0x123..abfc"                        // Defaults to withdrawal address if not set, can be edited manually
     }
   ],

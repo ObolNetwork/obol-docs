@@ -10,7 +10,7 @@ Obol develops and maintains a suite of smart contracts for use with Distributed 
 
 The key to a distributed validator is understanding how a withdrawal is processed. The most common way to handle a withdrawal of a validator operated by a number of different people is to use an immutable withdrawal recipient contract, with the distribution rules hardcoded into it. 
 
-For the time being Obol uses `0x01` withdrawal credentials, and intends to upgrade to [0x03 withdrawal credentials](https://www.dropbox.com/s/z8kpyl5r2lh1ixe/Screenshot%202021-12-26%20at%2013.53.48.png?dl=0) when smart contract initiated exits are enabled. 
+For the time being Obol uses `0x01` withdrawal credentials, and intends to upgrade to [0x03 withdrawal credentials](https://ethresear.ch/t/0x03-withdrawal-credentials-simple-eth1-triggerable-withdrawals/10021) when smart contract initiated exits are enabled. 
 
 ### Ownable Withdrawal Recipient
 

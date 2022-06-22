@@ -24,7 +24,7 @@ To create a distributed validator cluster with a group of other node operators r
 
 ## Getting started with Charon
 
-1. Clone the [charon-distributed-validator-node](https://github.com/ObolNetwork/charon-distributed-validator-cluster) template repository from Github, and `cd` into the directory.
+1. Clone the [charon-distributed-validator-node](https://github.com/ObolNetwork/charon-distributed-validator-node) template repository from Github, and `cd` into the directory.
 
    ```sh
    # Clone the repo

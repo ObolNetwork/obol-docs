@@ -13,7 +13,7 @@ The following is a break down of the intended testnet roadmap, the features that
 # Testnets
 
 - [x] Dev Net 1
-- [ ] Dev Net 2
+- [x] Dev Net 2
 - [ ] Athena Public Testnet 1
 - [ ] Bia Attack net
 - [ ] Circe Public Testnet 2
@@ -64,7 +64,7 @@ A core focus of this devnet will be to collect network performance data. This wi
 
 **Network:** Kiln
 
-**Target start date:** May 2022
+**Target start date:** June 2022
 
 **Duration:** 2 weeks
 
@@ -93,7 +93,7 @@ This will be an unincentivised testnet, and will form as the basis for us figuri
 
 **Network:** Kiln or a Merged Test Network (e.g. Görli)
 
-**Target start date:** June 2022
+**Target start date:** July 2022
 
 **Duration:** 2 week setup, 4 weeks operation
 

@@ -10,7 +10,7 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.6.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.6.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.7.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.7.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 ### Available Commands
 
@@ -74,7 +74,7 @@ Usage:
   charon create enr [flags]
 
 Flags:
-      --data-dir string                The directory where charon will store all its internal data (default ".charon/data")
+      --data-dir string                The directory where charon will store all its internal data (default ".charon")
   -h, --help                           Help for enr
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-bootnode-relay             Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
@@ -83,8 +83,8 @@ Flags:
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:16003])
-      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:16004")
+      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:3610])
+      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
 ```
 
 #### Create a full cluster locally
@@ -129,7 +129,7 @@ Flags:
       --network string                 Ethereum network to create validators for. Options: mainnet, prater, kintsugi, kiln, gnosis. (default "prater")
       --num-validators int             The number of distributed validators the cluster will manage (32ETH staked for each). (default 1)
       --operator-enrs strings          Comma-separated list of each operator's Charon ENR address
-      --output-dir string              The folder to write the output cluster-definition.json file to. (default ".")
+      --output-dir string              The folder to write the output cluster-definition.json file to. (default ".charon")
   -t, --threshold int                  The threshold required for signature reconstruction. Minimum is n-(ceil(n/3)-1). (default 3)
       --withdrawal-address string      Withdrawal Ethereum address (default "0x0000000000000000000000000000000000000000")
 ```
@@ -148,7 +148,7 @@ Usage:
   charon dkg [flags]
 
 Flags:
-      --data-dir string                The directory where charon will store all its internal data (default ".charon/data")
+      --data-dir string                The directory where charon will store all its internal data (default ".charon")
       --definition-file string         The path to the cluster definition file. (default ".charon/cluster-definition.json")
   -h, --help                           Help for dkg
       --log-format string              Log format; console, logfmt or json (default "console")
@@ -160,8 +160,8 @@ Flags:
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:16003])
-      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:16004")
+      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:3610])
+      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
 ```
 
 ### Run the Charon middleware
@@ -177,7 +177,7 @@ Usage:
 
 Flags:
       --beacon-node-endpoint string    Beacon node endpoint URL (default "http://localhost/")
-      --data-dir string                The directory where charon will store all its internal data (default ".charon/data")
+      --data-dir string                The directory where charon will store all its internal data (default ".charon")
       --feature-set string             Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
       --feature-set-disable strings    Comma-separated list of features to disable, overriding the default minimum feature set.
       --feature-set-enable strings     Comma-separated list of features to enable, overriding the default minimum feature set.
@@ -187,7 +187,7 @@ Flags:
       --lock-file string               The path to the cluster lock file defining distributed validator cluster (default ".charon/cluster-lock.json")
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
-      --monitoring-address string      Listening address (ip and port) for the monitoring API (prometheus, pprof) (default "127.0.0.1:16001")
+      --monitoring-address string      Listening address (ip and port) for the monitoring API (prometheus, pprof) (default "127.0.0.1:3620")
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-bootnode-relay             Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
       --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.gcp.obol.tech:16000/enr])
@@ -195,9 +195,9 @@ Flags:
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:16003])
-      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:16004")
+      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:3610])
+      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
       --simnet-beacon-mock             Enables an internal mock beacon node for running a simnet.
       --simnet-validator-mock          Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
-      --validator-api-address string   Listening address (ip and port) for validator-facing traffic proxying the beacon-node API (default "127.0.0.1:16002")
+      --validator-api-address string   Listening address (ip and port) for validator-facing traffic proxying the beacon-node API (default "127.0.0.1:3600")
 ```

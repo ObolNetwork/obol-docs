@@ -12,6 +12,4 @@ The Charon daemon sits as a middleware between the consensus layer's [beacon nod
 
 The middleware strives to be stateless and statically configured through 777 file systems. The lack of a control-plane API for online reconfiguration is deliberate to keep operations simple and secure by default.
 
-The daemon offers a config reload instruction through Unix signals which is useful to join or leave Obol clusters on-the-fly without interruption.
-
 The `charon` package will initially be available as a Docker image and through binary builds. An APT package with a systemd integration is planned.

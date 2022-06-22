@@ -86,8 +86,8 @@ The Obol core team has begun work on all three phases of the effort, and will pr
 
 **Progress:**
 
-- Phase 0: 60%
-- Phase 1: 25%
+- Phase 0: 70%
+- Phase 1: 65%
 - Phase 1.5: 30%
 
 The core team plans to release the different phases for proto community feedback as they approach 75% completion.

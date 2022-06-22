@@ -17,10 +17,10 @@ To create a distributed validator cluster, you and your group of operators need 
     - This data is stored in the DV Launchpad data layer and a shareable URL is generated. This is a link for the other operators to join and complete the ceremony.
 2.  The other operators in the cluster follow this URL to the launchpad.
     - They review the terms of the cluster configuration.
-    - The submit the ENR of their charon client.
+    - They submit the ENR of their charon client.
     - They sign both the hash of the cluster config and their charon ENR to indicate acceptance of the terms.
 3. Once all operators have submitted signatures for the cluster configuration and ENRs, they can all download the cluster definition file. 
-4. Every operator loads this cluster definition file into `charon dkg`. The definition provides the charon process with the information it needs to complete the DKG ceremony with the other charon clients. 
+4. Every operator passes this cluster definition file to the `charon dkg` command. The definition provides the charon process with the information it needs to find and complete the DKG ceremony with the other charon clients involved. 
 5. Once all charon clients can communicate with one another, the DKG process completes. All operators end up with:
     - A `cluster-lock.json` file, which contains the original cluster configuration data, combined with the newly generated group public keys and their associated public key shares. This file is needed by the `charon run` command. 
     - Validator deposit data
