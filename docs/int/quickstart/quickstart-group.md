@@ -105,7 +105,7 @@ Once the key generation ceremony has been completed, the charon nodes have the d
 1. Use the pre-prepared [grafana](http://localhost:3000/) dashboard to verify the cluster health looks okay. You should see connections with all other operators in the cluster as healthy, and observed ping times under 1 second for all connections.
    ```sh
    # Open Grafana
-   open http://localhost:3000/d/laEp8vupp
+   open http://localhost:3000/d/singlenode
    ```
 
 ## Activating the distributed validator
