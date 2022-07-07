@@ -6,7 +6,7 @@ sidebar_position: 13
 
 ![Testnet Roadmap](/img/ObolTestnetRoadmap.png)
 
-Over the coming quarters, Obol Labs have and will continue to coordinate and host a number of progressively larger test nets to help harden the charon client and iterate on the key generation tooling.
+Over the coming quarters, Obol Labs have and will continue to coordinate and host a number of progressively larger testnets to help harden the charon client and iterate on the key generation tooling.
 
 The following is a break down of the intended testnet roadmap, the features that are to be complete by each testnet, and their target start date and durations.
 
@@ -173,7 +173,7 @@ The aim of this testnet is to show that even with directly incentivised byzantin
 
 **Network:** Merged Gnosis Chain
 
-**Target start date:** Q4 2022 
+**Target start date:** Q4 2022
 
 **Duration:** 4 weeks
 

@@ -19,7 +19,7 @@ It will be possible to split an existing validator keystore into a set of key sh
 
 In an ideal scenario, a distributed validator's private key should never exist in full in a single location.
 
-You can split an existing EIP-2335 keystore for a validator to migrate it to a distriubted validator architecture with the `charon create cluster --split-existing-keys` command documented [here](../dv/09_charon_cli_reference.md#create-a-full-cluster-locally). 
+You can split an existing EIP-2335 keystore for a validator to migrate it to a distributed validator architecture with the `charon create cluster --split-existing-keys` command documented [here](../dv/09_charon_cli_reference.md#create-a-full-cluster-locally). 
 
 ### What is an ENR?
 
