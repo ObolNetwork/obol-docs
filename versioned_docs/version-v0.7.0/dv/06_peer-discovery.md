@@ -20,7 +20,7 @@ Before a DKG process begins, all operators must run `charon create enr`, or just
 
 The file that outlines a DKG ceremony is known as a [`cluster-definition`](./08_distributed-validator-cluster-manifest.md) file. This file is passed to `charon dkg` which uses it to create private keys, a cluster lock file and deposit data for the configured number of distributed validators. The cluster-lock file will be made available to `charon run`, and the validator key stores will be made available to the configured validator client. 
 
-When `charon run` starts up and ingests its configuration from the `cluster-lock.json` file, it checks if it's observed/configured public IP address differs from what is listed in the lock file. If it is different; it updates the IP address, increments the nonce of the ENR and reissues it before beginning to establish connections with the other operators in the cluster.
+When `charon run` starts up and ingests its configuration from the `cluster-lock.json` file, it checks if its observed/configured public IP address differs from what is listed in the lock file. If it is different; it updates the IP address, increments the nonce of the ENR and reissues it before beginning to establish connections with the other operators in the cluster.
 
 #### Node database
 
