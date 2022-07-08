@@ -101,7 +101,7 @@ This will be an unincentivised testnet, and will form as the basis for us figuri
 - Make deploying Ethereum validator nodes accessible
 - Generate a huge backlog of bugs, feature requests, platform requests and integration requests
 
-**Registration Form:** [Here](https://pwxy2mff03w.typeform.com/AthenaTestnet)
+**Registration Form:** [Here](https://obol.typeform.com/AthenaTestnet)
 
 ## Bia Attack Net
 
