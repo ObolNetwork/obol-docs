@@ -53,7 +53,7 @@ To create a distributed validator cluster with a group of other node operators r
 
    ```sh
    # Create an ENR private key
-   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:latest create enr
+   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.7.0 create enr
    ```
 
    :::caution
@@ -78,7 +78,7 @@ To create the private keys for a distributed validator securely, a Distributed K
    # First set the ENRs of all the operators participating in DKG ceremony in .env file as CHARON_OPERATOR_ENRS
 
    # Create .charon/cluster-definition.json to participate in DKG ceremony
-   docker run --rm -v "$(pwd):/opt/charon" --env-file .env ghcr.io/obolnetwork/charon:latest create dkg
+   docker run --rm -v "$(pwd):/opt/charon" --env-file .env ghcr.io/obolnetwork/charon:v0.7.0 create dkg
    ```
 
 1. The operator that ran this command should distribute the resulting `cluster-definition.json` file to each operator.
@@ -90,7 +90,7 @@ To create the private keys for a distributed validator securely, a Distributed K
    cp cluster-definition.json .charon/
 
    # Participate in DKG ceremony, this will create .charon/cluster-lock.json, .charon/deposit-data.json and .charon/validator_keys/
-   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:latest dkg
+   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.7.0 dkg
    ```
 
 ## Verifying cluster health
