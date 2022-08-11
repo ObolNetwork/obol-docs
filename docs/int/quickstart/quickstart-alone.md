@@ -38,7 +38,7 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 
    ```sh
    # Create a testnet distributed validator cluster
-   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.8.1 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead"
+   docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.9.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead"
    ```
 
 1. Start the cluster

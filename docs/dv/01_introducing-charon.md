@@ -22,7 +22,7 @@ The below graphic visually outlines the internal functionalies of Charon.
 The `charon` client is in an early alpha state, and is not ready for mainnet, see [here](https://github.com/ObolNetwork/charon#supported-consensus-layer-clients) for the latest on charon's readiness.
 
 ```
-docker run ghcr.io/obolnetwork/charon:v0.8.1 --help
+docker run obolnetwork/charon:v0.9.0 --help
 ```
 
 For more information on running charon, take a look at our [quickstart guide](../int/quickstart/index.md). 
