@@ -14,7 +14,7 @@ The following is a break down of the intended testnet roadmap, the features that
 
 - [x] [Dev Net 1](#devnet-1)
 - [x] [Dev Net 2](#devnet-2)
-- [ ] [Athena Public Testnet 1](#athena-public-testnet-1)
+- [x] [Athena Public Testnet 1](#athena-public-testnet-1)
 - [ ] [Bia Attack net](#bia-attack-net)
 - [ ] [Circe Public Testnet 2](#cerce-public-testnet-ii)
 - [ ] [Demeter Red/Blue net](#demeter-redblue-net)
@@ -91,7 +91,7 @@ This will be an unincentivised testnet, and will form as the basis for us figuri
 
 **Network:** Görli
 
-**Target start date:** August 2022
+**Started date:** 1st August 2022
 
 **Duration:** 2 week cluster setup, 4 weeks operation
 
@@ -100,8 +100,6 @@ This will be an unincentivised testnet, and will form as the basis for us figuri
 - Engage Obol Proto Community
 - Make deploying Ethereum validator nodes accessible
 - Generate a huge backlog of bugs, feature requests, platform requests and integration requests
-
-**Registration Form:** [Here](https://obol.typeform.com/AthenaTestnet)
 
 ## Bia Attack Net
 
