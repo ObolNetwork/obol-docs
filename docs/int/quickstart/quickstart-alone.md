@@ -50,7 +50,7 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 
    ```sh
    # Open Grafana
-   open http://localhost:3000/d/laEp8vupp
+   open http://localhost:3000/d/singlenode/single-charon-node-dashboard?
    ```
 
 1. Activate the validator on the testnet using the original [staking launchpad](https://prater.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/cluster/deposit-data.json`.
