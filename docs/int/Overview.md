@@ -3,14 +3,13 @@ sidebar_position: 2
 description: An overview of the Obol network
 ---
 
-
 ## The Network
 
-The network can be best visualized as a work layer that sits directly on top of base layer consensus. This work layer is designed to provide the base layer with more resiliency and promote decentralization as it scales. As the current chapter of Ethereum matures over the coming years, the community will move onto the next great scaling challenge, which is stake centralization. To effectively mititgate these risks, community building and credible neutrality must be used as a primary design principles. 
+The network can be best visualized as a work layer that sits directly on top of base layer consensus. This work layer is designed to provide the base layer with more resiliency and promote decentralization as it scales. As Ethereum matures over the coming years, the community will move onto the next great scaling challenge, which is stake centralization. To effectively mititgate these risks, community building and credible neutrality must be used as a primary design principles. 
 
-Obol as a layer is focused on scaling consensus by providing permissionless access to Distributed Validators (DV's). We believe that DV's will and should make up a large portion of mainnet validator configurations. In preparation for the first wave of adoption the network  currently utilizes a middleware implementation of Distributed Validator Technology (DVT), to enable the operation of distributed validator clusters that can preserve validators current client and remote signing configurations.
+Obol is focused on scaling consensus by providing permissionless access to Distributed Validators (DV's). We believe that distributed validators will and should make up a large portion of mainnet validator configurations. In preparation for the first wave of adoption, the network  currently utilizes a middleware implementation of Distributed Validator Technology (DVT), to enable the operation of distributed validator clusters that can preserve validators current client and remote signing infrastructure.
 
-Similar to how roll up technology laid the foundation for L2 scaling implementations, we believe DVT will do the same for scaling consensus while preserving decentralization. Staking infrastructure is entering its protocol phase of evolution, which must include trust-minimized staking networks that can be plugged into at scale. Layers like Obol are critical to the long term viability and resiliency of public networks, especially networks like Ethereum. We believe DVT will evolve into a widely used primitive and will ensure the security, resiliency, and decentralization of the public blockchain networks that adopt it.
+Similar to how roll-up technology laid the foundation for L2 scaling implementations, we believe DVT will do the same for scaling consensus while preserving decentralization. Staking infrastructure is entering its protocol phase of evolution, which must include trust-minimized staking networks that can be plugged into at scale. Layers like Obol are critical to the long term viability and resiliency of public networks, especially networks like Ethereum. We believe DVT will evolve into a widely used primitive and will ensure the security, resiliency, and decentralization of the public blockchain networks that adopt it.
 
 The Obol Network consists of four core public goods:
 
@@ -25,13 +24,13 @@ The Obol Ecosystem is inspired by previous work on Ethereum public goods and exp
 
 The Obol Network will become an open, community governed, self-sustaining project over the coming months and years. Together we will incentivize, build, and maintain distributed validator technology that makes public networks a more secure and resilient foundation to build on top of.
 
-![](/img/DVT4.png)
-
 ## The Vision
 
 The road to decentralising stake is a long one. At Obol we have divided our vision into two key versions of distributed validators. 
 
 ### V1 - Trusted Distributed Validators
+
+![Multi Operator DV Cluster](/img/MultiOperator7.png)
 
 The first version of distibuted validators will have dispute resolution out of band. Meaning you need to know and communicate with your counterparty operators if there is an issue with your shared cluster. 
 

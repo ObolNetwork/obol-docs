@@ -54,7 +54,7 @@ This page serves material necessary to catch up with the current state of Ethere
 
 ### Prater Testnet Blockchain
 
-* [Launchpad](https://prater.launchpad.ethereum.org/en/)
+* [Launchpad](https://goerli.launchpad.ethereum.org/en/)
 * [Beacon Chain Explorer](https://prater.beaconcha.in/)
 
 ### Mainnet Blockchain
