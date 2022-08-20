@@ -53,7 +53,7 @@ Charon is in an early alpha state and is not ready to be run on mainnet
    open http://localhost:3000/d/singlenode/single-charon-node-dashboard?
    ```
 
-1. Activate the validator on the testnet using the original [staking launchpad](https://prater.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/cluster/deposit-data.json`.
+1. Activate the validator on the testnet using the original [staking launchpad](https://goerli.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/cluster/deposit-data.json`.
    - If you use Mac OS, `.charon` the default output folder, does not show up on the launchpad's "Upload Deposit Data" file picker. Rectify this by pressing `Command + Shift + . ` (full stop). This should display hidden folders, allowing you to select the deposit file.
 
 Congratulations, if this all worked you are now running a distributed validator cluster on a testnet. Try turning off a single node of the four with `docker stop` and see if the validator stays online or begins missing duties, to see for yourself the fault-tolerance that can be added to proof of stake validation with this new Distributed Validator Technology.

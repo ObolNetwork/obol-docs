@@ -14,7 +14,7 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'obolnetwork', // Usually your GitHub org/user name.
+  organizationName: 'ObolNetwork', // Usually your GitHub org/user name.
   projectName: 'obol-docs', // Usually your repo name.
   trailingSlash: false,
   presets: [
@@ -25,13 +25,13 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/obolnetwork/obol-docs/edit/main/website/',
+          editUrl: 'https://github.com/ObolNetwork/obol-docs/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/obolnetwork/obol-docs/edit/main/website/blog/',
+            'https://github.com/ObolNetwork/obol-docs/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
