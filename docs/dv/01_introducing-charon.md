@@ -29,7 +29,7 @@ The following is an outline of the services that can be exposed by charon.
 
 - **:3610** - Charon P2P port. This is the port that charon clients use to communicate with one another via TCP. Should this endpoint be exposed publicly? **Yes**.
 
-- **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a pprof server on `/pprof`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`.
+- **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`.
 
 - **:3630** - UDP discovery port. This port is used by the discv5 discovery protocol for peer discovery of charon nodes.
 
