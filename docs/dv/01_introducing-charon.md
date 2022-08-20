@@ -25,15 +25,15 @@ The middleware strives to be stateless and statically configured through 777 fil
 
 The following is an outline of the services that can be exposed by charon.
 
-- **:3600** - The validator API. This is the endpoint that serves the consensus layer's [beacon node API](https://ethereum.github.io/beacon-APIs/). This is the port validator clients should talk to instead of their standard consensus client REST API port. Charon subsequently proxies these requests to the upstream consensus client specified by `--beacon-node-endpoints`.
+- **:3600** - The validator REST API. This is the port that serves the consensus layer's [beacon node API](https://ethereum.github.io/beacon-APIs/). This is the port validator clients should talk to instead of their standard consensus client REST API port. Charon subsequently proxies these requests to the upstream consensus client specified by `--beacon-node-endpoints`.
 
-- **:3610** - Charon P2P port. This is the port that charon clients use to communicate with one another via TCP. Should this endpoint be exposed publicly? **Yes**.
+- **:3610** - Charon P2P port. This is the port that charon clients use to communicate with one another via TCP. This endpoint should be port-forwarded on your router and exposed publicly, preferably on a static IP address. This IP address should then be set on the charon run command with `--p2p-external-ip` or `CHARON_P2P_EXTERNAL_IP`.
 
-- **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`.
+- **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`. This port should not be exposed publicly.
 
 - **:3630** - UDP discovery port. This port is used by the discv5 discovery protocol for peer discovery of charon nodes.
 
-- **:3640**  - HTTP server port. This port hosts a HTTP webserver that serves a client's ENR on `/enr`. This is used by charon startup to find an ENR to connect to for peering. 
+- **:3640**  - Bootnode HTTP server port. This port hosts a HTTP webserver that serves a client's ENR on `/enr`. This is only used by the `charon bootnode` command. 
 
 ## Getting started
 
