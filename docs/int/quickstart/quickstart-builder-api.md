@@ -94,7 +94,7 @@ echo pkadKH8m7LNgSbebQI4lc4oOFZmA8y+2WRdEFrng6Pf47MVdAaVFKMFsE4uxIB6v | base64 -
 -> 0xa6469d287f26ecb36049b79b408e25738a0e159980f32fb659174416b9e0e8f7f8ecc55d01a54528c16c138bb1201eaf
 ```
 
-Feel free to update the voting_keystore_path, suggested_fee_recipient etc. to whatever you have set up for you're environment.
+Feel free to update the voting_keystore_path, suggested_fee_recipient etc. to whatever you have set up for you're environment. Note that there either needs to be a different validator_definitions.yml on each distributed validator based on the keys it holds or a single validator_definitions.yml file can be used but you must ensure no collisions on the voting_keystore_path & voting_keystore_password_path.  
 
 :::tip
 Don't forget to be a good testnet steward and exit your validator when you are finished testing with it.
