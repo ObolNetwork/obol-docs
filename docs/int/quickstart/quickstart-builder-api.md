@@ -58,7 +58,7 @@ Configuring the Lightouse validator client with Charon follows exactly the same 
 ```
 ---
 - enabled: true
-  voting_public_key: 0xb3f099cf5ae92404f3d1ab833d622468cd1a14b2719e5daaa3690d960e36646e7d63dddb8ea2c1df7b42b1296ad62022
+  voting_public_key: 0xa6469d287f26ecb36049b79b408e25738a0e159980f32fb659174416b9e0e8f7f8ecc55d01a54528c16c138bb1201eaf
   type: local_keystore
   voting_keystore_path: /data/lighthouse/validator_keys/keystore-0.json
   voting_keystore_password_path: /data/lighthouse/validator_keys/keystore-0.txt
@@ -84,6 +84,14 @@ Configuring the Lightouse validator client with Charon follows exactly the same 
   gas_limit: 30000000
   builder_proposals: true
   builder_pubkey_override: 0x8793b522c8197c047b95b6f4b3c7fd1582a2466ff96eb274ee51fc699c99cbdfeb41cf576bbbbdecf2454527083edf34
+```
+
+Note the pubkeyshares in the cluster-lock.json are base64 encoded and decode to hex. Below is a decoding example for the first voting_public_key seen above.
+
+```
+echo pkadKH8m7LNgSbebQI4lc4oOFZmA8y+2WRdEFrng6Pf47MVdAaVFKMFsE4uxIB6v | base64 -d | hexdump -v -e '/1 "%02x" ' | (echo -n 0x && cat)
+
+-> 0xa6469d287f26ecb36049b79b408e25738a0e159980f32fb659174416b9e0e8f7f8ecc55d01a54528c16c138bb1201eaf
 ```
 
 Feel free to update the voting_keystore_path, suggested_fee_recipient etc. to whatever you have set up for you're environment.
