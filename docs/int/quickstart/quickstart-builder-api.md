@@ -95,11 +95,10 @@ Feel free to update the `voting_keystore_path`, `suggested_fee_recipient` etc. t
 
 ### Verify Charon + Builder API is Functional
 
-Once you have charon and you validator client set up you can verify the set up by reviewing your proposed blocks on Etherscan testnets or on via the Relay API endpoints.
+Once you have Charon and your Validator Client set up you can verify the set up is functional by reviewing your proposed blocks on Etherscan testnets or on via the Relay API endpoints.
 
-As an example if my validator was the block proposer for block 12853375 on Ropsten I can review the following two resources.
+As an example if my validator was the block proposer for block 12853375 on Ropsten I can review the following resources.
 
+[Etherscan Ropsten Block 12853375](https://ropsten.etherscan.io/block/12853375), if we check the `Extra Data` field on this page we will see the tag `Flashbots flashblock (Hex:0x466c617368626f747320666c617368626c6f636b)`. Relays will generally add a tag to the block, this block was submitted via the Flashbots Relay and as a result has the tag includes `Flashbots flashblock`.
 
-[Etherscan Ropsten Block 12853375](https://ropsten.etherscan.io/block/12853375), if we check the `Extra Data` field relays will generally add a tag to the block. This block was submitted via the Flashbots Relay and as a result has the tag `Flashbots flashblock (Hex:0x466c617368626f747320666c617368626c6f636b)`
-
-[Relay Data API](https://flashbots.notion.site/Relay-API-Spec-5fb0819366954962bc02e81cb33840f5), if you navigate to the `Data API` section you will see an endpoint `proposerPayloadsDelivered`. You are able to add a query argument of `block_number` to this call to see if a block was submitted via that relay. [Here](https://builder-relay-ropsten.flashbots.net/relay/v1/data/bidtraces/proposer_payload_delivered?block_number=12853375) is the query for the example block 12853375. Blocks that have not been submitted to the Relay will return an empty array `[]`.
+[Relay Data API](https://flashbots.notion.site/Relay-API-Spec-5fb0819366954962bc02e81cb33840f5), if you navigate to the `Data API` section  on the Relay Data API you will see an endpoint labeled `proposerPayloadsDelivered`. You are able to add a query argument of `block_number` to this call to see if a block was submitted via that Relay. [Here](https://builder-relay-ropsten.flashbots.net/relay/v1/data/bidtraces/proposer_payload_delivered?block_number=12853375) is the query for the example block 12853375. Blocks that have not been submitted to the Relay will return an empty array `[]`.
