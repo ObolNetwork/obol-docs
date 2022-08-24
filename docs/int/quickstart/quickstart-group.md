@@ -122,11 +122,11 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 
 If you have gotten this far through the process, and whether you succeed or fail at running the distributed validator successfully on the testnet, we would like to hear your feedback on the process and where you encountered difficulties. Please open issues in either this repo if the problem is deployment related, or the [charon](https://github.com/ObolNetwork/charon) repo if the issue is directly related to the client.
 
-# Other Actions
+## Other Actions
 
 The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
 
-## Step 6. Leader Adds Central Monitoring Token
+### Leader Adds Central Monitoring Token
 
 The cluster leader will be provided with a Central Monitoring Token used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in prometheus/prometheus.yml replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`. Final prometheus/prometheus.yml would look something like:
@@ -154,34 +154,37 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 ```
 
-## Optional Step 7. Validator Voluntary Exit
-   A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
-   
-   To trigger a voluntary exit, a sidecar docker-compose command is executed that signs and submits the voluntary exit to the active running charon node that shares it with other nodes in the cluster. The commands below should be executed on the same machine and same folder as the active running charon-distribute-validator-node docker compose.
-   
-   Note: Quorum peers in the cluster need to perform this task to exit a validator.
-  
-   - Create a new `exit_keys` folder next to `.charon/validator_keys`: `mkdir .charon/exit_keys`
-   - Copy the validator keys and passwords that you want to exit from the `validator_keys` folder to the `exit_keys` folder.
-     - E.g. to exit validator #4: `cp .charon/validator_keys/keystore/keystore-4* .charon/exit_keys/`
-     - Warning: all keys copied to the `exit_keys` folder will be exited, so be careful!
-   - Ensure the external network in `compose-volutary-exit.yml` is correct.
-     - Confirm the name of the exiting `charon-distributed-validator-node` docker network: `docker network ls`.
-     - If it isn't `charon-distributed-validator-node-dvnode`, then update `compose-volutary-exit.yml` accordingly.
-   - Ensure the latest fork version epoch is used:
-     - Voluntary exists require an epoch after which they take effect.
-     - All VCs need to sign and submit the exact same messages (epoch) in DVT.
-     - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
-     - There is however a [bug](https://github.com/sigp/lighthouse/issues/3471) in lighthouse requiring an epoch that maps to the latest fork version to be used.
-     - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
-     - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
-   - Run the command to submit this node's partially signed voluntary exit:
-     - `docker-compose -f compose-voluntary-exit.yml up`
-     - Confirm the logs: `Exit for validator XXXXX submitted`
-     - Exit the container: `Ctrl-C`
-   - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
+### Validator Voluntary Exit
 
-## Steps to host your own bootnode
+A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
+
+To trigger a voluntary exit, a sidecar docker-compose command is executed that signs and submits the voluntary exit to the active running charon node that shares it with other nodes in the cluster. The commands below should be executed on the same machine and same folder as the active running `charon-distribute-validator-node` docker compose.
+
+:::info
+A threshold of peers in the cluster need to perform this task to exit a validator.
+:::
+
+- Create a new `exit_keys` folder next to `.charon/validator_keys`: `mkdir .charon/exit_keys`
+- Copy the validator keys and passwords that you want to exit from the `validator_keys` folder to the `exit_keys` folder.
+  - E.g. to exit validator #4: `cp .charon/validator_keys/keystore/keystore-4* .charon/exit_keys/`
+  - Warning: all keys copied to the `exit_keys` folder will be exited, so be careful!
+- Ensure the external network in `compose-volutary-exit.yml` is correct.
+  - Confirm the name of the exiting `charon-distributed-validator-node` docker network: `docker network ls`.
+  - If it isn't `charon-distributed-validator-node-dvnode`, then update `compose-volutary-exit.yml` accordingly.
+- Ensure the latest fork version epoch is used:
+  - Voluntary exists require an epoch after which they take effect.
+  - All VCs need to sign and submit the exact same messages (epoch) in DVT.
+  - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
+  - There is however a [bug](https://github.com/sigp/lighthouse/issues/3471) in lighthouse requiring an epoch that maps to the latest fork version to be used.
+  - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
+  - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
+- Run the command to submit this node's partially signed voluntary exit:
+  - `docker-compose -f compose-voluntary-exit.yml up`
+  - Confirm the logs: `Exit for validator XXXXX submitted`
+  - Exit the container: `Ctrl-C`
+- The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
+
+### Self-Host a Bootnode
 
 If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralisation, you can opt to host your own bootnode on a separate open and static internet port.
 
@@ -211,10 +214,4 @@ Configure **ALL** charon nodes in your cluster to use this bootnode:
 - Either by adding a flag: `--p2p-bootnodes=http://replace.with.public.ip.or.hostname:3640/enr`
 - Or by setting the environment variable: `CHARON_P2P_BOOTNODES=http://replace.with.public.ip.or.hostname:3640/enr`
 
-Note that a local `boonode/.charon/charon-enr-private-key` file will be created next to `bootnode/docker-compose.yml` to ensure a persisted bootnode ENR across restarts. 
-
-# Project Status
-
-It is still early days for the Obol Network and everything is under active development.
-It is NOT ready for mainnet.
-Keep checking in for updates, [here](https://github.com/ObolNetwork/charon/#supported-consensus-layer-clients) is the latest on charon's supported clients and duties.
+Note that a local `boonode/.charon/charon-enr-private-key` file will be created next to `bootnode/docker-compose.yml` to ensure a persisted bootnode ENR across restarts.
