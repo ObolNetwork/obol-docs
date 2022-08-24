@@ -10,9 +10,9 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.9.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.9.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.10.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.10.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
-### Available Commands
+## Available Commands
 
 The following are the top-level commands available to use. 
 
@@ -28,7 +28,7 @@ Available Commands:
   completion  Generate the autocompletion script for the specified shell
   create      Create artifacts for a distributed validator cluster
   dkg         Participate in a Distributed Key Generation ceremony
-  enr         Print this client's Ethereum Node Record
+  enr         Prints a new ENR for this node
   help        Help about any command
   run         Run the charon middleware client
   version     Print version and exit
@@ -39,7 +39,7 @@ Flags:
 Use "charon [command] --help" for more information about a command.
 ```
 
-### `create` subcommand
+### The `create` subcommand
 
 The `create` subcommand handles the creation of artifacts needed by charon to operate.
 
@@ -78,7 +78,7 @@ Flags:
   -h, --help                           Help for enr
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-bootnode-relay             Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
-      --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.gcp.obol.tech:3640/enr])
+      --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.lb.gcp.obol.tech:3640/enr])
       --p2p-bootnodes-from-lockfile    Enables using cluster lock ENRs as discv5 bootnodes. Allows skipping explicit bootnodes if key generation ceremony included correct IPs.
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
@@ -89,7 +89,7 @@ Flags:
 
 #### Create a full cluster locally
 
-`charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster.lock` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
+`charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
 ```markdown
 charon create cluster --help
@@ -99,15 +99,18 @@ Usage:
   charon create cluster [flags]
 
 Flags:
-      --clean                       Delete the cluster directory before generating it.
-      --cluster-dir string          The target folder to create the cluster in. (default ".charon/cluster")
-  -h, --help                        Help for cluster
-      --network string              Ethereum network to create validators for. Options: mainnet, prater, kintsugi, kiln, gnosis. (default "prater")
-  -n, --nodes int                   The number of charon nodes in the cluster. (default 4)
-      --split-existing-keys         Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
-      --split-keys-dir string       Directory containing keys to split. Expects keys in keystore-*.json and passwords in keystore-*.txt. Requires --split-existing-keys.
-  -t, --threshold int               The threshold required for signature reconstruction. Minimum is n-(ceil(n/3)-1). (default 3)
-      --withdrawal-address string   Ethereum address to receive the returned stake and accrued rewards. (default "0x0000000000000000000000000000000000000000")
+      --clean                          Delete the cluster directory before generating it.
+      --cluster-dir string             The target folder to create the cluster in. (default ".charon/cluster")
+      --fee-recipient-address string   Optional Ethereum address of the fee recipient
+  -h, --help                           Help for cluster
+      --name string                    Optional cosmetic cluster name
+      --network string                 Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "goerli")
+  -n, --nodes int                      The number of charon nodes in the cluster. Minimum is 4. (default 4)
+      --num-validators int             The number of distributed validators needed in the cluster. (default 1)
+      --split-existing-keys            Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
+      --split-keys-dir string          Directory containing keys to split. Expects keys in keystore-*.json and passwords in keystore-*.txt. Requires --split-existing-keys.
+  -t, --threshold int                  Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
+      --withdrawal-address string      Ethereum address to receive the returned stake and accrued rewards. (default "0x0000000000000000000000000000000000000000")
 ```
 
 #### Creating the configuration for a DKG Ceremony
@@ -126,17 +129,17 @@ Flags:
       --fee-recipient-address string   Optional Ethereum address of the fee recipient
   -h, --help                           Help for dkg
       --name string                    Optional cosmetic cluster name
-      --network string                 Ethereum network to create validators for. Options: mainnet, prater, kintsugi, kiln, gnosis. (default "prater")
+      --network string                 Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "goerli")
       --num-validators int             The number of distributed validators the cluster will manage (32ETH staked for each). (default 1)
       --operator-enrs strings          [REQUIRED] Comma-separated list of each operator's Charon ENR address.
       --output-dir string              The folder to write the output cluster-definition.json file to. (default ".charon")
-  -t, --threshold int                  The threshold required for signature reconstruction. Minimum is n-(ceil(n/3)-1). (default 3)
+  -t, --threshold int                  Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
       --withdrawal-address string      Withdrawal Ethereum address (default "0x0000000000000000000000000000000000000000")
 ```
 
 ### Performing a DKG Ceremony
 
-Th `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit and exit data for each new distributed validator. The command outputs the `cluster.lock` file and key shares for each Distributed Validator created. 
+Th `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
 
 ```markdown
 charon dkg --help
@@ -153,9 +156,10 @@ Flags:
   -h, --help                           Help for dkg
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
+      --no-verify                      Disables cluster definition and lock file verification.
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-bootnode-relay             Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
-      --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.gcp.obol.tech:3640/enr])
+      --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.lb.gcp.obol.tech:3640/enr])
       --p2p-bootnodes-from-lockfile    Enables using cluster lock ENRs as discv5 bootnodes. Allows skipping explicit bootnodes if key generation ceremony included correct IPs.
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
@@ -166,7 +170,7 @@ Flags:
 
 ### Run the Charon middleware
 
-This `run` command accepts a `cluster.lock` file that was created either via a `charon create cluster` command or `charon dkg`. This lock file outlines the nodes in the cluster and the distributed validators they operate on behalf of. 
+This `run` command accepts a `cluster-lock.json` file that was created either via a `charon create cluster` command or `charon dkg`. This lock file outlines the nodes in the cluster and the distributed validators they operate on behalf of. 
 
 ```markdown
 charon run --help
@@ -190,9 +194,10 @@ Flags:
       --log-format string               Log format; console, logfmt or json (default "console")
       --log-level string                Log level; debug, info, warn or error (default "info")
       --monitoring-address string       Listening address (ip and port) for the monitoring API (prometheus, pprof). (default "127.0.0.1:3620")
+      --no-verify                       Disables cluster definition and lock file verification.
       --p2p-allowlist string            Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-bootnode-relay              Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
-      --p2p-bootnodes strings           Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.gcp.obol.tech:3640/enr])
+      --p2p-bootnodes strings           Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.lb.gcp.obol.tech:3640/enr])
       --p2p-bootnodes-from-lockfile     Enables using cluster lock ENRs as discv5 bootnodes. Allows skipping explicit bootnodes if key generation ceremony included correct IPs.
       --p2p-denylist string             Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-external-hostname string    The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
@@ -202,4 +207,37 @@ Flags:
       --simnet-beacon-mock              Enables an internal mock beacon node for running a simnet.
       --simnet-validator-mock           Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
       --validator-api-address string    Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
+```
+
+### Host a bootnode
+
+Bootnodes are dual-purpose at this point in time. They run a [discV5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md) discovery server that allows charon clients to find one another despite IP address changes, and they also run a libp2p [circuit relay](https://docs.libp2p.io/concepts/circuit-relay/) server that allows charon clients behind NAT gateways to be communicated with when `--p2p-bootnode-relay` is enabled. These features make it easier to get a distributed validator cluster established and connected, but they trade off against cluster independence and fault tolerance. In the long run the use of these features will be minimised, but for now, if you want to self-host a bootnode for your cluster(s) the following command will start one. 
+
+```markdown
+charon bootnode --help
+Starts a discv5 bootnode that charon nodes can use to bootstrap their p2p cluster
+
+Usage:
+  charon bootnode [flags]
+
+Flags:
+      --auto-p2pkey                    Automatically create a p2pkey (ecdsa private key used for p2p authentication and ENR) if none found in data directory (default true)
+      --bootnode-http-address string   Listening address (ip and port) for the bootnode http server serving runtime ENR (default "127.0.0.1:3640")
+      --data-dir string                The directory where charon will store all its internal data (default ".charon")
+  -h, --help                           Help for bootnode
+      --log-format string              Log format; console, logfmt or json (default "console")
+      --log-level string               Log level; debug, info, warn or error (default "info")
+      --max-reservations int           Updates max circuit reservations per peer (each valid for 30min) (default 512)
+      --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
+      --p2p-bootnode-relay             Enables using bootnodes as libp2p circuit relays. Useful if some charon nodes are not have publicly accessible.
+      --p2p-bootnodes strings          Comma-separated list of discv5 bootnode URLs or ENRs. (default [http://bootnode.lb.gcp.obol.tech:3640/enr])
+      --p2p-bootnodes-from-lockfile    Enables using cluster lock ENRs as discv5 bootnodes. Allows skipping explicit bootnodes if key generation ceremony included correct IPs.
+      --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
+      --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-max-connections int        Libp2p maximum number of peers that can connect to this bootnode. (default 16384)
+      --p2p-relay                      Enable libp2p tcp host providing circuit relay to charon clusters (default true)
+      --p2p-relay-loglevel string      Libp2p circuit relay log level. E.g., debug, info, warn, error
+      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:3610])
+      --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
 ```
