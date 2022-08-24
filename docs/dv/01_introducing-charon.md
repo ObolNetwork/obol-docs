@@ -40,7 +40,7 @@ The following is an outline of the services that can be exposed by charon.
 The `charon` client is in an early alpha state, and is not ready for mainnet, see [here](https://github.com/ObolNetwork/charon#supported-consensus-layer-clients) for the latest on charon's readiness.
 
 ```
-docker run obolnetwork/charon:v0.9.0 --help
+docker run obolnetwork/charon:v0.10.0 --help
 ```
 
 For more information on running charon, take a look at our [quickstart guide](../int/quickstart/index.md). 

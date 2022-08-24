@@ -35,7 +35,7 @@ The schema of the `cluster-definition.json` is defined as:
   ],
   "uuid": "1234-abcdef-1234-abcdef",            // Random unique identifier.
   "version": "v1.0.0",                          // Schema version
-  "num_validators": 100,                        // Number of distributed validators to be created in cluster.lock
+  "num_validators": 100,                        // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3,                               // Optional threshold required for signature reconstruction
   "fee_recipient_address":"0x123..abfc",        // ETH1 fee_recipient address
   "withdrawal_address": "0x123..abfc",          // ETH1 withdrawal address

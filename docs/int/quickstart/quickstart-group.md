@@ -23,7 +23,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 
 # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.9.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.10.0 create enr
 ```
 
 You should expect to see a console output like
@@ -51,7 +51,7 @@ cp .env.sample .env
 
 # Set FEE_RECIPIENT_ADDRESS and WITHDRAWAL_ADDRESS to ETH1 addresses of your choice.
 # NAME can be any random string like "Obol Team"
-docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.9.0 create dkg --name=$NAME --fee-recipient-address=$FEE_RECIPIENT_ADDRESS --withdrawal-address=$WITHDRAWAL_ADDRESS
+docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.10.0 create dkg --name=$NAME --fee-recipient-address=$FEE_RECIPIENT_ADDRESS --withdrawal-address=$WITHDRAWAL_ADDRESS
 
 # The above command prepares a DKG configuration file.
 ```
@@ -66,7 +66,7 @@ Every cluster member then participates in the DKG ceremony. For Charon v1, this 
 
 ```
 # Participate in DKG ceremony, this will create .charon/cluster-lock.json, .charon/deposit-data.json and .charon/validator_keys
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.9.0 dkg --p2p-bootnode-relay
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.10.0 dkg --p2p-bootnode-relay
 ```
 
 Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder. These include:
