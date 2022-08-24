@@ -119,7 +119,7 @@ Once the key generation ceremony has been completed, the charon nodes have the d
 
 Once the cluster is healthy and fully connected, it is time to deposit the required 32 (test) ether to activate the newly created Distributed Validator.
 
-1. Activate the validator on the testnet using the original [staking launchpad](https://prater.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/deposit-data.json`.
+1. Activate the validator on the testnet using the original [staking launchpad](https://goerli.launchpad.ethereum.org/en/overview) site with the deposit data created at `.charon/deposit-data.json`.
    - If you use Mac OS, `.charon` the default output folder, does not show up on the launchpad's "Upload Deposit Data" file picker. Rectify this by pressing `Command + Shift + . ` (full stop). This should display hidden folders, allowing you to select the deposit file.
    - A more distributed validator friendly deposit interface is in the works for an upcoming release.
 1. This process takes approximately 16 hours for the deposit to be registered on the beacon chain. Future upgrades to the protocol aims to reduce this time.
