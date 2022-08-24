@@ -40,9 +40,9 @@ With these 2 conditions in places Charon validators will be able to register to 
 
 ### Lighthouse Validator Client
 
-For Lighthouse we have are currenting waiting on the following [PR](https://github.com/sigp/lighthouse/pull/3445) to be merged into their unstable branch to enable compatability, please review the status. 
+For Lighthouse we are currenting waiting on the following [PR](https://github.com/sigp/lighthouse/pull/3445) to be merged into their unstable branch to enable compatability, please review the PR's status. 
 
-If you PR has been merged Lighthouse can be used with Charon, you must use the [unstable branch / container image](https://hub.docker.com/r/sigp/lighthouse/tags) to have access to the changes that enable compatibility.
+If the PR has been merged Lighthouse can be used with Charon. You must use the [unstable branch / container image](https://hub.docker.com/r/sigp/lighthouse/tags) to have access to the changes that enable compatibility.
  
 
 Configuring the Lightouse validator client with Charon follows exactly the same process as their [official guide](https://lighthouse-book.sigmaprime.io/builders.html) with some additional conditions.
