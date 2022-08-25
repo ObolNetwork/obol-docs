@@ -40,10 +40,9 @@ With these 2 conditions in places Charon validators will be able to register to 
 
 ### Lighthouse Validator Client
 
-For Lighthouse we are currently waiting on the following [PR](https://github.com/sigp/lighthouse/pull/3445) to be merged into their unstable branch to enable compatability, please review the PR's status. 
+For Lighthouse we are currently waiting on the following [PR](https://github.com/sigp/lighthouse/pull/3445) to be merged into their unstable branch to enable compatability, please review the PR's status.
 
 If the PR has been merged Lighthouse can be used with Charon. You must use the [unstable branch / container image](https://hub.docker.com/r/sigp/lighthouse/tags) to have access to the changes that enable compatibility.
- 
 
 Configuring the Lightouse validator client with Charon follows exactly the same process as their [official guide](https://lighthouse-book.sigmaprime.io/builders.html) with some additional conditions.
 
@@ -99,6 +98,6 @@ Once you have Charon and your Validator Client set up you can verify the set up 
 
 As an example if my validator was the block proposer for block 12853375 on Ropsten I can review the following resources.
 
-[Etherscan Ropsten Block 12853375](https://ropsten.etherscan.io/block/12853375), if we check the `Extra Data` field on this page we will see the tag `Flashbots flashblock (Hex:0x466c617368626f747320666c617368626c6f636b)`. Relays will generally add a tag to the block, this block was submitted via the Flashbots Relay and as a result has the tag includes `Flashbots flashblock`.
+[Etherscan Ropsten Block 12853375](https://ropsten.etherscan.io/block/12853375), if we check the `Extra Data` field on this page we will see the tag `Flashbots flashblock (Hex:0x466c617368626f747320666c617368626c6f636b)`. Relays will generally add a tag to the block, this block was submitted via the Flashbots Relay and as a result it has the tag: `Flashbots flashblock`.
 
-[Relay Data API](https://flashbots.notion.site/Relay-API-Spec-5fb0819366954962bc02e81cb33840f5), if you navigate to the `Data API` section  on the Relay Data API you will see an endpoint labeled `proposerPayloadsDelivered`. You are able to add a query argument of `block_number` to this call to see if a block was submitted via that Relay. [Here](https://builder-relay-ropsten.flashbots.net/relay/v1/data/bidtraces/proposer_payload_delivered?block_number=12853375) is the query for the example block 12853375. Blocks that have not been submitted to the Relay will return an empty array `[]`.
+[Relay Data API](https://flashbots.notion.site/Relay-API-Spec-5fb0819366954962bc02e81cb33840f5), if you navigate to the `Data API` section on the Relay Data API you will see an endpoint labeled `proposerPayloadsDelivered`. You are able to add a query argument of `block_number` to this call to see if a block was submitted via that Relay. [Here](https://builder-relay-ropsten.flashbots.net/relay/v1/data/bidtraces/proposer_payload_delivered?block_number=12853375) is the query for the example block 12853375. Blocks that have not been submitted to the Relay will return an empty array `[]`.
