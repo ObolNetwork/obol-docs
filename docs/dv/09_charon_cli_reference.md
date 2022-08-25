@@ -20,8 +20,8 @@ The following are the top-level commands available to use.
 
 The `charon help` prints the commands available in charon.
 
-```shell
-foo@bar:~$ charon help
+```markdown
+charon help
 
 Charon enables the operation of Ethereum validators in a fault tolerant manner by splitting the validating keys across a group of trusted parties using threshold cryptography.
 
@@ -48,8 +48,8 @@ Use "charon [command] --help" for more information about a command.
 
 The `charon enr` command prints a newly generated Ethereum Node Record (ENR) from the node's charon-enr-private-key.
 
-```shell
-foo@bar:~$ charon enr --help
+```markdown
+charon enr --help
 
 Prints a newly generated Ethereum Node Record (ENR) from this node's charon-enr-private-key
 
@@ -75,8 +75,8 @@ Flags:
 
 The `charon version` command prints the charon version and associated git hash. It looks something like `v0.9.0 [git_commit_hash=d79486c,git_commit_time=2022-08-19T07:16:02Z]`.
 
-```shell
-foo@bar:~$ charon version --help
+```markdown
+charon version --help
 
 Output version info
 
@@ -92,8 +92,8 @@ Flags:
 
 The `charon bootnode` command starts a discv5 bootnode that charon nodes can use to bootstrap their p2p cluster. It is useful for those who want to run bootnodes themselves.
 
-```shell
-foo@bar:~$ charon bootnode --version
+```markdown
+charon bootnode --version
 
 Starts a discv5 bootnode that charon nodes can use to bootstrap their p2p cluster
 
@@ -126,8 +126,8 @@ Flags:
 
 The `create` subcommand handles the creation of artifacts needed by charon to operate.
 
-```shell
-foo@bar:~$ charon create --help
+```markdown
+charon create --help
 
 Create artifacts for a distributed validator cluster. These commands can be used to facilitate the creation of a distributed validator cluster between a group of operators by performing a distributed key generation ceremony, or they can be used to create a local cluster for single operator use cases.
 
@@ -149,8 +149,8 @@ Use "charon create [command] --help" for more information about a command.
 
 An `enr` is an Ethereum Node Record. It is used to identify this charon client to its other counterparty charon clients across the internet. 
 
-```shell
-foo@bar:~$ charon create enr --help
+```markdown
+charon create enr --help
 Create an Ethereum Node Record (ENR) private key to identify this charon client
 
 Usage:
@@ -174,8 +174,8 @@ Flags:
 
 `charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
-```shell
-foo@bar:~$ charon create cluster --help
+```markdown
+charon create cluster --help
 
 Creates a local charon cluster configuration including validator keys, charon p2p keys, cluster-lock.json and a deposit-data.json. See flags for supported features.
 
@@ -201,8 +201,8 @@ Flags:
 
 This `charon create dkg` command creates a cluster_definition file used for the `charon dkg` command. 
 
-```shell
-foo@bar:~$ charon create dkg --help
+```markdown
+charon create dkg --help
 
 Create a cluster definition file that will be used by all participants of a DKG.
 
@@ -226,8 +226,8 @@ Flags:
 
 Th `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
 
-```shell
-foo@bar:~$ charon dkg --help
+```markdown
+charon dkg --help
 
 Participate in a distributed key generation ceremony for a specific cluster definition that creates
 distributed validator key shares and a final cluster lock configuration. Note that all other cluster operators should run
@@ -258,8 +258,8 @@ Flags:
 
 This `run` command accepts a `cluster-lock.json` file that was created either via a `charon create cluster` command or `charon dkg`. This lock file outlines the nodes in the cluster and the distributed validators they operate on behalf of. 
 
-```shell
-foo@bar:~$ charon run --help
+```markdown
+charon run --help
 
 Starts the long-running Charon middleware process to perform distributed validator duties.
 
