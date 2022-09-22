@@ -40,7 +40,7 @@ If you are taking part in an organised Obol testnet, submit the created ENR publ
 
 ## Step 2. Leader creates the DKG configuration file and distributes it to cluster operators
 
-The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command. For the official Obol testnets, this step will be completed by an Obol core team member or the cluster captain and the definition file will be distributed to the cluster members for DKG completion.
+The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
 
 In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](https://docs.obol.tech/docs/dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
 
