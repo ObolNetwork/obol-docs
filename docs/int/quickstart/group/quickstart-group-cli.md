@@ -1,15 +1,16 @@
 ---
-sidebar_position: 5
-description: Run one node in a multi-operator distributed validator cluster
+sidebar_position: 2
+description: Run one node in a multi-operator distributed validator cluster using CLI
 ---
 
-# Run a cluster with others
+# CLI
 
-The following instructions aim to assist a group of users coordinating together to create a distributed validator cluster between them. Only one person needs to do [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in the quickstart process.
+The following instructions aim to assist a group of users coordinating together to create a distributed validator cluster between them.
 
 ## Pre-requisites
 
-Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](https://git-scm.com/downloads) installed. Also, make sure `docker` is running before executing the commands below.
+- Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](https://git-scm.com/downloads) installed. Also, make sure `docker` is running before executing the commands below.
+- Decide who the leader of your cluster will be. Only leaders have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in the quickstart process. They do not get any special privilege.
 
 ## Step 1. Creating and backing up a private key for charon
 
@@ -37,23 +38,21 @@ You should expect to see a console output like
 
 If you are taking part in an organised Obol testnet, submit the created ENR public address (the console output starting with `enr:-...` not the contents of the private key file) to the appropriate typeform.
 
-## Step 2. Leader creates the DKG configuration file and distributes it to everyone else
+## Step 2. Leader creates the DKG configuration file and distributes it to cluster operators
 
-One person, in the cluster or otherwise, will prepare the configuration file for the distributed key generation ceremony using the `charon create dkg` command. For the official Obol testnets, this step will be completed by an Obol core team member or the cluster captain and the definition file will be distributed to the cluster members for DKG completion.
+The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command. For the official Obol testnets, this step will be completed by an Obol core team member or the cluster captain and the definition file will be distributed to the cluster members for DKG completion.
 
 In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](https://docs.obol.tech/docs/dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
 
 ```
 # Prepare an environment variable file
-cp .env.sample .env
+cp .env.create_dkg.sample .env.create_dkg
 
-# Set the ENRs of all the operators participating in the DKG ceremony in the .env file variable CHARON_OPERATOR_ENRS
+# Populate the .env.create_dkg file with the cluster name, the fee recipient and withdrawal Ethereum addresses and the 
+# operator ENRs of all the operators participating in the DKG ceremony.
 
-# Set FEE_RECIPIENT_ADDRESS and WITHDRAWAL_ADDRESS to ETH1 addresses of your choice.
-# NAME can be any random string like "Obol Team"
-docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.10.0 create dkg --name=$NAME --fee-recipient-address=$FEE_RECIPIENT_ADDRESS --withdrawal-address=$WITHDRAWAL_ADDRESS
-
-# The above command prepares a DKG configuration file.
+# Run the `charon create dkg` command that generates DKG cluster-definition.json file.
+docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.10.0 create dkg
 ```
 
 This command should output a file at `.charon/cluster-definition.json`. This file needs to be shared with the other operators in a cluster.
@@ -69,6 +68,8 @@ Every cluster member then participates in the DKG ceremony. For Charon v1, this 
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.10.0 dkg --p2p-bootnode-relay
 ```
 
+>This is a helpful [video walkthrough](https://www.youtube.com/watch?v=94Pkovp5zoQ&ab_channel=ObolNetwork).
+
 Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder. These include:
 
 - A `deposit-data.json` file. This contains the information needed to activate the validator on the Ethereum network.
@@ -77,7 +78,7 @@ Assuming the DKG is successful, a number of artefacts will be created in the `.c
 
 At this point you should make a backup of the `.charon/validator_keys` folder as replacing lost private keys is not straightforward at this point in charon's development. The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
 
-If taking part in the official Athena testnet, one cluster member will have to submit the `cluster-lock` and `deposit-data` files to the Obol Team, setting the stage for activation.
+If taking part in an official Obol testnet, one cluster member will have to submit the `cluster-lock` and `deposit-data` files to the Obol Team.
 
 ## Step 4. Start the Distributed Validator Cluster
 
@@ -105,6 +106,8 @@ You should use the grafana dashboard to infer whether your cluster is healthy. I
 - That your charon client can connect to the configured beacon client.
 - That your charon client can connect to all peers
 
+Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
+
 You might notice that there are logs indicating that a validator cannot be found and that APIs are returning 404. This is to be expected at this point, as the validator public keys listed in the lock file have not been deposited and acknowledged on the consensus layer yet (usually ~16 hours after the deposit is made).
 
 To turn off your node after checking the health of the cluster you can run:
@@ -120,16 +123,17 @@ If you and your team have gotten to this phase of the quickstart, and you have s
 
 This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
 
-If you have gotten this far through the process, and whether you succeed or fail at running the distributed validator successfully on the testnet, we would like to hear your feedback on the process and where you encountered difficulties. Please open issues in either this repo if the problem is deployment related, or the [charon](https://github.com/ObolNetwork/charon) repo if the issue is directly related to the client.
+If you have gotten this far through the process, and whether you succeed or fail at running the distributed validator successfully on the testnet, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/TsXFa8uB2E). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
 
-## Other Actions
+# Other Optional Actions
 
 The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
+	
+## Step 6. Leader Adds Central Monitoring Token
 
-### Leader Adds Central Monitoring Token
-
-The cluster leader will be provided with a Central Monitoring Token used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in prometheus/prometheus.yml replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
+The cluster leader may be provided with a Central Monitoring Token used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in prometheus/prometheus.yml replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
+
 The cluster leader will be assigned a cluster name to be added in the prometheus/prometheus.yml replacing the `$CLUSTER_NAME`. The cluster name will look like: `cluster-123`
 Final prometheus/prometheus.yml would look something like:
 ```
@@ -156,7 +160,7 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 ```
 
-### Validator Voluntary Exit
+## Validator Voluntary Exit
 
 A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
 
@@ -186,7 +190,7 @@ A threshold of peers in the cluster need to perform this task to exit a validato
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
 
-### Self-Host a Bootnode
+## Self-Host a Bootnode
 
 If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralisation, you can opt to host your own bootnode on a separate open and static internet port.
 
