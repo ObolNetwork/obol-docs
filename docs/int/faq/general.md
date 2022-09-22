@@ -25,7 +25,7 @@ It should be the same as running a normal post-merge Ethereum node. It would be 
 
 Charon alone uses negligible disk space of not more than a few MBs. However if you are running your consensus client and execution client on the same server with charon then you will need 500GB of free SSD disk space (assuming you are running a testnet chain, mainnet requires 1TB or more disk space ideally).
 
-For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](./quickstart/), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](docs/int/quickstart/group/quickstart-group-launchpad.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
 ## Migrating existing validators
 
