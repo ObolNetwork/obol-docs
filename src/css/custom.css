@@ -14,6 +14,7 @@
   --ifm-color-primary-lighter: #81bba3;
   --ifm-color-primary-lightest: #D9ECF3;
   --ifm-footer-background-color: #33474D;
+  --ifm-color-info-dark: #D9ECF3;
   --ifm-code-font-size: 95%;
   --prism-background-color: #243D42;
   font-family: 'Avenir Next', Montserrat, sans-serif;
@@ -58,4 +59,8 @@ html[data-theme="dark"] .text--center--title {
 
 html[data-theme="light"] .text--center--title {
   color: #011216;
+}
+
+.details {
+  background-color: #243D42;
 }
