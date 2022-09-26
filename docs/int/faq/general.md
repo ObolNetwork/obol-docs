@@ -25,13 +25,13 @@ It should be the same as running a normal post-merge Ethereum node. It would be 
 
 Charon alone uses negligible disk space of not more than a few MBs. However if you are running your consensus client and execution client on the same server with charon then you will need 500GB of free SSD disk space (assuming you are running a testnet chain, mainnet requires 1TB or more disk space ideally).
 
-For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](docs/int/quickstart/group/quickstart-group-launchpad.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group/quickstart-group-launchpad.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
 ## Migrating existing validators
 
 ### Can I keep my existing validator client?
 
-Yes. Charon sits as a middleware between a validator client and it's beacon node. All validators that implement the standard REST API will be supported, along with all popular client delivery software such as DAppNode [packages](https://dappnode.github.io/explorer/#/), Rocket Pool's [smart node](https://github.com/rocket-pool/smartnode), StakeHouse's [wagyu](https://github.com/stake-house/wagyu), and Stereum's [node launcher](https://stereum.net/development/#roadmap).
+Yes. Charon sits as a middleware between a validator client and it's beacon node. All validators that implement the standard REST API will be supported, along with all popular client delivery software such as Dappnode [packages](https://dappnode.github.io/explorer/#/), Rocket Pool's [smart node](https://github.com/rocket-pool/smartnode), StakeHouse's [wagyu](https://github.com/stake-house/wagyu), and Stereum's [node launcher](https://stereum.net/development/#roadmap).
 
 ### Can I migrate my existing validator into a distributed validator?
 
@@ -52,7 +52,7 @@ You can split an existing EIP-2335 keystore for a validator to migrate it to a d
 
 Currently, the minimum is 4 operators with a threshold of 3.
 
-The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its(their) duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaing BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check threshold value in your [`cluster-lock.json`](/docs/dv/08_distributed-validator-cluster-manifest.md#cluster-lock-file) file.
+The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its(their) duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaing BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check threshold value in your [`cluster-lock.json`](../dv/08_distributed-validator-cluster-manifest.md#cluster-lock-file) file.
 
 The maximum, honest answer, we don't know yet! It will depend heavily on your nodes network latency to talk to one another. The CLI caps out at 31 for now for a sane maximum. In practice, 10 nodes allows 3 nodes to fail at any one time, and probably is the largest cluster you should attempt for now unless you you're really experimenting 😅.
 
@@ -62,4 +62,4 @@ By the way, the more operators, the longer the DKG, but don't worry, there is no
 
 You can check if the containers on your node are outputting errors by running `docker-compose logs` on a machine with a running cluster.
 
-Diagnose some common errors and view their resolutions [here](docs/int/faq/errors.md).
+Diagnose some common errors and view their resolutions [here](./errors.mdx).
