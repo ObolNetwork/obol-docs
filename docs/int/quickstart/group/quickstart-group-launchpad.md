@@ -14,7 +14,7 @@ The following instructions aim to assist a group of users coordinating together 
 
 ## Step 1. Creating and backing up a private key for charon
 
-The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](docs/int/faq/errors.md#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](docs/int/faq/errors.mdx#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
@@ -95,28 +95,31 @@ After receiving the invite link created by the leader, cluster members will be a
     - Your operator definition (address, `ENR`, `enr_sig` and `config_hash` signatures)
 
 ## Step 3. Run the DKG
+For Charon v1, this needs to happen synchronously between participants at an agreed time.
 
 1. Once all operators successfully signed, your screen will automatically advance to the next step and look like this. Click `Continue`.
 
   ![Config Signing Success](/img/Guide08.png)
 
-2. Download the `cluster-definition` file and move it to the hidden `.charon` folder. Alternatively, run the `docker` command on the screen in your terminal to perform this automatically. Then, click `Continue`.
+2. You have two options at this stage.
+    1. Option 1 and default is to run the `docker` command on the screen in your terminal to automatically download the `cluster-definition` file and move it to the hidden `.charon` folder and start the DKG process.
+  //[Insert Screenshot]
 
-3. Every cluster member then participates in the DKG ceremony by running the command displayed at the `Run the DKG` bullet on your screen. It will look something like this. For Charon v1, this needs to happen synchronously between participants at an agreed time.
+    2. Option 2 is to download the `cluster-definition` file and move it to the hidden `.charon` folder. Then, every cluster member participates in the DKG ceremony by running the command displayed under the `Run the DKG` menu. It will look something like this:
 
-    ![Run the DKG](/img/Guide10.png)
+      ![Run the DKG](/img/Guide10.png)
 
-  - This is a helpful [DKG video walkthrough](https://www.youtube.com/watch?v=94Pkovp5zoQ&ab_channel=ObolNetwork).
+      This is a helpful [DKG video walkthrough](https://www.youtube.com/watch?v=94Pkovp5zoQ&ab_channel=ObolNetwork) (it uses the CLI to get the `cluster-definition` file but the DKG logic is the same).
 
-Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder. These include:
+3. Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder. These include:
 
-- A `deposit-data.json` file. This contains the information needed to activate the validator on the Ethereum network.
-- A `cluster-lock.json` file. This contains the information needed by charon to operate the distributed validator cluster with its peers.
-- A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
+    - A `deposit-data.json` file. This contains the information needed to activate the validator on the Ethereum network.
+    - A `cluster-lock.json` file. This contains the information needed by charon to operate the distributed validator cluster with its peers.
+    - A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
 
-At this point you should make a backup of the `.charon/validator_keys` folder as replacing lost private keys is not straightforward at this point in charon's development. The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
+4. At this point you should make a backup of the `.charon/validator_keys` folder as replacing lost private keys is not straightforward at this point in charon's development. The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
 
-If taking part in an official Obol testnet, one cluster member will have to submit the `cluster-lock` and `deposit-data` files to the Obol Team.
+5. If taking part in an official Obol testnet, one cluster member will have to submit the `cluster-lock` and `deposit-data` files to the Obol Team.
 
 ## Step 4. Start the Distributed Validator Cluster
 
