@@ -103,7 +103,6 @@ For Charon v1, this needs to happen synchronously between participants at an agr
 
 2. You have two options at this stage.
     1. Option 1 and default is to run the `docker` command on the screen in your terminal to automatically download the `cluster-definition` file and move it to the hidden `.charon` folder and start the DKG process.
-  //[Insert Screenshot]
 
     2. Option 2 is to download the `cluster-definition` file and move it to the hidden `.charon` folder. Then, every cluster member participates in the DKG ceremony by running the command displayed under the `Run the DKG` menu. It will look something like this:
 
