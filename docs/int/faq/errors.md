@@ -113,11 +113,6 @@ To check if some peers are not online:
 </details>
 
 <details>
-<summary><h4><code>Attester failed in parSigDBThreshold component</code> error</h4></summary>
-Should be fixed in the latest version of Charon, upgrade and restart your node.
-</details>
-
-<details>
 <summary><h4><code>Peer connection failing and dropping</code> error</h4></summary>
 
 Should be fixed in the latest version of Charon, upgrade and restart your node. Likely linked to Obol bootnode infrastructure. You can also try to [run your own bootnode](https://docs.obol.tech/docs/next/int/quickstart/group/quickstart-group-launchpad#self-host-a-bootnode).
@@ -136,13 +131,135 @@ Wait for Teku & Lighthouse sync to be complete.
 </details>
 
 <details>
-<summary><h4><code>Reserve relay circuit: reservation failed</code> error</h4></summary>
-<code>RESERVATION_REFUSED</code> is returned by the bootnode libp2p relay when some maximum limit has been reached. 
+    <summary>
+        <h4>
+        <code>Reserve relay circuit: reservation failed</code> error
+        </h4>
+    </summary>
+    <code>RESERVATION_REFUSED</code> is returned by the bootnode libp2p relay when some maximum limit has been reached. 
 
-This is most often due to "maximum reservations per IP/peer". This is when your charon node is restarting or in some error loop and constantly attempting to create new relay reservations reaching the maximum. To fix this error, stop your charon node for 30mins before restarting it. This should allow the bootnode enough time to reset your ip/peer limits and should then allow new reservations.
+    This is most often due to "maximum reservations per IP/peer". This is when your charon node is restarting or in some error loop and constantly attempting to create new relay reservations reaching the maximum. To fix this error, stop your charon node for 30mins before restarting it. This should allow the bootnode enough time to reset your ip/peer limits and should then allow new reservations.
 
-This could also be due to the bootnode being overloaded in general, so reaching a server wide "maximum connections" limit. This is an issue with bootnode scalability and we are working in a long term fix for this. If stopping your node for 30min doesn't solve <code>RESERVATION_REFUSED</code>, then it is a problem the Obol team needs to solve.
+    This could also be due to the bootnode being overloaded in general, so reaching a server wide "maximum connections" limit. This is an issue with bootnode scalability and we are working in a long term fix for this. If stopping your node for 30min doesn't solve <code>RESERVATION_REFUSED</code>, then it is a problem the Obol team needs to solve.
 </details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't fetch duty data from the beacon node</code> error
+        </h4>
+    </summary>
+    <code>msgFetcher</code> indicates a duty failed in the fetcher component when it failed to fetch the required data from the beacon node API. This indicates a problem with the upstream beacon node.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't aggregate attestation due to failed attester duty</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherAggregatorNoAttData</code> indicates an attestation aggregation duty failed in the fetcher component since it couldn't fetch the prerequisite attestation data. This indicates the associated attestation duty failed to obtain a cluster agreed upon value.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't aggregate attestation due to insufficient partial v2 committee subscriptions</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherAggregatorZeroPrepares</code> indicates an attestation aggregation duty failed in the fetcher component since it couldn't fetch the prerequisite aggregated v2 committee subscription. This indicates the associated prepare aggregation duty failed due to no partial v2 committee subscription submitted by the cluster validator clients.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't aggregate attestation due to failed prepare aggregator duty</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherAggregatorFailedPrepare</code> indicates an attestation aggregation duty failed in the fetcher component since it couldn't fetch the prerequisite aggregated v2 committee subscription. This indicates the associated prepare aggregation duty failed.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't propose block due to insufficient partial randao signatures</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherProposerFewRandaos</code> indicates a block proposer duty failed in the fetcher component since it couldn't fetch the prerequisite aggregated RANDAO. This indicates the associated randao duty failed due to insufficient partial randao signatures submitted by the cluster validator clients.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't propose block due to zero partial randao signatures</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherProposerZeroRandaos</code> indicates a block proposer duty failed in the fetcher component since it couldn't fetch the prerequisite aggregated RANDAO. This indicates the associated randao duty failed due to no partial randao signatures submitted by the cluster validator clients.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Couldn't propose block due to failed randao duty</code> error
+        </h4>
+    </summary>
+    <code>msgFetcherProposerZeroRandaos</code> indicates a block proposer duty failed in the fetcher component since it couldn't fetch the prerequisite aggregated RANDAO. This indicates the associated randao duty failed.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Consensus algorithm didn't complete</code> error
+        </h4>
+    </summary>
+    <code>msgConsensus</code> indicates a duty failed in consensus component. This could indicate that insufficient honest peers participated in consensus or p2p network connection problems.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Signed duty not submitted by local validator client</code> error
+        </h4>
+    </summary>
+    <code>msgValidatorAPI</code> indicates that partial signature were never submitted by the local validator client. This could indicate that the local validator client is offline, or has connection problems with charon, or has some other problem. See validator client logs for more details.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Bug: partial signature database didn't trigger partial signature exchange</code> error
+        </h4>
+    </summary>
+    <code>msgParSigDBInternal</code> indicates a bug in the partial signature database as it is unexpected.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>No partial signatures received from peers</code> error
+        </h4>
+    </summary>
+    <code>msgParSigEx</code> indicates that no partial signature for the duty was received from any peer. This indicates all peers are offline or p2p network connection problems.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Insufficient partial signatures received, minimum required threshold not reached</code> error
+        </h4>
+    </summary>
+    <code>msgParSigDBThreshold</code> indicates that insufficient partial signatures for the duty was received from peers. This indicates problems with peers or p2p network connection problems.
+</details>
+
+<details>
+    <summary>
+        <h4>
+        <code>Bug: threshold aggregation of partial signatures failed due to inconsistent signed data</code> error
+        </h4>
+    </summary>
+    <code>msgSigAgg</code> indicates that BLS threshold aggregation of sufficient partial signatures failed. This indicates inconsistent signed data. This indicates a bug in charon as it is unexpected.
+</details>
+
 </details>
 
 <details open>
