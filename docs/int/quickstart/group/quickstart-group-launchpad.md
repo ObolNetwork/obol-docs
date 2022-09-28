@@ -12,6 +12,10 @@ The following instructions aim to assist a group of users coordinating together 
 - Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](https://git-scm.com/downloads) installed. Also, make sure `docker` is running before executing the commands below.
 - Decide who the leader of your cluster will be. Only leaders have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in the quickstart process. They do not get any special privilege.
 
+## 1-min Video Overview
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QZM7mQs78pI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+
 ## Step 1. Creating and backing up a private key for charon
 
 The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](docs/int/faq/errors.mdx#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
