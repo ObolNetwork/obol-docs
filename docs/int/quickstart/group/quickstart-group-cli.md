@@ -134,19 +134,16 @@ The above steps should get you running a distributed validator cluster. The foll
 The cluster leader may be provided with a Central Monitoring Token used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in prometheus/prometheus.yml replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
 
-The cluster leader will be assigned a cluster name to be added in the prometheus/prometheus.yml replacing the `$CLUSTER_NAME`. The cluster name will look like: `cluster-123`
 Final prometheus/prometheus.yml would look something like:
 ```
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.
   evaluation_interval: 30s # Evaluate rules every 30 seconds.
-  external_labels:
-    cluster_name: cluster-123
 
 remote_write:
   - url: https://vm.monitoring.gcp.obol.tech/write
     authorization:
-      credentials: 436764:eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ
+      credentials: eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ
 
 scrape_configs:
   - job_name: 'charon'
