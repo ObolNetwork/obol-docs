@@ -39,7 +39,7 @@ It is possible to split an existing validator keystore into a set of key shares 
 
 In an ideal scenario, a distributed validator's private key should never exist in full in a single location.
 
-You can split an existing EIP-2335 keystore for a validator to migrate it to a distributed validator architecture with the `charon create cluster --split-existing-keys` command documented [here](docs/dv/09_charon_cli_reference.md#create-a-full-cluster-locally).
+You can split an existing EIP-2335 keystore for a validator to migrate it to a distributed validator architecture with the `charon create cluster --split-existing-keys` command documented [here](../../dv/09_charon_cli_reference.md#create-a-full-cluster-locally).
 
 ## Distributed Key Generation
 
@@ -52,7 +52,7 @@ You can split an existing EIP-2335 keystore for a validator to migrate it to a d
 
 Currently, the minimum is 4 operators with a threshold of 3.
 
-The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its(their) duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaing BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check threshold value in your [`cluster-lock.json`](../dv/08_distributed-validator-cluster-manifest.md#cluster-lock-file) file.
+The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its(their) duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaing BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check threshold value in your [`cluster-lock.json`](../../dv/08_distributed-validator-cluster-manifest.md#cluster-lock-file) file.
 
 The maximum, honest answer, we don't know yet! It will depend heavily on your nodes network latency to talk to one another. The CLI caps out at 31 for now for a sane maximum. In practice, 10 nodes allows 3 nodes to fail at any one time, and probably is the largest cluster you should attempt for now unless you you're really experimenting 😅.
 
