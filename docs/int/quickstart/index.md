@@ -9,4 +9,4 @@ There are two ways to test out a distributed validator; on your own, by running 
 The following are guides to getting started with our template repositories. The intention is to support every combination of beacon clients and validator clients with compose files. 
 
 - [Running the full cluster alone.](./quickstart-alone.md)
-- [Running one node in a cluster with a group of other node operators.](docs/int/quickstart/group/quickstart-group-launchpad.md)
+- [Running one node in a cluster with a group of other node operators.](./group/quickstart-group-launchpad.md)
