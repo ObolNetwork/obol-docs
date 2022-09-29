@@ -61,6 +61,10 @@ html[data-theme="light"] .text--center--title {
   color: #011216;
 }
 
-.details {
+html[data-theme="dark"] .details {
   background-color: #243D42;
+}
+
+html[data-theme="light"] .details {
+  background-color: #f6f8fa;
 }
