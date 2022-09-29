@@ -14,7 +14,7 @@ The following instructions aim to assist a group of users coordinating together 
 
 ## Step 1. Creating and backing up a private key for charon
 
-The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](docs/int/faq/errors.mdx#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](../../faq/errors.mdx#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
