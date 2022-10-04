@@ -135,23 +135,6 @@ docker-compose logs
     <details className="details">
       <summary>
         <h4>
-          <code>Attester failed in parSigDBThreshold component</code> error
-        </h4>
-      </summary> Should be fixed in the latest version of Charon, upgrade and restart your node.
-    </details>
-    <details className="details">
-      <summary>
-        <h4>
-          <code>Peer connection failing and dropping</code> error
-        </h4>
-      </summary> 
-      Should be fixed in the latest version of Charon, upgrade and restart your node. 
-      Likely linked to Obol bootnode infrastructure. 
-      You can also try to <a href="https://docs.obol.tech/docs/next/int/quickstart/group/quickstart-group-launchpad#self-host-a-bootnode">run your own bootnode</a>.
-    </details>
-    <details className="details">
-      <summary>
-        <h4>
           <code>Load private key</code> error
         </h4>
       </summary> Make sure you have successfully run a DKG before running the node. The key should be created and placed in the right directory during the ceremony Also, make sure you are working in the right directory: <code>charon-distributed-validator-node</code>
