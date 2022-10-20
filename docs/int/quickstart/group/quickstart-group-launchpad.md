@@ -28,7 +28,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 
 # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.10.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.11.0 create enr
 ```
 
 You should expect to see a console output like
@@ -126,7 +126,7 @@ For Charon v1, this needs to happen synchronously between participants at an agr
 
 ## Step 4. Start the Distributed Validator Cluster
 
-With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
+With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`nethermind`) and a consensus layer client (`nimbus`).
 
 Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
 
@@ -225,7 +225,6 @@ A threshold of peers in the cluster need to perform this task to exit a validato
   - Voluntary exists require an epoch after which they take effect.
   - All VCs need to sign and submit the exact same messages (epoch) in DVT.
   - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
-  - There is however a [bug](https://github.com/sigp/lighthouse/issues/3471) in lighthouse requiring an epoch that maps to the latest fork version to be used.
   - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
   - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
 - Run the command to submit this node's partially signed voluntary exit:

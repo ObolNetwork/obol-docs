@@ -42,7 +42,7 @@ Docusaurus can manage multiple versions of your docs.
 
 Release a version v0.5.0 of your project:
 
-First update the sample command in `./docs/dv/01_introducing-charon.md` , `./docs/dv/09_charon_cli_reference.md`, `./docs/int/quickstart/quickstart-alone.md`, `./docs/int/quickstart/group/quickstart-group-cli.md`, and `./docs/int/quickstart/group/quickstart-group-launchpad.md`.
+Control/Command+F the `/docs/` folder for the current version, and update all references to the upcoming version.
 
 Now you are ready to create the next version by running the following command.
 
