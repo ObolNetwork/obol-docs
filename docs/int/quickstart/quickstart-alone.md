@@ -28,8 +28,6 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 
    `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
 
-
-
 1. Create the artifacts needed to run a testnet distributed validator cluster
 
    ```sh

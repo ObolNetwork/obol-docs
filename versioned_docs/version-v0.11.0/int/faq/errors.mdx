@@ -337,7 +337,7 @@ docker-compose logs
     </summary> It's because both geth and lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when geth finishes syncing. You can also add a second beacon node endpoint for something like infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose(./docker-compose.yml#84).
   </details>
 </details>
-<details className="details">
+  <details className="details">
     <summary>
       <h4> How do I fix the <code>plugin "loki" not found</code> error?
       </h4>
