@@ -336,18 +336,13 @@ docker-compose logs
       </h4>
     </summary> It's because both geth and lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when geth finishes syncing. You can also add a second beacon node endpoint for something like infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose(./docker-compose.yml#84).
   </details>
-</details>
   <details className="details">
     <summary>
       <h4> How do I fix the <code>plugin "loki" not found</code> error?
       </h4>
-    </summary> If you get the following error when calling `docker-compose up`:
-
-`Error response from daemon: error looking up logging plugin loki: plugin "loki" not found`, then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:
-
-```shell
-docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
-```
+    </summary> If you get the following error when calling `docker-compose up`:<br/>
+    <code>Error response from daemon: error looking up logging plugin loki: plugin "loki" not found</code>.<br/>Then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:<br/>
+    <code>docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions </code>
   </details>
 </details>
 <details open className="details">
