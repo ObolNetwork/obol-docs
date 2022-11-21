@@ -57,20 +57,20 @@ The leader will prepare the configuration file for the distributed key generatio
 
 4. Follow the flow and accept the advisories
 5. Configure the Cluster 
-    - Add the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster)
-    - Add the Ethereum addresses for each operator received at the end of [Step 1](#step-1-creating-and-backing-up-a-private-key-for-charon).
-    - Select the desired amount of validators (32 ETH each)
+    - Input the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster).
+    - Input the Ethereum addresses for each operator received at the end of [Step 1](#step-1-creating-and-backing-up-a-private-key-for-charon).
+    - Select the desired amount of validators (32 ETH each).
     - Paste your `ENR` generated in [Step 1](#step-1-creating-and-backing-up-a-private-key-for-charon).
-    - Choose your Withdrawal Addresses for validator exit.
-    - Create Group
+    - Input the `Withdrawal Addresses` to receive validator principal and rewards at exit.
+    - Input the `Fee Recipient Address` to receive transation fees from block proposals. 
+    - Create Cluster Configuration
 
     ![Create Group](/img/Guide03.png)
 
-6. Review, Confirm and Sign the Configuration (there can be up to 4 signatures needed)
-    - Cluster Configuration (contains operators, withdrawal address, # validators, etc.) 
+6. Review, Confirm and Sign the Configuration (2 signatures needed) 
     - Config hash 
-    - His/her own `ENR`
-    - His/her operator definition (address, `ENR`, `enr_sig` and `config_hash` signatures) 
+    - Leader's own `ENR`
+
 7. Share your group invite link with the cluster operators. Following the link as a leader will show you a screen waiting for other operators to accept the configuration.
 
   ![Invite Operators](/img/Guide04.png)
@@ -96,7 +96,6 @@ After receiving the invite link created by the leader, cluster members will be a
 6. Sign the configuration with your wallet and wait for other operators to do the same (up to three signatures required).
     - Config hash 
     - Your own `ENR`
-    - Your operator definition (address, `ENR`, `enr_sig` and `config_hash` signatures)
 
 ## Step 3. Run the DKG
 For Charon v1, this needs to happen synchronously between participants at an agreed time.
