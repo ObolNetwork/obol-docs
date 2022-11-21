@@ -33,7 +33,7 @@ Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](http
 
    ```sh
    # Create a testnet distributed validator cluster
-   docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.12.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
+   docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.12.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
    ```
 
 1. Start the cluster
@@ -75,7 +75,7 @@ The intention is to support all validator clients, and work is underway to add s
 Create some testnet private keys for a six node distributed validator cluster with the command:
 
 ```sh
-docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.12.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.12.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
 ```
 
 This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
@@ -105,7 +105,7 @@ mkdir split_keys
 # E.g. keystore-0.json keystore-0.txt
 
 # Split these keystores into "n" (--nodes) key shares with "t" (--threshold) as threshold for a distributed validator
-docker run --rm  -v $(pwd):/opt/charon ghcr.io/obolnetwork/charon:v0.12.0 create cluster --split-existing-keys --split-keys-dir=/opt/charon/split_keys --threshold 4 --nodes 6
+docker run --rm  -v $(pwd):/opt/charon obolnetwork/charon:v0.12.0 create cluster --split-existing-keys --split-keys-dir=/opt/charon/split_keys --threshold 4 --nodes 6
 
 # The above command will create 4 validator keys along with cluster-lock.json and deposit-data.json in ./.charon/cluster : 
 # .charon/cluster/
