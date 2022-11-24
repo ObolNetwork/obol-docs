@@ -12,7 +12,7 @@ To create a distributed validator cluster, you and your group of operators need 
 
 1. One operator begins the cluster setup on the [Distributed Validator Launchpad](../dvk/02_distributed_validator_launchpad.md).
     - This involves setting all of the terms for the cluster, including; withdrawal address, fee recipient, validator count, operator addresses, etc. This information is known as a *cluster configuration*.
-    - This operator also sets their charon client's Ethereum Node Record ([ENR](../int/faq/errors.mdx#what-is-an-enr)).
+    - This operator also sets their charon client's Ethereum Node Record ([ENR](../int/faq/errors.mdx#enrs-keys)).
     - This operator signs both the hash of the cluster config and the ENR to prove custody of their address.
     - This data is stored in the DV Launchpad data layer and a shareable URL is generated. This is a link for the other operators to join and complete the ceremony.
 2.  The other operators in the cluster follow this URL to the launchpad.

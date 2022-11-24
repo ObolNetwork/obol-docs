@@ -107,11 +107,11 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                href: 'https://discord.gg/n6ebKsX46w',
+                to: 'https://discord.gg/obol',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/obolnetwork',
+                to: 'https://twitter.com/obolnetwork',
               },
             ],
           },
@@ -120,11 +120,11 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                href: 'https://blog.obol.tech/',
+                to: 'https://blog.obol.tech/',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/obolnetwork/',
+                to: 'https://github.com/obolnetwork/',
               },
             ],
           },

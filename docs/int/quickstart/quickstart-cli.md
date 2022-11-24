@@ -1,20 +1,26 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 description: Run one node in a multi-operator distributed validator cluster using the CLI
 ---
 
-# CLI
+# Run a cluster using the CLI
 
-The following instructions aim to assist a group of users coordinating together to create a distributed validator cluster between them.
+:::caution
+Charon is in an early alpha state and is not ready to be run on mainnet
+:::
+
+The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster.
 
 ## Pre-requisites
 
-- Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](https://git-scm.com/downloads) installed. Also, make sure `docker` is running before executing the commands below.
+- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- Ensure you have [git](https://git-scm.com/downloads) installed. 
+- Make sure `docker` is running before executing the commands below.
 - Decide who the leader of your cluster will be. Only leaders have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in the quickstart process. They do not get any special privilege.
 
-## Step 1. Creating and backing up a private key for charon
+## Step 1. Create and back up a private key for charon
 
-The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](../../faq/errors.mdx#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+In order to prepare for a distributed key generation ceremony, all operators need to create an [ENR](../faq/errors.mdx#enrs-keys) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
@@ -32,17 +38,15 @@ You should expect to see a console output like
     Created ENR private key: .charon/charon-enr-private-key
     enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
 
-> ⚠️ Attention
->
-> Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony.**
+:::caution
+Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
+:::
 
-If you are taking part in an organised Obol testnet, submit the created ENR public address (the console output starting with `enr:-...` not the contents of the private key file) to the appropriate typeform.
+Finally, share the Ethereum address you will use for the cluster with the leader so that he/she can proceed to Step 2.
 
-## Step 2. Leader creates the DKG configuration file and distributes it to cluster operators
+## Step 2. Leader creates the DKG configuration file and distribute it to cluster operators
 
 The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
-
-In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](https://docs.obol.tech/docs/dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
 
 ```
 # Prepare an environment variable file
@@ -59,9 +63,9 @@ This command should output a file at `.charon/cluster-definition.json`. This fil
 
 ## Step 3. Run the DKG
 
-After receiving the `cluster-definition.json` file created by the leader, cluster members should ideally save it in the `.charon/` folder that was created during step 1, alternatively the `--definition-file` flag can override the default expected location for this file.
+After receiving the `cluster-definition.json` file created by the leader, cluster operators should ideally save it in the `.charon/` folder that was created during step 1, alternatively the `--definition-file` flag can override the default expected location for this file.
 
-Every cluster member then participates in the DKG ceremony. For Charon v1, this needs to happen synchronously between participants at an agreed time.
+Every cluster member then participates in the DKG ceremony. For Charon v1, this needs to happen relatively synchronously between participants at an agreed time.
 
 ```
 # Participate in DKG ceremony, this will create .charon/cluster-lock.json, .charon/deposit-data.json and .charon/validator_keys
@@ -78,9 +82,7 @@ Assuming the DKG is successful, a number of artefacts will be created in the `.c
 
 At this point you should make a backup of the `.charon/validator_keys` folder as replacing lost private keys is not straightforward at this point in charon's development. The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
 
-If taking part in an official Obol testnet, one cluster member will have to submit the `cluster-lock` and `deposit-data` files to the Obol Team.
-
-## Step 4. Start the Distributed Validator Cluster
+## Step 4. Start your Distributed Validator Node
 
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`nethermind`) and a consensus layer client (`nimbus`).
 
@@ -88,7 +90,7 @@ Before completing these instructions, you should assign a static local IP addres
 
 **Caution**: If you manually update `docker-compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.
 
-**NOTE**: If you have a `geth` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/geth`. This makes everything faster since you start from a synced geth node.
+**Note**: If you have a `geth` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/geth`. This makes everything faster since you start from a synced geth node.
 
 ```
 # Delete lighthouse data if it exists
@@ -104,13 +106,13 @@ open http://localhost:3000/d/singlenode/
 You should use the grafana dashboard to infer whether your cluster is healthy. In particular you should check:
 
 - That your charon client can connect to the configured beacon client.
-- That your charon client can connect to all peers
+- That your charon client can connect to all peers.
 
 Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
 
 You might notice that there are logs indicating that a validator cannot be found and that APIs are returning 404. This is to be expected at this point, as the validator public keys listed in the lock file have not been deposited and acknowledged on the consensus layer yet (usually ~16 hours after the deposit is made).
 
-To turn off your node after checking the health of the cluster you can run:
+If at any point you need to turn off your node, you can run:
 
 ```
 # Shut down the currently running distributed validator node
@@ -119,31 +121,33 @@ docker-compose down
 
 ## Step 5. Activate the deposit data
 
-If you and your team have gotten to this phase of the quickstart, and you have successfully created a distributed validator together, and you have connected all of your charon clients together such that the monitoring indicates that they are all healthy and ready to operate, one person may process to activate this deposit data with the existing [staking launchpad](https://prater.launchpad.ethereum.org/).
+Congrats 🎉 if your cluster have gotten to this step of the quickstart and have successfully created a distributed validator together. 
+
+If you have connected all of your charon clients together such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator**, usually the leader, may process to activate this deposit data with the existing [staking launchpad](https://goerli.launchpad.ethereum.org/).
 
 This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
 
-If you have gotten this far through the process, and whether you succeed or fail at running the distributed validator successfully on the testnet, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/TsXFa8uB2E). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
+## Step 6. Add the Central Monitoring Token
 
-# Other Optional Actions
+> 💡 This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster. 
 
-The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
-	
-## Step 6. Leader Adds Central Monitoring Token
-
-The cluster leader may be provided with a Central Monitoring Token used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in prometheus/prometheus.yml replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
+1. You may have been provided with a **Central Monitoring Token** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
 
-Final prometheus/prometheus.yml would look something like:
+2. To help us easily identify your cluster, also add your `cluster name` in the `prometheus/prometheus.yml` file, replacing `$CLUSTER_NAME`.
+
+Final prometheus/prometheus.yml would look like:
 ```
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.
   evaluation_interval: 30s # Evaluate rules every 30 seconds.
+  external_labels:
+    cluster_name: cluster-123
 
 remote_write:
   - url: https://vm.monitoring.gcp.obol.tech/write
     authorization:
-      credentials: eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ
+      credentials: 436764:eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ
 
 scrape_configs:
   - job_name: 'charon'
@@ -157,14 +161,17 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 ```
 
-## Validator Voluntary Exit
+## Step 7. Validator Voluntary Exit
 
+:::caution
+This step only needs to be taken when you decide to exit your DV cluster. 
+:::
 A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
 
-To trigger a voluntary exit, a sidecar docker-compose command is executed that signs and submits the voluntary exit to the active running charon node that shares it with other nodes in the cluster. The commands below should be executed on the same machine and same folder as the active running `charon-distribute-validator-node` docker compose.
+To trigger a voluntary exit, a sidecar `docker-compose` command is executed that signs and submits the voluntary exit to the active running charon node that shares it with other nodes in the cluster. The commands below should be executed in the terminal on the same machine and same folder as the active running `charon-distribute-validator-node` docker compose.
 
 :::info
-A threshold of peers in the cluster need to perform this task to exit a validator.
+A threshold of operators in the cluster need to perform this task to exit a validator.
 :::
 
 - Create a new `exit_keys` folder next to `.charon/validator_keys`: `mkdir .charon/exit_keys`
@@ -186,34 +193,39 @@ A threshold of peers in the cluster need to perform this task to exit a validato
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
 
-## Self-Host a Bootnode
+## Feedback
 
-If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralisation, you can opt to host your own bootnode on a separate open and static internet port.
+If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/obol). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
 
+## Other Actions
+
+The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
+
+### Docker power users
+
+This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker-compose` and want to have more flexibility and power to change the default configuration.
+
+We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
+See https://docs.docker.com/compose/extends/#multiple-compose-files for more details.
+
+There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
+
+- `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
-# Figure out your public IP
-curl v4.ident.me
-
-# Clone the repo and cd into it.
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
-cd charon-distributed-validator-node
-
-# Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname
-
-nano bootnode/docker-compose.yml
-
-docker-compose -f bootnode/docker-compose.yml up
+docker-compose -f docker-compose.yml -f compose-debug.yml up
 ```
 
-Test whether the bootnode is publicly accessible. This should return an ENR:
-`curl http://replace.with.public.ip.or.hostname:3640/enr`
+- `docker-compose.override.yml.sample` is intended to override the default configuration provided in `docker-compose.yml`. This is useful when, for example, you wish to add port mappings or want to disable a container.
 
-Ensure the ENR returned by the bootnode contains the correct public IP and port by decoding it with https://enr-viewer.com/.
+- To use it, just copy the sample file to `docker-compose.override.yml` and customise it to your liking. Please create this file ONLY when you want to tweak something. This is because the default override file is empty and docker errors if you provide an empty compose file.
+```
+cp docker-compose.override.yml.sample docker-compose.override.yml
 
-Configure **ALL** charon nodes in your cluster to use this bootnode:
+# Tweak docker-compose.override.yml and then run docker-compose up
+docker-compose up
+```
 
-- Either by adding a flag: `--p2p-bootnodes=http://replace.with.public.ip.or.hostname:3640/enr`
-- Or by setting the environment variable: `CHARON_P2P_BOOTNODES=http://replace.with.public.ip.or.hostname:3640/enr`
-
-Note that a local `boonode/.charon/charon-enr-private-key` file will be created next to `bootnode/docker-compose.yml` to ensure a persisted bootnode ENR across restarts.
+- You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
+```
+docker-compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
+```
