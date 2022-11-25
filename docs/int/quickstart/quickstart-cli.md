@@ -16,11 +16,13 @@ The following instructions aim to assist a group of operators coordinating toget
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
 - Ensure you have [git](https://git-scm.com/downloads) installed. 
 - Make sure `docker` is running before executing the commands below.
-- Decide who the leader of your cluster will be. Only leaders have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in the quickstart process. They do not get any special privilege.
+- Decide who the Leader or Creator of your cluster will be. Only them have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in this quickstart. They do not get any special privilege.
+  - In the **Leader** case, the operator creating the cluster will also operate a node in the cluster.
+  - In the **Creator** case, the cluster is created by an external party to the cluster.
 
 ## Step 1. Create and back up a private key for charon
 
-In order to prepare for a distributed key generation ceremony, all operators need to create an [ENR](../faq/errors.mdx#enrs-keys) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+In order to prepare for a distributed key generation ceremony, all operators (including the leader but NOT a creator) need to create an [ENR](../faq/errors.mdx#enrs-keys) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
@@ -42,24 +44,25 @@ You should expect to see a console output like
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
 :::
 
-Finally, share the Ethereum address you will use for the cluster with the leader so that he/she can proceed to Step 2.
+Finally, share your ENR with the leader or creator so that he/she can proceed to Step 2.
 
-## Step 2. Leader creates the DKG configuration file and distribute it to cluster operators
+## Step 2. Leader or Creator creates the DKG configuration file and distribute it to cluster operators
 
-The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
+1. The leader or creator of the cluster will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
 
-```
-# Prepare an environment variable file
-cp .env.create_dkg.sample .env.create_dkg
+  ```
+  # Prepare an environment variable file
+  cp .env.create_dkg.sample .env.create_dkg
+  ```
+2. Populate the `.env.create_dkg` file created with the `cluster name`, the `fee recipient` and `withdrawal Ethereum addresses`, and the `ENRs` of all the operators participating in the cluster.
+    - The file generated is hidden by default. To view it, run `ls -al` in your terminal. Else, if you are on `macOS`, press `Cmd + Shift + .` to view all hidden files in the finder application.
 
-# Populate the .env.create_dkg file with the cluster name, the fee recipient and withdrawal Ethereum addresses and the 
-# operator ENRs of all the operators participating in the DKG ceremony.
+3. Run the `charon create dkg` command that generates DKG cluster-definition.json file.
+  ```
+  docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.12.0 create dkg
+  ```
 
-# Run the `charon create dkg` command that generates DKG cluster-definition.json file.
-docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.12.0 create dkg
-```
-
-This command should output a file at `.charon/cluster-definition.json`. This file needs to be shared with the other operators in a cluster.
+  This command should output a file at `.charon/cluster-definition.json`. This file needs to be shared with the other operators in a cluster.
 
 ## Step 3. Run the DKG
 
@@ -84,7 +87,7 @@ At this point you should make a backup of the `.charon/validator_keys` folder as
 
 ## Step 4. Start your Distributed Validator Node
 
-With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`nethermind`) and a consensus layer client (`nimbus`).
+With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
 
 Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
 
@@ -129,14 +132,15 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 
 ## Step 6. Add the Central Monitoring Token
 
-> 💡 This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster. 
-
+:::info
+This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster. 
+:::
 1. You may have been provided with a **Central Monitoring Token** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
 
 2. To help us easily identify your cluster, also add your `cluster name` in the `prometheus/prometheus.yml` file, replacing `$CLUSTER_NAME`.
 
-Final prometheus/prometheus.yml would look like:
+The final `prometheus/prometheus.yml` file would look like:
 ```
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.
@@ -199,14 +203,14 @@ If you have gotten this far through the process, and whether you succeeded or fa
 
 ## Other Actions
 
-The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
+The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to improve the resilience and performance of your distributed validator cluster.
 
 ### Docker power users
 
 This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker-compose` and want to have more flexibility and power to change the default configuration.
 
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
-See https://docs.docker.com/compose/extends/#multiple-compose-files for more details.
+See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
 There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
 

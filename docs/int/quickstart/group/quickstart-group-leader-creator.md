@@ -8,8 +8,8 @@ description: Run one node in a multi-operator distributed validator cluster usin
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
-The following instructions aim to assist the leader or creator for a group of users coordinating together to create a distributed validator cluster. There can only be 1 leader or creator per cluster.
-  - In the **Leader** case, the operator creating the cluster will also operate a node in the cluster. 
+The following instructions aim to assist the leader or creator of a group of users coordinating together to create a distributed validator cluster. There can only be 1 leader or creator per cluster.
+  - In the **Leader** case, the operator creating the cluster will also operate a node in the cluster.
   - In the **Creator** case, the cluster is created by an external party to the cluster.
 
 ## Pre-requisites

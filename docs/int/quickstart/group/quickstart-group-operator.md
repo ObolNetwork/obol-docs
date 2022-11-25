@@ -9,7 +9,7 @@ description: Run one node in a multi-operator distributed validator cluster usin
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
-The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster.
+The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster after receiving an cluster invite link from a leader or creator.
 
 ## Pre-requisites
 
@@ -77,7 +77,7 @@ For Charon v1, the [DKG](docs/dvk/01_distributed-validator-keys.md) needs to hap
 
   ![Config Signing Success](/img/Guide08.png)
 
-2. You have two options at this stage.
+2. You have two options to perform the DKG.
     1. **Option 1** and default is to copy and run the `docker` command on the screen in your terminal. It will automatically download the `cluster-definition` file, move it to the hidden `.charon` folder and start the DKG process.
 
     2. **Option 2** (Manual DKG) is to download the `cluster-definition` file manually and move it to the hidden `.charon` folder. Then, every cluster member participates in the DKG ceremony by running the command displayed.
@@ -94,7 +94,7 @@ For Charon v1, the [DKG](docs/dvk/01_distributed-validator-keys.md) needs to hap
 
 ## Step 4. Start your Distributed Validator Node
 
-With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`nethermind`) and a consensus layer client (`nimbus`).
+With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
 
 Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
 
@@ -139,14 +139,16 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 
 ## Step 6. Add the Central Monitoring Token
 
-> 💡 This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster. 
+:::info
+This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster.
+:::
 
 1. You may have been provided with a **Central Monitoring Token** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
 `eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
 
 2. To help us easily identify your cluster, also add your `cluster name` in the `prometheus/prometheus.yml` file, replacing `$CLUSTER_NAME`.
 
-Final prometheus/prometheus.yml would look like:
+The final `prometheus/prometheus.yml` file would look like:
 ```
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.
@@ -209,14 +211,14 @@ If you have gotten this far through the process, and whether you succeeded or fa
 
 ## Other Actions
 
-The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to help Obol with their testing program, or to improve the resilience and performance of your distributed validator cluster.
+The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to improve the resilience and performance of your distributed validator cluster.
 
 ### Docker power users
 
 This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker-compose` and want to have more flexibility and power to change the default configuration.
 
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
-See https://docs.docker.com/compose/extends/#multiple-compose-files for more details.
+See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
 There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
 

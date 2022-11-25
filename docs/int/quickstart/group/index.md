@@ -6,7 +6,7 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 
 There are two user journeys when setting up a DV cluster with others. Each comes with its own quickstart
 
-1. The [Leader & Creator Journey](./group/quickstart-group-leader-creator) which outlines the steps to create a cluster configuration for a cluster to be joined by others. 
+1. The [**Leader** & **Creator** Journey](./group/quickstart-group-leader-creator) which outlines the steps to create a cluster configuration for a cluster to be later joined by others. 
     - In the **Leader** case, the operator creating the cluster will also operate a node in the cluster. 
     - In the **Creator** case, the cluster is created by an external party to the cluster.
 

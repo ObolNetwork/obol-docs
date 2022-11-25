@@ -63,11 +63,13 @@ The default cluster consists of:
 The intention is to support all validator clients, and work is underway to add support for lodestar to this repo, with [nimbus](https://github.com/ObolNetwork/charon-distributed-validator-cluster/issues/67) and [prysm](https://github.com/ObolNetwork/charon-distributed-validator-cluster/issues/68) support to follow in the future. Read more about our client support [here](https://dvt.obol.tech).
 
 ## Step 3. Start the cluster
+Run this command to start your cluster nodes
+
 ```sh
 # Start the distributed validator cluster
 docker-compose up --build
 ```
-Checkout the monitoring dashboard and see if things look all right
+Check the monitoring dashboard and see if things look all right
 
 ```sh
 # Open Grafana
