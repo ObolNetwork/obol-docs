@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: Run one node in a multi-operator distributed validator cluster using the DV Launchpad
+description: A node operator joins a DV cluster
 ---
 
 # Operator Journey
@@ -207,7 +207,7 @@ A threshold of operators in the cluster need to perform this task to exit a vali
 
 ## Feedback
 
-If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/obol). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
+If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
 
 ## Other Actions
 

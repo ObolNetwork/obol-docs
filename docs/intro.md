@@ -17,4 +17,4 @@ This manual is aimed at developers and stakers looking to utilize the Obol Netwo
 
 ## Need assistance?
 
-If you have any questions about this documentation or are experiencing technical problems with any Obol-related projects, head on over to our [Discord](https://discord.gg/obol) where a member of our team or the community will be happy to assist you.
+If you have any questions about this documentation or are experiencing technical problems with any Obol-related projects, head on over to our [Discord](https://discord.gg/n6ebKsX46w) where a member of our team or the community will be happy to assist you.

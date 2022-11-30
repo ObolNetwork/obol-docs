@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: Run one node in a multi-operator distributed validator cluster using the DV Launchpad
+description: A leader/creator creates a cluster configuration to be shared with operators
 ---
 # Creator & Leader Journey
 

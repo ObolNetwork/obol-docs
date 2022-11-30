@@ -60,7 +60,7 @@ The default cluster consists of:
    - vc4: [Teku](https://github.com/ConsenSys/teku)
    - vc5: [Vouch](https://github.com/attestantio/vouch)
 
-The intention is to support all validator clients, and work is underway to add support for lodestar to this repo, with [nimbus](https://github.com/ObolNetwork/charon-distributed-validator-cluster/issues/67) and [prysm](https://github.com/ObolNetwork/charon-distributed-validator-cluster/issues/68) support to follow in the future. Read more about our client support [here](https://dvt.obol.tech).
+The intention is to support all validator clients. Read more about our client support [here](https://dvt.obol.tech).
 
 ## Step 3. Start the cluster
 Run this command to start your cluster containers
@@ -120,4 +120,4 @@ A threshold of nodes in the cluster need to perform this task to exit a validato
 
 ## Feedback
 
-If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/obol). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
+If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
