@@ -107,7 +107,7 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                to: 'https://discord.gg/obol',
+                to: 'https://discord.gg/n6ebKsX46w',
               },
               {
                 label: 'Twitter',

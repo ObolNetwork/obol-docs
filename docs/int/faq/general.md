@@ -9,11 +9,11 @@ description: Frequently asked questions
 
 ### Does Obol have a token?
 
-No. Distributed validators use only ETH.
+No. Distributed validators use only Ether.
 
 ### Where can I learn more about Distributed Validators?
 
-Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https://twitter.com/ObolNetwork) yet? Maybe join our [discord](https://discord.gg/obol) too.
+Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https://twitter.com/ObolNetwork) yet? Maybe join our [discord](https://discord.gg/n6ebKsX46w) too.
 
 ### What's with the name Charon?
 
