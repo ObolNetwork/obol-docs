@@ -115,12 +115,12 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Discord",
-                href: "https://discord.gg/n6ebKsX46w",
+                label: 'Discord',
+                to: 'https://discord.gg/n6ebKsX46w',
               },
               {
-                label: "Twitter",
-                href: "https://twitter.com/obolnetwork",
+                label: 'Twitter',
+                to: 'https://twitter.com/obolnetwork',
               },
             ],
           },
@@ -128,12 +128,12 @@ const config = {
             title: "More",
             items: [
               {
-                label: "Blog",
-                href: "https://blog.obol.tech/",
+                label: 'Blog',
+                to: 'https://blog.obol.tech/',
               },
               {
-                label: "GitHub",
-                href: "https://github.com/obolnetwork/",
+                label: 'GitHub',
+                to: 'https://github.com/obolnetwork/',
               },
             ],
           },

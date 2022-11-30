@@ -1,15 +1,17 @@
 ---
-sidebar_position: 6
+sidebar_position: 3
 description: Run a distributed validator cluster with the builder API (MEV-Boost)
 ---
 
 # Run a cluster with MEV-Boost
 
 :::caution
-Charon is in an early alpha state and is not ready to be run on mainnet. Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from the users perspective.
+Charon is in an early alpha state and is not ready to be run on mainnet. 
+
+Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from the users perspective.
 :::
 
-This quickstart guide focuses on configuring the builder API for a validator and assumes you already have a cluster up and running.
+This quickstart guide focuses on configuring the builder API for a validator and assumes you already [have a cluster up and running](./index.md).
 
 ## Getting started with Charon & the Builder API
 

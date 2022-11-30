@@ -9,7 +9,7 @@ description: Frequently asked questions
 
 ### Does Obol have a token?
 
-No. Distributed validators use only ether.
+No. Distributed validators use only Ether.
 
 ### Where can I learn more about Distributed Validators?
 
@@ -17,7 +17,7 @@ Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https
 
 ### What's with the name Charon?
 
-[Charon](https://www.theoi.com/Khthonios/Kharon.html) is the Ancient Greek Ferryman of the Dead. He was tasked with bringing people across the Acheron river to the underworld. His fee was one Obol coin, placed in the mouth of the deceased. This tradition of placing a coin or Obol in the mouth of the deceased continues to this day across the Greek world.
+[Charon](https://www.theoi.com/Khthonios/Kharon.html) [kharon] is the Ancient Greek Ferryman of the Dead. He was tasked with bringing people across the Acheron river to the underworld. His fee was one Obol coin, placed in the mouth of the deceased. This tradition of placing a coin or Obol in the mouth of the deceased continues to this day across the Greek world.
 
 ### What are the hardware requirements for running a Charon node?
 
@@ -25,7 +25,7 @@ It should be the same as running a normal post-merge Ethereum node. It would be 
 
 Charon alone uses negligible disk space of not more than a few MBs. However if you are running your consensus client and execution client on the same server with charon then you will need 500GB of free SSD disk space (assuming you are running a testnet chain, mainnet requires 1TB or more disk space ideally).
 
-For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group/quickstart-group-launchpad.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
 ## Migrating existing validators
 
@@ -43,11 +43,6 @@ You can split an existing EIP-2335 keystore for a validator to migrate it to a d
 
 ## Distributed Key Generation
 
-### How to run a DKG
-
-- This is a helpful [video walkthrough](https://www.youtube.com/watch?v=94Pkovp5zoQ&ab_channel=ObolNetwork).
-- You can also use [this worksheet](https://docs.google.com/spreadsheets/d/1A-ncCgasaRZwRPlvrUqRFovNaUTOksNuQLFOqGCaxf8/edit#gid=0) to easily follow the steps it outlines.
-
 ### What are the min and max numbers of operators for a Distributed Validator?
 
 Currently, the minimum is 4 operators with a threshold of 3.
@@ -63,3 +58,35 @@ By the way, the more operators, the longer the DKG, but don't worry, there is no
 You can check if the containers on your node are outputting errors by running `docker-compose logs` on a machine with a running cluster.
 
 Diagnose some common errors and view their resolutions [here](./errors.mdx).
+
+## Self-Host a Bootnode
+
+If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralisation, you can opt to host your own bootnode on a separate open and static internet port.
+
+```
+# Figure out your public IP
+curl v4.ident.me
+
+# Clone the repo and cd into it.
+git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
+
+cd charon-distributed-validator-node
+
+# Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname
+
+nano bootnode/docker-compose.yml
+
+docker-compose -f bootnode/docker-compose.yml up
+```
+
+Test whether the bootnode is publicly accessible. This should return an ENR:
+`curl http://replace.with.public.ip.or.hostname:3640/enr`
+
+Ensure the ENR returned by the bootnode contains the correct public IP and port by decoding it with https://enr-viewer.com/.
+
+Configure **ALL** charon nodes in your cluster to use this bootnode:
+
+- Either by adding a flag: `--p2p-bootnodes=http://replace.with.public.ip.or.hostname:3640/enr`
+- Or by setting the environment variable: `CHARON_P2P_BOOTNODES=http://replace.with.public.ip.or.hostname:3640/enr`
+
+Note that a local `boonode/.charon/charon-enr-private-key` file will be created next to `bootnode/docker-compose.yml` to ensure a persisted bootnode ENR across restarts.
