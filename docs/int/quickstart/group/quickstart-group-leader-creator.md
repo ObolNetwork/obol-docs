@@ -9,8 +9,8 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
 The following instructions aim to assist the leader or creator of a group of users coordinating together to create a distributed validator cluster. There can only be 1 leader or creator per cluster.
-  - In the **Leader** case, the operator creating the cluster will also operate a node in the cluster.
-  - In the **Creator** case, the cluster is created by an external party to the cluster.
+    - In the **Leader** case, the person creating the cluster *will* be a node operator in the cluster. 
+    - In the **Creator** case, the person creating the cluster *will not* be a node operator in the cluster.
 
 ## Pre-requisites
 
@@ -19,7 +19,7 @@ The following instructions aim to assist the leader or creator of a group of use
 - Make sure `docker` is running before executing the commands below.
 
 ## Step 1. Collect Ethereum addresses of the cluster operators
-Before starting the cluster creation, you will need to collect one Ethereum address per operator in the cluster.
+Before starting the cluster creation, you will need to collect one Ethereum address per operator in the cluster. They will need to be able to sign messages through metamask with this address. Broader wallet support will be added in future. 
 
 ## Step 2. Create and back up a private key for charon
 :::info
@@ -65,21 +65,21 @@ You will prepare the configuration file for the distributed key generation cerem
 5. Configure the Cluster 
     - Input the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster). The threshold for the cluster to operate sucessfully will update automatically.
     - ⚠️ Leave the `Non-Operator` toggle off if you are a **Leader** and will participate in the cluster. Turn the toggle on if you are a **Creator** and won't participate.
-    - Input the Ethereum addresses for each operator received at [Step 1](#step-1-collect-ethereum-addresses-of-the-cluster-operators).
+    - Input the Ethereum addresses for each operator collected during [step 1](#step-1-collect-ethereum-addresses-of-the-cluster-operators).
     - Select the desired amount of validators (32 ETH each) the cluster will run.
     - Paste your `ENR` generated at [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
-    - Input the `Withdrawal Addresses` to receive validator principal and rewards at exit.
+    - Input the `Withdrawal Address` to receive validator principal and consensus rewards at exit.
     - Input the `Fee Recipient Address` to receive transation fees from block proposals. 
     - Create Cluster Configuration
 
     ![Create Group](/img/Guide03.png)
 
 6. Review, Confirm and Sign the following with your wallet
-    - The Config hash 
-    - If you are a **Leader**, you will also have to sign your `ENR`
+    - The config hash. This is a hashed representation of all of the details for this cluster. 
+    - If you are a **Leader**, you will also have to sign your `ENR`. This signature authorises the key represented by this ENR to act on your behalf in the cluster. 
 
 7. Share your cluster invite link with the operators. Following the link will show you a screen waiting for other operators to accept the configuration you created.
 
   ![Invite Operators](/img/Guide04.png)
 
-👉 If you are a **Leader**, you now have to follow the the [**Operator** Journey](./quickstart-group-operator). If you are a **Creator**, your journey ends here and you can monitor with the link whether the operator are signing or not.
+👉 If you are a **Leader**, you now have to follow the the [**Operator** Journey](./quickstart-group-operator). If you are a **Creator**, your journey ends here and you can monitor with the link whether the operators are confirming their agreement to the cluster by signing their approval.

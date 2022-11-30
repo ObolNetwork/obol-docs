@@ -49,7 +49,7 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 After receiving the invite link created by the **Leader** or **Creator**, you will be able to join and sign the cluster configuration created.
 
 1. Go to the DV launchpad link provided by the leader or creator.
-2. Connect your wallet using the Ethereum address provided to the leader in [Step 1](#step-1-share-an-ethereum-address-with-your-leader-or-creator).
+2. Connect your wallet using the Ethereum address provided to the leader in [step 1](#step-1-share-an-ethereum-address-with-your-leader-or-creator).
   
   ![Connect Wallet](/img/Guide05.png)
 
@@ -58,13 +58,13 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
   ![Get Started](/img/Guide06.png)
 
 4. Review and accept the advisories.
-5. Review the configuration created by the leader or creator and add your `ENR` generated in [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
+5. Review the configuration created by the leader or creator and add your `ENR` generated in [step 2](#step-2-create-and-back-up-a-private-key-for-charon).
 
   ![Review Config](/img/Guide07.png)
 
 6. Sign the following with your wallet 
-    - The Config hash 
-    - Your own `ENR`
+    - The config hash. This is a hashed representation of all of the details for this cluster. 
+    - Your own `ENR`. This signature authorises the key represented by this ENR to act on your behalf in the cluster.
 
 7. Wait for all the other operators in your cluster to do the same.
 
@@ -78,7 +78,7 @@ For Charon v1, the [DKG](docs/dvk/01_distributed-validator-keys.md) needs to hap
   ![Config Signing Success](/img/Guide08.png)
 
 2. You have two options to perform the DKG.
-    1. **Option 1** and default is to copy and run the `docker` command on the screen in your terminal. It will automatically download the `cluster-definition` file, move it to the hidden `.charon` folder and start the DKG process.
+    1. **Option 1** and default is to copy and run the `docker` command on the screen into your terminal. It will retrieve the remote cluster details and begin the DKG process.
 
     2. **Option 2** (Manual DKG) is to download the `cluster-definition` file manually and move it to the hidden `.charon` folder. Then, every cluster member participates in the DKG ceremony by running the command displayed.
 
