@@ -9,8 +9,12 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
 The following instructions aim to assist the leader or creator of a group of users coordinating together to create a distributed validator cluster. There can only be 1 leader or creator per cluster.
-    - In the **Leader** case, the person creating the cluster *will* be a node operator in the cluster. 
-    - In the **Creator** case, the person creating the cluster *will not* be a node operator in the cluster.
+  - In the **Leader** case, the person creating the cluster *will* be a node operator in the cluster. 
+  - In the **Creator** case, the person creating the cluster *will not* be a node operator in the cluster.
+
+## Overview Video
+
+<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/OK6WE8te33Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Pre-requisites
 

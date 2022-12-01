@@ -11,9 +11,3 @@ There are two user journeys when setting up a DV cluster with others. Each comes
     - In the **Creator** case, the person creating the cluster *will not* be a node operator in the cluster.
 
 2. The [**Operator** Journey](./group/quickstart-group-operator) which outlines the steps to join an existing cluster created by a leader or creator using the above process.
-
-## 1-min Video Overview
-
-The below video showcases a **Leader Journey** followed by an **Operator Journey**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QZM7mQs78pI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
