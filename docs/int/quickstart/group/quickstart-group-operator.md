@@ -70,7 +70,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 ## Step 3. Run the DKG
 :::info
-For Charon v1, the [DKG](docs/dvk/01_distributed-validator-keys.md) needs to happen relatively synchronously between participants at an agreed time.
+For Charon v1, the [DKG](docs/dv/charon/dkg.md) needs to happen relatively synchronously between participants at an agreed time.
 :::
 
 1. Once all operators successfully signed, your screen will automatically advance to the next step and look like this. Click `Continue`. If you closed the tab, just go back to the invite link shared by the leader and connect your wallet.

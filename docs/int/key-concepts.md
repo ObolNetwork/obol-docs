@@ -58,7 +58,7 @@ A distributed validator client intercepts the validator client ↔ consensus cli
 - Coming to consensus on a candidate duty for all validators to sign
 - Combining signatures from all validators into a distributed validator signature
 
-The only example of a distributed validator client built with a non-custodial middleware architecture to date is [charon](../dv/01_introducing-charon.md).
+The only example of a distributed validator client built with a non-custodial middleware architecture to date is [charon](../dv/charon/intro).
 
 ### Validator Client
 
@@ -93,4 +93,4 @@ One piece of the distributed validator private key.
 
 To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 
 
-A distributed validator key generation ceremony is a type of DKG ceremony. A ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata. Read more about these ceremonies [here](../dvk/01_distributed-validator-keys.md). 
+A distributed validator key generation ceremony is a type of DKG ceremony. A ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata. Read more about these ceremonies [here](../dv/charon/dkg). 
