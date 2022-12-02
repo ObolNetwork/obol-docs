@@ -73,7 +73,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 ## Step 3. Run the DKG
 :::info
-For Charon v1, the [DKG](docs/dvk/01_distributed-validator-keys.md) needs to happen relatively synchronously between participants at an agreed time.
+For Charon v1, the [DKG](docs/dv/charon/dkg.md) needs to happen relatively synchronously between participants at an agreed time.
 :::
 
 ### Overview
