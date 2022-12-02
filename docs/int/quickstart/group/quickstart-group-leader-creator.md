@@ -76,7 +76,9 @@ You will prepare the configuration file for the distributed key generation cerem
 
 6. Review, Confirm and Sign the following with your wallet
     - The config hash. This is a hashed representation of all of the details for this cluster. 
-    - If you are a **Leader**, you will also have to sign your `ENR`. This signature authorises the key represented by this ENR to act on your behalf in the cluster. 
+    - If you are a **Leader**, you will also have to sign 
+      - the `operator_config_hash`
+      - your `ENR`: this signature authorises the key represented by this ENR to act on your behalf in the cluster.
 
 7. Share your cluster invite link with the operators. Following the link will show you a screen waiting for other operators to accept the configuration you created.
 
