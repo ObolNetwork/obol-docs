@@ -11,6 +11,9 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 
 The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster after receiving an cluster invite link from a leader or creator.
 
+## Overview Video
+<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/6pXASqjAQbs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+
 ## Pre-requisites
 
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
@@ -72,6 +75,9 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 :::info
 For Charon v1, the [DKG](docs/dv/charon/dkg.md) needs to happen relatively synchronously between participants at an agreed time.
 :::
+
+### Overview
+<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/cEMhxHuNJrI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 1. Once all operators successfully signed, your screen will automatically advance to the next step and look like this. Click `Continue`. If you closed the tab, just go back to the invite link shared by the leader and connect your wallet.
 
