@@ -17,7 +17,7 @@ The charon client has the responsibility of securely completing a distributed ke
 
 A distributed key generation ceremony involves `Operators` and their `Charon clients`.
 
-- An `Operator` is identified by their Ethereum address. They will sign with this address's private key to authenticate their charon client ahead of the ceremony. The signature will be of; a hash of the charon clients ENR public key, the `cluster_definition_hash`, and an incrementing `nonce`, allowing for a direct linkage between a user, their charon client, and the cluster this client is intended to service, while retaining the ability to update the charon client by incrementing the nonce value and re-signing like the standard ENR spec.
+- An `Operator` is identified by their Ethereum address. They will sign with this address' private key to authenticate their charon client ahead of the ceremony. The signature will be of; a hash of their charon client ENR public key, and the `cluster_definition_hash`, allowing for a direct linkage between a user, their charon client, and the cluster this client is intended to service, while retaining the ability to update the charon client by incrementing the nonce value and re-signing like the standard ENR spec.
 
 - A `Charon client` is also identified by a public/private key pair, in this instance, the public key is represented as an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778) (ENR). This is a standard identity format for both EL and CL clients. These ENRs are used by each charon node to identify its cluster peers over the internet, and to communicate with one another in an [end to end encrypted manner](https://github.com/libp2p/go-libp2p-noise). These keys need to be created by each operator before they can participate in a cluster creation.
 
@@ -34,17 +34,6 @@ Charon will read the ENRs in the definition, confirm that its ENR is present, an
 Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching `cluster_definition_hash`), the ceremony begins.
 
 No user input is required, charon does the work and outputs the following files to each machine and then exits.
-
-```sh
-# Common data
-.charon/cluster-definition.json          # The original definition file from the DV Launchpad or `charon create dkg`
-.charon/cluster-lock.json                # New lockfile based on cluster-definition.json with validator group public keys and threshold BLS verifiers included with the initial cluster config
-.charon/deposit-data.json         # JSON file of deposit data for the distributed validators
-
-# Sensitive operator-specific data
-.charon/charon-enr-private-key    # Created before the ceremony took place [Back this up]
-.charon/validator_keys/           # Folder of key shares to be backed up and moved to validator client [Back this up]
-```
 
 ## Backing up the ceremony artifacts
 
