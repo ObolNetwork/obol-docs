@@ -11,12 +11,14 @@ import TabItem from '@theme/TabItem';
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
-The following instructions aim to assist with the preparation of a distributed validator key generation ceremony. Select the *Leader* tab if you **will** be an operator participating in the cluster, and select the *Creator* tab if you **will not** be an operator in the cluster. This person holds no position of privilege in the cluster, they only set the initial terms of the cluster that the other operators agree to. 
+The following instructions aim to assist with the preparation of a distributed validator key generation ceremony. Select the *Leader* tab if you **will** be an operator participating in the cluster, and select the *Creator* tab if you **will NOT** be an operator in the cluster. 
+
+These roles hold no position of privilege in the cluster, they only set the initial terms of the cluster that the other operators agree to. 
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 The person creating the cluster <b>will</b> be a node operator in the cluster.<br/><br/>
-    <h3>Pre-requisites</h3>
+    <h1>Pre-requisites</h1>
     <ul>
       <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.</li>
       <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
@@ -31,12 +33,6 @@ The person creating the cluster <b>will</b> be a node operator in the cluster.<b
 ## Overview Video
 
 <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/OK6WE8te33Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
-
-## Pre-requisites
-
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
-- Ensure you have [git](https://git-scm.com/downloads) installed. 
-- Make sure `docker` is running before executing the commands below.
 
 ## Step 1. Collect Ethereum addresses of the cluster operators
 Before starting the cluster creation, you will need to collect one Ethereum address per operator in the cluster. They will need to be able to sign messages through metamask with this address. Broader wallet support will be added in future. 
@@ -113,7 +109,7 @@ You will prepare the configuration file for the distributed key generation cerem
     - Select the desired amount of validators (32 ETH each) the cluster will run.
     - Paste your `ENR` generated at [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
     - Input the `Withdrawal Address` to receive validator principal and consensus rewards at exit.
-    - Input the `Fee Recipient Address` to receive transation fees from block proposals. 
+    - Input the `Fee Recipient Address` to receive transaction fees from block proposals. 
     - Create Cluster Configuration
 
     ![Create Group](/img/Guide03.png)
