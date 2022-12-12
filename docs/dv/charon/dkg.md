@@ -7,9 +7,9 @@ sidebar_position: 2
 
 ## Overview
 
-A **distributed validator key** is a group of BLS private keys that together operate as a threshold key for participating in proof-of-stake consensus.
+A [**distributed validator key**](../../int/key-concepts#distributed-validator-key) is a group of BLS private keys that together operate as a threshold key for participating in proof-of-stake consensus.
 
-To make a distributed validator with no fault-tolerance (i.e. all nodes need to be online to sign every message), due to the BLS signature scheme used by Proof of Stake Ethereum, each key share could be chosen by operators independently. However, to create a distributed validator that can stay online despite a subset of its nodes going offline, the key shares need to be generated together (4 randomly chosen points on a graph don't all neccessarily sit on the same order three curve). To do this in a secure manner with no one party being trusted to distribute the keys requires what is known as a **distributed key generation ceremony**.
+To make a distributed validator with no fault-tolerance (i.e. all nodes need to be online to sign every message), due to the BLS signature scheme used by Proof of Stake Ethereum, each key share could be chosen by operators independently. However, to create a distributed validator that can stay online despite a subset of its nodes going offline, the key shares need to be generated together (4 randomly chosen points on a graph don't all neccessarily sit on the same order three curve). To do this in a secure manner with no one party being trusted to distribute the keys requires what is known as a [**distributed key generation ceremony**](../../int/key-concepts#distributed-validator-key-generation-ceremony).
 
 The charon client has the responsibility of securely completing a distributed key generation ceremony with its counterparty nodes. The ceremony configuration is outlined in a [cluster definition](../charon/cluster-configuration).
 
@@ -17,9 +17,9 @@ The charon client has the responsibility of securely completing a distributed ke
 
 A distributed key generation ceremony involves `Operators` and their `Charon clients`.
 
-- An `Operator` is identified by their Ethereum address. They will sign with this address' private key to authenticate their charon client ahead of the ceremony. The signature will be of; a hash of their charon client ENR public key, and the `cluster_definition_hash`, allowing for a direct linkage between a user, their charon client, and the cluster this client is intended to service, while retaining the ability to update the charon client by incrementing the nonce value and re-signing like the standard ENR spec.
+- An `Operator` is identified by their Ethereum address. They will sign a message with this address to authorize their charon client to take part in the DKG ceremony. 
 
-- A `Charon client` is also identified by a public/private key pair, in this instance, the public key is represented as an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778) (ENR). This is a standard identity format for both EL and CL clients. These ENRs are used by each charon node to identify its cluster peers over the internet, and to communicate with one another in an [end to end encrypted manner](https://github.com/libp2p/go-libp2p-noise). These keys need to be created by each operator before they can participate in a cluster creation.
+- A `Charon client` is also identified by a public/private key pair, in this instance, the public key is represented as an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778) (ENR). This is a standard identity format for both EL and CL clients. These ENRs are used by each charon node to identify its cluster peers over the internet, and to communicate with one another in an [end to end encrypted manner](https://github.com/libp2p/go-libp2p/tree/master/p2p/security/noise). These keys need to be created (and backed up) by each operator before they can participate in a cluster creation.
 
 ## Cluster Definition Creation
 

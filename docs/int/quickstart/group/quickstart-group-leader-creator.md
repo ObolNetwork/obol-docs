@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
-The following instructions aim to assist the leader or creator of a group of users coordinating together to create a distributed validator cluster. There can only be 1 **leader** or **creator** per cluster.
+The following instructions aim to assist with the preparation of a distributed validator key generation ceremony. Select the *Leader* tab if you **will** be an operator participating in the cluster, and select the *Creator* tab if you **will not** be an operator in the cluster. This person holds no position of privilege in the cluster, they only set the initial terms of the cluster that the other operators agree to. 
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
@@ -90,14 +90,14 @@ You will prepare the configuration file for the distributed key generation cerem
       <TabItem value="leader" label="Leader" default>
     <ul><li>
     
-    ⚠️ Leave the `Non-Operator` toggle OFF.
+    ⚠️ Leave the `Non-Operator` toggle <b>OFF</b>.
     
     </li></ul>
       </TabItem>
       <TabItem value="creator" label="Creator">
     <ul><li>
     
-    ⚠️ Turn the `Non-Operator` toggle ON.
+    ⚠️ Turn the `Non-Operator` toggle <b>ON</b>.
     
     </li></ul>
       </TabItem>
@@ -149,11 +149,11 @@ You will prepare the configuration file for the distributed key generation cerem
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 
-  👉 You now have to follow the the [**Operator** Journey](./quickstart-group-operator).
+   👉 Once every participating operator has signed their approval to the terms, you will continue the [**Operator** journey](./quickstart-group-operator#step-3-run-the-dkg) by completing the distributed key generation step.
   </TabItem>
   <TabItem value="creator" label="Creator">
 
-   Your journey ends here and you can monitor with the link whether the operators are confirming their agreement to the cluster by signing their approval.
+   Your journey ends here and you can monitor with the link whether the operators confirm their agreement to the cluster by signing their approval. Future versions of the launchpad will allow a creator to track a distributed validator's lifecycle in its entirety.
   </TabItem>
 </Tabs>
 

@@ -13,7 +13,7 @@ This document intends to outline what Obol is, how the ecosystem is structured, 
 
 The Obol Network consists of four core public goods:
 
-- **The DVK Launchpad** - a CLI tool and user interface for bootstrapping Distributed Validators
+- **The DV Launchpad** - a [User Interface](https://goerli.launchpad.obol.tech/) for bootstrapping Distributed Validators
 
 - **Charon** - a middleware client that enables validators to run in a fault-tolerant, distributed manner
 
