@@ -1,8 +1,9 @@
 ---
 description: A go-based middleware client for taking part in Distributed Validator clusters.
+sidebar_position: 6
 ---
 
-# Charon CLI reference
+# CLI reference
 
 :::caution
 
@@ -11,8 +12,6 @@ The `charon` client is under heavy development, interfaces are subject to change
 :::
 
 The following is a reference for charon version [`v0.12.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.12.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
-
-## Available Commands
 
 The following are the top-level commands available to use. 
 
@@ -39,7 +38,7 @@ Flags:
 Use "charon [command] --help" for more information about a command.
 ```
 
-### The `create` subcommand
+## The `create` subcommand
 
 The `create` subcommand handles the creation of artifacts needed by charon to operate.
 
@@ -62,7 +61,7 @@ Use "charon create [command] --help" for more information about a command.
 
 ```
 
-#### Creating an ENR for charon
+### Creating an ENR for charon
 
 An `enr` is an Ethereum Node Record. It is used to identify this charon client to its other counterparty charon clients across the internet. 
 
@@ -87,7 +86,7 @@ Flags:
       --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
 ```
 
-#### Create a full cluster locally
+### Create a full cluster locally
 
 `charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
@@ -113,7 +112,7 @@ Flags:
       --withdrawal-address string      Ethereum address to receive the returned stake and accrued rewards. (default "0x0000000000000000000000000000000000000000")
 ```
 
-#### Creating the configuration for a DKG Ceremony
+### Creating the configuration for a DKG Ceremony
 
 This `charon create dkg` command creates a cluster_definition file used for the `charon dkg` command. 
 
@@ -136,6 +135,8 @@ Flags:
   -t, --threshold int                  Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
       --withdrawal-address string      Withdrawal Ethereum address (default "0x0000000000000000000000000000000000000000")
 ```
+
+## The `dkg` subcommand
 
 ### Performing a DKG Ceremony
 
@@ -167,6 +168,8 @@ Flags:
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. (default [127.0.0.1:3610])
       --p2p-udp-address string         Listening UDP address (ip and port) for discv5 discovery. (default "127.0.0.1:3630")
 ```
+
+## The `run` subcommand
 
 ### Run the Charon middleware
 
@@ -209,7 +212,7 @@ Flags:
       --validator-api-address string    Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
 
-### Host a bootnode
+## Host a bootnode
 
 Bootnodes are dual-purpose at this point in time. They run a [discV5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md) discovery server that allows charon clients to find one another despite IP address changes, and they also run a libp2p [circuit relay](https://docs.libp2p.io/concepts/circuit-relay/) server that allows charon clients behind NAT gateways to be communicated with when `--p2p-bootnode-relay` is enabled. These features make it easier to get a distributed validator cluster established and connected, but they trade off against cluster independence and fault tolerance. In the long run the use of these features will be minimised, but for now, if you want to self-host a bootnode for your cluster(s) the following command will start one. 
 
