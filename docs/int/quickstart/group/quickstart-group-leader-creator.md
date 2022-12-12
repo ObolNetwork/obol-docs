@@ -15,10 +15,16 @@ The following instructions aim to assist with the preparation of a distributed v
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
-    The person creating the cluster will be a node operator in the cluster.
+The person creating the cluster <b>will</b> be a node operator in the cluster.<br/><br/>
+    <h3>Pre-requisites</h3>
+    <ul>
+      <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.</li>
+      <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
+      <li>Make sure <code>docker</code> is running before executing the commands below.</li>
+    </ul>
   </TabItem>
   <TabItem value="creator" label="Creator">
-    The person creating the cluster will NOT be a node operator in the cluster.
+    The person creating the cluster <b>will not</b> be a node operator in the cluster.
   </TabItem>
 </Tabs>
 
