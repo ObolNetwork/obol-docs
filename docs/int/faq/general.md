@@ -41,6 +41,10 @@ In an ideal scenario, a distributed validator's private key should never exist i
 
 You can split an existing EIP-2335 keystore for a validator to migrate it to a distributed validator architecture with the `charon create cluster --split-existing-keys` command documented [here](docs/charon/charon_cli_reference.md#create-a-full-cluster-locally).
 
+### Can I migrate an existing Charon node to a new machine?
+
+It is possible to migrate your Charon node to another machine running the same config by moving the `.charon` folder with its contents to your new machine. Make sure the EL and CL on the new machine are synced before proceeding to the move to minimize downtime. 
+
 ## Distributed Key Generation
 
 ### What are the min and max numbers of operators for a Distributed Validator?
