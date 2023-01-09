@@ -109,7 +109,7 @@ The following is a break down of the intended testnet roadmap, the features that
 
 **Goals:**
 
-- Break charon, launchpad, API in multiple ways after having tested the happy path during the previous testnets
-- Create a number of testing tools to facilitate the disruption of charon, including releasing a p2p network abuser, a fuzz testing client, k6 scripts for load testing/hammering an RPC endpoints and more.
+- Break charon, the launchpad, and the Obol API in multiple ways after having focused primarily on the happy path during the previous testnets.
+- Create a number of testing tools to facilitate the disruption of charon, including releasing a p2p network abuser, a fuzz testing client, k6 scripts for load testing/hammering RPC endpoints and more.
 - Find as many memory leaks, DoS vulnerable endpoints and operations, missing signature verifications and more.
 - This testnet may be centered around a hackathon if suitable.
