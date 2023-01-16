@@ -232,7 +232,7 @@ Flags:
 
 ## Host a relay
 
-Relays ....
+Relays run a libp2p circuit relay server that allows charon clusters to perform peer discovery and for charon clients behind NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
 
 ```markdown
 charon relay --help
