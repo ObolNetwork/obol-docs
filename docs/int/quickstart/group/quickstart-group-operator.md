@@ -35,7 +35,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 
 # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.12.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.13.0 create enr
 ```
 
 You should expect to see a console output like
