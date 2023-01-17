@@ -103,11 +103,11 @@ const config = {
               },
               {
                 label: "Charon",
-                to: "/docs/dv/introducing-charon",
+                to: "/docs/charon/intro",
               },
               {
                 label: "DV Launchpad",
-                to: "/docs/dvk/distributed-validator-keys",
+                to: "/docs/dvl/intro",
               },
             ],
           },

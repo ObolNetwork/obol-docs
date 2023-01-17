@@ -24,12 +24,12 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvk/distributed-validator-keys">Distributed Validator Launchpad</Link> is 
+        The <Link to="/docs/dvl/intro">Distributed Validator Launchpad</Link> is 
         an interface to enable distributed key generation for Distributed
         Validators.
       </>
     ),
-    link: "/docs/dvk/distributed-validator-keys",
+    link: "/docs/dvl/intro",
   },
   {
     title: "Deploy Distributed Validators",
@@ -37,11 +37,11 @@ const FeatureList: FeatureItem[] = [
     alt: "Charon Distributed Validator Client Logomark",
     description: (
       <>
-        <Link to="/docs/dv/introducing-charon">Charon</Link> is a Distributed
+        <Link to="/docs/charon/intro">Charon</Link> is a Distributed
         Validator Client for running Ethereum validators in a fault tolerant manner.
       </>
     ),
-    link: "/docs/dv/introducing-charon",
+    link: "/docs/charon/intro",
   },
   {
     title: "Build on the Obol Network",
