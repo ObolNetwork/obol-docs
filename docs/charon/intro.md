@@ -16,7 +16,7 @@ Charon sits as a middleware between a normal validating client and its connected
 ![Charon Cluster](/img/DVCluster.png)
 
 ## Charon architecture
-The below graphic visually outlines the internal functionalies of Charon.
+The below graphic visually outlines the internal functionalities of Charon.
 
 ![Charon Internals Slide](/img/CharonInternals.png)
 

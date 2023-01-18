@@ -71,4 +71,3 @@ There are a number of aspects to this trust surface that can be mitigated with a
 ### Sample Configuration and Lock Files
 
 Refer to the details [here](../charon/cluster-configuration).
-
