@@ -11,15 +11,15 @@ This document describes the Charon DVT networking model which can be divided int
 
 ## Internal Validator Stack
 
-![Internal Validator Stack](/img/InternalValidatorStack.png)
+<img src="/img/InternalValidatorStack.png" alt="Internal Validator Stack" width="50%"/> <br/>
 
 Charon is a middleware DVT client and is therefore connected to an upstream beacon node and a downstream validator client is connected to it. 
 Each operator should run the whole validator stack (all 4 client software types), either on the same machine or on different machines. The networking between 
 the nodes should be private and not exposed to the public internet.
 
-Related Charon configuration flags: <br/>
-`--beacon-node-endpoints`: Connects Charon to one or more beacon nodes <br/>
-`--validator-api-address`: Address for Charon to listen on and serve requests from the validator client
+Related Charon configuration flags:
+- `--beacon-node-endpoints`: Connects Charon to one or more beacon nodes.
+- `--validator-api-address`: Address for Charon to listen on and serve requests from the validator client.
 
 ## External P2P Network 
 
@@ -28,18 +28,18 @@ The Charon clients in a DV cluster are connected to each other via a small p2p n
 discovered via an external "relay" server. The p2p connections are over the public internet so the charon p2p port must be publicly accessible. Charon leverages
 the popular [libp2p](https://libp2p.io/) protocol.
 
-Related Charon configuration flags: <br/>
-`--p2p-tcp-addresses`: Addresses for Charon to listen on and serve p2p requests <br/>
-`--p2p-relays`: Connect charon to one or more relay servers <br/>
-`--private-key-file`: Private key identifying the charon client <br/>
+Related [Charon configuration flags](docs/charon/charon-cli-reference.md):
+- `--p2p-tcp-addresses`: Addresses for Charon to listen on and serve p2p requests.
+- `--p2p-relays`: Connect charon to one or more relay servers.
+- `--private-key-file`: Private key identifying the charon client.
 
 ### LibP2P Authentication and Security
 
-Each charon client has a secp256k1 private key. The associated public key is encoded into the cluster lock file to identify the nodes in the cluster. 
+Each charon client has a secp256k1 private key. The associated public key is encoded into the [cluster lock file](cluster-configuration.md#Cluster-Lock-File) to identify the nodes in the cluster. 
 For ease of use and to align with the Ethereum ecosystem, Charon encodes these public keys in the [ENR format](https://eips.ethereum.org/EIPS/eip-778), 
 not in [libp2p’s Peer ID format](https://docs.libp2p.io/concepts/fundamentals/peers/).
 
-Charon currently only supports libp2p tcp connections with noise security and only accepts incoming libp2p connections from peers defined in the cluster lock. 
+Charon currently only supports libp2p tcp connections with [noise](https://noiseprotocol.org/) security and only accepts incoming libp2p connections from peers defined in the cluster lock. 
 
 ### LibP2P Relays and Peer Discovery
 
@@ -56,21 +56,23 @@ Note that in order for two peers to discover each other, they must connect to th
 
 Libp2p’s [identify](https://docs.libp2p.io/concepts/fundamentals/protocols/#identify) protocol attempts to automatically detect the public IP address of a charon
 client without the need to explicitly configure it. If this however fails, the following two configuration flags can be used to explicitly set the publicly advertised
-address: <br/>
-`--p2p-external-ip`: Explicitly sets the external IP address. <br/>
-`--p2p-external-hostname`: Explicitly sets the external DNS host name. <br/>
+address:
+- `--p2p-external-ip`: Explicitly sets the external IP address.
+- `--p2p-external-hostname`: Explicitly sets the external DNS host name.
 
-⚠️⚠️⚠️ If a pair of charon clients are not publicly accessible, due to being behind a NAT, they will not be able to upgrade their relay connections to a direct connection. 
+:::caution
+If a pair of charon clients are not publicly accessible, due to being behind a NAT, they will not be able to upgrade their relay connections to a direct connection. 
 Even though this is supported, it isn’t recommended as relay connections introduce additional latency and reduced throughput and will result in decreased validator effectiveness 
 and possible missed block proposals and attestations.
+:::
 
 Libp2p’s circuit-relay connections are end-to-end encrypted, even though relay servers accept connections between nodes from multiple different clusters, relays are merely 
 routing opaque connections. And since Charon only accepts incoming connections from other peers in its cluster, the use of a relay doesn’t allow connections between clusters.
 
-Only the following three libp2p protocols are established between a charon node and a relay itself: <br/>
-[circuit-relay](https://docs.libp2p.io/concepts/nat/circuit-relay/): To establish relay e2e encrypted connections between two peers in a cluster. <br/>
-[identify](https://docs.libp2p.io/concepts/fundamentals/protocols/#identify): Auto-detection of public IP addresses to share with other peers in the cluster. <br/>
-[peerinfo](https://github.com/ObolNetwork/charon/blob/main/app/peerinfo/peerinfo.go): Exchanges basic application [metadata](https://github.com/ObolNetwork/charon/blob/main/app/peerinfo/peerinfopb/v1/peerinfo.proto) for improved operational metrics and observability. <br/>
+Only the following three libp2p protocols are established between a charon node and a relay itself:
+- [circuit-relay](https://docs.libp2p.io/concepts/nat/circuit-relay/): To establish relay e2e encrypted connections between two peers in a cluster. <br/>
+- [identify](https://docs.libp2p.io/concepts/fundamentals/protocols/#identify): Auto-detection of public IP addresses to share with other peers in the cluster. <br/>
+- [peerinfo](https://github.com/ObolNetwork/charon/blob/main/app/peerinfo/peerinfo.go): Exchanges basic application [metadata](https://github.com/ObolNetwork/charon/blob/main/app/peerinfo/peerinfopb/v1/peerinfo.proto) for improved operational metrics and observability. <br/>
 
 All other charon protocols are only established between nodes in the same cluster. 
 

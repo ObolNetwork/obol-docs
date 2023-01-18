@@ -16,7 +16,7 @@ A charon cluster is configured in two steps:
 - `cluster-definition.json` which defines the intended cluster configuration before keys have been created in a distributed key generation ceremony.
 - `cluster-lock.json` which includes and extends `cluster-definition.json` with distributed validator BLS public key shares.
 
-In the case of a solo operator running a cluster, the [`charon create cluster`](./charon_cli_reference.md#create-a-full-cluster-locally) command combines both steps into one and just outputs the final `cluster-lock.json` without a DKG step.
+In the case of a solo operator running a cluster, the [`charon create cluster`](./charon-cli-reference.md#create-a-full-cluster-locally) command combines both steps into one and just outputs the final `cluster-lock.json` without a DKG step.
 
 ## Cluster Definition File
 
@@ -24,7 +24,7 @@ The `cluster-definition.json` is provided as input to the DKG which generates ke
 
 ### Using the CLI
 
-The [`charon create dkg`](./charon_cli_reference.md#creating-the-configuration-for-a-dkg-ceremony) command is used to create the `cluster-definition.json` file which is used as input to `charon dkg`.
+The [`charon create dkg`](./charon-cli-reference.md#creating-the-configuration-for-a-dkg-ceremony) command is used to create the `cluster-definition.json` file which is used as input to `charon dkg`.
 
 The schema of the `cluster-definition.json` is defined as:
 
