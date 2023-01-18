@@ -46,7 +46,7 @@ Charon currently only supports libp2p tcp connections with [noise](https://noise
 Relays are simple libp2p servers that are publicly accessible supporting the [circuit-relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) protocol. 
 Circuit-relay is a libp2p transport protocol that routes traffic between two peers over a third-party “relay” peer.
 
-Obol hosts a publicly accessible relay at http://0.relay.obol.tech and will work with other organisations in the community to host alternatives  Anyone can host their own relay server for their DV cluster.
+Obol hosts a publicly accessible relay at https://0.relay.obol.tech and will work with other organisations in the community to host alternatives  Anyone can host their own relay server for their DV cluster.
 
 Each charon node knows which peers are in the cluster from the ENRs in the cluster lock file, but their IP addresses are unknown. By connecting to the same relay, 
 nodes establish “relay connections” to each other. Once connected via relay they exchange their known public addresses via libp2p’s [identify](https://docs.libp2p.io/concepts/fundamentals/protocols/#identify) 
@@ -85,7 +85,7 @@ via HTTP GET request. Since charon also includes the unique `cluster-hash` heade
 
 The relay supports serving its runtime public multiaddrs via its `--http-address` flag.
 
-E.g., http://0.relay.obol.tech is actually a load-balancer that routes HTTP requests to one of many relays based on the `cluster-hash` header returning the target relay’s multiaddr
+E.g., https://0.relay.obol.tech is actually a load-balancer that routes HTTP requests to one of many relays based on the `cluster-hash` header returning the target relay’s multiaddr
 which the charon client then uses to connect to that relay.
 
 The charon `--p2p-relays` flag therefore supports both multiaddrs as well as HTTP URls.       
