@@ -21,9 +21,9 @@ Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https
 
 ### What are the hardware requirements for running a Charon node?
 
-It should be the same as running a normal post-merge Ethereum node. It would be easiest with 16GB of RAM, 500GB of disk and 8MB/s of internet bandwidth, though lower resourced machines can probably be used with some effort.
+It should be the same as running a normal post-merge Ethereum node. It would be easiest with 16GB of RAM, 1TB of disk and 8MB/s of internet bandwidth, though lower resourced machines can probably be used with some effort.
 
-Charon alone uses negligible disk space of not more than a few MBs. However if you are running your consensus client and execution client on the same server with charon then you will need 500GB of free SSD disk space (assuming you are running a testnet chain, mainnet requires 1TB or more disk space ideally).
+Charon alone uses negligible disk space of not more than a few MBs. However, if you are running your consensus client and execution client on the same server with charon, then you will need 1TB of free SSD disk space (assuming you are running a testnet chain, mainnet requires [2TB](https://geth.ethereum.org/docs/getting-started/hardware-requirements) or more disk space ideally).
 
 For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
