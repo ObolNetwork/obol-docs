@@ -97,9 +97,3 @@ Before a DKG process begins, all operators must run [`charon create enr`](./char
 The file that outlines a DKG ceremony is known as a [`cluster-definition.json`](./cluster-configuration) file. This file is passed to `charon dkg` which uses it to create private keys, a [`cluster-lock.json`](./cluster-configuration) file and `deposit-data.json` for the configured number of distributed validators. The `cluster-lock` file will be made available to `charon run`, and the validator key stores will be made available to the configured validator client.
 
 When [`charon run`](./charon-cli-reference.md#run-the-charon-middleware) starts up and ingests its configuration from the `cluster-lock.json` file, it checks if its observed/configured public IP address differs from what is listed in the lock file. If it is different; it updates the IP address, increments the nonce of the ENR and reissues it before beginning to establish connections with the other operators in the cluster.
-
-### Node database
-
-Distributed Validator Clusters are permissioned networks with a fully meshed topology. Each node will permanently store the ENRs of all other known Obol nodes in their node database.
-
-Unlike with node databases of public permissionless networks (such as [Go-Ethereum](https://pkg.go.dev/github.com/ethereum/go-ethereum@v1.10.13/p2p/enode#DB)), there is no inbuilt eviction logic – the database will keep growing indefinitely. This is acceptable as the number of operators in a cluster is expected to stay constant. Mutable clusters will be introduced in the future.
