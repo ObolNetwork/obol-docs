@@ -1,6 +1,6 @@
 ---
 description: Networking
-sidebar_position: 7
+sidebar_position: 4
 ---
 
 # Charon networking
@@ -81,11 +81,25 @@ All other charon protocols are only established between nodes in the same cluste
 In order for a charon client to connect to a relay, it needs the relay's [multiaddr](https://docs.libp2p.io/concepts/fundamentals/addressing/) (containing its public key and IP address).
 But a single multiaddr can only point to a single relay server which can easily be overloaded if too many clusters connect to it. Charon therefore supports resolving a relay’s multiaddr
 via HTTP GET request. Since charon also includes the unique `cluster-hash` header in this request, the relay provider can use
-[consistent header-based load-balancing](https://cloud.google.com/load-balancing/docs/https/traffic-management-global#traffic_steering_header-based_routing)to map clusters to one of many relays using a single HTTP address.
+[consistent header-based load-balancing](https://cloud.google.com/load-balancing/docs/https/traffic-management-global#traffic_steering_header-based_routing) to map clusters to one of many relays using a single HTTP address.
 
 The relay supports serving its runtime public multiaddrs via its `--http-address` flag.
 
 E.g., https://0.relay.obol.tech is actually a load-balancer that routes HTTP requests to one of many relays based on the `cluster-hash` header returning the target relay’s multiaddr
 which the charon client then uses to connect to that relay.
 
-The charon `--p2p-relays` flag therefore supports both multiaddrs as well as HTTP URls.       
+The charon `--p2p-relays` flag therefore supports both multiaddrs as well as HTTP URls.
+
+### Authenticating a distributed validator client
+
+Before a DKG process begins, all operators must run [`charon create enr`](./charon-cli-reference.md#creating-an-enr-for-charon), or just `charon enr` if enr private key already exists, to create or get the Ethereum Node Record for their client. These ENRs are included in the configuration of a Distributed Key Generation ceremony.
+
+The file that outlines a DKG ceremony is known as a [`cluster-definition.json`](./cluster-configuration) file. This file is passed to `charon dkg` which uses it to create private keys, a [`cluster-lock.json`](./cluster-configuration) file and `deposit-data.json` for the configured number of distributed validators. The `cluster-lock` file will be made available to `charon run`, and the validator key stores will be made available to the configured validator client.
+
+When [`charon run`](./charon-cli-reference.md#run-the-charon-middleware) starts up and ingests its configuration from the `cluster-lock.json` file, it checks if its observed/configured public IP address differs from what is listed in the lock file. If it is different; it updates the IP address, increments the nonce of the ENR and reissues it before beginning to establish connections with the other operators in the cluster.
+
+### Node database
+
+Distributed Validator Clusters are permissioned networks with a fully meshed topology. Each node will permanently store the ENRs of all other known Obol nodes in their node database.
+
+Unlike with node databases of public permissionless networks (such as [Go-Ethereum](https://pkg.go.dev/github.com/ethereum/go-ethereum@v1.10.13/p2p/enode#DB)), there is no inbuilt eviction logic – the database will keep growing indefinitely. This is acceptable as the number of operators in a cluster is expected to stay constant. Mutable clusters will be introduced in the future.

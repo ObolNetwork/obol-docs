@@ -1,6 +1,6 @@
 ---
 description: A go-based middleware client for taking part in Distributed Validator clusters.
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 # CLI reference
