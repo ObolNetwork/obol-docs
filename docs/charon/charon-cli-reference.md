@@ -107,7 +107,7 @@ Flags:
       --fee-recipient-address string   Optional Ethereum address of the fee recipient
   -h, --help                           Help for cluster
       --insecure-keys                  Generates insecure keystore files. This should never be used. It is not supported on mainnet.
-      --keymanager-addresses strings   Comma separated list of keymanager URLs to push validator key shares to. Note that multiple addresses are required, one for each node in the cluster, with node0's keyshares being pushed to the first address, node1's keyshares to the second, and so on.
+      --keymanager-addresses strings   Comma separated list of keymanager URLs to import validator key shares to. Note that multiple addresses are required, one for each node in the cluster, with node0's keyshares being imported to the first address, node1's keyshares to the second, and so on.
       --name string                    The cluster name
       --network string                 Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "goerli")
       --nodes int                      The number of charon nodes in the cluster. Minimum is 4. (default 4)
@@ -163,7 +163,7 @@ Flags:
       --data-dir string                The directory where charon will store all its internal data (default ".charon")
       --definition-file string         The path to the cluster definition file or an HTTP URL. (default ".charon/cluster-definition.json")
   -h, --help                           Help for dkg
-      --keymanager-address string      The keymanager URL to push validator keyshares to.
+      --keymanager-address string      The keymanager URL to import validator keyshares.
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
       --no-verify                      Disables cluster definition and lock file verification.
