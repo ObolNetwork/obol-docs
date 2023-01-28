@@ -68,3 +68,29 @@ html[data-theme="dark"] .details {
 html[data-theme="light"] .details {
   background-color: #f6f8fa;
 }
+
+/* Docusaurus Colors */
+
+html[data-theme="dark"] .menu-content {
+  background-color: #111F22;
+}
+
+html[data-theme="light"] .menu-content {
+  background-color: #ffffff;
+}
+
+html[data-theme="dark"] li > label  {
+  background-color: #111F22;
+}
+
+html[data-theme="light"]  li > label  {
+  background-color: #ffffff;
+}
+
+html[data-theme="dark"] div.scrollbar-container > div  {
+  background-color: #091011;
+}
+
+/* html[data-theme="dark"] div.scrollbar-container > div  {
+  background-color: #091011;
+} */

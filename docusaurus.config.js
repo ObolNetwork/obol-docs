@@ -47,6 +47,44 @@ const config = {
         anonymizeIP: true,
       },
     ],
+    [
+      'redocusaurus',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            // spec: 'https://api.obol.tech/docs-yaml',
+            spec: './static/api-spec.yaml',
+            route: '/api/',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          // primaryColor: '#16968E',
+          // primaryColorDark: '#16968E',
+          theme: {
+            colors: {
+              http: {
+                get: '#16968e',
+                put: '#9167e4',
+                post: '#b6ea5c',
+                delete: '#dd603c',
+              },
+            },
+            // sidebar: {
+            //   backgroundColor: '#00ff00'
+            // },
+            rightPanel: {
+              backgroundColor: '#243D42'
+            },
+          }
+        },
+        // options: {
+        //   hideLoading: true,
+        // },
+      },
+    ],
   ],
 
   themeConfig:
@@ -70,6 +108,11 @@ const config = {
             docId: "intro",
             position: "left",
             label: "Docs",
+          },
+          {
+            to: 'api',
+            position: 'left',
+            label: 'API',
           },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
