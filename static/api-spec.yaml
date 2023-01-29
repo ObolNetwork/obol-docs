@@ -204,7 +204,7 @@
             {
               'operationId': 'DVController_getClusterDefinition',
               'summary': 'Retrieve a Distributed Validator Cluster proposal',
-              'description': "This endpoint allows a charon client or launchpad interface to retrieve the terms of a proposed DKG. Once all operators listed in the DKG have submitted signed approvals to the terms, this object will be ready for a cluster of operators to use as part of a DKG ceremony. If the objects in the `operators` array are not fully populated, these operators need to use the [PUT request](#/Distributed%20Validators/DVController_updateClusterDefinition) to upload their charon client's public key and a signature from their address to indicate their acceptance of the terms.",
+              'description': "This endpoint allows a charon client or launchpad interface to retrieve the terms of a proposed DKG. Once all operators listed in the DKG have submitted signed approvals to the terms, this object will be ready for a cluster of operators to use as part of a DKG ceremony. If the objects in the `operators` array are not fully populated, these operators need to use the [PUT request](#/Distributed-Validators/operation/DVController_updateClusterDefinition) to upload their charon client's public key and a signature from their address to indicate their acceptance of the terms.",
               'parameters':
                 [
                   {

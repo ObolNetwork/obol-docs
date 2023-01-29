@@ -30,11 +30,7 @@ const config = {
           // Please change this to your repo.
           editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/",
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/blog/",
-        },
+        blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -56,8 +52,14 @@ const config = {
             // spec: 'https://api.obol.tech/docs-yaml',
             spec: './static/api-spec.yaml',
             route: '/api/',
+            layout: {
+              title: 'API Reference',
+              description: 'An API for preparing Distributed Validator Key Generation Ceremonies built by Obol Labs.',
+              keywords: ["Distributed Validators", "Ethereum", "DVT", "Obol", "API"],
+            },
           },
         ],
+        
         // Theme Options for modifying how redoc renders them
         theme: {
           // Change with your site colors
@@ -80,9 +82,7 @@ const config = {
             },
           }
         },
-        // options: {
-        //   hideLoading: true,
-        // },
+       
       },
     ],
   ],
