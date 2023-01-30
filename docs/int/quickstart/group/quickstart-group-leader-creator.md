@@ -75,7 +75,7 @@ This step is not needed and you can move on to [Step 3](#step-3-create-the-dkg-c
 
 You will prepare the configuration file for the distributed key generation ceremony using the launchpad.
 
-1. Go to the [DV Launchpad](https://goerli.launchpad.obol.tech) 
+1. Go to the [DV Launchpad](https://bia.launchpad.obol.tech) 
 2. Connect your wallet
 
   ![Connect your Wallet](/img/Guide01.png)
