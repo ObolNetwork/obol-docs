@@ -75,7 +75,7 @@ This step is not needed and you can move on to [Step 3](#step-3-create-the-dkg-c
 
 You will prepare the configuration file for the distributed key generation ceremony using the launchpad.
 
-1. Go to the [DV Launchpad](https://goerli.launchpad.obol.tech) 
+1. Go to the [DV Launchpad](https://bia.launchpad.obol.tech) 
 2. Connect your wallet
 
   ![Connect your Wallet](/img/Guide01.png)
@@ -108,40 +108,73 @@ You will prepare the configuration file for the distributed key generation cerem
     - Input the Ethereum addresses for each operator collected during [step 1](#step-1-collect-ethereum-addresses-of-the-cluster-operators).
     - Select the desired amount of validators (32 ETH each) the cluster will run.
     - Paste your `ENR` generated at [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
-    - Input the `Withdrawal Address` to receive validator principal and consensus rewards at exit.
-    - Input the `Fee Recipient Address` to receive transaction fees from block proposals. 
+    - Select the `Withdrawal Addresses` method. `Single address` to receive the principal and fees to a single address or `Splitter Contracts` to share them among operators.
+    <Tabs groupId="withdrawl-method">
+      <TabItem value="single" label="Single Address">
+      <ul>
+      <li>Enter the <code>Principal Address</code> to receive validator principal at exit.</li>
+      <li>Enter the <code>Rewards Address</code> to receive staking rewards, MEV and priority fees.</li></ul>
+      
+      You can set them to be the same as your connected wallet address in one click.
+      <br></br><br></br>
+
+      ![Create Group](/img/Guide03.png)
+
+      </TabItem>
+      <TabItem value="splitter" label="Splitter Contract">
+      <ul>
+      <li>Enter the address for the <code>Principal</code> to receive validator principal at exit.</li>
+      <li>Enter the addresses and split percentages for the <code>Rewards</code> to receive staking rewards, MEV and priority fees.</li></ul><br></br>
+
+      ![Create Group](/img/Guide03-splitter.png)
+
+      </TabItem>
+    </Tabs>
+
     - Create Cluster Configuration
 
-    ![Create Group](/img/Guide03.png)
+
 
 6. Review, Confirm and Sign the following with your wallet
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
-<ul><ul>
-<li>
-  
-  The config hash. This is a hashed representation of all of the details for this cluster. 
-</li>
-<li>
-
-  The `operator_config_hash` 
-</li>
-<li>
-
-  Your `ENR`: this signature authorises the key represented by this ENR to act on your behalf in the cluster.
-</li>
-</ul></ul>
+    <ul>
+    <Tabs groupId="withdrawl-method">
+    <TabItem value="single" label="Single Address">
+    Confirm the config and Sign
+    <ul>
+    <li>The config hash. This is a hashed representation of all of the details for this cluster.</li>
+    <li>The <code>operator_config_hash</code></li>
+    <li>Your <code>ENR</code>: this signature authorises the key represented by this ENR to act on your behalf in the cluster.</li>
+    </ul>
+    </TabItem>
+    <TabItem value="splitter" label="Splitter Contract">
+    <ul><li>Deploy the withdrawal contracts by signing the transactions in your wallet.</li></ul>
+    <ul><li>Confirm the config and Sign</li></ul>
+    <ul><ul>
+    <li>The config hash. This is a hashed representation of all of the details for this cluster.</li>
+    <li>The <code>operator_config_hash</code></li>
+    <li>Your <code>ENR</code>: this signature authorises the key represented by this ENR to act on your behalf in the cluster.</li>
+    </ul></ul>
+    </TabItem></Tabs></ul>
 
   </TabItem>
   <TabItem value="creator" label="Creator">
-<ul><ul>
-<li>
-  
-  The config hash. This is a hashed representation of all of the details for this cluster. 
-</li>
-</ul></ul>
-</TabItem>
+    <ul>
+    <Tabs groupId="withdrawl-method">
+    <TabItem value="single" label="Single Address">
+    Confirm the config and Sign
+    <ul><li>The config hash. This is a hashed representation of all of the details for this cluster.</li></ul>
+    </TabItem>
+    <TabItem value="splitter" label="Splitter Contract">
+    <ul><li>Deploy the withdrawal contracts by signing the transactions in your wallet.</li></ul>
+    <ul><li>Confirm the config and Sign</li></ul>
+    <ul><ul>
+    <li>The config hash. This is a hashed representation of all of the details for this cluster.</li>
+    </ul></ul>
+    </TabItem></Tabs></ul>
+  </TabItem>
 </Tabs>
 
 7. Share your cluster invite link with the operators. Following the link will show you a screen waiting for other operators to accept the configuration you created.
@@ -158,4 +191,3 @@ You will prepare the configuration file for the distributed key generation cerem
    Your journey ends here and you can monitor with the link whether the operators confirm their agreement to the cluster by signing their approval. Future versions of the launchpad will allow a creator to track a distributed validator's lifecycle in its entirety.
   </TabItem>
 </Tabs>
-
