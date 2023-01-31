@@ -40,11 +40,13 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 Run the following command:
 
 ```sh
-# Create a testnet distributed validator cluster
+# Create a distributed validator cluster
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.13.0 create cluster --withdrawal-address="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
 ```
 
 This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
+
+This guide will launch all six charon clients in separate containers along with an execution client and consensus client. To distribute your cluster physically, copy each directory with one (or several) private keys within it to the other machines you want to use. Consider using the single node [docker-compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected.
 
 ### Distributed Validator Cluster
 
@@ -63,7 +65,7 @@ The default cluster consists of:
 The intention is to support all validator clients. Read more about our client support [here](https://dvt.obol.tech).
 
 ## Step 3. Start the cluster
-Run this command to start your cluster containers
+Run this command from each machine containing private keys to start your cluster containers
 
 ```sh
 # Start the distributed validator cluster
