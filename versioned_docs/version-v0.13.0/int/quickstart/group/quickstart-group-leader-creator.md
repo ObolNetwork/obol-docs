@@ -108,23 +108,23 @@ You will prepare the configuration file for the distributed key generation cerem
     - Input the Ethereum addresses for each operator collected during [step 1](#step-1-collect-ethereum-addresses-of-the-cluster-operators).
     - Select the desired amount of validators (32 ETH each) the cluster will run.
     - Paste your `ENR` generated at [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
-    - Select the `Withdrawal Addresses` method. `Single address` to receive the principal and fees to a single address or `Splitter Contracts` to share them among operators.
+    - Select the `Withdrawal Addresses` method. Use `Single address` to receive the principal and fees to normal Ethereum addresses or `Reward Splitter` to deploy contracts that share the reward of a validator among operators.
     <Tabs groupId="withdrawl-method">
       <TabItem value="single" label="Single Address">
       <ul>
-      <li>Enter the <code>Principal Address</code> to receive validator principal at exit.</li>
-      <li>Enter the <code>Rewards Address</code> to receive staking rewards, MEV and priority fees.</li></ul>
+      <li>Enter the <code>Withdrawal Address</code> that will receive the validator effective balance at exit and when balance skimming occurs.</li>
+      <li>Enter the <code>Fee Recipient Address</code> to receive MEV rewards (if enabled), and block proposal priority fees.</li></ul>
       
       You can set them to be the same as your connected wallet address in one click.
-      <br></br><br></br>
+      <br /><br />
 
       ![Create Group](/img/Guide03.png)
 
       </TabItem>
-      <TabItem value="splitter" label="Splitter Contract">
+      <TabItem value="splitter" label="Reward Splitter">
       <ul>
-      <li>Enter the address for the <code>Principal</code> to receive validator principal at exit.</li>
-      <li>Enter the addresses and split percentages for the <code>Rewards</code> to receive staking rewards, MEV and priority fees.</li></ul><br></br>
+      <li>Enter the Ethereum address to claim the validator principal (32 ether) at exit.</li>
+      <li>Enter the Ethereum addresses and their percentage split of the validator's rewards. Validator rewards include consensus rewards, MEV rewards and proposal priority fees.</li></ul><br />
 
       ![Create Group](/img/Guide03-splitter.png)
 
@@ -149,7 +149,7 @@ You will prepare the configuration file for the distributed key generation cerem
     <li>Your <code>ENR</code>: this signature authorises the key represented by this ENR to act on your behalf in the cluster.</li>
     </ul>
     </TabItem>
-    <TabItem value="splitter" label="Splitter Contract">
+    <TabItem value="splitter" label="Reward Splitter">
     <ul><li>Deploy the withdrawal contracts by signing the transactions in your wallet.</li></ul>
     <ul><li>Confirm the config and Sign</li></ul>
     <ul><ul>
@@ -167,7 +167,7 @@ You will prepare the configuration file for the distributed key generation cerem
     Confirm the config and Sign
     <ul><li>The config hash. This is a hashed representation of all of the details for this cluster.</li></ul>
     </TabItem>
-    <TabItem value="splitter" label="Splitter Contract">
+    <TabItem value="splitter" label="Reward Splitter">
     <ul><li>Deploy the withdrawal contracts by signing the transactions in your wallet.</li></ul>
     <ul><li>Confirm the config and Sign</li></ul>
     <ul><ul>
