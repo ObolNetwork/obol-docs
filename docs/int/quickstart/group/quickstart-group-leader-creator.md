@@ -17,7 +17,7 @@ These roles hold no position of privilege in the cluster, they only set the init
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
-The person creating the cluster <b>will</b> be a node operator in the cluster.<br/><br/>
+    The person creating the cluster <b>will</b> be a node operator in the cluster.<br /><br />
     <h1>Pre-requisites</h1>
     <ul>
       <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.</li>
@@ -42,18 +42,18 @@ Before starting the cluster creation, you will need to collect one Ethereum addr
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 
-In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
-```sh
-# Clone this repo
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
+  ```sh
+  # Clone this repo
+  git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 
-# Change directory
-cd charon-distributed-validator-node
+  # Change directory
+  cd charon-distributed-validator-node
 
-# Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.13.0 create enr
-```
+  # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
+  docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.13.0 create enr
+  ```
 
 You should expect to see a console output like
 
@@ -63,12 +63,13 @@ You should expect to see a console output like
 :::caution
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
 :::
-</TabItem>
-<TabItem value="creator" label="Creator">
 
-This step is not needed and you can move on to [Step 3](#step-3-create-the-dkg-configuration-file-and-distribute-it-to-cluster-operators).
+  </TabItem>
+  <TabItem value="creator" label="Creator">
 
-</TabItem>
+  This step is not needed and you can move on to [Step 3](#step-3-create-the-dkg-configuration-file-and-distribute-it-to-cluster-operators).
+
+  </TabItem>
 </Tabs>
 
 ## Step 3. Create the DKG configuration file and distribute it to cluster operators
@@ -90,105 +91,102 @@ You will prepare the configuration file for the distributed key generation cerem
     
     <Tabs groupId="leader-creator">
       <TabItem value="leader" label="Leader" default>
-    <ul><li>
+      <ul><li>
     
-    ⚠️ Leave the `Non-Operator` toggle <b>OFF</b>.
+      ⚠️ Leave the `Non-Operator` toggle <b>OFF</b>.
     
-    </li></ul>
+      </li></ul>
       </TabItem>
       <TabItem value="creator" label="Creator">
-    <ul><li>
+      <ul><li>
     
     ⚠️ Turn the `Non-Operator` toggle <b>ON</b>.
     
-    </li></ul>
+      </li></ul>
       </TabItem>
     </Tabs>
 
     - Input the Ethereum addresses for each operator collected during [step 1](#step-1-collect-ethereum-addresses-of-the-cluster-operators).
     - Select the desired amount of validators (32 ETH each) the cluster will run.
     - Paste your `ENR` generated at [Step 2](#step-2-create-and-back-up-a-private-key-for-charon).
-    - Select the `Withdrawal Addresses` method. `Single address` to receive the principal and fees to a single address or `Splitter Contracts` to share them among operators.
+    - Select the `Withdrawal Addresses` method. Use `Single address` to receive the principal and fees to a single address or `Splitter Contracts` to share them among operators.
+    
     <Tabs groupId="withdrawl-method">
-      <TabItem value="single" label="Single Address">
+     <TabItem value="single" label="Single Address">
       <ul>
       <li>Enter the <code>Withdrawal Address</code> that will receive the validator effective balance at exit and when balance skimming occurs.</li>
-      <li>Enter the <code>Fee Recipient Address</code> to receive MEV rewards (if enabled), and block proposal priority fees.</li></ul>
-      
-      You can set them to be the same as your connected wallet address in one click.
+      <li>Enter the <code>Fee Recipient Address</code> to receive MEV rewards (if enabled), and block proposal priority fees.</li>
+      <br /></ul>
+       You can set them to be the same as your connected wallet address in one click.
       <br /><br />
 
-      ![Create Group](/img/Guide03.png)
+    ![Create Group](/img/Guide03.png)
 
-      </TabItem>
-      <TabItem value="splitter" label="Reward Splitter">
-      <ul>
+     </TabItem>
+     <TabItem value="splitter" label="Reward Splitter">
+       <ul>
       <li>Enter the Ethereum address to claim the validator principal (32 ether) at exit.</li>
-      <li>Enter the Ethereum addresses and their percentage split of the validator's rewards. Validator rewards include consensus rewards, MEV rewards and proposal priority fees.</li></ul><br />
+      <li>Enter the Ethereum addresses and their percentage split of the validator's rewards. Validator rewards include consensus rewards, MEV rewards and proposal priority fees.</li>
+      </ul><br />
 
       ![Create Group](/img/Guide03-splitter.png)
 
-      </TabItem>
-    </Tabs>
+     </TabItem>
+   </Tabs>
 
-    - Create Cluster Configuration
+    - Click `Create Cluster Configuration`
 
 
-
-6. Review, Confirm and Sign the following with your wallet
+<Tabs groupId="withdrawl-method">
+  <TabItem value="single" label="Single Address">
+    <ul>
+      6. Review the cluster configuration
+    </ul>
+  </TabItem>
+  <TabItem value="splitter" label="Reward Splitter">
+    <ul>6. Deploy the withdrawal manager contracts by signing the two transactions with your wallet.</ul>
+  </TabItem>
+</Tabs>
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
     <ul>
-    <Tabs groupId="withdrawl-method">
-    <TabItem value="single" label="Single Address">
-    You will be asked to confirm your configuration and to sign:
-    <ul>
-    <li>The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li>
-    <li>The <code>operator_config_hash</code>. This is your acceptance of the terms as a participating node operator.</li>
-    <li>Your <code>ENR</code>. Signing your ENR authorises the corresponding private key to act on your behalf in the cluster.</li>
+      7. You will be asked to confirm your configuration and to sign:
     </ul>
-    </TabItem>
-    <TabItem value="splitter" label="Reward Splitter">
-    <ul><li>Deploy the withdrawal contracts by signing the transactions in your wallet.</li></ul>
-    <ul><li>You will be asked to confirm your configuration and to sign:</li></ul>
-    <ul><ul>
-    <li>The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li>
-     <li>The <code>operator_config_hash</code>. This is your acceptance of the terms as a participating node operator.</li>
-    <li>Your <code>ENR</code>. Signing your ENR authorises the corresponding private key to act on your behalf in the cluster.</li>
-    </ul></ul>
-    </TabItem></Tabs></ul>
-
+    <ul>
+      <ul>
+        <li>The <code>config_hash</code>. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li>
+        <li>The <code>operator_config_hash</code>. This is your acceptance of the terms as a participating node operator.</li>
+        <li>Your <code>ENR</code>. Signing your ENR authorises the corresponding private key to act on your behalf in the cluster.</li>
+      </ul>
+    </ul>
   </TabItem>
   <TabItem value="creator" label="Creator">
-    <ul>
-    <Tabs groupId="withdrawl-method">
-    <TabItem value="single" label="Single Address">
-    You will be asked to confirm your configuration and to sign:
-    <ul><li>The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li></ul>
-    </TabItem>
-    <TabItem value="splitter" label="Reward Splitter">
-    <ul><li>Deploy the withdrawal manager contracts by signing the transactions in your wallet.</li></ul>
-    <ul><li>You will be asked to confirm your configuration and to sign:</li></ul>
-    <ul><ul>
-    <ul><li>The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li></ul>
-    </ul></ul>
-    </TabItem></Tabs></ul>
+      <ul>
+      7. You will be asked to confirm your configuration and to sign:
+      </ul>
+      <ul>
+        <ul>
+          <li>The <code>config_hash</code>. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.</li>
+        </ul>
+      </ul>
   </TabItem>
 </Tabs>
 
-7. Share your cluster invite link with the operators. Following the link will show you a screen waiting for other operators to accept the configuration you created.
+8. Share your cluster invite link with the operators. Following the link will show you a screen waiting for other operators to accept the configuration you created.
 
   ![Invite Operators](/img/Guide04.png)
 
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 
-   👉 Once every participating operator has signed their approval to the terms, you will continue the [**Operator** journey](./quickstart-group-operator#step-3-run-the-dkg) by completing the distributed key generation step.
+  👉 Once every participating operator has signed their approval to the terms, you will continue the [**Operator** journey](./quickstart-group-operator#step-3-run-the-dkg) by completing the distributed key generation step.
+
   </TabItem>
   <TabItem value="creator" label="Creator">
 
-   Your journey ends here and you can monitor with the link whether the operators confirm their agreement to the cluster by signing their approval. Future versions of the launchpad will allow a creator to track a distributed validator's lifecycle in its entirety.
+  Your journey ends here and you can monitor with the link whether the operators confirm their agreement to the cluster by signing their approval. Future versions of the launchpad will allow a creator to track a distributed validator's lifecycle in its entirety.
+
   </TabItem>
 </Tabs>
 
