@@ -226,7 +226,7 @@ This section of the readme is intended for the "docker power users", i.e., for t
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
 See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
-There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
+There are some additional compose files in this repository, `compose-debug.yml`, `docker-compose.override.yml.sample` and `mevboost-compose.yml`, along-with the default `docker-compose.yml` file that you can use for this purpose.
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
@@ -246,4 +246,9 @@ docker-compose up
 - You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
 ```
 docker-compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
+```
+
+- To run [mev-boost](https://boost.flashbots.net/), run:
+```
+docker-compose -f docker-compose.yml -f mevboost-compose.yml up
 ```
