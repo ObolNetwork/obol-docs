@@ -163,6 +163,18 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
+       <h4>
+         <code>Error opening relay circuit: NO_RESERVATION</code> error
+       </h4>
+     </summary>
+     <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer isn't connected to the relay, so the the charon
+     client cannot connect to the peer via the relay. That might be because the peer is offline or the
+     peer is configured to connect to a different relay.
+     <br /><br />
+     To fix this error, ensure the peer is online and configured with the exact same `--p2p-relays` flag.
+    </details>
+    <details className="details">
+      <summary>
         <h4>
           <code>Couldn't fetch duty data from the beacon node</code> error
         </h4>
