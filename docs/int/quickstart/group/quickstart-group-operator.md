@@ -146,7 +146,7 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 ## Step 6 - Optional. Add the Monitoring Credentials
 
 :::info
-This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has contacted you directly.
+This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has given you a credential to use.
 :::
 
 1. You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:

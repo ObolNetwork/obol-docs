@@ -146,7 +146,7 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 ## Step 6 - Optional. Add the Monitoring Credentials
 
 :::info
-This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has contacted you directly.
+This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has given you a credential to use.
 :::
 
 1. You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:
@@ -226,7 +226,7 @@ This section of the readme is intended for the "docker power users", i.e., for t
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
 See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
-There are some additional compose files in this repository, `compose-debug.yml`, `docker-compose.override.yml.sample` and `mevboost-compose.yml`, along-with the default `docker-compose.yml` file that you can use for this purpose.
+There are some additional compose files in this repository, `compose-debug.yml`, `docker-compose.override.yml.sample` and `mevboost-compose.yml`, along with the default `docker-compose.yml` file that you can use for this purpose.
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
