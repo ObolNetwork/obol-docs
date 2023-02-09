@@ -143,14 +143,14 @@ If you have connected all of your charon clients together such that the monitori
 
 This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
 
-## Step 6. Add the Central Monitoring Token
+## Step 6 - Optional. Add the Monitoring Credentials
 
 :::info
-This step is **optional** but recommended in order for the Obol Team to help with the health of your cluster.
+This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has contacted you directly.
 :::
 
-1. You may have been provided with a **Central Monitoring Token** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The token needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN`. The token will look like:
-`eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ`.
+1. You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:
+`obol20!tnt8U!C...`.
 
 2. To help us easily identify your cluster, also add your `cluster name` in the `prometheus/prometheus.yml` file, replacing `$CLUSTER_NAME`.
 
@@ -165,7 +165,7 @@ global:
 remote_write:
   - url: https://vm.monitoring.gcp.obol.tech/write
     authorization:
-      credentials: 436764:eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ
+      credentials: obol20!tnt8U!C...
 
 scrape_configs:
   - job_name: 'charon'
@@ -226,7 +226,7 @@ This section of the readme is intended for the "docker power users", i.e., for t
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
 See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
-There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
+There are some additional compose files in this repository, `compose-debug.yml`, `docker-compose.override.yml.sample` and `mevboost-compose.yml`, along-with the default `docker-compose.yml` file that you can use for this purpose.
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
@@ -246,4 +246,9 @@ docker-compose up
 - You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
 ```
 docker-compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
+```
+
+- To run [mev-boost](https://boost.flashbots.net/), run:
+```
+docker-compose -f docker-compose.yml -f mevboost-compose.yml up
 ```
