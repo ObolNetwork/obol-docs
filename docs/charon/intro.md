@@ -15,7 +15,7 @@ Charon sits as a middleware between a normal validating client and its connected
 
 ![Charon Cluster](/img/DVCluster.png)
 
-## Charon architecture
+## Charon Architecture
 Charon is an Ethereum proof of stake distributed validator (DV) client. Like any validator client, its main purpose is to perform validation duties for the Beacon Chain, primarily attestations and block proposals. The beacon client handles a lot of the heavy lifting, leaving the validator client to focus on fetching duty data, signing that data, and submitting it back to the beacon client.
 
 Charon is designed as a generic event-driven workflow with different components coordinating to perform validation duties. All duties follow the same flow, the only difference being the signed data. The workflow can be divided into phases consisting of one or more components:
