@@ -204,7 +204,7 @@
             {
               'operationId': 'DVController_getClusterDefinition',
               'summary': 'Retrieve a Distributed Validator Cluster proposal',
-              'description': "This endpoint allows a charon client or launchpad interface to retrieve the terms of a proposed DKG. Once all operators listed in the DKG have submitted signed approvals to the terms, this object will be ready for a cluster of operators to use as part of a DKG ceremony. If the objects in the `operators` array are not fully populated, these operators need to use the [PUT request](#/Distributed-Validators/operation/DVController_updateClusterDefinition) to upload their charon client's public key and a signature from their address to indicate their acceptance of the terms.",
+              'description': "This endpoint allows a charon client or launchpad interface to retrieve the terms of a proposed DKG. Once all operators listed in the DKG have signed the terms of the cluster, this object will be ready for a cluster of operators to use as part of a DKG ceremony. If the objects in the `operators` array are not fully populated, these operators need to use the [PUT request](#tag/Distributed-Validators/operation/DVController_updateClusterDefinition) to upload their charon client's public key and a signature from their address to indicate their acceptance of the terms.",
               'parameters':
                 [
                   {
@@ -238,7 +238,7 @@
             {
               'operationId': 'DVController_updateClusterDefinition',
               'summary': 'Accept a proposed Distributed Validator Cluster',
-              'description': 'This endpoint is used by the operators present in the `operators` array of a cluster definition. These entites must submit a public key (in ENR form) to serve as their identity during the DKG, along with EIP712 signatures indicating their acceptance of the terms of this DKG.',
+              'description': 'This endpoint is used by the operators present in the `operators` array of a cluster definition. These operators must submit a public key (in ENR form) to serve as their identity during the DKG, along with EIP712 signatures indicating their acceptance of the terms of this DKG.',
               'parameters':
                 [
                   {
@@ -330,7 +330,7 @@
             {
               'operationId': 'DVController_postClusterDefinition',
               'summary': 'Propose a new Distributed Validator Cluster',
-              'description': 'This endpoint allows the caller to propose a distributed key generation ceremony. The caller must specify the important details of a Distributed Validator Cluster such as the participating operators and exit details. Operators invited to participate in this DKG must submit a public key to act on their behalf, and must sign the hash of this DKG object, to indicate their acceptance of the terms of this Distributed Validator Cluster.',
+              'description': "This endpoint allows the caller to propose a distributed key generation ceremony. The caller must specify the configuration of a Distributed Validator Cluster; such as the participating operators and the validator exit details. Operators invited to participate in this cluster must submit a public key (in [ENR](https://docs.obol.tech/docs/v0.12.0/int/faq/errors#enrs-keys) form) to serve as their node's identity, along with EIP712 signatures indicating their acceptance of the terms of this cluster.",
               'parameters':
                 [
                   {
@@ -378,7 +378,7 @@
   'info':
     {
       'title': 'Obol API',
-      'description': "## What is this API?\n\nThis API is for creating and managing [Distributed Validators](https://docs.obol.tech/docs/int/key-concepts#distributed-validator). This API works in tandem with Obol's [Distributed Validator Launchpad](https://goerli.launchpad.obol.tech), a dapp designed to allow people to authenticate their counterparties and agree to the terms of a Distributed Validator Cluster. This API will be made more easy for code-only interaction in the coming quarters with the release of the Obol-SDK. \n\nRead more about Obol and how to use the [launchpad](https://goerli.launchpad.obol.tech) on our [docs site](https://docs.obol.tech/). \n\nFor enquiries:",
+      'description': "## What is this API?\n\nThis API is for creating and managing [Distributed Validators](https://docs.obol.tech/docs/int/key-concepts#distributed-validator). This API works in tandem with Obol's [Distributed Validator Launchpad](https://goerli.launchpad.obol.tech), a dapp designed to allow people to authenticate their counterparties and agree to the terms of a Distributed Validator Cluster. This API will be made more easy for code-only interaction in the coming quarters with the release of the Obol-SDK. \n\nRead more about Obol and how to use the [launchpad](https://goerli.launchpad.obol.tech) on our [docs site](https://docs.obol.tech/).",
       'version': 'v1.2.0',
       'contact':
         {
