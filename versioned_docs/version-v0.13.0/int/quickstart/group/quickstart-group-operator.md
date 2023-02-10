@@ -200,7 +200,7 @@ A threshold of operators in the cluster need to perform this task to exit a vali
   - Confirm the name of the exiting `charon-distributed-validator-node` docker network: `docker network ls`.
   - If it isn't `charon-distributed-validator-node-dvnode`, then update `compose-volutary-exit.yml` accordingly.
 - Ensure the latest fork version epoch is used:
-  - Voluntary exists require an epoch after which they take effect.
+  - Voluntary exits require an epoch after which they take effect.
   - All VCs need to sign and submit the exact same messages (epoch) in DVT.
   - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
   - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
