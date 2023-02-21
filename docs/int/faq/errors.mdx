@@ -24,7 +24,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>What is an ENR?</h4>
+      <h4 id="what-is-an-enr">What is an ENR?</h4>
     </summary> 
     An ENR is shorthand for an <a href="https://eips.ethereum.org/EIPS/eip-778">Ethereum Node Record</a>. 
     It is a way to represent a node on a public network, with a reliable mechanism to update its information. 
@@ -37,7 +37,7 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4>How do I get my ENR if I want to generate it again?</h4>
+      <h4 id="generate-enr-again">How do I get my ENR if I want to generate it again?</h4>
     </summary>
     <ul>
       <li>
@@ -49,7 +49,7 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4> What do I do if lose my <code>charon-enr-private-key</code>? </h4>
+      <h4 id="lost-enr-private-key"> What do I do if lose my <code>charon-enr-private-key</code>? </h4>
     </summary>
     <ul>
       <li> For now, ENR rotation/replacement is not supported, it will be supported in a future release. </li>
@@ -58,7 +58,7 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4>I can't find the keys anywhere.</h4>
+      <h4 id="lost-keys">I can't find the keys anywhere</h4>
     </summary>
     <ul>
       <li>The <code>charon-enr-private-key</code> is generated inside a hidden folder <code>.charon</code>. </li>
@@ -74,19 +74,19 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>Downloading historical blocks</h4>
+      <h4 id="downloading-historical-blocks">Downloading historical blocks</h4>
     </summary> This means that Lighthouse is still syncing which will throw a lot of errors down the line. Wait for the sync before moving further.
   </details>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="failed-to-request-attester-duties">
         <code>Failed to request attester duties</code> error
       </h4>
     </summary> Indicates there is something wrong with your lighthouse beacon node. This might be because the request buffer is full as your node is never starting consensus since it never gets the duties.
   </details>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="discovery-search-timeout">
         <code>Not enough time for a discovery seach</code> error
       </h4>
     </summary> This could be linked to a internet connection being to slow or relying on a slow third-party service such as Infura.
@@ -98,19 +98,19 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="error-communicating-with-beacon-node-api">
         <code>Error communicating with Beacon Node API</code> & <code>Error while connecting to beacon node event stream</code>
       </h4>
     </summary> This is likely due to lighthouse not done syncing, wait and try again once synced. Can also be linked to Teku keystore issue.
   </details>
   <details className="details">
     <summary>
-      <h4>Clock sync issues</h4>
+      <h4 id="clock-sync-issues">Clock sync issues</h4>
     </summary> Either your clock server time is off, or you are talking to a remote beacon client that is super slow (this is why we advise against using services like infura).
   </details>
   <details className="details">
     <summary>
-      <h4>My beacon node API is flaky with lots of errors and timeouts</h4>
+      <h4 id="beacon-node-API-flaky">My beacon node API is flaky with lots of errors and timeouts</h4>
     </summary> 
     A good quality beacon node API is critical to validator performance. 
     It is always advised to run your own beacon node to ensure low latencies to boost validator performance.
@@ -127,28 +127,28 @@ docker-compose logs
   </summary>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="attester-failed-in-consensus-component-error">
           <code>Attester failed in consensus component</code> error
         </h4>
       </summary> The required number of operators defined in your cluster-lock file is probably not online to sign successfully. Make sure all operators are running the latest version of charon. To check if some peers are not online: <code> docker logs charon-distributed-validator-node-charon-1 2>&1 | grep 'absent' </code>
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="load-private-key-error">
           <code>Load private key</code> error
         </h4>
       </summary> Make sure you have successfully run a DKG before running the node. The key should be created and placed in the right directory during the ceremony Also, make sure you are working in the right directory: <code>charon-distributed-validator-node</code>
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="failed-to-confirm-node-connection-error">
           <code>Failed to confirm node connection</code> error
         </h4>
       </summary> Wait for Teku & Lighthouse sync to be complete.
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="reserve-relay-circuit-error">
           <code>Reserve relay circuit: reservation failed</code> error
         </h4>
       </summary>
@@ -163,7 +163,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-       <h4>
+       <h4 id="opening-relay-circuit-error">
          <code>Error opening relay circuit: NO_RESERVATION</code> error
        </h4>
      </summary>
@@ -175,7 +175,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="duty-data-from-beacon-node-error">
           <code>Couldn't fetch duty data from the beacon node</code> error
         </h4>
       </summary>
@@ -183,7 +183,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="aggregate-attestation-error">
           <code>Couldn't aggregate attestation due to failed attester duty</code> error
         </h4>
       </summary>
@@ -191,7 +191,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="aggregate-attestation-insufficient-partial-v2-committee-error">
           <code>Couldn't aggregate attestation due to insufficient partial v2 committee subscriptions</code> error
         </h4>
       </summary>
@@ -199,7 +199,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="aggregate-attestation-failed-prepare-aggregator-duty-error">
           <code>Couldn't aggregate attestation due to failed prepare aggregator duty</code> error
         </h4>
       </summary>
@@ -207,7 +207,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="insufficient-partial-randao-signatures-error">
           <code>Couldn't propose block due to insufficient partial randao signatures</code> error
         </h4>
       </summary>
@@ -215,7 +215,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="zero-partial-randao-signatures-error">
           <code>Couldn't propose block due to zero partial randao signatures</code> error
         </h4>
       </summary>
@@ -223,7 +223,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="failed-randao-duty-error">
           <code>Couldn't propose block due to failed randao duty</code> error
         </h4>
       </summary>
@@ -231,7 +231,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="consensus-algorithm-not-complete-error">
           <code>Consensus algorithm didn't complete</code> error
         </h4>
       </summary>
@@ -239,7 +239,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="signed-duty-not-submitted-error">
           <code>Signed duty not submitted by local validator client</code> error
         </h4>
       </summary>
@@ -247,7 +247,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="partial-signature-exchange-error">
           <code>Bug: partial signature database didn't trigger partial signature exchange</code> error
         </h4>
       </summary>
@@ -255,7 +255,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="no-partial-signature-received-error">
           <code>No partial signatures received from peers</code> error
         </h4>
       </summary>
@@ -263,7 +263,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="insufficient-partial-signatures-received-error">
           <code>Insufficient partial signatures received, minimum required threshold not reached</code> error
         </h4>
       </summary>
@@ -271,7 +271,7 @@ docker-compose logs
     </details>
     <details className="details">
       <summary>
-        <h4>
+        <h4 id="inconsistent-signed-data-error">
           <code>Bug: threshold aggregation of partial signatures failed due to inconsistent signed data</code> error
         </h4>
       </summary>
@@ -284,7 +284,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>Teku <code>keystore file</code> error </h4>
+      <h4 id="teku-keystore-file-error">Teku <code>keystore file</code> error </h4>
     </summary> Teku sometimes logs an error which looks like <code>Keystore file /opt/charon/validator_keys/keystore-0.json.lock already in use.</code> This can be solved by deleting the file(s) ending with <code>.lock</code> in the folder <code>.charon/validator_keys</code>. It is caused by an unsafe shut down of Teku (usually by double pressing `Ctrl+C` to shutdown containers faster).
   </details>
 </details>
@@ -294,7 +294,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4> How to fix the grafana dashboard? </h4>
+      <h4 id="how-to-fix-grafana-dashboard"> How to fix the grafana dashboard? </h4>
     </summary> Sometimes, grafana dashboard doesn't load any data first time around.You can solve this by following the steps below: <ul>
       <li>Click the Wheel Icon > Datasources</li>
       <li>Click prometheus</li>
@@ -304,7 +304,7 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="no-data-validator-info-panel">
         <code>N/A</code> & <code>No data</code> in validator info panel
       </h4>
     </summary> Can be linked to the <a href="https://github.com/ObolNetwork/charon-distributed-validator-node#teku-keystore-file-error">Teku Keystore issue</a>.
@@ -316,7 +316,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="unauthorized-invalid-token-error">
         <code>Unauthorized: authentication error: invalid token</code>
       </h4>
     </summary> You can ignore this error unless you have been contacted by the Obol Team with monitoring credentials. In that case, follow <a href="docs/int/quickstart/group/quickstart-group-operator#step-6---optional-add-the-monitoring-credentials">Step 6 of the quickstart</a>. It does not affect cluster performance or prevent the cluster from running.
@@ -328,7 +328,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4> How to fix <code>permission denied</code> errors? </h4>
+      <h4 id="docker-permission-denied-error"> How to fix <code>permission denied</code> errors? </h4>
     </summary> Permission denied errors can come up in a variety of manners, particularly on Linux and WSL for Windows systems. In the interest of security, the charon docker image runs as a non-root user, and this user often does not have the permissions to write in the directory you have checked out the code to. This can be generally be fixed with some of the following: <ul>
       <li>Running docker commands with <code>sudo</code>, if you haven't <a href="https://docs.docker.com/engine/install/linux-postinstall/">setup docker to be run as a non-root user</a>. </li>
       <li>Changing the permissions of the <code>.charon</code> folder with the commands: </li>
@@ -344,13 +344,13 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4> I see a lot of errors after running <code>docker-compose up</code>
+      <h4 id="running-docker-compose-up-error"> I see a lot of errors after running <code>docker-compose up</code>
       </h4>
     </summary> It's because both geth and lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when geth finishes syncing. You can also add a second beacon node endpoint for something like infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose(./docker-compose.yml#84).
   </details>
   <details className="details">
     <summary>
-      <h4> How do I fix the <code>plugin "loki" not found</code> error?
+      <h4 id="loki-plugin-not-found-error"> How do I fix the <code>plugin "loki" not found</code> error?
       </h4>
     </summary> If you get the following error when calling `docker-compose up`:<br/>
     <code>Error response from daemon: error looking up logging plugin loki: plugin "loki" not found</code>.<br/>Then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:<br/>
@@ -363,7 +363,7 @@ docker-compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4>
+      <h4 id="resolve-ip-or-p2p-external-host-flag-error">
         <code> Resolve IP of p2p external host flag: lookup replace.with.public.ip.or.hostname: no such host </code>{" "} error
       </h4>
     </summary> Replace <code>replace.with.public.ip.or.hostname</code> in the bootnode/docker-compose.yml with your real public IP or DNS hostname.
