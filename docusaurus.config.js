@@ -194,6 +194,14 @@ const config = {
         { property: "og:image:height", content: "630" },
       ],
     }),
+    themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      ({
+        hashed: true,
+      }),
+    ],
+  ],
 };
 
 module.exports = config;
