@@ -148,7 +148,7 @@ Flags:
 
 ### Performing a DKG Ceremony
 
-Th `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
+The `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
 
 ```markdown
 charon dkg --help
@@ -225,6 +225,127 @@ Flags:
       --synthetic-block-proposals          Enables additional synthetic block proposal duties. Used for testing of rare duties.
       --validator-api-address string       Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 
+```
+
+## The `combine` subcommand
+
+### Combine distributed validator keyshares into a single Validator key
+
+The `combine` command combines many validator keyshares into a single Ethereum validator key.
+
+To run this command, one needs all the node operator's `.charon` directories, which need to be organized in the following way:
+
+```shell
+validators-to-be-combined/
+├── node0
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node1
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node2
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+└── node3
+    ├── charon-enr-private-key
+    ├── cluster-lock.json
+    ├── deposit-data.json
+    └── validator_keys
+        ├── keystore-0.json
+        ├── keystore-0.txt
+        ├── keystore-1.json
+        └── keystore-1.txt
+```
+
+That is, each operator '.charon' directory must be placed in a parent directory, and renamed.
+
+The chosen name doesn't matter, as long as it's different from `.charon`.
+
+At the end of the process `combine` will create a new set of directories containing one validator key each, named after its public key:
+
+```shell
+validators-to-be-combined/
+├── 0x822c5310674f4fc4ec595642d0eab73d01c62b588f467da6f98564f292a975a0ac4c3a10f1b3a00ccc166a28093c2dcd # contains private key
+│   └── validator_keys
+│       ├── keystore-0.json
+│       └── keystore-0.txt
+├── 0x8929b4c8af2d2eb222d377cac2aa7be950e71d2b247507d19b5fdec838f0fb045ea8910075f191fd468da4be29690106 # contains private key
+│   └── validator_keys
+│       ├── keystore-0.json
+│       └── keystore-0.txt
+├── node0
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node1
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node2
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+└── node3
+    ├── charon-enr-private-key
+    ├── cluster-lock.json
+    ├── deposit-data.json
+    └── validator_keys
+        ├── keystore-0.json
+        ├── keystore-0.txt
+        ├── keystore-1.json
+        └── keystore-1.txt
+```
+
+By default, the `combine` command will refuse to overwrite any private key that is already present in the destination directory.
+
+To force the process, use the `--force` flag.
+
+```markdown
+charon combine --help
+Combines the private key shares from a threshold of operators in a distributed validator cluster into a set of validator private keys that can be imported into a standard Ethereum validator client.
+
+Warning: running the resulting private keys in a validator alongside the original distributed validator cluster *will* result in slashing.
+
+Usage:
+charon combine [flags]
+
+Flags:
+--cluster-dir string       Parent directory containing a number of .charon subdirectories from each node in the cluster. (default ".charon/")
+--force                    Overwrites private keys with the same name if present.
+-h, --help                 Help for combine
 ```
 
 ## Host a relay
