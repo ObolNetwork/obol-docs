@@ -86,10 +86,10 @@ const config = {
       },
     ],
   ],
-
+  // themes: ['@docusaurus/theme-search-algolia'],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       colorMode: {
         defaultMode: "dark",
         disableSwitch: false,
@@ -193,7 +193,12 @@ const config = {
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
       ],
-    }),
+      algolia: {
+      appId: '2TP87X1OFD',
+      apiKey: '6371f5a3a9c091c7d77c54730d2b1d96',
+      indexName: 'Obol-docs',
+      },
+    },
 };
 
 module.exports = config;
