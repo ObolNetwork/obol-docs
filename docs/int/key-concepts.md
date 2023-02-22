@@ -27,7 +27,7 @@ In the above example, the stack includes Geth, Lighthouse, Charon and Teku.
 
 ![A Geth Client](/img/POWNodeV2.png)
 
-An execution client (formerly known as an Eth1 client) specialises in running the EVM and managing the transaction pool for the Ethereum network. These clients provide execution payloads to consensus clients for inclusion into blocks. 
+An execution client (formerly known as an Eth1 client) specializes in running the EVM and managing the transaction pool for the Ethereum network. These clients provide execution payloads to consensus clients for inclusion into blocks. 
 
 Examples of execution clients include:
 
@@ -83,7 +83,7 @@ A distributed validator cluster is a collection of distributed validator nodes c
 
 ![A Distributed Validator Key](/img/ThresholdSigning.png)
 
-A distributed validator key is a group of BLS private keys, that together operate as a threshold key for participating in proof of stake consensus with.
+A distributed validator key is a group of BLS private keys, that together operate as a threshold key for participating in proof of stake consensus.
 
 ### Distributed Validator Key Share
 

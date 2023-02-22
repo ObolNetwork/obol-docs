@@ -71,7 +71,7 @@ With tutorials for solo and group flows having been developed and refined. The g
 
 The core output from this testnet was a significant number of public cluster running and public feedback collected.
 
-This was an unincentivised testnet and formed the basis for us to figure out a Sybil resistance mechanism.
+This was an unincentivized testnet and formed the basis for us to figure out a Sybil resistance mechanism.
 
 **Participants:** Obol Community
 
