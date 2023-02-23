@@ -148,7 +148,7 @@ Flags:
 
 ### Performing a DKG Ceremony
 
-Th `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
+The `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
 
 ```markdown
 charon dkg --help
@@ -267,7 +267,7 @@ Flags:
 
 ## Host a bootnode (deprecated)
 
-Bootnodes are dual-purpose at this point in time. They run a [discV5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md) discovery server that allows charon clients to find one another despite IP address changes, and they also run a libp2p [circuit relay](https://docs.libp2p.io/concepts/circuit-relay/) server that allows charon clients behind NAT gateways to be communicated with when `--p2p-bootnode-relay` is enabled. These features make it easier to get a distributed validator cluster established and connected, but they trade off against cluster independence and fault tolerance. In the long run the use of these features will be minimised, but for now, if you want to self-host a bootnode for your cluster(s) the following command will start one. 
+Bootnodes are dual-purpose at this point in time. They run a [discV5](https://github.com/ethereum/devp2p/blob/master/discv5/discv5.md) discovery server that allows charon clients to find one another despite IP address changes, and they also run a libp2p [circuit relay](https://docs.libp2p.io/concepts/circuit-relay/) server that allows charon clients behind NAT gateways to be communicated with when `--p2p-bootnode-relay` is enabled. These features make it easier to get a distributed validator cluster established and connected, but they trade off against cluster independence and fault tolerance. In the long run the use of these features will be minimized, but for now, if you want to self-host a bootnode for your cluster(s) the following command will start one. 
 
 ```markdown
 charon bootnode --help

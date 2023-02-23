@@ -29,7 +29,7 @@ This cluster definition specifies the intended cluster configuration before keys
 
 Once all participants have signed the cluster definition, they can load the `cluster-definition` file into their charon client, and the client will attempt to complete the DKG. 
 
-Charon will read the ENRs in the definition, confirm that its ENR is present, and then will reach out to bootnodes that are deployed to find the other ENRs on the network. (Fresh ENRs just have a public key and an IP address of 0.0.0.0 until they are loaded into a live charon client, which will update the IP address and increment the ENRs nonce and resign with the clients private key. If an ENR with a higher nonce is seen be a charon client, they will update the IP address of that ENR in their address book.)
+Charon will read the ENRs in the definition, confirm that its ENR is present, and then will reach out to bootnodes that are deployed to find the other ENRs on the network. (Fresh ENRs just have a public key and an IP address of 0.0.0.0 until they are loaded into a live charon client, which will update the IP address and increment the ENRs nonce and resign with the clients private key. If an ENR with a higher nonce is seen by a charon client, they will update the IP address of that ENR in their address book.)
 
 Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching `cluster_definition_hash`), the ceremony begins.
 
@@ -45,7 +45,7 @@ These files are:
 - **A distributed validator cluster lock file:** This `cluster-lock.json` file contains the configuration a distributed validator client like charon needs to join a cluster capable of operating a number of distributed validators.
 - **Validator deposit data:** This file is used to activate one or more distributed validators on the Ethereum network. 
 
-Once the ceremony is complete, all participants should take a backup of the created files. In future versions of charon, if a participant loses access to these key shares, it will be possible to use a key re-sharing protocol to swap the participants old keys out of a distributed validator in favour of new keys, allowing the rest of a cluster to recover from a set of lost key shares. However for now, without a backup, the safest thing to do would be to exit the validator.
+Once the ceremony is complete, all participants should take a backup of the created files. In future versions of charon, if a participant loses access to these key shares, it will be possible to use a key re-sharing protocol to swap the participants old keys out of a distributed validator in favor of new keys, allowing the rest of a cluster to recover from a set of lost key shares. However for now, without a backup, the safest thing to do would be to exit the validator.
 
 ## DKG Verification
 

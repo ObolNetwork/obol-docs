@@ -49,7 +49,7 @@ If the submission of deposits to a deposit registry needs to be gated to only wh
 
 ### Validator Registry
 
-If validators need to be managed on chain programatically rather than manually with humans triggering exits, a validator registry can be used. Deposits getting activated get an entry into the validator registry, and validators using 0x03 exits get staged for removal from the registry. This registry can be used to coordinate many validators with similar operators and configuration. 
+If validators need to be managed on chain programmatically rather than manually with humans triggering exits, a validator registry can be used. Deposits getting activated get an entry into the validator registry, and validators using 0x03 exits get staged for removal from the registry. This registry can be used to coordinate many validators with similar operators and configuration. 
 
 :::note
 
