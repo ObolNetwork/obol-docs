@@ -3,7 +3,9 @@ sidebar_position: 5
 description: Combine distributed validator keyshares
 ---
 
-# Combine distributed validator keyshares into an Ethereum validator key
+# Combine DV keyshares
+
+Combine distributed validator keyshares into an Ethereum validator key
 
 :::caution
 Combining keyshares into an Ethereum validator key is a security hazard, and can potentially get you slashed.
