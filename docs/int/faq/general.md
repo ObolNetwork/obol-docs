@@ -65,7 +65,7 @@ Diagnose some common errors and view their resolutions [here](./errors.mdx).
 
 ## Self-Host a Bootnode
 
-If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralisation, you can opt to host your own bootnode on a separate open and static internet port.
+If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralization, you can opt to host your own bootnode on a separate open and static internet port.
 
 ```
 # Figure out your public IP
