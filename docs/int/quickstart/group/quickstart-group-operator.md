@@ -98,7 +98,13 @@ For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running 
     - A `cluster-lock.json` file. This contains the information needed by charon to operate the distributed validator cluster with its peers.
     - A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
 
-4. At this point you should make a backup of the `.charon/validator_keys` folder as replacing lost private keys is not straightforward at this point in charon's development. The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
+:::caution
+Please make sure to create a backup of `.charon/validator_keys`. **If you lose your keys you won't be able to start the DV cluster successfully.**
+:::
+
+:::info
+The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
+:::
 
 ## Step 4. Start your Distributed Validator Node
 
