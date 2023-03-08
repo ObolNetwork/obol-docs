@@ -20,12 +20,21 @@ Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https
 [Charon](https://www.theoi.com/Khthonios/Kharon.html) [kharon] is the Ancient Greek Ferryman of the Dead. He was tasked with bringing people across the Acheron river to the underworld. His fee was one Obol coin, placed in the mouth of the deceased. This tradition of placing a coin or Obol in the mouth of the deceased continues to this day across the Greek world.
 
 ### What are the hardware requirements for running a Charon node?
+Charon alone uses negligible disk space of not more than a few MBs. However, if you are running your consensus client and execution client on the same server than charon, then you will typically need the same hardware as running a full Ethereum node: 
 
-It should be the same as running a normal post-merge Ethereum node. It would be easiest with 16GB of RAM, 1TB of disk and 8MB/s of internet bandwidth, though lower resourced machines can probably be used with some effort.
+At minimum:
+- CPU with 2+ cores
+- 8GB RAM
+- 1TB free disk space
+- 10MB/s bandwidth
 
-Charon alone uses negligible disk space of not more than a few MBs. However, if you are running your consensus client and execution client on the same server with charon, then you will need 1TB of free SSD disk space (assuming you are running a testnet chain, mainnet requires [2TB](https://geth.ethereum.org/docs/getting-started/hardware-requirements) of disk space).
+Recommended specifications:
+- Fast CPU with 4+ cores
+- 16GB+ RAM
+- Fast SSD with 1+TB
+- 25MB/s bandwidth
 
-For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+For more hardware considerations, check out the [Ethereum.org guides](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware) which explores various setups and trade-offs, such as running the node locally or in the cloud.
 
 ## Migrating existing validators
 
