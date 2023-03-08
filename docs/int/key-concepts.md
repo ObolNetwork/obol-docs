@@ -83,9 +83,15 @@ A distributed validator cluster is a collection of distributed validator nodes c
 
 ![A Distributed Validator Key](/img/ThresholdSigning.png)
 
-A distributed validator key is a group of BLS private keys, that together operate as a threshold key for participating in proof of stake consensus with.
+A distributed validator key is a group of BLS private keys, that together operate as a threshold key for participating in proof of stake consensus.
 
-The number of nodes in a cluster that need to be online and honest for their distributed validators to be online is outlined in the following table.
+### Distributed Validator Key Share
+
+One piece of the distributed validator private key.
+
+### Distributed Validator Threshold
+
+The number of nodes in a cluster that needs to be online and honest for their distributed validators to be online is outlined in the following table.
 
 | Cluster Size | Threshold | Note              |
 |:------------:|:---------:|:------------------|
@@ -96,10 +102,6 @@ The number of nodes in a cluster that need to be online and honest for their dis
 | 8            |  6/8      |                   |
 | 9            |  6/9      | Minimum to tolerate three offline nodes |
 | 10           |  7/10     | Minimum to tolerate three **malicious** nodes |
-
-### Distributed Validator Key Share
-
-One piece of the distributed validator private key.
 
 ### Distributed Validator Key Generation Ceremony
 
