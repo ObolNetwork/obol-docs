@@ -136,7 +136,8 @@ which needs a prysm beacon node to work alongside a REST based beacon node. Here
    docker compose -f docker-compose.yml -f compose-prysm.yml -f docker-compose.override.yml up --build
    ```
 
-Note: Support for prysm VCs with is in experimental phase as prysm doesn't provide complete support of REST API compatible validator client.
+Note: Support for prysm VCs is in experimental phase as prysm doesn't provide [complete support](https://github.com/prysmaticlabs/prysm/issues/11580)
+of REST API compatible validator client.
 
 ## Feedback
 
