@@ -11,7 +11,7 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.13.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.13.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.14.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.14.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use. 
 
