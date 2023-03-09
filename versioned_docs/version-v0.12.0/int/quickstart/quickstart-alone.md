@@ -38,7 +38,7 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 1. Start the cluster
    ```sh
    # Start the distributed validator cluster
-   docker-compose up
+   docker compose up
    ```
 1. Checkout the monitoring dashboard and see if things look all right
 

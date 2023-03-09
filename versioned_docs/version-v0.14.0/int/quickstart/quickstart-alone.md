@@ -46,7 +46,7 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.14.0 create cluste
 
 This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
 
-This guide will launch all six charon clients in separate containers along with an execution client and consensus client. To distribute your cluster physically, copy each directory with one (or several) private keys within it to the other machines you want to use. Consider using the single node [docker-compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected.
+This guide will launch all six charon clients in separate containers along with an execution client and consensus client. To distribute your cluster physically, copy each directory with one (or several) private keys within it to the other machines you want to use. Consider using the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected.
 
 ### Distributed Validator Cluster
 
@@ -69,7 +69,7 @@ Run this command from each machine containing private keys to start your cluster
 
 ```sh
 # Start the distributed validator cluster
-docker-compose up --build
+docker compose up --build
 ```
 Check the monitoring dashboard and see if things look all right
 
@@ -115,7 +115,7 @@ A threshold of nodes in the cluster need to perform this task to exit a validato
   - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
   - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
 - Run the command to submit this node's partially signed voluntary exit:
-  - `docker-compose -f compose-voluntary-exit.yml up`
+  - `docker compose -f compose-voluntary-exit.yml up`
   - Confirm the logs: `Exit for validator XXXXX submitted`
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.

@@ -8,15 +8,15 @@ description: Errors & Resolutions
 All operators should try to restart their nodes and should check if they are on the latest stable version before attempting anything other configuration change as we are still in beta and frequently releasing fixes. You can restart and update with the following commands:
 
 ```
-docker-compose down
+docker compose down
 git pull
-docker-compose up
+docker compose up
 ```
 
 You can check your logs using
 
 ```
-docker-compose logs
+docker compose logs
 ```
 <details open className="details">
   <summary>
@@ -344,7 +344,7 @@ docker-compose logs
   </details>
   <details className="details">
     <summary>
-      <h4 id="running-docker-compose-up-error"> I see a lot of errors after running <code>docker-compose up</code>
+      <h4 id="running-docker-compose-up-error"> I see a lot of errors after running <code>docker compose up</code>
       </h4>
     </summary> It's because both geth and lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when geth finishes syncing. You can also add a second beacon node endpoint for something like infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose(./docker-compose.yml#84).
   </details>
@@ -352,7 +352,7 @@ docker-compose logs
     <summary>
       <h4 id="loki-plugin-not-found-error"> How do I fix the <code>plugin "loki" not found</code> error?
       </h4>
-    </summary> If you get the following error when calling `docker-compose up`:<br/>
+    </summary> If you get the following error when calling `docker compose up`:<br/>
     <code>Error response from daemon: error looking up logging plugin loki: plugin "loki" not found</code>.<br/>Then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:<br/>
     <code>docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions </code>
   </details>

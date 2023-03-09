@@ -106,7 +106,7 @@ Before completing these instructions, you should assign a static local IP addres
 rm -r ./data/lighthouse
 
 # Spin up a Distributed Validator Node with a Validator Client
-docker-compose up
+docker compose up
 
 # Open Grafana dashboard
 open http://localhost:3000/d/singlenode/
@@ -125,7 +125,7 @@ If at any point you need to turn off your node, you can run:
 
 ```
 # Shut down the currently running distributed validator node
-docker-compose down
+docker compose down
 ```
 
 ## Step 5. Activate the deposit data
@@ -199,7 +199,7 @@ A threshold of operators in the cluster need to perform this task to exit a vali
   - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
   - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
 - Run the command to submit this node's partially signed voluntary exit:
-  - `docker-compose -f compose-voluntary-exit.yml up`
+  - `docker compose -f compose-voluntary-exit.yml up`
   - Confirm the logs: `Exit for validator XXXXX submitted`
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
@@ -214,7 +214,7 @@ The above steps should get you running a distributed validator cluster. The foll
 
 ### Docker power users
 
-This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker-compose` and want to have more flexibility and power to change the default configuration.
+This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker compose` and want to have more flexibility and power to change the default configuration.
 
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
 See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
@@ -223,7 +223,7 @@ There are two additional files in this repository, `compose-debug.yml` and `dock
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
-docker-compose -f docker-compose.yml -f compose-debug.yml up
+docker compose -f docker-compose.yml -f compose-debug.yml up
 ```
 
 - `docker-compose.override.yml.sample` is intended to override the default configuration provided in `docker-compose.yml`. This is useful when, for example, you wish to add port mappings or want to disable a container.
@@ -232,11 +232,11 @@ docker-compose -f docker-compose.yml -f compose-debug.yml up
 ```
 cp docker-compose.override.yml.sample docker-compose.override.yml
 
-# Tweak docker-compose.override.yml and then run docker-compose up
-docker-compose up
+# Tweak docker-compose.override.yml and then run docker compose up
+docker compose up
 ```
 
 - You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
 ```
-docker-compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
+docker compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
 ```

@@ -112,7 +112,7 @@ With the DKG ceremony over, the last phase before activation is to prepare your 
 
 Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
 
-**Caution**: If you manually update `docker-compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.
+**Caution**: If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.
 
 **Note**: If you have a `geth` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/geth`. This makes everything faster since you start from a synced geth node.
 
@@ -121,7 +121,7 @@ Before completing these instructions, you should assign a static local IP addres
 rm -r ./data/lighthouse
 
 # Spin up a Distributed Validator Node with a Validator Client
-docker-compose up
+docker compose up
 
 # Open Grafana dashboard
 open http://localhost:3000/d/singlenode/
@@ -140,7 +140,7 @@ If at any point you need to turn off your node, you can run:
 
 ```
 # Shut down the currently running distributed validator node
-docker-compose down
+docker compose down
 ```
 
 ## Step 5. Activate the deposit data
@@ -214,7 +214,7 @@ A threshold of operators in the cluster need to perform this task to exit a vali
   - `compose-volutary-exit.yml` is configured with `--epoch=112260` which is the latest Bellatrix fork on Prater.
   - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
 - Run the command to submit this node's partially signed voluntary exit:
-  - `docker-compose -f compose-voluntary-exit.yml up`
+  - `docker compose -f compose-voluntary-exit.yml up`
   - Confirm the logs: `Exit for validator XXXXX submitted`
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
@@ -238,7 +238,7 @@ There are some additional compose files in this repository, `compose-debug.yml`,
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 ```
-docker-compose -f docker-compose.yml -f compose-debug.yml up
+docker compose -f docker-compose.yml -f compose-debug.yml up
 ```
 
 - `docker-compose.override.yml.sample` is intended to override the default configuration provided in `docker-compose.yml`. This is useful when, for example, you wish to add port mappings or want to disable a container.
@@ -247,16 +247,16 @@ docker-compose -f docker-compose.yml -f compose-debug.yml up
 ```
 cp docker-compose.override.yml.sample docker-compose.override.yml
 
-# Tweak docker-compose.override.yml and then run docker-compose up
-docker-compose up
+# Tweak docker-compose.override.yml and then run docker compose up
+docker compose up
 ```
 
 - You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
 ```
-docker-compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
+docker compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
 ```
 
 - To run [mev-boost](https://boost.flashbots.net/), run:
 ```
-docker-compose -f docker-compose.yml -f mevboost-compose.yml up
+docker compose -f docker-compose.yml -f mevboost-compose.yml up
 ```

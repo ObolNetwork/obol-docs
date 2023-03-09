@@ -59,7 +59,7 @@ By the way, the more operators, the longer the DKG, but don't worry, there is no
 
 ## Debugging Errors in Logs 
 
-You can check if the containers on your node are outputting errors by running `docker-compose logs` on a machine with a running cluster.
+You can check if the containers on your node are outputting errors by running `docker compose logs` on a machine with a running cluster.
 
 Diagnose some common errors and view their resolutions [here](./errors.mdx).
 
@@ -80,7 +80,7 @@ cd charon-distributed-validator-node
 
 nano bootnode/docker-compose.yml
 
-docker-compose -f bootnode/docker-compose.yml up
+docker compose -f bootnode/docker-compose.yml up
 ```
 
 Test whether the bootnode is publicly accessible. This should return an ENR:
