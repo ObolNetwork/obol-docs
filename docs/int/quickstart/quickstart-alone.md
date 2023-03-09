@@ -57,10 +57,10 @@ The default cluster consists of:
 - Mixture of validator clients:
    - vc0: [Lighthouse](https://github.com/sigp/lighthouse)
    - vc1: [Teku](https://github.com/ConsenSys/teku)
-   - vc2: [Vouch](https://github.com/attestantio/vouch)
+   - vc2: [Nimbus](https://github.com/status-im/nimbus-eth2)
    - vc3: [Lighthouse](https://github.com/sigp/lighthouse)
    - vc4: [Teku](https://github.com/ConsenSys/teku)
-   - vc5: [Vouch](https://github.com/attestantio/vouch)
+   - vc5: [Nimbus](https://github.com/status-im/nimbus-eth2)
 
 The intention is to support all validator clients. Read more about our client support [here](https://dvt.obol.tech).
 
@@ -120,6 +120,26 @@ A threshold of nodes in the cluster need to perform this task to exit a validato
   - Exit the container: `Ctrl-C`
 - The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
 
+## Run Prysm VCs in a DV Cluster
+
+We have provided experimental support of prysm validator client through [compose-prysm.yml](https://github.com/ObolNetwork/charon-distributed-validator-cluster/blob/main/compose-prysm.yml) 
+which needs a prysm beacon node to work alongside a REST based beacon node. Here are the steps to test prysm in a DV Cluster:
+
+1. Run the following command:
+   ```sh
+   cp docker-compose.override.yml.sample docker-compose.override.yml
+   ```
+2. **Disable** the VCs in `docker-compose.override.yml` that are to be replaced by corresponding prysm VCs by un-commenting profiles field
+([more details on profiles](https://docs.docker.com/compose/profiles/)). Also disable the prysm VCs that are not required in the cluster in `docker-compose.override.yml`.
+3. Run the following command:
+   ```sh
+   docker compose -f docker-compose.yml -f compose-prysm.yml -f docker-compose.override.yml up --build
+   ```
+
+Note: Support for prysm VCs with is in experimental phase as prysm doesn't provide complete support of REST API compatible validator client.
+
 ## Feedback
 
-If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
+If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear
+your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). 
+Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
