@@ -329,7 +329,7 @@ Usage:
   charon combine [flags]
 
 Flags:
-      --cluster-dir string   Parent directory containing a number of .charon subdirectories from each node in the cluster. (default ".charon/")
+      --cluster-dir string   Parent directory containing a number of .charon subdirectories from each node in the cluster. (default ".charon/cluster/")
       --force                Overwrites private keys with the same name if present.
   -h, --help                 Help for combine
 
