@@ -89,6 +89,20 @@ A distributed validator key is a group of BLS private keys, that together operat
 
 One piece of the distributed validator private key.
 
+### Distributed Validator Threshold
+
+The number of nodes in a cluster that needs to be online and honest for their distributed validators to be online is outlined in the following table.
+
+| Cluster Size | Threshold | Note              |
+|:------------:|:---------:|:------------------|
+| 4            |  3/4      | Minimum threshold |
+| 5            |  4/5      |                   |
+| 6            |  4/6      | Minimum to tolerate two offline nodes|
+| 7            |  5/7      | Minimum to tolerate two **malicious** nodes |
+| 8            |  6/8      |                   |
+| 9            |  6/9      | Minimum to tolerate three offline nodes |
+| 10           |  7/10     | Minimum to tolerate three **malicious** nodes |
+
 ### Distributed Validator Key Generation Ceremony
 
 To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 

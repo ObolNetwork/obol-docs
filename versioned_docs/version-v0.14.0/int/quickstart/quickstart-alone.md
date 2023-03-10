@@ -44,7 +44,8 @@ Run the following command:
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.14.0 create cluster --name="mycluster" --withdrawal-addresses="0x000000000000000000000000000000000000dead" --fee-recipient-addresses="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
 ```
 
-This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
+This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`. Note
+that charon versions prior to `v0.14.0` had a single `--withdrawal-address` flag which was changed to the `--withdrawal-addresses` flag in the [v0.14.0 release](https://github.com/ObolNetwork/charon/releases/tag/v0.14.0).
 
 This guide will launch all six charon clients in separate containers along with an execution client and consensus client. To distribute your cluster physically, copy each directory with one (or several) private keys within it to the other machines you want to use. Consider using the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected.
 
@@ -136,8 +137,8 @@ which needs a prysm beacon node to work alongside a REST based beacon node. Here
    docker compose -f docker-compose.yml -f compose-prysm.yml -f docker-compose.override.yml up --build
    ```
 
-Note: Support for prysm VCs is in experimental phase as prysm doesn't provide [complete support](https://github.com/prysmaticlabs/prysm/issues/11580)
-of REST API compatible validator client.
+Note: Support for prysm validator clients is in an experimental phase as prysm doesn't provide [complete support](https://github.com/prysmaticlabs/prysm/issues/11580)
+for running their validator client on a beacon node REST API. 
 
 ## Feedback
 
