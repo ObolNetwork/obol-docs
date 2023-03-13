@@ -5,17 +5,17 @@ description: Combine distributed validator keyshares
 
 # Combine DV keyshares
 
-Combine distributed validator keyshares into an Ethereum validator key
-
 :::caution
-Combining keyshares into an Ethereum validator key is a security hazard, and can potentially get you slashed.
+Combining keyshares into an Ethereum validator key is a security hazard, and can potentially cause your validator to be slashed.
 
 Only combine keyshares for a cluster that's about to be shut down.
 :::
 
+Combine distributed validator keyshares into an Ethereum validator key.
+
 ## Pre-requisites
 
-- Ensure you have all the `.charon` directories of all the cluster node operators
+- Ensure you have all the `.charon` directories of all the cluster node operators.
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
 - Make sure `docker` is running before executing the commands below.
 
@@ -23,7 +23,7 @@ Only combine keyshares for a cluster that's about to be shut down.
 
 Rename each cluster node operator `.charon` directory in a different way.
 
-We suggest to name them in a clear and distinct way, to avoid confusion.
+We suggest naming them clearly and distinctly, to avoid confusion.
 
 At the end of this process, you should have a tree like this:
 
@@ -58,7 +58,8 @@ validators-to-be-combined/
 │       ├── keystore-0.txt
 │       ├── keystore-1.json
 │       └── keystore-1.txt
-└── node3
+...
+└── node*
     ├── charon-enr-private-key
     ├── cluster-lock.json
     ├── deposit-data.json
@@ -142,7 +143,6 @@ We can verify that the directory names are correct by looking at the lock file:
 $ jq .distributed_validators[].distributed_public_key  validators-to-be-combined//node0/cluster-lock.json
 "0x822c5310674f4fc4ec595642d0eab73d01c62b588f467da6f98564f292a975a0ac4c3a10f1b3a00ccc166a28093c2dcd"
 "0x8929b4c8af2d2eb222d377cac2aa7be950e71d2b247507d19b5fdec838f0fb045ea8910075f191fd468da4be29690106"
-
 ```
 
 :::info
