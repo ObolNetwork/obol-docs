@@ -73,7 +73,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 7. Wait for all the other operators in your cluster to do the same.
 
-## Step 3. Run the DKG
+## Step 4. Run the DKG
 :::info
 For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
 :::
@@ -106,7 +106,7 @@ Please make sure to create a backup of `.charon/validator_keys`. **If you lose y
 The `cluster-lock` and `deposit-data` files are identical for each operator and can be copied if lost.
 :::
 
-## Step 4. Start your Distributed Validator Node
+## Step 5. Start your Distributed Validator Node
 
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
 
@@ -143,7 +143,7 @@ If at any point you need to turn off your node, you can run:
 docker compose down
 ```
 
-## Step 5. Activate the deposit data
+## Step 6. Activate the deposit data
 
 Congrats 🎉 if your cluster have gotten to this step of the quickstart and have successfully created a distributed validator together. 
 
@@ -151,7 +151,7 @@ If you have connected all of your charon clients together such that the monitori
 
 This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
 
-## Step 6 - Optional. Add the Monitoring Credentials
+## Step 7 - Optional. Add the Monitoring Credentials
 
 :::info
 This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has given you a credential to use.
@@ -187,7 +187,7 @@ scrape_configs:
       - targets: ['node-exporter:9100']
 ```
 
-## Step 7. Validator Voluntary Exit
+## Step 8. Validator Voluntary Exit
 
 :::caution
 This step only needs to be taken when you decide to exit your DV cluster. 
