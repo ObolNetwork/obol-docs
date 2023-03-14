@@ -40,8 +40,12 @@ Charon is in an early alpha state and is not ready to be run on mainnet
 Run the following command:
 
 ```sh
+# Enter required validator addresses
+WITHDRAWAL_ADDR=<ENTER YOUR WITHDRAWAL ADDRESS HERE>
+FEE_RECIPIENT_ADDR=<ENTER YOUR FEE RECIPIENT ADDRESS HERE>
+
 # Create a distributed validator cluster
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.14.0 create cluster --name="mycluster" --withdrawal-addresses="0x000000000000000000000000000000000000dead" --fee-recipient-addresses="0x000000000000000000000000000000000000dead" --nodes 6 --threshold 5
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.14.0 create cluster --name="mycluster" --withdrawal-addresses="${WITHDRAWAL_ADDR}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDR}" --nodes 6 --threshold 5
 ```
 
 This command will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`. Note
