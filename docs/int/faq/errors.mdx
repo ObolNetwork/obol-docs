@@ -152,14 +152,14 @@ docker compose logs
           <code>Reserve relay circuit: reservation failed</code> error
         </h4>
       </summary>
-      <code>RESERVATION_REFUSED</code> is returned by the bootnode libp2p relay when some maximum limit has been reached. 
+      <code>RESERVATION_REFUSED</code> is returned by the libp2p relay when some maximum limit has been reached. 
       This is most often due to "maximum reservations per IP/peer". 
       This is when your charon node is restarting or in some error loop and constantly attempting to create new relay reservations reaching the maximum. 
       <br /><br />
       To fix this error, stop your charon node for 30mins before restarting it. 
-      This should allow the bootnode enough time to reset your ip/peer limits and should then allow new reservations. 
-      This could also be due to the bootnode being overloaded in general, so reaching a server wide "maximum connections" limit.
-      This is an issue with bootnode scalability and we are working in a long term fix for this. 
+      This should allow the relay enough time to reset your ip/peer limits and should then allow new reservations. 
+      This could also be due to the relay being overloaded in general, so reaching a server wide "maximum connections" limit.
+      This is an issue with relay scalability and we are working in a long term fix for this. 
     </details>
     <details className="details">
       <summary>
@@ -359,13 +359,20 @@ docker compose logs
 </details>
 <details open className="details">
   <summary>
-    <h2 id="standalone-bootnode"> Standalone Bootnode </h2>
+    <h2 id="Relay">Relay</h2>
   </summary>
   <details className="details">
     <summary>
       <h4 id="resolve-ip-or-p2p-external-host-flag-error">
         <code> Resolve IP of p2p external host flag: lookup replace.with.public.ip.or.hostname: no such host </code>{" "} error
       </h4>
-    </summary> Replace <code>replace.with.public.ip.or.hostname</code> in the bootnode/docker-compose.yml with your real public IP or DNS hostname.
+    </summary> Replace <code>replace.with.public.ip.or.hostname</code> in the relay/docker-compose.yml with your real public IP or DNS hostname.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="timeout-resolving-bootnode-enr">
+        <code> Timeout resolving bootnode ENR: context deadline exceeded </code>{" "} error
+      </h4>
+    </summary> The relay you are trying to connect to your peers via is offline or is being restricted from your location.
   </details>
 </details>

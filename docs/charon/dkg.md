@@ -29,7 +29,7 @@ This cluster definition specifies the intended cluster configuration before keys
 
 Once all participants have signed the cluster definition, they can load the `cluster-definition` file into their charon client, and the client will attempt to complete the DKG. 
 
-Charon will read the ENRs in the definition, confirm that its ENR is present, and then will reach out to bootnodes that are deployed to find the other ENRs on the network. (Fresh ENRs just have a public key and an IP address of 0.0.0.0 until they are loaded into a live charon client, which will update the IP address and increment the ENRs nonce and resign with the clients private key. If an ENR with a higher nonce is seen by a charon client, they will update the IP address of that ENR in their address book.)
+Charon will read the ENRs in the definition, confirm that its ENR is present, and then will reach out to relays that are deployed to find the other ENRs on the network. (Fresh ENRs just have a public key and an IP address of 0.0.0.0 until they are loaded into a live charon client, which will update the IP address and increment the ENRs nonce and resign with the clients private key. If an ENR with a higher nonce is seen by a charon client, they will update the IP address of that ENR in their address book.)
 
 Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching `cluster_definition_hash`), the ceremony begins.
 
