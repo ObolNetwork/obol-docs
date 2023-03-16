@@ -63,9 +63,9 @@ You can check if the containers on your node are outputting errors by running `d
 
 Diagnose some common errors and view their resolutions [here](./errors.mdx).
 
-## Self-Host a Bootnode
+## Self-Host a Relay
 
-If you are experiencing connectivity issues with the Obol hosted bootnode, or you want to improve your clusters latency and decentralization, you can opt to host your own bootnode on a separate open and static internet port.
+If you are experiencing connectivity issues with the Obol hosted relays, or you want to improve your clusters latency and decentralization, you can opt to host your own relay on a separate open and static internet port.
 
 ```
 # Figure out your public IP
@@ -76,21 +76,21 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 
 cd charon-distributed-validator-node
 
-# Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in bootnode/docker-compose.yml with your public IPv4 or DNS hostname
+# Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname
 
-nano bootnode/docker-compose.yml
+nano relay/docker-compose.yml
 
-docker compose -f bootnode/docker-compose.yml up
+docker compose -f relay/docker-compose.yml up
 ```
 
-Test whether the bootnode is publicly accessible. This should return an ENR:
+Test whether the relay is publicly accessible. This should return an ENR:
 `curl http://replace.with.public.ip.or.hostname:3640/enr`
 
-Ensure the ENR returned by the bootnode contains the correct public IP and port by decoding it with https://enr-viewer.com/.
+Ensure the ENR returned by the relay contains the correct public IP and port by decoding it with https://enr-viewer.com/.
 
-Configure **ALL** charon nodes in your cluster to use this bootnode:
+Configure **ALL** charon nodes in your cluster to use this relay:
 
-- Either by adding a flag: `--p2p-bootnodes=http://replace.with.public.ip.or.hostname:3640/enr`
-- Or by setting the environment variable: `CHARON_P2P_BOOTNODES=http://replace.with.public.ip.or.hostname:3640/enr`
+- Either by adding a flag: `--p2p-relays=http://replace.with.public.ip.or.hostname:3640/enr`
+- Or by setting the environment variable: `CHARON_P2P_RELAYS=http://replace.with.public.ip.or.hostname:3640/enr`
 
-Note that a local `boonode/.charon/charon-enr-private-key` file will be created next to `bootnode/docker-compose.yml` to ensure a persisted bootnode ENR across restarts.
+Note that a local `relay/.charon/charon-enr-private-key` file will be created next to `relay/docker-compose.yml` to ensure a persisted relay ENR across restarts.

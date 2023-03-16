@@ -33,7 +33,7 @@ The following is an outline of the services that can be exposed by charon.
 
 - **:3630** - UDP discovery port. This port is used by the discv5 discovery protocol for peer discovery of charon nodes.
 
-- **:3640**  - Bootnode HTTP server port. This port hosts a HTTP webserver that serves a client's ENR on `/enr`. This is only used by the `charon bootnode` command. 
+- **:3640**  - Relay HTTP server port. This port hosts a HTTP webserver that serves a client's ENR on `/enr`. This is only used by the `charon relay` command. 
 
 ## Getting started
 
