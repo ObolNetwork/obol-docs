@@ -1,5 +1,5 @@
 ---
-description: Charon - The Distributed Validator Client
+description: Security Roadmap
 sidebar_position: 2
 ---
 
@@ -15,4 +15,3 @@ Obol Labs has completed the following security audits:
 1. Launchpad and public APIs - September 2023
 ## Circe Attack Net
 Circe attack net will be launched in 2023 Q2
-

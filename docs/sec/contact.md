@@ -1,5 +1,5 @@
 ---
-description: Charon - The Distributed Validator Client
+description: Security Contact
 sidebar_position: 3
 ---
 
