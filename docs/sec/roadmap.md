@@ -3,7 +3,7 @@ description: Security Roadmap
 sidebar_position: 2
 ---
 
-# Obol Security Roadmap for 2023
+# Roadmap
 
 ## Past Audits
 Obol Labs has completed the following security audits:

@@ -3,7 +3,7 @@ description: Security Overview
 sidebar_position: 1
 ---
 
-# Obol Security Overview
+# Overview
 This page serves as an overview of the Obol Network from a security auditor’s point of view. It lists all of the projects that are intended to fall under the scope of the Obol Network project, as well as past audit reports, notable security bugs, and open security/privacy challenges in the Obol Network. You can think of this page as “a security auditor’s guide to Obol.”
 
 This page is updated quarterly. The last update was on 2023-03-21.
