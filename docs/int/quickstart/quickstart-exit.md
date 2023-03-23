@@ -20,7 +20,7 @@ Exiting your validator keys can be useful in situations where you want to stop s
 
 ## Step 1. Confirm the `EXIT_EPOCH`
 
-Set the `EXIT_EPOCH` environment variable to the epoch number at which you want to exit. For example, if you want to exit at epoch 112260, enter the following command:
+Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want to exit as soon as possible, the default epoch of `112260` is sufficient.
     
     export EXIT_EPOCH=112260
 
