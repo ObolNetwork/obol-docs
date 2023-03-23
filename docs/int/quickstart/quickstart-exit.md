@@ -26,7 +26,11 @@ Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want 
 
 ## Step 2. Run the `voluntary-exit` command on your validator client
 
-Run the following voluntarily exit the validator:
+Run the appropriate command to broadcast an exit message from your validator client to its upstream charon client.
+
+:::tip
+This command should be executed on your running validator client, not your charon client. It needs to be the validator client that is connected to your charon client taking part in the Distributed Validator Cluster, and not a standalone VC connected to a different consensus layer client, as you are only signing a partial exit message, with a partial private key share, which charon will combine with the other partial exit messages from the other operators in the cluster before broadcasting to the consensus layer when it valid. 
+:::
 
 <Tabs groupId="validator-clients">
   <TabItem value="teku" label="Teku" default>
