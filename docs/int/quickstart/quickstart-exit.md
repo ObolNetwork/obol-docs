@@ -66,7 +66,7 @@ This command should be executed on your running validator client, not your charo
   </TabItem>
 </Tabs>
 
-Once a threshold of exit signatures has been reached, charon will submit the exit transaction to the beacon chain.
+Once a threshold of exit signatures has been received by any single charon client, it will craft a valid exit message and will submit it to the beacon chain for inclusion.
 
 ## Feedback
 
