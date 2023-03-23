@@ -18,7 +18,7 @@ Exiting your validator keys can be useful in situations where you want to stop s
 - A quorum of operators needs to run the same exit command for the exit to succeed.
 - If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has stored. If all charon clients restart before the required threshold of exit messages are received, operators will have to rebroadcast the exit messages. 
 
-## Step 1. Set the `EXIT_EPOCH`
+## Step 1. Confirm the `EXIT_EPOCH`
 
 Set the `EXIT_EPOCH` environment variable to the epoch number at which you want to exit. For example, if you want to exit at epoch 112260, enter the following command:
     
