@@ -24,7 +24,7 @@ Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want 
     
     export EXIT_EPOCH=112260
 
-## Step 2. Run the `voluntary-exit` command
+## Step 2. Run the `voluntary-exit` command on your validator client
 
 Run the following voluntarily exit the validator:
 
