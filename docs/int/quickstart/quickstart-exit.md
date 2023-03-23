@@ -33,37 +33,19 @@ This command should be executed on your running validator client, not your charo
 :::
 
 <Tabs groupId="validator-clients">
-  <TabItem value="teku" label="Teku" default>
-    <pre>
-      <code>
-    {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
-    --beacon-node-api-endpoint="http://charon:3600/" \
-    --confirmation-enabled=false \
-    --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-    --epoch=$\{EXIT_EPOCH:-112260}`}
-      </code>
-    </pre>
-  </TabItem>
-  <TabItem value="lighthouse" label="Lighthouse">
-    <pre>
-      <code>
-    {String.raw`docker exec -ti charon-distributed-validator-node-lighthouse-1 /opt/lighthouse/lighthouse validator exit \
-    --beacon-node "http://charon:3600/" \
-    --validator-dir "/opt/charon/validator_keys" \
-    --epoch $\{EXIT_EPOCH:-112260}`}
-      </code>
-    </pre>
-  </TabItem>
-  <TabItem value="nimbus" label="Nimbus">
-    <pre>
-      <code>
-    {String.raw`docker exec -ti charon-distributed-validator-node-nimbus-1 /opt/nimbus-eth2/build/nimbus_beacon_node validator_exit \
-    --rpc="http://charon:3600/" \
-    --validators-dir="/opt/charon/validator_keys" \
-    --exit-epoch=$\{EXIT_EPOCH:-112260}`}
-      </code>
-    </pre>
-  </TabItem>
+  {[
+    <TabItem value="teku" label="Teku" default>
+      <pre>
+        <code>
+      {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+      --beacon-node-api-endpoint="http://charon:3600/" \
+      --confirmation-enabled=false \
+      --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+      --epoch=$\{EXIT_EPOCH:-112260}`}
+        </code>
+      </pre>
+    </TabItem>
+  ]}
 </Tabs>
 
 Once a threshold of exit signatures has been received by any single charon client, it will craft a valid exit message and will submit it to the beacon chain for inclusion.
