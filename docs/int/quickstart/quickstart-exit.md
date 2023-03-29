@@ -22,7 +22,7 @@ Exiting your validator keys can be useful in situations where you want to stop s
 
 Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want to exit as soon as possible, the default epoch of `112260` is sufficient.
     
-    export EXIT_EPOCH=112260
+    export EXIT_EPOCH=162304
 
 ## Step 2. Run the `voluntary-exit` command on your validator client
 
@@ -41,7 +41,7 @@ This command should be executed on your running validator client, not your charo
       --beacon-node-api-endpoint="http://charon:3600/" \
       --confirmation-enabled=false \
       --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-      --epoch=$\{EXIT_EPOCH:-112260}`}
+      --epoch=$\{EXIT_EPOCH:-162304}`}
         </code>
       </pre>
     </TabItem>
