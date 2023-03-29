@@ -117,7 +117,7 @@ A threshold of nodes in the cluster need to perform this task to exit a validato
   - Voluntary exists require an epoch after which they take effect.
   - All VCs need to sign and submit the exact same messages (epoch) in DVT.
   - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
-  - `compose-voluntary-exit.yml` is configured with `--epoch=162304` which is the latest Bellatrix fork on Prater.
+  - `compose-voluntary-exit.yml` is configured with `--epoch=162304` which is the latest Capella fork on Goerli.
   - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
 - Run the command to submit this node's partially signed voluntary exit:
   - `docker compose -f compose-voluntary-exit.yml up`
