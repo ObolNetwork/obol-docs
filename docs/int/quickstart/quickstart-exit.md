@@ -20,7 +20,7 @@ Exiting your validator keys can be useful in situations where you want to stop s
 
 ## Step 1. Confirm the `EXIT_EPOCH`
 
-Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want to exit as soon as possible, the default epoch of `112260` is sufficient.
+Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want to exit as soon as possible, the default epoch of `162304` is sufficient.
     
     export EXIT_EPOCH=162304
 
