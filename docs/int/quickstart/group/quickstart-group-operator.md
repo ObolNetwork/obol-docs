@@ -189,35 +189,9 @@ scrape_configs:
 
 ## Step 8. Validator Voluntary Exit
 
-:::caution
-This step only needs to be taken when you decide to exit your DV cluster. 
-:::
-A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
+Exiting your validator(s) can be useful in situations where you want to stop staking and withdraw your staked ETH.
 
-To trigger a voluntary exit, a sidecar `docker-compose` command is executed that signs and submits the voluntary exit to the active running charon node that shares it with other nodes in the cluster. The commands below should be executed in the terminal on the same machine and same folder as the active running `charon-distribute-validator-node` docker compose.
-
-:::info
-A threshold of operators in the cluster need to perform this task to exit a validator.
-:::
-
-- Create a new `exit_keys` folder next to `.charon/validator_keys`: `mkdir .charon/exit_keys`
-- Copy the validator keys and passwords that you want to exit from the `validator_keys` folder to the `exit_keys` folder.
-  - E.g. to exit validator #4: `cp .charon/validator_keys/keystore/keystore-4* .charon/exit_keys/`
-  - Warning: all keys copied to the `exit_keys` folder will be exited, so be careful!
-- Ensure the external network in `compose-voluntary-exit.yml` is correct.
-  - Confirm the name of the exiting `charon-distributed-validator-node` docker network: `docker network ls`.
-  - If it isn't `charon-distributed-validator-node-dvnode`, then update `compose-voluntary-exit.yml` accordingly.
-- Ensure the latest fork version epoch is used:
-  - Voluntary exists require an epoch after which they take effect.
-  - All VCs need to sign and submit the exact same messages (epoch) in DVT.
-  - `--epoch=1` would be ideal, since all chains have that epoch in the past, so the validator should exit immediately.
-  - `compose-voluntary-exit.yml` is configured with `--epoch=162304` which is the latest Capella fork on Goerli.
-  - If the Charon cluster is running on a different chain, **ALL** operators must update `--epoch` to the same latest fork version returned by `curl $BEACON_NODE/eth/v1/config/fork_schedule`.
-- Run the command to submit this node's partially signed voluntary exit:
-  - `docker compose -f compose-voluntary-exit.yml up`
-  - Confirm the logs: `Exit for validator XXXXX submitted`
-  - Exit the container: `Ctrl-C`
-- The charon metric `core_parsigdb_exit_total` will be incremented each time a voluntary exit partial signature is received, either from this node or from peers.
+👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
 
 ## Feedback
 
