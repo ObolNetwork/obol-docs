@@ -1,7 +1,7 @@
 ---
 description: Security Contacts
-sidebar_position: 3
+sidebar_position: 4
 ---
 
-# Contact
-If you would like to get in touch to report a security incident, bug, vulnerability, or inquire about Obol's security please [contact us](https://github.com/ObolNetwork/obol-security/blob/main/SECURITY.md#receiving-disclosures)
+# Contacts
+Please email security@obol.tech to report a security incident, vulnerability, bug or inquire about Obol's security.
