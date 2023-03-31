@@ -15,7 +15,7 @@ No. Distributed validators use only Ether.
 
 Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https://twitter.com/ObolNetwork) yet? Maybe join our [discord](https://discord.gg/n6ebKsX46w) too.
 
-### What's with the name Charon?
+### Where does the name Charon come from?
 
 [Charon](https://www.theoi.com/Khthonios/Kharon.html) [kharon] is the Ancient Greek Ferryman of the Dead. He was tasked with bringing people across the Acheron river to the underworld. His fee was one Obol coin, placed in the mouth of the deceased. This tradition of placing a coin or Obol in the mouth of the deceased continues to this day across the Greek world.
 
@@ -26,6 +26,13 @@ It should be the same as running a normal post-merge Ethereum node. It would be 
 Charon alone uses negligible disk space of not more than a few MBs. However, if you are running your consensus client and execution client on the same server with charon, then you will need 1TB of free SSD disk space (assuming you are running a testnet chain, mainnet requires [2TB](https://geth.ethereum.org/docs/getting-started/hardware-requirements) of disk space).
 
 For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+
+### What is the difference between a node, a validator and a cluster?
+A node is a single instance of an Ethereum EL+CL clients software that can communicate with other nodes to maintain the Ethereum blockchain.
+
+A validator is a node that participates in the consensus process by verifying transactions and creating new blocks. Multiple validators can run from the same node.
+
+A cluster is a group of nodes that act together as one or several validators, which allows for a more efficient use of resources, reduces operational costs, and provides better reliability and fault tolerance.
 
 ## Migrating existing validators
 
