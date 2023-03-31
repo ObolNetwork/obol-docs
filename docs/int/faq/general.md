@@ -28,7 +28,7 @@ Charon alone uses negligible disk space of not more than a few MBs. However, if 
 For now, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
 ### What is the difference between a node, a validator and a cluster?
-A node is a single instance of an Ethereum EL+CL clients software that can communicate with other nodes to maintain the Ethereum blockchain.
+A node is a single instance of Ethereum EL+CL clients that can communicate with other nodes to maintain the Ethereum blockchain.
 
 A validator is a node that participates in the consensus process by verifying transactions and creating new blocks. Multiple validators can run from the same node.
 
