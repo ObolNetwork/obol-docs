@@ -29,7 +29,9 @@ Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want 
 Run the appropriate command to broadcast an exit message from your validator client to its upstream charon client.
 
 :::tip
-This command should be executed on your running validator client, not your charon client. It needs to be the validator client that is connected to your charon client taking part in the Distributed Validator Cluster, and not a standalone VC connected to a different consensus layer client, as you are only signing a partial exit message, with a partial private key share, which charon will combine with the other partial exit messages from the other operators in the cluster before broadcasting to the consensus layer when it valid. 
+This command should be executed on your running validator client, not your charon client. It needs to be the validator client that is connected to your charon client taking part in the Distributed Validator Cluster, and not a standalone VC connected to a different consensus layer client, as you are only signing a partial exit message, with a partial private key share, which charon will combine with the other partial exit messages from the other operators in the cluster before broadcasting to the consensus layer when it valid.
+
+If running the out-of-the-box docker node repository, the above translates to running the following command from the `charon-distributed-validator-node` directory.
 :::
 
 <Tabs groupId="validator-clients">
