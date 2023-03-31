@@ -13,7 +13,7 @@ To participate in the Bug Bounty Program you must:
 - Not be a resident of any country that does not allow participation in these types of programs
 - Be at least 14 years old and have legal capacity to agree to these terms and participate in the Bug Bounty Program
 - Have permission from your employer to participate
-- Not be (for the previous 12 months) a Obol Labs employee, immediate family member of a Obol employee, Obol contractor, or Obol service provider.
+- Not be (for the previous 12 months) an Obol Labs employee, immediate family member of an Obol employee, Obol contractor, or Obol service provider.
 
 ## Scope
 The bug bounty program applies to software and services that are built by Obol. Only submissions under the following domains are eligible for rewards:
@@ -87,7 +87,7 @@ Reports that do not include sufficient detail will not be eligible for rewards.
 Obol Labs will disclose the details of the vulnerability and the researcher’s identity (with their consent) only after we have remediated the vulnerability and issued a fix. Researchers must keep the details of the vulnerability confidential until Obol Labs has acknowledged and remediated the issue.
 
 ## Legal Compliance
-All participants in the bug bounty program must comply with all applicable laws, regulations, and policy terms and conditions. The Company will not be held liable for any unlawful or unauthorised activities performed by participants in the bug bounty program.
+All participants in the bug bounty program must comply with all applicable laws, regulations, and policy terms and conditions. Obol will not be held liable for any unlawful or unauthorised activities performed by participants in the bug bounty program.
 
 We will not take any legal action against security researchers who discover and report security vulnerabilities in accordance with this bug bounty policy. We do, however, reserve the right to take legal action against anyone who violates the terms and conditions of this policy.
 
