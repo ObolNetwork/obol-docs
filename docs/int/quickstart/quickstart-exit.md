@@ -41,7 +41,7 @@ This command should be executed on your running validator client, not your charo
       --beacon-node-api-endpoint="http://charon:3600/" \
       --confirmation-enabled=false \
       --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-      --epoch=$\{EXIT_EPOCH:-162304}`}
+      --epoch=162304`}
         </code>
       </pre>
     </TabItem>
