@@ -189,6 +189,37 @@ Exiting your validator(s) can be useful in situations where you want to stop sta
 
 👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
 
+## Update DVT stack
+
+It is highly recommended to upgrade your DVT stack from time to time. To do this, follow these steps:
+```
+# Change to the node directory
+cd charon-distributed-validator-node
+
+# Pull latest changes to the repo
+git pull
+
+# Restart your DVT stack!
+docker compose restart
+```
+
+You may get a `git conflict` error like this:
+```markdown
+error: Entry '<fileName>' would be overwritten by merge. Cannot merge. (Changes in staging area)
+```
+This is probably because you have specified a prometheus token (`$PROM_REMOTE_WRITE_TOKEN`) in `prometheus/prometheus.yml` file.
+To fix this, simply copy your token and undo any changes to the `prometheus.yml` file and try pulling again:
+```
+git pull
+```
+
+And then, simply replace the `$PROM_REMOTE_WRITE_TOKEN` variable with the token copied earlier.
+
+Now, restart your DVT stack!
+```
+docker compose restart
+```
+
 ## Feedback
 
 If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
