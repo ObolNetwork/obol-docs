@@ -189,6 +189,45 @@ Exiting your validator(s) can be useful in situations where you want to stop sta
 
 👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
 
+## Updating DVT stack
+
+It is highly recommended to upgrade your DVT stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
+To do this, follow these steps:
+```
+# Change to the node directory
+cd charon-distributed-validator-node
+
+# Pull latest changes to the repo
+git pull
+
+# Restart your DVT stack!
+docker compose restart -d
+```
+
+You may get a `git conflict` error like this:
+```markdown
+...
+error: Your local changes to the following files would be overwritten by merge:
+prometheus/prometheus.yml
+...
+Please commit your changes or stash them before you merge.
+Aborting
+```
+This is probably because you have made some changes to some of the files. To get rid of this error, undo all the custom changes that you may have made and then try again.
+
+Most commonly, it happens when you have specified a prometheus token (`$PROM_REMOTE_WRITE_TOKEN`) in `prometheus/prometheus.yml` file.
+To fix this, simply copy your token and undo any changes to the `prometheus.yml` file and try pulling again:
+```
+git pull
+```
+
+And then, simply replace the `$PROM_REMOTE_WRITE_TOKEN` variable with the token copied earlier.
+
+Now, restart your DVT stack!
+```
+docker compose restart -d
+```
+
 ## Feedback
 
 If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
