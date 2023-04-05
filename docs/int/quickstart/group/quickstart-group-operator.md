@@ -191,7 +191,8 @@ Exiting your validator(s) can be useful in situations where you want to stop sta
 
 ## Updating DVT stack
 
-It is highly recommended to upgrade your DVT stack from time to time. To do this, follow these steps:
+It is highly recommended to upgrade your DVT stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
+To do this, follow these steps:
 ```
 # Change to the node directory
 cd charon-distributed-validator-node
@@ -208,10 +209,13 @@ You may get a `git conflict` error like this:
 ...
 error: Your local changes to the following files would be overwritten by merge:
 prometheus/prometheus.yml
+...
 Please commit your changes or stash them before you merge.
 Aborting
 ```
-This is probably because you have specified a prometheus token (`$PROM_REMOTE_WRITE_TOKEN`) in `prometheus/prometheus.yml` file.
+This is probably because you have made some changes to some of the files. To get rid of this error, undo all the custom changes that you may have made and then try again.
+
+Most commonly, it happens when you have specified a prometheus token (`$PROM_REMOTE_WRITE_TOKEN`) in `prometheus/prometheus.yml` file.
 To fix this, simply copy your token and undo any changes to the `prometheus.yml` file and try pulling again:
 ```
 git pull

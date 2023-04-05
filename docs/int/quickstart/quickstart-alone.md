@@ -120,7 +120,8 @@ for running their validator client on a beacon node REST API.
 
 ## Updating DVT stack
 
-It is highly recommended to upgrade your DVT stack from time to time. To do this, follow these steps:
+It is highly recommended to upgrade your DVT stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
+To do this, follow these steps:
 ```
 # Change to the node directory
 cd charon-distributed-validator-cluster
