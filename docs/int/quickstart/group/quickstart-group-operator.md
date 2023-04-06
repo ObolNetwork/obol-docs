@@ -198,6 +198,7 @@ To do this, follow these steps:
 cd charon-distributed-validator-node
 
 # Stop and remove containers, networks
+# Give sufficient time for all containers to exit
 docker compose down
 
 # Pull latest changes to the repo
