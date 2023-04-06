@@ -11,7 +11,7 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.14.4`](https://github.com/ObolNetwork/charon/releases/tag/v0.14.4). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.15.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.15.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use. 
 
@@ -96,8 +96,9 @@ Flags:
   -h, --help                              Help for cluster
       --insecure-keys                     Generates insecure keystore files. This should never be used. It is not supported on mainnet.
       --keymanager-addresses strings      Comma separated list of keymanager URLs to import validator key shares to. Note that multiple addresses are required, one for each node in the cluster, with node0's keyshares being imported to the first address, node1's keyshares to the second, and so on.
+      --keymanager-auth-tokens strings    Authentication bearer tokens to interact with the keymanager URLs. Don't include the "Bearer" symbol, only include the api-token.
       --name string                       The cluster name
-      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "goerli")
+      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
       --nodes int                         The number of charon nodes in the cluster. Minimum is 4. (default 4)
       --num-validators int                The number of distributed validators needed in the cluster. (default 1)
       --publish                           Publish lock file to obol-api.
@@ -124,7 +125,7 @@ Flags:
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for dkg
       --name string                       Optional cosmetic cluster name
-      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "goerli")
+      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
       --num-validators int                The number of distributed validators the cluster will manage (32ETH staked for each). (default 1)
       --operator-enrs strings             [REQUIRED] Comma-separated list of each operator's Charon ENR address.
       --output-dir string                 The folder to write the output cluster-definition.json file to. (default ".charon")
@@ -152,6 +153,7 @@ Flags:
       --definition-file string         The path to the cluster definition file or an HTTP URL. (default ".charon/cluster-definition.json")
   -h, --help                           Help for dkg
       --keymanager-address string      The keymanager URL to import validator keyshares.
+      --keymanager-auth-token string   Authentication bearer token to interact with keymanager API. Don't include the "Bearer" symbol, only include the api-token.
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
       --no-verify                      Disables cluster definition and lock file verification.
@@ -164,7 +166,7 @@ Flags:
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --publish                        Publish lock file to obol-api.
       --publish-address string         The URL to publish the lock file to. (default "https://api.obol.tech")
-
+      --shutdown-delay duration        Graceful shutdown delay. (default 1s)
 ```
 
 ## The `run` subcommand
@@ -205,12 +207,12 @@ Flags:
       --p2p-tcp-address strings            Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --private-key-file string            The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
       --simnet-beacon-mock                 Enables an internal mock beacon node for running a simnet.
+      --simnet-beacon-mock-fuzz            Configures simnet beaconmock to return fuzzed responses.
       --simnet-slot-duration duration      Configures slot duration in simnet beacon mock. (default 1s)
       --simnet-validator-keys-dir string   The directory containing the simnet validator key shares. (default ".charon/validator_keys")
       --simnet-validator-mock              Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
       --synthetic-block-proposals          Enables additional synthetic block proposal duties. Used for testing of rare duties.
       --validator-api-address string       Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
-
 ```
 
 ## The `combine` subcommand
@@ -329,10 +331,10 @@ Usage:
   charon combine [flags]
 
 Flags:
-      --cluster-dir string   Parent directory containing a number of .charon subdirectories from each node in the cluster. (default ".charon/cluster/")
+      --cluster-dir string   Parent directory containing a number of .charon subdirectories from the required threshold of nodes in the cluster. (default ".charon/cluster")
       --force                Overwrites private keys with the same name if present.
   -h, --help                 Help for combine
-
+      --output-dir string    Directory to output the combined private keys to. (default "./validator_keys")
 ```
 
 ## Host a relay
@@ -347,24 +349,24 @@ Usage:
   charon relay [flags]
 
 Flags:
-      --auto-p2pkey                    Automatically create a p2pkey (secp256k1 private key used for p2p authentication and ENR) if none found in data directory. (default true)
-      --data-dir string                The directory where charon will store all its internal data (default ".charon")
-  -h, --help                           Help for relay
-      --http-address string            Listening address (ip and port) for the relay http server serving runtime ENR. (default "127.0.0.1:3640")
-      --log-format string              Log format; console, logfmt or json (default "console")
-      --log-level string               Log level; debug, info, warn or error (default "info")
-      --loki-addresses strings         Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
-      --loki-service string            Service label sent with logs to Loki. (default "charon")
-      --monitoring-address string      Listening address (ip and port) for the prometheus and pprof monitoring http server. (default "127.0.0.1:3620")
-      --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
-      --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
-      --p2p-disable-reuseport          Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-max-connections int        Libp2p maximum number of peers that can connect to this relay. (default 16384)
-      --p2p-max-reservations int       Updates max circuit reservations per peer (each valid for 30min) (default 512)
-      --p2p-relay-loglevel string      Libp2p circuit relay log level. E.g., debug, info, warn, error.
-      --p2p-relays strings             Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
-      --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-
+      --auto-p2pkey                       Automatically create a p2pkey (secp256k1 private key used for p2p authentication and ENR) if none found in data directory. (default true)
+      --data-dir string                   The directory where charon will store all its internal data (default ".charon")
+  -h, --help                              Help for relay
+      --http-address string               Listening address (ip and port) for the relay http server serving runtime ENR. (default "127.0.0.1:3640")
+      --log-format string                 Log format; console, logfmt or json (default "console")
+      --log-level string                  Log level; debug, info, warn or error (default "info")
+      --loki-addresses strings            Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
+      --loki-service string               Service label sent with logs to Loki. (default "charon")
+      --monitoring-address string         Listening address (ip and port) for the prometheus and pprof monitoring http server. (default "127.0.0.1:3620")
+      --p2p-advertise-private-addresses   Enable advertising of libp2p auto-detected private addresses. This doesn't affect manually provided p2p-external-ip/hostname.
+      --p2p-allowlist string              Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
+      --p2p-denylist string               Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
+      --p2p-disable-reuseport             Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string      The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string            The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-max-connections int           Libp2p maximum number of peers that can connect to this relay. (default 16384)
+      --p2p-max-reservations int          Updates max circuit reservations per peer (each valid for 30min) (default 512)
+      --p2p-relay-loglevel string         Libp2p circuit relay log level. E.g., debug, info, warn, error.
+      --p2p-relays strings                Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
+      --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
