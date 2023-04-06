@@ -126,14 +126,10 @@ To do this, follow these steps:
 # Change to the node directory
 cd charon-distributed-validator-cluster
 
-# Stop and remove containers, networks
-# Give sufficient time for all containers to exit
-docker compose down
-
 # Pull latest changes to the repo
 git pull
 
-# Restart your DVT stack!
+# Create (or recreate) your DVT stack!
 docker compose up -d --build
 ```
 
