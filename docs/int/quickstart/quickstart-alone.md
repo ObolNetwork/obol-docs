@@ -126,6 +126,9 @@ To do this, follow these steps:
 # Change to the node directory
 cd charon-distributed-validator-cluster
 
+# Stop and remove containers, networks
+docker compose down
+
 # Pull latest changes to the repo
 git pull
 
