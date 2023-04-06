@@ -10,7 +10,7 @@ This page is updated quarterly. The last update was on 2023-03-21.
 
 ## Table of Contents
 1. [Obol Audits](#obol-audits)
-2. [Open Challenges](#open-problems-and-challenges)
+2. [Open Challenges](#open-challenges)
 3. [Core Public Goods](#core-public-goods)
 4. [List of Security Audits](#list-of-security-audits)
 
