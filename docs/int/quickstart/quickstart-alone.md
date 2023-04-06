@@ -118,9 +118,9 @@ which needs a prysm beacon node to work alongside a REST based beacon node. Here
 Note: Support for prysm validator clients is in an experimental phase as prysm doesn't provide [complete support](https://github.com/prysmaticlabs/prysm/issues/11580)
 for running their validator client on a beacon node REST API. 
 
-## Updating DVT stack
+## Updating DV stack
 
-It is highly recommended to upgrade your DVT stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
+It is highly recommended to upgrade your DV stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
 To do this, follow these steps:
 ```
 # Change to the node directory
@@ -129,7 +129,7 @@ cd charon-distributed-validator-cluster
 # Pull latest changes to the repo
 git pull
 
-# Create (or recreate) your DVT stack!
+# Create (or recreate) your DV stack!
 docker compose up -d --build
 ```
 
