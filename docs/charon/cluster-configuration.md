@@ -31,6 +31,10 @@ The schema of the `cluster-definition.json` is defined as:
 ```json
 {
   "name": "best cluster", // Optional cosmetic identifier
+  "creator": {
+    "address": "0x123..abfc", //ETH1 address of the creator
+    "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
+  },
   "operators": [
     {
       "address": "0x123..abfc", // ETH1 address of the operator
@@ -42,14 +46,22 @@ The schema of the `cluster-definition.json` is defined as:
   "uuid": "1234-abcdef-1234-abcdef", // Random unique identifier.
   "version": "v1.2.0", // Schema version
   "timestamp": "2022-01-01T12:00:00+00:00", // Creation timestamp
-  "num_validators": 100, // Number of distributed validators to be created in cluster-lock.json
+  "num_validators": 2, // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3, // Optional threshold required for signature reconstruction
-  "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address
-  "withdrawal_address": "0x123..abfc", // ETH1 withdrawal address
+  "validators": [
+    {
+      "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address of validator
+      "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
+    },
+    {
+      "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address of validator
+      "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
+    }
+  ],
   "dkg_algorithm": "foo_dkg_v1", // Optional DKG algorithm for key generation
   "fork_version": "0x00112233", // Chain/Network identifier
-  "config_hash": "abcfde...acbfed", // Hash of the static (non-changing) fields
-  "definition_hash": "abcdef...abcedef" // Final hash of all fields
+  "config_hash": "0xabcfde...acbfed", // Hash of the static (non-changing) fields
+  "definition_hash": "0xabcdef...abcedef" // Final hash of all fields
 }
 ```
 
