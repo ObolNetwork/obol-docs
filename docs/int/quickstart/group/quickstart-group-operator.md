@@ -189,9 +189,9 @@ Exiting your validator(s) can be useful in situations where you want to stop sta
 
 👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
 
-## Updating DVT stack
+## Updating DV stack
 
-It is highly recommended to upgrade your DVT stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
+It is highly recommended to upgrade your DV stack from time to time. This ensures that your node is secure, performant, up-to-date and you don't miss important hard forks.
 To do this, follow these steps:
 ```
 # Change to the node directory
@@ -200,8 +200,8 @@ cd charon-distributed-validator-node
 # Pull latest changes to the repo
 git pull
 
-# Create (or recreate) your DVT stack!
-docker compose up -d
+# Create (or recreate) your DV stack!
+docker compose up -d --build
 ```
 
 You may get a `git conflict` error like this:
