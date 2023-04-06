@@ -133,7 +133,7 @@ docker compose down
 git pull
 
 # Restart your DVT stack!
-docker compose restart -d --build
+docker compose up -d --build
 ```
 
 ## Feedback
