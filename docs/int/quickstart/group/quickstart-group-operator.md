@@ -200,8 +200,8 @@ cd charon-distributed-validator-node
 # Pull latest changes to the repo
 git pull
 
-# Restart your DVT stack!
-docker compose restart -d
+# Create (or recreate) your DVT stack!
+docker compose up -d
 ```
 
 You may get a `git conflict` error like this:

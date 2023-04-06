@@ -129,8 +129,8 @@ cd charon-distributed-validator-cluster
 # Pull latest changes to the repo
 git pull
 
-# Restart your DVT stack!
-docker compose restart -d --build
+# Create (or recreate) your DVT stack!
+docker compose up -d --build
 ```
 
 ## Feedback
