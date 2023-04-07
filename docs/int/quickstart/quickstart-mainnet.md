@@ -13,12 +13,32 @@ DKG keys created for goerli cannot be used on mainnet and vice versa.
 
 This section is intended for users who wish to run their distributed validator on Ethereum mainnet.
 
-1. First make sure that your DV stack is [up-to-date](./quickstart-alone#updating-dv-stack).
-2. Then, copy the `.env.sample` file to `.env`
+### Pre-requisites
+
+- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- Ensure you have [git](https://git-scm.com/downloads) installed.
+- Make sure `docker` is running before executing the commands below.
+
+### Steps
+
+1. Clone the [charon-distributed-validator-node](https://github.com/ObolNetwork/charon-distributed-validator-node) repo and `cd` into the directory.
+
+```sh
+# Clone this repo
+git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
+
+# Change directory
+cd charon-distributed-validator-node
+```
+
+2. If you have already cloned the repo, make sure that it is [up-to-date](./quickstart-alone#updating-dv-stack).
+
+3. Copy the `.env.sample` file to `.env`
 ```
 cp -n .env.sample .env
 ```
-3. In your `.env` file, uncomment and set values for `NETWORK` & `LIGHTHOUSE_CHECKPOINT_SYNC_URL`
+
+4. In your `.env` file, uncomment and set values for `NETWORK` & `LIGHTHOUSE_CHECKPOINT_SYNC_URL`
 ```
 ...
 # Overrides network for all the relevant services.
