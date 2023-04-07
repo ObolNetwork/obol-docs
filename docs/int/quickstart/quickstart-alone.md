@@ -6,7 +6,7 @@ description: Run all nodes in a distributed validator cluster
 # Run a cluster alone
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an alpha state and should be used with caution according to its Terms of Use.
 :::
 
 ## Pre-requisites
