@@ -6,7 +6,7 @@ description: Split existing validator keys
 # Split existing validator keys
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an alpha state and should be used with caution according to its Terms of Use.
 
 This process should only be used if you want to split an existing validator key into multiple keyshares.
 
