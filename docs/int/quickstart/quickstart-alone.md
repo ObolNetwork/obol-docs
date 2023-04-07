@@ -133,14 +133,14 @@ git pull
 docker compose up -d --build
 ```
 
-## Run mainnet node
+## Run a DV on mainnet
 
-This section is intended for users who wish to run their node on Ethereum mainnet.
+This section is intended for users who wish to run their distributed validator on Ethereum mainnet. 
 
 1. First make sure that your DV stack is [up-to-date](./quickstart-alone#updating-dv-stack).
 2. Then, copy the `.env.sample` file to `.env`
 ```
-cp .env.sample .env
+cp -n .env.sample .env
 ```
 3. In your `.env` file, uncomment and set values for `NETWORK` & `LIGHTHOUSE_CHECKPOINT_SYNC_URL`
 ```
@@ -152,6 +152,7 @@ NETWORK=mainnet
 LIGHTHOUSE_CHECKPOINT_SYNC_URL=https://mainnet.checkpoint.sigp.io/https://eth-clients.github.io/checkpoint-sync-endpoints/#mainnet
 ...
 ```
+Note that you can choose any checkpoint sync url from https://eth-clients.github.io/checkpoint-sync-endpoints/#mainnet.
 
 Your DV stack is now mainnet ready 🎉
 
@@ -162,10 +163,10 @@ of the repo, you can disable these images. To do so, follow these steps:
 
 1. Copy the `docker-compose.override.yml.sample` file
 ```
-cp docker-compose.override.yml.sample docker-compose.override.yml
+cp -n docker-compose.override.yml.sample docker-compose.override.yml
 ```
 2. Uncomment the `profiles: [disable]` section for both `geth` and `lighthouse`. The override file should now look like this
-```markdown
+```
 services:
   geth:
     # Disable geth
@@ -186,17 +187,17 @@ services:
 ...
 ```
 3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your mainnet beacon node's URL
-```markdown
+```
 ...
 # Connect to one or more external beacon nodes. Use a comma separated list excluding spaces.
-CHARON_BEACON_NODE_ENDPOINTS=
+CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_MAINNET_BEACON_NODE_URL>
 ...
 ```
 
 #### Mainnet node with mev-boost
 
 If you are running your mainnet DV node with `mev-boost`, you need to uncomment and set the `MEVBOOST_RELAYS` variable in the `.env` file
-```markdown
+```
 ...
 # MEV-Boost docker container image version, e.g. `latest` or `v1.4.0`.
 #MEVBOOST_VERSION=
@@ -205,18 +206,18 @@ MEVBOOST_RELAYS=https://0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433
 ```
 You can also use the [flashbots relay](https://boost-relay.flashbots.net/).
 
-#### Voluntary exit mainnet validator
+#### Exit a mainnet distributed validator
 
 If you want to exit your mainnet validator, you need to uncomment and set the `EXIT_EPOCH` variable in the `.env` file
 
-```markdown
+```
 ...
 # Cluster wide consistent exit epoch. Set to latest for fork version, see `curl $BEACON_NODE/eth/v1/config/fork_schedule`
-EXIT_EPOCH=194048
+# Currently, the latest fork is bellatrix (epoch: 144896)
+EXIT_EPOCH=144896
 ...
 ```
-
-This epoch is the shapella fork epoch and is taken from EF's [shapella mainnet announcement blog](https://blog.ethereum.org/2023/03/28/shapella-mainnet-announcement).
+Note that `EXIT_EPOCH` should be `194048` after the [shapella fork](https://blog.ethereum.org/2023/03/28/shapella-mainnet-announcement).
 
 ## Feedback
 
