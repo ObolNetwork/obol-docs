@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Creator & Leader Journey
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
+Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 The following instructions aim to assist with the preparation of a distributed validator key generation ceremony. Select the *Leader* tab if you **will** be an operator participating in the cluster, and select the *Creator* tab if you **will NOT** be an operator in the cluster. 

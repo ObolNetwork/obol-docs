@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 description: Exit a validator
 ---
 import Tabs from '@theme/Tabs';
@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Exit a validator
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
+Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 Exiting your validator keys can be useful in situations where you want to stop staking and withdraw your staked ETH.
