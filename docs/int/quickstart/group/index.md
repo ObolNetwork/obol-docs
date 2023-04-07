@@ -1,7 +1,7 @@
 # Run a cluster with others
 
 :::caution
-Charon is in an early alpha state and is not ready to be run on mainnet
+Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
 :::
 
 There are two user journeys when setting up a DV cluster with others. Each comes with its own quickstart

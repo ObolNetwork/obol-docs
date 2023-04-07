@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Exit a validator
 
 :::caution
-Charon is in an early alpha state and is not ready to be run on mainnet.
+Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
 :::
 
 Exiting your validator keys can be useful in situations where you want to stop staking and withdraw your staked ETH.

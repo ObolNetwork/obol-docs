@@ -1,7 +1,7 @@
 # Quickstart Guides
 
 :::caution
-Charon is in an early alpha state and is not ready to be run on mainnet
+Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
 :::
 
 There are two ways to run a distributed validator and each comes with its own quickstart

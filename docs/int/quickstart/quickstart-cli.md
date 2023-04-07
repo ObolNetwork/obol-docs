@@ -6,7 +6,7 @@ description: Run one node in a multi-operator distributed validator cluster usin
 # Run a cluster using the CLI
 
 :::caution
-Charon is in an early alpha state and is not ready to be run on mainnet
+Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
 :::
 
 The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster.
