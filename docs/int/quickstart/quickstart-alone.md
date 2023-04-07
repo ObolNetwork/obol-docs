@@ -6,7 +6,7 @@ description: Run all nodes in a distributed validator cluster
 # Run a cluster alone
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its Terms of Use (check latest URL/Docs).
+Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 ## Pre-requisites
@@ -132,6 +132,91 @@ git pull
 # Create (or recreate) your DV stack!
 docker compose up -d --build
 ```
+
+## Run mainnet node
+
+This section is intended for users who wish to run their node on Ethereum mainnet.
+
+1. First make sure that your DV stack is [up-to-date](./quickstart-alone#updating-dv-stack).
+2. Then, copy the `.env.sample` file to `.env`
+```
+cp .env.sample .env
+```
+3. In your `.env` file, uncomment and set values for `NETWORK` & `LIGHTHOUSE_CHECKPOINT_SYNC_URL`
+```
+...
+# Overrides network for all the relevant services.
+NETWORK=mainnet
+...
+# Checkpoint sync url used by lighthouse to fast sync.
+LIGHTHOUSE_CHECKPOINT_SYNC_URL=https://mainnet.checkpoint.sigp.io/https://eth-clients.github.io/checkpoint-sync-endpoints/#mainnet
+...
+```
+
+Your DV stack is now mainnet ready 🎉
+
+#### Remote mainnet beacon node
+
+If you already have a mainnet beacon node running somewhere and you want to use that instead of running EL (`geth`) & CL (`lighthouse`) as part
+of the repo, you can disable these images. To do so, follow these steps:
+
+1. Copy the `docker-compose.override.yml.sample` file
+```
+cp docker-compose.override.yml.sample docker-compose.override.yml
+```
+2. Uncomment the `profiles: [disable]` section for both `geth` and `lighthouse`. The override file should now look like this
+```markdown
+services:
+  geth:
+    # Disable geth
+    profiles: [disable]
+    # Bind geth internal ports to host ports
+    #ports:
+      #- 8545:8545 # JSON-RPC
+      #- 8551:8551 # AUTH-RPC
+      #- 6060:6060 # Metrics
+
+  lighthouse:
+    # Disable lighthouse
+    profiles: [disable]
+    # Bind lighthouse internal ports to host ports
+    #ports:
+      #- 5052:5052 # HTTP
+      #- 5054:5054 # Metrics
+...
+```
+3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your mainnet beacon node's URL
+```markdown
+...
+# Connect to one or more external beacon nodes. Use a comma separated list excluding spaces.
+CHARON_BEACON_NODE_ENDPOINTS=
+...
+```
+
+#### Mainnet node with mev-boost
+
+If you are running your mainnet DV node with `mev-boost`, you need to uncomment and set the `MEVBOOST_RELAYS` variable in the `.env` file
+```markdown
+...
+# MEV-Boost docker container image version, e.g. `latest` or `v1.4.0`.
+#MEVBOOST_VERSION=
+MEVBOOST_RELAYS=https://0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433094e5f22f21102ec057841fcb81978ed1ea0fa8246@builder-relay-mainnet.blocknative.com
+...
+```
+You can also use the [flashbots relay](https://boost-relay.flashbots.net/).
+
+#### Voluntary exit mainnet validator
+
+If you want to exit your mainnet validator, you need to uncomment and set the `EXIT_EPOCH` variable in the `.env` file
+
+```markdown
+...
+# Cluster wide consistent exit epoch. Set to latest for fork version, see `curl $BEACON_NODE/eth/v1/config/fork_schedule`
+EXIT_EPOCH=194048
+...
+```
+
+This epoch is the shapella fork epoch and is taken from EF's [shapella mainnet announcement blog](https://blog.ethereum.org/2023/03/28/shapella-mainnet-announcement).
 
 ## Feedback
 
