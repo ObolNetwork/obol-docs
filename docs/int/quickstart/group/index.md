@@ -1,7 +1,7 @@
 # Run a cluster with others
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its Terms of Use.
+Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 There are two user journeys when setting up a DV cluster with others. Each comes with its own quickstart
