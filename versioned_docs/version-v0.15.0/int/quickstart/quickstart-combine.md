@@ -82,7 +82,7 @@ Run the following command:
 
 ```sh
 # Create a distributed validator cluster
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:latest combine --cluster-dir /opt/charon/validators-to-be-combined
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.15.0 combine --cluster-dir /opt/charon/validators-to-be-combined
 ```
 
 This command will create one subdirectory for each validator private key that has been combined, named after its public key.
