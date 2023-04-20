@@ -14,7 +14,7 @@ The following is a breakdown of the intended testnet roadmap, the features that 
 - [x] [Dev Net 1](#devnet-1)
 - [x] [Dev Net 2](#devnet-2)
 - [x] [Athena Public Testnet 1](#athena-public-testnet-1)
-- [ ] [Bia Public Testnet 2](#bia-public-testnet-2)
+- [x] [Bia Public Testnet 2](#bia-public-testnet-2)
 - [ ] [Circe Attack Net](#circe-attack-net)
 
 ## Devnet 1
