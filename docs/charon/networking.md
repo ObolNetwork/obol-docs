@@ -40,14 +40,11 @@ For ease of use and to align with the Ethereum ecosystem, Charon encodes these p
 not in [libp2p’s Peer ID format](https://docs.libp2p.io/concepts/fundamentals/peers/).
 
 :::caution
-The secp256k1 private key identifies and authenticates each Charon node to the other cluster operators.
+Each Charon node's secp256k1 private key is critical for authentication and must be kept secure to prevent cluster compromise.
 
-It must be kept safe to avoid exfiltration: if leaked, the security of the cluster in which it resides can be compromised.
+Do not use the same key across multiple clusters, as this can lead to security issues.
 
-The secp256k1 private key can only be used by one operator in one cluster at the same time, running multiple clusters with it is explicitly
-not supported, and will lead to security issues.
-
-For more informations, see [libp2p's article](https://docs.libp2p.io/concepts/security/security-considerations) about peer communication security.
+For more on p2p security, refer to [libp2p's article](https://docs.libp2p.io/concepts/security/security-considerations). 
 :::
 
 Charon currently only supports libp2p tcp connections with [noise](https://noiseprotocol.org/) security and only accepts incoming libp2p connections from peers defined in the cluster lock. 
