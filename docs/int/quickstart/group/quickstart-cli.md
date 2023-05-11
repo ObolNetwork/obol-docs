@@ -22,7 +22,7 @@ The following instructions aim to assist a group of operators coordinating toget
 
 ## Step 1. Create and back up a private key for charon
 
-In order to prepare for a distributed key generation ceremony, all operators (including the leader but NOT a creator) need to create an [ENR](../faq/errors.mdx#enrs-keys) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+In order to prepare for a distributed key generation ceremony, all operators (including the leader but NOT a creator) need to create an [ENR](docs/int/faq/errors.mdx) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo

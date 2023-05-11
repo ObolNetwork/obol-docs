@@ -11,7 +11,7 @@ Charon is in an alpha state and should be used with caution according to its [Te
 Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from the users perspective.
 :::
 
-This quickstart guide focuses on configuring the builder API for a validator and assumes you already [have a cluster up and running](./index.md).
+This quickstart guide focuses on configuring the builder API for a validator and assumes you already [have a cluster up and running](docs/int/quickstart/group/index.md).
 
 ## Getting started with Charon & the Builder API
 
