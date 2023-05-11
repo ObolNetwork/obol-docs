@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 description: Combine distributed validator keyshares
 ---
 
@@ -150,7 +150,3 @@ $ jq .distributed_validators[].distributed_public_key  validators-to-be-combined
 The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it.
 
 :::
-
-## Feedback
-
-If you have gotten this far through the process, and whether you succeeded or failed at recombining a set of keyshares, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).

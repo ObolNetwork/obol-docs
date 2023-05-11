@@ -1,9 +1,9 @@
 ---
-sidebar_position: 8
+sidebar_position: 7
 description: Run a cluster on mainnet
 ---
 
-# Run a cluster on mainnet
+# Run a DV on mainnet
 
 :::caution
 Note that you should proceed only if you accept the risk and have tested this on goerli testnet.

@@ -1,15 +1,15 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 description: Run one node in a multi-operator distributed validator cluster using the CLI
 ---
 
-# Run a cluster using the CLI
+# Using the CLI
 
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
-The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster.
+The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster via the CLI.
 
 ## Pre-requisites
 
@@ -126,87 +126,4 @@ If at any point you need to turn off your node, you can run:
 ```
 # Shut down the currently running distributed validator node
 docker compose down
-```
-
-## Step 5. Activate the deposit data
-
-Congrats 🎉 if your cluster have gotten to this step of the quickstart and have successfully created a distributed validator together. 
-
-If you have connected all of your charon clients together such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator**, usually the leader, may process to activate this deposit data with the existing [staking launchpad](https://goerli.launchpad.ethereum.org/).
-
-This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
-
-## Step 6 - Optional. Add the Monitoring Credentials
-
-:::info
-This step is **optional** but will help the Obol Team monitor the health of your cluster. It can only be perfomed if the Obol Team has given you a credential to use.
-:::
-
-You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to our central prometheus service to monitor, analyze and improve your cluster's performance. The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:
-`obol20!tnt8U!C...`.
-
-The final `prometheus/prometheus.yml` file would look like:
-```
-global:
-  scrape_interval:     30s # Set the scrape interval to every 30 seconds.
-  evaluation_interval: 30s # Evaluate rules every 30 seconds.
-
-remote_write:
-  - url: https://vm.monitoring.gcp.obol.tech/write
-    authorization:
-      credentials: obol20!tnt8U!C...
-
-scrape_configs:
-  - job_name: 'charon'
-    static_configs:
-      - targets: ['charon:3620']
-  - job_name: 'teku'
-    static_configs:
-      - targets: ['teku:8008']
-  - job_name: 'node-exporter'
-    static_configs:
-      - targets: ['node-exporter:9100']
-```
-
-## Step 7. Validator Voluntary Exit
-
-Exiting your validator(s) can be useful in situations where you want to stop staking and withdraw your staked ETH.
-
-👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
-
-## Feedback
-
-If you have gotten this far through the process, and whether you succeeded or failed at running the distributed validator successfully, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
-
-## Other Actions
-
-The above steps should get you running a distributed validator cluster. The following are some extra steps you may want to take either to improve the resilience and performance of your distributed validator cluster.
-
-### Docker power users
-
-This section of the readme is intended for the "docker power users", i.e., for the ones who are familiar with working with `docker compose` and want to have more flexibility and power to change the default configuration.
-
-We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
-See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
-
-There are two additional files in this repository, `compose-debug.yml` and `docker-compose.override.yml.sample`, alongwith the default `docker-compose.yml` file that you can use for this purpose.
-
-- `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
-```
-docker compose -f docker-compose.yml -f compose-debug.yml up
-```
-
-- `docker-compose.override.yml.sample` is intended to override the default configuration provided in `docker-compose.yml`. This is useful when, for example, you wish to add port mappings or want to disable a container.
-
-- To use it, just copy the sample file to `docker-compose.override.yml` and customise it to your liking. Please create this file ONLY when you want to tweak something. This is because the default override file is empty and docker errors if you provide an empty compose file.
-```
-cp docker-compose.override.yml.sample docker-compose.override.yml
-
-# Tweak docker-compose.override.yml and then run docker compose up
-docker compose up
-```
-
-- You can also run all these compose files together. This is desirable when you want to use both the features. For example, you may want to have some debugging containers AND also want to override some defaults. To achieve this, you can run:
-```
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
 ```

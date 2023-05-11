@@ -1,11 +1,11 @@
 ---
-sidebar_position: 7
+sidebar_position: 5
 description: Exit a validator
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Exit a validator
+# Exit a DV
 
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
@@ -29,8 +29,28 @@ Confirm the earliest `EXIT_EPOCH` to use for your validators. Assuming you want 
 Run the appropriate command to broadcast an exit message from your validator client to its upstream charon client.
 
 :::tip
-This command should be executed on your running validator client, not your charon client. It needs to be the validator client that is connected to your charon client taking part in the Distributed Validator Cluster, and not a standalone VC connected to a different consensus layer client, as you are only signing a partial exit message, with a partial private key share, which charon will combine with the other partial exit messages from the other operators in the cluster before broadcasting to the consensus layer when it valid. 
+This command should be executed on your running validator client, not your charon client. It needs to be the validator client that is connected to your charon client taking part in the Distributed Validator Cluster, and not a standalone VC connected to a different consensus layer client, as you are only signing a partial exit message, with a partial private key share, which charon will combine with the other partial exit messages from the other operators in the cluster before broadcasting to the consensus layer when it valid.  The below commands implement that approach.
 :::
+
+### Navigate to the node directory
+
+<Tabs groupId="group-solo">
+  <TabItem value="group" label="Group cluster" default>
+    <pre>
+      <code>
+        cd charon-distributed-validator-node
+      </code>
+    </pre>
+  </TabItem>
+  
+  <TabItem value="solo" label="Solo cluster">
+    <pre>
+      <code>
+        cd charon-distributed-validator-cluster
+      </code>
+    </pre>
+  </TabItem>
+</Tabs>
 
 <Tabs groupId="validator-clients">
   {[
@@ -49,7 +69,3 @@ This command should be executed on your running validator client, not your charo
 </Tabs>
 
 Once a threshold of exit signatures has been received by any single charon client, it will craft a valid exit message and will submit it to the beacon chain for inclusion.
-
-## Feedback
-
-If you have gotten this far through the process, and whether you succeeded or failed at exiting a validator, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).

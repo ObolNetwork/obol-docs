@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 description: Split existing validator keys
 ---
 
@@ -91,7 +91,3 @@ Created charon cluster:
 ```
 
 These split keys can now be used to start a charon cluster.
-
-## Feedback
-
-If you have gotten this far through the process, and whether you succeeded or failed at splitting an existing validator keystore, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).
