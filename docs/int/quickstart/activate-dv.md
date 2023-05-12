@@ -20,6 +20,6 @@ Once you have connected all of your charon clients together such that the monito
   </TabItem>
 </Tabs>
 
-This process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.
+The validator(s) `deposit-data.json` to be uploaded in the launchpad should be in each `.charon` folder from the nodes participating in the cluster. The copies accross the nodes are identical and any of them can be uploaded.
 
-The validator `deposit-data.json` should be in `.charon`.
+The activation process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks. You can leave your distributed validator cluster offline until closer to the activation period if you would prefer. You can also use this time to improve and harden your monitoring and alerting for the cluster.

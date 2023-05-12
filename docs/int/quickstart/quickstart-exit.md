@@ -42,14 +42,6 @@ This command should be executed on your running validator client, not your charo
       </code>
     </pre>
   </TabItem>
-  
-  <TabItem value="solo" label="Solo cluster">
-    <pre>
-      <code>
-        cd charon-distributed-validator-cluster
-      </code>
-    </pre>
-  </TabItem>
 </Tabs>
 
 <Tabs groupId="validator-clients">

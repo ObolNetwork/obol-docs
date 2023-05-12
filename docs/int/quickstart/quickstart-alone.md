@@ -12,7 +12,7 @@ Charon is in an alpha state and should be used with caution according to its [Te
 :::warning
 Running a Distributed Validator alone or a solo cluster means that a single operator or entity runs all the nodes of the DV. In such a case and depending on the objective, there not necessarily the need to create the keyshares via a trustless DKG. Instead the keyshares are created centrally, then distributed securely to the nodes. 
 
-Obviously, to maximise the value of a DV, a single operator can still create the keyshares in a trustless manner via the DKG, avoiding the private key being stored in full anywhere during the process. Follow the [group guide](docs/int/quickstart/group/index.md) instead for this latter case.
+However, to maximise the security of a DV, a single operator can still create the keyshares in a trustless manner via the DKG, avoiding the private keys being stored in full anywhere during the process. Follow the [group guide](docs/int/quickstart/group/index.md) instead for this latter case.
 :::
 
 ## Pre-requisites
@@ -60,12 +60,14 @@ that charon versions prior to `v0.14.4` had a single `--withdrawal-address` flag
 ## Step 3. Start the cluster
 
 :::warning
-To distribute your cluster physically and start the DV, copy each `.charon` directory with one (or several) private keys within it to the other machines you want to use. Consider using the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected.
+To distribute your cluster physically and start the DV, copy or move each `.charon` directory with one (or several) private keys within it to the other machines you'll use as nodes. 
+
+Then use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder in them.
 :::
 
 # Testing the cluster locally
 
-The repo also contains six charon clients in separate docker containers along with an execution client and consensus client for DENO and TESTING purposes only.
+The `charon-distributed-validator-cluster` repo used above to create the keyshares also contains six charon clients in separate docker containers along with an execution client and consensus client for DENO and TESTING purposes only, simulating the cluster running.
 
 The default cluster consists of:
 - [Nethermind](https://github.com/NethermindEth/nethermind), an execution layer client
