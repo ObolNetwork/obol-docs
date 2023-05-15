@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 description: Run all nodes in a distributed validator cluster
 ---
 
