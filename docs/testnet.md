@@ -124,7 +124,7 @@ This testnet is also important for learning the conditions Charon will be subjec
 
 **Network:** Görli
 
-**Target Completed Date:** June 2023
+**Target Completed Date:** To be announced
 
 **Duration:** 2-4 weeks operation, depending on how resilient the clients are
 
