@@ -6,12 +6,12 @@ description: Run a cluster on mainnet
 # Run a DV on mainnet
 
 :::caution
-Note that you should proceed only if you accept the risk and have tested this on goerli testnet.
+Charin is in an alpha state, and you should proceed only if you accept the risk, the [terms of use](https://obol.tech/terms.pdf), and have tested running a Distributed Validator on a testnet first.
 
-DKG keys created for goerli cannot be used on mainnet and vice versa.
+Distributed Validators created for goerli cannot be used on mainnet and vice versa, please take caution when creating, backing up, and activating mainnet validators.
 :::
 
-This section is intended for users who wish to run their distributed validator on Ethereum mainnet.
+This section is intended for users who wish to run their Distributed Validator on Ethereum mainnet.
 
 ### Pre-requisites
 
@@ -54,8 +54,11 @@ Your DV stack is now mainnet ready 🎉
 
 #### Remote mainnet beacon node
 
-If you already have a mainnet beacon node running somewhere and you want to use that instead of running EL (`geth`) & CL (`lighthouse`) as part
-of the repo, you can disable these images. To do so, follow these steps:
+:::caution
+Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
+:::
+
+If you already have a mainnet beacon node running somewhere and you want to use that instead of running EL (`geth`) & CL (`lighthouse`) as part of the repo, you can disable these images. To do so, follow these steps:
 
 1. Copy the `docker-compose.override.yml.sample` file
 ```
@@ -109,8 +112,8 @@ If you want to exit your mainnet validator, you need to uncomment and set the `E
 ```
 ...
 # Cluster wide consistent exit epoch. Set to latest for fork version, see `curl $BEACON_NODE/eth/v1/config/fork_schedule`
-# Currently, the latest fork is bellatrix (epoch: 144896)
-EXIT_EPOCH=144896
+# Currently, the latest fork is capella (epoch: 194048)
+EXIT_EPOCH=194048
 ...
 ```
 Note that `EXIT_EPOCH` should be `194048` after the [shapella fork](https://blog.ethereum.org/2023/03/28/shapella-mainnet-announcement).

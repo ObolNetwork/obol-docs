@@ -9,10 +9,8 @@ description: Run all nodes in a distributed validator cluster
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
-:::warning
-Running a Distributed Validator alone or a solo cluster means that a single operator or entity runs all the nodes of the DV. In such a case and depending on the objective, there not necessarily the need to create the keyshares via a trustless DKG. Instead the keyshares are created centrally, then distributed securely to the nodes. 
-
-However, to maximise the security of a DV, a single operator can still create the keyshares in a trustless manner via the DKG, avoiding the private keys being stored in full anywhere during the process. Follow the [group guide](docs/int/quickstart/group/index.md) instead for this latter case.
+:::info
+Running a Distributed Validator alone means that a single operator manages all of the nodes of the DV. Depending on the operators security preferences, the private key shares can be created centrally, and distributed securely to each node; or the private key shares can be created in a lower-trust manner with a [Distributed Key Generation](../key-concepts.md#distributed-validator-key-generation-ceremony) process, which avoids the validator private key being stored in full anywhere, at any point in its lifecycle. Follow the [group guide](./group/index.md) instead of this solo guide for this case.
 :::
 
 ## Pre-requisites
@@ -60,20 +58,21 @@ that charon versions prior to `v0.14.4` had a single `--withdrawal-address` flag
 ## Step 3. Start the cluster
 
 :::warning
-To distribute your cluster physically and start the DV, copy or move each `.charon` directory with one (or several) private keys within it to the other machines you'll use as nodes. 
+This guide runs only one EL, one CL, and 6 distributed validator charon + VC pairs on a single docker instance. If this machine fails there will not be fault tolerance. This is a demo repo to understand how Distributed Validators work and is not suitable for a production deployment. 
+<!-- To distribute your cluster physically and start the DV, copy or move each `.charon` directory with one (or several) private keys within it to the other machines you'll use as nodes. 
 
-Then use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder in them.
+Then use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately. -->
 :::
 
 # Testing the cluster locally
 
-The `charon-distributed-validator-cluster` repo used above to create the keyshares also contains six charon clients in separate docker containers along with an execution client and consensus client for DENO and TESTING purposes only, simulating the cluster running.
+The `charon-distributed-validator-cluster` repo used above to create the keyshares also contains six charon clients in separate docker containers along with an execution client and consensus client, simulating a Distributed Validator cluster running.
 
 The default cluster consists of:
 - [Nethermind](https://github.com/NethermindEth/nethermind), an execution layer client
 - [Lighthouse](https://github.com/sigp/lighthouse), a consensus layer client
 - Six [charon](https://github.com/ObolNetwork/charon) nodes
-- Mixture of validator clients:
+- A mixture of validator clients:
    - vc0: [Lighthouse](https://github.com/sigp/lighthouse)
    - vc1: [Teku](https://github.com/ConsenSys/teku)
    - vc2: [Nimbus](https://github.com/status-im/nimbus-eth2)
