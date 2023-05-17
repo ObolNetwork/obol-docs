@@ -66,7 +66,7 @@ Then use the single node [docker compose](https://github.com/ObolNetwork/charon-
 
 # Testing the cluster locally
 
-The `charon-distributed-validator-cluster` repo used above to create the keyshares also contains six charon clients in separate docker containers along with an execution client and consensus client, simulating a Distributed Validator cluster running.
+The `charon-distributed-validator-cluster` repo used above to create the key shares also contains six charon clients in separate docker containers along with an execution client and consensus client, simulating a Distributed Validator cluster running.
 
 The default cluster consists of:
 - [Nethermind](https://github.com/NethermindEth/nethermind), an execution layer client

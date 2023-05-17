@@ -11,7 +11,7 @@ Reconstituting Distributed Validator private key shares into a standard validato
 Only combine private keys as a last resort and do so with extreme caution.
 :::
 
-Combine distributed validator key shares into an Ethereum validator key.
+Combine distributed validator private key shares into an Ethereum validator private key.
 
 ## Pre-requisites
 
@@ -76,7 +76,7 @@ Make sure to never mix the various `.charon` directories with one another.
 Doing so can potentially cause the combination process to fail.
 :::
 
-## Step 2. Combine the keyshares
+## Step 2. Combine the key shares
 
 Run the following command:
 
@@ -147,6 +147,7 @@ $ jq .distributed_validators[].distributed_public_key  validators-to-be-combined
 
 :::info
 
-The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it. Ensure your distributed validator is shut down 
+The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it. 
 
+Ensure your distributed validator cluster is completely shut down before starting a replacement validator or you are likely to be slashed.
 :::
