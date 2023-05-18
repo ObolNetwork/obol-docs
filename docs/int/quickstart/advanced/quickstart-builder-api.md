@@ -8,7 +8,7 @@ description: Run a distributed validator cluster with the builder API (MEV-Boost
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
-Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from the users perspective.
+Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from a user's perspective.
 :::
 
 This quickstart guide focuses on configuring the builder API for a validator and assumes you already [have a cluster up and running](docs/int/quickstart/group/index.md).
@@ -51,7 +51,7 @@ Configuring the Lightouse validator client with Charon follows exactly the same 
 - The validator client must be set up to use a custom [validator_definitions.yml](https://lighthouse-book.sigmaprime.io/validator-management.html).
 - The flag `--builder-registration-timestamp-override` must be set and the assigned value must be the same across all validator clients.
 - The custom validator_definitions.yml must be placed in the `--validators-dir` of lighthouse.
-- The custom validator_definitions.yml must follow the structure below, where `voting_public_key` is the pubkeyshare on the validator client and `builder_pubkey_override` is the associated aggregate pubkey the network will find. You can find these pubkeyshare to aggregate pubkey mapping in the `cluster-lock.json` file created during the DKG process.
+- The custom validator_definitions.yml must follow the structure below, where `voting_public_key` is the pubkey share on the validator client and `builder_pubkey_override` is the associated aggregate pubkey the network will find. You can find these pubkey share to aggregate pubkey mappings in the `cluster-lock.json` file created during the DKG process.
 
 ```yaml
 ---
@@ -84,7 +84,7 @@ Configuring the Lightouse validator client with Charon follows exactly the same 
   builder_pubkey_override: 0x8793b522c8197c047b95b6f4b3c7fd1582a2466ff96eb274ee51fc699c99cbdfeb41cf576bbbbdecf2454527083edf34
 ```
 
-Note the pubkeyshares in the `cluster-lock.json` are base64 encoded and decode to hex. Below is a decoding example for the first `voting_public_key` seen above.
+Note the pubkey shares in the `cluster-lock.json` are base64 encoded and decode to hex. Below is a decoding example for the first `voting_public_key` seen above.
 
 ```sh
 echo pkadKH8m7LNgSbebQI4lc4oOFZmA8y+2WRdEFrng6Pf47MVdAaVFKMFsE4uxIB6v | base64 -d | hexdump -v -e '/1 "%02x" ' | (echo -n 0x && cat)

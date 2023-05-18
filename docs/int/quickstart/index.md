@@ -5,7 +5,7 @@ Charon is in an alpha state and should be used with caution according to its [Te
 :::
 
 There are two ways to set up a distributed validator and each comes with its own quickstart
-1. [Run a DV cluster as a **group**](./group/index.md), where typically several operators or entities operate the various nodes of the cluster. In this setup, the keyshares are created via a trustless DKG, avoiding the full private keys being stored in full anywhere during the process. 
-This approach is this also suited for single entities operating all nodes of a cluster but wishing to create the keyshares in a trustless fashion.
+1. [Run a DV cluster as a **group**](./group/index.md), where several operators run the nodes that make up the cluster. In this setup, the key shares are created using a distributed key generation process, avoiding the full private keys being stored in full in any one place. 
+This approach can also be used by single entities operating all nodes of a cluster but wanting to create the key shares in a trust-minimised fashion.
 
-2. [Run a DV cluster **alone**](./quickstart-alone.md), where a single operator or entity runs all the nodes of the DV. In such a case and depending on the objective, there not necessarily the need to create the keyshares via a trustless DKG. Instead the keyshares are created centrally, then distributed securely to the nodes.
+2. [Run a DV cluster **alone**](./quickstart-alone.md), where a single operator or entity runs all the nodes of the DV. Depending on trust assumptions, there is not necessarily the need to create the key shares via a DKG process. Instead the key shares can be created in a centralised manner, and distributed securely to the nodes.
