@@ -1,32 +1,31 @@
 ---
 sidebar_position: 3
-description: Centralisation risks and their mitigations
+description: Centralization Risks and mitigation
 ---
 
-# Centralisation risks
+# Centralization risks and mitigation
 
-The following is an overview of some points of centralisation in a distributed validator, and the actions one can take to protect and harden their validator infrastructure from correlated failures or undue influence. 
+# Risk: Obol hosting the relay infrastructure
+**Mitigation**: Self-host a relay
 
-## Risk: Obol hosting the relay infrastructure
-**Mitigation**: Self-host a relay or use a third party relay
+One of the risks associated with Obol hosting the [LibP2P relays](docs/charon/networking.md) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network.
 
-Obol Labs currently hosts the default [libp2p relay](../../charon/networking.md) infrastructure for charon clients. These relays enable peer discovery between charon clients in a cluster. If the Obol-hosted relays go down, peers won't be able to discover each other and establish a direct connection with one another. This would impact the ability for operators to perform a DKG, and for nodes to find one another after they restart. To mitigate this risk; node operators should consider [self-hosting a relay](../../charon/charon-cli-reference#host-a-relay). Operators can also list multiple relays for a client to connect to and use, needing just one working relay between a pair of nodes to establish a direct connection. With multiple relays specified, if Obol's relays go down, the clusters can still operate through the other working relays. 
+# Risk: Obol being able to update Charon code
+**Mitigation**: Pin specific versions
 
-## Risk: Obol being able to update Charon's codebase
-**Mitigation**: Pin a specific docker version or commit
+Another risk associated with Obol is having the ability to update the [Charon code](https://github.com/ObolNetwork/charon) running on the network which could introduce vulnerabilities or malicious code. To mitigate this risk, Obol can consider pinning specific versions of the code that have been thoroughly tested and accepted by the network. This would ensure that any updates are carefully vetted and reviewed by the community.
 
-Obol Labs is the current maintainer of the [charon codebase](https://github.com/ObolNetwork/charon). Obol Labs could introduce vulnerabilities or malicious code in a future update. To mitigate this risk, an operator should pin specific versions of the docker image or commits of the repository that have been thoroughly tested and accepted by the community and the operator's security team. Due to the independent nature of Distributed Validator Clusters, every cluster does not need to upgrade versions in lock-step, allowing a cautious operator or cluster to vet and test any potential release candidate for as long as they need. Further, it is possible to gradually roll out new versions of the charon software to a subset of your production nodes before upgrading a signing supermajority of the nodes in your cluster. 
+# Risk: Obol hosting the DV Launchpad
+**Mitigation**: Use [`create cluster`](docs/charon/charon-cli-reference.md) or [`create dkg`](docs/charon/charon-cli-reference.md) locally and distribute the files manually
 
-## Risk: Obol hosting the DV Launchpad
-**Mitigation**: Use [`create cluster`](../../charon/charon-cli-reference#create-a-full-cluster-locally) or [`create dkg`](../../charon/charon-cli-reference#creating-the-configuration-for-a-dkg-ceremony) locally and distribute the files manually
+Hosting the first Charon frontend, the [DV Launchpad](docs/dvl/intro.md), on a centralized server could create a single point of failure, as users would have to rely on Obol's server to access the protocol. This could limit the decentralization of the protocol and could make it vulnerable to attacks or downtime. Obol hosting the launchpad on a decentralized network, such as IPFS is a first step but not enough. This is why the Charon code is open-source and contains a CLI interface to interact with the protocol locally.
 
-Obol Labs develops and hosts a web application known as the [Distributed Validator (DV) Launchpad](../../dvl/intro.md) for facilitating the creation of Distributed Validators. [This site](https://goerli.launchpad.obol.tech/) is intended to educate users on the risks associated with running a Distributed Validator, and is inspired by the original Ethereum [Staking Launchpad](https://launchpad.ethereum.org/). If an Operator does not wish to depend on the DV Launchpad, charon has the [`create cluster`](../../charon/charon-cli-reference#create-a-full-cluster-locally), [`create dkg`](../../charon/charon-cli-reference#creating-the-configuration-for-a-dkg-ceremony), and [`dkg`](../../charon/charon-cli-reference#the-dkg-subcommand) commands for creating a Distributed Validator without any external dependencies. 
+To mitigate the risk of launchpad failure, consider using the `create cluster` or `create dkg` commands locally and distributing the key shares files manually.
 
-## Risk: Obol having a total failure
-**Mitigation**: Either [exit](../../int/quickstart/quickstart-exit) the validator, or use the [`combine`](../../charon/charon-cli-reference#the-combine-subcommand) command to create the validator private key from its key shares
 
-If Obol Labs were to cease operating, and if [charon](https://github.com/ObolNetwork/charon) was to go unmaintained or suffered a complete failure, a node operator could [exit](../../int/quickstart/quickstart-exit) the validator in the normal manner, or if needed, operators could collect their private key shares into one location, and use the [`combine`](../../charon/charon-cli-reference#the-combine-subcommand) subcommand to merge a threshold of the [Distributed Validator private key shares](../../int/key-concepts#distributed-validator-key) into a standard validator private key. 
+# Risk: Obol going bust/rogue
+**Mitigation**: Use key recovery
 
-:::caution
-Please use caution in the event of combining private key shares into a single validator private key, if the distributed validator cluster is still online and validating when the newly assembled private key also begins to validate, **the validator is likely to be slashed**.
-:::
+The final centralization risk associated with Obol is the possibility of the company going bankrupt or acting maliciously, which would lead to a loss of control over the network and potentially cause damage to the ecosystem. To mitigate this risk, Obol has implemented a key recovery mechanism. This would allow the clusters to continue operating and to retrieve full private keys even if Obol is no longer able to provide support.
+
+A guide to recombine key shares into a single private key can be accessed [here](../quickstart/advanced/quickstart-combine.md).

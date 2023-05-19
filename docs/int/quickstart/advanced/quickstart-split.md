@@ -1,24 +1,24 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 description: Split existing validator keys
 ---
 
-# Split existing validator keys
+# Split existing validator private keys
 
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
-This process should only be used if you want to split an existing validator key into multiple keyshares.
+This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed.
 
-If you are starting a new validator, you should follow the [quickstart guide](./) instead.
+If you are starting a new validator, you should follow a [quickstart guide](../index.md) instead.
 :::
 
-Split an existing Ethereum validator key into multiple keyshares for use in an Obol Distributed Validator.
+Split an existing Ethereum validator key into multiple key shares for use in an [Obol Distributed Validator Cluster](../../key-concepts#distributed-validator-cluster).
 
 
 ## Pre-requisites
 
-- Ensure you have the existing validator keys (the ones to split) ready to be copied.
+- Ensure you have the existing validator keystores (the ones to split) and passwords.
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
 - Make sure `docker` is running before executing the commands below.
 
@@ -56,17 +56,16 @@ At the end of this process, you should have a tree like this:
 Run the following docker command to split the keys:
 
 ```shell
-CHARON_VERSION=                # E.g. 0.14.0
+CHARON_VERSION=                # E.g. v0.15.0
 CLUSTER_NAME=                  # The name of the cluster you want to create.
 WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals.
 FEE_RECIPIENT_ADDRESS=         # The address you want to use for fee payments.
-THRESHOLD=                     # The number of keyshares required to sign a message.
 NODES=                         # The number of nodes in the cluster.    
 
-docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:v${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --threshold ${THRESHOLD} --nodes ${NODES}
+docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --nodes ${NODES}
 ```
 
-The above command will create `validator_keys` along with `cluster-lock.json` and `deposit-data.json` in `./.charon/cluster` for each node.
+The above command will create `validator_keys` along with `cluster-lock.json` in `./.charon/cluster` for each node.
 
 Command output:
 
@@ -84,14 +83,9 @@ Created charon cluster:
 ├─ node[0-*]/                   Directory for each node
 │  ├─ charon-enr-private-key    Charon networking private key for node authentication
 │  ├─ cluster-lock.json         Cluster lock defines the cluster lock file which is signed by all nodes
-│  ├─ deposit-data.json         Deposit data file is used to activate a Distributed Validator on DV Launchpad
 │  ├─ validator_keys            Validator keystores and password
 │  │  ├─ keystore-*.json        Validator private share key for duty signing
 │  │  ├─ keystore-*.txt         Keystore password files for keystore-*.json
 ```
 
 These split keys can now be used to start a charon cluster.
-
-## Feedback
-
-If you have gotten this far through the process, and whether you succeeded or failed at splitting an existing validator keystore, we would like to hear your feedback on the process and where you encountered difficulties. Please let us know by joining and posting on our [Discord](https://discord.gg/n6ebKsX46w). Also, feel free to add issues to our [GitHub repos](https://github.com/ObolNetwork).

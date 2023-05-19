@@ -15,7 +15,7 @@ No. Distributed validators use only Ether.
 
 Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https://twitter.com/ObolNetwork) yet? Maybe join our [discord](https://discord.gg/n6ebKsX46w) too.
 
-### What's with the name Charon?
+### Where does the name Charon come from?
 
 [Charon](https://www.theoi.com/Khthonios/Kharon.html) [kharon] is the Ancient Greek Ferryman of the Dead. He was tasked with bringing people across the Acheron river to the underworld. His fee was one Obol coin, placed in the mouth of the deceased. This tradition of placing a coin or Obol in the mouth of the deceased continues to this day across the Greek world.
 
@@ -25,30 +25,25 @@ Charon alone uses negligible disk space of not more than a few MBs. However, if 
 At minimum:
 - A CPU with 2+ physical cores (or 4 vCPUs)
 - 8GB RAM
-- >1.5TB free SSD disk space (for mainnet)
+- 1.5TB+ free SSD disk space (for mainnet)
 - 10mb/s internet bandwidth
 
 Recommended specifications:
 - A CPU with 4+ physical cores
 - 16GB+ RAM
-- >2TB free disk on a high performance SSD (e.g. NVMe)
+- 2TB+ free disk on a high performance SSD (e.g. NVMe)
 - 25mb/s internet bandwidth
 
 For more hardware considerations, check out the [ethereum.org guides](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware) which explores various setups and trade-offs, such as running the node locally or in the cloud.
 
-## Migrating existing validators
+For now, Geth, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../quickstart/group), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
-### Can I keep my existing validator client?
+### What is the difference between a node, a validator and a cluster?
+A node is a single instance of Ethereum EL+CL clients that can communicate with other nodes to maintain the Ethereum blockchain.
 
-Yes. Charon sits as a middleware between a validator client and it's beacon node. All validators that implement the standard REST API will be supported, along with all popular client delivery software such as Dappnode [packages](https://dappnode.github.io/explorer/#/), Rocket Pool's [smart node](https://github.com/rocket-pool/smartnode), StakeHouse's [wagyu](https://github.com/stake-house/wagyu), and Stereum's [node launcher](https://stereum.net/development/#roadmap).
+A validator is a node that participates in the consensus process by verifying transactions and creating new blocks. Multiple validators can run from the same node.
 
-### Can I migrate my existing validator into a distributed validator?
-
-It is possible to split an existing validator keystore into a set of key shares suitable for a distributed validator cluster, but it is a trusted distribution process which is not ideal compared to setting up a fresh cluster using a DKG ceremony where no operator ever has the full private key. Furthermore, if the old staking system is not safely shut down, it could pose a risk of slashing by double signing alongside the new distributed validator, please use extreme caution if migrating a validator, and make sure to wait at least three epochs offline to reduce the risk of double signing or surround voting.
-
-In an ideal scenario, a distributed validator's private key should never exist in full in a single location.
-
-You can split an existing EIP-2335 keystore for a validator to migrate it to a distributed validator architecture with the `charon create cluster --split-existing-keys` command documented [here](docs/charon/charon-cli-reference.md#create-a-full-cluster-locally).
+A cluster is a group of nodes that act together as one or several validators, which allows for a more efficient use of resources, reduces operational costs, and provides better reliability and fault tolerance.
 
 ### Can I migrate an existing Charon node to a new machine?
 
@@ -67,35 +62,3 @@ The threshold (aka quorum) corresponds to the minimum numbers of operators that 
 You can check if the containers on your node are outputting errors by running `docker compose logs` on a machine with a running cluster.
 
 Diagnose some common errors and view their resolutions [here](./errors.mdx).
-
-## Self-Host a Relay
-
-If you are experiencing connectivity issues with the Obol hosted relays, or you want to improve your clusters latency and decentralization, you can opt to host your own relay on a separate open and static internet port.
-
-```
-# Figure out your public IP
-curl v4.ident.me
-
-# Clone the repo and cd into it.
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
-cd charon-distributed-validator-node
-
-# Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname
-
-nano relay/docker-compose.yml
-
-docker compose -f relay/docker-compose.yml up
-```
-
-Test whether the relay is publicly accessible. This should return an ENR:
-`curl http://replace.with.public.ip.or.hostname:3640/enr`
-
-Ensure the ENR returned by the relay contains the correct public IP and port by decoding it with https://enr-viewer.com/.
-
-Configure **ALL** charon nodes in your cluster to use this relay:
-
-- Either by adding a flag: `--p2p-relays=http://replace.with.public.ip.or.hostname:3640/enr`
-- Or by setting the environment variable: `CHARON_P2P_RELAYS=http://replace.with.public.ip.or.hostname:3640/enr`
-
-Note that a local `relay/.charon/charon-enr-private-key` file will be created next to `relay/docker-compose.yml` to ensure a persisted relay ENR across restarts.
