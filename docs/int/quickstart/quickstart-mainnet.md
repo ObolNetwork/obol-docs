@@ -31,7 +31,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 ```
 
-2. If you have already cloned the repo, make sure that it is [up-to-date](./quickstart-alone#updating-dv-stack).
+2. If you have already cloned the repo, make sure that it is [up-to-date](./update).
 
 3. Copy the `.env.sample` file to `.env`
 ```
