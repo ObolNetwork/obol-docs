@@ -6,7 +6,9 @@ description: Test the solo cluster locally
 # Test the cluster locally
 
 :::warning
-This guide runs only one EL, one CL, and 6 distributed validator charon + VC pairs on a single docker instance. If this machine fails there will not be fault tolerance. This is a demo repo to understand how Distributed Validators work and is not suitable for a production deployment. 
+This is a demo repo to understand how Distributed Validators work and is not suitable for a production deployment.
+
+This guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance. As a consequence, if this machine fails, there will not be fault tolerance. 
 :::
 
 The `charon-distributed-validator-cluster` repo used [earlier](./create-keys) to create the key shares also contains six charon clients in separate docker containers along with an execution client and consensus client, simulating a Distributed Validator cluster running.
