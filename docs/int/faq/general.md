@@ -25,13 +25,13 @@ Charon alone uses negligible disk space of not more than a few MBs. However, if 
 At minimum:
 - A CPU with 2+ physical cores (or 4 vCPUs)
 - 8GB RAM
-- >1.5TB free SSD disk space (for mainnet)
+- 1.5TB+ free SSD disk space (for mainnet)
 - 10mb/s internet bandwidth
 
 Recommended specifications:
 - A CPU with 4+ physical cores
 - 16GB+ RAM
-- >2TB free disk on a high performance SSD (e.g. NVMe)
+- 2TB+ free disk on a high performance SSD (e.g. NVMe)
 - 25mb/s internet bandwidth
 
 For more hardware considerations, check out the [ethereum.org guides](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware) which explores various setups and trade-offs, such as running the node locally or in the cloud.
@@ -62,35 +62,3 @@ The threshold (aka quorum) corresponds to the minimum numbers of operators that 
 You can check if the containers on your node are outputting errors by running `docker compose logs` on a machine with a running cluster.
 
 Diagnose some common errors and view their resolutions [here](./errors.mdx).
-
-## Self-Host a Relay
-
-If you are experiencing connectivity issues with the Obol hosted relays, or you want to improve your clusters latency and decentralization, you can opt to host your own relay on a separate open and static internet port.
-
-```
-# Figure out your public IP
-curl v4.ident.me
-
-# Clone the repo and cd into it.
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
-cd charon-distributed-validator-node
-
-# Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname # Replace 'replace.with.public.ip.or.hostname' in relay/docker-compose.yml with your public IPv4 or DNS hostname
-
-nano relay/docker-compose.yml
-
-docker compose -f relay/docker-compose.yml up
-```
-
-Test whether the relay is publicly accessible. This should return an ENR:
-`curl http://replace.with.public.ip.or.hostname:3640/enr`
-
-Ensure the ENR returned by the relay contains the correct public IP and port by decoding it with https://enr-viewer.com/.
-
-Configure **ALL** charon nodes in your cluster to use this relay:
-
-- Either by adding a flag: `--p2p-relays=http://replace.with.public.ip.or.hostname:3640/enr`
-- Or by setting the environment variable: `CHARON_P2P_RELAYS=http://replace.with.public.ip.or.hostname:3640/enr`
-
-Note that a local `relay/.charon/charon-enr-private-key` file will be created next to `relay/docker-compose.yml` to ensure a persisted relay ENR across restarts.
