@@ -6,7 +6,7 @@ description: Run a cluster on mainnet
 # Run a DV on mainnet
 
 :::caution
-Charin is in an alpha state, and you should proceed only if you accept the risk, the [terms of use](https://obol.tech/terms.pdf), and have tested running a Distributed Validator on a testnet first.
+Charon is in an alpha state, and you should proceed only if you accept the risk, the [terms of use](https://obol.tech/terms.pdf), and have tested running a Distributed Validator on a testnet first.
 
 Distributed Validators created for goerli cannot be used on mainnet and vice versa, please take caution when creating, backing up, and activating mainnet validators.
 :::

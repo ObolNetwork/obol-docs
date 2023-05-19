@@ -28,4 +28,4 @@ To mitigate the risk of launchpad failure, consider using the `create cluster` o
 
 The final centralization risk associated with Obol is the possibility of the company going bankrupt or acting maliciously, which would lead to a loss of control over the network and potentially cause damage to the ecosystem. To mitigate this risk, Obol has implemented a key recovery mechanism. This would allow the clusters to continue operating and to retrieve full private keys even if Obol is no longer able to provide support.
 
-A guide to recombine key shares into a single private key can be accessed [here](docs/int/quickstart/quickstart-combine.md).
+A guide to recombine key shares into a single private key can be accessed [here](../quickstart/advanced/quickstart-combine.md).

@@ -12,13 +12,12 @@ import TabItem from '@theme/TabItem';
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
-Exiting your validator is for when you want to stop staking and withdraw your staked ether. This process will take 27 hours or longer depending on the current length of the exit queue.
+Exiting your validator means to stop staking and withdraw your staked ether. This process will take 27 hours or longer depending on the current length of the exit queue. 
 
-## Pre-requisites
-
+:::info
 - A threshold of operators needs to run the same exit command for the exit to succeed.
 - If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has stored. If all charon clients restart before the required threshold of exit messages are received, operators will have to rebroadcast the exit messages.
-
+:::
 ## Step 1. Run the `voluntary-exit` command on your validator client
 
 Run the appropriate command to broadcast an exit message from your validator client to its upstream charon client.
@@ -66,3 +65,5 @@ Confirm the earliest `EXIT_EPOCH` to use to make sure every operator is using th
 </Tabs>
 
 Once a threshold of exit signatures has been received by any single charon client, it will craft a valid exit message and will submit it to the beacon chain for inclusion.
+
+The process of a validator exiting from staking takes variable amounts of time, depending on how many others are exiting at the same time. Once complete, the DV will no longer be responsible for performing validator network duties, is no longer eligible for rewards, and no longer has their ETH "at stake". At this time the account will be marked as fully “withdrawable”.

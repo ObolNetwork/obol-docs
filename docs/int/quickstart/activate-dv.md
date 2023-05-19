@@ -13,7 +13,7 @@ Charon is in an alpha state and should be used with caution according to its [Te
 
 If you have successfully created a distributed validator and you are ready to activate it, congratulations.  
 
-Once you have connected all of your charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator**, may proceed to activate the validators using one of the following websites: 
+Once you have connected all of your charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator** may proceed to activate the validators using one of the following websites: 
 
 <Tabs groupId="network">
   <TabItem value="goërli" label="Goërli" default>
