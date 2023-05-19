@@ -39,6 +39,14 @@ Each charon client has a secp256k1 private key. The associated public key is enc
 For ease of use and to align with the Ethereum ecosystem, Charon encodes these public keys in the [ENR format](https://eips.ethereum.org/EIPS/eip-778), 
 not in [libp2p’s Peer ID format](https://docs.libp2p.io/concepts/fundamentals/peers/).
 
+:::caution
+Each Charon node's secp256k1 private key is critical for authentication and must be kept secure to prevent cluster compromise.
+
+Do not use the same key across multiple clusters, as this can lead to security issues.
+
+For more on p2p security, refer to [libp2p's article](https://docs.libp2p.io/concepts/security/security-considerations). 
+:::
+
 Charon currently only supports libp2p tcp connections with [noise](https://noiseprotocol.org/) security and only accepts incoming libp2p connections from peers defined in the cluster lock. 
 
 ### LibP2P Relays and Peer Discovery

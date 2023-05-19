@@ -265,6 +265,12 @@ validators-to-be-combined/
 
 That is, each operator '.charon' directory must be placed in a parent directory, and renamed.
 
+Note that all validator keys are required for the successful execution of this command.
+
+If for example the lock file defines 2 validators, each `validator_keys` directory must contain exactly 4 files, a JSON and TXT file for each validator.
+
+Those files must be named with an increasing index associated with the validator in the lock file, starting from 0.
+
 The chosen name doesn't matter, as long as it's different from `.charon`.
 
 At the end of the process `combine` will create a new set of directories containing one validator key each, named after its public key:
