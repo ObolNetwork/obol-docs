@@ -121,8 +121,8 @@ The table below lists different cluster sizes and their characteristics:
 
 | Cluster Size | Threshold | BFT # | CFT # | Note                               |
 |--------------|-----------|-------|-------|------------------------------------|
-| 1            | 1         | 0     | 0     | ❌ Warning: Not CFT or BFT!         |
-| 2            | 2         | 0     | 0     | ❌ Warning: Not CFT or BFT!         |
+| 1            | 1         | 0     | 0     | ❌ Invalid: Not CFT nor BFT!        |
+| 2            | 2         | 0     | 0     | ❌ Invalid: Not CFT nor BFT!        |
 | 3            | 2         | 0     | 1     | ⚠️ Warning: CFT but not BFT!       |
 | 4            | 3         | 1     | 1     | ✅ CFT and BFT optimal for 1 faulty |
 | 5            | 4         | 1     | 1     |                                    |
