@@ -115,7 +115,7 @@ Cluster sizes can therefore chosen to be optimise for BFT or CFT depending on th
 
 The table below lists different cluster sizes and their characteristics:
  - `Cluster Size` - the number of nodes in the cluster.
- - `Threshold` - the minimum number of nodes that must collaborate to create signatures.
+ - `Threshold` - the minimum number of nodes that must collaborate to come to consensus and to create signatures.
  - `BFT #` - the maximum number of byzantine nodes that can be tolerated.
  - `CFT #` - the maximum number of crashed nodes that can be tolerated.
 
