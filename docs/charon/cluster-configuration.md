@@ -99,7 +99,7 @@ The `cluster-lock.json` has the following schema:
 ## Cluster Size and Robustness
 
 The cluster size (the number of nodes/operators in the cluster) determines the robustness of the cluster; its ability remain operational under different failure scenarios.
-The larger the cluster size, the more nodes faulty nodes it can tolerate.
+The larger the cluster size, the more faulty nodes it can tolerate.
 Even though larger clusters are more robust, they are also more expensive to operate and introduce additional network latency which can negatively impact the cluster's performance.
 
 Determining the optimal cluster size is a trade-off between robustness (larger is better) vs cost and performance (smaller is better).
@@ -110,36 +110,36 @@ The robustness of a cluster can generally be divided into two categories:
 
 Different cluster sizes tolerate different amounts of byzantine vs crash nodes. 
 In practice, hardware and software crash relatively frequently, while byzantine behaviour is much rarer.
-Byzantine Fault Tolerance is however critical for trust minimised system like charon cluster. 
+Byzantine Fault Tolerance is however critical for trust minimised systems like distributed validators. 
 Cluster sizes can therefore chosen to be optimise for BFT or CFT depending on their requirements.
 
-Teh table below lists different cluster sizes and their characteristics:
+The table below lists different cluster sizes and their characteristics:
  - `Cluster Size` - the number of nodes in the cluster.
  - `Threshold` - the minimum number of nodes that must collaborate to create signatures.
  - `BFT #` - the maximum number of byzantine nodes that can be tolerated.
  - `CFT #` - the maximum number of crashed nodes that can be tolerated.
 
-| Cluster Size | Threshold | BFT # | CFT # | Note                          |
-|--------------|-----------|-------|-------|-------------------------------|
-| 1            | 1         | 0     | 0     | ❌ Warning: Not CFT or BFT!    |
-| 2            | 2         | 0     | 0     | ❌ Warning: Not CFT or BFT!    |
-| 3            | 2         | 0     | 1     | ⚠️ Warning: CFT but not BFT!  |
-| 4            | 3         | 1     | 1     | ✅ Minimum both CFT and BFT    |
-| 5            | 4         | 1     | 1     |                               |
-| 6            | 4         | 1     | 2     | ✅ CFT optimal for 2 crashed   |
-| 7            | 5         | 2     | 2     | ✅ BFT optimal for 2 byzantine |
-| 8            | 6         | 2     | 2     |                               |
-| 9            | 6         | 2     | 3     | ✅ CFT optimal for 3 crashed   |
-| 10           | 7         | 3     | 3     | ✅ BFT optimal for 3 byzantine |
-| 11           | 8         | 3     | 3     |                               |
-| 12           | 8         | 3     | 4     | ✅ CFT optimal for 4 crashed   |
-| 13           | 9         | 4     | 4     | ✅ BFT optimal for 4 byzantine |
-| 14           | 10        | 4     | 4     |                               |
-| 15           | 10        | 4     | 5     | ✅ CFT optimal for 5 crashed   |
-| 16           | 11        | 5     | 5     | ✅ BFT optimal for 5 byzantine |
-| 17           | 12        | 5     | 5     |                               |
-| 18           | 12        | 5     | 6     | ✅ CFT optimal for 6 crashed   |
-| 19           | 13        | 6     | 6     | ✅ BFT optimal for 6 byzantine |
-| 20           | 14        | 6     | 6     |                               |
-| 21           | 14        | 6     | 7     | ✅ CFT optimal for 7 crashed   |
-| 22           | 15        | 7     | 7     | ✅ BFT optimal for 7 byzantine |
+| Cluster Size | Threshold | BFT # | CFT # | Note                               |
+|--------------|-----------|-------|-------|------------------------------------|
+| 1            | 1         | 0     | 0     | ❌ Warning: Not CFT or BFT!         |
+| 2            | 2         | 0     | 0     | ❌ Warning: Not CFT or BFT!         |
+| 3            | 2         | 0     | 1     | ⚠️ Warning: CFT but not BFT!       |
+| 4            | 3         | 1     | 1     | ✅ CFT and BFT optimal for 1 faulty |
+| 5            | 4         | 1     | 1     |                                    |
+| 6            | 4         | 1     | 2     | ✅ CFT optimal for 2 crashed        |
+| 7            | 5         | 2     | 2     | ✅ BFT optimal for 2 byzantine      |
+| 8            | 6         | 2     | 2     |                                    |
+| 9            | 6         | 2     | 3     | ✅ CFT optimal for 3 crashed        |
+| 10           | 7         | 3     | 3     | ✅ BFT optimal for 3 byzantine      |
+| 11           | 8         | 3     | 3     |                                    |
+| 12           | 8         | 3     | 4     | ✅ CFT optimal for 4 crashed        |
+| 13           | 9         | 4     | 4     | ✅ BFT optimal for 4 byzantine      |
+| 14           | 10        | 4     | 4     |                                    |
+| 15           | 10        | 4     | 5     | ✅ CFT optimal for 5 crashed        |
+| 16           | 11        | 5     | 5     | ✅ BFT optimal for 5 byzantine      |
+| 17           | 12        | 5     | 5     |                                    |
+| 18           | 12        | 5     | 6     | ✅ CFT optimal for 6 crashed        |
+| 19           | 13        | 6     | 6     | ✅ BFT optimal for 6 byzantine      |
+| 20           | 14        | 6     | 6     |                                    |
+| 21           | 14        | 6     | 7     | ✅ CFT optimal for 7 crashed        |
+| 22           | 15        | 7     | 7     | ✅ BFT optimal for 7 byzantine      |
