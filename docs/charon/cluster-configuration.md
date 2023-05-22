@@ -96,22 +96,22 @@ The `cluster-lock.json` has the following schema:
 }
 ```
 
-## Cluster Size and Robustness
+## Cluster Size and Resilience
 
-The cluster size (the number of nodes/operators in the cluster) determines the robustness of the cluster; its ability remain operational under different failure scenarios.
-The larger the cluster size, the more faulty nodes it can tolerate.
-Even though larger clusters are more robust, they are also more expensive to operate and introduce additional network latency which can negatively impact the cluster's performance.
+The cluster size (the number of nodes/operators in the cluster) determines the resilience of the cluster; its ability remain operational under diverse failure scenarios.
+Larger clusters can tolerate more faulty nodes.
+However, increased cluster size implies higher operational costs and potential network latency, which may negatively affect performance
 
-Determining the optimal cluster size is a trade-off between robustness (larger is better) vs cost and performance (smaller is better).
+Optimal cluster size is therefore trade-off between resilience (larger is better) vs cost-efficiency and performance (smaller is better).
 
-The robustness of a cluster can generally be divided into two categories:
+Cluster resilience can be broadly classified into two categories:
  - **[Byzantine Fault Tolerance (BFT)](https://en.wikipedia.org/wiki/Byzantine_fault)** - the ability to tolerate nodes that are actively trying to disrupt the cluster.
  - **[Crash Fault Tolerance (CFT)](https://en.wikipedia.org/wiki/Fault_tolerance)** - the ability to tolerate nodes that have crashed or are otherwise unavailable.
 
 Different cluster sizes tolerate different amounts of byzantine vs crash nodes. 
-In practice, hardware and software crash relatively frequently, while byzantine behaviour is much rarer.
-Byzantine Fault Tolerance is however critical for trust minimised systems like distributed validators. 
-Cluster sizes can therefore chosen to be optimise for BFT or CFT depending on their requirements.
+In practice, hardware and software crash relatively frequently, while byzantine behaviour is relatively uncommon.
+However, Byzantine Fault Tolerance is crucial for trust minimised systems like distributed validators. 
+Thus, cluster sizes can be chosen to be optimise for either BFT or CFT.
 
 The table below lists different cluster sizes and their characteristics:
  - `Cluster Size` - the number of nodes in the cluster.
