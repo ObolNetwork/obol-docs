@@ -1,7 +1,10 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 description: Run all nodes in a distributed validator cluster
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Create the private key shares
 
@@ -23,33 +26,30 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
 
 ## Create the key shares locally
 
-1. Clone the [charon-distributed-validator-cluster](https://github.com/ObolNetwork/charon-distributed-validator-cluster) repo and `cd` into the directory.
+<Tabs groupId="create-keys">
+  <TabItem value="docker" label="Docker CLI" default>
+    Create the artifacts needed to run a DV cluster by running the following command to setup the parameters of the cluster
+    <pre>
+      <code>
+      WITHDRAWAL_ADDR=[ENTER YOUR WITHDRAWAL ADDRESS HERE]
+      <br/>
+      FEE_RECIPIENT_ADDR=[ENTER YOUR FEE RECIPIENT ADDRESS HERE]
+      <br/>
+      NB_NODES=[ENTER AMOUNT OF DESIRED NODES]
+      </code>
+    </pre>
+    Then, run this command to create the key shares centrally
+    <pre>
+      <code>
+      docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.15.0 create cluster --name="mycluster" --withdrawal-addresses="{'${WITHDRAWAL_ADDR}'}" --fee-recipient-addresses="{'${FEE_RECIPIENT_ADDR}'}" --nodes="{'${NB_NODES}'}"
+      </code>
+    </pre>
+  </TabItem>
+  <TabItem value="launchpad" label="Launchpad UI">
+    Go to the <a href="goerli.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
+  </TabItem>
+</Tabs>
 
-   ```sh
-   # Clone the repo
-   git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
 
-   # Change directory
-   cd charon-distributed-validator-cluster/
-   ```
 
-2. Prepare the environment variables
-
-   ```sh
-   # Copy the sample environment variables
-   cp .env.sample .env
-   ```
-   `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
-
-3. Create the artifacts needed to run a DV cluster by running the following command:
-
-   ```sh
-   # Enter required validator addresses
-   WITHDRAWAL_ADDR=<ENTER YOUR WITHDRAWAL ADDRESS HERE>
-   FEE_RECIPIENT_ADDR=<ENTER YOUR FEE RECIPIENT ADDRESS HERE>
-
-   # Create a distributed validator cluster
-   docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.15.0 create cluster --name="mycluster" --withdrawal-addresses="${WITHDRAWAL_ADDR}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDR}" --nodes 6 --threshold 5
-   ```
-
-These commands will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
+After successful completion, a subdirectory `.charon/cluster` should be created. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.

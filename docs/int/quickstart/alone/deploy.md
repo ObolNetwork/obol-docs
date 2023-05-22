@@ -4,7 +4,7 @@ description: Move the private key shares to the nodes and run the cluster
 ---
 
 # Deploy the cluster
-To distribute your cluster physically and start the DV, copy or move each `.charon` directory with one (or several) private key shares within it to the other machines you'll use as nodes. 
+To distribute your cluster physically and start the DV, each node needs a `.charon` directory with one (or several) private key shares within it.
 
 :point_right: Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
 
