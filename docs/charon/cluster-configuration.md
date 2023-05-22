@@ -143,3 +143,22 @@ The table below lists different cluster sizes and their characteristics:
 | 20           | 14        | 6     | 6     |                                    |
 | 21           | 14        | 6     | 7     | ✅ CFT optimal for 7 crashed        |
 | 22           | 15        | 7     | 7     | ✅ BFT optimal for 7 byzantine      |
+
+The table above is determined by the QBFT consensus algorithm with the 
+following formulas from [this](https://arxiv.org/pdf/1909.10194.pdf) paper: 
+
+```
+n = cluster size
+
+Threshold: min number of honest nodes required to reach quorum given size n
+Quarom(n) = ceiling(2n/3) 
+
+BFT #: max number of faulty (byzantine) nodes given size n
+f(n) = floor((n-1)/3)
+
+CFT #: max number of unavailable (crashed) nodes given size n
+crashed(n) = n - Quarom(n) 
+```
+
+
+
