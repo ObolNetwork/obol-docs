@@ -111,11 +111,11 @@ Cluster resilience can be broadly classified into two categories:
 Different cluster sizes tolerate different amounts of byzantine vs crash nodes. 
 In practice, hardware and software crash relatively frequently, while byzantine behaviour is relatively uncommon.
 However, Byzantine Fault Tolerance is crucial for trust minimised systems like distributed validators. 
-Thus, cluster sizes can be chosen to be optimise for either BFT or CFT.
+Thus, cluster size can be chosen to optimise for either BFT or CFT.
 
 The table below lists different cluster sizes and their characteristics:
  - `Cluster Size` - the number of nodes in the cluster.
- - `Threshold` - the minimum number of nodes that must collaborate to come to consensus and to create signatures.
+ - `Threshold` - the minimum number of nodes that must collaborate to reach consensus quorum and to create signatures.
  - `BFT #` - the maximum number of byzantine nodes that can be tolerated.
  - `CFT #` - the maximum number of crashed nodes that can be tolerated.
 
