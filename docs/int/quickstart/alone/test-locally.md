@@ -4,15 +4,12 @@ description: Test the solo cluster locally
 ---
 
 # Run a test cluster locally
-
-:::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
-
 :::warning
 This is a demo repo to understand how Distributed Validators work and is not suitable for a production deployment.
 
-This guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance. As a consequence, if this machine fails, there will not be fault tolerance. 
+This guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance. As a consequence, if this machine fails, there will not be fault tolerance.
+
+Follow these two guides sequentially instead for production deployment: [create keys centrally](./create-keys.md) and [how to deploy them](./deploy.md). 
 :::
 
 The [`charon-distributed-validator-cluster`](https://github.com/ObolNetwork/charon-distributed-validator-cluster) repo contains six charon clients in separate docker containers along with an execution client and consensus client, simulating a Distributed Validator cluster running.
@@ -68,7 +65,7 @@ The default cluster consists of:
 
 These commands will create a subdirectory `.charon/cluster`. In it are six folders, one for each charon node created. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
 
-## Step 3. Start the cluster
+## Start the cluster
 
 Run this command to start your cluster containers
 
