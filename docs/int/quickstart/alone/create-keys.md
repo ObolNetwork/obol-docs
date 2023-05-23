@@ -21,7 +21,6 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
 ## Pre-requisites
 
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
-- Ensure you have [git](https://git-scm.com/downloads) installed. 
 - Make sure `docker` is running before executing the commands below.
 
 ## Create the key shares locally
@@ -48,7 +47,7 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
     </pre>
   </TabItem>
   <TabItem value="launchpad" label="Launchpad UI">
-    Go to the <a href="goerli.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
+    Go to the <a href="https://goerli.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
   </TabItem>
 </Tabs>
 
