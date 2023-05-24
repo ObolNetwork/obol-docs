@@ -95,3 +95,70 @@ The `cluster-lock.json` has the following schema:
   "signature_aggregate": "abcdef...abcedef"                 // BLS aggregate signature of the lock hash signed by each DV pubkey.
 }
 ```
+
+## Cluster Size and Resilience
+
+The cluster size (the number of nodes/operators in the cluster) determines the resilience of the cluster; its ability remain operational under diverse failure scenarios.
+Larger clusters can tolerate more faulty nodes.
+However, increased cluster size implies higher operational costs and potential network latency, which may negatively affect performance
+
+Optimal cluster size is therefore trade-off between resilience (larger is better) vs cost-efficiency and performance (smaller is better).
+
+Cluster resilience can be broadly classified into two categories:
+ - **[Byzantine Fault Tolerance (BFT)](https://en.wikipedia.org/wiki/Byzantine_fault)** - the ability to tolerate nodes that are actively trying to disrupt the cluster.
+ - **[Crash Fault Tolerance (CFT)](https://en.wikipedia.org/wiki/Fault_tolerance)** - the ability to tolerate nodes that have crashed or are otherwise unavailable.
+
+Different cluster sizes tolerate different counts of byzantine vs crash nodes. 
+In practice, hardware and software crash relatively frequently, while byzantine behaviour is relatively uncommon.
+However, Byzantine Fault Tolerance is crucial for trust minimised systems like distributed validators. 
+Thus, cluster size can be chosen to optimise for either BFT or CFT.
+
+The table below lists different cluster sizes and their characteristics:
+ - `Cluster Size` - the number of nodes in the cluster.
+ - `Threshold` - the minimum number of nodes that must collaborate to reach consensus quorum and to create signatures.
+ - `BFT #` - the maximum number of byzantine nodes that can be tolerated.
+ - `CFT #` - the maximum number of crashed nodes that can be tolerated.
+
+| Cluster Size | Threshold | BFT # | CFT # | Note                               |
+|--------------|-----------|-------|-------|------------------------------------|
+| 1            | 1         | 0     | 0     | ❌ Invalid: Not CFT nor BFT!        |
+| 2            | 2         | 0     | 0     | ❌ Invalid: Not CFT nor BFT!        |
+| 3            | 2         | 0     | 1     | ⚠️ Warning: CFT but not BFT!       |
+| 4            | 3         | 1     | 1     | ✅ CFT and BFT optimal for 1 faulty |
+| 5            | 4         | 1     | 1     |                                    |
+| 6            | 4         | 1     | 2     | ✅ CFT optimal for 2 crashed        |
+| 7            | 5         | 2     | 2     | ✅ BFT optimal for 2 byzantine      |
+| 8            | 6         | 2     | 2     |                                    |
+| 9            | 6         | 2     | 3     | ✅ CFT optimal for 3 crashed        |
+| 10           | 7         | 3     | 3     | ✅ BFT optimal for 3 byzantine      |
+| 11           | 8         | 3     | 3     |                                    |
+| 12           | 8         | 3     | 4     | ✅ CFT optimal for 4 crashed        |
+| 13           | 9         | 4     | 4     | ✅ BFT optimal for 4 byzantine      |
+| 14           | 10        | 4     | 4     |                                    |
+| 15           | 10        | 4     | 5     | ✅ CFT optimal for 5 crashed        |
+| 16           | 11        | 5     | 5     | ✅ BFT optimal for 5 byzantine      |
+| 17           | 12        | 5     | 5     |                                    |
+| 18           | 12        | 5     | 6     | ✅ CFT optimal for 6 crashed        |
+| 19           | 13        | 6     | 6     | ✅ BFT optimal for 6 byzantine      |
+| 20           | 14        | 6     | 6     |                                    |
+| 21           | 14        | 6     | 7     | ✅ CFT optimal for 7 crashed        |
+| 22           | 15        | 7     | 7     | ✅ BFT optimal for 7 byzantine      |
+
+The table above is determined by the QBFT consensus algorithm with the 
+following formulas from [this](https://arxiv.org/pdf/1909.10194.pdf) paper: 
+
+```
+n = cluster size
+
+Threshold: min number of honest nodes required to reach quorum given size n
+Quarom(n) = ceiling(2n/3) 
+
+BFT #: max number of faulty (byzantine) nodes given size n
+f(n) = floor((n-1)/3)
+
+CFT #: max number of unavailable (crashed) nodes given size n
+crashed(n) = n - Quarom(n) 
+```
+
+
+
