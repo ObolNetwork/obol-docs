@@ -4,7 +4,7 @@ description: Move the private key shares to the nodes and run the cluster
 ---
 
 # Deploy the cluster
-To distribute your cluster physically and start the DV, each node needs a  directory called `.charon` with one (or several) private key shares within it as per the structure below.
+To distribute your cluster physically and start the DV, each node needs a directory called `.charon` with one (or several) private key shares within it as per the structure below.
 
 ```
 ├── .charon
