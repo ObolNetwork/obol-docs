@@ -50,11 +50,11 @@ Confirm the earliest `EXIT_EPOCH` to use to make sure every operator is using th
     <li>Appends <code>{String.raw`--validator=<filename>`}</code> to the <code>command</code> variable.</li>
     <li>Executes a program called <code>nimbus_beacon_node</code> with the following arguments:</li>
     <ul>
-      <li><code>deposits exit</code> :Exits validators</li>
-      <li><code>$command</code> :The generated command string from the loop.</li>
-      <li><code>--epoch=162304</code> :The epoch upon which to submit the voluntary exit.</li>
-      <li><code>--rest-url=http://charon:3600/</code> :Specifies the Charon <code>host:port</code></li>
-      <li><code>--data-dir=/home/user/charon/</code> :Specifies the <code>Keystore path</code> which has all the validator keys. There will be a <code>secrets</code> and a <code>validators</code> folder inside it.</li>
+      <li><code>deposits exit</code> : Exits validators</li>
+      <li><code>$command</code> : The generated command string from the loop.</li>
+      <li><code>--epoch=162304</code> : The epoch upon which to submit the voluntary exit.</li>
+      <li><code>--rest-url=http://charon:3600/</code> : Specifies the Charon <code>host:port</code></li>
+      <li><code>--data-dir=/home/user/charon/</code> : Specifies the <code>Keystore path</code> which has all the validator keys. There will be a <code>secrets</code> and a <code>validators</code> folder inside it.</li>
     </ul>
     <pre>
       <code>
@@ -74,14 +74,14 @@ Confirm the earliest `EXIT_EPOCH` to use to make sure every operator is using th
     </pre>
   </TabItem>
     <TabItem value="lodestar" label="Lodestar" default>
-    The following executes an interactive command inside the Loestar VC container to exit all validators. Executes 
+    The following executes an interactive command inside the Loestar VC container to exit all validators. It executes 
     <code>node /usr/app/packages/cli/bin/lodestar validator voluntary-exit</code> with the arguments:
     <ul>
-      <li><code>--beaconNodes="http://charon:3600"</code> :Specifies the Charon <code>host:port</code>.</li>
-      <li><code>--data-dir=/opt/data</code> :Specifies the folder where the key stores were imported.</li>
-      <li><code>--exitEpoch=162304</code> :The epoch upon which to submit the voluntary exit.</li>
-      <li><code>--network=goerli</code> :Specifies the network.</li>
-      <li><code>--yes</code> :Skips confirmation prompt.</li>
+      <li><code>--beaconNodes="http://charon:3600"</code> : Specifies the Charon <code>host:port</code>.</li>
+      <li><code>--data-dir=/opt/data</code> : Specifies the folder where the key stores were imported.</li>
+      <li><code>--exitEpoch=162304</code> : The epoch upon which to submit the voluntary exit.</li>
+      <li><code>--network=goerli</code> : Specifies the network.</li>
+      <li><code>--yes</code> : Skips confirmation prompt.</li>
     </ul>
     <pre>
       <code>
