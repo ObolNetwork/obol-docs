@@ -11,14 +11,13 @@ import TabItem from '@theme/TabItem';
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
-
 Exiting your validator means to stop staking and withdraw your staked ether. This process will take 27 hours or longer depending on the current length of the exit queue.
 
 :::info
 
 - A threshold of operators needs to run the same exit command for the exit to succeed.
 - If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has stored. If all charon clients restart before the required threshold of exit messages are received, operators will have to rebroadcast the exit messages.
-  :::
+:::
 
 ## Run the `voluntary-exit` command on your validator client
 
@@ -51,11 +50,11 @@ Confirm the earliest `EXIT_EPOCH` to use to make sure every operator is using th
     <li>Appends <code>{String.raw`--validator=<filename>`}</code> to the <code>command</code> variable.</li>
     <li>Executes a program called <code>nimbus_beacon_node</code> with the following arguments:</li>
     <ul>
-      <li><code>deposits exit</code> :-Exits validators</li>
-      <li><code>$command</code> :-The generated command string from the loop.</li>
-      <li><code>--epoch=162304</code> :-The epoch upon which to submit the voluntary exit.</li>
-      <li><code>--rest-url=http://charon:3600/</code> :-Specifies the Charon <code>host:port</code></li>
-      <li><code>--data-dir=/home/user/charon/</code> :-Specifies the <code>Keystore path</code> which has all the validator keys. There will be a <code>secrets</code> and a <code>validators</code> folder inside it.</li>
+      <li><code>deposits exit</code> :Exits validators</li>
+      <li><code>$command</code> :The generated command string from the loop.</li>
+      <li><code>--epoch=162304</code> :The epoch upon which to submit the voluntary exit.</li>
+      <li><code>--rest-url=http://charon:3600/</code> :Specifies the Charon <code>host:port</code></li>
+      <li><code>--data-dir=/home/user/charon/</code> :Specifies the <code>Keystore path</code> which has all the validator keys. There will be a <code>secrets</code> and a <code>validators</code> folder inside it.</li>
     </ul>
     <pre>
       <code>
@@ -78,11 +77,11 @@ Confirm the earliest `EXIT_EPOCH` to use to make sure every operator is using th
     The following executes an interactive command inside the Loestar VC container to exit all validators. Executes 
     <code>node /usr/app/packages/cli/bin/lodestar validator voluntary-exit</code> with the arguments:
     <ul>
-      <li><code>--beaconNodes="http://charon:3600"</code> :-Specifies the Charon <code>host:port</code>.</li>
-      <li><code>--data-dir=/opt/data</code> :-Specifies the folder where the key stores were imported.</li>
-      <li><code>--exitEpoch=162304</code> :-The epoch upon which to submit the voluntary exit.</li>
-      <li><code>--network=goerli</code> :-Specifies the network.</li>
-      <li><code>--yes</code> : Skips confirmation prompt.</li>
+      <li><code>--beaconNodes="http://charon:3600"</code> :Specifies the Charon <code>host:port</code>.</li>
+      <li><code>--data-dir=/opt/data</code> :Specifies the folder where the key stores were imported.</li>
+      <li><code>--exitEpoch=162304</code> :The epoch upon which to submit the voluntary exit.</li>
+      <li><code>--network=goerli</code> :Specifies the network.</li>
+      <li><code>--yes</code> :Skips confirmation prompt.</li>
     </ul>
     <pre>
       <code>
