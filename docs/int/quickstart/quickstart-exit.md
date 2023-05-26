@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
+
 Users looking to exit staking entirely and withdraw their full balance back must also sign and broadcast a "voluntary exit" message with validator keys which will start the process of exiting from staking. This is done with your validator client and submitted to your beacon node, and does not require gas. In the case of a DV, each charon node needs to broadcast a partial exit to the other nodes of the cluster. Once a threshold of partial exits has been received by any node, the full voluntary exit will be sent to the beacon chain.
 
 This process will take 27 hours or longer depending on the current length of the exit queue.
@@ -19,6 +20,7 @@ This process will take 27 hours or longer depending on the current length of the
 - A threshold of operators needs to run the exit command for the exit to succeed.
 - If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
 :::
+
 ## Run the `voluntary-exit` command on your validator client
 
 Run the appropriate command on your validator client to broadcast an exit message from your validator client to its upstream charon client.
