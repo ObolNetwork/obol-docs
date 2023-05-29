@@ -48,7 +48,7 @@ The Obol Network consists of four core public goods:
 - The Distributed Validator [Launchpad](https://docs.obol.tech/docs/dvl/intro), a [User Interface](https://goerli.launchpad.obol.tech/) for bootstrapping Distributed Validators
 - [Charon](https://docs.obol.tech/docs/charon/intro), a middleware client that enables validators to run in a fault-tolerant, distributed manner
 - [Obol Managers](https://docs.obol.tech/docs/sc/introducing-obol-managers), a set of solidity smart contracts for the formation of Distributed Validators
-- [Obol Testnets])(https://docs.obol.tech/docs/testnet), a set of on-going public incentivized testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
+- [Obol Testnets](https://docs.obol.tech/docs/testnet), a set of on-going public incentivized testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
 
 ## List of Security Audits
 
