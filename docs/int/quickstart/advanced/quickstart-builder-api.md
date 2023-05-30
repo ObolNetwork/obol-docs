@@ -41,6 +41,16 @@ Once the flag is set up, Obol distributed validators will be able to register to
 
 For Lighthouse, we are currently waiting on the following [PR](https://github.com/sigp/lighthouse/pull/4306) to be merged into their unstable branch to enable compatability, please review the PR's status.
 
+## Run MEV Boost
+
+If you want to run [mev-boost](https://boost.flashbots.net/) and if you are already running the [cluster](docs/int/quickstart/group/index.md), you can follow these steps:
+
+- Set `BUILDER_API_ENABLED=true` in `.env`
+- Restart your stack
+```
+docker compose -f docker-compose.yml -f mevboost-compose.yml up
+```
+
 ### Verify Charon + Builder API is Functional
 
 Once you have Charon and your Validator Client set up, you can verify if your setup is functional by reviewing your proposed blocks on [beaconcha.in](https://beaconcha.in) dashboards or via the Relay API endpoints.
