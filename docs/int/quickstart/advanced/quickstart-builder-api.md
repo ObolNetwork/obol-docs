@@ -43,7 +43,7 @@ For Lighthouse, we are currently waiting on the following [PR](https://github.co
 
 ### Verify Charon + Builder API is Functional
 
-Once you have Charon and your Validator Client set up, you can verify if your setup is functional by reviewing your proposed blocks on [beaconcha.in](https://beaconcha.in) dashboards or on via the Relay API endpoints.
+Once you have Charon and your Validator Client set up, you can verify if your setup is functional by reviewing your proposed blocks on [beaconcha.in](https://beaconcha.in) dashboards or via the Relay API endpoints.
 
 As an example, if my validator was the block proposer for block `17370078` on mainnet, I can review the following resources:
 
