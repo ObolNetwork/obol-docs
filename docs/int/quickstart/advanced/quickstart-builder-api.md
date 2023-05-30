@@ -8,7 +8,7 @@ description: Run a distributed validator cluster with the builder API (MEV-Boost
 :::caution
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
-Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from a user's perspective.
+Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In the future, this process aims to be much more automated and seamless from a user's perspective.
 :::
 
 This quickstart guide focuses on configuring the builder API for a validator and assumes you already [have a cluster up and running](docs/int/quickstart/group/index.md).
@@ -33,7 +33,7 @@ Currently, Charon with the builder API enabled, is compatible only with [Teku](h
 
 Configuring the Teku validator client with Charon follows exactly the same process as their [official guide](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file).
 
-The validator client must be set up to use the `--validators-proposer-config` [flag](https://docs.teku.consensys.net/reference/cli#validators-proposer-config) with a value equal to `http://$CHARON_ENDPOINT:3600/teku_proposer_config`
+The validator client must be set up to use the `--validators-proposer-config` [flag](https://docs.teku.consensys.net/reference/cli#validators-proposer-config) with a value equal to `http://$CHARON_ENDPOINT:3600/teku_proposer_config`.
 
 Once the flag is set up, Obol distributed validators will be able to register to the builder network, submit blinded beacon blocks and gain a share of the MEV profits.
 
@@ -43,9 +43,9 @@ For Lighthouse, we are currently waiting on the following [PR](https://github.co
 
 ### Verify Charon + Builder API is Functional
 
-Once you have Charon and your Validator Client set up you can verify the set up is functional by reviewing your proposed blocks on Etherscan testnets or on via the Relay API endpoints.
+Once you have Charon and your Validator Client set up, you can verify if your setup is functional by reviewing your proposed blocks on [beaconcha.in](https://beaconcha.in) dashboards or on via the Relay API endpoints.
 
-As an example, if my validator was the block proposer for block 17370078 on mainnet, I can review the following resources:
+As an example, if my validator was the block proposer for block `17370078` on mainnet, I can review the following resources:
 
 * [Beaconcha.in](https://beaconcha.in):
   * Consider this [Mainnet block 17370078](https://beaconcha.in/block/17370078).
@@ -59,5 +59,5 @@ As an example, if my validator was the block proposer for block 17370078 on main
   * Blocks that have not been submitted to the Relay will return an empty array `[]`.
 
 :::caution
-Note that the mainnet block in the above description is taken only as an example, and not actually proposed by a distributed validator.
+Note that the mainnet block in the above description is taken only for representation, and not actually proposed by a distributed validator.
 :::caution
