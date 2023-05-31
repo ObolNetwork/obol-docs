@@ -47,7 +47,7 @@ charon run --builder-api
 
 #### Teku Validator Client
 
-Configuring the Teku validator client with Charon follows exactly the same process as their [official guide](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file).
+Configuring the Teku validator client with Charon can be done by following the same process outlined in the [Teku official guide](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file).
 
 The validator client must be set up to use the `--validators-proposer-config` [flag](https://docs.teku.consensys.net/reference/cli#validators-proposer-config) with a value equal to `http://$CHARON_ENDPOINT:3600/teku_proposer_config`.
 
