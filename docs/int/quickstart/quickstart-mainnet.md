@@ -93,18 +93,6 @@ CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_MAINNET_BEACON_NODE_URL>
 ...
 ```
 
-#### Mainnet node with mev-boost
-
-If you are running your mainnet DV node with `mev-boost`, you need to uncomment and set the `MEVBOOST_RELAYS` variable in the `.env` file
-```
-...
-# MEV-Boost docker container image version, e.g. `latest` or `v1.4.0`.
-#MEVBOOST_VERSION=
-MEVBOOST_RELAYS=https://0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433094e5f22f21102ec057841fcb81978ed1ea0fa8246@builder-relay-mainnet.blocknative.com
-...
-```
-You can also use the [flashbots relay](https://boost-relay.flashbots.net/).
-
 #### Exit a mainnet distributed validator
 
 If you want to exit your mainnet validator, you need to uncomment and set the `EXIT_EPOCH` variable in the `.env` file

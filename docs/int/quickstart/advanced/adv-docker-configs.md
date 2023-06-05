@@ -36,9 +36,3 @@ docker compose up
 ```
 docker compose -f docker-compose.yml -f docker-compose.override.yml -f compose-debug.yml up
 ```
-
-- To run [mev-boost](https://boost.flashbots.net/), run:
-
-```
-docker compose -f docker-compose.yml -f mevboost-compose.yml up
-```
