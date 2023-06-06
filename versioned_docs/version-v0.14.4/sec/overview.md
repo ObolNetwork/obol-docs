@@ -49,4 +49,4 @@ The Obol Network consists of four core public goods:
 ## List of Security Audits
 
 ### 2023
-Ethereal Ventures did the initial security audit for Obol's software development processes, vulnerability disclosure and escalation procedures, and the key personnel risk. The audits completed reports are linked [here](https://github.com/ObolNetwork/obol-security/tree/main/audits).
+Ethereal Ventures did the initial security readiness review for Obol's software development processes, vulnerability disclosure and escalation procedures, and the key personnel risk. The audits completed reports are linked [here](https://github.com/ObolNetwork/obol-security/tree/main/audits).
