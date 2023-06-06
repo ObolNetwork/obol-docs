@@ -9,13 +9,10 @@ This page serves as an overview of the Obol Network from a security auditor’s 
 This page is updated quarterly. The last update was on 2023-03-21.
 
 ## Table of Contents
-1. [Obol Audits](#obol-audits)
-2. [Open Challenges](#open-problems-and-challenges)
-3. [Core Public Goods](#core-public-goods)
-4. [List of Security Audits](#list-of-security-audits)
+1. [Open Challenges](#open-problems-and-challenges)
+2. [Core Public Goods](#core-public-goods)
+3. [List of Security Audits](#list-of-security-audits)
 
-## Obol Audits
-Obol Network has completed the following security audits:
 
 ## Open Challenges
 These are the “big picture” security challenges for Obol Network that are on our radar.
