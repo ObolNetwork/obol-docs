@@ -5,10 +5,6 @@ sidebar_position: 2
 
 # Roadmap
 
-## Past Audits
-Obol Labs has completed the following security audits:
-1. Ethereal Ventures - Jan 25, 2023 - [Audit report](https://hackmd.io/sH7FDtgTQV-2jN2ODfiscw)
-
 ## Upcoming Audits
 1. Solidity smart contracts audit - Date TBD
 ## Penetration Test
