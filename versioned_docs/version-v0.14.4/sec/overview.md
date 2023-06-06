@@ -16,7 +16,6 @@ This page is updated quarterly. The last update was on 2023-03-21.
 
 ## Obol Audits
 Obol Network has completed the following security audits:
-- Ethereal Ventures Security Audit [Report](https://hackmd.io/sH7FDtgTQV-2jN2ODfiscw)
 
 ## Open Challenges
 These are the “big picture” security challenges for Obol Network that are on our radar.

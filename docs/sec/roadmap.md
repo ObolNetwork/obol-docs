@@ -5,7 +5,6 @@ sidebar_position: 2
 
 # Roadmap
 
-
 ## Upcoming Audits
 1. Solidity smart contracts audit - Date TBD
 ## Penetration Test
