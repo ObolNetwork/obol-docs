@@ -11,12 +11,11 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.15.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.15.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.16.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.16.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use. 
 
 ```markdown
-charon help
 Charon enables the operation of Ethereum validators in a fault tolerant manner by splitting the validating keys across a group of trusted parties using threshold cryptography.
 
 Usage:
@@ -99,7 +98,7 @@ Flags:
       --keymanager-auth-tokens strings    Authentication bearer tokens to interact with the keymanager URLs. Don't include the "Bearer" symbol, only include the api-token.
       --name string                       The cluster name
       --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
-      --nodes int                         The number of charon nodes in the cluster. Minimum is 4. (default 4)
+      --nodes int                         The number of charon nodes in the cluster. Minimum is 3. (default 3)
       --num-validators int                The number of distributed validators needed in the cluster. (default 1)
       --publish                           Publish lock file to obol-api.
       --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech")
@@ -154,6 +153,7 @@ Flags:
   -h, --help                           Help for dkg
       --keymanager-address string      The keymanager URL to import validator keyshares.
       --keymanager-auth-token string   Authentication bearer token to interact with keymanager API. Don't include the "Bearer" symbol, only include the api-token.
+      --log-color string               Log color; auto, force, disable. (default "auto")
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
       --no-verify                      Disables cluster definition and lock file verification.
@@ -192,6 +192,7 @@ Flags:
       --jaeger-address string              Listening address for jaeger tracing.
       --jaeger-service string              Service name used for jaeger tracing. (default "charon")
       --lock-file string                   The path to the cluster lock file defining distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                   Log color; auto, force, disable. (default "auto")
       --log-format string                  Log format; console, logfmt or json (default "console")
       --log-level string                   Log level; debug, info, warn or error (default "info")
       --loki-addresses strings             Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
@@ -206,6 +207,7 @@ Flags:
       --p2p-relays strings                 Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
       --p2p-tcp-address strings            Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --private-key-file string            The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
+      --private-key-file-lock              Enables private key locking to prevent multiple instances using the same key.
       --simnet-beacon-mock                 Enables an internal mock beacon node for running a simnet.
       --simnet-beacon-mock-fuzz            Configures simnet beaconmock to return fuzzed responses.
       --simnet-slot-duration duration      Configures slot duration in simnet beacon mock. (default 1s)
@@ -359,6 +361,7 @@ Flags:
       --data-dir string                   The directory where charon will store all its internal data (default ".charon")
   -h, --help                              Help for relay
       --http-address string               Listening address (ip and port) for the relay http server serving runtime ENR. (default "127.0.0.1:3640")
+      --log-color string                  Log color; auto, force, disable. (default "auto")
       --log-format string                 Log format; console, logfmt or json (default "console")
       --log-level string                  Log level; debug, info, warn or error (default "info")
       --loki-addresses strings            Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
