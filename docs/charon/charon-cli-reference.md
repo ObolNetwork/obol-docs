@@ -98,7 +98,7 @@ Flags:
       --keymanager-auth-tokens strings    Authentication bearer tokens to interact with the keymanager URLs. Don't include the "Bearer" symbol, only include the api-token.
       --name string                       The cluster name
       --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
-      --nodes int                         The number of charon nodes in the cluster. Minimum is 4. (default 3)
+      --nodes int                         The number of charon nodes in the cluster. Minimum is 3. (default 3)
       --num-validators int                The number of distributed validators needed in the cluster. (default 1)
       --publish                           Publish lock file to obol-api.
       --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech")
