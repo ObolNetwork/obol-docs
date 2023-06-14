@@ -106,19 +106,23 @@ Immediately upon broadcasting a signed voluntary exit message, the exit epoch an
 2. Withdrawable epoch - epoch at which your validator funds are eligible for a full withdrawal during the next validator sweep.
 This occurs 256 epochs after the exit epoch, which takes ~27.3 hours.
 
-## How to verify Exit process
+## How to verify a validator exit
 
-Follow the example below to verify the exit process of cluster size of 4 nodes with 2 validators and threshold of 3.
+Consult the examples below and compare them to your validator's monitoring to verify that exits from each operator in the cluster are being received. This example is a cluster of 4 nodes with 2 validators and threshold of 3 nodes broadcasting exits are needed.
 
-1. Exit Node 1 with your validator client
+1. Operator 1 broadcasts an exit on validator client 1.
   ![Verify in Grafana Exit panel](/img/ExitPromQuery-01.png)
   ![Verify in Grafana Exit panel](/img/DutyExit-01.png)
-2. Exit Node 2 with your validator client
+2. Operator 2 broadcasts an exit on validator client 2.
   ![Verify in Grafana Exit panel](/img/ExitPromQuery-02.png)
   ![Verify in Grafana Exit panel](/img/DutyExit-02.png)
-3. Exit Node 3 with your validator client
+3. Operator 3 broadcasts an exit on validator client 3.
   ![Verify in Grafana Exit panel](/img/ExitPromQuery-03.png)
   ![Verify in Grafana Exit panel](/img/DutyExit-03.png)
 
-At this point, the threshold of 3 has been reached and the exit process will start. The logs will show the following:
+At this point, the threshold of 3 has been reached and the validator exit process will start. The logs will show the following:
   ![Verify in Grafana Exit panel](/img/ExitLogs.png)
+  
+  :::tip
+  Once a validator has broadcasted an exit message, it must continue to validate for at least 27 hours or longer. Do not shut off your distributed validator nodes until your validator is full exited.
+  :::
