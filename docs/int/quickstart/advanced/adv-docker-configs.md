@@ -12,7 +12,7 @@ This section is intended for *docker power users*, i.e., for those who are famil
 We use the "Multiple Compose File" feature which provides a very powerful way to override any configuration in `docker-compose.yml` without needing to modify git-checked-in files since that results in conflicts when upgrading this repo.
 See [this](https://docs.docker.com/compose/extends/#multiple-compose-files) for more details.
 
-There are some additional compose files in [this repository](https://github.com/ObolNetwork/charon-distributed-validator-node/), `compose-debug.yml`, `docker-compose.override.yml.sample` and `mevboost-compose.yml`, along-with the default `docker-compose.yml` file that you can use for this purpose.
+There are some additional compose files in [this repository](https://github.com/ObolNetwork/charon-distributed-validator-node/), `compose-debug.yml` and `docker-compose.override.yml.sample`, along-with the default `docker-compose.yml` file that you can use for this purpose.
 
 - `compose-debug.yml` contains some additional containers that developers can use for debugging, like `jaeger`. To achieve this, you can run:
 
