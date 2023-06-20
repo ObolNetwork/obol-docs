@@ -56,14 +56,15 @@ At the end of this process, you should have a tree like this:
 Run the following docker command to split the keys:
 
 ```shell
-CHARON_VERSION=                # E.g. 0.14.0
+CHARON_VERSION=                # E.g. 0.16.0
+NETWORK=                       # E.g. goerli or mainnet
 CLUSTER_NAME=                  # The name of the cluster you want to create.
 WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals.
 FEE_RECIPIENT_ADDRESS=         # The address you want to use for fee payments.
 THRESHOLD=                     # The number of keyshares required to sign a message.
 NODES=                         # The number of nodes in the cluster.    
 
-docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:v${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --threshold ${THRESHOLD} --nodes ${NODES}
+docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:v${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --network="${NETWORK}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --threshold ${THRESHOLD} --nodes ${NODES}
 ```
 
 The above command will create `validator_keys` along with `cluster-lock.json` and `deposit-data.json` in `./.charon/cluster` for each node.
