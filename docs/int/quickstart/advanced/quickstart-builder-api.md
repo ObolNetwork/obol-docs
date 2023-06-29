@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 description: Run a distributed validator cluster with the builder API (MEV-Boost)
 ---
 
