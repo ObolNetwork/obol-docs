@@ -124,5 +124,5 @@ At this point, the threshold of 3 has been reached and the validator exit proces
   ![Verify in Grafana Exit panel](/img/ExitLogs.png)
   
 :::tip
-Once a validator has broadcasted an exit message, it must continue to validate for at least 27 hours or longer. Do not shut off your distributed validator nodes until your validator is full exited.
+Once a validator has broadcasted an exit message, it must continue to validate for at least 27 hours or longer. Do not shut off your distributed validator nodes until your validator is fully exited.
 :::
