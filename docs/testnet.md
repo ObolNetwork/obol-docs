@@ -15,7 +15,6 @@ The following is a breakdown of the intended testnet roadmap, the features that 
 - [x] [Dev Net 2](#devnet-2)
 - [x] [Athena Public Testnet 1](#athena-public-testnet-1)
 - [x] [Bia Public Testnet 2](#bia-public-testnet-2)
-- [ ] [Circe Attack Net](#circe-attack-net)
 
 ## Devnet 1
 
@@ -116,21 +115,3 @@ This testnet is also important for learning the conditions Charon will be subjec
 - Make deploying Ethereum validator nodes accessible using the DV Launchpad.
 - Build comprehensive guides for various profiles to spin up DVs with minimal supervision from the core team.
 
-## Circe Attack Net
-
-**Participants:** Obol Community, Immunefi Bug Bounty searchers, Code4rena.io
-
-**State:** Client Hardening
-
-**Network:** Görli
-
-**Target Completed Date:** To be announced
-
-**Duration:** 2-4 weeks operation, depending on how resilient the clients are
-
-**Goals:**
-
-- Break Charon, the DV launchpad, and the API in multiple ways after having focused primarily on the happy path during the previous testnets.
-- Create a number of testing tools to facilitate the disruption of Charon, including releasing a p2p network abuser, a fuzz testing client, k6 scripts for load testing/hammering RPC endpoints and more.
-- Find as many memory leaks, DoS vulnerable endpoints and operations, missing signature verifications and more.
-- This testnet may be centered around a hackathon if suitable.
