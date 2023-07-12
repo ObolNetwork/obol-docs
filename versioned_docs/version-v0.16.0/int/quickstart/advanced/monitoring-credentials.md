@@ -95,7 +95,7 @@ scrape_configs:
 ## Third-Party Services for Uptime Testing
 
 - [updown.io](https://updown.io/)
-- [Grafana synthetic Monitoring](https://grafana.com/blog/2022/03/10/best-practices-for-alerting-on-synthetic-monitoring-metrics-in-grafana-cloud/?src=ggl-s&mdm=cpc&camp=nb-synthetic-monitoring-pm&cnt=130224525351&trm=grafana%20synthetic%20monitoring&device=c&gclid=CjwKCAjwzJmlBhBBEiwAEJyLu4A0quHdic_UAyYuJgqUntwGTq6DKIFq0rfPkp9fxt4lK8VMgYmo4BoCO3EQAvD_BwE)
+- [Grafana synthetic Monitoring](https://grafana.com/grafana/plugins/grafana-synthetic-monitoring-app/)
 
 ## Key metrics to watch to verify node health based on jobs
 
