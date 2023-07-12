@@ -81,15 +81,13 @@ Flags:
 `charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
 ```markdown
-charon create cluster --help
 Creates a local charon cluster configuration including validator keys, charon p2p keys, cluster-lock.json and a deposit-data.json. See flags for supported features.
 
 Usage:
   charon create cluster [flags]
 
 Flags:
-      --clean                             Delete the cluster directory before generating it.
-      --cluster-dir string                The target folder to create the cluster in. (default ".charon/cluster")
+      --cluster-dir string                The target folder to create the cluster in. (default "./")
       --definition-file string            Optional path to a cluster definition file or an HTTP URL. This overrides all other configuration flags.
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for cluster
@@ -97,9 +95,9 @@ Flags:
       --keymanager-addresses strings      Comma separated list of keymanager URLs to import validator key shares to. Note that multiple addresses are required, one for each node in the cluster, with node0's keyshares being imported to the first address, node1's keyshares to the second, and so on.
       --keymanager-auth-tokens strings    Authentication bearer tokens to interact with the keymanager URLs. Don't include the "Bearer" symbol, only include the api-token.
       --name string                       The cluster name
-      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
-      --nodes int                         The number of charon nodes in the cluster. Minimum is 3. (default 4)
-      --num-validators int                The number of distributed validators needed in the cluster. (default 1)
+      --network string                    Ethereum network to create validators for. Options: mainnet, goerli, gnosis, sepolia.
+      --nodes int                         The number of charon nodes in the cluster. Minimum is 3.
+      --num-validators int                The number of distributed validators needed in the cluster.
       --publish                           Publish lock file to obol-api.
       --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech")
       --split-existing-keys               Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
