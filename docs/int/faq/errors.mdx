@@ -277,6 +277,17 @@ docker compose logs
       </summary>
       <code>msgSigAgg</code> indicates that BLS threshold aggregation of sufficient partial signatures failed. This indicates inconsistent signed data. This indicates a bug in charon as it is unexpected.
     </details>
+    <details className="details">
+      <summary>
+        <h4 id="private-key-lock-error">
+          <code>Existing private key lock file found, another charon instance may be running on your machine</code> error
+        </h4>
+      </summary>
+		When you turn on the <code>--private-key-file-lock</code> option in Charon, it checks for a special file called the private key lock file. This file has the same name as the ENR private key file but with a <code>.lock</code> extension.
+		If the private key lock file exists and is not older than 5 seconds, Charon won't run. It doesn't allow running multiple Charon instances with the same ENR private key.
+		If the private key lock file has a timestamp older than 5 seconds, Charon will replace it and continue with its work.
+		If you're sure that no other Charon instances are running, you can delete the private key lock file.
+    </details>
 </details>
 <details open className="details">
   <summary>
