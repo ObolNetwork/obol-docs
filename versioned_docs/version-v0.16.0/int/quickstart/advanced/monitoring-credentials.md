@@ -55,25 +55,15 @@ scrape_configs:
 - Navigate to the **[repository](https://github.com/ObolNetwork/terraform-modules/tree/main/grafana-dashboards/dashboards)** that contains a variety of Grafana dashboards. For this demonstration, we will utilize the Charon Dashboard json.
 - In your Grafana interface, create a new dashboard and select the import option.
 
-![Screenshot 2023-06-26 at 1.00.05 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2bba3f52-ff32-452e-811b-f2ac7a4905fb/Screenshot_2023-06-26_at_1.00.05_PM.png)
-
 - Copy the content of the Charon Dashboard json from the repository and paste it into the import box in Grafana. Click "Load" to proceed.
-
-![Screenshot 2023-06-26 at 1.03.08 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6790e67a-eb51-4bfb-b7b1-df14f214b72d/Screenshot_2023-06-26_at_1.03.08_PM.png)
 
 - Finalize the import by clicking on the "Import" button. At this point, your dashboard should begin displaying metrics. Ensure your Charon client and Prometheus are operational for this to occur.
 
-![Screenshot 2023-06-26 at 1.16.27 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc0b4a9e-c21c-4ce4-b613-9c3f84e696ed/Screenshot_2023-06-26_at_1.16.27_PM.png)
-
 ## Example alerting rules
 
-- Alerts for Node-Exporter can be created using the sample rules provided here
+- Alerts for Node-Exporter can be created using the sample rules provided here [Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)
 
-[Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)
-
-- For Charon/Alpha alerts, refer to the alerting rules available
-
-[monitoring/alerting-rules at main · ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules)
+- For Charon/Alpha alerts, refer to the alerting rules available [monitoring/alerting-rules at main · ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules)
 
 ## Understanding Alert rules
 
@@ -89,7 +79,7 @@ scrape_configs:
 10. `AlphaClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the "Alpha M1 Cluster #1" falls to 0.
 11. PeerPingLatency: 1. This alert is activated if the 90th percentile of the ping latency to the peers in a cluster exceeds 500ms within 2 minutes.
 
-## ****Best Practices for Monitoring Charon Nodes & Cluster****
+## Best Practices for Monitoring Charon Nodes & Cluster
 
 - **Establish Baselines**: Familiarize yourself with the normal operation metrics like CPU, memory, and network usage. This will help you detect anomalies.
 - **Define Key Metrics**: Set up alerts for essential metrics, encompassing both system-level and Charon-specific ones.
@@ -102,14 +92,14 @@ scrape_configs:
 - **Conduct Drills**: Regularly simulate failure scenarios to fine-tune your setup.
 - **Update Regularly**: Keep your nodes and clusters updated with the latest software versions.
 
-## ****Third-Party Services for Uptime Testing****
+## Third-Party Services for Uptime Testing
 
 - [updown.io](https://updown.io/)
 - [Grafana synthetic Monitoring](https://grafana.com/blog/2022/03/10/best-practices-for-alerting-on-synthetic-monitoring-metrics-in-grafana-cloud/?src=ggl-s&mdm=cpc&camp=nb-synthetic-monitoring-pm&cnt=130224525351&trm=grafana%20synthetic%20monitoring&device=c&gclid=CjwKCAjwzJmlBhBBEiwAEJyLu4A0quHdic_UAyYuJgqUntwGTq6DKIFq0rfPkp9fxt4lK8VMgYmo4BoCO3EQAvD_BwE)
 
-## **Key metrics to watch to verify node health based on jobs**
+## Key metrics to watch to verify node health based on jobs
 
-**node_exporter:**
+### Node Exporter:
 
 **CPU Usage**: High or spiking CPU usage can be a sign of a process demanding more resources than it should.
 
