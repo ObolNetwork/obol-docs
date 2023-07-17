@@ -61,7 +61,22 @@ scrape_configs:
 
 ## Example alerting rules
 
-- Alerts for Node-Exporter can be created using the sample rules provided here [Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)
+## Example alerting rules
+
+To create alerts for Node-Exporter, follow these steps based on the sample rules provided on the "Awesome Prometheus alerts" page:
+
+1. Visit the **[Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)** page. Here, you will find an array of Prometheus alerting rules categorized by hardware, system, and services.
+   
+2. Depending on your need, select the category of alerts. For example, if you want to set up alerts for your system's CPU usage, click on the 'CPU' under the 'Host & Hardware' category.
+   
+3. On the selected page, you'll find specific alert rules like 'High CPU Usage'. Each rule will provide the PromQL expression, alert name, and a brief description of what the alert does. You can copy these rules.
+   
+4. Paste the copied rules into your Prometheus configuration file under the `rules` section. Make sure you understand each rule before adding it to avoid unnecessary alerts.
+   
+5. Finally, save and apply the configuration file. Prometheus should now trigger alerts based on these rules.
+
+
+For alerts specific to Charon/Alpha, refer to the alerting rules available on this [GitHub page](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules).
 
 - For Charon/Alpha alerts, refer to the alerting rules available [monitoring/alerting-rules at main · ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules)
 
