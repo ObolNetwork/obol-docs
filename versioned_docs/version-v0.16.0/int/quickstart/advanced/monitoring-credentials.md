@@ -82,12 +82,12 @@ For alerts specific to Charon/Alpha, refer to the alerting rules available on th
 2. `ClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
 3. `ClusterNodeDown`This alert is activated when a node in a specified Alpha cluster is offline.
 4. `ClusterMissedAttestations`:This alert indicates that there have been missed attestations in a specified Alpha cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster.
-5. `ClusterInUnknownStatus`: This alert is designed to activate when a node within the "Alpha M1 Cluster #1" is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the app_monitoring_readyz metric is 0.
+5. `ClusterInUnknownStatus`: This alert is designed to activate when a node within the cluster is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the app_monitoring_readyz metric is 0.
 6. `ClusterInsufficientPeers`:This alert is set to activate when the number of peers for a node in the Alpha M1 Cluster #1 is insufficient. The condition is evaluated by checking whether the maximum of the **`app_monitoring_readyz`** equals 4.
 7. `ClusterFailureRate`: This alert is activated when the failure rate of the Alpha M1 Cluster #1 exceeds a certain threshold.
 8. `ClusterVCMissingValidators`: This alert is activated if any validators in the Alpha M1 Cluster #1 are missing.
-9. `ClusterHighPctFailedSyncMsgDuty`: This alert is activated if a high percentage of sync message duties failed in the "Alpha M1 Cluster #1". The alert is activated if the sum of the increase in failed duties tagged with "sync_message" in the last hour divided by the sum of the increase in total duties tagged with "sync_message" in the last hour is greater than 0.1.
-10. `ClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the "Alpha M1 Cluster #1" falls to 0.
+9. `ClusterHighPctFailedSyncMsgDuty`: This alert is activated if a high percentage of sync message duties failed in the cluster. The alert is activated if the sum of the increase in failed duties tagged with "sync_message" in the last hour divided by the sum of the increase in total duties tagged with "sync_message" in the last hour is greater than 0.1.
+10. `ClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the cluster falls to 0.
 11. PeerPingLatency: 1. This alert is activated if the 90th percentile of the ping latency to the peers in a cluster exceeds 500ms within 2 minutes.
 
 ## Best Practices for Monitoring Charon Nodes & Cluster

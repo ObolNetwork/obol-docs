@@ -52,44 +52,45 @@ scrape_configs:
 
 ## Import Pre-Configured Charon Dashboards
 
-- Navigate to the **[repository](https://github.com/ObolNetwork/terraform-modules/tree/main/grafana-dashboards/dashboards)** that contains a variety of Grafana dashboards. For this demonstration, we will utilize the Charon Dashboard json.
+- Navigate to the **[repository](https://github.com/ObolNetwork/monitoring/tree/main/dashboards)** that contains a variety of Grafana dashboards. For this demonstration, we will utilize the Charon Dashboard json.
 - In your Grafana interface, create a new dashboard and select the import option.
-
-![Screenshot 2023-06-26 at 1.00.05 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2bba3f52-ff32-452e-811b-f2ac7a4905fb/Screenshot_2023-06-26_at_1.00.05_PM.png)
 
 - Copy the content of the Charon Dashboard json from the repository and paste it into the import box in Grafana. Click "Load" to proceed.
 
-![Screenshot 2023-06-26 at 1.03.08 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6790e67a-eb51-4bfb-b7b1-df14f214b72d/Screenshot_2023-06-26_at_1.03.08_PM.png)
-
 - Finalize the import by clicking on the "Import" button. At this point, your dashboard should begin displaying metrics. Ensure your Charon client and Prometheus are operational for this to occur.
-
-![Screenshot 2023-06-26 at 1.16.27 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cc0b4a9e-c21c-4ce4-b613-9c3f84e696ed/Screenshot_2023-06-26_at_1.16.27_PM.png)
 
 ## Example alerting rules
 
-- Alerts for Node-Exporter can be created using the sample rules provided here
+To create alerts for Node-Exporter, follow these steps based on the sample rules provided on the "Awesome Prometheus alerts" page:
 
-[Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)
+1. Visit the **[Awesome Prometheus alerts](https://samber.github.io/awesome-prometheus-alerts/rules.html#host-and-hardware)** page. Here, you will find lists of Prometheus alerting rules categorized by hardware, system, and services.
+   
+2. Depending on your need, select the category of alerts. For example, if you want to set up alerts for your system's CPU usage, click on the 'CPU' under the 'Host & Hardware' category.
+   
+3. On the selected page, you'll find specific alert rules like 'High CPU Usage'. Each rule will provide the PromQL expression, alert name, and a brief description of what the alert does. You can copy these rules.
+   
+4. Paste the copied rules into your Prometheus configuration file under the `rules` section. Make sure you understand each rule before adding it to avoid unnecessary alerts.
+   
+5. Finally, save and apply the configuration file. Prometheus should now trigger alerts based on these rules.
 
-- For Charon/Alpha alerts, refer to the alerting rules available
 
-[monitoring/alerting-rules at main · ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules)
+For alerts specific to Charon/Alpha, refer to the alerting rules available on this [ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules).
 
 ## Understanding Alert rules
 
-1. `AlphaClusterBeaconNodeDown`This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
-2. `AlphaClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
-3. `AlphaClusterNodeDown`This alert is activated when a node in a specified Alpha cluster is offline.
-4. `AlphaClusterMissedAttestations`:This alert indicates that there have been missed attestations in a specified Alpha cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster.
-5. `AlphaClusterInUnknownStatus`: This alert is designed to activate when a node within the "Alpha M1 Cluster #1" is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the app_monitoring_readyz metric is 0.
-6. `AlphaClusterInsufficientPeers`:This alert is set to activate when the number of peers for a node in the Alpha M1 Cluster #1 is insufficient. The condition is evaluated by checking whether the maximum of the **`app_monitoring_readyz`** equals 4.
-7. `AlphaClusterFailureRate`: This alert is activated when the failure rate of the Alpha M1 Cluster #1 exceeds a certain threshold.
-8. `AlphaClusterVCMissingValidators`: This alert is activated if any validators in the Alpha M1 Cluster #1 are missing.
-9. `AlphaClusterHighPctFailedSyncMsgDuty`: This alert is activated if a high percentage of sync message duties failed in the "Alpha M1 Cluster #1". The alert is activated if the sum of the increase in failed duties tagged with "sync_message" in the last hour divided by the sum of the increase in total duties tagged with "sync_message" in the last hour is greater than 0.1.
-10. `AlphaClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the "Alpha M1 Cluster #1" falls to 0.
+1. `ClusterBeaconNodeDown`This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
+2. `ClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
+3. `ClusterNodeDown`This alert is activated when a node in a specified Alpha cluster is offline.
+4. `ClusterMissedAttestations`:This alert indicates that there have been missed attestations in a specified Alpha cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster.
+5. `ClusterInUnknownStatus`: This alert is designed to activate when a node within the cluster is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the app_monitoring_readyz metric is 0.
+6. `ClusterInsufficientPeers`:This alert is set to activate when the number of peers for a node in the Alpha M1 Cluster #1 is insufficient. The condition is evaluated by checking whether the maximum of the **`app_monitoring_readyz`** equals 4.
+7. `ClusterFailureRate`: This alert is activated when the failure rate of the Alpha M1 Cluster #1 exceeds a certain threshold.
+8. `ClusterVCMissingValidators`: This alert is activated if any validators in the Alpha M1 Cluster #1 are missing.
+9. `ClusterHighPctFailedSyncMsgDuty`: This alert is activated if a high percentage of sync message duties failed in the cluster. The alert is activated if the sum of the increase in failed duties tagged with "sync_message" in the last hour divided by the sum of the increase in total duties tagged with "sync_message" in the last hour is greater than 0.1.
+10. `ClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the cluster falls to 0.
 11. PeerPingLatency: 1. This alert is activated if the 90th percentile of the ping latency to the peers in a cluster exceeds 500ms within 2 minutes.
 
-## ****Best Practices for Monitoring Charon Nodes & Cluster****
+## Best Practices for Monitoring Charon Nodes & Cluster
 
 - **Establish Baselines**: Familiarize yourself with the normal operation metrics like CPU, memory, and network usage. This will help you detect anomalies.
 - **Define Key Metrics**: Set up alerts for essential metrics, encompassing both system-level and Charon-specific ones.
@@ -102,14 +103,14 @@ scrape_configs:
 - **Conduct Drills**: Regularly simulate failure scenarios to fine-tune your setup.
 - **Update Regularly**: Keep your nodes and clusters updated with the latest software versions.
 
-## ****Third-Party Services for Uptime Testing****
+## Third-Party Services for Uptime Testing
 
 - [updown.io](https://updown.io/)
-- [Grafana synthetic Monitoring](https://grafana.com/blog/2022/03/10/best-practices-for-alerting-on-synthetic-monitoring-metrics-in-grafana-cloud/?src=ggl-s&mdm=cpc&camp=nb-synthetic-monitoring-pm&cnt=130224525351&trm=grafana%20synthetic%20monitoring&device=c&gclid=CjwKCAjwzJmlBhBBEiwAEJyLu4A0quHdic_UAyYuJgqUntwGTq6DKIFq0rfPkp9fxt4lK8VMgYmo4BoCO3EQAvD_BwE)
+- [Grafana synthetic Monitoring](https://grafana.com/grafana/plugins/grafana-synthetic-monitoring-app/)
 
-## **Key metrics to watch to verify node health based on jobs**
+## Key metrics to watch to verify node health based on jobs
 
-**node_exporter:**
+### Node Exporter:
 
 **CPU Usage**: High or spiking CPU usage can be a sign of a process demanding more resources than it should.
 
