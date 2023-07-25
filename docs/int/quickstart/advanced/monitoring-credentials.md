@@ -14,7 +14,7 @@ Ensure the following software are installed:
 - Prometheus: You can install it using the guide available **[here](https://prometheus.io/docs/prometheus/latest/installation/)**
 - Grafana: Follow this **[link](https://grafana.com/docs/grafana/latest/setup-grafana/installation/)** to install Grafana
 
-# Push metrics to Obol Monitoring
+## Push metrics to Obol Monitoring
 
 :::info
 This is **optional** and does not confer any special privileges within the Obol Network.
@@ -110,7 +110,7 @@ For alerts specific to Charon/Alpha, refer to the alerting rules available on th
 
 ## Key metrics to watch to verify node health based on jobs
 
-### Node Exporter:
+- Node Exporter:
 
 **CPU Usage**: High or spiking CPU usage can be a sign of a process demanding more resources than it should.
 
