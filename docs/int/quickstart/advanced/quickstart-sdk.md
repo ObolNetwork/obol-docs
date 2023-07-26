@@ -95,3 +95,7 @@ Reference lock files can be found [here](https://github.com/ObolNetwork/charon/t
 ## Activate the DVs using the deposit contract
 
 This guide will in future cover activating the deposit data from a lock file.
+
+## Usage Examples
+
+[obol-sdk-examples](https://github.com/ObolNetwork/obol-sdk-examples/tree/Hanan/SDKexamples) 
