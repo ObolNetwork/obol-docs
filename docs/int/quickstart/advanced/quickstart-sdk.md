@@ -3,6 +3,9 @@ sidebar_position: 1
 description: Create a DV cluster using the Obol Typescript SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Create a DV using the SDK
 
 :::caution
@@ -20,13 +23,18 @@ This is a walkthrough of using the [Obol-SDK](https://www.npmjs.com/package/@obo
 
 Install the Obol-SDK package into your development environment
 
-```bash
-# NPM
-npm install --save @obolnetwork/obol-sdk
-
-# Yarn
-yarn add @obolnetwork/obol-sdk
-```
+<Tabs groupId="install-sdk">
+  <TabItem value="npm" label="NPM" default>
+    <pre>
+      <code>npm install --save @obolnetwork/obol-sdk</code>
+    </pre>
+  </TabItem>
+  <TabItem value="yarn" label="Yarn">
+    <pre>
+      <code>yarn add @obolnetwork/obol-sdk</code>
+    </pre>
+  </TabItem>
+</Tabs>
 
 ## Instantiate the client
 
