@@ -37,17 +37,17 @@ Ensure the following software are installed:
 
 ## Understanding Alert rules
 
-1. `AlphaClusterBeaconNodeDown`This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
-2. `AlphaClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
-3. `AlphaClusterNodeDown`This alert is activated when a node in a specified Alpha cluster is offline.
-4. `AlphaClusterMissedAttestations`:This alert indicates that there have been missed attestations in a specified Alpha cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster.
+1. `AlphaClusterBeaconNodeDown`: This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
+2. `AlphaClusterBeaconNodeSyncing`: This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
+3. `AlphaClusterNodeDown`: This alert is activated when a node in a specified Alpha cluster is offline.
+4. `AlphaClusterMissedAttestations`: This alert indicates that there have been missed attestations in a specified Alpha cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster.
 5. `AlphaClusterInUnknownStatus`: This alert is designed to activate when a node within the "Alpha M1 Cluster #1" is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the app_monitoring_readyz metric is 0.
-6. `AlphaClusterInsufficientPeers`:This alert is set to activate when the number of peers for a node in the Alpha M1 Cluster #1 is insufficient. The condition is evaluated by checking whether the maximum of the **`app_monitoring_readyz`** equals 4.
+6. `AlphaClusterInsufficientPeers`: This alert is set to activate when the number of peers for a node in the Alpha M1 Cluster #1 is insufficient. The condition is evaluated by checking whether the maximum of the **`app_monitoring_readyz`** equals 4.
 7. `AlphaClusterFailureRate`: This alert is activated when the failure rate of the Alpha M1 Cluster #1 exceeds a certain threshold.
 8. `AlphaClusterVCMissingValidators`: This alert is activated if any validators in the Alpha M1 Cluster #1 are missing.
 9. `AlphaClusterHighPctFailedSyncMsgDuty`: This alert is activated if a high percentage of sync message duties failed in the "Alpha M1 Cluster #1". The alert is activated if the sum of the increase in failed duties tagged with "sync_message" in the last hour divided by the sum of the increase in total duties tagged with "sync_message" in the last hour is greater than 0.1.
 10. `AlphaClusterNumConnectedRelays`: This alert is activated if the number of connected relays in the "Alpha M1 Cluster #1" falls to 0.
-11. PeerPingLatency: 1. This alert is activated if the 90th percentile of the ping latency to the peers in a cluster exceeds 500ms within 2 minutes.
+11. `PeerPingLatency: 1`: This alert is activated if the 90th percentile of the ping latency to the peers in a cluster exceeds 500ms within 2 minutes.
 
 ## ****Best Practices for Monitoring Charon Nodes & Cluster****
 

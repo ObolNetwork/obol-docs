@@ -14,7 +14,7 @@ Ensure the following software are installed:
 - Prometheus: You can install it using the guide available **[here](https://prometheus.io/docs/prometheus/latest/installation/)**
 - Grafana: Follow this **[link](https://grafana.com/docs/grafana/latest/setup-grafana/installation/)** to install Grafana
 
-## Push metrics to Obol Monitoring
+## Push Metrics to Obol Monitoring
 
 :::info
 This is **optional** and does not confer any special privileges within the Obol Network.
@@ -59,7 +59,7 @@ scrape_configs:
 
 - Finalize the import by clicking on the "Import" button. At this point, your dashboard should begin displaying metrics. Ensure your Charon client and Prometheus are operational for this to occur.
 
-## Example alerting rules
+## Example Alerting Rules
 
 To create alerts for Node-Exporter, follow these steps based on the sample rules provided on the "Awesome Prometheus alerts" page:
 
@@ -76,7 +76,7 @@ To create alerts for Node-Exporter, follow these steps based on the sample rules
 
 For alerts specific to Charon/Alpha, refer to the alerting rules available on this [ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules).
 
-## Understanding Alert rules
+## Understanding Alert Rules
 
 1. `ClusterBeaconNodeDown`This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
 2. `ClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
