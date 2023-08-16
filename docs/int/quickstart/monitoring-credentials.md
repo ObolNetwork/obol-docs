@@ -53,6 +53,7 @@ scrape_configs:
 ## Import Pre-Configured Charon Dashboards
 
 - Navigate to the **[repository](https://github.com/ObolNetwork/monitoring/tree/main/dashboards)** that contains a variety of Grafana dashboards. For this demonstration, we will utilize the Charon Dashboard json.
+
 - In your Grafana interface, create a new dashboard and select the import option.
 
 - Copy the content of the Charon Dashboard json from the repository and paste it into the import box in Grafana. Click "Load" to proceed.
