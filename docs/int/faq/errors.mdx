@@ -394,7 +394,7 @@ docker compose logs
   <details className="details">
     <summary>
       <h4 id="Potential-next-epoch-attester-duties-reorg-slot-821-error">
-        <code> warn: Potential next epoch attester duties reorg slot=6861821, dutyEpoch=214432, priorDependentRoot=0xa08b0d0000000000000000000000000000000000000000000000000000000000, newDependentRoot=0xc68535c177b97d0f5ca2c2c50888563b6d63fe5c91ede07b86e96df93d64368f</code>{" "} error
+        <code> warn: Potential next epoch attester duties reorg</code>{" "} error
       </h4>
     </summary> Lodestar logs these warnings because charon is not able to return proper <code>dependent_root</code> value in <code>getAttesterDuties</code> API response whenever lodestar calls this API. This is because charon uses <code>go-eth2-client</code> for all the beacon API calls and it doesn't provide dependent_root value in responses. We have reported this to them here.
   </details>
