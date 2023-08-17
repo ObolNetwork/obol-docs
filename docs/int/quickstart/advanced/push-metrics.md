@@ -1,9 +1,9 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 description: Add monitoring credentials to help the Obol Team monitor the health of your cluster
 ---
 
-# Push metrics to Obol Monitoring
+# Push Metrics to Obol Monitoring
 
 :::info
 This is **optional** and does not confer any special privileges within the Obol Network.

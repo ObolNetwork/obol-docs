@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 description: Combine distributed validator private key shares to recover the validator private key.
 ---
 

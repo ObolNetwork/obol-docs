@@ -14,52 +14,17 @@ Ensure the following software are installed:
 - Prometheus: You can install it using the guide available **[here](https://prometheus.io/docs/prometheus/latest/installation/)**
 - Grafana: Follow this **[link](https://grafana.com/docs/grafana/latest/setup-grafana/installation/)** to install Grafana
 
-# Push metrics to Obol Monitoring
-
-:::info
-This is **optional** and does not confer any special privileges within the Obol Network.
-:::
-
-You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to Obol's central prometheus cluster to monitor, analyze, and improve your Distributed Validator Cluster's performance.
-
-The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:
-```
-obol20!tnt8U!C...
-```
-
-The updated `prometheus/prometheus.yml` file should look like:
-```
-global:
-  scrape_interval:     30s # Set the scrape interval to every 30 seconds.
-  evaluation_interval: 30s # Evaluate rules every 30 seconds.
-
-remote_write:
-  - url: https://vm.monitoring.gcp.obol.tech/write
-    authorization:
-      credentials: obol20!tnt8U!C...
-
-scrape_configs:
-  - job_name: 'charon'
-    static_configs:
-      - targets: ['charon:3620']
-  - job_name: "lodestar"
-    static_configs:
-      - targets: [ "lodestar:5064" ]
-  - job_name: 'node-exporter'
-    static_configs:
-      - targets: ['node-exporter:9100']
-```
-
 ## Import Pre-Configured Charon Dashboards
 
 - Navigate to the **[repository](https://github.com/ObolNetwork/monitoring/tree/main/dashboards)** that contains a variety of Grafana dashboards. For this demonstration, we will utilize the Charon Dashboard json.
+
 - In your Grafana interface, create a new dashboard and select the import option.
 
 - Copy the content of the Charon Dashboard json from the repository and paste it into the import box in Grafana. Click "Load" to proceed.
 
 - Finalize the import by clicking on the "Import" button. At this point, your dashboard should begin displaying metrics. Ensure your Charon client and Prometheus are operational for this to occur.
 
-## Example alerting rules
+## Example Alerting Rules
 
 To create alerts for Node-Exporter, follow these steps based on the sample rules provided on the "Awesome Prometheus alerts" page:
 
@@ -76,7 +41,7 @@ To create alerts for Node-Exporter, follow these steps based on the sample rules
 
 For alerts specific to Charon/Alpha, refer to the alerting rules available on this [ObolNetwork/monitoring](https://github.com/ObolNetwork/monitoring/tree/main/alerting-rules).
 
-## Understanding Alert rules
+## Understanding Alert Rules
 
 1. `ClusterBeaconNodeDown`This alert is activated when the beacon node in a specified Alpha cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster.
 2. `ClusterBeaconNodeSyncing`This alert indicates that the beacon node in a specified Alpha cluster is synchronizing, i.e., catching up with the latest blocks in the cluster.
@@ -110,7 +75,7 @@ For alerts specific to Charon/Alpha, refer to the alerting rules available on th
 
 ## Key metrics to watch to verify node health based on jobs
 
-### Node Exporter:
+- Node Exporter:
 
 **CPU Usage**: High or spiking CPU usage can be a sign of a process demanding more resources than it should.
 
