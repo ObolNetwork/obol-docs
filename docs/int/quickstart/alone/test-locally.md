@@ -63,7 +63,7 @@ The default cluster consists of:
    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.17.0 create cluster --name="mycluster" --cluster-dir=".charon/cluster/" --withdrawal-addresses="${WITHDRAWAL_ADDR}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDR}" --nodes 6 --network goerli --num-validators=1
    ```
 
-These commands will create six folders within `cluster-nodes`, one for each node created. You will need to rename `node*` to `.charon` for each folder to be found by the default `charon run` command, or you can use `charon run --private-key-file="./node0/charon-enr-private-key" --lock-file="./node0/cluster-lock.json"` for each instance of charon you start.
+These commands will create six folders within `.charon/cluster`, one for each node created. You will need to rename `node*` to `.charon` for each folder to be found by the default `charon run` command, or you can use `charon run --private-key-file=".charon/cluster/node0/charon-enr-private-key" --lock-file=".charon/cluster/node0/cluster-lock.json"` for each instance of charon you start.
 
 ## Start the cluster
 
