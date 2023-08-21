@@ -157,8 +157,5 @@ BFT #: max number of faulty (byzantine) nodes given size n
 f(n) = floor((n-1)/3)
 
 CFT #: max number of unavailable (crashed) nodes given size n
-crashed(n) = n - Quarom(n) 
+crashed(n) = n - Quorum(n)
 ```
-
-
-
