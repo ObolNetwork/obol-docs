@@ -86,7 +86,6 @@ This page serves material necessary to catch up with the current state of Ethere
 
 ### Serenity research posts
 
-* [Sharding v2.1 Spec](https://notes.ethereum.org/SCIg8AH5SA-O4C1G1LYZHQ)
 * [Casper/Sharding/Beacon Chain FAQs](https://notes.ethereum.org/9MMuzWeFTTSg-3Tz_YeiBA?view)
 * [RETIRED! Sharding Phase 1 Spec](https://ethresear.ch/t/sharding-phase-1-spec-retired/1407/92)
 * [Exploring the Proposer/Collator Spec and Why it Was Retired](https://ethresear.ch/t/exploring-the-proposer-collator-split/1632/24)
