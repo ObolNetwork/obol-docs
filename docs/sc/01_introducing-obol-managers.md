@@ -42,7 +42,7 @@ contract WithdrawalRecipientOwnable is Ownable {
 
 ```
 
-An Ownable Withdrawal Recipient is the most basic example of a withdrawal recipient contract. It implements Open Zeppelin's `Ownable` interface and allows one address to call the `withdraw()` function, which pulls all ether from the address into the owners address (or another address specified). This contract does no accounting on the amount of ether that is withdrawn, nor does it differentiate reward from principal.
+An Ownable Withdrawal Recipient is the most basic example of a withdrawal recipient contract. It implements Open Zeppelin's `Ownable` interface and allows one address to call the `withdraw()` function, which pulls all ether from the address into the owner's address (or another address specified). This contract does no accounting on the amount of ether that is withdrawn, nor does it differentiate reward from principal.
 
 ### Optimistic Withdrawal Recipient
 
@@ -68,13 +68,13 @@ This contract fits both design goals and can be used with thousands of validator
 
 ### Exitable Withdrawal Recipient
 
-A much awaited feature for proof of stake Ethereum is the ability to trigger the exit of a validator with only the withdrawal address. This is tracked in [EIP-7002](). Support for this feature will be inheritable in all other withdrawal recipient contracts. This will mitigate the risk to a principal provider of funds being stuck, or a validator being irrecoverably offline.
+A much awaited feature for proof of stake Ethereum is the ability to trigger the exit of a validator with only the withdrawal address. This is tracked in [EIP-7002](https://eips.ethereum.org/EIPS/eip-7002). Support for this feature will be inheritable in all other withdrawal recipient contracts. This will mitigate the risk to a principal provider of funds being stuck, or a validator being irrecoverably offline.
 
 ## Split Contracts
 
 A split, or splitter, is a set of contracts that can divide ether or an ERC20 across a number of addresses. Splits are used in conjunction with withdrawal recipients. Execution Layer rewards for a DV are directed to a split address through the use of a `fee recipient` address. Splits can be either immutable, or mutable by way of an admin address capable of updating them.
 
-Further information about splits can be found on the 0xSplits team's [docs site]().
+Further information about splits can be found on the 0xSplits team's [docs site](https://docs.0xsplits.xyz/).
 
 ## Split Controllers
 
@@ -82,7 +82,7 @@ Splits can be completely edited through the use of the `controller` address, how
 
 ### (Gnosis) SAFE wallet
 
-A SAFE is a common method to administrate a mutable split. The most well-known deployment of this pattern is the [protocol guild](). The SAFE can arbitrarily update the split to any set of addresses with any valid set of percentages.
+A [SAFE](https://safe.global/) is a common method to administrate a mutable split. The most well-known deployment of this pattern is the [protocol guild](https://protocol-guild.readthedocs.io/en/latest/3-smart-contract.html). The SAFE can arbitrarily update the split to any set of addresses with any valid set of percentages.
 
 ### Immutable Split Controller
 
