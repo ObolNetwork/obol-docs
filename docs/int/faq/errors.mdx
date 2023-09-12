@@ -288,6 +288,16 @@ docker compose logs
 		If the private key lock file has a timestamp older than 5 seconds, Charon will replace it and continue with its work.
 		If you're sure that no other Charon instances are running, you can delete the private key lock file.
     </details>
+    <details className="details">
+      <summary>
+        <h4 id="mismatching-validator-client-key">
+          <code>Validator api 5xx response: mismatching validator client key share index, Mth key share submitted to Nth charon peer</code> error
+        </h4>
+      </summary>
+    The issue revolves around an invalid setup or deployment, where keyshares are not tied to the enr private key. There appears to be a mix-up during deployment, leading to a mismatching validator client key share index.
+    For example: <code>Bob's private key shares are imported and a VC that is connected to Alice's charon node. This is invalid setup/deployment. Alice's charon should only be connected to Alice's VC.</code>
+		Check the keyshare of each node inside cluster-lock.json and see that matches with the key inside <code>node(num)/validator_keys/keystore-0.json</code>
+    </details>
 </details>
 <details open className="details">
   <summary>
