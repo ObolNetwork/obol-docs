@@ -21,7 +21,7 @@ The `deposit-data.json` to be used to deposit will be located in each operator's
 If you are being given a `deposit-data.json` file that you didn't generate yourself, please take extreme care to ensure this operator has not given you a malicious `deposit-data.json` file that is not the one you expect. Cross reference the files from multiple operators if there is any doubt. Activating the wrong validator or an invalid deposit could result in complete theft or loss of funds. 
 :::
 
-Use any of the following tools to deposit:
+Use any of the following tools to deposit. Please use the third-party tools at your own risk and always double check the staking contract address.
 
 <Tabs groupId="network">
   <TabItem value="goërli" label="Goërli" default>
