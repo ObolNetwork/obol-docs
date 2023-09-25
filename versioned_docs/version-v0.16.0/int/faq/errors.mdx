@@ -89,7 +89,7 @@ docker compose logs
       <h4 id="discovery-search-timeout">
         <code>Not enough time for a discovery seach</code> error
       </h4>
-    </summary> This could be linked to a internet connection being to slow or relying on a slow third-party service such as Infura.
+    </summary> This could be linked to an internet connection being to slow or relying on a slow third-party service such as Infura.
   </details>
 </details>
 <details open className="details">
@@ -167,7 +167,7 @@ docker compose logs
          <code>Error opening relay circuit: NO_RESERVATION</code> error
        </h4>
      </summary>
-     <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer isn't connected to the relay, so the the charon
+     <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer isn't connected to the relay, so the charon
      client cannot connect to the peer via the relay. That might be because the peer is offline or the
      peer is configured to connect to a different relay.
      <br /><br />
@@ -295,7 +295,7 @@ docker compose logs
   <details className="details">
     <summary>
       <h4 id="how-to-fix-grafana-dashboard"> How to fix the grafana dashboard? </h4>
-    </summary> Sometimes, grafana dashboard doesn't load any data first time around.You can solve this by following the steps below: <ul>
+    </summary> Sometimes, grafana dashboard doesn't load any data first time around. You can solve this by following the steps below: <ul>
       <li>Click the Wheel Icon > Datasources</li>
       <li>Click prometheus</li>
       <li>Change the "Access" field from <code>Server (default)</code> to <code>Browser</code>. Press "Save & Test". It should fail. </li>
