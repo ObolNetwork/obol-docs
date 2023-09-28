@@ -4,7 +4,7 @@ Our goal for this page is to equip you with the foundational knowledge needed to
 
 ## **Understanding Ethereum**
 
-To grasp the current landscape of Ethereum's PoS development, we encourage you to delve into the wealth of information available on the [Official Ethereum Website.](ethereum.org/en/learn/)
+To grasp the current landscape of Ethereum's PoS development, we encourage you to delve into the wealth of information available on the [Official Ethereum Website.](https://ethereum.org/en/learn/)
 The Ethereum website serves as a hub for all things Ethereum, catering to individuals at various levels of expertise, whether you're just starting your journey or are an Ethereum veteran. Here, you'll find a trove of resources that cater to diverse learning needs and preferences, ensuring that there's something valuable for everyone in the Ethereum community to discover.
 
 ## **DVT & Ethereum**
