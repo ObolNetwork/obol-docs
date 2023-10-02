@@ -203,7 +203,7 @@ Rather than using an NPM library to supply a factory address or JSON artifacts, 
 - **Harder to compromise:** as long as the user knows launchpad.obol.eth, it’s pretty difficult to trick them into deploying the wrong contracts.
 - **Easier to validate** for non-technical users: the Obol contract can be queried for deployment information via etherscan. For example:
 
-![Etherscan Contract View Screenshot]()
+![Etherscan Contract View Screenshot](/img/EtherscanContractView.png)
 
 Note that in order for this to be successful, Obol needs to provide detailed steps for users to perform manual validation of their cluster setups. Users should be able to treat this as a “checklist:”
 
@@ -215,3 +215,70 @@ Note that in order for this to be successful, Obol needs to provide detailed ste
     - reward split configuration matches
 
 As long as these steps are plastered all over the place (i.e. not just on the Launchpad) and Obol puts in effort to educate users about the process, this approach should allow users to validate cluster configurations themselves - regardless of Launchpad or NPM package compromise.
+
+#### Obol’s response:
+Roadmapped: add the ability for the OWR factory to claim and transfer its reverse resolution ownership.
+
+### R2: Users should deposit to the beacon chain through a pool contract
+
+Once cluster setup and DKG is complete, a group of operators should deposit to the beacon chain by way of a pool contract. The pool contract should:
+
+  - Accept Eth from any of the group’s operators
+  - Stop accepting Eth when the contract’s balance hits (32 ETH * number of validators)
+  - Make it easy to pull the trigger and deposit to the beacon chain once the critical balance has been reached
+  - Offer all of the group’s operators a “bail” option at any point before the deposit is triggered
+
+Ideally, this contract is deployed during the setup process described in #R1, as another step toward allowing users to perform independent validation of the process.
+
+Rather than relying on social consensus, this should:
+  - Allow operators to fund the validator without needing to trust any single party
+  - Make it harder to mess up the deposit or send funds to some malicious actor, as the pool contract should know what the beacon deposit contract address is
+
+#### Obol’s response:
+Roadmapped: give the operators a streamlined, secure way to deposit Ether (ETH) to the beacon chain collectively, satisfying specific conditions:
+
+  - Pooling from multiple operators.
+  - Ceasing to accept ETH once a critical balance is reached, defined by 32 ETH multiplied by the number of validators.
+  - Facilitating an immediate deposit to the beacon chain once the target balance is reached.
+  - Provide a 'bail-out' option for operators to withdraw their contribution before initiating the group's deposit to the beacon chain.
+
+### R3: Raise the barrier to entry to push an update to the Launchpad
+
+Currently, any repo admin can publish an update to the Launchpad unchecked.
+
+Given the risks and scenarios outlined above, consider amending this process so that the sole compromise of either admin is not sufficient to publish to the Launchpad site. It may be worthwhile to require both admins to approve publishing to the site.
+
+Along with simply adding additional prerequisites to publish an update to the Launchpad, ensure that both admins have enabled some level of multi-factor authentication on their GitHub accounts.
+
+#### Obol’s response:
+We removed individual’s ability to merge changes without review, enforced MFA, signed commits, and employed Bulldozer bot to make sure a PR gets merged automatically when all checks pass.
+
+## Additional Notes
+### Vulnerability Disclosure
+During the interviews, I got some conflicting information when asking about Obol’s vulnerability disclosure process.
+
+Some interviewees directed me towards Obol’s security repo, which details security contacts: [ObolNetwork/obol-security](https://github.com/ObolNetwork/obol-security), while some answered that disclosure should happen primarily through Immunefi. While these may both be part of the correct answer, it seems that Obol’s disclosure process may not be as well-defined as it could be. Here are some notes:
+
+  - I wasn’t able to find information about Obol on Immunefi. I also didn’t find any reference to a security contact or disclosure policy in Obol’s docs.
+  - When looking into the obol security repo, I noticed broken links in a few of the sections in README.md and SECURITY.md:
+    - Security policy
+    - More Information
+  - Some of the text and links in the Bug Bounty Program don’t seem to apply to Obol (see text referring to Vaults and Strategies).
+  - The Receiving Disclosures section does not include a public key with which submitters can encrypt vulnerability information.
+
+It’s my understanding that these items are probably lower priority due to Obol’s initial closed launch - but these should be squared away soon!
+[Obol response to latest vuln disclosure process goes here]
+
+#### Obol’s response: 
+we addressed all of the concerns in the obol-security repository:
+  1. The security policy link has been fixed
+  2. The Bug Bounty program received an overhaul and clearly states rewards, eligibility, and scope
+  3. We list two GPG public keys for which we accept encrypted vulnerabilities reports.
+
+We are actively working towards integrating Immunefi in our security pipeline.
+
+### Key Personnel Risk 
+A final section on the specifics of key personnel risk faced by Obol has been redacted from the original report. Particular areas of control highlighted were github org ownership and domain name control.
+
+#### Obol’s response:
+These risks have been mitigated by adding an extra admin to the github org, and by setting up a second DNS stack in case the primary one fails, along with general Opsec improvements.
