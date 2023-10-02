@@ -24,16 +24,16 @@ network. The end result for the validator is generally an increased APY as they 
 
 ## Run MEV Boost
 
-Currently, we don't support [mev-boost](https://boost.flashbots.net/) if you are running your charon cluster using [this repo](https://github.com/ObolNetwork/charon-distributed-validator-node) since the repo 
-uses lodestar validator client which is not `builder API` compatible with Charon.
+Before running MEV-boost please check your cluster version, which can be found inside the cluster-lock.json file.
+If you are using cluster-lock version 1.7.0 or higher release verions, Obol seamlessly accommodates all validator client implementations within a mev-enabled distributed validator cluster.
 
-We are working on a solution that enables the builder API feature irrespective of the choice of the Validator Client.
+Currently, Charon with the builder API enabled, is compatible only with [Teku](https://github.com/ConsenSys/teku) on any cluster-lock versions below 1.7.0.
 
 ## Builder API
 
 If you want to configure Charon and supported Validator clients to support the builder API feature, you can do that as well.
 
-Currently, Charon with the builder API enabled, is compatible only with [Teku](https://github.com/ConsenSys/teku). Work is underway [to support](https://dvt.obol.tech/) all validator client implementations in a mev-enabled distributed validator cluster seamlessly.
+Currently, Charon with the builder API enabled, is compatible with all validator client implementations in a mev-enabled distributed validator cluster seamlessly.
 
 ### Charon
 
@@ -55,7 +55,11 @@ Once the flag is set up, Obol distributed validators will be able to register to
 
 #### Lighthouse Validator Client
 
-For Lighthouse, we are currently waiting on the following [PR](https://github.com/sigp/lighthouse/pull/4306) to be merged into their unstable branch to enable compatability, please review the PR's status.
+For lighthouse, configuring the VC with Charon can be done by following the same process outlined in the [Lighthouse official guide](https://lighthouse-book.sigmaprime.io/builders.html).
+
+The validator client must be set up to use the `--builder-proposals` [flag](https://lighthouse-book.sigmaprime.io/builders.html#how-to-connect-to-a-builder) with a value equal to `http://$CHARON_ENDPOINT:3600/proposer_config`.
+
+Once the flag is set up, Obol distributed validators will be able to register to the builder network, submit blinded beacon blocks and gain a share of the MEV profits.
 
 ## Verify MEV Boost is functional
 
