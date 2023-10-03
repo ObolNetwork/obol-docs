@@ -1,6 +1,6 @@
 ---
-description: Security details for the Obol Network
 sidebar_position: 3
+description: Security details for the Obol Network
 ---
 
 # Contacts

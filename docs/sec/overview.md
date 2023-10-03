@@ -1,6 +1,6 @@
 ---
-description: Security Overview
 sidebar_position: 1
+description: Security Overview
 ---
 
 # Overview
@@ -19,7 +19,7 @@ This page is updated quarterly. The last update was on 2023-10-01.
 
 The completed audits reports are linked [here](https://github.com/ObolNetwork/obol-security/tree/main/audits).
 
-- A review of Obol Labs [development processes](./ev-assessment.md) by Ethereal Ventures
+- A review of Obol Labs [development processes](./ev-assessment) by Ethereal Ventures
 
 - A [security assessment](https://github.com/ObolNetwork/obol-security/blob/f9d7b0ad0bb8897f74ccb34cd4bd83012ad1d2b5/audits/Sigma_Prime_Obol_Network_Charon_Security_Assessment_Report_v2_1.pdf) of Charon by [Sigma Prime](https://sigmaprime.io/).
 
@@ -27,7 +27,7 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 ## Security focused documents
 
-- A [threat model](../int/faq/threat_model.md) for a DV middleware client like charon.
+- A [threat model](./threat_model) for a DV middleware client like charon.
 
 ## Bug Bounty
 

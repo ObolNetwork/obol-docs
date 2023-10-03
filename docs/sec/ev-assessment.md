@@ -1,6 +1,6 @@
 ---
-description: Software Development Security Assessment
 sidebar_position: 4
+description: Software Development Security Assessment
 ---
 
 # Software Development at Obol

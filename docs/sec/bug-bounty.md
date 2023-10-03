@@ -1,6 +1,6 @@
 ---
-description: Bug Bounty Policy
 sidebar_position: 2
+description: Bug Bounty Policy
 ---
 
 # Obol Bug Bounty
