@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 The Obol-SDK is in an alpha state and should be used with caution.
 :::
 
-This is a walkthrough of using the [Obol-SDK](https://www.npmjs.com/package/@obolnetwork/obol-sdk) to propose a four-node distributed validator cluster for creation using the [DV Launchpad](../../../dvl/intro.md). 
+This is a walkthrough of using the [Obol-SDK](https://www.npmjs.com/package/@obolnetwork/obol-sdk) to propose a four-node distributed validator cluster for creation using the [DV Launchpad](../../../dvl/intro.md).
 
 ## Pre-requisites
 
@@ -43,7 +43,6 @@ The first thing you need to do is create a instance of the Obol SDK client. The 
 - The `chainID` for the chain you intend to use.
 - An ethers.js [signer](https://docs.ethers.org/v6/api/providers/#Signer-signTypedData) object.
 
-
 ```ts
 import { Client } from "@obolnetwork/obol-sdk";
 import { ethers } from "ethers";
@@ -54,8 +53,8 @@ const privateKey = ethers.Wallet.fromPhrase(mnemonic).privateKey;
 const wallet = new ethers.Wallet(privateKey);
 const signer = wallet.connect(null);
 
-// Instantiate the Obol Client for goerli 
-const obol = new Client({chainId: 5}, signer);
+// Instantiate the Obol Client for goerli
+const obol = new Client({ chainId: 5 }, signer);
 ```
 
 ## Propose the cluster
@@ -66,20 +65,23 @@ List the Ethereum addresses of participating operators, along with withdrawal an
 // A config hash is a deterministic hash of the proposed DV cluster configuration
 const configHash = await obol.createClusterDefinition({
   name: "SDK Demo Cluster",
-  operators:
-    [
-      { address: "0xC35CfCd67b9C27345a54EDEcC1033F2284148c81" },
-      { address: "0x33807D6F1DCe44b9C599fFE03640762A6F08C496" },
-      { address: "0xc6e76F72Ea672FAe05C357157CfC37720F0aF26f" },
-      { address: "0x86B8145c98e5BD25BA722645b15eD65f024a87EC" }
-    ],
-  validators: [{
-    fee_recipient_address: "0x3CD4958e76C317abcEA19faDd076348808424F99",
-    withdrawal_address: "0xE0C5ceA4D3869F156717C66E188Ae81C80914a6e"
-  }],
+  operators: [
+    { address: "0xC35CfCd67b9C27345a54EDEcC1033F2284148c81" },
+    { address: "0x33807D6F1DCe44b9C599fFE03640762A6F08C496" },
+    { address: "0xc6e76F72Ea672FAe05C357157CfC37720F0aF26f" },
+    { address: "0x86B8145c98e5BD25BA722645b15eD65f024a87EC" },
+  ],
+  validators: [
+    {
+      fee_recipient_address: "0x3CD4958e76C317abcEA19faDd076348808424F99",
+      withdrawal_address: "0xE0C5ceA4D3869F156717C66E188Ae81C80914a6e",
+    },
+  ],
 });
 
-console.log(`Direct the operators to https://goerli.launchpad.obol.tech/dv?configHash=${configHash} to complete the key generation process`)
+console.log(
+  `Direct the operators to https://goerli.launchpad.obol.tech/dv?configHash=${configHash} to complete the key generation process`
+);
 ```
 
 ## Invite the Operators to complete the DKG
@@ -88,21 +90,48 @@ Once the Obol-API returns a `configHash` string from the `createClusterDefinitio
 
 1. Operators navigate to `https://<NETWORK_NAME_HERE>.launchpad.obol.tech/dv?configHash=<CONFIG_HASH_HERE>` and complete the [run a DV with others](../group/quickstart-group-operator.md) flow.
 1. Once the DKG is complete, and operators are using the `--publish` flag, the created cluster details will be posted to the Obol API
-1. The creator will be able to retrieve this data with `obol.getClusterLock(configHash)`, to use for activating the newly created validator. 
+1. The creator will be able to retrieve this data with `obol.getClusterLock(configHash)`, to use for activating the newly created validator.
 
 ## Retrieve the created Distributed Validators using the SDK
 
-Once the DKG is complete, the proposer of the cluster can retrieve key data such as the validator public keys and their associated deposit data messages. 
+Once the DKG is complete, the proposer of the cluster can retrieve key data such as the validator public keys and their associated deposit data messages.
 
 ```js
 const clusterLock = await obol.getClusterLock(configHash);
 ```
 
-Reference lock files can be found [here](https://github.com/ObolNetwork/charon/tree/main/cluster/testdata). 
+Reference lock files can be found [here](https://github.com/ObolNetwork/charon/tree/main/cluster/testdata).
 
 ## Activate the DVs using the deposit contract
 
-This guide will in future cover activating the deposit data from a lock file.
+In order to activate cluster validator, the cluster operator can retrieve the validator associated deposit data and call deposit from the deposit contract.
+
+```js
+const WEI_FACTOR = 10 ** 18;
+
+const validatorDepositData =
+  clusterLock.distributed_validators[validatorIndex].deposit_data;
+
+const depositContract = new ethers.Contract(
+  DEPOSIT_CONTRACT_ADDRESS, // 0x00000000219ab540356cBB839Cbe05303d7705Fa for Mainnet, 0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b for Goerli
+  depositContractABI, // https://etherscan.io/address/0x00000000219ab540356cBB839Cbe05303d7705Fa#code for Mainnet, and replace the address for Goerli
+  signer
+);
+
+const principal = BigNumber.from(validatorDepositData.amount); // 32 ethers
+
+const TX_VALUE = principal.mul(WEI_FACTOR);
+
+const tx = await depositContract.deposit(
+  Ox(validatorDepositData.pubkey),
+  Ox(validatorDepositData.withdrawal_credentials),
+  Ox(validatorDepositData.signature),
+  Ox(validatorDepositData.deposit_data_root),
+  { value: TX_VALUE }
+);
+
+const txResult = await tx.wait();
+```
 
 ## Usage Examples
 
