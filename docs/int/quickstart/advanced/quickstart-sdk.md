@@ -123,10 +123,10 @@ const principal = BigNumber.from(validatorDepositData.amount); // 32 ethers
 const TX_VALUE = principal.mul(WEI_FACTOR);
 
 const tx = await depositContract.deposit(
-  Ox(validatorDepositData.pubkey),
-  Ox(validatorDepositData.withdrawal_credentials),
-  Ox(validatorDepositData.signature),
-  Ox(validatorDepositData.deposit_data_root),
+  validatorDepositData.pubkey,
+  validatorDepositData.withdrawal_credentials,
+  validatorDepositData.signature,
+  validatorDepositData.deposit_data_root,
   { value: TX_VALUE }
 );
 
