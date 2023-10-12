@@ -107,8 +107,6 @@ Reference lock files can be found [here](https://github.com/ObolNetwork/charon/t
 In order to activate the distributed validators, the cluster operator can retrieve the validators' associated deposit data from the lock file and use it to craft transactions to the `deposit()` method on the deposit contract.
 
 ```js
-const WEI_FACTOR = 10 ** 18;
-
 const validatorDepositData =
   clusterLock.distributed_validators[validatorIndex].deposit_data;
 
