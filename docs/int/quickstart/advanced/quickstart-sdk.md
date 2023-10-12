@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-The Obol-SDK is in an alpha state and should be used with caution.
+The Obol-SDK is in an alpha state and should be used with caution., particularly on mainnet.
 :::
 
 This is a walkthrough of using the [Obol-SDK](https://www.npmjs.com/package/@obolnetwork/obol-sdk) to propose a four-node distributed validator cluster for creation using the [DV Launchpad](../../../dvl/intro.md).
@@ -104,7 +104,7 @@ Reference lock files can be found [here](https://github.com/ObolNetwork/charon/t
 
 ## Activate the DVs using the deposit contract
 
-In order to activate cluster validator, the cluster operator can retrieve the validator associated deposit data and call deposit from the deposit contract.
+In order to activate the distributed validators, the cluster operator can retrieve the validators' associated deposit data from the lock file and use it to craft transactions to the `deposit()` method on the deposit contract.
 
 ```js
 const WEI_FACTOR = 10 ** 18;
@@ -118,9 +118,7 @@ const depositContract = new ethers.Contract(
   signer
 );
 
-const principal = BigNumber.from(validatorDepositData.amount); // 32 ethers
-
-const TX_VALUE = principal.mul(WEI_FACTOR);
+const TX_VALUE = ethers.parseEther("32");
 
 const tx = await depositContract.deposit(
   validatorDepositData.pubkey,
