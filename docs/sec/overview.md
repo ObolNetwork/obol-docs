@@ -25,6 +25,8 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 - A solidity audit of the Obol Manager Contracts.
 
+- An audit and security assessment of Charon by [Quantstamp](https://quantstamp.com/) - in progress and expected completion by Q4 2023
+
 ## Security focused documents
 
 - A [threat model](./threat_model) for a DV middleware client like charon.
