@@ -342,7 +342,7 @@ docker compose logs
       <h4 id="unauthorized-invalid-token-error">
         <code>Unauthorized: authentication error: invalid token</code>
       </h4>
-    </summary> You can ignore this error unless you have been contacted by the Obol Team with monitoring credentials. In that case, follow <a href="/docs/int/quickstart/group/quickstart-group-operator#step-6---optional-add-the-monitoring-credentials">Step 6 of the quickstart</a>. It does not affect cluster performance or prevent the cluster from running.
+    </summary> You can ignore this error unless you have been contacted by the Obol Team with monitoring credentials. In that case, follow <a href="https://docs.obol.tech/docs/next/int/quickstart/advanced/monitoring">Getting Started Monitoring your Node</a> in our advanced guides. It does not affect cluster performance or prevent the cluster from running.
   </details>
 </details>
 <details open className="details">
@@ -397,5 +397,17 @@ docker compose logs
         <code> Timeout resolving bootnode ENR: context deadline exceeded </code>{" "} error
       </h4>
     </summary> The relay you are trying to connect to your peers via is offline or unreachable.
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="Lodestar">Lodestar</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="Potential-next-epoch-attester-duties-reorg-slot-821-error">
+        <code> warn: Potential next epoch attester duties reorg</code>{" "} error
+      </h4>
+    </summary> Lodestar logs these warnings because charon is not able to return proper <code>dependent_root</code> value in <code>getAttesterDuties</code> API response whenever lodestar calls this API. This is because charon uses <code>go-eth2-client</code> for all the beacon API calls and it doesn't provide <code>dependent_root</code> value in responses. We have reported this to them here.
   </details>
 </details>
