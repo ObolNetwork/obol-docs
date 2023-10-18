@@ -114,4 +114,3 @@ This testnet is also important for learning the conditions Charon will be subjec
 - Distributed Validator returns are competitive versus single validator clients.
 - Make deploying Ethereum validator nodes accessible using the DV Launchpad.
 - Build comprehensive guides for various profiles to spin up DVs with minimal supervision from the core team.
-
