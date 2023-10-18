@@ -25,6 +25,8 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 - A [solidity audit](./smart_contract_audit) of the Obol Manager Contracts by [Zach Obront](https://zachobront.com/).
 
+- A second audit of Charon is planned for Q4 2023.
+
 ## Security focused documents
 
 - A [threat model](./threat_model) for a DV middleware client like charon.
