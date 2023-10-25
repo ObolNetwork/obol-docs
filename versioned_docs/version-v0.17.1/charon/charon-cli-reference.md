@@ -22,6 +22,7 @@ Usage:
   charon [command]
 
 Available Commands:
+  alpha       Alpha subcommands provide early access to in-development features
   combine     Combines the private key shares of a distributed validator cluster into a set of standard validator private keys.
   completion  Generate the autocompletion script for the specified shell
   create      Create artifacts for a distributed validator cluster
@@ -95,7 +96,7 @@ Flags:
       --keymanager-addresses strings      Comma separated list of keymanager URLs to import validator key shares to. Note that multiple addresses are required, one for each node in the cluster, with node0's keyshares being imported to the first address, node1's keyshares to the second, and so on.
       --keymanager-auth-tokens strings    Authentication bearer tokens to interact with the keymanager URLs. Don't include the "Bearer" symbol, only include the api-token.
       --name string                       The cluster name
-      --network string                    Ethereum network to create validators for. Options: mainnet, goerli, gnosis, sepolia.
+      --network string                    Ethereum network to create validators for. Options: mainnet, goerli, gnosis, sepolia, holesky.
       --nodes int                         The number of charon nodes in the cluster. Minimum is 3.
       --num-validators int                The number of distributed validators needed in the cluster.
       --publish                           Publish lock file to obol-api.
@@ -122,7 +123,7 @@ Flags:
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for dkg
       --name string                       Optional cosmetic cluster name
-      --network string                    Ethereum network to create validators for. Options: mainnet, gnosis, goerli, kiln, ropsten, sepolia. (default "mainnet")
+      --network string                    Ethereum network to create validators for. Options: mainnet, goerli, gnosis, sepolia, holesky. (default "mainnet")
       --num-validators int                The number of distributed validators the cluster will manage (32ETH staked for each). (default 1)
       --operator-enrs strings             [REQUIRED] Comma-separated list of each operator's Charon ENR address.
       --output-dir string                 The folder to write the output cluster-definition.json file to. (default ".charon")
@@ -189,12 +190,13 @@ Flags:
   -h, --help                               Help for run
       --jaeger-address string              Listening address for jaeger tracing.
       --jaeger-service string              Service name used for jaeger tracing. (default "charon")
-      --lock-file string                   The path to the cluster lock file defining distributed validator cluster. (default ".charon/cluster-lock.json")
+      --lock-file string                   The path to the cluster lock file defining distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
       --log-color string                   Log color; auto, force, disable. (default "auto")
       --log-format string                  Log format; console, logfmt or json (default "console")
       --log-level string                   Log level; debug, info, warn or error (default "info")
       --loki-addresses strings             Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
       --loki-service string                Service label sent with logs to Loki. (default "charon")
+      --manifest-file string               The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
       --monitoring-address string          Listening address (ip and port) for the monitoring API (prometheus, pprof). (default "127.0.0.1:3620")
       --no-verify                          Disables cluster definition and lock file verification.
       --p2p-allowlist string               Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
@@ -340,6 +342,7 @@ Flags:
       --cluster-dir string   Parent directory containing a number of .charon subdirectories from the required threshold of nodes in the cluster. (default ".charon/cluster")
       --force                Overwrites private keys with the same name if present.
   -h, --help                 Help for combine
+      --no-verify            Disables cluster definition and lock file verification.
       --output-dir string    Directory to output the combined private keys to. (default "./validator_keys")
 ```
 
