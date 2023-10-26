@@ -146,7 +146,7 @@ You will prepare the configuration file for the distributed key generation cerem
     </ul>
   </TabItem>
   <TabItem value="splitter" label="Reward Splitter">
-    <ul>6. Deploy the withdrawal manager contracts by signing the two transactions with your wallet.</ul>
+    <ul>6. Deploy the Obol Splits contracts by signing the transaction with your wallet.</ul>
   </TabItem>
 </Tabs>
 
