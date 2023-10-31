@@ -110,7 +110,7 @@ The following flags need to be configured on your chosen validator client
   <TabItem value="teku" label="Teku" default>
     <pre>
       <code>
-    {String.raw`teku validator-client --validators-proposer-blinded-blocks-enabled=true `}
+    {String.raw`teku validator-client --validators-builder-registration-default-enabled=true`}
       </code>
     </pre>
 
@@ -139,7 +139,7 @@ The following flags need to be configured on your chosen validator client
   <TabItem value="lodestar" label="Lodestar">
     <pre>
       <code>
-    {String.raw`--builder`}
+    {String.raw`--builder="true" --builder.selection="builderonly"`}
       </code>
     </pre>
   </TabItem>
@@ -160,4 +160,4 @@ If you are using the [ultrasound relay](https://relay.ultrasound.money), you can
 
 You should check that your validator client's logs look healthy, and ensure that you haven't added a `fee-recipient` address that conflicts with what has been selected by your cluster in your cluster-lock file, as that may prevent your validator from producing a signature for the block when the opportunity arises. You should also confirm the same for all of the other peers in your cluster. 
 
-Once a proposal has been made, you should look at the `Block Extra Data` field under `Execution Payload` for the block on [Beaconcha.in](https://beaconcha.in/block/17370078), and confirm there is text present, this generally suggests the block came from a builder, and was not a locally constructed block. 
+Once a proposal has been made, you should look at the `Block Extra Data` field under `Execution Payload` for the block on [Beaconcha.in](https://beaconcha.in/block/18450364), and confirm there is text present, this generally suggests the block came from a builder, and was not a locally constructed block. 
