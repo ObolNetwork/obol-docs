@@ -8,7 +8,16 @@ description: Centralization Risks and mitigation
 ## Risk: Obol hosting the relay infrastructure
 **Mitigation**: Self-host a relay
 
-One of the risks associated with Obol hosting the [LibP2P relays](docs/charon/networking.md) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network.
+One of the risks associated with Obol hosting the [LibP2P relays](docs/charon/networking.md) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network. Ensure that all nodes in the cluster use the same relays, or they will not be able to find each other if they are connected to different relays.
+
+The following non-Obol entities run relays that you can consider adding to your cluster (you can have more than one per cluster, see the `--p2p-relays` flag of [`charon run`](../../charon/charon-cli-reference.md#the-run-subcommand)):
+
+| Entity    | Relay URL                                   |
+|-----------|---------------------------------------|
+| [DSRV](https://www.dsrvlabs.com/)      | https://charon-relay.dsrvlabs.dev     |
+| [Infstones](https://infstones.com/) | https://obol-relay.infstones.com:3640/ |
+| [Hashquark](https://www.hashquark.io/) | https://relay-2.prod-relay.721.land/  |
+| [Figment](https://figment.io/)   | https://relay-1.obol.figment.io/ |
 
 ## Risk: Obol being able to update Charon code
 **Mitigation**: Pin specific docker versions or compile from source on a trusted commit

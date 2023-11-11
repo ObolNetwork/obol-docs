@@ -52,7 +52,7 @@ Before starting the cluster creation, you will need to collect one Ethereum addr
   cd charon-distributed-validator-node
 
   # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-  docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.16.0 create enr
+  docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.17.1 create enr
   ```
 
 You should expect to see a console output like
@@ -146,7 +146,7 @@ You will prepare the configuration file for the distributed key generation cerem
     </ul>
   </TabItem>
   <TabItem value="splitter" label="Reward Splitter">
-    <ul>6. Deploy the withdrawal manager contracts by signing the two transactions with your wallet.</ul>
+    <ul>6. Deploy the Obol Splits contracts by signing the transaction with your wallet.</ul>
   </TabItem>
 </Tabs>
 
