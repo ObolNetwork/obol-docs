@@ -70,3 +70,13 @@ The `charon-enr-private-key` **must be preserved**, failure in doing so requires
 If you're doing a DKG with a custom cluster definition - for example, create with `charon create dkg` rather than the Obol Launchpad - you can re-use the same file.
 
 Once this process has been completed, the cluster operators can retry a DKG.
+
+## Further debugging
+
+If for some reason the DKG process fails again, node operators are adviced to reach out to the Charon team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing what troubleshooting steps were taken and providing **debug logs**.
+
+To enable debug logs first clean up the Charon data directory as explained in [the previous paragraph](#cleaning-up-the-charon-directory), then run your DKG command by appending `--log-level=debug` at the end.
+
+In order for the Charon team to debug your issue as quickly and precisely as possible please provide full logs in textual form, not through screenshots or display photos.
+
+Providing complete logs is particularly important, since it allows the team to reconstruct precisely what happened.
