@@ -35,20 +35,8 @@ cd charon-distributed-validator-node
 
 3. Copy the `.env.sample` file to `.env`
 ```
-cp -n .env.sample .env
+cp -n .env.sample.mainnet .env
 ```
-
-4. In your `.env` file, uncomment and set values for `NETWORK` & `LIGHTHOUSE_CHECKPOINT_SYNC_URL`
-```
-...
-# Overrides network for all the relevant services.
-NETWORK=mainnet
-...
-# Checkpoint sync url used by lighthouse to fast sync.
-LIGHTHOUSE_CHECKPOINT_SYNC_URL=https://mainnet.checkpoint.sigp.io/https://eth-clients.github.io/checkpoint-sync-endpoints/#mainnet
-...
-```
-Note that you can choose any checkpoint sync url from https://eth-clients.github.io/checkpoint-sync-endpoints/#mainnet.
 
 Your DV stack is now mainnet ready 🎉
 
