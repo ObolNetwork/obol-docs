@@ -47,7 +47,7 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
     </pre>
   </TabItem>
   <TabItem value="launchpad" label="Launchpad UI">
-    Go to the <a href="https://beta.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
+    Go to the <a href="https://goerli.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
   </TabItem>
 </Tabs>
 
