@@ -9,8 +9,7 @@ import TabItem from '@theme/TabItem';
 # Create a DV using the SDK
 
 :::caution
-
-The Obol-SDK is in an alpha state and should be used with caution., particularly on mainnet.
+The Obol-SDK is in a beta state and should be used with caution on testnets only.
 :::
 
 This is a walkthrough of using the [Obol-SDK](https://www.npmjs.com/package/@obolnetwork/obol-sdk) to propose a four-node distributed validator cluster for creation using the [DV Launchpad](../../../dvl/intro.md).

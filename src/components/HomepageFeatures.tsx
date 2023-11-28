@@ -49,11 +49,11 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-obol-managers">Obol Managers</Link> are
-        smart contracts for the coordination of Distributed Validators.
+        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are
+        smart contracts for the distribution of rewards from Distributed Validators.
       </>
     ),
-    link: "/docs/sc/introducing-obol-managers",
+    link: "/docs/sc/introducing-obol-splits",
   },
   {
     title: "Join the Upcoming Testnets",

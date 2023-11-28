@@ -6,7 +6,7 @@ description: Run one node in a multi-operator distributed validator cluster usin
 # Using the CLI
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster via the CLI.
