@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Activate a DV
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 If you have successfully created a distributed validator and you are ready to activate it, congratulations! 🎉
