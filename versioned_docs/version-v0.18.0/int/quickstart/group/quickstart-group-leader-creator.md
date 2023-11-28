@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Creator & Leader Journey
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 The following instructions aim to assist with the preparation of a distributed validator key generation ceremony. Select the *Leader* tab if you **will** be an operator participating in the cluster, and select the *Creator* tab if you **will NOT** be an operator in the cluster. 
@@ -78,7 +78,7 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 
 You will prepare the configuration file for the distributed key generation ceremony using the launchpad.
 
-1. Go to the [DV Launchpad](https://goerli.launchpad.obol.tech) 
+1. Go to the [DV Launchpad](https://beta.launchpad.obol.tech) 
 2. Connect your wallet
 
   ![Connect your Wallet](/img/Guide01.png)

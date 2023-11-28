@@ -25,7 +25,7 @@ Use any of the following tools to deposit. Please use the third-party tools at y
 
 <Tabs groupId="network">
   <TabItem value="goërli" label="Goërli" default>
-    <li><a href="https://goerli.launchpad.obol.tech/" target="_blank">Obol Distributed Validator Launchpad</a></li>
+    <li><a href="https://beta.launchpad.obol.tech/" target="_blank">Obol Distributed Validator Launchpad</a></li>
     <li><a href="https://goerli.launchpad.ethereum.org/en/" target="_blank">ethereum.org Staking Launchpad</a></li>
   </TabItem>
   <TabItem value="mainnet" label="Mainnet" >
