@@ -119,7 +119,7 @@ Usage:
   charon create dkg [flags]
 
 Flags:
-      --dkg-algorithm string              DKG algorithm to use; default, keycast, frost (default "default")
+      --dkg-algorithm string              DKG algorithm to use; default, frost (default "default")
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for dkg
       --name string                       Optional cosmetic cluster name
