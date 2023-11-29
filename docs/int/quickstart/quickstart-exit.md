@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 # Exit a DV
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 Users looking to exit staking entirely and withdraw their full balance back must also sign and broadcast a "voluntary exit" message with validator keys which will start the process of exiting from staking. This is done with your validator client and submitted to your beacon node, and does not require gas. In the case of a DV, each charon node needs to broadcast a partial exit to the other nodes of the cluster. Once a threshold of partial exits has been received by any node, the full voluntary exit will be sent to the beacon chain.

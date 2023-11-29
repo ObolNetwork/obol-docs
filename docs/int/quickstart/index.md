@@ -1,7 +1,7 @@
 # Quickstart Guides
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 There are two ways to set up a distributed validator and each comes with its own quickstart

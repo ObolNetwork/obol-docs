@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 # Run a cluster with MEV enabled
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 This quickstart guide focuses on configuring the builder API for Charon and supported validator and consensus clients.

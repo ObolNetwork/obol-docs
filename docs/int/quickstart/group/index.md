@@ -1,7 +1,7 @@
 # Run a cluster as a group
 
 :::caution
-Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+Charon is in an beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
 :::info
