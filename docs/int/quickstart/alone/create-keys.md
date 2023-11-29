@@ -26,7 +26,7 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
 ## Create the key shares locally
 
 <Tabs groupId="create-keys">
-  <TabItem value="docker" label="Docker CLI" default>
+  <TabItem value="docker" label="Charon Command">
     Create the artifacts needed to run a DV cluster by running the following command to setup the inputs for the DV.
     Check the <a href="../../../charon/charon-cli-reference">Charon CLI reference</a> for additional optional flags to set.
     <br/><br/>
@@ -37,20 +37,22 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
       FEE_RECIPIENT_ADDR=[ENTER YOUR FEE RECIPIENT ADDRESS HERE]
       <br/>
       NB_NODES=[ENTER AMOUNT OF DESIRED NODES]
+      <br/>
+      NETWORK="goerli"
       </code>
     </pre>
     Then, run this command to create all the key shares and cluster artifacts locally:<br/><br/>
     <pre>
       <code>
-      docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create cluster --name="mycluster" --withdrawal-addresses="{'${WITHDRAWAL_ADDR}'}" --fee-recipient-addresses="{'${FEE_RECIPIENT_ADDR}'}" --nodes="{'${NB_NODES}'}" --network goerli --num-validators=1
+      docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create cluster --name="Quickstart Cluster" --withdrawal-addresses="{'${WITHDRAWAL_ADDR}'}" --fee-recipient-addresses="{'${FEE_RECIPIENT_ADDR}'}" --nodes="{'${NB_NODES}'}" --network="{'${NETWORK}'}" --num-validators=1 --cluster-dir="cluster"
       </code>
     </pre>
   </TabItem>
-  <TabItem value="launchpad" label="Launchpad UI">
-    Go to the <a href="https://goerli.launchpad.obol.tech">Obol Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
+  <TabItem value="launchpad" label="Launchpad UI" default>
+    Go to the <a href="https://goerli.launchpad.obol.tech">Obol Goerli DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster.
   </TabItem>
 </Tabs>
 
-After successful completion, a subdirectory `.charon/cluster` should be created. In it are as many folders as nodes of the cluster. Each folder contains partial private keys that together make up the distributed validator described in `.charon/cluster/cluster-lock.json`.
+After successful completion, a subdirectory `cluster/` should be created. In it are as many folders as nodes of the cluster. Each folder contains charon artifacts and partial private keys needed for each node of the cluster.
 
-Once ready, you can move to [deploying this cluster physically](./deploy.md).
+Once you have made a backup of the `cluster/` folder, you can move to [deploying this cluster physically](./deploy.md).

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 description: Update your DV cluster with the latest Charon release
 ---
 import Tabs from '@theme/Tabs';
@@ -14,7 +14,7 @@ To do this, follow these steps:
 ### Navigate to the node directory
 
 <Tabs groupId="group-solo">
-  <TabItem value="group" label="Group cluster" default>
+  <TabItem value="group" label="charon-distributed-validator-node" default>
     <pre>
       <code>
         cd charon-distributed-validator-node
@@ -22,7 +22,7 @@ To do this, follow these steps:
     </pre>
   </TabItem>
   
-  <TabItem value="solo" label="Solo cluster">
+  <TabItem value="solo" label="charon-distributed-validator-cluster">
     <pre>
       <code>
         cd charon-distributed-validator-cluster

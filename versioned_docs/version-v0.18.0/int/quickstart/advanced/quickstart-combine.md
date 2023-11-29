@@ -28,9 +28,9 @@ We suggest naming them clearly and distinctly, to avoid confusion.
 At the end of this process, you should have a tree like this:
 
 ```shell
-$ tree ./validators-to-be-combined
+$ tree ./cluster
 
-validators-to-be-combined/
+cluster/
 ├── node0
 │   ├── charon-enr-private-key
 │   ├── cluster-lock.json
@@ -82,65 +82,24 @@ Run the following command:
 
 ```sh
 # Combine a clusters private keys
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 combine --cluster-dir /opt/charon/validators-to-be-combined
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
 ```
 
 This command will create one subdirectory for each validator private key that has been combined, named after its public key.
  
 ```shell
-$ tree ./validators-to-be-combined
-
-validators-to-be-combined/
-├── 0x822c5310674f4fc4ec595642d0eab73d01c62b588f467da6f98564f292a975a0ac4c3a10f1b3a00ccc166a28093c2dcd
-│   └── validator_keys
-│       ├── keystore-0.json
-│       └── keystore-0.txt
-├── 0x8929b4c8af2d2eb222d377cac2aa7be950e71d2b247507d19b5fdec838f0fb045ea8910075f191fd468da4be29690106
-│   └── validator_keys
-│       ├── keystore-0.json
-│       └── keystore-0.txt
-├── node0
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node1
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node2
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-└── node3
-    ├── charon-enr-private-key
-    ├── cluster-lock.json
-    ├── deposit-data.json
-    └── validator_keys
-        ├── keystore-0.json
-        ├── keystore-0.txt
-        ├── keystore-1.json
-        └── keystore-1.txt
+$ tree combined
+combined
+├── keystore-0.json
+├── keystore-0.txt
+├── keystore-1.json
+└── keystore-1.txt
 ```
 
 We can verify that the directory names are correct by looking at the lock file:
 
 ```shell
-$ jq .distributed_validators[].distributed_public_key  validators-to-be-combined/node0/cluster-lock.json
+$ jq .distributed_validators[].distributed_public_key  cluster/node0/cluster-lock.json
 "0x822c5310674f4fc4ec595642d0eab73d01c62b588f467da6f98564f292a975a0ac4c3a10f1b3a00ccc166a28093c2dcd"
 "0x8929b4c8af2d2eb222d377cac2aa7be950e71d2b247507d19b5fdec838f0fb045ea8910075f191fd468da4be29690106"
 ```

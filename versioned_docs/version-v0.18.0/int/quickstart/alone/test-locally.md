@@ -5,7 +5,7 @@ description: Test the solo cluster locally
 
 # Run a test cluster locally
 :::warning
-This is a demo repo to understand how Distributed Validators work and is not suitable for a production deployment.
+This is a demo repo to understand how Distributed Validators work and **is not suitable for a mainnet deployment**.
 
 This guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance. As a consequence, if this machine fails, there will not be fault tolerance.
 
