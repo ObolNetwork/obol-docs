@@ -18,20 +18,22 @@ Users looking to exit staking entirely and withdraw their full balance back must
 This process will take 27 hours or longer depending on the current length of the exit queue.
 
 :::info
+
 - A threshold of operators needs to run the exit command for the exit to succeed.
 - If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
-:::
+  :::
 
 ## Run the `voluntary-exit` command on your validator client
 
 Run the appropriate command on your validator client to broadcast an exit message from your validator client to its upstream charon client.
 
-It needs to be the validator client that is connected to your charon client taking part in the DV, as you are only signing a partial exit message, with a partial private key share, which your charon client will combine with the other partial exit messages from the other operators. 
+It needs to be the validator client that is connected to your charon client taking part in the DV, as you are only signing a partial exit message, with a partial private key share, which your charon client will combine with the other partial exit messages from the other operators.
 
 :::info
+
 - All operators need to use the same `EXIT_EPOCH` for the exit to be successful. Assuming you want to exit as soon as possible, the default epoch of `162304` included in the below commands should be sufficient.
 - Partial exits can be broadcasted by any validator client as long as the sum reaches the threshold for the cluster.
-:::
+  :::
 
 <Tabs groupId="validator-clients">
   <TabItem value="Goerli" label="Goerli" default>
@@ -74,7 +76,7 @@ It needs to be the validator client that is connected to your charon client taki
                 command+=" --validator=$filename"; \
             done; \
         
-    /home/user/nimbus_beacon_node deposits exit $command --epoch=162304 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
+            /home/user/nimbus_beacon_node deposits exit $command --epoch=162304 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
           </code>
         </pre>
       </TabItem>
@@ -90,7 +92,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-        {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=162304 --network=goerli --yes'`}
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=162304 --network=goerli --yes'`}
           </code>
         </pre>
       </TabItem>
@@ -101,11 +103,11 @@ It needs to be the validator client that is connected to your charon client taki
       <TabItem value="teku" label="Teku" default>
         <pre>
           <code>
-        {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
-        --beacon-node-api-endpoint="http://charon:3600/" \
-        --confirmation-enabled=false \
-        --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-        --epoch=256`}
+            {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            --beacon-node-api-endpoint="http://charon:3600/" \
+            --confirmation-enabled=false \
+            --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+            --epoch=256`}
           </code>
         </pre>
       </TabItem>
@@ -136,7 +138,7 @@ It needs to be the validator client that is connected to your charon client taki
                 command+=" --validator=$filename"; \
             done; \
         
-    /home/user/nimbus_beacon_node deposits exit $command --epoch=256 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
+            /home/user/nimbus_beacon_node deposits exit $command --epoch=256 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
           </code>
         </pre>
       </TabItem>
@@ -152,7 +154,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-        {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=256 --network=holesky --yes'`}
+           {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=256 --network=holesky --yes'`}
           </code>
         </pre>
       </TabItem>
@@ -163,11 +165,11 @@ It needs to be the validator client that is connected to your charon client taki
       <TabItem value="teku" label="Teku" default>
         <pre>
           <code>
-        {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
-        --beacon-node-api-endpoint="http://charon:3600/" \
-        --confirmation-enabled=false \
-        --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-        --epoch=194048`}
+            {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            --beacon-node-api-endpoint="http://charon:3600/" \
+            --confirmation-enabled=false \
+            --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+            --epoch=194048`}
           </code>
         </pre>
       </TabItem>
@@ -198,7 +200,7 @@ It needs to be the validator client that is connected to your charon client taki
                 command+=" --validator=$filename"; \
             done; \
         
-    /home/user/nimbus_beacon_node deposits exit $command --epoch=194048 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
+            /home/user/nimbus_beacon_node deposits exit $command --epoch=194048 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
           </code>
         </pre>
       </TabItem>
@@ -214,7 +216,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-        {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=194048 --network=mainnet --yes'`}
+           {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=194048 --network=mainnet --yes'`}
           </code>
         </pre>
       </TabItem>
@@ -225,33 +227,35 @@ It needs to be the validator client that is connected to your charon client taki
 Once a threshold of exit signatures has been received by any single charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
 
 ## Exit epoch and withdrawable epoch
+
 The process of a validator exiting from staking takes variable amounts of time, depending on how many others are exiting at the same time.
 
 Immediately upon broadcasting a signed voluntary exit message, the exit epoch and withdrawable epoch values are calculated based off the current epoch number. These values determine exactly when the validator will no longer be required to be online performing validation, and when the validator is eligible for a full withdrawal respectively.
+
 1. Exit epoch - epoch at which your validator is no longer active, no longer earning rewards, and is no longer subject to slashing rules.
-  :::caution
-  Up until this epoch (while "in the queue") your validator is expected to be online and is held to the same slashing rules as always. Do not turn your DV node off until this epoch is reached.
-  :::
+   :::caution
+   Up until this epoch (while "in the queue") your validator is expected to be online and is held to the same slashing rules as always. Do not turn your DV node off until this epoch is reached.
+   :::
 2. Withdrawable epoch - epoch at which your validator funds are eligible for a full withdrawal during the next validator sweep.
-This occurs 256 epochs after the exit epoch, which takes ~27.3 hours.
+   This occurs 256 epochs after the exit epoch, which takes ~27.3 hours.
 
 ## How to verify a validator exit
 
 Consult the examples below and compare them to your validator's monitoring to verify that exits from each operator in the cluster are being received. This example is a cluster of 4 nodes with 2 validators and threshold of 3 nodes broadcasting exits are needed.
 
 1. Operator 1 broadcasts an exit on validator client 1.
-  ![Verify in Grafana Exit panel](/img/ExitPromQuery-01.png)
-  ![Verify in Grafana Exit panel](/img/DutyExit-01.png)
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-01.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-01.png)
 2. Operator 2 broadcasts an exit on validator client 2.
-  ![Verify in Grafana Exit panel](/img/ExitPromQuery-02.png)
-  ![Verify in Grafana Exit panel](/img/DutyExit-02.png)
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-02.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-02.png)
 3. Operator 3 broadcasts an exit on validator client 3.
-  ![Verify in Grafana Exit panel](/img/ExitPromQuery-03.png)
-  ![Verify in Grafana Exit panel](/img/DutyExit-03.png)
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-03.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-03.png)
 
 At this point, the threshold of 3 has been reached and the validator exit process will start. The logs will show the following:
-  ![Verify in Grafana Exit panel](/img/ExitLogs.png)
-  
+![Verify in Grafana Exit panel](/img/ExitLogs.png)
+
 :::tip
 Once a validator has broadcasted an exit message, it must continue to validate for at least 27 hours or longer. Do not shut off your distributed validator nodes until your validator is fully exited.
 :::
