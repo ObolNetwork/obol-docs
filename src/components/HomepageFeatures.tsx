@@ -24,7 +24,7 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvl/intro">Distributed Validator Launchpad</Link> is 
+        The <Link to="/docs/dvl/intro">Distributed Validator Launchpad</Link> is
         an interface to enable distributed key generation for Distributed
         Validators.
       </>
@@ -37,8 +37,8 @@ const FeatureList: FeatureItem[] = [
     alt: "Charon Distributed Validator Client Logomark",
     description: (
       <>
-        <Link to="/docs/charon/intro">Charon</Link> is a Distributed
-        Validator Client for running Ethereum validators in a fault tolerant manner.
+        <Link to="/docs/charon/intro">Charon</Link> is a Distributed Validator
+        Client for running Ethereum validators in a fault tolerant manner.
       </>
     ),
     link: "/docs/charon/intro",
@@ -49,23 +49,23 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are
-        smart contracts for the distribution of rewards from Distributed Validators.
+        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are smart
+        contracts for the distribution of rewards from Distributed Validators.
       </>
     ),
     link: "/docs/sc/introducing-obol-splits",
   },
   {
-    title: "Join the Upcoming Testnets",
+    title: "Take part in Beta",
     image: "/img/noun_laboratory.png",
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/testnet">Obol Testnets</Link> are being
-        organised to develop the Charon client and to seed a distributed community of Operators.
+        You can run one Distributed Validator on mainnet as part of Obol's{" "}
+        <Link to="https://blog.obol.tech/mainnet-open-beta-launch-blog/">Open Beta.</Link>
       </>
     ),
-    link: "/docs/testnet",
+    link: "/docs/int/quickstart/quickstart-mainnet",
   },
 ];
 
@@ -78,7 +78,7 @@ function Feature({ title, image, description, alt, link }: FeatureItem) {
         </div>
       </Link>
       <div className="text--center padding-horiz--md">
-        <Link to={link}  style={{ textDecoration: "none" }}>
+        <Link to={link} style={{ textDecoration: "none" }}>
           <div className="text--center--title">
             <h3>{title}</h3>
           </div>

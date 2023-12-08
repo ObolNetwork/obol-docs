@@ -1,13 +1,19 @@
 ---
-sidebar_position: 6
-description: Obol testnets roadmap
+sidebar_position: 2
+description: Community testing efforts
 ---
 
-# Testnets
+# Community Testing
 
-Over the coming quarters, Obol Labs has and will continue to coordinate and host a number of progressively larger testnets to help harden the Charon client and iterate on the key generation tooling.
+:::tip
 
-The following is a breakdown of the intended testnet roadmap, the features that are to be completed by each testnet, and their target start date and duration.
+This page looks at the community testing efforts organised by Obol to test Distributed Validators at scale. If you are looking for guides to run a Distributed Validator on testnet you can do so [here](../int/quickstart/index.md). 
+
+:::
+
+Over the last number of years, Obol Labs has coordinated and hosted a number of progressively larger testnets to help harden the Charon client and iterate on the key generation tooling.
+
+The following is a breakdown of the testnet roadmap, the features that were to be completed by each testnet, and their completion date and duration.
 
 # Testnets
 
@@ -101,7 +107,7 @@ This testnet is also important for learning the conditions Charon will be subjec
 
 **Network:** Görli
 
-**Target Completed date:** March 2023
+**Completed date:** March 2023
 
 **Duration:** 2 weeks cluster setup, 4-8 weeks operation
 

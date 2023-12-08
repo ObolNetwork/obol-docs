@@ -16,7 +16,7 @@ The Obol Network consists of four core public goods:
 - The [Distributed Validator Launchpad](../dvl/intro), a [User Interface](https://goerli.launchpad.obol.tech/) for bootstrapping Distributed Validators
 - [Charon](../charon/intro), a middleware client that enables validators to run in a fault-tolerant, distributed manner
 - [Obol Splits](../sc/introducing-obol-splits.md), a set of solidity smart contracts for the distribution of rewards from Distributed Validators
-- [Obol Testnets](../testnet.md), a set of on-going public incentivized testnets that enable any sized operator to test their deployment before serving for the mainnet Obol Network
+- [Obol Testnets](../fr/testnet.md), distributed valdiator infrastructure for Ethereum public test networks, to enable any sized operator to test their deployment before running Distributed Validators on mainnet.
 
 ### Sustainable Public Goods
 

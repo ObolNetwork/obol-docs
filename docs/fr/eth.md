@@ -1,3 +1,8 @@
+---
+sidebar_position: 1
+description: Ethereum and its relationship with DVT
+---
+
 # Ethereum and its Relationship with DVT
 
 Our goal for this page is to equip you with the foundational knowledge needed to actively contribute to the advancement of Obol while also directing you to valuable Ethereum and DVT related resources. Additionally, we will shed light on the intersection of DVT and Ethereum, offering curated articles and blog posts to enhance your understanding.
