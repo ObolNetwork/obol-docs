@@ -60,7 +60,7 @@ The default cluster consists of:
    FEE_RECIPIENT_ADDR=<ENTER YOUR FEE RECIPIENT ADDRESS HERE>
 
    # Create a distributed validator cluster
-   docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create cluster --name="mycluster" --cluster-dir=".charon/cluster/" --withdrawal-addresses="${WITHDRAWAL_ADDR}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDR}" --nodes 6 --network goerli --num-validators=1
+   docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 create cluster --name="mycluster" --cluster-dir=".charon/cluster/" --withdrawal-addresses="${WITHDRAWAL_ADDR}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDR}" --nodes 6 --network goerli --num-validators=1
    ```
 
 These commands will create six folders within `.charon/cluster`, one for each node created. You will need to rename `node*` to `.charon` for each folder to be found by the default `charon run` command, or you can use `charon run --private-key-file=".charon/cluster/node0/charon-enr-private-key" --lock-file=".charon/cluster/node0/cluster-lock.json"` for each instance of charon you start.

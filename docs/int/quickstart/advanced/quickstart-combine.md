@@ -82,10 +82,10 @@ Run the following command:
 
 ```sh
 # Combine a clusters private keys
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
 ```
 
-This command will create one subdirectory for each validator private key that has been combined, named after its public key.
+This command will store the combined keys in the `output-dir`, in this case a folder named `combined`.
  
 ```shell
 $ tree combined
@@ -106,7 +106,7 @@ $ jq .distributed_validators[].distributed_public_key  cluster/node0/cluster-loc
 
 :::info
 
-The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it. 
+The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it.
 
 Ensure your distributed validator cluster is completely shut down before starting a replacement validator or you are likely to be slashed.
 :::

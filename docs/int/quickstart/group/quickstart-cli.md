@@ -32,7 +32,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 
 # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 create enr
 ```
 
 You should expect to see a console output like
@@ -59,7 +59,7 @@ Finally, share your ENR with the leader or creator so that he/she can proceed to
 
 3. Run the `charon create dkg` command that generates DKG cluster-definition.json file.
   ```
-  docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.18.0 create dkg
+  docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.19.0 create dkg
   ```
 
   This command should output a file at `.charon/cluster-definition.json`. This file needs to be shared with the other operators in a cluster.
@@ -72,7 +72,7 @@ Every cluster member then participates in the DKG ceremony. For Charon v1, this 
 
 ```
 # Participate in DKG ceremony, this will create .charon/cluster-lock.json, .charon/deposit-data.json and .charon/validator_keys
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 dkg
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 dkg
 ```
 
 >This is a helpful [video walkthrough](https://www.youtube.com/watch?v=94Pkovp5zoQ&ab_channel=ObolNetwork).
@@ -94,8 +94,6 @@ The `cluster-lock` and `deposit-data` files are identical for each operator and 
 ## Step 4. Start your Distributed Validator Node
 
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
-
-Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
 
 **Caution**: If you manually update `docker-compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.
 
@@ -127,3 +125,7 @@ If at any point you need to turn off your node, you can run:
 # Shut down the currently running distributed validator node
 docker compose down
 ```
+
+:::tip
+In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../../../charon/networking.md).
+:::
