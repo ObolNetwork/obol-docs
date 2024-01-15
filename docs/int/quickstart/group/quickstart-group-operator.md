@@ -35,7 +35,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node
 
 # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 create enr
 ```
 
 You should expect to see a console output like
@@ -110,8 +110,6 @@ The `cluster-lock` and `deposit-data` files are identical for each operator and 
 
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term. This repo is configured to sync an execution layer client (`geth`) and a consensus layer client (`lighthouse`).
 
-Before completing these instructions, you should assign a static local IP address to your device (extending the DHCP reservation indefinitely or removing the device from the DCHP pool entirely if you prefer), and port forward the TCP protocol on the public port `:3610` on your router to your device's local IP address on the same port. This step is different for every person's home internet, and can be complicated by the presence of dynamic public IP addresses. We are currently working on making this as easy as possible, but for the time being, a distributed validator cluster isn't going to work very resiliently if all charon nodes cannot talk directly to one another and instead need to have an intermediary node forwarding traffic to them.
-
 **Caution**: If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.
 
 **Note**: If you have a `geth` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/geth`. This makes everything faster since you start from a synced geth node.
@@ -130,7 +128,8 @@ open http://localhost:3000/d/singlenode/
 You should use the grafana dashboard to infer whether your cluster is healthy. In particular you should check:
 
 - That your charon client can connect to the configured beacon client.
-- That your charon client can connect to all peers.
+- That your charon client can connect to all peers directly.
+- That your validator client is connected to charon, and has the private keys it needs loaded and accessible. 
 
 Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
 
@@ -142,3 +141,7 @@ If at any point you need to turn off your node, you can run:
 # Shut down the currently running distributed validator node
 docker compose down
 ```
+
+:::tip
+In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../../../charon/networking.md).
+:::

@@ -52,7 +52,7 @@ Before starting the cluster creation, you will need to collect one Ethereum addr
   cd charon-distributed-validator-node
 
   # Create your charon ENR private key, this will create a charon-enr-private-key file in the .charon directory
-  docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.18.0 create enr
+  docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 create enr
   ```
 
 You should expect to see a console output like

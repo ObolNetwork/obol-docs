@@ -56,7 +56,7 @@ At the end of this process, you should have a tree like this:
 Run the following docker command to split the keys:
 
 ```shell
-CHARON_VERSION=                # E.g. v0.18.0
+CHARON_VERSION=                # E.g. v0.19.0
 CLUSTER_NAME=                  # The name of the cluster you want to create.
 WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals.
 FEE_RECIPIENT_ADDRESS=         # The address you want to use for fee payments.

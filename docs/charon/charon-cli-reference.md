@@ -11,11 +11,12 @@ The `charon` client is under heavy development, interfaces are subject to change
 
 :::
 
-The following is a reference for charon version [`v0.18.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.18.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for charon version [`v0.19.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.19.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use. 
 
 ```markdown
+charon --help
 Charon enables the operation of Ethereum validators in a fault tolerant manner by splitting the validating keys across a group of trusted parties using threshold cryptography.
 
 Usage:
@@ -82,6 +83,7 @@ Flags:
 `charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
 ```markdown
+charon create cluster --help
 Creates a local charon cluster configuration including validator keys, charon p2p keys, cluster-lock.json and a deposit-data.json. See flags for supported features.
 
 Usage:
@@ -103,6 +105,10 @@ Flags:
       --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech")
       --split-existing-keys               Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
       --split-keys-dir string             Directory containing keys to split. Expects keys in keystore-*.json and passwords in keystore-*.txt. Requires --split-existing-keys.
+      --testnet-chain-id uint             Chain ID of the custom test network.
+      --testnet-fork-version string       Genesis fork version of the custom test network (in hex).
+      --testnet-genesis-timestamp int     Genesis timestamp of the custom test network.
+      --testnet-name string               Name of the custom test network.
       --threshold int                     Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
       --withdrawal-addresses strings      Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
 ```
@@ -155,6 +161,7 @@ Flags:
       --log-color string               Log color; auto, force, disable. (default "auto")
       --log-format string              Log format; console, logfmt or json (default "console")
       --log-level string               Log level; debug, info, warn or error (default "info")
+      --log-output-path string         Path in which to write on-disk logs.
       --no-verify                      Disables cluster definition and lock file verification.
       --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
       --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
@@ -194,6 +201,7 @@ Flags:
       --log-color string                   Log color; auto, force, disable. (default "auto")
       --log-format string                  Log format; console, logfmt or json (default "console")
       --log-level string                   Log level; debug, info, warn or error (default "info")
+      --log-output-path string             Path in which to write on-disk logs.
       --loki-addresses strings             Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
       --loki-service string                Service label sent with logs to Loki. (default "charon")
       --manifest-file string               The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
@@ -214,120 +222,18 @@ Flags:
       --simnet-validator-keys-dir string   The directory containing the simnet validator key shares. (default ".charon/validator_keys")
       --simnet-validator-mock              Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
       --synthetic-block-proposals          Enables additional synthetic block proposal duties. Used for testing of rare duties.
+      --testnet-chain-id uint              Chain ID of the custom test network.
+      --testnet-fork-version string        Genesis fork version in hex of the custom test network.
+      --testnet-genesis-timestamp int      Genesis timestamp of the custom test network.
+      --testnet-name string                Name of the custom test network.
       --validator-api-address string       Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
 
 ## The `combine` subcommand
 
-### Combine distributed validator keyshares into a single Validator key
+### Combine distributed validator key shares into a single Validator key
 
-The `combine` command combines many validator keyshares into a single Ethereum validator key.
-
-To run this command, one needs all the node operator's `.charon` directories, which need to be organized in the following way:
-
-```shell
-validators-to-be-combined/
-├── node0
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node1
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node2
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-└── node3
-    ├── charon-enr-private-key
-    ├── cluster-lock.json
-    ├── deposit-data.json
-    └── validator_keys
-        ├── keystore-0.json
-        ├── keystore-0.txt
-        ├── keystore-1.json
-        └── keystore-1.txt
-```
-
-That is, each operator '.charon' directory must be placed in a parent directory, and renamed.
-
-Note that all validator keys are required for the successful execution of this command.
-
-If for example the lock file defines 2 validators, each `validator_keys` directory must contain exactly 4 files, a JSON and TXT file for each validator.
-
-Those files must be named with an increasing index associated with the validator in the lock file, starting from 0.
-
-The chosen name doesn't matter, as long as it's different from `.charon`.
-
-At the end of the process `combine` will create a new set of directories containing one validator key each, named after its public key:
-
-```shell
-validators-to-be-combined/
-├── 0x822c5310674f4fc4ec595642d0eab73d01c62b588f467da6f98564f292a975a0ac4c3a10f1b3a00ccc166a28093c2dcd # contains private key
-│   └── validator_keys
-│       ├── keystore-0.json
-│       └── keystore-0.txt
-├── 0x8929b4c8af2d2eb222d377cac2aa7be950e71d2b247507d19b5fdec838f0fb045ea8910075f191fd468da4be29690106 # contains private key
-│   └── validator_keys
-│       ├── keystore-0.json
-│       └── keystore-0.txt
-├── node0
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node1
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-├── node2
-│   ├── charon-enr-private-key
-│   ├── cluster-lock.json
-│   ├── deposit-data.json
-│   └── validator_keys
-│       ├── keystore-0.json
-│       ├── keystore-0.txt
-│       ├── keystore-1.json
-│       └── keystore-1.txt
-└── node3
-    ├── charon-enr-private-key
-    ├── cluster-lock.json
-    ├── deposit-data.json
-    └── validator_keys
-        ├── keystore-0.json
-        ├── keystore-0.txt
-        ├── keystore-1.json
-        └── keystore-1.txt
-```
-
-By default, the `combine` command will refuse to overwrite any private key that is already present in the destination directory.
-
-To force the process, use the `--force` flag.
+The `combine` command combines many validator key shares into a single Ethereum validator key.
 
 ```markdown
 charon combine --help
@@ -346,9 +252,82 @@ Flags:
       --output-dir string    Directory to output the combined private keys to. (default "./validator_keys")
 ```
 
+To run this command, one needs at least a threshold number of node operator's `.charon` directories, which need to be organized into a single folder:
+
+```shell
+tree ./cluster
+cluster/
+├── node0
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node1
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+├── node2
+│   ├── charon-enr-private-key
+│   ├── cluster-lock.json
+│   ├── deposit-data.json
+│   └── validator_keys
+│       ├── keystore-0.json
+│       ├── keystore-0.txt
+│       ├── keystore-1.json
+│       └── keystore-1.txt
+└── node3
+    ├── charon-enr-private-key
+    ├── cluster-lock.json
+    ├── deposit-data.json
+    └── validator_keys
+        ├── keystore-0.json
+        ├── keystore-0.txt
+        ├── keystore-1.json
+        └── keystore-1.txt
+```
+
+That is, each operator '.charon' directory must be placed in a parent directory, and renamed to avoid conflicts.
+
+If for example the lock file defines 2 validators, each `validator_keys` directory must contain exactly 4 files, a JSON and TXT file for each validator.
+
+Those files must be named with an increasing index associated with the validator in the lock file, starting from 0.
+
+The chosen folder name does not matter, as long as it's different from `.charon`.
+
+At the end of the process `combine` will create a new set of directories containing one validator key each, named after its public key:
+
+```shell
+charon combine --cluster-dir="./cluster" --output-dir="./combined"
+tree ./combined
+combined
+├── keystore-0.json
+├── keystore-0.txt
+├── keystore-1.json
+└── keystore-1.txt
+```
+By default, the `combine` command will refuse to overwrite any private key that is already present in the destination directory.
+
+To force the process, use the `--force` flag.
+
+:::caution
+
+The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it.
+
+**Ensure your distributed validator cluster is completely shut down for at least two epochs before starting a replacement validator or you are likely to be slashed.**
+:::
+
 ## Host a relay
 
-Relays run a libp2p [circuit relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) server that allows charon clusters to perform peer discovery and for charon clients behind NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
+Relays run a libp2p [circuit relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) server that allows charon clusters to perform peer discovery and for charon clients behind strict NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
 
 ```markdown
 charon relay --help
@@ -380,3 +359,4 @@ Flags:
       --p2p-relays strings                Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
       --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
+You can also consider adding [alternative public relays](../int/faq/risks.md#risk-obol-hosting-the-relay-infrastructure) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).

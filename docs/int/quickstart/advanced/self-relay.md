@@ -34,3 +34,5 @@ Configure **ALL** charon nodes in your cluster to use this relay:
 - Or by setting the environment variable: `CHARON_P2P_RELAYS=http://replace.with.public.ip.or.hostname:3640/enr`
 
 Note that a local `relay/.charon/charon-enr-private-key` file will be created next to `relay/docker-compose.yml` to ensure a persisted relay ENR across restarts.
+
+A list of publicly available relays that can be used is maintained [here](../../faq/risks.md#risk-obol-hosting-the-relay-infrastructure). 
