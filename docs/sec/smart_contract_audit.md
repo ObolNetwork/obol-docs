@@ -14,6 +14,7 @@ description: Smart Contract Audit
             <h2>Obol Manager Contracts</h2>
             <p>Prepared by: Zach Obront, Independent Security Researcher</p>
             <p>Date: Sept 18 to 22, 2023</p>
+            <p><a href="https://github.com/ObolNetwork/obol-splits/blob/main/audit/Obol%20Audit%20Report.pdf" target="_blank">PDF Version</a></p>
         </td>
     </tr>
 </table>
@@ -41,7 +42,7 @@ The following contracts were in scope:
 - src/owr/OptimisticWithdrawalReceiver.sol
 - src/owr/OptimisticWithdrawalReceiverFactory.sol
 
-After completion of the fixes, the [2f4f059bfd145f5f05d794948c918d65d222c3a9](https://github.com/ObolNetwork/obol-manager-contracts/tree/2f4f059bfd145f5f05d794948c918d65d222c3a9) commit was reviewed. After this review, the updated Lido fee share system in [PR #96](https://github.com/ObolNetwork/obol-manager-contracts/pull/96/files) was reviewed.
+After completion of the fixes, the [2f4f059bfd145f5f05d794948c918d65d222c3a9](https://github.com/ObolNetwork/obol-manager-contracts/tree/2f4f059bfd145f5f05d794948c918d65d222c3a9) commit was reviewed. After this review, the updated Lido fee share system in [PR #96](https://github.com/ObolNetwork/obol-manager-contracts/pull/96/files) (at commit [fd244a05f964617707b0a40ebb11b523bbd683b8](https://github.com/ObolNetwork/obol-splits/pull/96/commits/fd244a05f964617707b0a40ebb11b523bbd683b8)) was reviewed.
 
 ## Summary of Findings
 
