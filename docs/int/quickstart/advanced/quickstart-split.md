@@ -12,7 +12,7 @@ This process should only be used if you want to split an *existing validator pri
 
 If you are starting a new validator, you should follow a [quickstart guide](../index.md) instead.
 
-If you use MEV-Boost, make sure you turned off your MEV-Boost service for the time of splitting the keys, otherwise you may hit [the issue](https://github.com/ObolNetwork/charon/issues/2770).
+If you use MEV-Boost, make sure you turned off your MEV-Boost service for the time of splitting the keys, otherwise you may hit [this issue](https://github.com/ObolNetwork/charon/issues/2770).
 :::
 
 Split an existing Ethereum validator key into multiple key shares for use in an [Obol Distributed Validator Cluster](../../key-concepts#distributed-validator-cluster).
