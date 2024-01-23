@@ -67,7 +67,7 @@ NODES=                         # The number of nodes in the cluster.
 docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --nodes ${NODES} --network goerli
 ```
 
-The above command will create `validator_keys` along with `cluster-lock.json` in `./.charon/cluster` for each node.
+The above command will create `validator_keys` along with `cluster-lock.json` in `./cluster` for each node.
 
 Command output:
 
@@ -81,7 +81,7 @@ Command output:
 Created charon cluster:
  --split-existing-keys=true
 
-.charon/cluster/
+./cluster/
 ├─ node[0-*]/                   Directory for each node
 │  ├─ charon-enr-private-key    Charon networking private key for node authentication
 │  ├─ cluster-lock.json         Cluster lock defines the cluster lock file which is signed by all nodes
