@@ -58,7 +58,7 @@ const config = {
         specs: [
           {
             // spec: 'https://api.obol.tech/docs-yaml',
-            spec: './static/api-spec.yaml',
+            spec:"https://api.obol.tech/docs-json",
             route: '/api/',
             layout: {
               title: 'API Reference',
