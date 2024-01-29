@@ -69,7 +69,7 @@ Ensure you create a backup of the private key stored in the '.charon' folder, sp
   </TabItem>
   <TabItem value="creator" label="Creator">
 
-  This step is not needed and you can move on to [Step 3](#step-3-create-the-dkg-configuration-file-and-distribute-it-to-cluster-operators).
+  This step is not needed, you can move on to [Step 3](#step-3-create-the-dkg-configuration-file-and-distribute-it-to-cluster-operators).
 
   </TabItem>
 </Tabs>
