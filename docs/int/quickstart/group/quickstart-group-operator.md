@@ -73,7 +73,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 7. Wait for all the other operators in your cluster to do the same.
 
-## Step 4. Run the DKG
+## Step 4. Run the DKG 
 :::info
 For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
 :::
