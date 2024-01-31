@@ -69,7 +69,7 @@ Yes. Unless you were to decide to [deploy an editable splitter contract](#can-i-
 
 ### Can I change the percentages in a split?
 
-Generally Obol Splits are deployed in an immutable fashion, meaning you cannot edit the percentages after deployment. However, if you were to choose to deploy a controllable splitter contract when creating your Split, then yes, the address you select as controller can update the split percentages arbitrarily. A common pattern for this use case is to use a Gnosis SAFE as the controller address for the split, giving a group of entities (usually the operators and principal provider) the ability to update the percentages if need be. A well known example of this pattern is the [Protocol Guild](https://protocol-guild.readthedocs.io/en/latest/3-smart-contract.html). 
+Generally Obol Splits are deployed in an immutable fashion, meaning you cannot edit the percentages after deployment. However, if you were to choose to deploy a *controllable* splitter contract when creating your Split, then yes, the address you select as controller can update the split percentages arbitrarily. A common pattern for this use case is to use a Gnosis SAFE as the controller address for the split, giving a group of entities (usually the operators and principal provider) the ability to update the percentages if need be. A well known example of this pattern is the [Protocol Guild](https://protocol-guild.readthedocs.io/en/latest/3-smart-contract.html). 
 
 ### How do Obol Splits work?
 
@@ -79,15 +79,23 @@ You can read more about how Obol Splits work [here](../../sc/introducing-obol-sp
 
 Yes, Obol Splits are licensed under GPLv3 and the source code is available [here](https://github.com/ObolNetwork/obol-splits). 
 
+### Are Obol Splits audited?
+
+The Obol Splits contracts have been audited, though further development has continued on the contracts since. Consult the audit results [here](../../sec/smart_contract_audit.md). 
+
+### Are the Obol Splits contracts verified on Etherscan?
+
+Yes, you can view the verified contracts on Etherscan. A list of the contract deployments can be found [here](https://github.com/ObolNetwork/obol-splits?#deployment). 
+
 ### Does my cold wallet have to call the Obol Splits contracts?
 
 No. Any address can trigger the contracts to move the funds, they do not need to be a member of the Split either. You can set your cold wallet/custodian address as the recipient of the principal and rewards, and use any hot wallet to pay the gas fees to push the ether into the recipient address. 
 
-## Are there any edge cases I should be aware of when using Obol Splits?
+### Are there any edge cases I should be aware of when using Obol Splits?
 
 The most important decision is to be aware of whether or not the Split contract you are using has been set up with editability. If a splitter is editable, you should understand what the address that can edit the split does. Is the editor an EOA? Who controls that address? How secure is their seed phrase? Is it a smart contract? What can that contract do? Can the controller contract be upgraded? etc. Generally, the safest thing in Obol's perspective is not to have an editable splitter, and if in future you are unhappy with the configuration, that you exit the validator and create a fresh cluster with new settings that fit your needs. 
 
-Another facet to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract
+Another aspect to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract. There are edge cases relating to not calling the contracts periodically or ahead of a withdrawal, activating more validators than the contract was configured for, and a worst case mass slashing on the network. Consult the documentation on the contract [here](../../sc/introducing-obol-splits.md#optimistic-withdrawal-recipient), its audit [here](../../sec/smart_contract_audit.md), and follow up with the core team if you have further questions. 
 
 ## Debugging Errors in Logs 
 
