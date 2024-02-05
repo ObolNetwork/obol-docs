@@ -66,6 +66,13 @@ If instead of being shown your `enr` you see an error saying `permission denied`
 Ensure you create a backup of the private key stored in the '.charon' folder, specifically at '.charon/charon-enr-private-key'. This is the file used to generate your private key. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
 :::
 
+:::info
+The `charon-distributed-validator-node` repo is set by default to the Holesky testnet. If you wish to change the network, copy the file `.env.sample` inside the `charon-distributed-validator-node` folder, uncommenting line 5 and setting a value for `NETWORK`, saving the new file with the name `.env`. 
+
+.env.sample is a sample environment file that allows overriding default configuration defined in docker-compose.yml. Uncomment and set any variable to override its value.
+:::
+
+
   </TabItem>
   <TabItem value="creator" label="Creator">
 
