@@ -85,7 +85,7 @@ The `charon-distributed-validator-node` repo is set by default to the Holesky te
 
 You will prepare the configuration file for the distributed key generation ceremony using the launchpad.
 
-1. Go to the [DV Launchpad](https://goerli.launchpad.obol.tech) 
+1. Go to the [DV Launchpad](https://docs.obol.tech/docs/dvl/intro#dv-launchpad-links) 
 2. Connect your wallet
 
   ![Connect your Wallet](/img/Guide01.png)
