@@ -15,8 +15,9 @@ This section is intended for users who wish to run their Distributed Validator o
 
 ## Pre-requisites
 
+- A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
 - You have [enough up-to-spec nodes](../key-concepts.md#distributed-validator-threshold) for your mainnet deployment.
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed on each node.
+- Ensure you have [docker](https://docs.docker.com/desktop/install/linux-install/#generic-installation-steps) installed on each node.
 - Ensure you have [git](https://git-scm.com/downloads) installed on each node.
 - Make sure `docker` is running before executing the commands below.
 
