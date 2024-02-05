@@ -20,7 +20,8 @@ These roles hold no position of privilege in the cluster, they only set the init
     The person creating the cluster <b>will</b> be a node operator in the cluster.<br /><br />
     <h1>Pre-requisites</h1>
     <ul>
-      <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.</li>
+      <li>A basic <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/" target="_blank">knowledge</a> of Ethereum nodes and validators.</li>
+      <li>Ensure you have <a href="https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop" target="_blank">docker</a> installed.</li>
       <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
       <li>Make sure <code>docker</code> is running before executing the commands below.</li>
     </ul>
@@ -31,6 +32,8 @@ These roles hold no position of privilege in the cluster, they only set the init
 </Tabs>
 
 ## Overview Video
+
+This video shows the flow within the [DV Launchpad](https://docs.obol.tech/docs/dvl/intro#dv-launchpad-links):
 
 <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/OK6WE8te33Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 

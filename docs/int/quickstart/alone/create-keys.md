@@ -20,7 +20,8 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
 
 ## Pre-requisites
 
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
+- Ensure you have [docker](https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop) installed.
 - Make sure `docker` is running before executing the commands below.
 
 ## Create the key shares locally

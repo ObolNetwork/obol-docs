@@ -13,7 +13,8 @@ The following instructions aim to assist a group of operators coordinating toget
 
 ## Pre-requisites
 
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
+- Ensure you have [docker](https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop) installed.
 - Ensure you have [git](https://git-scm.com/downloads) installed. 
 - Make sure `docker` is running before executing the commands below.
 - Decide who the Leader or Creator of your cluster will be. Only them have to perform [step 2](#step-2-leader-creates-the-dkg-configuration-file-and-distributes-it-to-everyone-else) and [step 5](#step-5-activate-the-deposit-data) in this quickstart. They do not get any special privilege.

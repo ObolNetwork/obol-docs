@@ -28,7 +28,8 @@ The default cluster consists of:
 
 ## Pre-requisites
 
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
+- Ensure you have [docker](https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop) installed.
 - Ensure you have [git](https://git-scm.com/downloads) installed. 
 - Make sure `docker` is running before executing the commands below.
 

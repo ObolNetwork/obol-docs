@@ -12,11 +12,15 @@ Charon is in a beta state and should be used with caution according to its [Term
 The following instructions aim to assist a group of operators coordinating together to create a distributed validator cluster after receiving an cluster invite link from a leader or creator.
 
 ## Overview Video
+
+This video shows the flow within the [DV Launchpad](https://docs.obol.tech/docs/dvl/intro#dv-launchpad-links): 
+
 <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/6pXASqjAQbs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## Pre-requisites
 
-- Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
+- A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
+- Ensure you have [docker](https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop) installed.
 - Ensure you have [git](https://git-scm.com/downloads) installed. 
 - Make sure `docker` is running before executing the commands below.
 
