@@ -142,17 +142,17 @@ const config = {
             position: "left",
             label: "API",
           },
-          // {
-          //   type: "docSidebar",
-          //   sidebarId: "apiSidebar",
-          //   label: "SDK",
-          //   position: "left",
-          //},
           {
-            to: "docs/next/sdk",
+            type: "docSidebar",
+            sidebarId: "apiSidebar",
             label: "SDK",
             position: "left",
           },
+          // {
+          //   to: "docs/next/sdk",
+          //   label: "SDK",
+          //   position: "left",
+          // },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
             href: "https://github.com/obolnetwork/obol-docs",
