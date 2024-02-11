@@ -27,20 +27,23 @@ const config = {
         indexBlog: false,
       },
     ],
-    // [
-    //   "docusaurus-plugin-typedoc",
+    [
+      "docusaurus-plugin-typedoc",
 
-    //   // Plugin / TypeDoc options
-    //   {
-    //     entryPoints: ["../src/index.ts"],
-    //     tsconfig: "../tsconfig.json",
-    //     out: "sdk",
-    //     includeExtension: false,
-    //     sidebar: {
-    //       categoryLabel: "SDK",
-    //     },
-    //   },
-    // ],
+      // Plugin / TypeDoc options
+      {
+        entryPoints: ["../src/index.ts"],
+        tsconfig: "../tsconfig.json",
+        out: "docs/sdk",
+        mergeReadme: true,
+        parametersFormat: "table",
+        propertiesFormat: "table",
+        enumMembersFormat: "table",
+        typeDeclarationFormat: "table",
+        hidePageTitle: true
+
+      },
+    ],
   ],
   presets: [
     [
@@ -148,11 +151,6 @@ const config = {
             label: "SDK",
             position: "left",
           },
-          // {
-          //   to: "docs/next/sdk",
-          //   label: "SDK",
-          //   position: "left",
-          // },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
             href: "https://github.com/obolnetwork/obol-docs",
