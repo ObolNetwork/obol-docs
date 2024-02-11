@@ -10,12 +10,10 @@ Charon is in a beta state and should be used with caution according to its [Term
 
 This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed.
 
-If you are starting a new validator, you should follow a [quickstart guide](../start/quickstart_overview.md) instead.
-
-If you use MEV-Boost, make sure you turned off your MEV-Boost service for the time of splitting the keys, otherwise you may hit [this issue](https://github.com/ObolNetwork/charon/issues/2770).
+If you are starting a new validator, you should follow a [quickstart guide](../index.md) instead.
 :::
 
-Split an existing Ethereum validator key into multiple key shares for use in an [Obol Distributed Validator Cluster](../int/key-concepts.md#distributed-validator-cluster).
+Split an existing Ethereum validator key into multiple key shares for use in an [Obol Distributed Validator Cluster](../../key-concepts#distributed-validator-cluster).
 
 
 ## Pre-requisites
@@ -67,7 +65,7 @@ NODES=                         # The number of nodes in the cluster.
 docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:${CHARON_VERSION} create cluster --name="${CLUSTER_NAME}" --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" --split-existing-keys --split-keys-dir=/opt/charon/split_keys --nodes ${NODES} --network goerli
 ```
 
-The above command will create `validator_keys` along with `cluster-lock.json` in `./cluster` for each node.
+The above command will create `validator_keys` along with `cluster-lock.json` in `./.charon/cluster` for each node.
 
 Command output:
 
@@ -81,7 +79,7 @@ Command output:
 Created charon cluster:
  --split-existing-keys=true
 
-./cluster/
+.charon/cluster/
 ├─ node[0-*]/                   Directory for each node
 │  ├─ charon-enr-private-key    Charon networking private key for node authentication
 │  ├─ cluster-lock.json         Cluster lock defines the cluster lock file which is signed by all nodes
