@@ -32,9 +32,9 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^2.4.0",
     "@tsconfig/docusaurus": "^1.0.4",
-    "docusaurus-plugin-typedoc": "^0.22.0",
+    "docusaurus-plugin-typedoc": "^1.0.0-next.27",
     "typedoc": "^0.25.7",
-    "typedoc-plugin-markdown": "^3.17.1",
+    "typedoc-plugin-markdown": "^4.0.0-next.53",
     "typescript": "^4.7.4"
   },
   "browserslist": {
