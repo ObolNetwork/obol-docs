@@ -27,23 +27,23 @@ const config = {
         indexBlog: false,
       },
     ],
-    [
-      "docusaurus-plugin-typedoc",
+    // [
+    //   "docusaurus-plugin-typedoc",
 
-      // Plugin / TypeDoc options
-      {
-        entryPoints: ["../src/index.ts"],
-        tsconfig: "../tsconfig.json",
-        out: "docs/sdk",
-        mergeReadme: true,
-        parametersFormat: "table",
-        propertiesFormat: "table",
-        enumMembersFormat: "table",
-        typeDeclarationFormat: "table",
-        hidePageTitle: true
+    //   // Plugin / TypeDoc options
+    //   {
+    //     entryPoints: ["../src/index.ts"],
+    //     tsconfig: "../tsconfig.json",
+    //     out: "docs/sdk",
+    //     mergeReadme: true,
+    //     parametersFormat: "table",
+    //     propertiesFormat: "table",
+    //     enumMembersFormat: "table",
+    //     typeDeclarationFormat: "table",
+    //     hidePageTitle: true
 
-      },
-    ],
+    //   },
+    // ],
   ],
   presets: [
     [
