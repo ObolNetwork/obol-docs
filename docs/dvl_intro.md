@@ -1,9 +1,9 @@
 ---
 description: A dapp to securely create Distributed Validators alone or with a group.
-sidebar_position: 1
+sidebar_position: 6
 ---
 
-# Introduction
+# DV Launchpad
 
 ![DV Launchpad Promo Image](/img/DistributeYourValidators.svg)
 

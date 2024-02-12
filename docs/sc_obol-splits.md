@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 7
 description: Smart contracts for managing Distributed Validators
 ---
 
