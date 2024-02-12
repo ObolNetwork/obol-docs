@@ -784,13 +784,26 @@
                               "schema":
                                 {
                                   "anyOf":
-                                    [{ "$ref": "#/components/schemas/Map" }],
+                                    [
+                                      {
+                                        "$ref": "#/components/schemas/DistributedValidatorStateResponse",
+                                      },
+                                    ],
+                                  "example":
+                                    {
+                                      "0x000000000000000000000000000000":
+                                        {
+                                          "index": "0",
+                                          "status": "active_ongoing",
+                                          "balance": "32",
+                                        },
+                                    },
                                 },
                             },
                         },
                     },
                   "400": { "description": "Bad request recieved" },
-                  "404": { "description": "Validator not found" },
+                  "404": { "description": "Lock Hash not found" },
                   "500": { "description": "An unknown error occurred" },
                 },
               "tags": ["State"],
