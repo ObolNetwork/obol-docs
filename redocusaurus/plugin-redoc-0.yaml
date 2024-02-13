@@ -1,0 +1,586 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_redirect
+      summary: Redirect to the API docs
+      description: >-
+        Hitting the root of the domain redirects to /docs and a swagger
+        deployment.
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - System
+  /_health:
+    get:
+      operationId: HealthController_check
+      summary: Check the API health
+      description: This endpoint reports the API and its dependencies health.
+      parameters: []
+      responses:
+        '200':
+          description: The Health Check is successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+                    nullable: true
+                  error:
+                    type: object
+                    example: {}
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+        '503':
+          description: The Health Check is not successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  info:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+                    nullable: true
+                  error:
+                    type: object
+                    example:
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+                    nullable: true
+                  details:
+                    type: object
+                    example:
+                      database:
+                        status: up
+                      redis:
+                        status: down
+                        message: Could not connect
+                    additionalProperties:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                      additionalProperties:
+                        type: string
+      tags:
+        - System
+  /dv/{configHash}:
+    get:
+      operationId: DVController_getClusterDefinition
+      summary: Retrieve a Distributed Validator Cluster proposal
+      description: >-
+        This endpoint allows a charon client or launchpad interface to retrieve
+        the terms of a proposed DKG. Once all operators listed in the DKG have
+        signed the terms of the cluster, this object will be ready for a cluster
+        of operators to use as part of a DKG ceremony. If the objects in the
+        `operators` array are not fully populated, these operators need to use
+        the [PUT
+        request](#tag/Distributed-Validators/operation/DVController_updateClusterDefinition)
+        to upload their charon client's public key and a signature from their
+        address to indicate their acceptance of the terms.
+      parameters:
+        - name: configHash
+          required: true
+          in: path
+          description: The `config_hash` calculated for a cluster definition.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The cluster object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETClusterDefinitionResponse'
+      tags:
+        - Distributed Validators
+    put:
+      operationId: DVController_updateClusterDefinition
+      summary: Accept a proposed Distributed Validator Cluster
+      description: >-
+        This endpoint is used by the operators present in the `operators` array
+        of a cluster definition. These operators must submit a public key (in
+        ENR form) to serve as their identity during the DKG, along with EIP712
+        signatures indicating their acceptance of the terms of this DKG.
+      parameters:
+        - name: authorization
+          required: true
+          in: header
+          description: EIP712 operator hash as bearer token
+          schema:
+            type: string
+        - name: configHash
+          required: true
+          in: path
+          description: The `config_hash` calculated for a cluster definition.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperatorDto'
+      responses:
+        '200':
+          description: The cluster object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUTClusterDefinitionResponse'
+      tags:
+        - Distributed Validators
+      security:
+        - bearer: []
+    delete:
+      operationId: DVController_deleteClusterDefinition
+      summary: Delete a Distributed Validator Cluster proposal
+      description: >-
+        This endpoint allows the caller to delete an unwanted DKG ceremony
+        proposal.
+      parameters:
+        - name: configHash
+          required: true
+          in: path
+          description: The `config_hash` calculated for a cluster definition.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterDefinition'
+      tags:
+        - Distributed Validators
+      security:
+        - bearer: []
+  /dv:
+    post:
+      operationId: DVController_postClusterDefinition
+      summary: Propose a new Distributed Validator Cluster
+      description: >-
+        This endpoint allows the caller to propose a distributed key generation
+        ceremony. The caller must specify the configuration of a Distributed
+        Validator Cluster; such as the participating operators and the validator
+        exit details. Operators invited to participate in this cluster must
+        submit a public key (in
+        [ENR](https://docs.obol.tech/docs/v0.12.0/int/faq/errors#enrs-keys)
+        form) to serve as their node's identity, along with EIP712 signatures
+        indicating their acceptance of the terms of this cluster.
+      parameters:
+        - name: authorization
+          required: true
+          in: header
+          description: EIP712 cluster definition hash as bearer token
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterDefDto'
+      responses:
+        '201':
+          description: The cluster object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSTClusterDefinitionResponse'
+      tags:
+        - Distributed Validators
+      security:
+        - bearer: []
+info:
+  title: Obol API
+  description: >-
+    ## What is this API?
+
+
+    This API is for creating and managing [Distributed
+    Validators](https://docs.obol.tech/docs/int/key-concepts#distributed-validator).
+    This API works in tandem with Obol's [Distributed Validator
+    Launchpad](https://goerli.launchpad.obol.tech), a dapp designed to allow
+    people to authenticate their counterparties and agree to the terms of a
+    Distributed Validator Cluster. This API will be made more easy for code-only
+    interaction in the coming quarters with the release of the Obol-SDK. 
+
+
+    Read more about Obol and how to use the
+    [launchpad](https://goerli.launchpad.obol.tech) on our [docs
+    site](https://docs.obol.tech/).
+  version: v1.2.0
+  contact:
+    name: Obol Labs
+    url: https://obol.tech
+    email: support@obol.tech
+  x-logo:
+    url: https://obol.tech/obolnetwork.png
+    backgroundColor: '#182d32'
+    altText: Obol Network Logo
+tags:
+  - name: Distributed Validators
+    description: Configuration for distributed validator key generation ceremonies.
+  - name: System
+    description: System related endpoints.
+servers:
+  - url: https://api.obol.tech/
+    description: Production environment
+  - url: http://localhost:3000
+    description: Local development server
+  - url: https://localhost
+    description: HTTPS Local development server
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    CreatorDto:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        config_signature:
+          type: string
+          example: >-
+            0x1199fc4440aa7929905ec171ed1dad82a9f6a89891193b2b4cf45937a8cf9ece4972e02bc7e23d8b8b2e550b6430693ac6bc8c82a0509f65d0abb34d7ae0a8a81c
+      required:
+        - address
+        - config_signature
+    OperatorDto:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        enr:
+          type: string
+          example: >-
+            enr://5fb90badb37c5821b6d95526a41a9504680b4e7c8b763a1b1d49d4955c848621
+        fork_version:
+          type: string
+          example: '0x00001020'
+        enr_signature:
+          type: string
+          example: >-
+            0x1199fc4440aa7929905ec171ed1dad82a9f6a89891193b2b4cf45937a8cf9ece4972e02bc7e23d8b8b2e550b6430693ac6bc8c82a0509f65d0abb34d7ae0a8a81c
+        config_signature:
+          type: string
+          example: >-
+            0x1199fc4440aa7929905ec171ed1dad82a9f6a89891193b2b4cf45937a8cf9ece4972e02bc7e23d8b8b2e550b6430693ac6bc8c82a0509f65d0abb34d7ae0a8a81c
+      required:
+        - address
+        - enr
+        - fork_version
+        - enr_signature
+        - config_signature
+    GETClusterDefinitionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Obol Cluster
+        uuid:
+          type: string
+          example: 0194FDC2-FA2F-FCC0-41D3-FF12045B73C8
+        creator:
+          $ref: '#/components/schemas/CreatorDto'
+        version:
+          type: string
+          example: v1.2.0
+        num_validators:
+          type: number
+          example: 5
+        threshold:
+          type: number
+          example: 3
+        fee_recipient_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        withdrawal_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        dkg_algorithm:
+          type: string
+          example: default
+        fork_version:
+          type: string
+          example: '0x00001020'
+        config_hash:
+          type: string
+          example: '0x3940294920aaabbbccccddddeeeffff33224'
+        timestamp:
+          type: string
+          example: '2022-07-19T18:19:58+02:00'
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatorDto'
+      required:
+        - name
+        - uuid
+        - creator
+        - version
+        - num_validators
+        - threshold
+        - fee_recipient_address
+        - withdrawal_address
+        - dkg_algorithm
+        - fork_version
+        - config_hash
+        - timestamp
+        - operators
+    ClusterDefOperator:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+      required:
+        - address
+    ClusterDefCreator:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+      required:
+        - address
+    ClusterDefDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Obol Cluster
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterDefOperator'
+        creator:
+          $ref: '#/components/schemas/ClusterDefCreator'
+        uuid:
+          type: string
+          example: 0194FDC2-FA2F-FCC0-41D3-FF12045B73C8
+        version:
+          type: string
+          example: v1.2.0
+        num_validators:
+          type: number
+          minimum: 1
+          example: 5
+        threshold:
+          type: number
+          minimum: 1
+          example: 3
+        fee_recipient_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        withdrawal_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        dkg_algorithm:
+          type: string
+          example: default
+        fork_version:
+          type: string
+          example: '0x00001020'
+        timestamp:
+          type: string
+          example: '2022-07-19T18:19:58+02:00'
+        config_hash:
+          type: string
+          example: '0x29b0223beea5f4f74391f445d15afd4294040374f6924b98cbf8713f8d962d7c'
+      required:
+        - name
+        - operators
+        - creator
+        - uuid
+        - version
+        - num_validators
+        - threshold
+        - fee_recipient_address
+        - withdrawal_address
+        - dkg_algorithm
+        - fork_version
+        - timestamp
+        - config_hash
+    POSTClusterDefinitionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Obol Cluster
+        uuid:
+          type: string
+          example: 0194FDC2-FA2F-FCC0-41D3-FF12045B73C8
+        creator:
+          $ref: '#/components/schemas/CreatorDto'
+        version:
+          type: string
+          example: v1.2.0
+        num_validators:
+          type: number
+          example: 5
+        threshold:
+          type: number
+          example: 3
+        fee_recipient_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        withdrawal_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        dkg_algorithm:
+          type: string
+          example: default
+        fork_version:
+          type: string
+          example: '0x00001020'
+        config_hash:
+          type: string
+          example: '0x3940294920aaabbbccccddddeeeffff33224'
+        timestamp:
+          type: string
+          example: '2022-07-19T18:19:58+02:00'
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterDefOperator'
+      required:
+        - name
+        - uuid
+        - creator
+        - version
+        - num_validators
+        - threshold
+        - fee_recipient_address
+        - withdrawal_address
+        - dkg_algorithm
+        - fork_version
+        - config_hash
+        - timestamp
+        - operators
+    PUTClusterDefinitionResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Obol Cluster
+        uuid:
+          type: string
+          example: 0194FDC2-FA2F-FCC0-41D3-FF12045B73C8
+        creator:
+          $ref: '#/components/schemas/CreatorDto'
+        version:
+          type: string
+          example: v1.2.0
+        num_validators:
+          type: number
+          example: 5
+        threshold:
+          type: number
+          example: 3
+        fee_recipient_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        withdrawal_address:
+          type: string
+          example: '0x71cb05ee1b1f506ff321da3dac38f25c0c9ce6e1'
+        dkg_algorithm:
+          type: string
+          example: default
+        fork_version:
+          type: string
+          example: '0x00001020'
+        config_hash:
+          type: string
+          example: '0x3940294920aaabbbccccddddeeeffff33224'
+        timestamp:
+          type: string
+          example: '2022-07-19T18:19:58+02:00'
+        operators:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatorDto'
+      required:
+        - name
+        - uuid
+        - creator
+        - version
+        - num_validators
+        - threshold
+        - fee_recipient_address
+        - withdrawal_address
+        - dkg_algorithm
+        - fork_version
+        - config_hash
+        - timestamp
+        - operators
+    ClusterDefinition:
+      type: object
+      properties: {}
