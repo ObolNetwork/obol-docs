@@ -5,12 +5,7 @@ description: Quickstart Overview
 
 # Quickstart Overview
 
-## About this documentation
-
-This manual is aimed at developers and stakers looking to utilize Distributed Validators for solo or multi-operator staking. To contribute to this documentation, head over to our [Github repository](https://github.com/ObolNetwork/obol-docs) and file a pull request.
-
-
-## Quickstart Guides
+The quickstart guides are aimed at developers and stakers looking to utilize Distributed Validators for solo or multi-operator staking. To contribute to this documentation, head over to our [Github repository](https://github.com/ObolNetwork/obol-docs) and file a pull request.
 
 There are two ways to set up a distributed validator and each comes with its own quickstart, within the "Getting Started" section:
 1. Run a DV cluster as a **group**, where several operators run the nodes that make up the cluster. In this setup, the key shares are created using a distributed key generation process, avoiding the full private keys being stored in full in any one place. 
