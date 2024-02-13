@@ -57,8 +57,8 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            // spec: 'https://api.obol.tech/docs-yaml',
-            spec:"https://api.obol.tech/docs-json",
+            // spec: 'https://api.obol.tech/docs-json',
+            spec:"./static/api-spec.yaml",
             route: '/api/',
             layout: {
               title: 'API Reference',
