@@ -122,7 +122,7 @@ const config = {
             position: 'left',
             label: 'API',
           },
-          { to: "https://obolnetwork.github.io/obol-packages", label: "SDK", position: "left" },
+          { to: "sdk", label: "SDK", position: "left" },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
             href: "https://github.com/obolnetwork/obol-docs",

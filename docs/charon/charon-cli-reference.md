@@ -191,6 +191,7 @@ Usage:
 Flags:
       --beacon-node-endpoints strings      Comma separated list of one or more beacon node endpoint URLs.
       --builder-api                        Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
+      --debug-address string               Listening address (ip and port) for the pprof and QBFT debug API.
       --feature-set string                 Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
       --feature-set-disable strings        Comma-separated list of features to disable, overriding the default minimum feature set.
       --feature-set-enable strings         Comma-separated list of features to enable, overriding the default minimum feature set.
@@ -205,10 +206,8 @@ Flags:
       --loki-addresses strings             Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
       --loki-service string                Service label sent with logs to Loki. (default "charon")
       --manifest-file string               The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
-      --monitoring-address string          Listening address (ip and port) for the monitoring API (prometheus, pprof). (default "127.0.0.1:3620")
+      --monitoring-address string          Listening address (ip and port) for the monitoring API (prometheus). (default "127.0.0.1:3620")
       --no-verify                          Disables cluster definition and lock file verification.
-      --p2p-allowlist string               Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
-      --p2p-denylist string                Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-disable-reuseport              Disables TCP port reuse for outgoing libp2p connections.
       --p2p-external-hostname string       The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string             The IP address advertised by libp2p. This may be used to advertise an external IP.

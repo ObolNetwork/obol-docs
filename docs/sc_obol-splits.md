@@ -44,7 +44,7 @@ The alternative is to use an splits.org [waterfall contract](https://docs.splits
 
 :::
 
-This contract fits both design goals and can be used with thousands of validators. If you deploy an Optimistic Withdrawal Recipient with a principal higher than you actually end up using, nothing goes wrong. If you activate more validators than you specified in your contract deployment, you will record too much ether as reward and will overpay your reward address with ether that was principal ether, not earned ether. Current iterations of this contract are not designed for editing the amount of principal set.
+This contract fits both design goals and can be used with thousands of validators. It is safe to deploy an Optimistic Withdrawal Recipient with a principal higher than you actually end up using, though you should process the accrued rewards before exiting a validator or the reward recipients will be short-changed as that balance may be counted as principal instead of reward the next time the contract is updated. If you activate more validators than you specified in your contract deployment, you will record too much ether as reward and will overpay your reward address with ether that was principal ether, not earned ether. Current iterations of this contract are not designed for editing the amount of principal set.
 
 #### OWR Factory Deployment
 
