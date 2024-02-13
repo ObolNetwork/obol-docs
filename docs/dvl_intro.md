@@ -15,7 +15,7 @@ To facilitate the generation of distributed validator keys amongst remote users 
 
 ## Getting started
 
-For more information on running charon in a UI friendly way through the DV Launchpad, take a look at our [Quickstart Guides](docs/int/getting_started/quickstart_overview.md). 
+For more information on running charon in a UI friendly way through the DV Launchpad, take a look at our [Quickstart Guides](../docs/getting_started/quickstart_overview.md). 
 
 ## DV Launchpad Links
 
