@@ -13,23 +13,24 @@ Charon is in a beta state and should be used with caution according to its [Term
 
 
 
-<h1>Pre-requisites</h1>
-    <ul>
-      <li>A basic <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/" target="_blank">knowledge</a> of Ethereum nodes and validators.</li>
-      <li>Ensure you have <a href="https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop" target="_blank">docker</a> installed.</li>
-      <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
-      <li>Make sure <code>docker</code> is running before executing the commands below.</li>
-    </ul>
+## Pre-requisites
+  <ul>
+    <li>A basic <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/" target="_blank">knowledge</a> of Ethereum nodes and validators.</li>
+    <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
+    <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed. 
+    <br />(Click the above link, and choose your OS. Probably, you do not want to install "Docker Desktop" but rather choose one of the Linux OSs from "Supported platforms" to install "Docker Engine".)</li>
+    <li>Make sure <code>docker</code> is running before executing the commands below.</li>
+  </ul>
 
 <br />
 
-<h3>STEP 1: GENERATE ENR</h3>
+## STEP 1: Generate ENR
 
-  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node.
+  In order to prepare for a distributed key generation ceremony, you need to create an ENR for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node.
 
 <Tabs groupId="Docker-other">
-  <TabItem value="Docker ENR" label="Docker ENR" default>
-    You will use docker to generate an ENR.<br /><br />
+  <TabItem value="Docker" label="Docker" default>
+    Use docker to generate an ENR. (Note: in the "docker run" command, you may have to change the version from v0.19.0 to the correct version of the repo you are using)<br /><br />
 
     # Clone this repo
     git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
@@ -43,14 +44,14 @@ Charon is in a beta state and should be used with caution according to its [Term
   If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/docs/int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
   </TabItem>
-  <TabItem value="Ansible ENR" label="Ansible ENR">
-    Use ansible to generate an ENR.
+ <TabItem value="Ansible" label="Ansible">
+    Use ansible to generate an ENR. <a href="https://github.com/ObolNetwork/obol-ansible" target="_blank">See the repo here.</a>
   </TabItem>
-  <TabItem value="Helm ENR" label="Helm ENR">
-    Use Helm to generate an ENR.
+  <TabItem value="Helm" label="Helm">
+    Use Helm to generate an ENR. <a href="https://github.com/ObolNetwork/helm-charts" target="_blank">See the repo here.</a>
   </TabItem>
-  <TabItem value="K8s ENR" label="K8s ENR">
-    Use K8s to generate an ENR.
+  <TabItem value="K8s" label="K8s">
+    Use K8s to generate an ENR. <a href="https://github.com/ObolNetwork/charon-k8s-distributed-validator-node" target="_blank">See the repo here.</a>
   </TabItem>
 </Tabs>
 <br />
@@ -67,13 +68,15 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 
 For the next step, select the *Leader/Creator* tab if you are coordinating the creation of the cluster. (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to.) Select the *Leader/Creator* tab if you are simply operating a node in a cluster proposed by the cluster coordinator.<br />
 
+## STEP 2: Create or join cluster config
+
 <Tabs groupId="Leader/Creator-operator">
   <TabItem value="Leader/Creator" label="Leader/Creator" default>
-    <h2>STEP 2: Collect addresses, create cluster config, share with operators</h2> 
+    <h2> Collect addresses, create cluster config, share with operators</h2> 
     Before starting the cluster creation, you will need to collect one Ethereum address per operator in the cluster. They will need to be able to sign messages through MetaMask with this address. (Broader wallet support will be added in future.)<br />
     Then, create the cluster configuration. 
     <Tabs groupId="Launchpad-other">
-  <TabItem value="Launchpad cluster config" label="Launchpad cluster config" default>
+  <TabItem value="Launchpad" label="Launchpad" default>
     You will use Launchpad to create an invite link, and share it with the operators.<br />
     This video shows the flow within the <a href="https://docs.obol.tech/docs/dvl/intro#dv-launchpad-links" target="_blank">DV Launchpad</a>:
     
@@ -109,7 +112,7 @@ You will prepare the configuration file for the distributed key generation cerem
 You can use the link to monitor how many of the operators have already signed their approval of the cluster configuration. 
 
   </TabItem>
-  <TabItem value="CLI cluster config" label="CLI cluster config">
+  <TabItem value="CLI" label="CLI">
     You will use the CLI to create the cluster config file, which you will distribute it to the operators.
 
   1. The leader or creator of the cluster will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
@@ -122,6 +125,7 @@ You can use the link to monitor how many of the operators have already signed th
       - The file generated is hidden by default. To view it, run `ls -al` in your terminal. Else, if you are on `macOS`, press `Cmd + Shift + .` to view all hidden files in the finder application.
 
   3. Run the `charon create dkg` command that generates DKG cluster-definition.json file.
+    (Note: in the "docker run" command, you may have to change the version from v0.19.0 to the correct version of the repo you are using)
     ```
     docker run --rm -v "$(pwd):/opt/charon" --env-file .env.create_dkg obolnetwork/charon:v0.19.0 create dkg
     ```
@@ -135,7 +139,8 @@ You can use the link to monitor how many of the operators have already signed th
 
   </TabItem>
   <TabItem value="Operator" label="Operator">
-    <h2>STEP 2: Join the cluster configuration generated by the leader/creator</h2>
+    <h2>Join the cluster configuration generated by the leader/creator</h2>
+    Use the Launchpad or CLI to join the cluster configuration generated by the leader/creator:
     <Tabs groupId="Launchpad-other">
   <TabItem value="Launchpad cluster config" label="Launchpad cluster config" default>
     Your cluster leader/creator needs to configure the cluster, and send you an invitation URL link to join the cluster on the Launchpad. Once you've received the Launchpad invite link, enter your ENR and sign with your wallet.<br /><br />
@@ -163,12 +168,9 @@ You can use the link to monitor how many of the operators have already signed th
     - Your own `ENR`. This signature authorises the key represented by this ENR to act on your behalf in the cluster.
 
 7. Wait for all the other operators in your cluster to also finish these steps.
-
-
-
     
-  </TabItem>
-  <TabItem value="CLI cluster config" label="CLI cluster config">
+</TabItem>
+  <TabItem value="CLI" label="CLI">
       You'll receive the `cluster-definition.json` file created by the leader/creator. You should save it in the `.charon/` folder that was created initially. (Alternatively, you can use the `--definition-file` flag to override the default expected location for this file.)
   </TabItem>
 </Tabs>
@@ -182,15 +184,15 @@ Once every participating operator is ready, the next step is the distributed key
 <br /><br />
 
 
-<h3>STEP 3: Run the Distributed Key Generation (DKG) ceremony</h3>
+## STEP 3: Run the Distributed Key Generation (DKG) ceremony
 
 :::info
 For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps if operators can agreed on a certain time or schedule a video call for them to all run the command together.
 :::
 
 
-<Tabs groupId="Launchpad Docker DKG-other DKG">
-  <TabItem value="Launchpad Docker DKG" label="Launchpad Docker DKG" default>
+<Tabs groupId="Launchpad-other">
+  <TabItem value="Launchpad" label="Launchpad" default>
 
 <br />
 <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/cEMhxHuNJrI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
@@ -220,29 +222,43 @@ The `cluster-lock` and `deposit-data` files are identical for each operator, if 
 
   </TabItem>
 
-  <TabItem value="CLI DKG" label="CLI DKG">
+  <TabItem value="CLI" label="CLI">
     Please use the Launchpad for now.
   </TabItem>
 </Tabs>
 Now that the DKG has been completed, all operators can start their nodes. 
 <br />
 
-<h3>Step 4: Start your Distributed Validator Node</h3>
+## Step 4: Start your Distributed Validator Node
 
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term.
-Override .env depending on network. (does this require another tab?)
 
-<Tabs groupId="Local vs Remote">
-  <TabItem value="Local Node" label="Local Node" default>
-    Start a local node. 
 
-<Tabs groupId="Docker node start vs Other node start">
-  <TabItem value="Docker node start" label="Docker node start" default>
+<Tabs groupId="Local-Remote">
+  <TabItem value="Local Beacon Node" label="Local Beacon Node" default>
+    Start a local node, using docker or otherwise: 
+
+<Tabs groupId="Docker-other">
+  <TabItem value="Docker" label="Docker" default>
     Start your node with docker. This repo is configured to sync an execution layer client (`Nethermind`) and a consensus layer client (`Lighthouse`).<br /><br />
 
-  **Caution**: If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.<br />
+:::info
+  Currently, the CDVN repo installs a node on Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the .env file. 
+  From within the ```charon-distributed-validator-node``` directory:
+  ```sh
+  # Copy ".env.sample", renaming it ".env"
+  cp .env.sample .env
+  ```
+  `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
+
+  Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
+:::
+
+:::caution
+  If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.<br />
   
-  **Note**: If you have a `geth` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/geth`. This makes everything faster since you start from a synced geth node.
+  **Note**: If you have a `nethermind` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/nethermind`. This makes everything faster since you start from a synced nethermind node.
+:::
 
 ```
 # Delete lighthouse data if it exists
@@ -262,15 +278,21 @@ docker compose down
 
   </TabItem>
 
-  <TabItem value="Other node start" label="Other node start">
-    Start your node with Ansible, etc. 
+  <TabItem value="Ansible" label="Ansible">
+    Use ansible to start your node. <a href="https://github.com/ObolNetwork/obol-ansible" target="_blank">See the repo here.</a>
+  </TabItem>
+  <TabItem value="Helm" label="Helm">
+    Use Helm to start your node. <a href="https://github.com/ObolNetwork/helm-charts" target="_blank">See the repo here.</a>
+  </TabItem>
+  <TabItem value="K8s" label="K8s">
+    Use K8s to start your node. <a href="https://github.com/ObolNetwork/charon-k8s-distributed-validator-node" target="_blank">See the repo here.</a>
   </TabItem>
 </Tabs>
 
 
   </TabItem>
 
-  <TabItem value="Remote Node" label="Remote Node">
+  <TabItem value="Remote Beacon Node" label="Remote Beacon Node">
 
 ### Using a remote beacon node
 
@@ -278,7 +300,7 @@ docker compose down
 Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
 :::
 
-If you already have a mainnet beacon node running somewhere and you want to use that instead of running EL (`nethermind`) & CL (`lighthouse`) as part of the repo, you can disable these images. To do so, follow these steps:
+If you already have a beacon node running somewhere and you want to use that instead of running EL (`nethermind`) & CL (`lighthouse`) as part of the repo, you can disable these images. To do so, follow these steps:
 
 1. Copy the `docker-compose.override.yml.sample` file
 
@@ -309,7 +331,7 @@ services:
 ...
 ```
 
-3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your mainnet beacon node's URL
+3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your beacon node's URL
 
 ```
 ...
