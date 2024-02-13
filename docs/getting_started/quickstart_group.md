@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 description: New combined flow for leader/creator 
 ---
 import Tabs from '@theme/Tabs';
@@ -223,7 +223,7 @@ The `cluster-lock` and `deposit-data` files are identical for each operator, if 
   </TabItem>
 
   <TabItem value="CLI" label="CLI">
-    Please use the Launchpad for now.
+    [WIP 🚧] Please use the Launchpad option for now.
   </TabItem>
 </Tabs>
 Now that the DKG has been completed, all operators can start their nodes. 
@@ -355,7 +355,7 @@ docker compose up -d
 <br /><br />
 
 :::tip
-In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../../../charon/networking.md).
+In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../charon/networking.md).
 :::
 
 

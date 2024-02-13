@@ -6,7 +6,7 @@ description: Run a distributed validator cluster with the builder API (MEV-Boost
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Run a cluster with MEV enabled
+# Enable MEV
 
 :::caution
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).

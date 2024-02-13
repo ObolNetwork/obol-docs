@@ -1,11 +1,15 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 description: New combined flow for leader/creator 
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Quickstart - Create a DV alone
+
+:::caution
+Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
+:::
 
 :::info
 It is possible for a single operator to manage all of the nodes of a DV cluster. The nodes can be run on a single machine, which is only ideal for testing, or the nodes can be run on multiple machines, which is ideal for a production setup. 
@@ -79,7 +83,7 @@ You should now have multiple folders within `.charon/cluster`, one for each node
 ## STEP 2: Deploy and start the nodes
 
 <Tabs groupId="Local nodes-distributed nodes">
-  <TabItem value="Run nodes on a single machine" label="Run nodes on a single machine" default>
+  <TabItem value="Run the nodes on a single machine" label="Run the nodes on a single machine" default>
 
 :::warning
 This part of the guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance, and **is not suitable for a mainnet deployment**. (If this machine fails, there will not be any fault tolerance - the cluster will also fail.)
@@ -87,7 +91,7 @@ This part of the guide only runs one Execution Client, one Consensus Client, and
 For a production deployment with fault tolerance, follow the part of the guide instructing you how to distribute the nodes across multiple machines. 
 :::
 
-Run this command to start your cluster containers
+Run this command to start your cluster containers if you deployed using CDVC repo above.
 
 ```sh
 # Start the distributed validator cluster
@@ -102,26 +106,17 @@ open http://localhost:3000/d/laEp8vupp
 
 <br />
   </TabItem>
-  <TabItem value="Run the nodes on many machines" label="Run the nodes on many machines">
+  <TabItem value="Run the nodes on many machines" label="Run the nodes on multiple machines">
 
 :::caution
-Right now, the `charon create cluster` command [used earlier to create the private keys](./create-keys) outputs a folder structure like `cluster/node*/`. Make sure to grab the `./node*/` folders, *rename* them to `.charon` and then move them to one of the single node repos above. Once all nodes are online, synced, and connected, you will be ready to activate your validator.
+To distribute your cluster across multiple machines, each node in the cluster needs one of the folders called `node*/` to be copied to it. Each folder should be copied to a CDVN repo and renamed from `node*` to `.charon`.
+
+Right now, the `charon create cluster` command [used earlier to create the private keys](./create-keys) outputs a folder structure like `cluster/node*/`. Make sure to grab the `./node*/` folders, *rename* them to `.charon` and then move them to one of the single node repos below. Once all nodes are online, synced, and connected, you will be ready to activate your validator.
 :::
 
-To distribute your cluster across multiple machines, each node in the cluster needs one of the folders called `node*/` to be copied to it. Each folder should be copied to a CDVN repo and renamed from `node*` to `.charon`. (This is necessary for the folder to be found by the default `charon run` command. Optionally, it is possible to override `charon run`'s default file locations by using `charon run --private-key-file=".charon/cluster/node0/charon-enr-private-key" --lock-file=".charon/cluster/node0/cluster-lock.json"` for each instance of charon you start.
+ This is necessary for the folder to be found by the default `charon run` command. Optionally, it is possible to override `charon run`'s default file locations by using `charon run --private-key-file=".charon/cluster/node0/charon-enr-private-key" --lock-file=".charon/cluster/node0/cluster-lock.json"` for each instance of charon you start.
 
-:::info
-  Currently, the CDVN repo installs a node on Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the .env file. 
-  From within the ```charon-distributed-validator-node``` directory:
-  ```sh
-  # Copy ".env.sample", renaming it ".env"
-  cp .env.sample .env
-  ```
-  `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
-
-  Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
-:::
-
+ :point_right: Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
 <br />
 
 ```log title="Output from create cluster"
@@ -173,9 +168,17 @@ cluster
         └── keystore-N.txt
 ```
 
-:point_right: Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
+:::info
+  Currently, the CDVN repo installs a node on Goerli testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the .env file. 
+  From within the ```charon-distributed-validator-cluster``` directory:
+  ```sh
+  # Copy ".env.sample", renaming it ".env"
+  cp .env.sample .env
+  ```
+  `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
 
-
+  Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
+:::
 
   </TabItem>
 </Tabs>
