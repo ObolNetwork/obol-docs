@@ -40,8 +40,8 @@ const config = {
     //     propertiesFormat: "table",
     //     enumMembersFormat: "table",
     //     typeDeclarationFormat: "table",
-    //     hidePageTitle: true
-
+    //     hidePageTitle: true,
+    //     excludeNotDocumented:true,
     //   },
     // ],
   ],
@@ -74,9 +74,9 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            // spec: 'https://api.obol.tech/docs-yaml',
-            spec: "https://api.obol.tech/docs-json",
-            route: "/api/",
+            // spec: 'https://api.obol.tech/docs-json',
+            spec:"./static/api-spec.yaml",
+            route: '/api/',
             layout: {
               title: "API Reference",
               description:

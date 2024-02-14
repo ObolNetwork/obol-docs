@@ -1,6 +1,6 @@
 > **ClusterCreator**: `Object`
 
-Cluster Creator
+Cluster creator data
 
 ## Type declaration
 

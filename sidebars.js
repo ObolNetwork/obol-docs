@@ -296,23 +296,11 @@ const sidebars = {
     {
       "type": "doc",
       "id": "sdk/index",
-      "label": "intro",
+      "label": "Intro",
     },
     {
       "type": "category",
-      "label": "classes",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/classes/Client",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "enumerations",
+      "label": "Enumerations",
       "collapsible": true,
       "collapsed": true,
       "items": [
@@ -324,7 +312,19 @@ const sidebars = {
     },
     {
       "type": "category",
-      "label": "interfaces",
+      "label": "Classes",
+      "collapsible": true,
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/classes/Client",
+        },
+      ],
+    },
+    {
+      "type": "category",
+      "label": "Interfaces",
       "collapsible": true,
       "collapsed": true,
       "items": [
@@ -332,19 +332,11 @@ const sidebars = {
           "type": "doc",
           "id": "sdk/interfaces/ClusterDefintion",
         },
-        {
-          "type": "doc",
-          "id": "sdk/interfaces/ClusterLock",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/interfaces/ClusterPayload",
-        },
       ],
     },
     {
       "type": "category",
-      "label": "type-aliases",
+      "label": "Type-Aliases",
       "collapsible": true,
       "collapsed": true,
       "items": [
