@@ -97,7 +97,7 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 
 Exiting your validator(s) can be useful in situations where you want to stop staking and withdraw your staked ETH.
 
-👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
+👉 Follow the exit guide [here](../../int/quickstart/quickstart-exit.md)
 
 ## Run Prysm VCs in a DV Cluster
 

@@ -13,7 +13,7 @@ Ensure you have [docker](https://docs.docker.com/engine/install/) and [git](http
 
 ## Step 1. Creating and backing up a private key for charon
 
-The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](https://docs.obol.tech/docs/int/faq#what-is-an-enr) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+The first step of running a cluster is preparing for a distributed key generation ceremony. To do this everyone must create an [ENR](../../int/faq) for their charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
@@ -41,7 +41,7 @@ If you are taking part in an organised Obol testnet, submit the created ENR publ
 
 One person, in the cluster or otherwise, will prepare the configuration file for the distributed key generation ceremony using the `charon create dkg` command. For the official Obol testnets, this step will be completed by an Obol core team member or the cluster captain and the definition file will be distributed to the cluster members for DKG completion.
 
-In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](https://docs.obol.tech/docs/dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
+In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](../../dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
 
 ```
 # Prepare an environment variable file
