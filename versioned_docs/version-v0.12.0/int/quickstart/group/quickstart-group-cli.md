@@ -42,7 +42,7 @@ If you are taking part in an organised Obol testnet, submit the created ENR publ
 
 The leader will prepare the `cluster-definition.json` file for the Distributed Key Generation ceremony using the `charon create dkg` command.
 
-In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](https://docs.obol.tech/docs/dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
+In future, step 1 and step 2 of this guide will use the [Obol Distributed Validator Launchpad](../../../dvk/distributed_validator_launchpad) to facilitate and verify these files are created in an authenticated manner.
 
 ```
 # Prepare an environment variable file
