@@ -1,6 +1,6 @@
 > **DepositData**: `Object`
 
-Deposit Data
+Required deposit data for validator activation
 
 ## Type declaration
 

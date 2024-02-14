@@ -1,6 +1,6 @@
 > **ClusterOperator**: `Object`
 
-Cluster Node Operator
+Node operator data
 
 ## Type declaration
 

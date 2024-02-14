@@ -1,6 +1,6 @@
 > **ClusterValidator**: `Object`
 
-Cluster Validator
+Validator withdrawal configuration
 
 ## Type declaration
 
