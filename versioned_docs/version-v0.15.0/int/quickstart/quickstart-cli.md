@@ -172,7 +172,7 @@ scrape_configs:
 
 Exiting your validator(s) can be useful in situations where you want to stop staking and withdraw your staked ETH.
 
-👉 Follow the exit guide [here](docs/int/quickstart/quickstart-exit.md)
+👉 Follow the exit guide [here](./quickstart-exit.md)
 
 ## Feedback
 

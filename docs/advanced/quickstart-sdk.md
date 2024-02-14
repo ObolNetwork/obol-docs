@@ -87,7 +87,7 @@ console.log(
 
 Once the Obol-API returns a `configHash` string from the `createClusterDefinition` method, you can use this identifier to invite the operators to the [Launchpad](../dvl_intro.md) to complete the process
 
-1. Operators navigate to `https://<NETWORK_NAME_HERE>.launchpad.obol.tech/dv?configHash=<CONFIG_HASH_HERE>` and complete the [run a DV with others](../getting_started/quickstart_group.md) flow.
+1. Operators navigate to `https://<NETWORK_NAME_HERE>.launchpad.obol.tech/dv?configHash=<CONFIG_HASH_HERE>` and complete the [run a DV with others](../start/quickstart_group.md) flow.
 1. Once the DKG is complete, and operators are using the `--publish` flag, the created cluster details will be posted to the Obol API
 1. The creator will be able to retrieve this data with `obol.getClusterLock(configHash)`, to use for activating the newly created validator.
 

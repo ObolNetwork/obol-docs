@@ -25,7 +25,7 @@ Before starting the cluster creation, make sure you have shared an Ethereum addr
 
 ## Step 2. Create and back up a private key for charon
 
-In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+In order to prepare for a distributed key generation ceremony, you need to create an [ENR](../../faq/errors.mdx#enrs-keys) for your charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo

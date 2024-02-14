@@ -36,7 +36,7 @@ Recommended specifications:
 
 For more hardware considerations, check out the [ethereum.org guides](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware) which explores various setups and trade-offs, such as running the node locally or in the cloud.
 
-For now, Geth, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../getting_started/quickstart_overview.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
+For now, Geth, Teku & Lighthouse clients are packaged within the docker compose file provided in the [quickstart guides](../start/quickstart_overview.md), so you don't have to install anything else to run a cluster. Just make sure you give them some time to sync once you start running your node.
 
 ### What is the difference between a node, a validator and a cluster?
 A node is a single instance of Ethereum EL+CL clients that can communicate with other nodes to maintain the Ethereum blockchain.
@@ -55,7 +55,7 @@ It is possible to migrate your Charon node to another machine running the same c
 
 Currently, the minimum is 4 operators with a threshold of 3.
 
-The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaining BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check the recommended threshold values for a cluster [here](../intro/key-concepts.md#distributed-validator-threshold).
+The threshold (aka quorum) corresponds to the minimum numbers of operators that need to be active for the validator(s) to be able to perform its duties. It is defined by the following formula `n-(ceil(n/3)-1)`. We strongly recommend using this default threshold in your DKG as it maximises liveness while maintaining BFT safety. Setting a 4 out of 4 cluster for example, would make your validator more vulnerable to going offline instead of less vulnerable. You can check the recommended threshold values for a cluster [here](../int/key-concepts.md#distributed-validator-threshold).
 
 ## Obol Splits
 
@@ -81,7 +81,7 @@ Yes, Obol Splits are licensed under GPLv3 and the source code is available [here
 
 ### Are Obol Splits audited?
 
-The Obol Splits contracts have been audited, though further development has continued on the contracts since. Consult the audit results [here](../security/smart_contract_audit.md). 
+The Obol Splits contracts have been audited, though further development has continued on the contracts since. Consult the audit results [here](../sec/smart_contract_audit.md). 
 
 ### Are the Obol Splits contracts verified on Etherscan?
 
@@ -95,7 +95,7 @@ No. Any address can trigger the contracts to move the funds, they do not need to
 
 The most important decision is to be aware of whether or not the Split contract you are using has been set up with editability. If a splitter is editable, you should understand what the address that can edit the split does. Is the editor an EOA? Who controls that address? How secure is their seed phrase? Is it a smart contract? What can that contract do? Can the controller contract be upgraded? etc. Generally, the safest thing in Obol's perspective is not to have an editable splitter, and if in future you are unhappy with the configuration, that you exit the validator and create a fresh cluster with new settings that fit your needs. 
 
-Another aspect to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract. There are edge cases relating to not calling the contracts periodically or ahead of a withdrawal, activating more validators than the contract was configured for, and a worst case mass slashing on the network. Consult the documentation on the contract [here](../sc_obol-splits.md#optimistic-withdrawal-recipient), its audit [here](../security/smart_contract_audit.md), and follow up with the core team if you have further questions. 
+Another aspect to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract. There are edge cases relating to not calling the contracts periodically or ahead of a withdrawal, activating more validators than the contract was configured for, and a worst case mass slashing on the network. Consult the documentation on the contract [here](../sc_obol-splits.md#optimistic-withdrawal-recipient), its audit [here](../sec/smart_contract_audit.md), and follow up with the core team if you have further questions. 
 
 ## Debugging Errors in Logs 
 

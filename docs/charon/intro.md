@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # Introduction
 
-This section introduces and outlines the Charon *[kharon]* middleware, Obol's implementation of DVT. Please see the [key concepts](../intro/key-concepts.md) section as background and context.
+This section introduces and outlines the Charon *[kharon]* middleware, Obol's implementation of DVT. Please see the [key concepts](../int/key-concepts.md) section as background and context.
 
 ## What is Charon?
 
@@ -79,4 +79,4 @@ The following is an outline of the services that can be exposed by charon.
 
 ## Getting started
 
-For more information on running charon, take a look at our [Quickstart Guides](../getting_started/quickstart_overview.md). 
+For more information on running charon, take a look at our [Quickstart Guides](../start/quickstart_overview.md). 

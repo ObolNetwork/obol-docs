@@ -7,7 +7,7 @@ description: Community testing efforts
 
 :::tip
 
-This page looks at the community testing efforts organised by Obol to test Distributed Validators at scale. If you are looking for guides to run a Distributed Validator on testnet you can do so [here](../getting_started/quickstart_overview.md). 
+This page looks at the community testing efforts organised by Obol to test Distributed Validators at scale. If you are looking for guides to run a Distributed Validator on testnet you can do so [here](../start/quickstart_overview.md). 
 
 :::
 
