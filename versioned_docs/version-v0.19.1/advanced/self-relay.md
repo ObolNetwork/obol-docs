@@ -35,4 +35,4 @@ Configure **ALL** charon nodes in your cluster to use this relay:
 
 Note that a local `relay/.charon/charon-enr-private-key` file will be created next to `relay/docker-compose.yml` to ensure a persisted relay ENR across restarts.
 
-A list of publicly available relays that can be used is maintained [here](../faq/risks.md). 
+A list of publicly available relays that can be used is maintained [here](../int/faq/risks.md). 

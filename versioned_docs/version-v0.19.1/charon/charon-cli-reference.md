@@ -358,4 +358,4 @@ Flags:
       --p2p-relays strings                Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
       --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
-You can also consider adding [alternative public relays](../faq/risks.md) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).
+You can also consider adding [alternative public relays](../int/faq/risks.md) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).

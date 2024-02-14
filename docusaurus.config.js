@@ -27,27 +27,27 @@ const config = {
         indexBlog: false,
       },
     ], 
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        // redirects: [
-        //   // /docs/oldDoc -> /docs/newDoc
-        //   {
-        //     to: '/docs/newDoc',
-        //     from: '/docs/oldDoc',
-        //   },
-        // ],
-        createRedirects(existingPath) {
-          if (existingPath.includes('/int/faq')) {
-            // Redirect from /int/faq/X to /faq/X
-            return [
-              existingPath.replace('/faq', '/int/faq')
-            ];
-          }
-          return undefined; // Return a falsy value: no redirect created
-        },
-      },
-    ],
+    // [
+    //   '@docusaurus/plugin-client-redirects',
+    //   {
+    //     // redirects: [
+    //     //   // /docs/oldDoc -> /docs/newDoc
+    //     //   {
+    //     //     to: '/docs/newDoc',
+    //     //     from: '/docs/oldDoc',
+    //     //   },
+    //     // ],
+    //     createRedirects(existingPath) {
+    //       if (existingPath.includes('/int/faq')) {
+    //         // Redirect from /int/faq/X to /faq/X
+    //         return [
+    //           existingPath.replace('/faq', '/int/faq')
+    //         ];
+    //       }
+    //       return undefined; // Return a falsy value: no redirect created
+    //     },
+    //   },
+    // ],
     // [
     //   "docusaurus-plugin-typedoc",
 
