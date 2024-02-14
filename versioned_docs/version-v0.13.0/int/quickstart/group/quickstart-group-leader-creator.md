@@ -42,7 +42,7 @@ Before starting the cluster creation, you will need to collect one Ethereum addr
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 
-  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](../../../int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
   ```sh
   # Clone this repo

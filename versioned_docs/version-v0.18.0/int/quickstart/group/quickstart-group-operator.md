@@ -25,7 +25,7 @@ Before starting the cluster creation, make sure you have shared an Ethereum addr
 
 ## Step 2. Create and back up a private key for charon
 
-In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+In order to prepare for a distributed key generation ceremony, you need to create an [ENR](../../../int/faq/errors.mdx#enrs-keys) for your charon client. This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
 ```sh
 # Clone this repo
@@ -43,7 +43,7 @@ You should expect to see a console output like
     Created ENR private key: .charon/charon-enr-private-key
     enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
 
-If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/docs/int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
+If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/../../../int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
 :::caution
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
@@ -75,7 +75,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 ## Step 4. Run the DKG
 :::info
-For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
+For the [DKG](../../../charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
 :::
 
 ### Overview

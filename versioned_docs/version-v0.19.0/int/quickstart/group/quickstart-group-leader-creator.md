@@ -42,7 +42,7 @@ Before starting the cluster creation, you will need to collect one Ethereum addr
 <Tabs groupId="leader-creator">
   <TabItem value="leader" label="Leader" default>
 
-  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](docs/int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
+  In order to prepare for a distributed key generation ceremony, you need to create an [ENR](../../../int/faq/errors.mdx#enrs-keys) for your charon client. Operators in your cluster will also need to do this step, as per their [quickstart](./quickstart-group-operator#step-2-create-and-back-up-a-private-key-for-charon). This ENR is a public/private key pair, and allows the other charon clients in the DKG to identify and connect to your node.
 
   ```sh
   # Clone this repo
@@ -60,7 +60,7 @@ You should expect to see a console output like
     Created ENR private key: .charon/charon-enr-private-key
     enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
 
-If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/docs/int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
+If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/../../../int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
 :::caution
 Ensure you create a backup of the private key stored in the '.charon' folder, specifically at '.charon/charon-enr-private-key'. This is the file used to generate your private key. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**

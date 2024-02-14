@@ -67,7 +67,7 @@ The schema of the `cluster-definition.json` is defined as:
 
 ### Using the DV Launchpad
 
-- A [`leader/creator`](docs/int/quickstart/group/index.md), that wishes to coordinate the creation of a new Distributed Validator Cluster navigates to the launchpad and selects "Create new Cluster"
+- A [`leader/creator`](../int/quickstart/group/index.md), that wishes to coordinate the creation of a new Distributed Validator Cluster navigates to the launchpad and selects "Create new Cluster"
 - The `leader/creator` uses the user interface to configure all of the important details about the cluster including:
   - The `Withdrawal Address` for the created validators
   - The `Fee Recipient Address` for block proposals if it differs from the withdrawal address
