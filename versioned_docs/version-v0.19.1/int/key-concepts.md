@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 description: Some of the key terms in the field of Distributed Validator Technology
 ---
 

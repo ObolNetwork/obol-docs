@@ -16,212 +16,152 @@ const sidebars = {
   // By default, Docusaurus generates a sidebar from the docs folder structure
   tutorialSidebar: [
     {
-      "type": "doc",
-      "id": "intro",
+      "type": "category",
+      "label": "Introduction",
+      "collapsible": true,
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "int/obol_overview"
+        },
+        {
+          "type": "doc",
+          "id": "int/key-concepts"
+        }
+      ]
     },
     {
       "type": "category",
       "label": "Getting started",
       "collapsible": true,
-      "collapsed": false,
+      "collapsed": true,
       "items": [
         {
           "type": "doc",
-          "id": "int/Overview",
+          "id": "start/quickstart_overview"
         },
         {
           "type": "doc",
-          "id": "int/key-concepts",
+          "id": "start/quickstart_group"
         },
         {
-          "type": "category",
-          "label": "Quickstart Guides",
-          "collapsible": true,
-          "collapsed": false,
-          "items": [
-            {
-              "type": "category",
-              "label": "Create a DV alone",
-              "collapsible": true,
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/alone/test-locally",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/alone/create-keys",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/alone/deploy",
-                },
-              ],
-            },
-            {
-              "type": "category",
-              "label": "Create a DV as a group",
-              "collapsible": true,
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/group/quickstart-group-leader-creator",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/group/quickstart-group-operator",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/group/quickstart-cli",
-                },
-              ],
-              "link": {
-                "type": "doc",
-                "id": "int/quickstart/group/index",
-              },
-            },
-            {
-              "type": "doc",
-              "id": "int/quickstart/activate-dv",
-            },
-            {
-              "type": "doc",
-              "id": "int/quickstart/update",
-            },
-            {
-              "type": "doc",
-              "id": "int/quickstart/quickstart-exit",
-            },
-            {
-              "type": "doc",
-              "id": "int/quickstart/quickstart-mainnet",
-            },
-            {
-              "type": "category",
-              "label": "Advanced Guides",
-              "collapsible": true,
-              "collapsed": true,
-              "items": [
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/quickstart-sdk",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/quickstart-builder-api",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/quickstart-split",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/monitoring",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/obol-monitoring",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/self-relay",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/adv-docker-configs",
-                },
-                {
-                  "type": "doc",
-                  "id": "int/quickstart/advanced/quickstart-combine",
-                },
-              ],
-            },
-          ],
-          "link": {
-            "type": "doc",
-            "id": "int/quickstart/index",
-          },
+          "type": "doc",
+          "id": "start/quickstart_alone"
         },
         {
-          "type": "category",
-          "label": "FAQ",
-          "collapsible": true,
-          "collapsed": true,
-          "items": [
-            {
-              "type": "doc",
-              "id": "int/faq/general",
-            },
-            {
-              "type": "doc",
-              "id": "int/faq/errors",
-            },
-            {
-              "type": "doc",
-              "id": "int/faq/risks",
-            },
-            {
-              "type": "doc",
-              "id": "int/faq/dkg_failure",
-            },
-          ],
+          "type": "doc",
+          "id": "start/activate-dv"
         },
-      ],
+        {
+          "type": "doc",
+          "id": "start/update"
+        },
+        {
+          "type": "doc",
+          "id": "start/quickstart-exit"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced Guides",
+      "collapsible": true,
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced/quickstart-sdk"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/quickstart-builder-api"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/quickstart-split"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/monitoring"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/obol-monitoring"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/self-relay"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/adv-docker-configs"
+        },
+        {
+          "type": "doc",
+          "id": "advanced/quickstart-combine"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "FAQ",
+      "collapsible": true,
+      "collapsed": true,
+      "items": [
+        {
+          "type": "doc",
+          "id": "faq/general"
+        },
+        {
+          "type": "doc",
+          "id": "faq/errors"
+        },
+        {
+          "type": "doc",
+          "id": "faq/risks"
+        },
+        {
+          "type": "doc",
+          "id": "faq/dkg_failure"
+        }
+      ]
     },
     {
       "type": "category",
       "label": "Charon",
       "collapsible": true,
-      "collapsed": false,
-      "items": [
-        {
-          "type": "doc",
-          "id": "charon/intro",
-        },
-        {
-          "type": "doc",
-          "id": "charon/dkg",
-        },
-        {
-          "type": "doc",
-          "id": "charon/cluster-configuration",
-        },
-        {
-          "type": "doc",
-          "id": "charon/networking",
-        },
-        {
-          "type": "doc",
-          "id": "charon/charon-cli-reference",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "DV Launchpad",
-      "collapsible": true,
       "collapsed": true,
       "items": [
         {
           "type": "doc",
-          "id": "dvl/intro",
+          "id": "charon/intro"
         },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "Smart contracts",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
         {
           "type": "doc",
-          "id": "sc/introducing-obol-splits",
+          "id": "charon/dkg"
         },
-      ],
+        {
+          "type": "doc",
+          "id": "charon/cluster-configuration"
+        },
+        {
+          "type": "doc",
+          "id": "charon/networking"
+        },
+        {
+          "type": "doc",
+          "id": "charon/charon-cli-reference"
+        }
+      ]
+    },
+    {
+      "type": "doc",
+      "id": "dvl_intro"
+    },
+    {
+      "type": "doc",
+      "id": "sc_obol-splits"
     },
     {
       "type": "category",
@@ -231,29 +171,29 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
-          "id": "sec/overview",
+          "id": "sec/overview"
         },
         {
           "type": "doc",
-          "id": "sec/bug-bounty",
+          "id": "sec/bug-bounty"
         },
         {
           "type": "doc",
-          "id": "sec/contact",
+          "id": "sec/contact"
         },
         {
           "type": "doc",
-          "id": "sec/ev-assessment",
+          "id": "sec/ev-assessment"
         },
         {
           "type": "doc",
-          "id": "sec/smart_contract_audit",
+          "id": "sec/smart_contract_audit"
         },
         {
           "type": "doc",
-          "id": "sec/threat_model",
-        },
-      ],
+          "id": "sec/threat_model"
+        }
+      ]
     },
     {
       "type": "category",
@@ -263,17 +203,17 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
-          "id": "cg/bug-report",
+          "id": "cf/bug-report"
         },
         {
           "type": "doc",
-          "id": "cg/docs",
+          "id": "cf/docs"
         },
         {
           "type": "doc",
-          "id": "cg/feedback",
-        },
-      ],
+          "id": "cf/feedback"
+        }
+      ]
     },
     {
       "type": "category",
@@ -283,13 +223,17 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
-          "id": "fr/eth",
+          "id": "fr/eth"
         },
         {
           "type": "doc",
-          "id": "fr/testnet",
+          "id": "fr/ethereum_and_dvt"
         },
-      ],
+        {
+          "type": "doc",
+          "id": "fr/testnet"
+        }
+      ]
     },
   ],
   apiSidebar: [
@@ -374,7 +318,9 @@ const sidebars = {
         },
       ],
     },
-  ], // Add custom sidebar for "api" folder
+  ], 
+  
+  // Add custom sidebar for "api" folder
 
   // But you can create a sidebar manually
   /*

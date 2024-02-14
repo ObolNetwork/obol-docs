@@ -123,7 +123,7 @@ A malicious relay owned by a OA could lead to:
 
 We note that BFT consensus liveness disruption can only happen if the number of nodes using the malicious relay for communication is equal to the byzantine nodes amount defined in the consensus parameters.
 
-This risk can be mitigated by configuring nodes with multiple relay URLs from only [trusted entities](../int/quickstart/advanced/self-relay.md).
+This risk can be mitigated by configuring nodes with multiple relay URLs from only [trusted entities](../advanced/self-relay.md).
 
 The likelihood of this scenario is medium: Charon nodes are configured with a default set of relay nodes, so if an OA were to compromise those, it would lead to many cluster topologies getting discovered and potentially attacked and disrupted.
 

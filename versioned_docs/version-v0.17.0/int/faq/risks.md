@@ -18,7 +18,7 @@ Another risk associated with Obol is having the ability to update the [Charon co
 ## Risk: Obol hosting the DV Launchpad
 **Mitigation**: Use [`create cluster`](docs/charon/charon-cli-reference.md) or [`create dkg`](docs/charon/charon-cli-reference.md) locally and distribute the files manually
 
-Hosting the first Charon frontend, the [DV Launchpad](docs/dvl/intro.md), on a centralized server could create a single point of failure, as users would have to rely on Obol's server to access the protocol. This could limit the decentralization of the protocol and could make it vulnerable to attacks or downtime. Obol hosting the launchpad on a decentralized network, such as IPFS is a first step but not enough. This is why the Charon code is open-source and contains a CLI interface to interact with the protocol locally.
+Hosting the first Charon frontend, the [DV Launchpad](../../dvl/intro.md), on a centralized server could create a single point of failure, as users would have to rely on Obol's server to access the protocol. This could limit the decentralization of the protocol and could make it vulnerable to attacks or downtime. Obol hosting the launchpad on a decentralized network, such as IPFS is a first step but not enough. This is why the Charon code is open-source and contains a CLI interface to interact with the protocol locally.
 
 To mitigate the risk of launchpad failure, consider using the `create cluster` or `create dkg` commands locally and distributing the key shares files manually.
 

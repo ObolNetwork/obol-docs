@@ -4,7 +4,7 @@ description: Charon -  The Distributed Validator Client
 
 # Introducing Charon
 
-This section introduces and outlines the Charon DVT middleware. For additional context regarding distributed validator technology, see [this section](http://localhost:3000/docs/int/key-concepts#distributed-validator) of the key concept page.
+This section introduces and outlines the Charon DVT middleware. For additional context regarding distributed validator technology, see [this section](../int/key-concepts#distributed-validator) of the key concept page.
 
 ### What is Charon?
 

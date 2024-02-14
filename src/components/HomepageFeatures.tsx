@@ -24,12 +24,12 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvl/intro">Distributed Validator Launchpad</Link> is
+        The <Link to="/docs/dvl_intro">Distributed Validator Launchpad</Link> is
         an interface to enable distributed key generation for Distributed
         Validators.
       </>
     ),
-    link: "/docs/dvl/intro",
+    link: "/docs/dvl_intro",
   },
   {
     title: "Deploy Distributed Validators",
@@ -49,11 +49,11 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are smart
+        <Link to="/docs/sc_obol-splits">Obol Splits</Link> are smart
         contracts for the distribution of rewards from Distributed Validators.
       </>
     ),
-    link: "/docs/sc/introducing-obol-splits",
+    link: "/docs/sc_obol-splits",
   },
   {
     title: "Take part in Beta",
@@ -65,7 +65,7 @@ const FeatureList: FeatureItem[] = [
         <Link to="https://blog.obol.tech/mainnet-open-beta-launch-blog/">Open Beta.</Link>
       </>
     ),
-    link: "/docs/int/quickstart/quickstart-mainnet",
+    link: "/docs/start/activate-dv",
   },
 ];
 

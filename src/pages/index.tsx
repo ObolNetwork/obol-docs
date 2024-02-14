@@ -33,7 +33,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className={styles.button + " button button--secondary button--lg"}
-            to="/docs/intro"
+            to="/docs/int/obol_overview"
           >
             Read the Docs
           </Link>

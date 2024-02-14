@@ -56,6 +56,7 @@ const config = {
           editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/",
         },
         blog: false,
+        debug: true,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -136,7 +137,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "int/obol_overview",
             position: "left",
             label: "Docs",
           },
@@ -179,7 +180,7 @@ const config = {
             items: [
               {
                 label: "Intro to Obol",
-                to: "/docs/intro",
+                to: "/docs/int/obol_overview",
               },
               {
                 label: "Charon",
@@ -187,7 +188,7 @@ const config = {
               },
               {
                 label: "DV Launchpad",
-                to: "/docs/dvl/intro",
+                to: "/docs/dvl_intro",
               },
             ],
           },
