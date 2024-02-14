@@ -1,4 +1,4 @@
-Permitted ChainID's
+Permitted `chainId`s for the [Client](../classes/Client.md) `config` constructor parameter. 
 
 ## Enumeration Members
 

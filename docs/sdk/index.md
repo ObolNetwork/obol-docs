@@ -1,8 +1,12 @@
+---
+sidebar_position: 1
+description: Obol SDK
+title: Obol SDK Reference
+sidebar_label: Intro
+---
 ![Obol Logo](https://obol.tech/obolnetwork.png)
 
-<h1 align="center">Obol SDK</h1>
-
-This repo contains the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](https://docs.obol.tech/api). 
+This is the reference for the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](/api). 
 
 ## Getting Started
 

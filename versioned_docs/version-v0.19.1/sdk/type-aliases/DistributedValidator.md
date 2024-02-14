@@ -1,6 +1,6 @@
 > **DistributedValidator**: `Object`
 
-Required deposit data for validator activation
+Distributed Validator
 
 ## Type declaration
 

@@ -26,6 +26,27 @@ const config = {
       {
         indexBlog: false,
       },
+    ], 
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // redirects: [
+        //   // /docs/oldDoc -> /docs/newDoc
+        //   {
+        //     to: '/docs/newDoc',
+        //     from: '/docs/oldDoc',
+        //   },
+        // ],
+        createRedirects(existingPath) {
+          if (existingPath.includes('/int/faq')) {
+            // Redirect from /int/faq/X to /faq/X
+            return [
+              existingPath.replace('/faq', '/int/faq')
+            ];
+          }
+          return undefined; // Return a falsy value: no redirect created
+        },
+      },
     ],
     // [
     //   "docusaurus-plugin-typedoc",
@@ -40,8 +61,8 @@ const config = {
     //     propertiesFormat: "table",
     //     enumMembersFormat: "table",
     //     typeDeclarationFormat: "table",
-    //     hidePageTitle: true
-
+    //     hidePageTitle: true,
+    //     excludeNotDocumented:true,
     //   },
     // ],
   ],
@@ -56,6 +77,7 @@ const config = {
           editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/",
         },
         blog: false,
+        debug: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -74,9 +96,9 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            // spec: 'https://api.obol.tech/docs-yaml',
-            spec: "https://api.obol.tech/docs-json",
-            route: "/api/",
+            // spec: 'https://api.obol.tech/docs-json',
+            spec:"./static/api-spec.yaml",
+            route: '/api/',
             layout: {
               title: "API Reference",
               description:
@@ -136,7 +158,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "int/Overview",
             position: "left",
             label: "Docs",
           },
@@ -179,7 +201,7 @@ const config = {
             items: [
               {
                 label: "Intro to Obol",
-                to: "/docs/intro",
+                to: "/docs/int/Overview",
               },
               {
                 label: "Charon",

@@ -1,4 +1,9 @@
-Obol sdk Client can be used for creating, managing and activating distributed validators.
+---
+description: The client object of the Obol SDK
+sidebar_position: 6
+sidebar_label: Client
+---
+Obol SDK `Client` can be used for creating, managing and activating distributed validators.
 
 ## Extends
 

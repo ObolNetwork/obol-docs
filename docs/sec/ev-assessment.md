@@ -64,7 +64,7 @@ Obol’s business model is to eventually capture a portion of the revenue genera
 
 Obol’s product consists of three main components, each run by its own team: a webapp, a client, and smart contracts.
 
-- [DV Launchpad](../dvl_intro.md): A webapp to create and manage distributed validators.
+- [DV Launchpad](../dvl/intro.md): A webapp to create and manage distributed validators.
 - [Charon](../charon/intro.md): A middleware client that enables operators to run distributed validators.
 - [Solidity](../sc_obol-splits.md): Withdrawal and fee recipient contracts for use with distributed validators.
 

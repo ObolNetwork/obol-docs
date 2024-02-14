@@ -1,12 +1,12 @@
 ---
-hide_title: true
+sidebar_position: 1
+description: Obol SDK
+title: Obol SDK Reference
+sidebar_label: Intro
 ---
-
 ![Obol Logo](https://obol.tech/obolnetwork.png)
 
-<h1 align="center">Obol SDK</h1>
-
-This repo contains the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](https://docs.obol.tech/api). 
+This is the reference for the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](/api). 
 
 ## Getting Started
 
@@ -23,15 +23,15 @@ Checkout our [docs](https://docs.obol.tech/docs/int/quickstart/advanced/quicksta
 ## Interfaces
 
 - [ClusterDefintion](interfaces/ClusterDefintion.md)
+- [ClusterLock](interfaces/ClusterLock.md)
+- [ClusterPayload](interfaces/ClusterPayload.md)
 
 ## Type Aliases
 
 - [BuilderRegistration](type-aliases/BuilderRegistration.md)
 - [BuilderRegistrationMessage](type-aliases/BuilderRegistrationMessage.md)
 - [ClusterCreator](type-aliases/ClusterCreator.md)
-- [ClusterLock](type-aliases/ClusterLock.md)
 - [ClusterOperator](type-aliases/ClusterOperator.md)
-- [ClusterPayload](type-aliases/ClusterPayload.md)
 - [ClusterValidator](type-aliases/ClusterValidator.md)
 - [DepositData](type-aliases/DepositData.md)
 - [DistributedValidator](type-aliases/DistributedValidator.md)

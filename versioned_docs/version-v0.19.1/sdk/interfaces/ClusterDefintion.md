@@ -1,8 +1,8 @@
-Cluster definition data needed for dkg
+Cluster Definition
 
 ## Extends
 
-- [`ClusterPayload`](../type-aliases/ClusterPayload.md)
+- [`ClusterPayload`](ClusterPayload.md)
 
 ## Properties
 
@@ -13,11 +13,11 @@ Cluster definition data needed for dkg
 | `definition_hash?` | `string` | The hash of the cluster definition. | - |
 | `dkg_algorithm` | `string` | The cluster dkg algorithm. | - |
 | `fork_version` | `string` | The cluster fork version. | - |
-| `name` | `string` | The cluster name. | `ClusterPayload.name` |
+| `name` | `string` | The cluster name. | [`ClusterPayload`](ClusterPayload.md).`name` |
 | `num_validators` | `number` | The number of distributed validators in the cluster. | - |
-| `operators` | [`ClusterOperator`](../type-aliases/ClusterOperator.md)[] | The cluster nodes operators addresses. | `ClusterPayload.operators` |
+| `operators` | [`ClusterOperator`](../type-aliases/ClusterOperator.md)[] | The cluster nodes operators addresses. | [`ClusterPayload`](ClusterPayload.md).`operators` |
 | `threshold` | `number` | The distributed validator threshold. | - |
 | `timestamp` | `string` | The cluster creation timestamp. | - |
 | `uuid` | `string` | The cluster uuid. | - |
-| `validators` | [`ClusterValidator`](../type-aliases/ClusterValidator.md)[] | The clusters validators information. | `ClusterPayload.validators` |
+| `validators` | [`ClusterValidator`](../type-aliases/ClusterValidator.md)[] | The clusters validators information. | [`ClusterPayload`](ClusterPayload.md).`validators` |
 | `version` | `string` | The cluster configuration version. | - |

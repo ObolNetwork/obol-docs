@@ -43,7 +43,7 @@ You should expect to see a console output like
     Created ENR private key: .charon/charon-enr-private-key
     enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
 
-If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](/docs/int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
+If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](../../faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
 :::caution
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
