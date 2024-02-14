@@ -223,10 +223,6 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
-          "id": "fr/eth"
-        },
-        {
-          "type": "doc",
           "id": "fr/ethereum_and_dvt"
         },
         {
