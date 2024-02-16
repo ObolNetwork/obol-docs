@@ -65,7 +65,7 @@ const FeatureList: FeatureItem[] = [
         <Link to="https://blog.obol.tech/mainnet-open-beta-launch-blog/">Open Beta.</Link>
       </>
     ),
-    link: "/docs/int/quickstart/quickstart-mainnet",
+    link: "/docs/start/quickstart_overview",
   },
 ];
 
