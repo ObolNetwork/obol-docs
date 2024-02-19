@@ -25,7 +25,7 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 - A [solidity audit](./smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
 
-- A 2nd [audit of Charon](https://obol.tech/reports/Quantstamp_charon_audit_2023_Q4.pdf) by QuantStamp in Q4 of 2023.
+- A 2nd [audit of Charon](https://obol.tech/charon_quantstamp_audit.pdf) by QuantStamp in Q4 of 2023.
 
 ## Security focused documents
 
