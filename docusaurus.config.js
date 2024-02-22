@@ -239,7 +239,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Obol Labs, Inc. `,
+        copyright: `Copyright © ${new Date().getFullYear()} Obol Labs, Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
