@@ -38,4 +38,4 @@ The following is an outline of the services that can be exposed by charon.
 
 ## Getting started
 
-For more information on running charon, take a look at our [Quickstart Guides](docs/int/quickstart/index.md). 
+For more information on running charon, take a look at our [Quickstart Guides](../int/quickstart/index.md). 

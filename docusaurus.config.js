@@ -20,13 +20,51 @@ const config = {
   organizationName: "ObolNetwork", // Usually your GitHub org/user name.
   projectName: "obol-docs", // Usually your repo name.
   trailingSlash: false,
-    plugins: [
+  plugins: [
     [
       require.resolve("@cmfcmf/docusaurus-search-local"),
       {
         indexBlog: false,
       },
-    ],
+    ], 
+    // [
+    //   '@docusaurus/plugin-client-redirects',
+    //   {
+    //     // redirects: [
+    //     //   // /docs/oldDoc -> /docs/newDoc
+    //     //   {
+    //     //     to: '/docs/newDoc',
+    //     //     from: '/docs/oldDoc',
+    //     //   },
+    //     // ],
+    //     createRedirects(existingPath) {
+    //       if (existingPath.includes('/int/faq')) {
+    //         // Redirect from /int/faq/X to /faq/X
+    //         return [
+    //           existingPath.replace('/faq', '/int/faq')
+    //         ];
+    //       }
+    //       return undefined; // Return a falsy value: no redirect created
+    //     },
+    //   },
+    // ],
+    // [
+    //   "docusaurus-plugin-typedoc",
+
+    //   // Plugin / TypeDoc options
+    //   {
+    //     entryPoints: ["../src/index.ts"],
+    //     tsconfig: "../tsconfig.json",
+    //     out: "docs/sdk",
+    //     mergeReadme: true,
+    //     parametersFormat: "table",
+    //     propertiesFormat: "table",
+    //     enumMembersFormat: "table",
+    //     typeDeclarationFormat: "table",
+    //     hidePageTitle: true,
+    //     excludeNotDocumented:true,
+    //   },
+    // ],
   ],
   presets: [
     [
@@ -39,6 +77,7 @@ const config = {
           editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/",
         },
         blog: false,
+        debug: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -52,22 +91,28 @@ const config = {
       },
     ],
     [
-      'redocusaurus',
+      "redocusaurus",
       {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            // spec: 'https://api.obol.tech/docs-yaml',
-            spec: './static/api-spec.yaml',
+            spec:"https://api.obol.tech/docs-json",
             route: '/api/',
             layout: {
-              title: 'API Reference',
-              description: 'An API for preparing Distributed Validator Key Generation Ceremonies built by Obol Labs.',
-              keywords: ["Distributed Validators", "Ethereum", "DVT", "Obol", "API"],
+              title: "API Reference",
+              description:
+                "An API for preparing Distributed Validator Key Generation Ceremonies built by Obol Labs.",
+              keywords: [
+                "Distributed Validators",
+                "Ethereum",
+                "DVT",
+                "Obol",
+                "API",
+              ],
             },
           },
         ],
-        
+
         // Theme Options for modifying how redoc renders them
         theme: {
           // Change with your site colors
@@ -76,21 +121,20 @@ const config = {
           theme: {
             colors: {
               http: {
-                get: '#16968e',
-                put: '#9167e4',
-                post: '#b6ea5c',
-                delete: '#dd603c',
+                get: "#16968e",
+                put: "#9167e4",
+                post: "#b6ea5c",
+                delete: "#dd603c",
               },
             },
             // sidebar: {
             //   backgroundColor: '#00ff00'
             // },
             rightPanel: {
-              backgroundColor: '#243D42'
+              backgroundColor: "#243D42",
             },
-          }
+          },
         },
-       
       },
     ],
   ],
@@ -113,14 +157,20 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "intro",
+            docId: "int/Overview",
             position: "left",
             label: "Docs",
           },
           {
-            to: 'api',
-            position: 'left',
-            label: 'API',
+            to: "api",
+            position: "left",
+            label: "API",
+          },
+          {
+            type: "docSidebar",
+            sidebarId: "apiSidebar",
+            label: "SDK",
+            position: "left",
           },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
@@ -150,7 +200,7 @@ const config = {
             items: [
               {
                 label: "Intro to Obol",
-                to: "/docs/intro",
+                to: "/docs/int/Overview",
               },
               {
                 label: "Charon",
@@ -166,12 +216,12 @@ const config = {
             title: "Community",
             items: [
               {
-                label: 'Discord',
-                to: 'https://discord.gg/n6ebKsX46w',
+                label: "Discord",
+                to: "https://discord.gg/n6ebKsX46w",
               },
               {
-                label: 'Twitter',
-                to: 'https://twitter.com/obolnetwork',
+                label: "Twitter",
+                to: "https://twitter.com/obolnetwork",
               },
             ],
           },
@@ -179,12 +229,12 @@ const config = {
             title: "More",
             items: [
               {
-                label: 'Blog',
-                to: 'https://blog.obol.tech/',
+                label: "Blog",
+                to: "https://blog.obol.tech/",
               },
               {
-                label: 'GitHub',
-                to: 'https://github.com/obolnetwork/',
+                label: "GitHub",
+                to: "https://github.com/obolnetwork/",
               },
             ],
           },
