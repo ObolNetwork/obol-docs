@@ -11,7 +11,7 @@ grafana_api_key = os.getenv("GRAFANA_API_KEY")
 
 export_path = "./dashboards"
 import_path = "./dashboards"
-alert_config_path = "./alertmanager_config.yml"
+alert_config_path = "./dashboard/alertmanager_config.yml"
 
 def export_dashboards_from_grafana(grafana_url, grafana_api_key, export_path):
     headers = {"Authorization": "Bearer " + grafana_api_key}    
@@ -135,6 +135,6 @@ def import_exported_alerts(grafana_url, grafana_api_key, alert_config_path):
         print(f"Error importing Alertmanager configuration: {e}")
 
 
-export_dashboards_from_grafana(grafana_url, grafana_api_key, export_path)
-import_dashboards_to_grafana(grafana_url, grafana_api_key, import_path)
+# export_dashboards_from_grafana(grafana_url, grafana_api_key, export_path)
+# import_dashboards_to_grafana(grafana_url, grafana_api_key, import_path)
 import_exported_alerts(grafana_url, grafana_api_key, alert_config_path)
