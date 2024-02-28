@@ -49,13 +49,29 @@ Submissions related to the following are considered out of scope:
 
 Rewards are issued based on the severity and impact of the disclosed vulnerability, determined at the discretion of Obol Labs.
 
-### Critical Vulnerabilities: Up to $100,000
+### Critical Vulnerabilities: USD $50,000 to USD $100,000
 
 For vulnerabilities posing a severe risk to our system's security. requiring immediate attention. Highly likely to have a material impact on availability, integrity, and/or loss of funds.
 
 - High impact, high likelihood
-  Examples:
+
+Impacts:
+
 - Attacker can successfully conduct remote code execution in charon client to exfiltrate BLS private key material.
+- Direct theft of any user funds, whether at-rest or in-motion, other than unclaimed yield
+- Direct loss of funds
+- Permanent freezing of funds (fix requires hard fork)
+- Protocol insolvency
+- Network not being able to confirm new transactions (Total network shutdown)
+- Retrieve sensitive data/files from a running server such as:
+  - blockchain keys
+  - database passwords
+  - (this does not include non-sensitive environment variables, open source code, or usernames)
+- Taking state-modifying authenticated actions (with or without blockchain state interaction) on behalf of other users without any interaction by that user, such as:
+  - Changing registration information
+  - Withdrawals
+  - Voting
+  - Making trades
 
 ### High Vulnerabilities: Up to $20,000
 
@@ -63,8 +79,18 @@ For significant security risks that impact system integrity or funds and require
 
 - High impact, medium likelihood
 - Medium impact, high likelihood
-  Examples:
+
+Impact:
+
 - Attacker can successfully partition the cluster and keep the cluster offline.
+- Unintended chain split (Network partition)
+- Temporary freezing of network transactions by delaying one block by 500% or more of the average block time of the preceding 24 hours beyond standard difficulty adjustments
+- RPC API crash affecting projects with greater than or equal to 25% of the market capitalization on top of the respective layer
+- Theft of unclaimed yield
+- Theft of unclaimed royalties
+- Permanent freezing of unclaimed yield
+- Permanent freezing of unclaimed royalties
+- Temporary freezing of funds
 
 ### Medium Vulnerabilities: Up to $5,000
 
@@ -73,8 +99,21 @@ For vulnerabilities with a moderate impact, affecting system availability or int
 - High impact, low likelihood
 - Medium impact, medium likelihood
 - Low impact, high likelihood
-  Examples:
+
+Impacts:
+
 - Attacker can successfully conduct eclipse attacks on the cluster nodes with peer-ids with 4 leading zero bytes.
+- Increasing network processing node resource consumption by at least 30% without brute force actions, compared to the preceding 24 hours
+- Shutdown of greater than or equal to 30% of network processing nodes without brute force actions, but does not shut down the network
+- Charon cluster identity private key theft
+- Rogue node operator to penetrate and compromise other nodes to disturb the cluster’s lifecycle
+- Charon public relay node is compromised and lead to cluster topologies getting discovered and disrupted
+- Smart contract unable to operate due to lack of token funds
+- Block stuffing
+- Griefing (e.g. no profit motive for an attacker, but damage to the users or the protocol)
+- Theft of gas
+- Unbounded gas consumption
+- Redirecting users to malicious websites (Open Redirect)
 
 ### Low Vulnerabilities: Up to $500
 
@@ -82,10 +121,31 @@ For vulnerabilities with minimal impact, unlikely to significantly affect system
 
 - Low impact, medium likelihood
 - Medium impact, low likelihood
-  Examples:
+
+Impacts:
+
 - Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
+- Contract fails to deliver promised returns, but doesn't lose value
+- Shutdown of greater than 10% or equal to but less than 30% of network processing nodes without brute force actions, but does not shut down the network
+- Changing details of other users (including modifying browser local storage) without already-connected wallet interaction and with significant user interaction such as:
+  - Iframing leading to modifying the backend/browser state (must demonstrate impact with PoC)
+- Taking over broken or expired outgoing links such as:
+  - Social media handles, etc.
+- Temporarily disabling user to access target site, such as:
+  - Locking up the victim from login
+  - Cookie bombing, etc.
 
 Rewards may be issued as cash, merchandise, or other forms of recognition, at Obol's discretion. Only one reward will be granted per unique vulnerability.
+
+## The following activities are prohibited by this bug bounty program
+
+- Any testing on mainnet or public testnet deployed code; all testing should be done on local-forks of either public testnet or mainnet
+- Any testing with pricing oracles or third-party smart contracts
+- Attempting phishing or other social engineering attacks against our employees and/or customers
+- Any testing with third-party systems and applications (e.g. browser extensions) as well as websites (e.g. SSO providers, advertising networks)
+- Any denial of service attacks that are executed against project assets
+- Automated testing of services that generates significant amounts of traffic
+- Public disclosure of an unpatched vulnerability in an embargoed bounty
 
 ## Submission process
 
