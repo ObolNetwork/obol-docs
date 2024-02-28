@@ -3,66 +3,72 @@ sidebar_position: 2
 description: Bug Bounty Policy
 ---
 
-# Obol Bug Bounty
+# Obol Bug Bounty Program
 
 ## Overview
 
-Obol Labs is committed to ensuring the security of our distributed validator software and services. As part of our commitment to security, we have established a bug bounty program to encourage security researchers to report vulnerabilities in our software and services to us so that we can quickly address them.
+At Obol Labs, we prioritize the security of our distributed validator software and related services. Our Bug Bounty Program is designed to encourage and reward security researchers for identifying and reporting potential vulnerabilities. This initiative supports our commitment to the security and integrity of our products.
 
-## Eligibility
+## Participant Eligibility
 
-To participate in the Bug Bounty Program you must:
+Participants must meet the following criteria to be eligible for the Bug Bounty Program:
 
-- Not be a resident of any country that does not allow participation in these types of programs
-- Be at least 14 years old and have legal capacity to agree to these terms and participate in the Bug Bounty Program
-- Have permission from your employer to participate
-- Not be (for the previous 12 months) an Obol Labs employee, immediate family member of an Obol employee, Obol contractor, or Obol service provider.
+- Not reside in countries where participation in such programs is prohibited.
+- Be at least 14 years of age and possess the legal capacity to participate.
+- Have received consent from your employer, if applicable.
+- Not have been employed or contracted by Obol Labs, nor be an immediate family member of an employee, within the last 12 months.
 
-## Scope
+## Scope of the Program
 
-The bug bounty program applies to software and services that are built by Obol. Only submissions under the following domains are eligible for rewards:
+Eligible submissions must involve software and services developed by Obol, specifically under the domains of:
 
-- Charon DVT Middleware
-- DV Launchpad
-- Obol’s Public API
-- Obol’s Smart Contracts and the contracts they depend on.
-- Obol’s Public Relay
+- Charon
+- Obol DV Launchpad
+- Obol Splits
 
-Additionally, all vulnerabilities that require or are related to the following are out of scope:
+Submissions related to the following are considered out of scope:
 
 - Social engineering
 - Rate Limiting (Non-critical issues)
-- Physical security
-- Non-security-impacting UX issues
-- Vulnerabilities or weaknesses in third party applications that integrate with Obol
-- The Obol website or the Obol infrastructure in general is NOT part of this bug bounty program.
+- Physical security breaches
+- Non-security related UX/UI issues
+- Third-party application vulnerabilities
+- Obol's website or cloud infrastructure
 
-## Rules
+## Program Rules
 
-- Bug has not been publicly disclosed
-- Vulnerabilities that have been previously submitted by another contributor or already known by the Obol development team are not eligible for rewards
-- The size of the bounty payout depends on the assessment of the severity of the exploit. Please refer to the rewards section below for additional details
-- Bugs must be reproducible in order for us to verify the vulnerability. Submissions with a working proof of concept is necessary
-- Rewards and the validity of bugs are determined by the Obol security team and any payouts are made at their sole discretion
-- Terms and conditions of the Bug Bounty program can be changed at any time at the discretion of Obol
-- Details of any valid bugs may be shared with complementary protocols utilised in the Obol ecosystem in order to promote ecosystem cohesion and safety.
+- Submitted bugs must not have been previously disclosed publicly.
+- Only first reports of vulnerabilities will be considered for rewards; previously reported or known vulnerabilities are ineligible.
+- The severity of the vulnerability, as assessed by our team, will determine the reward amount. See the "Rewards" section for details.
+- Submissions must include a reproducible proof of concept.
+- The Obol security team reserves the right to determine the eligibility and reward for each submission.
+- Program terms may be updated at Obol's discretion.
+- Valid bugs may be disclosed to partner protocols within the Obol ecosystem to enhance overall security.
 
-## Rewards
+## Rewards Structure
 
-The rewards for participating in our bug bounty program will be based on the severity and impact of the vulnerability discovered. We will evaluate each submission on a case-by-case basis, and the rewards will be at Obol’s sole discretion.
+Rewards are issued based on the severity and impact of the disclosed vulnerability, determined at the discretion of Obol Labs.
 
-### Low: up to $500
+### Critical Vulnerabilities: Up to $100,000
 
-A Low-level vulnerability is one that has a limited impact and can be easily fixed. Unlikely to have a meaningful impact on availability, integrity, and/or loss of funds.
+For vulnerabilities posing a severe risk to our system's security. requiring immediate attention. Highly likely to have a material impact on availability, integrity, and/or loss of funds.
 
-- Low impact, medium likelihood
-- Medium impact, low likelihood
+- High impact, high likelihood
   Examples:
-- Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
+- Attacker can successfully conduct remote code execution in charon client to exfiltrate BLS private key material.
 
-### Medium: up to $1,000
+### High Vulnerabilities: Up to $20,000
 
-A Medium-level vulnerability is one that has a moderate impact and requires a more significant effort to fix. Possible to have an impact on validator availability, integrity, and/or loss of funds.
+For significant security risks that impact system integrity or funds and requires a significant effort to fix.
+
+- High impact, medium likelihood
+- Medium impact, high likelihood
+  Examples:
+- Attacker can successfully partition the cluster and keep the cluster offline.
+
+### Medium Vulnerabilities: Up to $5,000
+
+For vulnerabilities with a moderate impact, affecting system availability or integrity.
 
 - High impact, low likelihood
 - Medium impact, medium likelihood
@@ -70,47 +76,36 @@ A Medium-level vulnerability is one that has a moderate impact and requires a mo
   Examples:
 - Attacker can successfully conduct eclipse attacks on the cluster nodes with peer-ids with 4 leading zero bytes.
 
-### High: up to $4,000
+### Low Vulnerabilities: Up to $500
 
-A High-level vulnerability is one that has a significant impact on the security of the system and requires a significant effort to fix. Likely to have impact on availability, integrity, and/or loss of funds.
+For vulnerabilities with minimal impact, unlikely to significantly affect system operations.
 
-- High impact, medium likelihood
-- Medium impact, high likelihood
+- Low impact, medium likelihood
+- Medium impact, low likelihood
   Examples:
-- Attacker can successfully partition the cluster and keep the cluster offline.
+- Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
 
-### Critical: up to $10,000
-
-A Critical-level vulnerability is one that has a severe impact on the security of the in-production system and requires immediate attention to fix. Highly likely to have a material impact on availability, integrity, and/or loss of funds.
-
-- High impact, high likelihood
-  Examples:
-- Attacker can successfully conduct remote code execution in charon client to exfiltrate BLS private key material.
-
-We may offer rewards in the form of cash, merchandise, or recognition. We will only award one reward per vulnerability discovered, and we reserve the right to deny a reward if we determine that the researcher has violated the terms and conditions of this policy.
+Rewards may be issued as cash, merchandise, or other forms of recognition, at Obol's discretion. Only one reward will be granted per unique vulnerability.
 
 ## Submission process
 
-Please email security@obol.tech
+To report a vulnerability, please contact us at security@obol.tech with:
 
-Your report should include the following information:
+- A detailed description of the vulnerability and its potential impact.
+- Steps to reproduce the issue.
+- Any relevant proof of concept code, screenshots, or documentation.
+- Your contact information.
 
-- Description of the vulnerability and its potential impact
-- Steps to reproduce the vulnerability
-- Proof of concept code, screenshots, or other supporting documentation
-- Your name, email address, and any contact information you would like to provide.
-  Reports that do not include sufficient detail will not be eligible for rewards.
+Incomplete reports may not be eligible for rewards.
 
-## Disclosure Policy
+## Disclosure and Confidentiality
 
-Obol Labs will disclose the details of the vulnerability and the researcher’s identity (with their consent) only after we have remediated the vulnerability and issued a fix. Researchers must keep the details of the vulnerability confidential until Obol Labs has acknowledged and remediated the issue.
+Obol Labs will disclose vulnerabilities and the identity of the researcher (with consent) after remediation. Researchers are required to maintain confidentiality until official disclosure by Obol Labs.
 
-## Legal Compliance
+## Legal and Ethical Compliance
 
-All participants in the bug bounty program must comply with all applicable laws, regulations, and policy terms and conditions. Obol will not be held liable for any unlawful or unauthorised activities performed by participants in the bug bounty program.
+Participants must adhere to all relevant laws and regulations. Obol Labs will not pursue legal action against researchers reporting vulnerabilities in good faith, but reserves the right to respond to violations of this policy.
 
-We will not take any legal action against security researchers who discover and report security vulnerabilities in accordance with this bug bounty policy. We do, however, reserve the right to take legal action against anyone who violates the terms and conditions of this policy.
+## Non-Disclosure Agreement (NDA)
 
-## Non-Disclosure Agreement
-
-All participants in the bug bounty program will be required to sign a non-disclosure agreement (NDA) before they are given access to closed source software and services for testing purposes.
+Participants may be required to sign an NDA for access to certain proprietary information during their research.
