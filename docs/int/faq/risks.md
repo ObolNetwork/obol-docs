@@ -22,7 +22,7 @@ The following non-Obol entities run relays that you can consider adding to your 
 ## Risk: Obol being able to update Charon code
 **Mitigation**: Pin specific docker versions or compile from source on a trusted commit
 
-Another risk associated with Obol is having the ability to update the [Charon code](https://github.com/ObolNetwork/charon) running on the network which could introduce vulnerabilities or malicious code. To mitigate this risk, operators can consider pinning specific versions of the code that have been thoroughly tested and accepted by the network. This would ensure that any updates are carefully vetted and reviewed by the community.
+Another risk associated with Obol is the Labs team having the ability to update the [Charon code](https://github.com/ObolNetwork/charon) used by node operators within DV clusters, which could introduce vulnerabilities or malicious code. To mitigate this risk, operators can consider pinning specific versions of the Docker image or git repo that have been [thoroughly tested](../../sec/overview.md#list-of-security-audits-and-assessments) and accepted by the network. This would ensure that any updates are carefully vetted and reviewed by the community, and only introduced into a running cluster gradually. The labs team will strive to communicate the security or operational impact any charon update entails, giving operators the chance to decide whether they want potential performance or quality of experience improvements, or whether they remain on a trusted version for longer.
 
 ## Risk: Obol hosting the DV Launchpad
 **Mitigation**: Use [`create cluster`](../../charon/charon-cli-reference.md) or [`create dkg`](../../charon/charon-cli-reference.md) locally and distribute the files manually

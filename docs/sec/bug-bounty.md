@@ -22,11 +22,11 @@ To participate in the Bug Bounty Program you must:
 
 The bug bounty program applies to software and services that are built by Obol. Only submissions under the following domains are eligible for rewards:
 
-- Charon DVT Middleware
-- DV Launchpad
+- Charon the DV Middleware Client
+- The DV Launchpad
 - Obol’s Public API
 - Obol’s Smart Contracts and the contracts they depend on.
-- Obol’s Public Relay
+- Obol Labs hosted Public Relay Infrastructure
 
 Additionally, all vulnerabilities that require or are related to the following are out of scope:
 
@@ -34,8 +34,9 @@ Additionally, all vulnerabilities that require or are related to the following a
 - Rate Limiting (Non-critical issues)
 - Physical security
 - Non-security-impacting UX issues
-- Vulnerabilities or weaknesses in third party applications that integrate with Obol
-- The Obol website or the Obol infrastructure in general is NOT part of this bug bounty program.
+- Vulnerabilities or weaknesses in third party applications that integrate Obol
+- The [Obol](https://obol.tech) static website or the Obol infrastructure in general is NOT part of this bug bounty program
+- The operational security of node operators running or using Obol software
 
 ## Rules
 
@@ -57,35 +58,51 @@ A Low-level vulnerability is one that has a limited impact and can be easily fix
 
 - Low impact, medium likelihood
 - Medium impact, low likelihood
-  Examples:
-- Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
 
-### Medium: up to $1,000
+Examples:
+
+- Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
+- Attacker can display bad data on a non-interactive part of the launchpad.
+
+### Medium: up to $2,500
 
 A Medium-level vulnerability is one that has a moderate impact and requires a more significant effort to fix. Possible to have an impact on validator availability, integrity, and/or loss of funds.
 
 - High impact, low likelihood
 - Medium impact, medium likelihood
 - Low impact, high likelihood
-  Examples:
-- Attacker can successfully conduct eclipse attacks on the cluster nodes with peer-ids with 4 leading zero bytes.
 
-### High: up to $4,000
+Examples:
 
-A High-level vulnerability is one that has a significant impact on the security of the system and requires a significant effort to fix. Likely to have impact on availability, integrity, and/or loss of funds.
+- Attacker that is a member of a cluster can exfiltrate K1 key material from another member.
+- Attacker that is a member of the cluster can denial of service attack enough peers in the cluster to prevent operation of the validator(s)
+- Attacker that is a member of the cluster can bias the protocol in a manner to control the majority of block proposal opportunities.
+- Attacker can get a DV Launchpad user to inadvertently interact with a smart contract that is not a part of normal operation of the launchpad.
+
+### High: up to $10,000
+
+A High-level vulnerability is one that has a significant impact on the security of the system from a position of low-trust, and requires a significant effort to fix. Likely to have impact on availability, integrity, and/or loss of funds.
 
 - High impact, medium likelihood
 - Medium impact, high likelihood
-  Examples:
-- Attacker can successfully partition the cluster and keep the cluster offline.
 
-### Critical: up to $10,000
+Examples:
 
-A Critical-level vulnerability is one that has a severe impact on the security of the in-production system and requires immediate attention to fix. Highly likely to have a material impact on availability, integrity, and/or loss of funds.
+- Attacker that is not a member of the cluster can successfully partition the cluster and keep the cluster offline indefinitely.
+- Attacker that is not a member of the cluster can exfiltrate charon ENR private keys.
+- Attacker that is not a member of the cluster can destroy funds but cannot steal them.
+
+### Critical: up to $100,000
+
+A Critical-level vulnerability is one that has a severe impact on the security of the in-production system from an unauthenicated external attacker, and requires immediate attention to fix. Highly likely to have a material impact on validator private key security, and/or loss of funds.
 
 - High impact, high likelihood
-  Examples:
-- Attacker can successfully conduct remote code execution in charon client to exfiltrate BLS private key material.
+
+Examples:
+
+- Attacker that is not a member of the cluster can successfully exfiltrate BLS (not K1) private key material from a threshold number of operators in the cluster.
+- Attacker that is not a member of the cluster can achieve the production of arbitrary BLS signatures from a threshold number of operators in the cluster.
+- Attacker can craft a malicious cluster invite capable of subverting even careful review of all data to steal funds during a deposit.
 
 We may offer rewards in the form of cash, merchandise, or recognition. We will only award one reward per vulnerability discovered, and we reserve the right to deny a reward if we determine that the researcher has violated the terms and conditions of this policy.
 
