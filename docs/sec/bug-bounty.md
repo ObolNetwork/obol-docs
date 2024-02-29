@@ -22,9 +22,10 @@ Participants must meet the following criteria to be eligible for the Bug Bounty 
 
 Eligible submissions must involve software and services developed by Obol, specifically under the domains of:
 
-- Charon
-- Obol DV Launchpad
-- Obol Splits
+- Charon the DV Middleware Client
+- Obol DV Launchpad and Public API
+- Obol Splits Contracts
+- Obol Labs hosted Public Relay Infrastructure
 
 Submissions related to the following are considered out of scope:
 
@@ -33,7 +34,8 @@ Submissions related to the following are considered out of scope:
 - Physical security breaches
 - Non-security related UX/UI issues
 - Third-party application vulnerabilities
-- Obol's website or cloud infrastructure
+- The [Obol](https://obol.tech) static website or the Obol infrastructure
+- The operational security of node operators running or using Obol software
 
 ## Program Rules
 
@@ -49,40 +51,35 @@ Submissions related to the following are considered out of scope:
 
 Rewards are issued based on the severity and impact of the disclosed vulnerability, determined at the discretion of Obol Labs.
 
-### Critical Vulnerabilities: USD $50,000 to USD $100,000
+### Critical Vulnerabilities: Up to USD $100,000
 
-For vulnerabilities posing a severe risk to our system's security. requiring immediate attention. Highly likely to have a material impact on availability, integrity, and/or loss of funds.
+A Critical-level vulnerability is one that has a severe impact on the security of the in-production system from an unauthenicated external attacker, and requires immediate attention to fix. Highly likely to have a material impact on validator private key security, and/or loss of funds.
 
 - High impact, high likelihood
 
 Impacts:
 
-- Attacker can successfully conduct remote code execution in charon client to exfiltrate BLS private key material.
+- Attacker that is not a member of the cluster can successfully exfiltrate BLS (not K1) private key material from a threshold number of operators in the cluster.
+- Attacker that is not a member of the cluster can achieve the production of arbitrary BLS signatures from a threshold number of operators in the cluster.
+- Attacker can craft a malicious cluster invite capable of subverting even careful review of all data to steal funds during a deposit.
 - Direct theft of any user funds, whether at-rest or in-motion, other than unclaimed yield
 - Direct loss of funds
 - Permanent freezing of funds (fix requires hard fork)
-- Protocol insolvency
 - Network not being able to confirm new transactions (Total network shutdown)
-- Retrieve sensitive data/files from a running server such as:
-  - blockchain keys
-  - database passwords
-  - (this does not include non-sensitive environment variables, open source code, or usernames)
-- Taking state-modifying authenticated actions (with or without blockchain state interaction) on behalf of other users without any interaction by that user, such as:
-  - Changing registration information
-  - Withdrawals
-  - Voting
-  - Making trades
+- Protocol insolvency
 
-### High Vulnerabilities: Up to $20,000
+### High Vulnerabilities: Up to USD $10,000
 
-For significant security risks that impact system integrity or funds and requires a significant effort to fix.
+For significant security risks that impact the system from a position of low-trust and requires a significant effort to fix.
 
 - High impact, medium likelihood
 - Medium impact, high likelihood
 
-Impact:
+Impacts:
 
-- Attacker can successfully partition the cluster and keep the cluster offline.
+- Attacker that is not a member of the cluster can successfully partition the cluster and keep the cluster offline indefinitely.
+- Attacker that is not a member of the cluster can exfiltrate charon ENR private keys.
+- Attacker that is not a member of the cluster can destroy funds but cannot steal them.
 - Unintended chain split (Network partition)
 - Temporary freezing of network transactions by delaying one block by 500% or more of the average block time of the preceding 24 hours beyond standard difficulty adjustments
 - RPC API crash affecting projects with greater than or equal to 25% of the market capitalization on top of the respective layer
@@ -91,8 +88,16 @@ Impact:
 - Permanent freezing of unclaimed yield
 - Permanent freezing of unclaimed royalties
 - Temporary freezing of funds
+- Retrieve sensitive data/files from a running server:
+  - blockchain keys
+  - database passwords
+  - (this does not include non-sensitive environment variables, open source code, or usernames)
+- Taking state-modifying authenticated actions (with or without blockchain state interaction) on behalf of other users without any interaction by that user, such as:
+  - Changing cluster information
+  - Withdrawals
+  - Making trades
 
-### Medium Vulnerabilities: Up to $5,000
+### Medium Vulnerabilities: Up to USD $2,500
 
 For vulnerabilities with a moderate impact, affecting system availability or integrity.
 
@@ -102,7 +107,10 @@ For vulnerabilities with a moderate impact, affecting system availability or int
 
 Impacts:
 
-- Attacker can successfully conduct eclipse attacks on the cluster nodes with peer-ids with 4 leading zero bytes.
+- Attacker that is a member of a cluster can exfiltrate K1 key material from another member.
+- Attacker that is a member of the cluster can denial of service attack enough peers in the cluster to prevent operation of the validator(s)
+- Attacker that is a member of the cluster can bias the protocol in a manner to control the majority of block proposal opportunities.
+- Attacker can get a DV Launchpad user to inadvertently interact with a smart contract that is not a part of normal operation of the launchpad.
 - Increasing network processing node resource consumption by at least 30% without brute force actions, compared to the preceding 24 hours
 - Shutdown of greater than or equal to 30% of network processing nodes without brute force actions, but does not shut down the network
 - Charon cluster identity private key theft
@@ -115,7 +123,7 @@ Impacts:
 - Unbounded gas consumption
 - Redirecting users to malicious websites (Open Redirect)
 
-### Low Vulnerabilities: Up to $500
+### Low Vulnerabilities: Up to USD $500
 
 For vulnerabilities with minimal impact, unlikely to significantly affect system operations.
 
@@ -125,6 +133,7 @@ For vulnerabilities with minimal impact, unlikely to significantly affect system
 Impacts:
 
 - Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
+- Attacker can display bad data on a non-interactive part of the launchpad.
 - Contract fails to deliver promised returns, but doesn't lose value
 - Shutdown of greater than 10% or equal to but less than 30% of network processing nodes without brute force actions, but does not shut down the network
 - Changing details of other users (including modifying browser local storage) without already-connected wallet interaction and with significant user interaction such as:
