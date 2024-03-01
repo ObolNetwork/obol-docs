@@ -51,7 +51,7 @@ Submissions related to the following are considered out of scope:
 
 Rewards are issued based on the severity and impact of the disclosed vulnerability, determined at the discretion of Obol Labs.
 
-### Critical Vulnerabilities: Up to USD $100,000
+### Critical Vulnerabilities: Up to $100,000
 
 A Critical-level vulnerability is one that has a severe impact on the security of the in-production system from an unauthenicated external attacker, and requires immediate attention to fix. Highly likely to have a material impact on validator private key security, and/or loss of funds.
 
@@ -68,7 +68,7 @@ Impacts:
 - Network not being able to confirm new transactions (Total network shutdown)
 - Protocol insolvency
 
-### High Vulnerabilities: Up to USD $10,000
+### High Vulnerabilities: Up to $10,000
 
 For significant security risks that impact the system from a position of low-trust and requires a significant effort to fix.
 
@@ -97,7 +97,7 @@ Impacts:
   - Withdrawals
   - Making trades
 
-### Medium Vulnerabilities: Up to USD $2,500
+### Medium Vulnerabilities: Up to $2,500
 
 For vulnerabilities with a moderate impact, affecting system availability or integrity.
 
@@ -123,7 +123,7 @@ Impacts:
 - Unbounded gas consumption
 - Redirecting users to malicious websites (Open Redirect)
 
-### Low Vulnerabilities: Up to USD $500
+### Low Vulnerabilities: Up to $500
 
 For vulnerabilities with minimal impact, unlikely to significantly affect system operations.
 
