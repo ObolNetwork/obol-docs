@@ -68,7 +68,7 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 :::
 
 :::tip
-If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update your docker permissions](../int/faq/errors#docker-permission-denied-error) to allow the command to run successfully.
+If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update your docker permissions](../faq/errors.mdx#docker-permission-denied-error) to allow the command to run successfully.
 :::
 
 For the next step, select the _Creator_ tab if you are coordinating the creation of the cluster. (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to.) Select the _Operator_ tab if you are accepting an invitation to operate a node in a cluster proposed by the cluster creator.
