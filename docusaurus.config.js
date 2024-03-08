@@ -63,6 +63,7 @@ const config = {
     //     typeDeclarationFormat: "table",
     //     hidePageTitle: true,
     //     excludeNotDocumented:true,
+    //     sort: "source-order"
     //   },
     // ],
   ],
