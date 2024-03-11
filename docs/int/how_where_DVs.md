@@ -7,6 +7,28 @@ description: How and where to run DVs
 
 How and where to run DVs?
 
+
+## Launcher Support
+UI and CLI validator provisioning software
+
+| Launcher/Flow         | Solo             | Group              | Creator           |
+|:---------------------:|:----------------:|:------------------:|:-----------------:|
+|[DV Launchpad - Mainnet (beta)](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|[DV Launchpad - Holesky](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|[Rocketpool Smartnode](https://github.com/rocket-pool/smartnode)|:red_circle:|:construction:|:red_circle:|
+|[Dappnode](https://github.com/dappnode/DAppNodePackage-obol-distributed-validator-goerli)|:red_circle:|:construction:|:construction:|
+|[Avado](https://ava.do/)|:construction:|:construction:|:red_circle:|
+|[Stereum Launcher](https://stereum.net/)|:construction:|:red_circle:|:red_circle:|
+|[Eth-docker](https://eth-docker.net/)|:red_circle:|:construction:|:red_circle:|
+|[Nethermind Sedge](https://github.com/NethermindEth/sedge)|:red_circle:|:construction:|:red_circle:|
+|[NiceNode](https://www.nicenode.xyz/)|:red_circle:|:red_circle:|:red_circle:|
+|[EthereumOnArm](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/)|:red_circle:|:construction:|:red_circle:|
+|[DeBoot](https://github.com/awmacpherson/deboot)|:red_circle:|:red_circle:|:red_circle:|
+
+:::caution
+Charon is in a beta state and should be used with caution on mainnet according to its [Terms of Use](https://obol.tech/terms.pdf).
+:::
+
 ## CL+VC Combinations:
 |Consensus:point_down:Validator:point_right:| Teku     | Lighthouse | Nimbus     | Prysm     | Lodestar   | Vouch     |
 |:------------:|:--------:|:----------:|:----------:|:---------:|:----------:|:---------:|
@@ -47,24 +69,3 @@ How and where to run DVs?
 |[Dirk](https://github.com/attestantio/dirk/)|:red_circle:      |
 |[Secure-signer](https://github.com/PufferFinance/secure-signer)|:construction:    |
 
-
-## Launcher Support
-UI and CLI validator provisioning software
-
-| Launcher/Flow         | Solo             | Group              | Creator           |
-|:---------------------:|:----------------:|:------------------:|:-----------------:|
-|[DV Launchpad - Mainnet (beta)](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|[DV Launchpad - Holesky](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|[Rocketpool Smartnode](https://github.com/rocket-pool/smartnode)|:red_circle:|:construction:|:red_circle:|
-|[Dappnode](https://github.com/dappnode/DAppNodePackage-obol-distributed-validator-goerli)|:red_circle:|:construction:|:construction:|
-|[Avado](https://ava.do/)|:construction:|:construction:|:red_circle:|
-|[Stereum Launcher](https://stereum.net/)|:construction:|:red_circle:|:red_circle:|
-|[Eth-docker](https://eth-docker.net/)|:red_circle:|:construction:|:red_circle:|
-|[Nethermind Sedge](https://github.com/NethermindEth/sedge)|:red_circle:|:construction:|:red_circle:|
-|[NiceNode](https://www.nicenode.xyz/)|:red_circle:|:red_circle:|:red_circle:|
-|[EthereumOnArm](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/)|:red_circle:|:construction:|:red_circle:|
-|[DeBoot](https://github.com/awmacpherson/deboot)|:red_circle:|:red_circle:|:red_circle:|
-
-:::caution
-Charon is in a beta state and should be used with caution on mainnet according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
