@@ -397,12 +397,6 @@ If you manually update `docker compose` to mount `lighthouse` from your locally 
 :::
 
 ```bash
-# Clone this repo
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
-# Change directory
-cd charon-distributed-validator-node
-
 # Delete lighthouse data if it exists
 rm -r ./data/lighthouse
 
