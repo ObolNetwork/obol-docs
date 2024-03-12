@@ -5,13 +5,15 @@ description: How and where to run DVs
 
 # How and where to run DVs
 
-How and where to run DVs?
+:::caution
+Charon is in a beta state and should be used with caution on mainnet according to its [Terms of Use](https://obol.tech/terms.pdf).
+:::
 
 
 ## Launcher Support
 UI and CLI validator provisioning software
 
-| Launcher/Flow         | Solo             | Group              | Creator           |
+| Launcher/Flow         |    Solo             | Group              | Creator           |
 |:---------------------:|:----------------:|:------------------:|:-----------------:|
 |[DV Launchpad - Mainnet (beta)](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
 |[DV Launchpad - Holesky](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
@@ -25,9 +27,6 @@ UI and CLI validator provisioning software
 |[EthereumOnArm](https://ethereum-on-arm-documentation.readthedocs.io/en/latest/)|:red_circle:|:construction:|:red_circle:|
 |[DeBoot](https://github.com/awmacpherson/deboot)|:red_circle:|:red_circle:|:red_circle:|
 
-:::caution
-Charon is in a beta state and should be used with caution on mainnet according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
 
 ## CL+VC Combinations:
 |Consensus:point_down:Validator:point_right:| Teku     | Lighthouse | Nimbus     | Prysm     | Lodestar   | Vouch     |
