@@ -13,7 +13,7 @@ Charon is in a beta state and should be used with caution on mainnet according t
 ## Launcher Support
 UI and CLI validator provisioning software
 
-| Launcher/Flow         |    Solo             | Group              | Creator           |
+| Launcher/Flow         |      Solo        | Group              | Creator           |
 |:---------------------:|:----------------:|:------------------:|:-----------------:|
 |[DV Launchpad - Mainnet (beta)](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
 |[DV Launchpad - Holesky](../dvl/intro.md)|:white_check_mark:|:white_check_mark:|:white_check_mark:|
