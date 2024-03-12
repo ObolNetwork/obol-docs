@@ -81,14 +81,11 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        gtag: {
+          trackingID: 'G-DTT2S469C4',
+          anonymizeIP: true,
+        },
       }),
-    ],
-    [
-      "@docusaurus/plugin-google-gtag",
-      {
-        trackingID: "GTM-NZ2HGMB",
-        anonymizeIP: true,
-      },
     ],
     [
       "redocusaurus",
