@@ -18,6 +18,7 @@ The following non-Obol entities run relays that you can consider adding to your 
 | [Infstones](https://infstones.com/) | https://obol-relay.infstones.com:3640/ |
 | [Hashquark](https://www.hashquark.io/) | https://relay-2.prod-relay.721.land/  |
 | [Figment](https://figment.io/)   | https://relay-1.obol.figment.io/ |
+| [Node Guardians](https://nodeguardians.io/)   | https://obol-relay.nodeguardians.io/ |
 
 ## Risk: Obol being able to update Charon code
 **Mitigation**: Pin specific docker versions or compile from source on a trusted commit
