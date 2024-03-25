@@ -55,7 +55,7 @@ In order to prepare for a distributed key generation ceremony, you need to creat
 
 ```bash
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.1 create enr
 ```
 
 You should expect to see a console output like this:
