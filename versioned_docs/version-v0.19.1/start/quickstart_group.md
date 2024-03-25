@@ -54,6 +54,12 @@ This quickstart guide will walk you through creating a Distributed Validator Clu
 In order to prepare for a distributed key generation ceremony, you need to create an ENR for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
 
 ```bash
+# Clone the repo
+git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
+
+# Change directory
+cd charon-distributed-validator-node/
+
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.1 create enr
 ```
@@ -391,12 +397,6 @@ If you manually update `docker compose` to mount `lighthouse` from your locally 
 :::
 
 ```bash
-# Clone this repo
-git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
-# Change directory
-cd charon-distributed-validator-node
-
 # Delete lighthouse data if it exists
 rm -r ./data/lighthouse
 
