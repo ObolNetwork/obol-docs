@@ -30,6 +30,16 @@ The private key shares can be created centrally and distributed securely to each
 <Tabs groupId="Launchpad-other">
   <TabItem value="Launchpad" label="Launchpad" default>
 Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command, which you should run in your terminal.
+<br/><br/>
+Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">Quickstart Alone</a> demo repo and `cd` into the directory.
+
+  ```bash
+  # Clone the repo
+  git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
+
+  # Change directory
+  cd charon-distributed-validator-cluster/
+  ```
   </TabItem>
   <TabItem value="CLI" label="CLI">
     
