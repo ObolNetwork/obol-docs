@@ -43,8 +43,6 @@ Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-c
   ```
   </TabItem>
   <TabItem value="CLI" label="CLI">
-    
-    
 1. Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">Quickstart Alone</a> demo repo and `cd` into the directory.
 
   ```bash
@@ -57,36 +55,26 @@ Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-c
 
 2. Prepare the environment variables
 
-`.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Setup the desired settings for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
-
-<pre>
-  <code>
-  WITHDRAWAL_ADDR=[ENTER YOUR WITHDRAWAL ADDRESS HERE]
-  <br/>
-  FEE_RECIPIENT_ADDR=[ENTER YOUR FEE RECIPIENT ADDRESS HERE]
-  <br/>
-  NETWORK="holesky"
-  </code>
-</pre>
-
- 
-3. Once you have set the values you wish to use. Make a copy of this file called `.env`.
+`.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Setup the desired settings for the DV by uncommenting lines and setting values. Once you have set the values you wish to use, make a copy of this file called `.env`.
 
 ```bash
 # Copy the sample environment variables
 cp .env.sample .env
 ```
 
-4.  Then, run this command to create all the key shares and cluster artifacts locally:
+3. Run the cluster creation command, setting required flag values
+
+Run the below command to create all the key shares and cluster artifacts locally, manually setting the values of flags “nodes”, “network”, “num-validators”, “fee-recipient-addresses”,  and “withdrawal-addresses”. 
+Check the [Charon CLI reference](../charon/charon-cli-reference.md#create-a-full-cluster-locally) for additional, optional flags to set.
 
 <pre>
-  docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.19.0 create cluster 
+  docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.19.1 create cluster --nodes=4 --network=holesky --num-validators=1 --fee-recipient-addresses=[ENTER YOUR FEE RECIPIENT ADDRESS HERE] --withdrawal-addresses=[ENTER YOUR WITHDRAWAL ADDRESS HERE]
 </pre>
   </TabItem>
 </Tabs>
 <br />
 
-You should now have multiple folders within `./cluster/`, one for each node created. Backup the `./cluster/` folder, then move on to deploying the cluster physically.
+After the command is run, you should have multiple folders within `./cluster/`, one for each node created. Backup the `./cluster/` folder, then move on to deploying the cluster.
 
 ## Step 2: Deploy and start the nodes
 
