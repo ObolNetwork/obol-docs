@@ -88,7 +88,7 @@ This part of the guide only runs one Execution Client, one Consensus Client, and
 For a production deployment with fault tolerance, follow the part of the guide instructing you how to distribute the nodes across multiple machines. 
 :::
 
-Run this command to start your cluster containers if you deployed using CDVC repo above.
+Run this command to start your cluster containers if you deployed using [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster).
 
 ```sh
 # Start the distributed validator cluster
