@@ -57,7 +57,6 @@ enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGD
 
 - `cd` to the directory where your `.charon` folder is located (ex: `cd /path/to/charon-distributed-validator-node/`)
 - Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:latest enr`. This prints the ENR to your console.
-- Please note that this ENR is not the same as the one generated when you created it for the first time. This is because the process of generating ENRs includes the current timestamp. Nevertheless, this newly generated ENR will work for the DKG ceremony or for running your cluster.
 
 ### What do I do if lose my charon-enr-private-key?
 
