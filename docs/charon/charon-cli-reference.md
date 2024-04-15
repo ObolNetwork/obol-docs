@@ -368,7 +368,7 @@ Considering the distributed nature of a Charon cluster, the `exit` commands enab
 
 Operators can then use the `exit` subcommand to fetch and broadcast the fully signed exit message to their Beacon Node.
 
-To facilitate custom deployments, the `exit` subcommands allows listing all the active validators contained in a cluster, as well as broadcasting pre-signed exit messages from a file.
+To facilitate custom deployments, the `exit` subcommands allow listing all the active validators contained in a cluster, as well as broadcasting pre-signed exit messages from a file.
 
 All of the commands require a valid lock file and `charon-enr-private-key` to authenticate requests to the remote API.
 
