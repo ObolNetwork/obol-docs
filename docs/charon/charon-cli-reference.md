@@ -366,11 +366,16 @@ The `exit` subcommands allows users to exit a validator currently existing in a 
 
 Considering the distributed nature of a Charon cluster, the `exit` commands enables users to submit their partially signed exit messages to a remote API, which will hold it for them until there are enough to be successfully aggregated in a fully signed exit message.
 
-Operators can then use the `exit` subcommand to download and broadcast the fully signed exit message to their Beacon Node.
+Operators can then use the `exit` subcommand to fetch and broadcast the fully signed exit message to their Beacon Node.
 
 To facilitate custom deployments, the `exit` subcommands allows listing all the active validators contained in a cluster, as well as broadcasting pre-signed exit messages from a file.
 
 All of the commands require a valid lock file and `charon-enr-private-key` to authenticate requests to the remote API.
+
+In order to exit a validator, an operator needs to:
+ - run `charon exit sign`, which will sign a partial exit with the appropriate validator partial key, then store it in the remote API endpoint
+ - encourage at least `threshold-1` operators to do the same
+ - run `charon exit broadcast` to fetch and broadcast the full validator exit to the configured Beacon node.
 
 ```markdown
 Sign and broadcast distributed validator exit messages using a remote API.
