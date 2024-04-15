@@ -364,7 +364,7 @@ You can also consider adding [alternative public relays](../faq/risks.md) to you
 
 The `exit` subcommands allows users to exit a validator currently existing in a Charon cluster.
 
-Considering the distributed nature of a Charon cluster, the `exit` commands enables users to submit their partially signed exit messages to a remote API, which will hold it for them until there are enough to be successfully aggregated in a fully signed exit message.
+Considering the distributed nature of a Charon cluster, the `exit` commands enable users to submit their partially signed exit messages to a remote API, which will hold it for them until there are enough to be successfully aggregated in a fully signed exit message.
 
 Operators can then use the `exit` subcommand to fetch and broadcast the fully signed exit message to their Beacon Node.
 
