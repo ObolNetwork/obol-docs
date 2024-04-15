@@ -359,3 +359,119 @@ Flags:
       --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
 You can also consider adding [alternative public relays](../faq/risks.md) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).
+
+## The `exit` subcommand
+
+The `exit` subcommands allows users to exit a validator currently existing in a Charon cluster.
+
+Considering the distributed nature of a Charon cluster, the `exit` commands enables users to submit their partially signed exit messages to a remote API, which will hold it for them until there are enough to be successfully aggregated in a fully signed exit message.
+
+Operators can then use the `exit` subcommand to download and broadcast the fully signed exit message to their Beacon Node.
+
+To facilitate custom deployments, the `exit` subcommands allows listing all the active validators contained in a cluster, as well as broadcasting pre-signed exit messages from a file.
+
+All of the commands require a valid lock file and `charon-enr-private-key` to authenticate requests to the remote API.
+
+```markdown
+Sign and broadcast distributed validator exit messages using a remote API.
+
+Usage:
+  charon exit [command]
+
+Available Commands:
+  active-validator-list List all active validators
+  broadcast             Submit partial exit message for a distributed validator
+  fetch                 Fetch a signed exit message from the remote API
+  sign                  Sign partial exit message for a distributed validator
+
+Flags:
+  -h, --help   Help for exit
+
+Use "charon exit [command] --help" for more information about a command.
+```
+
+### `exit active-validator-list`
+
+```markdown
+Returns a list of all the DV in the specified cluster whose status is ACTIVE_ONGOING, i.e. can be exited.
+
+Usage:
+  charon exit active-validator-list [flags]
+
+Flags:
+      --beacon-node-url string   Beacon node URL.
+  -h, --help                     Help for active-validator-list
+      --lock-file string         The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string         Log color; auto, force, disable. (default "auto")
+      --log-format string        Log format; console, logfmt or json (default "console")
+      --log-level string         Log level; debug, info, warn or error (default "info")
+      --log-output-path string   Path in which to write on-disk logs.
+      --plaintext                Prints each active validator on a line, without any debugging or logging artifact. Useful for scripting.
+```
+
+### `exit broadcast`
+
+```markdown
+Retrieves and broadcasts a fully signed validator exit message, aggregated with the available partial signatures retrieved from the publish-address.
+
+Usage:
+  charon exit broadcast [flags]
+
+Flags:
+      --beacon-node-url string        Beacon node URL.
+      --exit-epoch uint               Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+      --exit-from-file string         Retrieves a signed exit message from a pre-prepared file instead of --publish-address.
+  -h, --help                          Help for broadcast
+      --lock-file string              The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string              Log color; auto, force, disable. (default "auto")
+      --log-format string             Log format; console, logfmt or json (default "console")
+      --log-level string              Log level; debug, info, warn or error (default "info")
+      --log-output-path string        Path in which to write on-disk logs.
+      --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
+      --validator-keys-dir string     Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest.
+```
+
+### `exit sign`
+
+```markdown
+Sign a partial exit message for a distributed validator and submit it to a remote API for aggregation.
+
+Usage:
+  charon exit sign [flags]
+
+Flags:
+      --beacon-node-url string        Beacon node URL.
+      --exit-epoch uint               Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+  -h, --help                          Help for sign
+      --lock-file string              The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string              Log color; auto, force, disable. (default "auto")
+      --log-format string             Log format; console, logfmt or json (default "console")
+      --log-level string              Log level; debug, info, warn or error (default "info")
+      --log-output-path string        Path in which to write on-disk logs.
+      --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
+      --validator-keys-dir string     Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest.
+```
+
+### `exit fetch`
+
+```markdown
+Fetches a fully signed exit message for a given validator from the remote API.
+
+Usage:
+  charon exit fetch [flags]
+
+Flags:
+  -h, --help                          Help for fetch
+      --lock-file string              The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string              Log color; auto, force, disable. (default "auto")
+      --log-format string             Log format; console, logfmt or json (default "console")
+      --log-level string              Log level; debug, info, warn or error (default "info")
+      --log-output-path string        Path in which to write on-disk logs.
+      --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
+      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest.
+```
