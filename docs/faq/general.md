@@ -3,6 +3,9 @@ sidebar_position: 1
 description: Frequently asked questions
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 # Frequently asked questions
 
 ## General
@@ -22,17 +25,97 @@ Have you checked out our [blog site](https://blog.obol.tech) and [twitter](https
 ### What are the hardware requirements for running a Charon node?
 Charon alone uses negligible disk space of not more than a few MBs. However, if you are running your consensus client and execution client on the same server as charon, then you will typically need the same hardware as running a full Ethereum node: 
 
-At minimum:
-- A CPU with 2+ physical cores (or 4 vCPUs)
-- 8GB RAM
-- 1.5TB+ free SSD disk space (for mainnet)
-- 10mb/s internet bandwidth
+<Tabs groupId="Hardware">
+    <TabItem value="Minimum" label="Minimum">
+        <table>
+            <tr>
+                <th></th>
+                <th>Charon + VC</th>
+                <th>Beacon Node</th>
+            </tr>
+            <tr>
+                <td><strong>CPU*</strong></td>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td><strong>RAM</strong></td>
+                <td>2</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td><strong>Storage</strong></td>
+                <td>100 MB</td>
+                <td>2 TB</td>
+            </tr>
+            <tr>
+                <td><strong>Internet Bandwidth</strong></td>
+                <td>10 Mb/s</td>
+                <td>10 Mb/s</td>
+            </tr>
+        </table>
+    </TabItem>
+    <TabItem value="Recommended" label="Recommended" default>
+    <table>
+            <tr>
+                <th></th>
+                <th>Charon + VC</th>
+                <th>Beacon Node</th>
+            </tr>
+            <tr>
+                <td><strong>CPU*</strong></td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td><strong>RAM</strong></td>
+                <td>3</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td><strong>Storage</strong></td>
+                <td>100 MB</td>
+                <td>2 TB</td>
+            </tr>
+            <tr>
+                <td><strong>Internet Bandwidth</strong></td>
+                <td>25 Mb/s</td>
+                <td>25 Mb/s</td>
+            </tr>
+        </table>
+    </TabItem>
+    <TabItem value="High # of Validators" label="High # of Validators (>200)" default>
+    <table>
+            <tr>
+                <th></th>
+                <th>Charon + VC</th>
+                <th>Beacon Node</th>
+            </tr>
+            <tr>
+                <td><strong>CPU*</strong></td>
+                <td>2</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td><strong>RAM</strong></td>
+                <td>4</td>
+                <td>32</td>
+            </tr>
+            <tr>
+                <td><strong>Storage</strong></td>
+                <td>100 MB</td>
+                <td>2 TB</td>
+            </tr>
+            <tr>
+                <td><strong>Internet Bandwidth</strong></td>
+                <td>100 Mb/s</td>
+                <td>100 Mb/s</td>
+            </tr>
+        </table>
+    </TabItem>
+</Tabs>
 
-Recommended specifications:
-- A CPU with 4+ physical cores
-- 16GB+ RAM
-- 2TB+ free disk on a high performance SSD (e.g. NVMe)
-- 25mb/s internet bandwidth
+*if using vCPU, aim for 2x the above amounts
 
 For more hardware considerations, check out the [ethereum.org guides](https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware) which explores various setups and trade-offs, such as running the node locally or in the cloud.
 
