@@ -17,7 +17,7 @@ obol20!tnt8U!C...
 ```
 
 The updated `prometheus/prometheus.yml` file should look like:
-```
+```yaml
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.
   evaluation_interval: 30s # Evaluate rules every 30 seconds.
@@ -26,6 +26,10 @@ remote_write:
   - url: https://vm.monitoring.gcp.obol.tech/write
     authorization:
       credentials: obol20!tnt8U!C...
+    write_relabel_configs:
+      - source_labels: [job]
+        regex: "charon"
+        action: keep # Keeps charon metrics and drop metrics from other containers.
 
 scrape_configs:
   - job_name: 'charon'
