@@ -61,7 +61,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node/
 
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.1 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.2 create enr
 ```
 
 You should expect to see a console output like this:
@@ -224,11 +224,11 @@ For the next step, select the _Creator_ tab if you are coordinating the creation
             <li>
               Run the <code>charon create dkg</code> command that generates DKG
               cluster-definition.json file. (Note: in the "docker run" command,
-              you may have to change the version from v0.19.0 to the correct
+              you may have to change the version from v0.19.2 to the correct
               version of the repo you are using)
               <pre>
                 docker run --rm -v "$(pwd):/opt/charon"
-                obolnetwork/charon:v0.19.0 create dkg --name="Quickstart"
+                obolnetwork/charon:v0.19.2 create dkg --name="Quickstart"
                 --num-validators=1
                 --fee-recipient-addresses="0x0000000000000000000000000000000000000000"
                 --withdrawal-addresses="0x0000000000000000000000000000000000000000"
@@ -347,7 +347,7 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
 
   </TabItem>
   <TabItem value="CLI" label="CLI">
-    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.0 dkg --publish</pre> and the DKG process should begin. 
+    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.2 dkg --publish</pre> and the DKG process should begin. 
   </TabItem>
 </Tabs>
 
