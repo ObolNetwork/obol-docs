@@ -15,7 +15,7 @@ The following non-Obol entities run relays that you can consider adding to your 
 | Entity    | Relay URL                                   |
 |-----------|---------------------------------------|
 | [DSRV](https://www.dsrvlabs.com/)      | https://charon-relay.dsrvlabs.dev     |
-| [Infstones](https://infstones.com/) | https://obol-relay.infstones.com:3640/ |
+| [Infstones](https://infstones.com/) | https://obol-relay.infstones.com/ |
 | [Hashquark](https://www.hashquark.io/) | https://relay-2.prod-relay.721.land/  |
 | [Figment](https://figment.io/)   | https://relay-1.obol.figment.io/ |
 | [Node Guardians](https://nodeguardians.io/)   | https://obol-relay.nodeguardians.io/ |
