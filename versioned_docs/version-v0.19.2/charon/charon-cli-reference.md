@@ -92,7 +92,6 @@ Usage:
 Flags:
       --cluster-dir string                The target folder to create the cluster in. (default "./")
       --definition-file string            Optional path to a cluster definition file or an HTTP URL. This overrides all other configuration flags.
-      --deposit-amounts ints              List of partial deposit amounts (integers) in ETH. Values must sum up to exactly 32ETH.
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for cluster
       --insecure-keys                     Generates insecure keystore files. This should never be used. It is not supported on mainnet.
@@ -126,7 +125,6 @@ Usage:
   charon create dkg [flags]
 
 Flags:
-      --deposit-amounts ints              List of partial deposit amounts (integers) in ETH. Values must sum up to exactly 32ETH.
       --dkg-algorithm string              DKG algorithm to use; default, frost (default "default")
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
   -h, --help                              Help for dkg

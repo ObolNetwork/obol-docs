@@ -29,12 +29,7 @@ The private key shares can be created centrally and distributed securely to each
 
 <Tabs groupId="Launchpad-other">
   <TabItem value="Launchpad" label="Launchpad" default>
-Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command, which you should run in your terminal.
-  </TabItem>
-  <TabItem value="CLI" label="CLI">
-    
-    
-1. Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">Quickstart Alone</a> demo repo and `cd` into the directory.
+    Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster. <br/>Before you run the command, checkout the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">Quickstart Alone</a> demo repo and <code>cd</code> into the directory.
 
   ```bash
   # Clone the repo
@@ -42,40 +37,45 @@ Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and 
 
   # Change directory
   cd charon-distributed-validator-cluster/
+
+  # Run the command provided in the DV Launchpad "Create a cluster alone" flow
+  docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v0.19.1 create cluster --definition-file=...
+  ```
+  </TabItem>
+
+  <TabItem value="CLI" label="CLI">
+
+1. Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster">Quickstart Alone</a> demo repo and <code>cd</code> into the directory.
+  ```bash
+  # Clone the repo
+  git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
+
+  # Change directory
+  cd charon-distributed-validator-cluster/
+  ```
+2. Run the cluster creation command, setting required flag values.
+
+  Run the below command to create the validator private key shares and cluster artifacts locally, replacing the example values for `nodes`, `network`, `num-validators`, `fee-recipient-addresses`,  and `withdrawal-addresses`.
+  Check the [Charon CLI reference](../charon/charon-cli-reference.md#create-a-full-cluster-locally) for additional, optional flags to set.
+  ```bash
+    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.1 create cluster --nodes=4 --network=holesky --num-validators=1 --name="Quickstart Guide Cluster" --cluster-dir="cluster" --fee-recipient-addresses=0x000000000000000000000000000000000000dead --withdrawal-addresses=0x000000000000000000000000000000000000dead
   ```
 
-2. Prepare the environment variables
+:::tip
+If you would like your cluster to appear on the [DV Launchpad](../dvl/intro), add the `--publish` flag to the command.
+:::
 
-`.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Setup the desired settings for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
-
-<pre>
-  <code>
-  WITHDRAWAL_ADDR=[ENTER YOUR WITHDRAWAL ADDRESS HERE]
-  <br/>
-  FEE_RECIPIENT_ADDR=[ENTER YOUR FEE RECIPIENT ADDRESS HERE]
-  <br/>
-  NETWORK="holesky"
-  </code>
-</pre>
-
- 
-3. Once you have set the values you wish to use. Make a copy of this file called `.env`.
-
-```bash
-# Copy the sample environment variables
-cp .env.sample .env
-```
-
-4.  Then, run this command to create all the key shares and cluster artifacts locally:
-
-<pre>
-  docker run --rm -v "$(pwd):/opt/charon" --env-file .env obolnetwork/charon:v0.19.0 create cluster 
-</pre>
   </TabItem>
 </Tabs>
 <br />
 
-You should now have multiple folders within `./cluster/`, one for each node created. Backup the `./cluster/` folder, then move on to deploying the cluster physically.
+After the `create cluster` command is run, you should have multiple subfolders within the newly created `./cluster/` folder, one for each node created.
+
+**Backup the `./cluster/` folder, then move on to deploying the cluster.**
+
+:::info
+Make sure your backup is secure and private, someone with access to these files could get the validators slashed.
+:::
 
 ## Step 2: Deploy and start the nodes
 
