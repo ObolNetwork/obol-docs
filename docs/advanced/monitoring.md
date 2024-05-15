@@ -10,7 +10,7 @@ To explain quickly, Prometheus generates the metrics and Grafana visualizes them
 
 The local Grafana server will have a few pre-built dashboards - 
 
-1. Charon Overview : This is the main dashboard that provides all the relavant details about the  charon node, for example, peer connectivity, duty completion, health of beacon node and downstream validator etc.  To open, navigate to  `charon-distributed-validator-node` directory and run following command in the terminal `open http://localhost:3000/d/d6qujIJVk/` . 
+1. Charon Overview : This is the main dashboard that provides all the relavant details about the  charon node, for example, peer connectivity, duty completion, health of beacon node and downstream validator etc.  To open, navigate to  `charon-distributed-validator-node` directory and open the following `uri`  in the browser `http://localhost:3000/d/d6qujIJVk/` . 
 2. Single Charon Node Dashboard (deprecated) - This is an older dashboard charon node monitoring which is now deprecated. If you are still using it, we would highly recommend to move to Charon Overview for most up to date panels.
 3. Charon Log Dashboard - This dashboard can be used to query the logs emitted while running your charon node . It utilizes [Grafana Loki](https://grafana.com/oss/loki/). This dashboard is not active by default and should only be used in debug mode. Refer to [advanced docker config](./adv-docker-configs) section on how to set up a debug mode.
 
