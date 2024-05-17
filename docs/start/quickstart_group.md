@@ -416,7 +416,7 @@ You should use the grafana dashboard that accompanies the quickstart repo to see
 
 ```bash
 # Open Grafana dashboard
-open http://localhost:3000/d/singlenode/
+open http://localhost:3000/d/d6qujIJVk/
 ```
 
 In particular you should check:
