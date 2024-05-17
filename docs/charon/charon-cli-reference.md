@@ -24,11 +24,12 @@ Usage:
 
 Available Commands:
   alpha       Alpha subcommands provide early access to in-development features
-  combine     Combines the private key shares of a distributed validator cluster into a set of standard validator private keys.
+  combine     Combine the private key shares of a distributed validator cluster into a set of standard validator private keys
   completion  Generate the autocompletion script for the specified shell
   create      Create artifacts for a distributed validator cluster
   dkg         Participate in a Distributed Key Generation ceremony
-  enr         Prints a new ENR for this node
+  enr         Print the ENR that identifies this client
+  exit        Exit a distributed validator.
   help        Help about any command
   relay       Start a libp2p relay server
   run         Run the charon middleware client
@@ -40,9 +41,9 @@ Flags:
 Use "charon [command] --help" for more information about a command.
 ```
 
-## The `create` subcommand
+## The `create` command
 
-The `create` subcommand handles the creation of artifacts needed by charon to operate.
+The `create` command handles the creation of artifacts needed by charon to operate.
 
 ```markdown
 charon create --help
@@ -80,11 +81,15 @@ Flags:
 
 ### Create a full cluster locally
 
-`charon create cluster` creates a set of distributed validators locally, including the private keys, a `cluster-lock.json` file, and deposit and exit data. However, this command should only be used for solo use of distributed validators. To run a Distributed Validator with a group of operators, it is preferable to create these artifacts using the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
+The `charon create cluster` command creates a set of distributed validators locally; including the private keys, a `cluster-lock.json` file, and deposit data. This command should only be used for solo-operation of distributed validators. To run a distributed validator cluster with a group of operators, it is preferable to create these artifacts using the [DV Launchpad](../dvl/intro.md) and the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
+
+:::caution
+This command produces new distributed validator private keys or handles and splits pre-existing traditional validator private keys, please use caution and keep these private keys securely backed up and secret.
+:::
 
 ```markdown
 charon create cluster --help
-Creates a local charon cluster configuration including validator keys, charon p2p keys, cluster-lock.json and a deposit-data.json. See flags for supported features.
+Creates a local charon cluster configuration including validator keys, charon p2p keys, cluster-lock.json and deposit-data.json file(s). See flags for supported features.
 
 Usage:
   charon create cluster [flags]
@@ -139,7 +144,7 @@ Flags:
       --withdrawal-addresses strings      Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
 ```
 
-## The `dkg` subcommand
+## The `dkg` command
 
 ### Performing a DKG Ceremony
 
@@ -155,7 +160,7 @@ Usage:
   charon dkg [flags]
 
 Flags:
-      --data-dir string                The directory where charon will store all its internal data (default ".charon")
+      --data-dir string                The directory where charon will store all its internal data. (default ".charon")
       --definition-file string         The path to the cluster definition file or an HTTP URL. (default ".charon/cluster-definition.json")
   -h, --help                           Help for dkg
       --keymanager-address string      The keymanager URL to import validator keyshares.
@@ -165,19 +170,17 @@ Flags:
       --log-level string               Log level; debug, info, warn or error (default "info")
       --log-output-path string         Path in which to write on-disk logs.
       --no-verify                      Disables cluster definition and lock file verification.
-      --p2p-allowlist string           Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
-      --p2p-denylist string            Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-disable-reuseport          Disables TCP port reuse for outgoing libp2p connections.
       --p2p-external-hostname string   The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string         The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings             Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
+      --p2p-relays strings             Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --publish                        Publish lock file to obol-api.
-      --publish-address string         The URL to publish the lock file to. (default "https://api.obol.tech")
+      --publish                        Publish the created cluster to a remote API.
+      --publish-address string         The URL to publish the cluster to. (default "https://api.obol.tech")
       --shutdown-delay duration        Graceful shutdown delay. (default 1s)
 ```
 
-## The `run` subcommand
+## The `run` command
 
 ### Run the Charon middleware
 
@@ -193,14 +196,14 @@ Usage:
 Flags:
       --beacon-node-endpoints strings      Comma separated list of one or more beacon node endpoint URLs.
       --builder-api                        Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
-      --debug-address string               Listening address (ip and port) for the pprof and QBFT debug API.
+      --debug-address string               Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
       --feature-set string                 Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
       --feature-set-disable strings        Comma-separated list of features to disable, overriding the default minimum feature set.
       --feature-set-enable strings         Comma-separated list of features to enable, overriding the default minimum feature set.
   -h, --help                               Help for run
       --jaeger-address string              Listening address for jaeger tracing.
       --jaeger-service string              Service name used for jaeger tracing. (default "charon")
-      --lock-file string                   The path to the cluster lock file defining distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
+      --lock-file string                   The path to the cluster lock file defining the distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
       --log-color string                   Log color; auto, force, disable. (default "auto")
       --log-format string                  Log format; console, logfmt or json (default "console")
       --log-level string                   Log level; debug, info, warn or error (default "info")
@@ -213,7 +216,7 @@ Flags:
       --p2p-disable-reuseport              Disables TCP port reuse for outgoing libp2p connections.
       --p2p-external-hostname string       The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string             The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                 Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
+      --p2p-relays strings                 Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
       --p2p-tcp-address strings            Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --private-key-file string            The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
       --private-key-file-lock              Enables private key locking to prevent multiple instances using the same key.
@@ -230,11 +233,123 @@ Flags:
       --validator-api-address string       Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
 
-## The `combine` subcommand
+## The `exit` command
 
-### Combine distributed validator key shares into a single Validator key
+A running charon client will [aggregate and broadcast](../start/quickstart-exit.md) signed exit messages it receives from its valdiator client immediately. These `exit` commands are instead used to *pre-sign* exit messages for an active distributed validator, to save to disk, or to broadcast; once enough of the operators of the cluster have submitted their partial exit signatures. Fully signed exit messages give a user or protocol a guarantee that they can exit an active validator at any point in future without the further assistance of the cluster's operators. In future, [execution-layer initiated exits](https://eips.ethereum.org/EIPS/eip-7002) will provide an even stronger guarantee that a validator can be exited by the withdrawal address it belongs to.
+
+```markdown
+charon exit --help
+Sign and broadcast distributed validator exit messages using a remote API.
+
+Usage:
+  charon exit [command]
+
+Available Commands:
+  active-validator-list List all active validators
+  broadcast             Submit partial exit message for a distributed validator
+  fetch                 Fetch a signed exit message from the remote API
+  sign                  Sign partial exit message for a distributed validator
+
+Flags:
+  -h, --help   Help for exit
+
+Use "charon exit [command] --help" for more information about a command.
+```
+
+### Pre-sign exit messages for active validators
+
+:::caution
+This command requires charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
+
+The default `publish-address` for this command sends signed exit messages to Obol's [API](/api) for aggregation and distribution. Exit signatures are stored in line with Obol's [terms and contiditions](https://obol.tech/terms.pdf).
+:::
+
+This command submits partial exit signatures to the remote API for aggregation. The required flags are `--beacon-node-url` and `--validator-public-key` of the validator you wish to exit. An exit message can only be signed for a validator that is fully deposited and assigned a validator index.
+
+
+```markdown
+charon exit sign --help
+Sign a partial exit message for a distributed validator and submit it to a remote API for aggregation.
+
+Usage:
+  charon exit sign [flags]
+
+Flags:
+      --beacon-node-timeout duration   Timeout for beacon node HTTP calls. (default 30s)
+      --beacon-node-url string         Beacon node URL. [REQUIRED]
+      --exit-epoch uint                Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+  -h, --help                           Help for sign
+      --lock-file string               The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string               Log color; auto, force, disable. (default "auto")
+      --log-format string              Log format; console, logfmt or json (default "console")
+      --log-level string               Log level; debug, info, warn or error (default "info")
+      --log-output-path string         Path in which to write on-disk logs.
+      --private-key-file string        The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string         The URL of the remote API. (default "https://api.obol.tech")
+      --validator-keys-dir string      Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string    Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+```
+
+### Download fully signed exit messages for cold storage
+
+Once enough operators have submitted their partial signatures for an active validator, you can use the `charon exit fetch` command to download the complete exit message to a file for safe keeping. This file can be given to a delegator who wants a guarantee that they can exit the distributed validator if need be.
+
+```markdown
+charon exit fetch --help
+Fetches a fully signed exit message for a given validator from the remote API and writes it to disk.
+
+Usage:
+  charon exit fetch [flags]
+
+Flags:
+  -h, --help                          Help for fetch
+      --lock-file string              The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string              Log color; auto, force, disable. (default "auto")
+      --log-format string             Log format; console, logfmt or json (default "console")
+      --log-level string              Log level; debug, info, warn or error (default "info")
+      --log-output-path string        Path in which to write on-disk logs.
+      --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
+      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+```
+
+### Broadcast a signed exit message
+
+The `charon exit broadcast` subcommand can be used to broadcast either a signed exit message from a file that was downloaded via the `fetch` command, or it can retrieve and broadcast an exit message directly from the API.
+
+```markdown
+charon exit broadcast --exit
+Retrieves and broadcasts to the configured beacon node a fully signed validator exit message, aggregated with the available partial signatures retrieved from the publish-address. Can also read a signed exit message from disk, in order to be broadcasted to the configured beacon node.
+
+Usage:
+  charon exit broadcast [flags]
+
+Flags:
+      --beacon-node-timeout duration   Timeout for beacon node HTTP calls. (default 30s)
+      --beacon-node-url string         Beacon node URL. [REQUIRED]
+      --exit-epoch uint                Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+      --exit-from-file string          Retrieves a signed exit message from a pre-prepared file instead of --publish-address.
+  -h, --help                           Help for broadcast
+      --lock-file string               The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string               Log color; auto, force, disable. (default "auto")
+      --log-format string              Log format; console, logfmt or json (default "console")
+      --log-level string               Log level; debug, info, warn or error (default "info")
+      --log-output-path string         Path in which to write on-disk logs.
+      --private-key-file string        The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string         The URL of the remote API. (default "https://api.obol.tech")
+      --validator-keys-dir string      Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string    Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+```
+
+## The `combine` command
+
+### Combine distributed validator key shares into a single validator key
 
 The `combine` command combines many validator key shares into a single Ethereum validator key.
+
+:::caution
+This command requires charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
+:::
 
 ```markdown
 charon combine --help
@@ -304,7 +419,7 @@ Those files must be named with an increasing index associated with the validator
 
 The chosen folder name does not matter, as long as it's different from `.charon`.
 
-At the end of the process `combine` will create a new set of directories containing one validator key each, named after its public key:
+At the end of the process `combine` will create a new directory specified by `--output-dir` containing the traditional validator private keystore.
 
 ```shell
 charon combine --cluster-dir="./cluster" --output-dir="./combined"
@@ -361,3 +476,29 @@ Flags:
       --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
 You can also consider adding [alternative public relays](../faq/risks.md) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).
+
+## Experimental commands
+
+These commands are subject to breaking changes until they are moved outside of the `alpha` subcommand in a future release.
+
+### Test your candidate distributed validator cluster
+
+Charon comes with a test suite for understanding the suitability and readiness of a given setup.
+
+```markdown
+charon alpha test --help
+Test subcommands provide test suite to evaluate current cluster setup. Currently there is support for peer connection tests, beacon node and validator API.
+
+Usage:
+  charon alpha test [command]
+
+Available Commands:
+  beacon      Run multiple tests towards beacon nodes
+  peers       Run multiple tests towards peer nodes
+  validator   Run multiple tests towards validator client
+
+Flags:
+  -h, --help   Help for test
+
+Use "charon alpha test [command] --help" for more information about a command.
+```
