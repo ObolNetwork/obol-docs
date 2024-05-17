@@ -40,6 +40,6 @@ Peer Score v0 lays the foundation for a more comprehensive evaluation system. Pl
 
 Peer Score offers valuable insights for various stakeholders:
 
-- **Staking/Restaking Protocols:** Peer Score is crucial component of Obol’s Techne Credential Program. LSPs and LRPs can utilize Techne Credentials ,and hence Peer Score, to identify efficient operators for expanding their validator sets.
+- **Staking/Restaking Protocols:** Peer Score is crucial component of Obol’s Techne Credential Program. LSPs and LRPs can utilize Techne Credentials ,and hence Peer Score, to identify efficient operators for expanding their operator sets.
 - **DV Operators:** Forming operator collectives based on peer effectiveness and potentially removing underperforming peers from DVs (with Charon v2 cluster mutability).
 - **DV Software Developers:** Establishing a standardized metric for evaluating operator performance across various DV software, enabling the development of new tools and services.
