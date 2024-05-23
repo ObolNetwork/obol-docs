@@ -6,7 +6,7 @@ Obol sdk Client can be used for creating, managing and activating distributed va
 
 ## Constructors
 
-### new Client(config, signer)
+### new Client()
 
 > **new Client**(`config`, `signer`?): [`Client`](Client.md)
 
@@ -14,7 +14,7 @@ Obol sdk Client can be used for creating, managing and activating distributed va
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `config` | `Object` | Client configurations |
+| `config` | `object` | Client configurations |
 | `config.baseUrl`? | `string` | obol-api url |
 | `config.chainId`? | `number` | Blockchain network ID |
 | `signer`? | `Signer` | ethersJS Signer |
@@ -34,13 +34,35 @@ An example of how to instantiate obol-sdk Client:
 
 #### Source
 
-index.ts:30
+index.ts:45
 
 ## Methods
 
+### acceptObolLatestTermsAndConditions()
+
+> **acceptObolLatestTermsAndConditions**(): `Promise`\<`string`\>
+
+Accepts Obol terms and conditions to be able to create or update data.
+
+#### Returns
+
+`Promise`\<`string`\>
+
+terms and conditions acceptance success message.
+
+#### Throws
+
+On unverified signature or wrong hash.
+
+#### Source
+
+index.ts:59
+
+***
+
 ### createClusterDefinition()
 
-> **createClusterDefinition**(`newCluster`): `Promise`< `string` \>
+> **createClusterDefinition**(`newCluster`): `Promise`\<`string`\>
 
 Creates a cluster definition which contains cluster configuration.
 
@@ -48,11 +70,11 @@ Creates a cluster definition which contains cluster configuration.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `newCluster` | [`ClusterPayload`](../type-aliases/ClusterPayload.md) | The new unique cluster. |
+| `newCluster` | [`ClusterPayload`](../interfaces/ClusterPayload.md) | The new unique cluster. |
 
 #### Returns
 
-`Promise`< `string` \>
+`Promise`\<`string`\>
 
 config_hash.
 
@@ -65,13 +87,13 @@ An example of how to use createClusterDefinition:
 
 #### Source
 
-index.ts:45
+index.ts:105
 
 ***
 
 ### acceptClusterDefinition()
 
-> **acceptClusterDefinition**(`operatorPayload`, `configHash`): `Promise`< [`ClusterDefintion`](../interfaces/ClusterDefintion.md) \>
+> **acceptClusterDefinition**(`operatorPayload`, `configHash`): `Promise` \<[`ClusterDefinition`](../interfaces/ClusterDefinition.md)\>
 
 Approves joining a cluster with specific configuration.
 
@@ -84,7 +106,7 @@ Approves joining a cluster with specific configuration.
 
 #### Returns
 
-`Promise`< [`ClusterDefintion`](../interfaces/ClusterDefintion.md) \>
+`Promise` \<[`ClusterDefinition`](../interfaces/ClusterDefinition.md)\>
 
 The cluster definition.
 
@@ -97,13 +119,13 @@ An example of how to use acceptClusterDefinition:
 
 #### Source
 
-index.ts:96
+index.ts:163
 
 ***
 
 ### getClusterDefinition()
 
-> **getClusterDefinition**(`configHash`): `Promise`< [`ClusterDefintion`](../interfaces/ClusterDefintion.md) \>
+> **getClusterDefinition**(`configHash`): `Promise` \<[`ClusterDefinition`](../interfaces/ClusterDefinition.md)\>
 
 #### Parameters
 
@@ -113,7 +135,7 @@ index.ts:96
 
 #### Returns
 
-`Promise`< [`ClusterDefintion`](../interfaces/ClusterDefintion.md) \>
+`Promise` \<[`ClusterDefinition`](../interfaces/ClusterDefinition.md)\>
 
 The  cluster definition for config hash
 
@@ -126,13 +148,13 @@ An example of how to use getClusterDefinition:
 
 #### Source
 
-index.ts:136
+index.ts:215
 
 ***
 
 ### getClusterLock()
 
-> **getClusterLock**(`configHash`): `Promise`< [`ClusterLock`](../type-aliases/ClusterLock.md) \>
+> **getClusterLock**(`configHash`): `Promise` \<[`ClusterLock`](../interfaces/ClusterLock.md)\>
 
 #### Parameters
 
@@ -142,7 +164,7 @@ index.ts:136
 
 #### Returns
 
-`Promise`< [`ClusterLock`](../type-aliases/ClusterLock.md) \>
+`Promise` \<[`ClusterLock`](../interfaces/ClusterLock.md)\>
 
 The matched cluster details (lock) from DB
 
@@ -155,4 +177,4 @@ An example of how to use getClusterLock:
 
 #### Source
 
-index.ts:152
+index.ts:234

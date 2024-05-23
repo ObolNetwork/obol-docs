@@ -1,4 +1,4 @@
-> **validateClusterLock**(`lock`): `Promise`< `boolean` \>
+> **validateClusterLock**(`lock`): `Promise`\<`boolean`\>
 
 Verifies Cluster Lock's validity.
 
@@ -6,11 +6,11 @@ Verifies Cluster Lock's validity.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `lock` | [`ClusterLock`](../type-aliases/ClusterLock.md) | cluster lock |
+| `lock` | [`ClusterLock`](../interfaces/ClusterLock.md) | cluster lock |
 
 ## Returns
 
-`Promise`< `boolean` \>
+`Promise`\<`boolean`\>
 
 boolean result to indicate if lock is valid
 
