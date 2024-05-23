@@ -47,10 +47,10 @@ This quickstart guide will walk you through creating a Distributed Validator Clu
   </li>
 </ul>
 
-<br />
-
-## Step 1: Generate an ENR
-
+## Step 1: Get your ENR
+<Tabs groupId="Get-ENR">
+  <TabItem value="CLI" label="CLI">
+  
 In order to prepare for a distributed key generation ceremony, you need to create an ENR for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
 
 ```bash
@@ -76,8 +76,87 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 :::tip
 If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update your docker permissions](../faq/errors.mdx#docker-permission-denied-error) to allow the command to run successfully.
 :::
+</TabItem>
+<TabItem value="Dappnode" label="Dappnode">
 
-For the next step, select the _Creator_ tab if you are coordinating the creation of the cluster. (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to.) Select the _Operator_ tab if you are accepting an invitation to operate a node in a cluster proposed by the cluster creator.
+## Prerequistes
+<ul>
+<li>
+    DappNode machine with internet connection. 
+  </li>
+</ul>
+
+## Prepare EL & CL on DappNode
+
+Before we create the configs for a validator, ensure you have selected an execution client & consensus client on your DappNode under the stakers tab.
+
+<p>
+          <ol>
+            <li>
+              Login to DappNode: <a href="http://my.dappnode/dashboard" target="_blank">
+          Dappnode Login
+        </a>
+              <img src="/img/dappnodeLogin.png" alt="Dappnode Login" />
+            </li>
+            <li>
+              Click on Stakers tab on the left side, select an execution client (Geth) & consensus client (Lodestar) & click apply changes. This will start the syncing process which can take few hrs/days. 
+              <img src="/img/SelectClients.png" alt="Select Clients" />
+            </li>
+            <li>
+              Once EL & CL is finished syncing, it should reflect on your dashboard as shown below. 
+              <img src="/img/Dashboard.png" alt="Dashboard" />
+            </li>
+            </ol>
+        </p>
+
+## Install the Obol DappNode package
+The below steps will provide guidance on how to install the Obol Holesky package for DappNode. 
+<p>
+  <ol>
+    <li>
+      Before installing the package, always go to the Obol DappNode Repo in order to get the latest IPFS hash.
+      <ul>
+        <li><a href="https://github.com/dappnode/DAppNodePackage-holesky-obol/releases" target="_blank">Holesky Repo</a></li>
+        <li><a href="https://github.com/dappnode/DAppNodePackage-obol/releases" target="_blank">Mainnet Repo</a></li>
+      </ul>
+    </li>
+    <li>
+      Copy the latest IPFS hash from the release details dropdown.
+      <img src="/img/DappnodeRepo.png" alt="Retrieve IPFS Hash" />
+    </li>
+    <li>
+      Go back to DappNode Dashboard > Dappstore, select the “Public” tab, and accept the terms & conditions before proceeding. 
+      <img src="/img/PublicTab.png" alt="Select Public Tab" />
+    </li>
+    <li>
+      Paste the IPFS hash you copied from github and click search (It may take a minute for the package to be found.) You will then be presented with package install page. Under the blue install button, click on advanced options & toggle the button to "bypass only signed safe restriction".  
+      <img src="/img/BypassButton.png" alt="bypass only signed safe restriction" />
+    </li>
+    <li>
+      Click install & in the config mode page > select new cluster & submit. (if you already have the config URL, you can select URL option.)
+      <img src="/img/InstallPAckage.png" alt="Install Package" />
+    </li>
+    <li>
+      Accept the terms & conditions and the install process will start straight afterwards. 
+      <img src="/img/TermsAndConditions.png" alt="Accept terms and conditions" />
+      <img src="/img/PackageInstalling.png" alt="Package Installing" />
+    </li>
+    <li>
+      You should now be able to see the Holesky Obol package under the packages tab. Click on the package to see further details. 
+      <img src="/img/PackagesTab.png" alt="Go to packages tab" />
+    </li>
+    <li>
+      Under the Info tab, you will be able to see the pre-generated ENRs, status of all five validator containers, their volumes & other menu options. 
+      <img src="/img/GetENR.png" alt="Get your ENR" />
+    </li>
+    <li>
+      Choose any of the ENRs listed that are not already in use. Now that you have your ENR, you can proceed to the next step!
+    </li>
+  </ol>
+</p>
+</TabItem>
+</Tabs> 
+For Step 2, select the "Creator" tab if you are coordinating the creation of the cluster (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to). Select the "Operator" tab if you are accepting an invitation to operate a node in a cluster, proposed by the cluster creator.
 
 ## Step 2: Create a cluster or accept an invitation to a cluster
 
