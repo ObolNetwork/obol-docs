@@ -37,7 +37,7 @@ const sidebars = {
         "type": "category",
         "label": "Classes",
         "collapsible": true,
-        "collapsed": true,
+        "collapsed": false,
         "items": [
           {
             "type": "doc",
