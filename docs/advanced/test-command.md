@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 The charon test command is in alpha state and should be used with caution on testnets only.
 :::
 
-Charon test command is evaluates effectiveness of the network between the machine it is running on and the targeted external service - other Charon peers, beacon node(s) or validator client. It prints a performance report to the standard output (can be omitted by with `quiet` flag) and a machine-readable TOML format of the report if `output-toml` flag is set.
+Charon test command evaluates network performance and effectiveness of the machine it is running on and the targeted external service - other Charon peers, beacon node(s) or validator client. It prints a performance report to the standard output (can be omitted by with `quiet` flag) and a machine-readable TOML format of the report if `output-toml` flag is set.
 
 ## Peers
 
