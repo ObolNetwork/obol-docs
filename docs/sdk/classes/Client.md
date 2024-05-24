@@ -54,6 +54,9 @@ terms and conditions acceptance success message.
 
 On unverified signature or wrong hash.
 
+An example of how to use acceptObolLatestTermsAndConditions:
+[acceptObolLatestTermsAndConditions](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L44)
+
 #### Source
 
 index.ts:59
@@ -83,7 +86,7 @@ config_hash.
 On duplicate entries, missing or wrong cluster keys.
 
 An example of how to use createClusterDefinition:
-[createObolCluster](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts)
+[createObolCluster](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L59)
 
 #### Source
 
@@ -115,7 +118,7 @@ The cluster definition.
 On unauthorized, duplicate entries, missing keys, not found cluster or invalid data.
 
 An example of how to use acceptClusterDefinition:
-[acceptClusterDefinition](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts)
+[acceptClusterDefinition](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L106)
 
 #### Source
 
@@ -144,7 +147,7 @@ The  cluster definition for config hash
 On not found config hash.
 
 An example of how to use getClusterDefinition:
-[getObolClusterDefinition](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts)
+[getObolClusterDefinition](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L74)
 
 #### Source
 
@@ -173,7 +176,7 @@ The matched cluster details (lock) from DB
 On not found cluster definition or lock.
 
 An example of how to use getClusterLock:
-[getObolClusterLock](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts)
+[getObolClusterLock](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L89)
 
 #### Source
 

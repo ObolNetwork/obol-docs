@@ -19,7 +19,7 @@ boolean result to indicate if lock is valid
 on missing keys or values.
 
 An example of how to use validateClusterLock:
-[validateClusterLock](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts)
+[validateClusterLock](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L127)
 
 ## Source
 
