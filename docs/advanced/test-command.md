@@ -24,7 +24,7 @@ To be able to establish direct connection, you have to ensure:
 - You add flag `p2p-tcp-address` (i.e.: `127.0.0.1:9001`) flag and the port specified in it is free and publicly accessible.
 - You add the flag `p2p-external-ip` (i.e.: `8.8.8.8`) and specify your public ip.
 
-If all points are satisfied by you and the other peers, you should be able to establish a direct TCP connection between each other. Note that a relay is still required, as establishing direct connection is facilitated by it.
+If all points are satisfied by you and the other peers, you should be able to establish a direct TCP connection between each other. Note that a relay is still required, as it is used for peer discovery. 
 
 ### Pre-requisites
 
