@@ -45,9 +45,13 @@ This quickstart guide will walk you through creating a Distributed Validator Clu
     Make sure <code>docker</code> is running before executing the commands
     below.
   </li>
+  <li>
+    (If you are taking part using a DappNode) A computer with an up to date version of <a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank"> DappNode</a>'s software and an internet connection.
+  </li>
 </ul>
 
 ## Step 1: Get your ENR
+
 <Tabs groupId="Get-ENR">
   <TabItem value="CLI" label="CLI">
   
@@ -79,42 +83,38 @@ If instead of being shown your `enr` you see an error saying `permission denied`
 </TabItem>
 <TabItem value="Dappnode" label="Dappnode">
 
-## Prerequistes
-<ul>
-<li>
-    DappNode machine with internet connection. 
-  </li>
-</ul>
+#### Prepare an Execution and Consensus client
 
-## Prepare EL & CL on DappNode
-
-Before we create the configs for a validator, ensure you have selected an execution client & consensus client on your DappNode under the stakers tab.
+Before preparing the DappNode to take part in a Distributed Validator Cluster, you must ensure you have selected an execution client & consensus client on your DappNode under the 'Stakers' tab for the network you intend to validate.
 
 <p>
           <ol>
             <li>
-              Login to DappNode: <a href="http://my.dappnode/dashboard" target="_blank">
-          Dappnode Login
-        </a>
+              Login to the DappNode Interface:{" "}
+              <a href="http://my.dappnode/dashboard" target="_blank">
+                Dappnode Login
+              </a>
               <img src="/img/dappnodeLogin.png" alt="Dappnode Login" />
             </li>
             <li>
-              Click on Stakers tab on the left side, select an execution client (Geth) & consensus client (Lodestar) & click apply changes. This will start the syncing process which can take few hrs/days. 
+              Click on the 'Stakers' tab on the left side, select an execution client (e.g. Geth) & consensus client (e.g. Lodestar) & click 'Apply changes'. This will start the syncing process which can take a number of hours.
               <img src="/img/SelectClients.png" alt="Select Clients" />
             </li>
             <li>
-              Once EL & CL is finished syncing, it should reflect on your dashboard as shown below. 
-              <img src="/img/Dashboard.png" alt="Dashboard" />
+              Once the clients are finished syncing, it should reflect on your 'Dashboard' as shown below.
+              <img src="/img/Dashboard.png" alt="Dashboard showing chains are synced and their status are healthy" />
             </li>
             </ol>
         </p>
 
-## Install the Obol DappNode package
-The below steps will provide guidance on how to install the Obol Holesky package for DappNode. 
+#### Install the Obol DappNode package
+
+With a fully synced Ethereum node now running on the DappNode, the below steps will walk through installing the Obol Holesky package via an IPFS hash and preparing for a Distributed Key Generation ceremony. Future versions of this guide will download the package from the official DappNode DappStore once a stable 1.0 release is made.
+
 <p>
   <ol>
     <li>
-      Before installing the package, always go to the Obol DappNode Repo in order to get the latest IPFS hash.
+      Before installing the package, go to the Obol DappNode Repo in order to get the latest IPFS hash.
       <ul>
         <li><a href="https://github.com/dappnode/DAppNodePackage-holesky-obol/releases" target="_blank">Holesky Repo</a></li>
         <li><a href="https://github.com/dappnode/DAppNodePackage-obol/releases" target="_blank">Mainnet Repo</a></li>
@@ -125,32 +125,32 @@ The below steps will provide guidance on how to install the Obol Holesky package
       <img src="/img/DappnodeRepo.png" alt="Retrieve IPFS Hash" />
     </li>
     <li>
-      Go back to DappNode Dashboard > Dappstore, select the “Public” tab, and accept the terms & conditions before proceeding. 
+      Go back to DappNode Dashboard > Dappstore, select the 'Public' tab, and accept the terms & conditions before proceeding.
       <img src="/img/PublicTab.png" alt="Select Public Tab" />
     </li>
     <li>
-      Paste the IPFS hash you copied from github and click search (It may take a minute for the package to be found.) You will then be presented with package install page. Under the blue install button, click on advanced options & toggle the button to "bypass only signed safe restriction".  
+      Paste the IPFS hash you copied from Github and click 'Search' (It may take a minute for the package to be found.) You will then be presented with the package installation page. Under the blue 'Install' button, click on 'Advanced Options' & toggle the button to 'Bypass only signed safe restriction'.
       <img src="/img/BypassButton.png" alt="bypass only signed safe restriction" />
     </li>
     <li>
-      Click install & in the config mode page > select new cluster & submit. (if you already have the config URL, you can select URL option.)
+      Click 'Install' & in the config mode page > select new cluster & submit. (if you already have the config URL, you can select URL option.)
       <img src="/img/InstallPAckage.png" alt="Install Package" />
     </li>
     <li>
-      Accept the terms & conditions and the install process will start straight afterwards. 
+      Accept the terms & conditions and the install process will begin.
       <img src="/img/TermsAndConditions.png" alt="Accept terms and conditions" />
       <img src="/img/PackageInstalling.png" alt="Package Installing" />
     </li>
     <li>
-      You should now be able to see the Holesky Obol package under the packages tab. Click on the package to see further details. 
+      You should now be able to see the Holesky Obol package under the 'Packages' tab. Click on the package to see important details.
       <img src="/img/PackagesTab.png" alt="Go to packages tab" />
     </li>
     <li>
-      Under the Info tab, you will be able to see the pre-generated ENRs, status of all five validator containers, their volumes & other menu options. 
+      Under the 'Info' tab, you will be see pre-generated ENRs, along with information such as the status of all five distributed validator clusters, their docker volumes & other menu options.
       <img src="/img/GetENR.png" alt="Get your ENR" />
     </li>
     <li>
-      Choose any of the ENRs listed that are not already in use. Now that you have your ENR, you can proceed to the next step!
+      Select any of the ENRs listed that are not already in use. This ENR will be used in the next step.
     </li>
   </ol>
 </p>
@@ -438,7 +438,6 @@ Please make sure to create a backup of your `.charon/` folder. **If you lose you
 The `cluster-lock` and `deposit-data` files are identical for each operator, if lost, they can be copied from one operator to another.
 :::
 
-
 Now that the DKG has been completed, all operators can start their nodes.
 
 ## Step 4: Start your Distributed Validator Node
@@ -447,13 +446,11 @@ With the DKG ceremony over, the last phase before activation is to prepare your 
 
 <Tabs groupId="Full-Pre-Existing">
   <TabItem value="Full Node" label="Full Node" default>
-    The quickstart <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>). You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests. 
-
+    The quickstart <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>). You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests.
 
 <Tabs groupId="Docker-Helm">
   
   <TabItem value="Docker" label="Docker" default>
-    
 
 :::info
 Currently, the quickstart [repo](https://github.com/ObolNetwork/charon-distributed-validator-node) configures a node for the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file.
@@ -467,6 +464,7 @@ Setup the desired inputs for the DV, including the network you wish to operate o
 # Copy ".env.sample", renaming it ".env"
 cp .env.sample .env
 ```
+
 :::
 
 :::caution
@@ -525,7 +523,6 @@ You might notice that there are logs indicating that a validator cannot be found
 
 <TabItem value="Existing Beacon Node" label="Existing Beacon Node">
 
-
 #### Using a pre-existing beacon node
 
 :::caution
@@ -582,9 +579,8 @@ docker compose up -d
   </TabItem>
 </Tabs>
 
-
 :::tip
 In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../charon/networking.md).
 :::
 
-If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to activating your validator to begin staking. 
+If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to activating your validator to begin staking.
