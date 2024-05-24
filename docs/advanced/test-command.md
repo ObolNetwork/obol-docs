@@ -20,7 +20,7 @@ Run tests towards other Charon peers to evaluate the effectiveness of a potentia
 
 To be able to establish direct connection, you have to ensure:
 
-- Your machine is publicly accessible on the internet or atleast a specific port is.
+- Your machine is publicly accessible on the internet or at least a specific port is.
 - You add flag `p2p-tcp-address` (i.e.: `127.0.0.1:9001`) flag and the port specified in it is free and publicly accessible.
 - You add the flag `p2p-external-ip` (i.e.: `8.8.8.8`) and specify your public ip.
 
@@ -28,7 +28,7 @@ If all points are satisfied by you and the other peers, you should be able to es
 
 ### Pre-requisites
 
-- [Create ENR](http://localhost:3000/docs/next/charon/charon-cli-reference#creating-an-enr-for-charon).
+- [Create ENR](../charon/charon-cli-reference#creating-an-enr-for-charon).
 - Share your ENR with other peers which will test against you.
 - Obtain the ENRs of the other peers against which you will test.
 
