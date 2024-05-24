@@ -22,20 +22,20 @@ Checkout our [docs](https://docs.obol.tech/docs/advanced/quickstart-sdk), [examp
 
 ## Interfaces
 
-- [ClusterDefintion](interfaces/ClusterDefintion.md)
+- [ClusterOperator](interfaces/ClusterOperator.md)
+- [ClusterCreator](interfaces/ClusterCreator.md)
+- [ClusterValidator](interfaces/ClusterValidator.md)
+- [ClusterPayload](interfaces/ClusterPayload.md)
+- [ClusterDefinition](interfaces/ClusterDefinition.md)
+- [BuilderRegistrationMessage](interfaces/BuilderRegistrationMessage.md)
+- [BuilderRegistration](interfaces/BuilderRegistration.md)
+- [DepositData](interfaces/DepositData.md)
+- [DistributedValidator](interfaces/DistributedValidator.md)
+- [ClusterLock](interfaces/ClusterLock.md)
 
 ## Type Aliases
 
-- [ClusterOperator](type-aliases/ClusterOperator.md)
 - [OperatorPayload](type-aliases/OperatorPayload.md)
-- [ClusterCreator](type-aliases/ClusterCreator.md)
-- [ClusterValidator](type-aliases/ClusterValidator.md)
-- [ClusterPayload](type-aliases/ClusterPayload.md)
-- [BuilderRegistrationMessage](type-aliases/BuilderRegistrationMessage.md)
-- [BuilderRegistration](type-aliases/BuilderRegistration.md)
-- [DepositData](type-aliases/DepositData.md)
-- [DistributedValidator](type-aliases/DistributedValidator.md)
-- [ClusterLock](type-aliases/ClusterLock.md)
 
 ## Functions
 
