@@ -21,103 +21,205 @@ const sidebars = {
       "id": "sdk/index",
       "label":"Intro"
     },
-    {
-      "type": "category",
-      "label": "Enumerations",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/enumerations/FORK_MAPPING",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "Classes",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/classes/Client",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "Interfaces",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/interfaces/ClusterDefintion",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "Type-Aliases",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/BuilderRegistration",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/BuilderRegistrationMessage",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/ClusterCreator",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/ClusterLock",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/ClusterOperator",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/ClusterPayload",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/ClusterValidator",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/DepositData",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/DistributedValidator",
-        },
-        {
-          "type": "doc",
-          "id": "sdk/type-aliases/OperatorPayload",
-        },
-      ],
-    },
-    {
-      "type": "category",
-      "label": "Functions",
-      "collapsible": true,
-      "collapsed": true,
-      "items": [
-        {
-          "type": "doc",
-          "id": "sdk/functions/validateClusterLock",
-        },
-      ],
-    },
-  ],
+      {
+        "type": "category",
+        "label": "Enumerations",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "doc",
+            "id": "sdk/enumerations/FORK_MAPPING"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Classes",
+        "collapsible": true,
+        "collapsed": false,
+        "items": [
+          {
+            "type": "doc",
+            "id": "sdk/classes/Client"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Interfaces",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/BuilderRegistration"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/BuilderRegistrationMessage"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterCreator"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterDefinition"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterLock"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterOperator"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterPayload"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/ClusterValidator"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/DepositData"
+          },
+          {
+            "type": "doc",
+            "id": "sdk/interfaces/DistributedValidator"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Type-Aliases",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "doc",
+            "id": "sdk/type-aliases/OperatorPayload"
+          }
+        ]
+      }, {
+        "type": "category",
+        "label": "Functions",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "doc",
+            "id": "sdk/functions/validateClusterLock"
+          }
+        ]
+      },
+    ],
+  // apiSidebar: [
+  //   {
+  //     "type": "doc",
+  //     "id": "sdk/index",
+  //     "label":"Intro"
+  //   },
+  //   {
+  //     "type": "category",
+  //     "label": "Enumerations",
+  //     "collapsible": true,
+  //     "collapsed": true,
+  //     "items": [
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/enumerations/FORK_MAPPING",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     "type": "category",
+  //     "label": "Classes",
+  //     "collapsible": true,
+  //     "collapsed": true,
+  //     "items": [
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/classes/Client",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     "type": "category",
+  //     "label": "Interfaces",
+  //     "collapsible": true,
+  //     "collapsed": true,
+  //     "items": [
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/interfaces/ClusterDefintion",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     "type": "category",
+  //     "label": "Type-Aliases",
+  //     "collapsible": true,
+  //     "collapsed": true,
+  //     "items": [
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/BuilderRegistration",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/BuilderRegistrationMessage",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/ClusterCreator",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/ClusterLock",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/ClusterOperator",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/ClusterPayload",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/ClusterValidator",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/DepositData",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/DistributedValidator",
+  //       },
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/type-aliases/OperatorPayload",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     "type": "category",
+  //     "label": "Functions",
+  //     "collapsible": true,
+  //     "collapsed": true,
+  //     "items": [
+  //       {
+  //         "type": "doc",
+  //         "id": "sdk/functions/validateClusterLock",
+  //       },
+  //     ],
+  //   },
+  // ],
 
   // Add custom sidebar for "api" folder
 
