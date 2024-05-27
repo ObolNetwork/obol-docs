@@ -26,6 +26,17 @@ Validators have two streams of revenue, the consensus layer rewards and the exec
 
 ### Optimistic Withdrawal Recipient
 
+<span
+    style={{
+      backgroundColor: '#2D4D53',
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+      display: 'block',
+    }}>
+    <img src="/img/obol_owr_split.png" alt="Optimistic Withdrawal Recpient graphic"></img>
+  </span>
+
 This is the primary withdrawal recipient Obol uses, as it allows for the separation of reward from principal, as well as permitting the ongoing withdrawal of accruing rewards.
 
 An Optimistic Withdrawal Recipient [contract](https://github.com/ObolNetwork/obol-splits/blob/main/src/owr/OptimisticWithdrawalRecipient.sol) takes three inputs when deployed:
@@ -54,7 +65,7 @@ The OptimisticWithdrawalRecipient contract is deployed via a [factory contract](
 |---------|-------------------------------------------------------------------------------------------------------------------------------|
 | Mainnet | [0x119acd7844cbdd5fc09b1c6a4408f490c8f7f522](https://etherscan.io/address/0x119acd7844cbdd5fc09b1c6a4408f490c8f7f522)         |
 | Goerli  | [0xe9557FCC055c89515AE9F3A4B1238575Fcd80c26](https://goerli.etherscan.io/address/0xe9557FCC055c89515AE9F3A4B1238575Fcd80c26)  |
-| Holesky |                                                                                                                               |
+| Holesky | [0x7fec4add6b5ee2b6c1cba232bc6db754794cb6df](https://holesky.etherscan.io/address/0x7fec4add6b5ee2b6c1cba232bc6db754794cb6df)  |
 | Sepolia | [0xca78f8fda7ec13ae246e4d4cd38b9ce25a12e64a](https://sepolia.etherscan.io/address/0xca78f8fda7ec13ae246e4d4cd38b9ce25a12e64a) |
 
 ### Exitable Withdrawal Recipient
@@ -83,7 +94,7 @@ The Immutable Split Controller [factory contract](https://github.com/ObolNetwork
 
 | Chain   | Address                                                                                                                       |
 |---------|-------------------------------------------------------------------------------------------------------------------------------|
-| Mainnet |          |
+| Mainnet | [0x49e7cA187F1E94d9A0d1DFBd6CCCd69Ca17F56a4](https://etherscan.io/address/0x49e7cA187F1E94d9A0d1DFBd6CCCd69Ca17F56a4)|
 | Goerli  | [0x64a2c4A50B1f46c3e2bF753CFe270ceB18b5e18f](https://goerli.etherscan.io/address/0x64a2c4A50B1f46c3e2bF753CFe270ceB18b5e18f) |
 | Holesky |                   |
 | Sepolia | |
