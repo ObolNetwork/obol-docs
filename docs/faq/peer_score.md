@@ -3,7 +3,9 @@ sidebar_position: 5
 description: Measuring Individual Performance in Distributed Validators
 ---
 
-# Introduction
+# Peer Score
+
+## Introduction
 
 Validator effectiveness is a critical metric for assessing the health of a rated network. It determines how well validators perform their attestation and block proposal duties. Existing solutions, like RAVER (Rated Validator Effectiveness Rating), provide a effectiveness score of a validator. In a monolithic validator that is run by a single operator, validator effectiveness can be considered as a proxy for the effectiveness or “score” of that operator. However, this approach falls short when dealing with distributed validators (DVs) maintained by multiple operators.
 
