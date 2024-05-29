@@ -32,7 +32,7 @@ Select the "Create EigenPod" option on the [EigenLayer App](https://app.eigenlay
 Create a Splitter on [splits.org](https://app.splits.org/), to divide the block reward and MEV amongst the operators. Note the split's address.
 
 :::tip
-To be part of Obol's [1% for Decentralisation ](https://blog.obol.tech/1-percent-for-decentralisation/) campaign, you must contribute 3% of execution layer rewards by setting [this address](etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient on your split. Future Obol EigenPods will support contributing 1% of total rewards instead.
+To be part of Obol's [1% for Decentralisation ](https://blog.obol.tech/1-percent-for-decentralisation/) campaign, you must contribute 3% of execution layer rewards by setting [this address](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient on your split. Future Obol EigenPods will support contributing 1% of total rewards instead.
 :::
 
 ## Create the DV cluster invite
