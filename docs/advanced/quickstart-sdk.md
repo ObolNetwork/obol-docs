@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 description: Create a DV cluster using the Obol Typescript SDK
 ---
 

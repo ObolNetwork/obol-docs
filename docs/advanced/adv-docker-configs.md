@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 10
 description: Use advanced docker-compose features to have more flexibility and power to change the default configuration.
 ---
 
