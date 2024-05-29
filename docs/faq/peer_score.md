@@ -18,11 +18,11 @@ Peer Score v0 addresses this limitation by introducing a method to evaluate the 
 - **Peer Score:** A metric reflecting the performance of a peer within a DV, calculated as the ratio of completed duties to expected duties.
 - **Operator Score:** An aggregated metric representing the overall effectiveness of an operator across multiple DVs (planned for future iterations).
 
-# Challenges with RAVER in DVs
+## Challenges with RAVER in DVs
 
 RAVER assigns a single effectiveness score to the entire DV. This score doesn't reflect the individual contributions of operators within the group. For example, a DV with 95% effectiveness maintained by four operators (A, B, C, and D) doesn't guarantee that each operator has a 95% effectiveness score. It's possible that even if operator D is frequently offline, the remaining operators (A, B, and C) can maintain the overall DV effectiveness.
 
-# Peer Score v0 Calculation
+## Peer Score v0 Calculation
 
 Peer Score v0 utilizes a straightforward formula:
 
@@ -30,7 +30,7 @@ Peer Score v0 utilizes a straightforward formula:
 
 This ratio reflects the peer's adherence to its assigned duties within the DV.
 
-# Future Iterations
+## Future Iterations
 
 Peer Score v0 lays the foundation for a more comprehensive evaluation system. Planned advancements include:
 
@@ -38,7 +38,7 @@ Peer Score v0 lays the foundation for a more comprehensive evaluation system. Pl
 - **Decentralization Scores:** Integrating metrics that consider the decentralization of clients and operator locations.
 - Peer rating: an anonymous rating peers can give to their other peers to grade their social co-ordination.
 
-# Use Cases
+## Use Cases
 
 Peer Score offers valuable insights for various stakeholders:
 
