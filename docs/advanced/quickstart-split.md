@@ -1,9 +1,9 @@
 ---
-sidebar_position: 3
+sidebar_position: 8
 description: Split existing validator keys
 ---
 
-# Split existing validator private keys
+# Split validator private keys
 
 :::caution
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).

@@ -23,7 +23,7 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 - A [security assessment](https://github.com/ObolNetwork/obol-security/blob/f9d7b0ad0bb8897f74ccb34cd4bd83012ad1d2b5/audits/Sigma_Prime_Obol_Network_Charon_Security_Assessment_Report_v2_1.pdf) of Charon by [Sigma Prime](https://sigmaprime.io/) resulting in version [`v0.16.0`](https://github.com/ObolNetwork/charon/releases/tag/v0.16.0).
 
-- A second [assessment of Charon](https://obol.tech/charon_quantstamp_assessment.pdf) by [QuantStamp](https://quantstamp.com/) resulting in version [`v0.19.2`](https://github.com/ObolNetwork/charon/releases/tag/v0.19.2).
+- A second [assessment of Charon](https://obol.tech/charon_quantstamp_assessment.pdf) by [QuantStamp](https://quantstamp.com/) resulting in version [`v0.19.1`](https://github.com/ObolNetwork/charon/releases/tag/v0.19.1).
 
 - A [solidity audit](./smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
 
