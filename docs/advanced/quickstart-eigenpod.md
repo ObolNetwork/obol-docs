@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-description: Create a DV EigenPod
+description: Create an EigenLayer Distributed Validator to enable distributed restaking.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -16,7 +16,7 @@ This is a walkthrough of creating a distributed validator cluster pointing to an
 
 ## Pre-requisites
 
-- The ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets).
+- The Ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets).
 - If creating more than one validator, the ability to use the [obol-sdk](./quickstart-sdk.md) is required.
 
 ## Create a SAFE to own the EigenPod
@@ -32,7 +32,7 @@ Select the "Create EigenPod" option on the [EigenLayer App](https://app.eigenlay
 Create a Splitter on [splits.org](https://app.splits.org/), to divide the block reward and MEV amongst the operators. Note the split's address.
 
 :::tip
-To be part of Obol's [1% for Decentralisation ](https://blog.obol.tech/1-percent-for-decentralisation/) campaign, you must contribute 3% of execution layer rewards by setting [this address](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient on your split. Future Obol EigenPods will support contributing 1% of total rewards instead.
+To be recognised as a part of Obol's [1% for Decentralisation](https://blog.obol.tech/1-percent-for-decentralisation/) campaign, you must contribute 3% of execution layer rewards by setting [this address](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient on your split. Upcoming Obol EigenPods will support contributing 1% of total rewards instead of 3% of only execution rewards.
 :::
 
 ## Create the DV cluster invite
