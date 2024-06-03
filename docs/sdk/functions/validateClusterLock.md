@@ -6,7 +6,7 @@ Verifies Cluster Lock's validity.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `lock` | [`ClusterLock`](../interfaces/ClusterLock.md) | cluster lock |
+| `lock` | [`ClusterLock`](../type-aliases/ClusterLock.md) | cluster lock |
 
 ## Returns
 
