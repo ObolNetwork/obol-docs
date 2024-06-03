@@ -59,7 +59,7 @@ An example of how to use acceptObolLatestTermsAndConditions:
 
 #### Source
 
-index.ts:59
+index.ts:61
 
 ***
 
@@ -73,7 +73,7 @@ Creates a cluster definition which contains cluster configuration.
 
 | Parameter | Type | Description |
 | :------ | :------ | :------ |
-| `newCluster` | [`ClusterPayload`](../interfaces/ClusterPayload.md) | The new unique cluster. |
+| `newCluster` | [`ClusterPayload`](../type-aliases/ClusterPayload.md) | The new unique cluster. |
 
 #### Returns
 
@@ -90,7 +90,7 @@ An example of how to use createClusterDefinition:
 
 #### Source
 
-index.ts:105
+index.ts:107
 
 ***
 
@@ -122,7 +122,7 @@ An example of how to use acceptClusterDefinition:
 
 #### Source
 
-index.ts:163
+index.ts:165
 
 ***
 
@@ -151,13 +151,13 @@ An example of how to use getClusterDefinition:
 
 #### Source
 
-index.ts:215
+index.ts:217
 
 ***
 
 ### getClusterLock()
 
-> **getClusterLock**(`configHash`): `Promise` \<[`ClusterLock`](../interfaces/ClusterLock.md)\>
+> **getClusterLock**(`configHash`): `Promise` \<[`ClusterLock`](../type-aliases/ClusterLock.md)\>
 
 #### Parameters
 
@@ -167,7 +167,7 @@ index.ts:215
 
 #### Returns
 
-`Promise` \<[`ClusterLock`](../interfaces/ClusterLock.md)\>
+`Promise` \<[`ClusterLock`](../type-aliases/ClusterLock.md)\>
 
 The matched cluster details (lock) from DB
 
@@ -180,4 +180,4 @@ An example of how to use getClusterLock:
 
 #### Source
 
-index.ts:234
+index.ts:236
