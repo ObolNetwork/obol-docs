@@ -81,7 +81,7 @@ It needs to be the validator client that is connected to your charon client taki
         </pre>
       </TabItem>
         <TabItem value="lodestar" label="Lodestar" default>
-        The following executes an interactive command inside the Loestar VC container to exit all validators. It executes 
+        The following executes an interactive command inside the Lodestar VC container to exit all validators. It executes 
         <code>node /usr/app/packages/cli/bin/lodestar validator voluntary-exit</code> with the arguments:
         <ul>
           <li><code>--beaconNodes="http://charon:3600"</code> : Specifies the Charon <code>host:port</code>.</li>
@@ -143,7 +143,7 @@ It needs to be the validator client that is connected to your charon client taki
         </pre>
       </TabItem>
         <TabItem value="lodestar" label="Lodestar" default>
-        The following executes an interactive command inside the Loestar VC container to exit all validators. It executes 
+        The following executes an interactive command inside the Lodestar VC container to exit all validators. It executes 
         <code>node /usr/app/packages/cli/bin/lodestar validator voluntary-exit</code> with the arguments:
         <ul>
           <li><code>--beaconNodes="http://charon:3600"</code> : Specifies the Charon <code>host:port</code>.</li>
@@ -205,7 +205,7 @@ It needs to be the validator client that is connected to your charon client taki
         </pre>
       </TabItem>
         <TabItem value="lodestar" label="Lodestar" default>
-        The following executes an interactive command inside the Loestar VC container to exit all validators. It executes 
+        The following executes an interactive command inside the Lodestar VC container to exit all validators. It executes 
         <code>node /usr/app/packages/cli/bin/lodestar validator voluntary-exit</code> with the arguments:
         <ul>
           <li><code>--beaconNodes="http://charon:3600"</code> : Specifies the Charon <code>host:port</code>.</li>
