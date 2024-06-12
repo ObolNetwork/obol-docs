@@ -118,7 +118,7 @@ It needs to be the validator client that is connected to your charon client taki
     --publish-timeout="5m"'`}
           </code>
         </pre>
-      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during creating of the cluster. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
+      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during the cluster creation. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
         <pre>
           <code>
         {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
@@ -212,7 +212,7 @@ It needs to be the validator client that is connected to your charon client taki
     --publish-timeout="5m"'`}
           </code>
         </pre>
-      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during creating of the cluster. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
+      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during the cluster creation. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
         <pre>
           <code>
         {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
@@ -306,7 +306,7 @@ It needs to be the validator client that is connected to your charon client taki
     --publish-timeout="5m"'`}
           </code>
         </pre>
-      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during creating of the cluster. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
+      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during the cluster creation. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
         <pre>
           <code>
         {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
