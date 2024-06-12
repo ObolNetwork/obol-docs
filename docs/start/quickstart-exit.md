@@ -96,6 +96,32 @@ It needs to be the validator client that is connected to your charon client taki
           </code>
         </pre>
       </TabItem>
+      <TabItem value="charon" label="Charon" default>
+      Voluntary exit can be submitted directly through charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through charon are submitted per validator. All active validators' public keys can be listed with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list'`}
+          </code>
+        </pre>
+      Then a signed partial exit for validator can be submitted by:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      After the threshold of signed partial exits is met, any operator from the cluster can broadcast the full signed exit to the beacon chain:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      </TabItem>
     </Tabs>
   </TabItem>
   <TabItem value="Holesky" label="Holesky">
@@ -155,6 +181,32 @@ It needs to be the validator client that is connected to your charon client taki
         <pre>
           <code>
            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=256 --network=holesky --yes'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="charon" label="Charon" default>
+      Voluntary exit can be submitted directly through charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through charon are submitted per validator. All active validators' public keys can be listed with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list'`}
+          </code>
+        </pre>
+      Then a signed partial exit for validator can be submitted by:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      After the threshold of signed partial exits is met, any operator from the cluster can broadcast the full signed exit to the beacon chain:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
           </code>
         </pre>
       </TabItem>
@@ -220,11 +272,37 @@ It needs to be the validator client that is connected to your charon client taki
           </code>
         </pre>
       </TabItem>
+      <TabItem value="charon" label="Charon" default>
+      Voluntary exit can be submitted directly through charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through charon are submitted per validator. All active validators' public keys can be listed with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list'`}
+          </code>
+        </pre>
+      Then a signed partial exit for validator can be submitted by:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      After the threshold of signed partial exits is met, any operator from the cluster can broadcast the full signed exit to the beacon chain:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      </TabItem>
     </Tabs>
   </TabItem>
 </Tabs>
 
-Once a threshold of exit signatures has been received by any single charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
+When submitting through a validator client (not through charon directly), once a threshold of exit signatures has been received by any single charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
 
 ## Exit epoch and withdrawable epoch
 
