@@ -41,11 +41,11 @@ It needs to be the validator client that is connected to your charon client taki
       <TabItem value="teku" label="Teku" default>
         <pre>
           <code>
-        {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
-        --beacon-node-api-endpoint="http://charon:3600/" \
-        --confirmation-enabled=false \
-        --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-        --epoch=162304`}
+            {String.raw`docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            --beacon-node-api-endpoint="http://charon:3600/" \
+            --confirmation-enabled=false \
+            --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+            --epoch=162304`}
           </code>
         </pre>
       </TabItem>
@@ -65,7 +65,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c '\
+            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c ' \
         
             mkdir /home/user/data/wd
             cp -r /home/user/data/charon/ /home/user/data/wd
@@ -92,7 +92,12 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=162304 --network=goerli --yes'`}
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
+            --beaconNodes="http://charon:3600" \
+            --dataDir=/opt/data \
+            --exitEpoch=162304 \
+            --network=goerli \
+            --yes'`}
           </code>
         </pre>
       </TabItem>
@@ -129,7 +134,7 @@ It needs to be the validator client that is connected to your charon client taki
       <TabItem value="teku" label="Teku" default>
         <pre>
           <code>
-            {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            {String.raw`docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
             --beacon-node-api-endpoint="http://charon:3600/" \
             --confirmation-enabled=false \
             --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
@@ -153,7 +158,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c '\
+            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c ' \
         
             mkdir /home/user/data/wd
             cp -r /home/user/data/charon/ /home/user/data/wd
@@ -180,7 +185,12 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-           {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=256 --network=holesky --yes'`}
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
+            --beaconNodes="http://charon:3600" \
+            --dataDir=/opt/data \
+            --exitEpoch=256 \
+            --network=holesky \
+            --yes'`}
           </code>
         </pre>
       </TabItem>
@@ -217,7 +227,7 @@ It needs to be the validator client that is connected to your charon client taki
       <TabItem value="teku" label="Teku" default>
         <pre>
           <code>
-            {String.raw`docker exec -ti charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            {String.raw`docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
             --beacon-node-api-endpoint="http://charon:3600/" \
             --confirmation-enabled=false \
             --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
@@ -241,7 +251,7 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c '\
+            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c ' \
         
             mkdir /home/user/data/wd
             cp -r /home/user/data/charon/ /home/user/data/wd
@@ -268,7 +278,12 @@ It needs to be the validator client that is connected to your charon client taki
         </ul>
         <pre>
           <code>
-           {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit --beaconNodes="http://charon:3600" --dataDir=/opt/data --exitEpoch=194048 --network=mainnet --yes'`}
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 /bin/sh -c 'node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
+            --beaconNodes="http://charon:3600" \
+            --dataDir=/opt/data \
+            --exitEpoch=194048 \
+            --network=mainnet \
+            --yes'`}
           </code>
         </pre>
       </TabItem>
