@@ -102,7 +102,7 @@ It needs to be the validator client that is connected to your charon client taki
         </pre>
       </TabItem>
       <TabItem value="charon" label="Charon" default>
-      Voluntary exit can be submitted directly through charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through charon are submitted per validator. All active validators' public keys can be listed with:
+      Voluntary exit can be submitted directly through Charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through Charon are submitted per validator. All active validators public keys for a given cluster lock can be listed with:
         <pre>
           <code>
         {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list'`}
