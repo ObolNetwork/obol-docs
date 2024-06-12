@@ -275,19 +275,21 @@ Usage:
   charon exit sign [flags]
 
 Flags:
-      --beacon-node-timeout duration   Timeout for beacon node HTTP calls. (default 30s)
-      --beacon-node-url string         Beacon node URL. [REQUIRED]
-      --exit-epoch uint                Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
-  -h, --help                           Help for sign
-      --lock-file string               The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string               Log color; auto, force, disable. (default "auto")
-      --log-format string              Log format; console, logfmt or json (default "console")
-      --log-level string               Log level; debug, info, warn or error (default "info")
-      --log-output-path string         Path in which to write on-disk logs.
-      --private-key-file string        The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish-address string         The URL of the remote API. (default "https://api.obol.tech")
-      --validator-keys-dir string      Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-      --validator-public-key string    Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+      --beacon-node-endpoints strings   Comma separated list of one or more beacon node endpoint URLs. [REQUIRED]
+      --beacon-node-timeout duration    Timeout for beacon node HTTP calls. (default 30s)
+      --exit-epoch uint                 Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+  -h, --help                            Help for sign
+      --lock-file string                The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                Log color; auto, force, disable. (default "auto")
+      --log-format string               Log format; console, logfmt or json (default "console")
+      --log-level string                Log level; debug, info, warn or error (default "info")
+      --log-output-path string          Path in which to write on-disk logs.
+      --private-key-file string         The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string          The URL of the remote API. (default "https://api.obol.tech")
+      --publish-timeout duration        Timeout for publishing a signed exit to the publish-address API. (default 30s)
+      --validator-index uint            Validator index of the validator to exit, the associated public key must be present in the cluster lock manifest. If --validator-pubkey is also provided, validator liveliness won't be checked on the beacon chain.
+      --validator-keys-dir string       Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string     Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain.
 ```
 
 ### Download fully signed exit messages for cold storage
@@ -302,6 +304,7 @@ Usage:
   charon exit fetch [flags]
 
 Flags:
+      --fetched-exit-path string      Path to store fetched signed exit messages. (default "./")
   -h, --help                          Help for fetch
       --lock-file string              The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
       --log-color string              Log color; auto, force, disable. (default "auto")
@@ -310,7 +313,8 @@ Flags:
       --log-output-path string        Path in which to write on-disk logs.
       --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
       --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
-      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+      --publish-timeout duration      Timeout for publishing a signed exit to the publish-address API. (default 30s)
+      --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain. [REQUIRED]
 ```
 
 ### Broadcast a signed exit message
@@ -325,20 +329,21 @@ Usage:
   charon exit broadcast [flags]
 
 Flags:
-      --beacon-node-timeout duration   Timeout for beacon node HTTP calls. (default 30s)
-      --beacon-node-url string         Beacon node URL. [REQUIRED]
-      --exit-epoch uint                Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
-      --exit-from-file string          Retrieves a signed exit message from a pre-prepared file instead of --publish-address.
-  -h, --help                           Help for broadcast
-      --lock-file string               The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string               Log color; auto, force, disable. (default "auto")
-      --log-format string              Log format; console, logfmt or json (default "console")
-      --log-level string               Log level; debug, info, warn or error (default "info")
-      --log-output-path string         Path in which to write on-disk logs.
-      --private-key-file string        The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish-address string         The URL of the remote API. (default "https://api.obol.tech")
-      --validator-keys-dir string      Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-      --validator-public-key string    Public key of the validator to exit, must be present in the cluster lock manifest. [REQUIRED]
+      --beacon-node-endpoints strings   Comma separated list of one or more beacon node endpoint URLs. [REQUIRED]
+      --beacon-node-timeout duration    Timeout for beacon node HTTP calls. (default 30s)
+      --exit-epoch uint                 Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
+      --exit-from-file string           Retrieves a signed exit message from a pre-prepared file instead of --publish-address.
+  -h, --help                            Help for broadcast
+      --lock-file string                The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                Log color; auto, force, disable. (default "auto")
+      --log-format string               Log format; console, logfmt or json (default "console")
+      --log-level string                Log level; debug, info, warn or error (default "info")
+      --log-output-path string          Path in which to write on-disk logs.
+      --private-key-file string         The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish-address string          The URL of the remote API. (default "https://api.obol.tech")
+      --publish-timeout duration        Timeout for publishing a signed exit to the publish-address API. (default 30s)
+      --validator-keys-dir string       Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --validator-public-key string     Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain. [REQUIRED]
 ```
 
 ## The `combine` command
