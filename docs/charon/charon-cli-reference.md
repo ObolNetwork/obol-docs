@@ -177,7 +177,9 @@ Flags:
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --publish                        Publish the created cluster to a remote API.
       --publish-address string         The URL to publish the cluster to. (default "https://api.obol.tech")
+      --publish-timeout duration       Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 30s)
       --shutdown-delay duration        Graceful shutdown delay. (default 1s)
+      --timeout duration               Timeout for the DKG process, should be increased if DKG times out. (default 1m0s)
 ```
 
 ## The `run` command
