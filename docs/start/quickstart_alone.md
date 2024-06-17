@@ -7,10 +7,6 @@ import TabItem from '@theme/TabItem';
 
 # Create a DV alone
 
-:::caution
-Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
-
 :::info
 It is possible for a single operator to manage all of the nodes of a DV cluster. The nodes can be run on a single machine, which is only suitable for testing, or the nodes can be run on multiple machines, which is expected for a production setup. 
 

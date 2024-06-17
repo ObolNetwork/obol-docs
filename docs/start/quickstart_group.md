@@ -8,10 +8,6 @@ import TabItem from "@theme/TabItem";
 
 # Create a DV with a group
 
-:::caution
-Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
-
 This quickstart guide will walk you through creating a Distributed Validator Cluster with a number of other node operators.
 
 ## Pre-requisites
