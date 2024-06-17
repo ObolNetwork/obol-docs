@@ -27,6 +27,7 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 - A [solidity audit](./smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
 
+- A [white box penetration test](https://obol.tech/sayfer.pdf) of the [DV Launchpad](../dvl/intro.md) and [Obol API](/api) by [Sayfer](https://sayfer.io/).
 
 ## Security focused documents
 
