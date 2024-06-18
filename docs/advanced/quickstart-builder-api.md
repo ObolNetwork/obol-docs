@@ -8,10 +8,6 @@ import TabItem from '@theme/TabItem';
 
 # Enable MEV
 
-:::caution
-Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
-
 This quickstart guide focuses on configuring the builder API for Charon and supported validator and consensus clients.
 
 ## Getting started with Charon & the Builder API
