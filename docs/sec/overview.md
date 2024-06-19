@@ -7,7 +7,7 @@ description: Security Overview
 
 This page serves as an overview of the Obol Network from a security point of view.
 
-This page is updated quarterly. The last update was on 2023-10-01.
+This page is updated quarterly. The last update was on 2024-June-19.
 
 ## Table of Contents
 
@@ -26,6 +26,8 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 - A second [assessment of Charon](https://obol.tech/charon_quantstamp_assessment.pdf) by [QuantStamp](https://quantstamp.com/) resulting in version [`v0.19.1`](https://github.com/ObolNetwork/charon/releases/tag/v0.19.1).
 
 - A [solidity audit](./smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
+
+- A [penetration testing certificate](https://github.com/ObolNetwork/obol-security/blob/main/audits/Sayfer_2024-03_Penetration_Testing_CFD.pdf) of the Obol DV Launchpad by [Sayfer](https://sayfer.io/).
 
 
 ## Security focused documents
