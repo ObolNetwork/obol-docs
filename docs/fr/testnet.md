@@ -6,9 +6,7 @@ description: Community testing efforts
 # Community Testing
 
 :::tip
-
-This page looks at the community testing efforts organised by Obol to test Distributed Validators at scale. If you are looking for guides to run a Distributed Validator on testnet you can do so [here](../start/quickstart_overview.md). 
-
+This page looks at the community testing efforts organised by Obol to test Distributed Validators at scale. If you are looking for guides to run a Distributed Validator on testnet you can do so [here](../start/quickstart_overview.md).
 :::
 
 Over the last number of years, Obol Labs has coordinated and hosted a number of progressively larger testnets to help harden the Charon client and iterate on the key generation tooling.
@@ -46,7 +44,7 @@ The first devnet aimed to have a number of trusted operators test out our earlie
 
 The second devnet aimed to have a number of trusted operators test out our earliest tutorial flows **together** for the first time.
 
-The aim was for groups of 4 testers to complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients and 4 different validator clients (lighthouse, teku, lodestar and vouch), each on their own machine at each operator's home or their place of choosing, running at least a kiln consensus client. 
+The aim was for groups of 4 testers to complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients and 4 different validator clients (Lighthouse, Teku, Lodestar and Vouch), each on their own machine at each operator's home or their place of choosing, running at least a kiln consensus client.
 
 This devnet was the first time `charon dkg` was tested with users. A core focus of this devnet was to collect network performance data.
 
@@ -115,7 +113,7 @@ This testnet is also important for learning the conditions Charon will be subjec
 
 - Engage the wider Solo and Professional Ethereum Staking Community.
 - Get integration feedback.
-- Build confidence in Charon after running DVs on an Ethereum testnet. 
+- Build confidence in Charon after running DVs on an Ethereum testnet.
 - Learn about the conditions Charon will be subjected to in production.
 - Distributed Validator returns are competitive versus single validator clients.
 - Make deploying Ethereum validator nodes accessible using the DV Launchpad.

@@ -7,7 +7,7 @@ description: Errors & Resolutions
 
 All operators should try to restart their nodes and should check if they are on the latest stable version before attempting anything other configuration change as we are still in beta and frequently releasing fixes. You can restart and update with the following commands:
 
-```
+```shell
 docker compose down
 git pull
 docker compose up
@@ -15,9 +15,10 @@ docker compose up
 
 You can check your logs using
 
-```
+```shell
 docker compose logs
 ```
+
 <details open className="details">
   <summary>
     <h2 id="enrs-keys">ENRs & Keys</h2>
@@ -53,7 +54,7 @@ docker compose logs
     </summary>
     <ul>
       <li> For now, ENR rotation/replacement is not supported, it will be supported in a future release. </li>
-      <li> Therefore, it's advised to always keep a backup of your{" "} <code>private-key</code> in a secure location (ex: cloud storage, USB Flash drive etc.) </li>
+      <li> Therefore, it's advised to always keep a backup of your{" "} <code>charon-enr-private-key</code> in a secure location (ex: cloud storage, USB Flash drive, etc.). </li>
     </ul>
   </details>
   <details className="details">
@@ -63,8 +64,8 @@ docker compose logs
     <ul>
       <li>The <code>charon-enr-private-key</code> is generated inside a hidden folder <code>.charon</code>. </li>
       <li>To view it, run <code>ls -al</code> in your terminal. </li>
-      <li>You can then copy the key to your <code>~/Downloads</code> folder for easy access by running <code>cp .charon/charon-enr-private-key ~/Downloads</code>. This step maybe a bit different for windows. </li>
-      <li>Else, if you are on <code>macOS</code>, press <code>Cmd + Shift + . </code> to view the <code>.charon</code> folder in the finder application. </li>
+      <li>You can then copy the key to your <code>~/Downloads</code> folder for easy access by running <code>cp .charon/charon-enr-private-key ~/Downloads</code>. This step maybe a bit different for Windows. </li>
+      <li>Else, if you are on macOS, press <code>Cmd + Shift + .</code> to view the <code>.charon</code> folder in the Finder application. </li>
     </ul>
   </details>
 </details>
@@ -82,14 +83,14 @@ docker compose logs
       <h4 id="failed-to-request-attester-duties">
         <code>Failed to request attester duties</code> error
       </h4>
-    </summary> Indicates there is something wrong with your lighthouse beacon node. This might be because the request buffer is full as your node is never starting consensus since it never gets the duties.
+    </summary> Indicates there is something wrong with your Lighthouse beacon node. This might be because the request buffer is full as your node is never starting consensus since it never gets the duties.
   </details>
   <details className="details">
     <summary>
       <h4 id="discovery-search-timeout">
         <code>Not enough time for a discovery seach</code> error
       </h4>
-    </summary> This could be linked to a internet connection being to slow or relying on a slow third-party service such as Infura.
+    </summary> This could be linked to a internet connection being too slow or relying on a slow third-party service such as Infura.
   </details>
 </details>
 <details open className="details">
@@ -101,12 +102,12 @@ docker compose logs
       <h4 id="error-communicating-with-beacon-node-api">
         <code>Error communicating with Beacon Node API</code> & <code>Error while connecting to beacon node event stream</code>
       </h4>
-    </summary> This is likely due to lighthouse not done syncing, wait and try again once synced. Can also be linked to Teku keystore issue.
+    </summary> This is likely due to Lighthouse not done syncing, wait and try again once synced. Can also be linked to Teku keystore issue.
   </details>
   <details className="details">
     <summary>
       <h4 id="clock-sync-issues">Clock sync issues</h4>
-    </summary> Either your clock server time is off, or you are talking to a remote beacon client that is super slow (this is why we advise against using services like infura).
+    </summary> Either your clock server time is off, or you are talking to a remote beacon client that is super slow (this is why we advise against using services like Infura).
   </details>
   <details className="details">
     <summary>
@@ -118,7 +119,7 @@ docker compose logs
     Using 3rd party services like Infura's beacon node API has significant disadvantages since the quality is often low. 
     Requests often return 500s or timeout (Charon times out after 2s). 
     This results in lots of warnings and errors and failed duties. 
-    We are working on an <a href="https://github.com/ObolNetwork/charon/issues/960">issue</a> to mitigate against this, but running a local beacon node is still always preferred. We are not yet considering increasing the 2s timeout since that can have knock-on effects.
+    Running a local beacon node is always preferred. We are not yet considering increasing the 2s timeout since that can have knock-on effects.
   </details>
 </details>
 <details open className="details">
@@ -130,14 +131,14 @@ docker compose logs
         <h4 id="attester-failed-in-consensus-component-error">
           <code>Attester failed in consensus component</code> error
         </h4>
-      </summary> The required number of operators defined in your cluster-lock file is probably not online to sign successfully. Make sure all operators are running the latest version of charon. To check if some peers are not online: <code> docker logs charon-distributed-validator-node-charon-1 2>&1 | grep 'absent' </code>
+      </summary> The required number of operators defined in your cluster-lock file is probably not online to sign successfully. Make sure all operators are running the latest version of Charon. To check if some peers are not online: <code> docker logs charon-distributed-validator-node-charon-1 2>&1 | grep 'absent' </code>
     </details>
     <details className="details">
       <summary>
         <h4 id="load-private-key-error">
           <code>Load private key</code> error
         </h4>
-      </summary> Make sure you have successfully run a DKG before running the node. The key should be created and placed in the right directory during the ceremony Also, make sure you are working in the right directory: <code>charon-distributed-validator-node</code>
+      </summary> Make sure you have successfully run a DKG before running the node. The key should be created and placed in the right directory during the ceremony. Also, make sure you are working in the right directory: <code>charon-distributed-validator-node</code>.
     </details>
     <details className="details">
       <summary>
@@ -154,10 +155,10 @@ docker compose logs
       </summary>
       <code>RESERVATION_REFUSED</code> is returned by the libp2p relay when some maximum limit has been reached. 
       This is most often due to "maximum reservations per IP/peer". 
-      This is when your charon node is restarting or in some error loop and constantly attempting to create new relay reservations reaching the maximum. 
+      This is when your Charon node is restarting or in some error loop and constantly attempting to create new relay reservations reaching the maximum. 
       <br /><br />
-      To fix this error, stop your charon node for 30mins before restarting it. 
-      This should allow the relay enough time to reset your ip/peer limits and should then allow new reservations. 
+      To fix this error, stop your Charon node for 30mins before restarting it. 
+      This should allow the relay enough time to reset your IP/peer limits and should then allow new reservations. 
       This could also be due to the relay being overloaded in general, so reaching a server wide "maximum connections" limit.
       This is an issue with relay scalability and we are working in a long term fix for this. 
     </details>
@@ -167,11 +168,11 @@ docker compose logs
          <code>Error opening relay circuit: NO_RESERVATION</code> error
        </h4>
      </summary>
-     <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer isn't connected to the relay, so the the charon
+     <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer isn't connected to the relay, so the the Charon
      client cannot connect to the peer via the relay. That might be because the peer is offline or the
      peer is configured to connect to a different relay.
      <br /><br />
-     To fix this error, ensure the peer is online and configured with the exact same `--p2p-relays` flag.
+     To fix this error, ensure the peer is online and configured with the exact same <code>--p2p-relays</code> flag.
     </details>
     <details className="details">
       <summary>
@@ -243,7 +244,7 @@ docker compose logs
           <code>Signed duty not submitted by local validator client</code> error
         </h4>
       </summary>
-      <code>msgValidatorAPI</code> indicates that partial signature were never submitted by the local validator client. This could indicate that the local validator client is offline, or has connection problems with charon, or has some other problem. See validator client logs for more details.
+      <code>msgValidatorAPI</code> indicates that partial signature were never submitted by the local validator client. This could indicate that the local validator client is offline, or has connection problems with Charon, or has some other problem. See validator client logs for more details.
     </details>
     <details className="details">
       <summary>
@@ -275,7 +276,7 @@ docker compose logs
           <code>Bug: threshold aggregation of partial signatures failed due to inconsistent signed data</code> error
         </h4>
       </summary>
-      <code>msgSigAgg</code> indicates that BLS threshold aggregation of sufficient partial signatures failed. This indicates inconsistent signed data. This indicates a bug in charon as it is unexpected.
+      <code>msgSigAgg</code> indicates that BLS threshold aggregation of sufficient partial signatures failed. This indicates inconsistent signed data. This indicates a bug in Charon as it is unexpected.
     </details>
     <details className="details">
       <summary>
@@ -294,11 +295,11 @@ docker compose logs
           <code>Validator api 5xx response: mismatching validator client key share index, Mth key share submitted to Nth charon peer</code> error
         </h4>
       </summary>
-    The issue revolves around an invalid setup or deployment, where keyshares are not tied to the enr private key. There appears to be a mix-up during deployment, leading to a mismatching validator client key share index.
+    The issue revolves around an invalid setup or deployment, where keyshares are not tied to the ENR private key. There appears to be a mix-up during deployment, leading to a mismatching validator client key share index.
     <ul>For example:</ul>
-    <ul>Imagine node N is Alice, and node M is Bob, the error would read:<code>mismatching validator client key share index, Bob's key share submitted to Alice's charon node.</code></ul>
-    <ul>Bob's private key share(s) are imported to a VC that is connected to Alice's charon node. This is a invalid setup/deployment. Alice's charon node should only be connected to Alice's VC.</ul>
-		Check the keyshare of each node inside cluster-lock.json and see that matches with the key inside <code>node(num)/validator_keys/keystore-0.json</code>
+    <ul>Imagine node N is Alice, and node M is Bob, the error would read:<code>mismatching validator client key share index, Bob's key share submitted to Alice's charon node</code>.</ul>
+    <ul>Bob's private key share(s) are imported to a VC that is connected to Alice's Charon node. This is a invalid setup/deployment. Alice's Charon node should only be connected to Alice's VC.</ul>
+		Check the keyshare of each node inside cluster-lock.json and see that matches with the key inside <code>node(num)/validator_keys/keystore-0.json</code>.
     </details>
 </details>
 <details open className="details">
@@ -308,7 +309,7 @@ docker compose logs
   <details className="details">
     <summary>
       <h4 id="teku-keystore-file-error">Teku <code>keystore file</code> error </h4>
-    </summary> Teku sometimes logs an error which looks like <code>Keystore file /opt/charon/validator_keys/keystore-0.json.lock already in use.</code> This can be solved by deleting the file(s) ending with <code>.lock</code> in the folder <code>.charon/validator_keys</code>. It is caused by an unsafe shut down of Teku (usually by double pressing `Ctrl+C` to shutdown containers faster).
+    </summary> Teku sometimes logs an error which looks like <code>Keystore file /opt/charon/validator_keys/keystore-0.json.lock already in use</code>. This can be solved by deleting the file(s) ending with <code>.lock</code> in the folder <code>.charon/validator_keys</code>. It is caused by an unsafe shut down of Teku (usually by double pressing <code>Ctrl+C</code> to shutdown containers faster).
   </details>
 </details>
 <details open className="details">
@@ -317,10 +318,10 @@ docker compose logs
   </summary>
   <details className="details">
     <summary>
-      <h4 id="how-to-fix-grafana-dashboard"> How to fix the grafana dashboard? </h4>
-    </summary> Sometimes, grafana dashboard doesn't load any data first time around.You can solve this by following the steps below: <ul>
-      <li>Click the Wheel Icon > Datasources</li>
-      <li>Click prometheus</li>
+      <h4 id="how-to-fix-grafana-dashboard"> How to fix the Grafana dashboard? </h4>
+    </summary> Sometimes, Grafana dashboard doesn't load any data first time around. You can solve this by following the steps below: <ul>
+      <li>Click the Wheel Icon > Datasources.</li>
+      <li>Click prometheus.</li>
       <li>Change the "Access" field from <code>Server (default)</code> to <code>Browser</code>. Press "Save & Test". It should fail. </li>
       <li>Change the "Access" field back to <code>Server (default)</code> and press "Save & Test". You should be presented with a green success icon saying "Data source is working" and you can return to the dashboard page. </li>
     </ul>
@@ -330,7 +331,7 @@ docker compose logs
       <h4 id="no-data-validator-info-panel">
         <code>N/A</code> & <code>No data</code> in validator info panel
       </h4>
-    </summary> Can be linked to the <a href="https://github.com/ObolNetwork/charon-distributed-validator-node#teku-keystore-file-error">Teku Keystore issue</a>.
+    </summary> Can be linked to a Teku keystore issue.
   </details>
 </details>
 <details open className="details">
@@ -342,7 +343,7 @@ docker compose logs
       <h4 id="unauthorized-invalid-token-error">
         <code>Unauthorized: authentication error: invalid token</code>
       </h4>
-    </summary> You can ignore this error unless you have been contacted by the Obol Team with monitoring credentials. In that case, follow <a href="https://docs.obol.tech/docs/next/int/quickstart/advanced/monitoring">Getting Started Monitoring your Node</a> in our advanced guides. It does not affect cluster performance or prevent the cluster from running.
+    </summary> You can ignore this error unless you have been contacted by the Obol Team with monitoring credentials. In that case, follow <a href="../advanced/monitoring">Getting Started Monitoring your Node</a> in our advanced guides. It does not affect cluster performance or prevent the cluster from running.
   </details>
 </details>
 <details open className="details">
@@ -357,10 +358,10 @@ docker compose logs
       <li>Changing the permissions of the <code>.charon</code> folder with the commands: </li>
       <ul>
         <li>
-          <code>mkdir .charon</code> (if it doesn't already exist)
+          <code>mkdir .charon</code> (if it doesn't already exist);
         </li>
         <li>
-          <code>sudo chmod -R 666 .charon</code>
+          <code>sudo chmod -R 666 .charon</code>.
         </li>
       </ul>
     </ul>
@@ -369,15 +370,15 @@ docker compose logs
     <summary>
       <h4 id="running-docker-compose-up-error"> I see a lot of errors after running <code>docker compose up</code>
       </h4>
-    </summary> It's because both geth and lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when geth finishes syncing. You can also add a second beacon node endpoint for something like infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose(./docker-compose.yml#84).
+    </summary> It's because both Geth and Lighthouse start syncing and so there's connectivity issues among the containers. Simply let the containers run for a while. You won't observe frequent errors when Geth finishes syncing. You can also add a second beacon node endpoint for something like Infura by adding a comma separated API URL to the end of <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose.yml.
   </details>
   <details className="details">
     <summary>
       <h4 id="loki-plugin-not-found-error"> How do I fix the <code>plugin "loki" not found</code> error?
       </h4>
-    </summary> If you get the following error when calling `docker compose up`:<br/>
+    </summary> If you get the following error when calling <code>docker compose up</code>:<br/>
     <code>Error response from daemon: error looking up logging plugin loki: plugin "loki" not found</code>.<br/>Then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:<br/>
-    <code>docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions </code>
+    <code>docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions</code>.
   </details>
 </details>
 <details open className="details">
@@ -408,6 +409,6 @@ docker compose logs
       <h4 id="Potential-next-epoch-attester-duties-reorg-slot-821-error">
         <code> warn: Potential next epoch attester duties reorg</code>{" "} error
       </h4>
-    </summary> Lodestar logs these warnings because charon is not able to return proper <code>dependent_root</code> value in <code>getAttesterDuties</code> API response whenever lodestar calls this API. This is because charon uses <code>go-eth2-client</code> for all the beacon API calls and it doesn't provide <code>dependent_root</code> value in responses. We have reported this to them <a href="https://github.com/attestantio/go-eth2-client/issues/35">here</a>.
+    </summary> Lodestar logs these warnings because Charon is not able to return proper <code>dependent_root</code> value in <code>getAttesterDuties</code> API response whenever Lodestar calls this API. This is because Charon uses <code>go-eth2-client</code> for all the beacon API calls and it doesn't provide <code>dependent_root</code> value in responses. We have reported this to them <a href="https://github.com/attestantio/go-eth2-client/issues/35">here</a>.
   </details>
 </details>

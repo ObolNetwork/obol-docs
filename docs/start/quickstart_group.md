@@ -53,7 +53,7 @@ This quickstart guide will walk you through creating a Distributed Validator Clu
   
 In order to prepare for a distributed key generation ceremony, you need to create an ENR for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
 
-```bash
+```shell
 # Clone the repo
 git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 
@@ -61,13 +61,15 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node/
 
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.2 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 create enr
 ```
 
 You should expect to see a console output like this:
 
-    Created ENR private key: .charon/charon-enr-private-key
-    enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
+```logs
+Created ENR private key: .charon/charon-enr-private-key
+enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
+```
 
 :::caution
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony nor start the DV cluster successfully.**
@@ -76,6 +78,7 @@ Please make sure to create a backup of the private key at `.charon/charon-enr-pr
 :::tip
 If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update your docker permissions](../faq/errors.mdx#docker-permission-denied-error) to allow the command to run successfully.
 :::
+
 </TabItem>
 <TabItem value="Dappnode" label="Dappnode">
 
@@ -151,7 +154,8 @@ With a fully synced Ethereum node now running on the DappNode, the below steps w
   </ol>
 </p>
 </TabItem>
-</Tabs> 
+</Tabs>
+
 For Step 2, select the "Creator" tab if you are coordinating the creation of the cluster (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to). Select the "Operator" tab if you are accepting an invitation to operate a node in a cluster, proposed by the cluster creator.
 
 ## Step 2: Create a cluster or accept an invitation to a cluster
@@ -298,15 +302,13 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
             </li>
             <li>
               Run the <code>charon create dkg</code> command that generates DKG
-              cluster-definition.json file. (Note: in the "docker run" command,
-              you may have to change the version from v0.19.2 to the correct
-              version of the repo you are using)
+              cluster-definition.json file.
               <pre>
-                docker run --rm -v "$(pwd):/opt/charon"
-                obolnetwork/charon:v0.19.2 create dkg --name="Quickstart"
-                --num-validators=1
-                --fee-recipient-addresses="0x0000000000000000000000000000000000000000"
-                --withdrawal-addresses="0x0000000000000000000000000000000000000000"
+                docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 create dkg {'\n'}
+                --name="Quickstart" {'\n'}
+                --num-validators=1 {'\n'}
+                --fee-recipient-addresses="0x0000000000000000000000000000000000000000" {'\n'}
+                --withdrawal-addresses="0x0000000000000000000000000000000000000000" {'\n'}
                 --operator-enrs="enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u"
               </pre>
               This command should output a file at
@@ -318,7 +320,7 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
                   it, run <code>ls -al .charon</code> in your terminal. Else, if
                   you are on <code>macOS</code>, press{" "}
                   <code>Cmd + Shift + .</code> to view all hidden files in the
-                  finder application.
+                  Finder application.
                 </li>
               </ul>
             </li>
@@ -388,7 +390,7 @@ Once every participating operator is ready, the next step is the distributed key
 ## Step 3: Run the Distributed Key Generation (DKG) ceremony
 
 :::tip
-For the [DKG](../charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps if operators can agreed on a certain time or schedule a video call for them to all run the command together.
+For the [DKG](../charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps if operators can agree on a certain time or schedule a video call for them to all run the command together.
 :::
 
 <Tabs groupId="Launchpad-other">
@@ -422,7 +424,7 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
 
   </TabItem>
   <TabItem value="CLI" label="CLI">
-    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.2 dkg --publish</pre> and the DKG process should begin. 
+    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 dkg --publish</pre> and the DKG process should begin.
   </TabItem>
 </Tabs>
 
@@ -442,21 +444,21 @@ With the DKG ceremony over, the last phase before activation is to prepare your 
 
 <Tabs groupId="Full-Pre-Existing">
   <TabItem value="Full Node" label="Full Node" default>
-    The quickstart <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>). You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests.
+    The <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">CDVN repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>) using Docker Compose. You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests.
 
 <Tabs groupId="Docker-Helm">
   
   <TabItem value="Docker" label="Docker" default>
 
 :::info
-Currently, the quickstart [repo](https://github.com/ObolNetwork/charon-distributed-validator-node) configures a node for the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file.
+Currently, the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node) configures a node for the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file.
 From within the `charon-distributed-validator-node` directory:
 
 `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
 
 Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set.
 
-```bash
+```shell
 # Copy ".env.sample", renaming it ".env"
 cp .env.sample .env
 ```
@@ -465,29 +467,30 @@ cp .env.sample .env
 
 :::caution
 If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.<br />
-
-**Note**: If you have a `nethermind` node already synced, you can simply copy over the directory. For ex: `cp -r ~/.ethereum/goerli data/nethermind`. This makes everything faster since you start from a synced nethermind node.
 :::
 
-```bash
+:::note
+If you have a `nethermind` node already synced, you can simply copy over the directory. For example: `cp -r ~/.ethereum/goerli data/nethermind`. This makes everything faster since you start from a synced nethermind node.
+:::
+
+```shell
 # Delete lighthouse data if it exists
 rm -r ./data/lighthouse
 
 # Spin up a Distributed Validator Node with a Validator Client
 docker compose up -d
-
 ```
 
 If at any point you need to turn off your node, you can run:
 
-```bash
-# Shut down the currently running distributed validator node
+```shell
+# Shut down the currently running Distributed Validator Node
 docker compose down
 ```
 
 You should use the grafana dashboard that accompanies the quickstart repo to see whether your cluster is healthy.
 
-```bash
+```shell
 # Open Grafana dashboard
 open http://localhost:3000/d/d6qujIJVk/
 ```
@@ -500,7 +503,7 @@ In particular you should check:
 
 Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
 
-You might notice that there are logs indicating that a validator cannot be found and that APIs are returning 404. This is to be expected at this point, as the validator public keys listed in the lock file have not been deposited and acknowledged on the consensus layer yet (usually ~16 hours after the deposit is made).
+You might notice that there are logs indicating that a validator cannot be found and that APIs are returning 404. This is to be expected at this point, as the validator public keys listed in the lock file have not been deposited and acknowledged on the consensus layer yet (usually it takes ~16 hours after the deposit is made).
 
   </TabItem>
 
@@ -519,23 +522,21 @@ You might notice that there are logs indicating that a validator cannot be found
 
 <TabItem value="Existing Beacon Node" label="Existing Beacon Node">
 
-#### Using a pre-existing beacon node
-
 :::caution
 Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
 :::
 
-If you already have a beacon node running somewhere and you want to use that instead of running an EL (`nethermind`) & CL (`lighthouse`) as part of the example repo, you can disable these images. To do so, follow these steps:
+If you already have a beacon node running somewhere and you want to use that instead of running an execution layer (`nethermind`) & consensus layer (`lighthouse`) as part of the example repo, you can disable these images. To do so, follow these steps:
 
 1. Copy the `docker-compose.override.yml.sample` file
 
-```
+```shell
 cp -n docker-compose.override.yml.sample docker-compose.override.yml
 ```
 
 2. Uncomment the `profiles: [disable]` section for both `nethermind` and `lighthouse`. The override file should now look like this
 
-```
+```docker
 services:
   nethermind:
     # Disable nethermind
@@ -558,7 +559,7 @@ services:
 
 3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your beacon node's URL
 
-```
+```shell
 ...
 # Connect to one or more external beacon nodes. Use a comma separated list excluding spaces.
 CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_BEACON_NODE_URL>
@@ -567,7 +568,7 @@ CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_BEACON_NODE_URL>
 
 4. Restart your docker compose
 
-```
+```shell
 docker compose down
 docker compose up -d
 ```
@@ -576,7 +577,7 @@ docker compose up -d
 </Tabs>
 
 :::tip
-In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. (The default port to expose is `:3610`). Read more about charon's networking [here](../charon/networking.md).
+In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. The default port to expose is `:3610`. Read more about charon's networking [here](../charon/networking.md).
 :::
 
 If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to activating your validator to begin staking.

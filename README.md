@@ -10,13 +10,13 @@ This website is built using [Docusaurus 2](https://docusaurus.io/), a modern sta
 
 ### Installation
 
-```
+```shell
 $ yarn
 ```
 
 ### Local Development
 
-```
+```shell
 $ yarn start
 ```
 
@@ -24,7 +24,7 @@ This command starts a local development server and opens up a browser window. Mo
 
 ### Build
 
-```
+```shell
 $ yarn build
 ```
 
@@ -46,7 +46,7 @@ Control/Command+F the `/docs/` folder for the current version, and update all re
 
 Now you are ready to create the next version by running the following command.
 
-```bash
+```shell
 yarn run version v0.5.0
 ```
 
@@ -113,7 +113,7 @@ module.exports = {
 
 Copy the `docs/intro.md` file to the `i18n/fr` folder:
 
-```bash
+```shell
 mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
 
 cp docs/intro.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
@@ -125,7 +125,7 @@ Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
 
 Start your site on the French locale:
 
-```bash
+```shell
 npm run start -- --locale fr
 ```
 
@@ -167,13 +167,13 @@ The locale dropdown now appears in your navbar:
 
 Build your site for a specific locale:
 
-```bash
+```shell
 npm run build -- --locale fr
 ```
 
 Or build your site to include all the locales at once:
 
-```bash
+```shell
 npm run build
 ```
 

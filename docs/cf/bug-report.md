@@ -18,12 +18,11 @@ If you are experiencing multiple issues, it is best to open each as a separate t
 
 An original bug report will very likely be preserved and used as a record and sounding board for users that have similar experiences in the future. Because of this, it is a great service to the community to ensure that reports meet these standards and follow the template closely.
 
-
 ## The bug report template
 
 Below is the standard bug report template used by all of Obol's official repositories.
 
-```sh
+```shell
 <!--- Provide a general summary of the issue in the Title above -->
 
 ## Expected Behavior
@@ -54,4 +53,3 @@ Version(s) used:
 ## Further Information
 <!--- Anything else to add?
 ```
-

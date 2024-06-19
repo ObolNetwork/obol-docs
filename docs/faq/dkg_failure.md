@@ -17,7 +17,7 @@ Charon's DKG doesn't allow peer reconnection once the process is started, but it
 
 When you see the following message:
 
-```
+```log
 14:08:34.505 INFO dkg        Waiting to connect to all peers...
 ```
 
@@ -25,7 +25,7 @@ this means your Charon instance is waiting for all the other cluster peers to st
 
 A log line will confirm the connection of a new peer:
 
-```
+```log
 14:08:34.523 INFO dkg        Connected to peer 1 of 3                 {"peer": "fantastic-adult"}
 14:08:34.529 INFO dkg        Connected to peer 2 of 3                 {"peer": "crazy-bunch"}
 14:08:34.673 INFO dkg        Connected to peer 3 of 3                 {"peer": "considerate-park"}
@@ -33,7 +33,7 @@ A log line will confirm the connection of a new peer:
 
 As soon as all the peers are connected, this message will be shown:
 
-```
+```log
 14:08:34.924 INFO dkg        All peers connected, starting DKG ceremony
 ```
 
@@ -41,7 +41,7 @@ Past this stage **no disconnections are allowed**, and _all peers must leave the
 
 If for some reason the DKG process fails, you would see error logs that resemble this:
 
-```
+```log
 14:28:46.691 ERRO cmd        Fatal error: sync step: p2p connection failed, please retry DKG: context canceled
 ```
 
@@ -51,9 +51,9 @@ As the error message suggests, the DKG process needs to be retried.
 
 One cannot simply retry the DKG process: Charon refuses to overwrite any runtime file in order to avoid inconsistencies and private key loss.
 
-When attempting to re-run a DKG with an unclean data directory -- which is either `.charon` or what was specified with the `--data-dir` CLI parameter -- this is the error that will be shown:
+When attempting to re-run a DKG with an unclean data directory - which is either `.charon` or what was specified with the `--data-dir` CLI parameter - this is the error that will be shown:
 
-```
+```log
 14:44:13.448 ERRO cmd        Fatal error: data directory not clean, cannot continue {"disallowed_entity": "cluster-lock.json", "data-dir": "/compose/node0"}
 ```
 
@@ -61,13 +61,14 @@ The `disallowed_entity` field lists all the files that Charon refuses to overwri
 
 In order to retry the DKG process one must delete the following entities, if present:
 
- - `validator_keys` directory
- - `cluster-lock.json` file
- - `deposit-data.json` file
+- `validator_keys` directory
+- `cluster-lock.json` file
+- `deposit-data.json` file
+
 :::caution
 The `charon-enr-private-key` file **must be preserved**, failure to do so requires the DKG process to be restarted from the beginning by creating a new cluster definition.
 :::
-If you're doing a DKG with a custom cluster definition - for example, create with `charon create dkg` rather than the Obol Launchpad - you can re-use the same file.
+If you're doing a DKG with a custom cluster definition - for example, create with `charon create dkg`, rather than the Obol Launchpad - you can re-use the same file.
 
 Once this process has been completed, the cluster operators can retry a DKG.
 

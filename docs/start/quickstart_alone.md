@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 # Create a DV alone
 
 :::info
-It is possible for a single operator to manage all of the nodes of a DV cluster. The nodes can be run on a single machine, which is only suitable for testing, or the nodes can be run on multiple machines, which is expected for a production setup. 
+It is possible for a single operator to manage all of the nodes of a DV cluster. The nodes can be run on a single machine, which is only suitable for testing, or the nodes can be run on multiple machines, which is expected for a production setup.
 
 The private key shares can be created centrally and distributed securely to each node. Alternatively, the private key shares can be created in a lower-trust manner with a [Distributed Key Generation](../int/key-concepts.md#distributed-validator-key-generation-ceremony) process, which avoids the validator private key being stored in full anywhere, at any point in its lifecycle. Follow the [group quickstart](./quickstart_group.md) instead for this latter case.
 :::
@@ -25,9 +25,9 @@ The private key shares can be created centrally and distributed securely to each
 
 <Tabs groupId="Launchpad-other">
   <TabItem value="Launchpad" label="Launchpad" default>
-    Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster. <br/>Before you run the command, checkout the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">Quickstart Alone</a> demo repo and <code>cd</code> into the directory.
+    Go to the the <a href="/docs/dvl/intro#dv-launchpad-links">DV Launchpad</a> and select <code>Create a distributed validator alone</code>. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster. <br/>Before you run the command, clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster.git">CDVC repo</a> and <code>cd</code> into the directory.
 
-  ```bash
+  ```shell
   # Clone the repo
   git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
 
@@ -35,26 +35,37 @@ The private key shares can be created centrally and distributed securely to each
   cd charon-distributed-validator-cluster/
 
   # Run the command provided in the DV Launchpad "Create a cluster alone" flow
-  docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v0.19.2 create cluster --definition-file=...
+  docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.0.0 create cluster --definition-file=...
   ```
+
   </TabItem>
 
   <TabItem value="CLI" label="CLI">
 
-1. Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster">Quickstart Alone</a> demo repo and <code>cd</code> into the directory.
-  ```bash
+1. Clone the <a href="https://github.com/ObolNetwork/charon-distributed-validator-cluster">CDVC repo</a> and <code>cd</code> into the directory.
+
+  ```shell
   # Clone the repo
   git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.git
 
   # Change directory
   cd charon-distributed-validator-cluster/
   ```
+
 2. Run the cluster creation command, setting required flag values.
 
   Run the below command to create the validator private key shares and cluster artifacts locally, replacing the example values for `nodes`, `network`, `num-validators`, `fee-recipient-addresses`,  and `withdrawal-addresses`.
   Check the [Charon CLI reference](../charon/charon-cli-reference.md#create-a-full-cluster-locally) for additional, optional flags to set.
-  ```bash
-    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.19.2 create cluster --nodes=4 --network=holesky --num-validators=1 --name="Quickstart Guide Cluster" --cluster-dir="cluster" --fee-recipient-addresses=0x000000000000000000000000000000000000dead --withdrawal-addresses=0x000000000000000000000000000000000000dead
+
+  ```shell
+    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 create cluster \
+      --nodes=4 \
+      --network=holesky \
+      --num-validators=1 \
+      --name="Quickstart Guide Cluster" \
+      --cluster-dir="cluster" \
+      --fee-recipient-addresses=0x000000000000000000000000000000000000dead \
+      --withdrawal-addresses=0x000000000000000000000000000000000000dead
   ```
 
 :::tip
@@ -81,18 +92,19 @@ Make sure your backup is secure and private, someone with access to these files 
 :::warning
 This part of the guide only runs one Execution Client, one Consensus Client, and 6 Distributed Validator Charon Client + Validator Client pairs on a single docker instance, and **is not suitable for a mainnet deployment**. (If this machine fails, there will not be any fault tolerance - the cluster will also fail.)
 
-For a production deployment with fault tolerance, follow the part of the guide instructing you how to distribute the nodes across multiple machines. 
+For a production deployment with fault tolerance, follow the part of the guide instructing you how to distribute the nodes across multiple machines.
 :::
 
-Run this command to start your cluster containers if you deployed using [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster).
+Run this command to start your cluster containers if you deployed using the [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster).
 
-```sh
+```shell
 # Start the distributed validator cluster
 docker compose up --build -d
 ```
-Check the monitoring dashboard and see if things look all right
 
-```sh
+Check the monitoring dashboard and see if things look all right.
+
+```shell
 # Open Grafana
 open http://localhost:3000/d/laEp8vupp
 ```
@@ -101,7 +113,7 @@ open http://localhost:3000/d/laEp8vupp
   <TabItem value="Run the nodes on many machines" label="Run the nodes on multiple machines">
 
 :::caution
-To distribute your cluster across multiple machines, each node in the cluster needs one of the folders called `node*/` to be copied to it. Each folder should be copied to a CDVN repo and renamed from `node*` to `.charon`.
+To distribute your cluster across multiple machines, each node in the cluster needs one of the folders called `node*/` to be copied to it. Each folder should be copied to a [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node) and renamed from `node*` to `.charon`.
 
 Right now, the `charon create cluster` command [used earlier to create the private keys](./quickstart_alone#step-1-create-the-key-shares-locally) outputs a folder structure like `cluster/node*/`. Make sure to grab the `./node*/` folders, *rename* them to `.charon` and then move them to one of the single node repos below. Once all nodes are online, synced, and connected, you will be ready to activate your validator.
 :::
@@ -112,7 +124,6 @@ Right now, the `charon create cluster` command [used earlier to create the priva
 <br />
 
 ```log title="Output from create cluster"
-
 cluster
 ├── node0
 │   ├── charon-enr-private-key
@@ -120,28 +131,38 @@ cluster
 │   ├── deposit-data.json
 │   └── validator_keys
 │       ├── keystore-0.json
-│       └── keystore-0.txt
+│       ├── keystore-0.txt
+│       ├── ...
+│       ├── keystore-N.json
+│       └── keystore-N.txt
 ├── node1
 │   ├── charon-enr-private-key
 │   ├── cluster-lock.json
 │   ├── deposit-data.json
 │   └── validator_keys
 │       ├── keystore-0.json
-│       └── keystore-0.txt
+│       ├── keystore-0.txt
+│       ├── ...
+│       ├── keystore-N.json
+│       └── keystore-N.txt
 ├── node2
 │   ├── charon-enr-private-key
 │   ├── cluster-lock.json
 │   ├── deposit-data.json
 │   └── validator_keys
 │       ├── keystore-0.json
-│       └── keystore-0.txt
+│       ├── keystore-0.txt
+│       ├── ...
+│       ├── keystore-N.json
+│       └── keystore-N.txt
 └── node3
     ├── charon-enr-private-key
     ├── cluster-lock.json
     ├── deposit-data.json
     └── validator_keys
         ├── keystore-0.json
-        └── keystore-0.txt
+        ├── keystore-0.txt
+        ├── ...
         ├── keystore-N.json
         └── keystore-N.txt
 
@@ -161,16 +182,17 @@ cluster
 ```
 
 :::info
-  Currently, the quickstart repo installs a node on the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file. 
+  Currently, the quickstart repo installs a node on the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file.
 
   `.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
 
   Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../charon/charon-cli-reference.md) for additional optional flags to set. Once you have set the values you wish to use. Make a copy of this file called `.env`.
 
-  ```bash
+  ```shell
   # Copy ".env.sample", renaming it ".env"
   cp .env.sample .env
   ```
+
 :::
 
   </TabItem>

@@ -37,7 +37,7 @@ Install the Obol-SDK package into your development environment
 
 ## Instantiate the client
 
-The first thing you need to do is create a instance of the Obol SDK client. The client takes two constructor parameters:
+The first thing you need to do is create an instance of the Obol SDK client. The client takes two constructor parameters:
 
 - The `chainID` for the chain you intend to use.
 - An ethers.js [signer](https://docs.ethers.org/v6/api/providers/#Signer-signTypedData) object.
@@ -88,7 +88,7 @@ console.log(
 Once the Obol-API returns a `configHash` string from the `createClusterDefinition` method, you can use this identifier to invite the operators to the [Launchpad](../dvl/intro.md) to complete the process
 
 1. Operators navigate to `https://<NETWORK_NAME_HERE>.launchpad.obol.tech/dv?configHash=<CONFIG_HASH_HERE>` and complete the [run a DV with others](../start/quickstart_group.md) flow.
-1. Once the DKG is complete, and operators are using the `--publish` flag, the created cluster details will be posted to the Obol API
+1. Once the DKG is complete, and operators are using the `--publish` flag, the created cluster details will be posted to the Obol API.
 1. The creator will be able to retrieve this data with `obol.getClusterLock(configHash)`, to use for activating the newly created validator.
 
 ## Retrieve the created Distributed Validators using the SDK

@@ -9,14 +9,16 @@ description: Add monitoring credentials to help the Obol Team monitor the health
 This is **optional** and does not confer any special privileges within the Obol Network.
 :::
 
-You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to Obol's central prometheus cluster to monitor, analyze, and improve your Distributed Validator Cluster's performance.
+You may have been provided with **Monitoring Credentials** used to push distributed validator metrics to Obol's central Prometheus cluster to monitor, analyze, and improve your Distributed Validator Cluster's performance.
 
 The provided credentials needs to be added in `prometheus/prometheus.yml` replacing `$PROM_REMOTE_WRITE_TOKEN` and will look like:
-```
+
+```shell
 obol20tnt8UC...
 ```
 
 The updated `prometheus/prometheus.yml` file should look like:
+
 ```yaml
 global:
   scrape_interval:     30s # Set the scrape interval to every 30 seconds.

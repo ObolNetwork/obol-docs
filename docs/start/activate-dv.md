@@ -29,9 +29,9 @@ Use any of the following tools to deposit. Please use the third-party tools at y
   * Fill the transaction information
   * Set amount to <code>32</code> in ETH
   * Use your <code>deposit-data.json</code> to fill the required data : <code>pubkey</code>,<code>withdrawal credentials</code>,<code>signature</code>,<code>deposit_data_root</code>. Make sure to prefix the input with <code>0x</code> to format them in bytes
-    * Click on <code>Add transaction</code>
+  * Click on <code>Add transaction</code>
   * Click on <code>Create Batch</code>
-  * Click on <code>Send Batch</code>, you can click on Simulate to check if the transaction will execute successfully
+  * Click on <code>Send Batch</code>, you can click on <code>Simulate</code> to check if the transaction will execute successfully
   * Get the minimum threshold of signatures from the other addresses and execute the custom transaction
 
 The activation process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks.

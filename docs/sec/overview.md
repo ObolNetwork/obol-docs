@@ -11,9 +11,11 @@ This page is updated quarterly. The last update was on 2024-June-19.
 
 ## Table of Contents
 
-1. [List of Security Audits and Assessments](#list-of-security-audits-and-assessments)
-1. [Security Focused Documents](#security-focused-documents)
-1. [Bug Bounty Details](./bug-bounty.md)
+- [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [List of Security Audits and Assessments](#list-of-security-audits-and-assessments)
+  - [Security focused documents](#security-focused-documents)
+  - [Bug Bounty](#bug-bounty)
 
 ## List of Security Audits and Assessments
 
@@ -28,7 +30,6 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 - A [solidity audit](./smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
 
 - A [penetration testing certificate](https://github.com/ObolNetwork/obol-security/blob/main/audits/Sayfer_2024-03_Penetration_Testing_CFD.pdf) of the Obol DV Launchpad by [Sayfer](https://sayfer.io/).
-
 
 ## Security focused documents
 
