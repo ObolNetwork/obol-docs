@@ -150,13 +150,13 @@ The following flags need to be configured on your chosen validator client
 
 It can be difficult to confirm everything is configured correctly with your cluster until a proposal opportunity arrives, but here are some things you can check. 
 
-When your cluster is running, you should see if charon is logging something like this each epoch:
+When your cluster is running, you should see if Charon is logging something like this each epoch:
 
 ```log
 13:10:47.094 INFO bcast      Successfully submitted validator registration to beacon node {"delay": "24913h10m12.094667699s", "pubkey": "84b_713", "duty": "1/builder_registration"}
 ```
 
-This indicates that your charon node is successfully registering with the relay for a blinded block when the time comes.
+This indicates that your Charon node is successfully registering with the relay for a blinded block when the time comes.
 
 If you are using the [ultrasound relay](https://relay.ultrasound.money), you can enter your cluster's distributed validator public key(s) into their website, to confirm they also see the validator as correctly registered.
 

@@ -79,11 +79,11 @@ Command output:
 ```shell
 ***************** WARNING: Splitting keys **********************
  Please make sure any existing validator has been shut down for
- at least 2 finalised epochs before starting the charon cluster,
+ at least 2 finalised epochs before starting the Charon cluster,
  otherwise slashing could occur.                               
 ****************************************************************
 
-Created charon cluster:
+Created Charon cluster:
  --split-existing-keys=true
 
 ./cluster/
@@ -95,4 +95,4 @@ Created charon cluster:
 │  │  ├─ keystore-*.txt         # Keystore password files for keystore-*.json
 ```
 
-These split keys can now be used to start a charon cluster.
+These split keys can now be used to start a Charon cluster.

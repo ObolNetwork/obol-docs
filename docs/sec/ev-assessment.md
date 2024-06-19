@@ -189,7 +189,7 @@ As long as Obol is clear and consistent with communication around releases and v
 
 Once a distributed validator is up and running, much of the danger has passed. As a middleware client, Charon sits between a validator’s consensus and validator clients. As such, it shouldn’t have direct access to a validator’s withdrawal keys nor signing keys.
 
-If existing validators update to a malicious version of Charon, it’s likely the worst thing an attacker could theoretically do is slash the validator, however, assuming charon has no access to any private keys, this would be predicated on one or more validator clients connected to charon also failing to prevent the signing of a slashable message. In practice, a compromised charon client is more likely to pose liveness risks than safety risks.
+If existing validators update to a malicious version of Charon, it’s likely the worst thing an attacker could theoretically do is slash the validator, however, assuming Charon has no access to any private keys, this would be predicated on one or more validator clients connected to Charon also failing to prevent the signing of a slashable message. In practice, a compromised Charon client is more likely to pose liveness risks than safety risks.
 
 This is not likely to be particularly motivating to potential attackers - and paired with the high difficulty described above, this scenario seems unlikely to cause significant issues.
 

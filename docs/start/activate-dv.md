@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 If you have successfully created a distributed validator and you are ready to activate it, congratulations! 🎉
 
-Once you have connected all of your charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator** may proceed to deposit and activate the validator(s).
+Once you have connected all of your Charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator** may proceed to deposit and activate the validator(s).
 
 The `deposit-data.json` to be used to deposit will be located in each operator's `.charon` folder. The copies across every node should be identical and any of them can be uploaded.
 

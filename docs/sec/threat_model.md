@@ -103,13 +103,13 @@ An outside attacker could also find and use vulnerabilities in the underlying cr
 
 ## Malicious beacon nodes
 
-A malicious beacon node (BN) could prevent the distributed validator from operating its validation duties, and could plausibly increase the likelihood of slashing by serving charon illegitimate information.
+A malicious beacon node (BN) could prevent the distributed validator from operating its validation duties, and could plausibly increase the likelihood of slashing by serving Charon illegitimate information.
 
 If the amount of nodes configured with the malicious BN are equal to the byzantine threshold for the Charon BFT consensus protocol, the validation process can potentially halt since the BFT parameter threshold is reached - most of the nodes are byzantine - the system will reach consensus on a set of data that isn’t valid.
 
 We deem the likelihood of this scenario to be medium depending on the trust model associated with the BNs deployment (cloud, self-hosted, SaaS product): node operators should always host or at least trust their own beacon nodes.
 
-## Malicious charon relays
+## Malicious Charon relays
 
 A Charon relay is used as a communication bridge between nodes that aren’t directly exposed on the Internet. It also acts as the peer discovery mechanism for a cluster.
 

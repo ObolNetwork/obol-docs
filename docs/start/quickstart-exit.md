@@ -15,14 +15,14 @@ This process will take 27 hours or longer depending on the current length of the
 
 :::info
 - A threshold of operators needs to run the exit command for the exit to succeed.
-- If a charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
+- If a Charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all Charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
 :::
 
 ## Run the `voluntary-exit` command on your validator client
 
 Run the appropriate command on your validator client to broadcast an exit message from your validator client to its upstream Charon client.
 
-It needs to be the validator client that is connected to your Charon client taking part in the DV, as you are only signing a partial exit message, with a partial private key share, which your charon client will combine with the other partial exit messages from the other operators.
+It needs to be the validator client that is connected to your Charon client taking part in the DV, as you are only signing a partial exit message, with a partial private key share, which your Charon client will combine with the other partial exit messages from the other operators.
 
 :::info
 - All operators need to use the same `EXIT_EPOCH` for the exit to be successful. Assuming you want to exit as soon as possible, the default epochs included in the below commands should be sufficient for the respective network.
@@ -320,7 +320,7 @@ It needs to be the validator client that is connected to your Charon client taki
   </TabItem>
 </Tabs>
 
-When submitting through a validator client (not through charon directly), once a threshold of exit signatures has been received by any single charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
+When submitting through a validator client (not through charon directly), once a threshold of exit signatures has been received by any single Charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
 
 ## Exit epoch and withdrawable epoch
 

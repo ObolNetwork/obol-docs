@@ -51,7 +51,7 @@ This quickstart guide will walk you through creating a Distributed Validator Clu
 <Tabs groupId="Get-ENR">
   <TabItem value="CLI" label="CLI">
   
-In order to prepare for a distributed key generation ceremony, you need to create an ENR for your charon client. This ENR is a public/private key pair that allows the other charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
+In order to prepare for a distributed key generation ceremony, you need to create an ENR for your Charon client. This ENR is a public/private key pair that allows the other Charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
 
 ```shell
 # Clone the repo
@@ -418,7 +418,7 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
 3. Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder of the node. These include:
 
    - A `deposit-data.json` file. This contains the information needed to activate the validator on the Ethereum network.
-   - A `cluster-lock.json` file. This contains the information needed by charon to operate the distributed validator cluster with its peers.
+   - A `cluster-lock.json` file. This contains the information needed by Charon to operate the distributed validator cluster with its peers.
    - A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
 
 
@@ -497,9 +497,9 @@ open http://localhost:3000/d/d6qujIJVk/
 
 In particular you should check:
 
-- That your charon client can connect to the configured beacon client.
-- That your charon client can connect to all peers directly.
-- That your validator client is connected to charon, and has the private keys it needs loaded and accessible.
+- That your Charon client can connect to the configured beacon client.
+- That your Charon client can connect to all peers directly.
+- That your validator client is connected to Charon, and has the private keys it needs loaded and accessible.
 
 Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
 
@@ -514,7 +514,7 @@ You might notice that there are logs indicating that a validator cannot be found
     Use a Helm to start your node. <a href="https://github.com/ObolNetwork/helm-charts" target="_blank">See the repo here</a> for further instructions. 
   </TabItem>
   <TabItem value="Kubernetes" label="Kubernetes">
-    Use Kubernetes manifests to start your charon client and validator client. These manifests expect an existing Beacon Node Endpoint to connect to. <a href="https://github.com/ObolNetwork/charon-k8s-distributed-validator-node" target="_blank">See the repo here</a> for further instructions.
+    Use Kubernetes manifests to start your Charon client and validator client. These manifests expect an existing Beacon Node Endpoint to connect to. <a href="https://github.com/ObolNetwork/charon-k8s-distributed-validator-node" target="_blank">See the repo here</a> for further instructions.
   </TabItem>
   </Tabs>
 
@@ -526,7 +526,7 @@ You might notice that there are logs indicating that a validator cannot be found
 Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
 :::
 
-If you already have a beacon node running somewhere and you want to use that instead of running an execution layer (`nethermind`) & consensus layer (`lighthouse`) as part of the example repo, you can disable these images. To do so, follow these steps:
+If you already have a beacon node running somewhere and you want to use that instead of running an EL (`nethermind`) & CL (`lighthouse`) as part of the example repo, you can disable these images. To do so, follow these steps:
 
 1. Copy the `docker-compose.override.yml.sample` file
 
@@ -577,7 +577,7 @@ docker compose up -d
 </Tabs>
 
 :::tip
-In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward charon's p2p port to the public internet to facilitate direct connections. The default port to expose is `:3610`. Read more about charon's networking [here](../charon/networking.md).
+In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward Charon's p2p port to the public internet to facilitate direct connections. The default port to expose is `:3610`. Read more about Charon's networking [here](../charon/networking.md).
 :::
 
 If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to activating your validator to begin staking.

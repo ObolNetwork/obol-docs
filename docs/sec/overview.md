@@ -33,7 +33,7 @@ The completed audits reports are linked [here](https://github.com/ObolNetwork/ob
 
 ## Security focused documents
 
-- A [threat model](./threat_model) for a DV middleware client like charon.
+- A [threat model](./threat_model) for a DV middleware client like Charon.
 
 ## Bug Bounty
 

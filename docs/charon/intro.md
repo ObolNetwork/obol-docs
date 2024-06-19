@@ -63,7 +63,7 @@ back to the `ValidatorAPI` which stores it in the `PartialSignatureDB`.
 The `PartialSignatureDB` stores the partially signed data submitted by the local Charon client’s VC.
 But it also stores all the partial signatures submitted by the VCs of other peers in the cluster.
 This is achieved by the `PartialSignatureExchange` component that exchanges partial signatures between all peers in the cluster.
-All charon clients, therefore, store all partial signatures the cluster generates.
+All Charon clients, therefore, store all partial signatures the cluster generates.
 
 ### **Threshold Aggregate** partial signatures
 
@@ -76,11 +76,11 @@ Finally, the `Broadcaster` component broadcasts the final threshold aggregated s
 
 ### Ports
 
-The following is an outline of the services that can be exposed by charon.
+The following is an outline of the services that can be exposed by Charon.
 
 - **:3600** - The validator REST API. This is the port that serves the consensus layer's [beacon node API](https://ethereum.github.io/beacon-APIs/). This is the port validator clients should talk to instead of their standard consensus client REST API port. Charon subsequently proxies these requests to the upstream consensus client specified by `--beacon-node-endpoints`.
 
-- **:3610** - Charon P2P port. This is the port that charon clients use to communicate with one another via TCP. This endpoint should be port-forwarded on your router and exposed publicly, preferably on a static IP address. This IP address should then be set on the charon run command with `--p2p-external-ip` or `CHARON_P2P_EXTERNAL_IP`.
+- **:3610** - Charon P2P port. This is the port that Charon clients use to communicate with one another via TCP. This endpoint should be port-forwarded on your router and exposed publicly, preferably on a static IP address. This IP address should then be set on the charon run command with `--p2p-external-ip` or `CHARON_P2P_EXTERNAL_IP`.
 
 - **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`. This port should not be exposed publicly.
 
