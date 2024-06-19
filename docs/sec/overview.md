@@ -7,7 +7,7 @@ description: Security Overview
 
 This page serves as an overview of the Obol Network from a security point of view.
 
-This page is updated quarterly. The last update was on 2023-10-01.
+This page is updated quarterly. The last update was on 2024-June-19.
 
 ## Table of Contents
 
