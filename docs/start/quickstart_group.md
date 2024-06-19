@@ -488,7 +488,7 @@ If at any point you need to turn off your node, you can run:
 docker compose down
 ```
 
-You should use the grafana dashboard that accompanies the quickstart repo to see whether your cluster is healthy.
+You should use the Grafana dashboard that accompanies the quickstart repo to see whether your cluster is healthy.
 
 ```shell
 # Open Grafana dashboard

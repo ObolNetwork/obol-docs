@@ -82,7 +82,7 @@ The following is an outline of the services that can be exposed by Charon.
 
 - **:3610** - Charon P2P port. This is the port that Charon clients use to communicate with one another via TCP. This endpoint should be port-forwarded on your router and exposed publicly, preferably on a static IP address. This IP address should then be set on the charon run command with `--p2p-external-ip` or `CHARON_P2P_EXTERNAL_IP`.
 
-- **:3620** - Monitoring port. This port hosts a webserver that serves prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`. This port should not be exposed publicly.
+- **:3620** - Monitoring port. This port hosts a webserver that serves Prometheus metrics on `/metrics`, a readiness endpoint on `/readyz` and a liveness endpoint on `/livez`, and a pprof server on `/debug/pprof`. This port should not be exposed publicly.
 
 ## Getting started
 
