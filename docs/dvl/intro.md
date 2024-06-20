@@ -25,4 +25,3 @@ For more information on running Charon in a UI friendly way through the DV Launc
 | Gnosis Chain      | https://gnosischain.launchpad.obol.tech    |
 | Holesky      | https://holesky.launchpad.obol.tech |
 | Sepolia      | https://sepolia.launchpad.obol.tech |
-| Goerli       | https://goerli.launchpad.obol.tech  |
