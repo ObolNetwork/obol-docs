@@ -133,7 +133,7 @@ With a fully synced Ethereum node now running on the DappNode, the below steps w
     </li>
     <li>
       Click 'Install' & in the config mode page > select new cluster & submit. (if you already have the config URL, you can select URL option.)
-      <img src="/img/InstallPAckage.png" alt="Install Package" />
+      <img src="/img/InstallPackage.png" alt="Install Package" />
     </li>
     <li>
       Accept the terms & conditions and the install process will begin.
@@ -425,6 +425,35 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
   </TabItem>
   <TabItem value="CLI" label="CLI">
     Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 dkg --publish</pre> and the DKG process should begin.
+  </TabItem>
+  <TabItem value="DappnodeTab" label="Dappnode">
+    Follow this step if the operator is signing through launchpad, importing the definition url into DappNode config & then running the DKG inside the DappNode, followed by cluster run.
+          <img src="/img/StartDKG.png" alt="Start DKG" />
+          <ol>
+            <li>
+              After all operators has signed with their wallet and has provided an ENR from the DappNode info tab, the launchpad page will guide operators to the DKG ceremony. Click continue & navigate to 'Dappnode/Avado' tab where the cluster definition file URL is presented. 
+              <img src="/img/DappnodeTab.png" alt="Dappnode Tab" />
+            </li>
+             <li>
+              To run the Distributed Key Generation ceremony using a DappNode, paste the URL into the Obol Package interface. Go to the 'Config' tab > select 'URL' from the dropdown menu > paste the Definition File URL, you retrieved from the launchpad, into the validator cluster-Num field which should match the ENR cluster-x. Example: If you picked ENR1 for signing, then you should paste the URL in Cluster-1. Finally, click the update button at the bottom of the page. 
+              <img src="/img/CopyURL.png" alt="Copy URL" />
+              <img src="/img/PasteURL.png" alt="Paste URL" />
+              <img src="/img/SelectURL.png" alt="Select URL from dorpdown" />
+            </li>
+              <li>
+              After DappNode updates the definition file, go back into the info tab & restart the Charon validator container. 
+              <img src="/img/RestartContainer.png" alt="Restart Charon validator container" />
+            </li>
+            <li>
+              The node is now ready and will attempt to complete the DKG. You can monitor the DKG progress via the logs tab. Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching `cluster_definition_hash`), the ceremony begins.
+              <img src="/img/ConnectPeers.png" alt="Connect to peers in logs tab" />
+            </li>
+             <li>
+              Example of DKG ceremony competed log. 
+              <img src="/img/DKGExample.png" alt="Connect to peers in logs tab" />
+            </li>
+            </ol>
+  
   </TabItem>
 </Tabs>
 
