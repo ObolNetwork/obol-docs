@@ -4,7 +4,7 @@ description: Add monitoring credentials to help the Obol Team monitor the health
 ---
 # Monitoring your Node
 
-This comprehensive guide will assist you in effectively monitoring your Charon clusters and setting up alerts by running your own Prometheus and Grafana server. If you want to use Obol’s [public dashboard](https://grafana.monitoring.gcp.obol.tech/d/d6qujIJVk/charon-overview-v3?orgId=1&refresh=1m) instead of running your servers, refer to [this section](./obol-monitoring.md) in Obol docs that teaches you how to push Prometheus metrics to Obol.
+This comprehensive guide will assist you in effectively monitoring your Charon clusters and setting up alerts by running your own Prometheus and Grafana server. If you want to use Obol’s [public dashboard](https://grafana.monitoring.gcp.obol.tech/d/d895e47a-3c2d-46b7-9b15-8f31202681af/clusters-aggregate-view?orgId=6) instead of running your servers, refer to [this section](./obol-monitoring.md) in Obol docs that teaches you how to push Prometheus metrics to Obol.
 
 To explain quickly, Prometheus generates the metrics and Grafana visualizes them. To learn more about Prometheus and Grafana, visit [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/). If you are using **[CDVN repository](https://github.com/ObolNetwork/charon-distributed-validator-node)** or **[CDVC repository](https://github.com/ObolNetwork/charon-distributed-validator-cluster)**, then Prometheus and Grafana are part of docker compose file and will be installed when you run `docker compose up`.
 
