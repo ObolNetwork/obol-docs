@@ -427,25 +427,25 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
     Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 dkg --publish</pre> and the DKG process should begin.
   </TabItem>
   <TabItem value="DappnodeTab" label="Dappnode">
-    Follow this step if the operator is signing through launchpad, importing the definition url into DappNode config & then running the DKG inside the DappNode, followed by cluster run.
+    Follow this step you are signing through the DV Launchpad, importing the cluster definition URL into the DappNode package's config & then running the DKG inside the DappNode, followed by cluster run.<br/>
           <img src="/img/StartDKG.png" alt="Start DKG" />
           <ol>
             <li>
-              After all operators has signed with their wallet and has provided an ENR from the DappNode info tab, the launchpad page will guide operators to the DKG ceremony. Click continue & navigate to 'Dappnode/Avado' tab where the cluster definition file URL is presented. 
+              After all operators have signed with their wallet and has provided an ENR from the DappNode info tab, the Launchpad will instruct operators to begin the DKG ceremony. Click continue & navigate to the 'Dappnode/Avado' tab where the cluster definition URL is presented. 
               <img src="/img/DappnodeTab.png" alt="Dappnode Tab" />
             </li>
              <li>
-              To run the Distributed Key Generation ceremony using a DappNode, paste the URL into the Obol Package interface. Go to the 'Config' tab > select 'URL' from the dropdown menu > paste the Definition File URL, you retrieved from the launchpad, into the validator cluster-Num field which should match the ENR cluster-x. Example: If you picked ENR1 for signing, then you should paste the URL in Cluster-1. Finally, click the update button at the bottom of the page. 
+              To run the Distributed Key Generation ceremony using a DappNode, you must paste the cluster definition URL into the Obol Package interface. Go to the 'Config' tab, select 'URL' from the dropdown menu, paste the cluster definition URL you retrieved from the launchpad, into the validator `cluster-*`field which matches the cluster you took the ENR from. Example: If you picked ENR1 for signing, then you should paste the URL into Cluster-1. Finally, click the 'Update' button at the bottom of the page.
               <img src="/img/CopyURL.png" alt="Copy URL" />
               <img src="/img/PasteURL.png" alt="Paste URL" />
               <img src="/img/SelectURL.png" alt="Select URL from dropdown" />
             </li>
               <li>
-              After DappNode updates the definition file, go back into the info tab & restart the Charon validator container. 
+              After DappNode records the cluster definition URL, go back to the 'Info' tab and restart the Charon container. 
               <img src="/img/RestartContainer.png" alt="Restart Charon validator container" />
             </li>
             <li>
-              The node is now ready and will attempt to complete the DKG. You can monitor the DKG progress via the logs tab. Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching `cluster_definition_hash`), the ceremony begins.
+              The node is now ready and will attempt to complete the DKG. You can monitor the DKG progress via the 'Logs' tab of the package. Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching <code>cluster_definition_hash</code>), the key generation ceremony begins.
               <img src="/img/ConnectPeers.png" alt="Connect to peers in logs tab" />
             </li>
              <li>
