@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-description: Test networking between Charon dependent services
+description: Test the performance of a candidate Distributed Validator Cluster setup.
 ---
 
 import Tabs from '@theme/Tabs';

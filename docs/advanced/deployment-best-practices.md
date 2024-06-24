@@ -42,7 +42,7 @@ In cases where latencies exceed these thresholds, efforts should be made to redu
 
 For high-scale, performance deployments; inter-peer latency of <25ms is optimal, along with an average consensus duration under 100ms.
 
-## Node Locations: Performance Optimization
+## Node Locations
 
 For optimal performance and high availability, it is recommended to provision machines or virtual machines (VMs) within the same continent. This practice helps minimize potential latency issues ensuring efficient communication and responsiveness. Consider maps of [undersea internet cables](https://www.submarinecablemap.com/) when selecting locations across oceans with low latency.
 
