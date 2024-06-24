@@ -5,15 +5,9 @@ sidebar_position: 5
 
 # CLI reference
 
-:::caution
+The following is a reference for Charon version [`v1.0.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.0.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
-The `charon` client is under heavy development, interfaces are subject to change until a first major version is published. 
-
-:::
-
-The following is a reference for charon version [`v0.19.2`](https://github.com/ObolNetwork/charon/releases/tag/v0.19.2). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
-
-The following are the top-level commands available to use. 
+The following are the top-level commands available to use.
 
 ```markdown
 charon --help
@@ -43,7 +37,7 @@ Use "charon [command] --help" for more information about a command.
 
 ## The `create` command
 
-The `create` command handles the creation of artifacts needed by charon to operate.
+The `create` command handles the creation of artifacts needed by Charon to operate.
 
 ```markdown
 charon create --help
@@ -63,9 +57,9 @@ Flags:
 Use "charon create [command] --help" for more information about a command.
 ```
 
-### Creating an ENR for charon
+### Creating an ENR for Charon
 
-An `enr` is an Ethereum Node Record. It is used to identify this charon client to its other counterparty charon clients across the internet. 
+An `enr` is an Ethereum Node Record. It is used to identify this Charon client to its other counterparty Charon clients across the internet.
 
 ```markdown
 charon create enr --help
@@ -75,7 +69,7 @@ Usage:
   charon create enr [flags]
 
 Flags:
-      --data-dir string   The directory where charon will store all its internal data (default ".charon")
+      --data-dir string   The directory where charon will store all its internal data. (default ".charon")
   -h, --help              Help for enr
 ```
 
@@ -121,7 +115,7 @@ Flags:
 
 ### Creating the configuration for a DKG Ceremony
 
-This `charon create dkg` command creates a cluster_definition file used for the `charon dkg` command. 
+This `charon create dkg` command creates a cluster_definition file used for the `charon dkg` command.
 
 ```markdown
 charon create dkg --help
@@ -148,7 +142,7 @@ Flags:
 
 ### Performing a DKG Ceremony
 
-The `charon dkg` command takes a `cluster_definition.json` file that instructs charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created. 
+The `charon dkg` command takes a `cluster_definition.json` file that instructs Charon on the terms of a new distributed validator cluster to be created. Charon establishes communication with the other nodes identified in the file, performs a distributed key generation ceremony to create the required threshold private keys, and signs deposit data for each new distributed validator. The command outputs the `cluster-lock.json` file and key shares for each Distributed Validator created.
 
 ```markdown
 charon dkg --help
@@ -177,14 +171,16 @@ Flags:
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --publish                        Publish the created cluster to a remote API.
       --publish-address string         The URL to publish the cluster to. (default "https://api.obol.tech")
+      --publish-timeout duration       Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 30s)
       --shutdown-delay duration        Graceful shutdown delay. (default 1s)
+      --timeout duration               Timeout for the DKG process, should be increased if DKG times out. (default 1m0s)
 ```
 
 ## The `run` command
 
 ### Run the Charon middleware
 
-This `run` command accepts a `cluster-lock.json` file that was created either via a `charon create cluster` command or `charon dkg`. This lock file outlines the nodes in the cluster and the distributed validators they operate on behalf of. 
+This `run` command accepts a `cluster-lock.json` file that was created either via a `charon create cluster` command or `charon dkg`. This lock file outlines the nodes in the cluster and the distributed validators they operate on behalf of.
 
 ```markdown
 charon run --help
@@ -235,7 +231,7 @@ Flags:
 
 ## The `exit` command
 
-A running charon client will [aggregate and broadcast](../start/quickstart-exit.md) signed exit messages it receives from its valdiator client immediately. These `exit` commands are instead used to *pre-sign* exit messages for an active distributed validator, to save to disk, or to broadcast; once enough of the operators of the cluster have submitted their partial exit signatures. Fully signed exit messages give a user or protocol a guarantee that they can exit an active validator at any point in future without the further assistance of the cluster's operators. In future, [execution-layer initiated exits](https://eips.ethereum.org/EIPS/eip-7002) will provide an even stronger guarantee that a validator can be exited by the withdrawal address it belongs to.
+A running Charon client will [aggregate and broadcast](../start/quickstart-exit.md) signed exit messages it receives from its valdiator client immediately. These `exit` commands are instead used to *pre-sign* exit messages for an active distributed validator, to save to disk, or to broadcast; once enough of the operators of the cluster have submitted their partial exit signatures. Fully signed exit messages give a user or protocol a guarantee that they can exit an active validator at any point in future without the further assistance of the cluster's operators. In future, [execution-layer initiated exits](https://eips.ethereum.org/EIPS/eip-7002) will provide an even stronger guarantee that a validator can be exited by the withdrawal address it belongs to.
 
 ```markdown
 charon exit --help
@@ -259,13 +255,12 @@ Use "charon exit [command] --help" for more information about a command.
 ### Pre-sign exit messages for active validators
 
 :::caution
-This command requires charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
+This command requires Charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
 
 The default `publish-address` for this command sends signed exit messages to Obol's [API](/api) for aggregation and distribution. Exit signatures are stored in line with Obol's [terms and contiditions](https://obol.tech/terms.pdf).
 :::
 
 This command submits partial exit signatures to the remote API for aggregation. The required flags are `--beacon-node-url` and `--validator-public-key` of the validator you wish to exit. An exit message can only be signed for a validator that is fully deposited and assigned a validator index.
-
 
 ```markdown
 charon exit sign --help
@@ -353,7 +348,7 @@ Flags:
 The `combine` command combines many validator key shares into a single Ethereum validator key.
 
 :::caution
-This command requires charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
+This command requires Charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
 :::
 
 ```markdown
@@ -366,11 +361,15 @@ Usage:
   charon combine [flags]
 
 Flags:
-      --cluster-dir string   Parent directory containing a number of .charon subdirectories from the required threshold of nodes in the cluster. (default ".charon/cluster")
-      --force                Overwrites private keys with the same name if present.
-  -h, --help                 Help for combine
-      --no-verify            Disables cluster definition and lock file verification.
-      --output-dir string    Directory to output the combined private keys to. (default "./validator_keys")
+      --cluster-dir string              Parent directory containing a number of .charon subdirectories from the required threshold of nodes in the cluster. (default ".charon/cluster")
+      --force                           Overwrites private keys with the same name if present.
+  -h, --help                            Help for combine
+      --no-verify                       Disables cluster definition and lock file verification.
+      --output-dir string               Directory to output the combined private keys to. (default "./validator_keys")
+      --testnet-chain-id uint           Chain ID of the custom test network.
+      --testnet-fork-version string     Genesis fork version of the custom test network (in hex).
+      --testnet-genesis-timestamp int   Genesis timestamp of the custom test network.
+      --testnet-name string             Name of the custom test network.
 ```
 
 To run this command, one needs at least a threshold number of node operator's `.charon` directories, which need to be organized into a single folder:
@@ -435,51 +434,53 @@ combined
 ├── keystore-1.json
 └── keystore-1.txt
 ```
+
 By default, the `combine` command will refuse to overwrite any private key that is already present in the destination directory.
 
 To force the process, use the `--force` flag.
 
 :::caution
 
-The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it.
+The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/ercs/blob/master/ERCS/erc-2335.md) format, and can be imported in any Ethereum validator client that supports it.
 
 **Ensure your distributed validator cluster is completely shut down for at least two epochs before starting a replacement validator or you are likely to be slashed.**
 :::
 
 ## Host a relay
 
-Relays run a libp2p [circuit relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) server that allows charon clusters to perform peer discovery and for charon clients behind strict NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
+Relays run a libp2p [circuit relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) server that allows Charon clusters to perform peer discovery and for Charon clients behind strict NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
 
 ```markdown
 charon relay --help
-Starts a libp2p relay that charon nodes can use to bootstrap their p2p cluster
+Starts a libp2p circuit relay that charon clients can use to discover and connect to their peers.
 
 Usage:
   charon relay [flags]
 
 Flags:
       --auto-p2pkey                       Automatically create a p2pkey (secp256k1 private key used for p2p authentication and ENR) if none found in data directory. (default true)
-      --data-dir string                   The directory where charon will store all its internal data (default ".charon")
+      --data-dir string                   The directory where charon will store all its internal data. (default ".charon")
+      --debug-address string              Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
   -h, --help                              Help for relay
       --http-address string               Listening address (ip and port) for the relay http server serving runtime ENR. (default "127.0.0.1:3640")
       --log-color string                  Log color; auto, force, disable. (default "auto")
       --log-format string                 Log format; console, logfmt or json (default "console")
       --log-level string                  Log level; debug, info, warn or error (default "info")
+      --log-output-path string            Path in which to write on-disk logs.
       --loki-addresses strings            Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
       --loki-service string               Service label sent with logs to Loki. (default "charon")
-      --monitoring-address string         Listening address (ip and port) for the prometheus and pprof monitoring http server. (default "127.0.0.1:3620")
+      --monitoring-address string         Listening address (ip and port) for the monitoring API (prometheus).
       --p2p-advertise-private-addresses   Enable advertising of libp2p auto-detected private addresses. This doesn't affect manually provided p2p-external-ip/hostname.
-      --p2p-allowlist string              Comma-separated list of CIDR subnets for allowing only certain peer connections. Example: 192.168.0.0/16 would permit connections to peers on your local network only. The default is to accept all connections.
-      --p2p-denylist string               Comma-separated list of CIDR subnets for disallowing certain peer connections. Example: 192.168.0.0/16 would disallow connections to peers on your local network. The default is to accept all connections.
       --p2p-disable-reuseport             Disables TCP port reuse for outgoing libp2p connections.
       --p2p-external-hostname string      The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
       --p2p-external-ip string            The IP address advertised by libp2p. This may be used to advertise an external IP.
       --p2p-max-connections int           Libp2p maximum number of peers that can connect to this relay. (default 16384)
       --p2p-max-reservations int          Updates max circuit reservations per peer (each valid for 30min) (default 512)
       --p2p-relay-loglevel string         Libp2p circuit relay log level. E.g., debug, info, warn, error.
-      --p2p-relays strings                Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech])
+      --p2p-relays strings                Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
       --p2p-tcp-address strings           Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
 ```
+
 You can also consider adding [alternative public relays](../faq/risks.md) to your cluster by specifying a list of `p2p-relays` in [`charon run`](#run-the-charon-middleware).
 
 ## Experimental commands

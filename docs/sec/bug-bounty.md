@@ -78,7 +78,7 @@ For significant security risks that impact the system from a position of low-tru
 Impacts:
 
 - Attacker that is not a member of the cluster can successfully partition the cluster and keep the cluster offline indefinitely.
-- Attacker that is not a member of the cluster can exfiltrate charon ENR private keys.
+- Attacker that is not a member of the cluster can exfiltrate Charon ENR private keys.
 - Attacker that is not a member of the cluster can destroy funds but cannot steal them.
 - Unintended chain split (Network partition)
 - Temporary freezing of network transactions by delaying one block by 500% or more of the average block time of the preceding 24 hours beyond standard difficulty adjustments
@@ -132,7 +132,7 @@ For vulnerabilities with minimal impact, unlikely to significantly affect system
 
 Impacts:
 
-- Attacker can sometimes put a charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
+- Attacker can sometimes put a Charon node in a state that causes it to drop one out of every one hundred attestations made by a validator
 - Attacker can display bad data on a non-interactive part of the launchpad.
 - Contract fails to deliver promised returns, but doesn't lose value
 - Shutdown of greater than 10% or equal to but less than 30% of network processing nodes without brute force actions, but does not shut down the network

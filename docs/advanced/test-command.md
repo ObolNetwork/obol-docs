@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 The charon test command is in alpha state and is still in development. It can not do any harm, but there is no guarantee it is stable and working as expected.
 :::
 
-Charon test command evaluates network performance and effectiveness of the machine it is running on and the targeted external service - other Charon peers, beacon node(s) or validator client. It prints a performance report to the standard output (can be omitted by with `quiet` flag) and a machine-readable TOML format of the report if `output-toml` flag is set.
+Charon test command evaluates network performance and effectiveness of the machine it is running on and the targeted external service - other Charon peers, beacon node(s), etc.. It prints a performance report to the standard output and a machine-readable TOML format of the report if `output-toml` flag is set.
 
 ## Peers
 
@@ -42,7 +42,7 @@ charon alpha test peers \
 ### Run with Docker
 
 ```shell
-docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:v1.0.0-rc1 alpha test peers \
+docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:v1.0.0 alpha test peers \
   --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZs,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY"
 ```
 
@@ -64,28 +64,6 @@ charon alpha test beacon \
 ### Run with Docker
 
 ```shell
-docker run obolnetwork/charon:v1.0.0-rc1 alpha test beacon \
+docker run obolnetwork/charon:v1.0.0 alpha test beacon \
   --endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com"
-```
-
-## Validator
-
-Run tests towards a validator client, evaluating the effectiveness of a potential connection of a Charon node running on the same machine.
-
-The default endpoint for pinging a validator client is set to `127.0.0.1:3600` (configurable with `validator-api-address` flag).
-
-### Pre-requisites
-
-- Running validator client towards which tests will be executed.
-
-### Run
-
-```shell
-charon alpha test validator
-```
-
-### Run with Docker
-
-```shell
-docker run obolnetwork/charon:v1.0.0-rc1 alpha test validator
 ```

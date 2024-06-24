@@ -8,13 +8,9 @@ import TabItem from '@theme/TabItem';
 
 # Activate a DV
 
-:::caution
-Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
-:::
-
 If you have successfully created a distributed validator and you are ready to activate it, congratulations! 🎉
 
-Once you have connected all of your charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator** may proceed to deposit and activate the validator(s).
+Once you have connected all of your Charon clients together, synced all of your ethereum nodes such that the monitoring indicates that they are all healthy and ready to operate, **ONE operator** may proceed to deposit and activate the validator(s).
 
 The `deposit-data.json` to be used to deposit will be located in each operator's `.charon` folder. The copies across every node should be identical and any of them can be uploaded.
 
@@ -33,9 +29,9 @@ Use any of the following tools to deposit. Please use the third-party tools at y
   * Fill the transaction information
   * Set amount to <code>32</code> in ETH
   * Use your <code>deposit-data.json</code> to fill the required data : <code>pubkey</code>,<code>withdrawal credentials</code>,<code>signature</code>,<code>deposit_data_root</code>. Make sure to prefix the input with <code>0x</code> to format them in bytes
-    * Click on <code>Add transaction</code>
+  * Click on <code>Add transaction</code>
   * Click on <code>Create Batch</code>
-  * Click on <code>Send Batch</code>, you can click on Simulate to check if the transaction will execute successfully
+  * Click on <code>Send Batch</code>, you can click on <code>Simulate</code> to check if the transaction will execute successfully
   * Get the minimum threshold of signatures from the other addresses and execute the custom transaction
 
 The activation process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks.

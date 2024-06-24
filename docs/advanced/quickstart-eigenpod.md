@@ -16,7 +16,7 @@ This is a walkthrough of creating a distributed validator cluster pointing to an
 
 ## Pre-requisites
 
-- The Ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets).
+- The Ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets.)
 - If creating more than one validator, the ability to use the [obol-sdk](./quickstart-sdk.md) is required.
 
 ## Create a SAFE to own the EigenPod
@@ -61,7 +61,6 @@ With these contracts deployed, you can now create the DV cluster invitation to s
   </TabItem>
 </Tabs>
 
-
 ## Deposit and restake your Distributed Validator
 
-Once you have completed the DKG ceremony, you can continue the flow on the EigenLayer app to activate these validators and restake them. Consult the EigenLayer [documentation](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod-and-set-withdrawal-credentials/enable-restaking) to continue the process. 
+Once you have completed the DKG ceremony, you can continue the flow on the EigenLayer app to activate these validators and restake them. Consult the EigenLayer [documentation](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod-and-set-withdrawal-credentials/enable-restaking) to continue the process.

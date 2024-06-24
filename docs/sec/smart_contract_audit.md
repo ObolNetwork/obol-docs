@@ -33,8 +33,8 @@ Zach Obront is an independent smart contract security researcher. He serves as a
 
 The [ObolNetwork/obol-manager-contracts](https://github.com/ObolNetwork/obol-manager-contracts/) repository was audited at commit [50ce277919723c80b96f6353fa8d1f8facda6e0e](https://github.com/ObolNetwork/obol-manager-contracts/tree/50ce277919723c80b96f6353fa8d1f8facda6e0e).
 
-
 The following contracts were in scope:
+
 - src/controllers/ImmutableSplitController.sol
 - src/controllers/ImmutableSplitControllerFactory.sol
 - src/lido/LidoSplit.sol
@@ -85,6 +85,7 @@ Fixed in [PR 85](https://github.com/ObolNetwork/obol-manager-contracts/pull/85) 
 0xSplits is used to distribute rewards across node operators. All Splits are deployed with an ImmutableSplitController, which is given permissions to update the split one time to add a fee for Obol at a future date.
 
 The Factory deploys these controllers as Clones with Immutable Args, hard coding the `owner`, `accounts`, `percentAllocations`, and `distributorFee` for the future update. This data is packed as follows:
+
 ```solidity
   function _packSplitControllerData(
     address owner,
@@ -107,6 +108,7 @@ The Factory deploys these controllers as Clones with Immutable Args, hard coding
     data = abi.encodePacked(splitMain, distributorFee, owner, uint8(recipientsSize), recipients);
   }
 ```
+
 In the process, `recipientsSize` is unsafely downcasted into a `uint8`, which has a maximum value of `256`. As a result, any values greater than 256 will overflow and result in a lower value of `recipients.length % 256` being passed as `recipientsSize`.
 
 When the Controller is deployed, the full list of `percentAllocations` is passed to the `validSplit` check, which will pass as expected. However, later, when `updateSplit()` is called, the `getNewSplitConfiguation()` function will only return the first `recipientsSize` accounts, ignoring the rest.
@@ -134,11 +136,13 @@ When the Controller is deployed, the full list of `percentAllocations` is passed
     }
   }
 ```
+
 When `updateSplit()` is eventually called on `splitsMain` to turn on fees, the `validSplit()` check on that contract will revert because the sum of the percent allocations will no longer sum to `1e6`, and the update will not be possible.
 
 #### Proof of Concept
 
 The following test can be dropped into a file in `src/test` to demonstrate that passing 400 accounts will result in a `recipientSize` of `400 - 256 = 144`:
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -185,6 +189,7 @@ contract ZachTest is Test {
 #### Recommendation
 
 When packing the data in `_packSplitControllerData()`, check `recipientsSize` before downcasting to a uint8:
+
 ```diff
 function _packSplitControllerData(
     address owner,
@@ -213,6 +218,7 @@ When the `OptimisticWithdrawalRecipient` receives funds from the beacon chain, i
 This value being as low as 16 ether protects against any predictable attack the node operator could perform. For example, due to the effect of hysteresis in updating effective balances, it does not seem to be possible for node operators to predictably bleed a withdrawal down to be below 16 ether (even if they timed a slashing perfectly).
 
 However, in the event of a mass slashing event, slashing punishments can be much more severe than they otherwise would be. To calculate the size of a slash, we:
+
 - take the total percentage of validator stake slashed in the 18 days preceding and following a user's slash
 - multiply this percentage by 3 (capped at 100%)
 - the full slashing penalty for a given validator equals 1/32 of their stake, plus the resulting percentage above applied to the remaining 31/32 of their stake
@@ -234,6 +240,7 @@ Acknowledged. We believe this is a black swan event. It would require a major ET
 ### [L-01] Obol fees will be applied retroactively to all non-distributed funds in the Splitter
 
 When Obol decides to turn on fees, a call will be made to `ImmutableSplitController::updateSplit()`, which will take the predefined split parameters (the original user specified split with Obol's fees added in) and call `updateSplit()` to implement the change.
+
 ```solidity
 function updateSplit() external payable {
     if (msg.sender != owner()) revert Unauthorized();
@@ -243,7 +250,9 @@ function updateSplit() external payable {
     ISplitMain(splitMain()).updateSplit(split, accounts, percentAllocations, uint32(distributorFee()));
 }
 ```
+
 If we look at the code on `SplitsMain`, we can see that this `updateSplit()` function is applied retroactively to all funds that are already in the split, because it updates the parameters without performing a distribution first:
+
 ```solidity
 function updateSplit(
     address split,
@@ -259,6 +268,7 @@ function updateSplit(
     _updateSplit(split, accounts, percentAllocations, distributorFee);
 }
 ```
+
 This means that any funds that have been sent to the split but have not yet be distributed will be subject to the Obol fee. Since these splitters will be accumulating all execution layer fees, it is possible that some of them may have received large MEV bribes, where this after-the-fact fee could be quite expensive.
 
 #### Recommendation
@@ -284,6 +294,7 @@ In the event that one of these integrations used a rebasing version of ETH (like
 In this case, the OWR would need to be able to handle rebasing tokens.
 
 In the event that rebasing tokens are used, there is the risk that slashing or inactivity leads to a period with a negative rebase. In this case, the following chain of events could happen:
+
 - `distribute(PULL)` is called, setting `fundsPendingWithdrawal == balance`
 - rebasing causes the balance to decrease slightly
 - `distribute(PULL)` is called again, so when `fundsToBeDistributed = balance - fundsPendingWithdrawal` is calculated in an unchecked block, it ends up being near `type(uint256).max`
@@ -319,6 +330,7 @@ While this contract should only be used for Lido to pay out rewards (which will 
 #### Proof of Concept
 
 The following test can be dropped into `LidoSplit.t.sol` to confirm that the clones can currently receive ETH:
+
 ```solidity
 function testZach_CanReceiveEth() public {
     uint before = address(lidoSplit).balance;
@@ -350,6 +362,7 @@ However, it is difficult to be sure how else this risk might be exploited by usi
 #### Proof of Concept
 
 If we comment out the `init()` call in the `createController()` call, we can see that the following test "successfully" deploys the controller, but the result is that there is no bytecode:
+
 ```solidity
 function testZach__CreateControllerSoladyBug() public {
     ImmutableSplitControllerFactory factory = new ImmutableSplitControllerFactory(address(9999));
@@ -392,6 +405,7 @@ This would save 40 bytes of calldata on each call to the clone, which leads to a
 #### Recommendation
 
 1) Add the following to `LidoSplit.sol`:
+
 ```solidity
 address immutable public stETH;
 address immutable public wstETH;
@@ -410,17 +424,20 @@ Fixed as recommended in [PR 87](https://github.com/ObolNetwork/obol-manager-cont
 ### [G-02] OWR can be simplified and save gas by not tracking distributedFunds
 
 Currently, the `OptimisticWithdrawalRecipient` contract tracks four variables:
+
 - distributedFunds: total amount of the token distributed via push or pull
 - fundsPendingWithdrawal: total balance distributed via pull that haven't been claimed yet
 - claimedPrincipalFunds: total amount of funds claimed by the principal recipient
 - pullBalances: individual pull balances that haven't been claimed yet
 
 When `_distributeFunds()` is called, we perform the following math (simplified to only include relevant updates):
+
 ```solidity
 endingDistributedFunds = distributedFunds - fundsPendingWithdrawal + currentBalance;
 fundsToBeDistributed = endingDistributedFunds - distributedFunds;
 distributedFunds = endingDistributedFunds;
 ```
+
 As we can see, `distributedFunds` is added to the `endingDistributedFunds` variable and then removed when calculating `fundsToBeDistributed`, having no impact on the resulting `fundsToBeDistributed` value.
 
 The `distributedFunds` variable is not read or used anywhere else on the contract.
@@ -430,6 +447,7 @@ The `distributedFunds` variable is not read or used anywhere else on the contrac
 We can simplify the math and save substantial gas (a storage write plus additional operations) by not tracking this value at all.
 
 This would allow us to calculate `fundsToBeDistributed` directly, as follows:
+
 ```solidity
 fundsToBeDistributed = currentBalance - fundsPendingWithdrawal;
 ```
