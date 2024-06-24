@@ -15,13 +15,13 @@ To facilitate the generation of distributed validator keys amongst remote users 
 
 ## Getting started
 
-For more information on running charon in a UI friendly way through the DV Launchpad, take a look at our [Quickstart Guides](../start/quickstart_overview.md). 
+For more information on running Charon in a UI friendly way through the DV Launchpad, take a look at our [Quickstart Guides](../start/quickstart_overview.md).
 
 ## DV Launchpad Links
 
 | Ethereum Network  | Launchpad                                |
 |--------------|-------------------------------------|
 | Mainnet      | https://beta.launchpad.obol.tech    |
+| Gnosis Chain      | https://gnosischain.launchpad.obol.tech    |
 | Holesky      | https://holesky.launchpad.obol.tech |
 | Sepolia      | https://sepolia.launchpad.obol.tech |
-| Goerli       | https://goerli.launchpad.obol.tech  |

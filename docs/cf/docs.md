@@ -14,7 +14,7 @@ The vast majority of documentation within this manual falls under the _Walkthrou
 
 #### Function or process
 
-The end goal of a walkthrough is for the reader to achieve a very particular function. 
+The end goal of a walkthrough is for the reader to achieve a very particular function.
 
 Take an installation page for example: Following this walkthrough isn't going to teach the reader much about working with the decentralized web or what Obol is. Still, by the end, they'll have Charon installed on their computer.
 
@@ -216,7 +216,7 @@ Use the dollar sign `$` to enter debug-mode.
 
 When instructing the reader to use a keyboard shortcut, surround individual keys in code tags:
 
-```bash
+```shell
 Press `ctrl` + `c` to copy the highlighted text.
 ```
 
@@ -245,4 +245,3 @@ concepts/
 ```
 
 _The framework and some information for this was forked from the original found on the [Filecoin documentation portal](https://docs.filecoin.io)_
-

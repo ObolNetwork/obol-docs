@@ -9,9 +9,9 @@ sidebar_position: 3
 These cluster definition and cluster lock files are a work in progress. The intention is for the files to be standardised for operating distributed validators via the [EIP process](https://eips.ethereum.org/) when appropriate.
 :::
 
-This document describes the configuration options for running a charon client or cluster.
+This document describes the configuration options for running a Charon client or cluster.
 
-A charon cluster is configured in two steps:
+A Charon cluster is configured in two steps:
 
 - `cluster-definition.json` which defines the intended cluster configuration before keys have been created in a distributed key generation ceremony.
 - `cluster-lock.json` which includes and extends `cluster-definition.json` with distributed validator BLS public key shares.
@@ -67,14 +67,14 @@ The schema of the `cluster-definition.json` is defined as:
 
 ### Using the DV Launchpad
 
-- A `leader/creator`, that wishes to coordinate the creation of a new Distributed Validator Cluster navigates to the launchpad and selects "Create new Cluster"
+- A `leader/creator`, that wishes to coordinate the creation of a new Distributed Validator Cluster navigates to the launchpad and selects "Create new Cluster".
 - The `leader/creator` uses the user interface to configure all of the important details about the cluster including:
-  - The `Withdrawal Address` for the created validators
-  - The `Fee Recipient Address` for block proposals if it differs from the withdrawal address
-  - The number of distributed validators to create
-  - The list of participants in the cluster specified by Ethereum address(/ENS)
-  - The threshold of fault tolerance required
-- These key pieces of information form the basis of the cluster configuration. These fields (and some technical fields like DKG algorithm to use) are serialized and merklized to produce the definition's `cluster_definition_hash`. This merkle root will be used to confirm that there is no ambiguity or deviation between definitions when they are provided to charon nodes.
+  - The `Withdrawal Address` for the created validators;
+  - The `Fee Recipient Address` for block proposals if it differs from the withdrawal address;
+  - The number of distributed validators to create;
+  - The list of participants in the cluster specified by Ethereum address(/ENS);
+  - The threshold of fault tolerance required.
+- These key pieces of information form the basis of the cluster configuration. These fields (and some technical fields like DKG algorithm to use) are serialized and merklized to produce the definition's `cluster_definition_hash`. This merkle root will be used to confirm that there is no ambiguity or deviation between definitions when they are provided to Charon nodes.
 - Once the `leader/creator` is satisfied with the configuration they publish it to the launchpad's data availability layer for the other participants to access. (For early development the launchpad will use a centralized backend db to store the cluster configuration. Near production, solutions like IPFS or arweave may be more suitable for the long term decentralization of the launchpad.)
 
 ## Cluster Lock File
@@ -100,24 +100,26 @@ The `cluster-lock.json` has the following schema:
 
 The cluster size (the number of nodes/operators in the cluster) determines the resilience of the cluster; its ability remain operational under diverse failure scenarios.
 Larger clusters can tolerate more faulty nodes.
-However, increased cluster size implies higher operational costs and potential network latency, which may negatively affect performance
+However, increased cluster size implies higher operational costs and potential network latency, which may negatively affect performance.
 
 Optimal cluster size is therefore trade-off between resilience (larger is better) vs cost-efficiency and performance (smaller is better).
 
 Cluster resilience can be broadly classified into two categories:
- - **[Byzantine Fault Tolerance (BFT)](https://en.wikipedia.org/wiki/Byzantine_fault)** - the ability to tolerate nodes that are actively trying to disrupt the cluster.
- - **[Crash Fault Tolerance (CFT)](https://en.wikipedia.org/wiki/Fault_tolerance)** - the ability to tolerate nodes that have crashed or are otherwise unavailable.
 
-Different cluster sizes tolerate different counts of byzantine vs crash nodes. 
+- **[Byzantine Fault Tolerance (BFT)](https://en.wikipedia.org/wiki/Byzantine_fault)** - the ability to tolerate nodes that are actively trying to disrupt the cluster.
+- **[Crash Fault Tolerance (CFT)](https://en.wikipedia.org/wiki/Fault_tolerance)** - the ability to tolerate nodes that have crashed or are otherwise unavailable.
+
+Different cluster sizes tolerate different counts of byzantine vs crash nodes.
 In practice, hardware and software crash relatively frequently, while byzantine behaviour is relatively uncommon.
-However, Byzantine Fault Tolerance is crucial for trust minimised systems like distributed validators. 
+However, Byzantine Fault Tolerance is crucial for trust minimised systems like distributed validators.
 Thus, cluster size can be chosen to optimise for either BFT or CFT.
 
 The table below lists different cluster sizes and their characteristics:
- - `Cluster Size` - the number of nodes in the cluster.
- - `Threshold` - the minimum number of nodes that must collaborate to reach consensus quorum and to create signatures.
- - `BFT #` - the maximum number of byzantine nodes that can be tolerated.
- - `CFT #` - the maximum number of crashed nodes that can be tolerated.
+
+- `Cluster Size` - the number of nodes in the cluster.
+- `Threshold` - the minimum number of nodes that must collaborate to reach consensus quorum and to create signatures.
+- `BFT #` - the maximum number of byzantine nodes that can be tolerated.
+- `CFT #` - the maximum number of crashed nodes that can be tolerated.
 
 | Cluster Size | Threshold | BFT # | CFT # | Note                               |
 |--------------|-----------|-------|-------|------------------------------------|
@@ -144,10 +146,10 @@ The table below lists different cluster sizes and their characteristics:
 | 21           | 14        | 6     | 7     | ✅ CFT optimal for 7 crashed        |
 | 22           | 15        | 7     | 7     | ✅ BFT optimal for 7 byzantine      |
 
-The table above is determined by the QBFT consensus algorithm with the 
-following formulas from [this](https://arxiv.org/pdf/1909.10194.pdf) paper: 
+The table above is determined by the QBFT consensus algorithm with the
+following formulas from [this](https://arxiv.org/pdf/1909.10194.pdf) paper:
 
-```
+```shell
 n = cluster size
 
 Threshold: min number of honest nodes required to reach quorum given size n

@@ -4,6 +4,7 @@ description: Some of the key terms in the field of Distributed Validator Technol
 ---
 
 # Key concepts
+
 This page outlines a number of the key concepts behind the various technologies that Obol is developing.
 
 ## Distributed validator
@@ -27,12 +28,12 @@ In the above example, the stack includes Geth, Lighthouse, Charon and Teku.
 
 ![A Geth Client](/img/POWNodeV2.png)
 
-An execution client (formerly known as an Eth1 client) specializes in running the EVM and managing the transaction pool for the Ethereum network. These clients provide execution payloads to consensus clients for inclusion into blocks. 
+An execution client (formerly known as an Eth1 client) specializes in running the EVM and managing the transaction pool for the Ethereum network. These clients provide execution payloads to consensus clients for inclusion into blocks.
 
 Examples of execution clients include:
 
 - [Go-Ethereum](https://geth.ethereum.org/)
-- [Nethermind](https://docs.nethermind.io/nethermind/)
+- [Nethermind](https://docs.nethermind.io/)
 - [Erigon](https://github.com/ledgerwatch/erigon)
 
 ### Consensus Client
@@ -53,12 +54,12 @@ Examples of Consensus clients include:
 
 ![A Charon Client](/img/CharonBrick.png)
 
-A distributed validator client intercepts the validator client ↔ consensus client communication flow over the [standardised REST API](https://ethereum.github.io/beacon-APIs/#/ValidatorRequiredApi), and focuses on two core duties.
+A distributed validator client intercepts the validator client ↔ consensus client communication flow over the [standardised REST API](https://ethereum.github.io/beacon-APIs/#/ValidatorRequiredApi), and focuses on two core duties:
 
-- Coming to consensus on a candidate duty for all validators to sign
-- Combining signatures from all validators into a distributed validator signature
+- Coming to consensus on a candidate duty for all validators to sign.
+- Combining signatures from all validators into a distributed validator signature.
 
-The only example of a distributed validator client built with a non-custodial middleware architecture to date is [charon](../charon/intro).
+The only example of a distributed validator client built with a non-custodial middleware architecture to date is [Charon](../charon/intro).
 
 ### Validator Client
 
@@ -71,7 +72,7 @@ Examples of validator clients include:
 - [Vouch](https://www.attestant.io/posts/introducing-vouch/)
 - [Prysm](https://docs.prylabs.network/docs/how-prysm-works/prysm-validator-client/)
 - [Teku](https://docs.teku.consensys.net/en/stable/)
-- [Lighthouse](https://lighthouse-book.sigmaprime.io/api-bn.html)
+- [Lighthouse](https://lighthouse-book.sigmaprime.io/api-vc.html)
 
 ## Distributed Validator Cluster
 
@@ -105,6 +106,6 @@ The number of nodes in a cluster that needs to be online and honest for their di
 
 ### Distributed Validator Key Generation Ceremony
 
-To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 
+To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony.
 
-A distributed validator key generation ceremony is a type of DKG ceremony. A ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata. Read more about these ceremonies [here](../charon/dkg). 
+A distributed validator key generation ceremony is a type of DKG ceremony. A ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata. Read more about these ceremonies [here](../charon/dkg).
