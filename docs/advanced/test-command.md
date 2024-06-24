@@ -1,22 +1,22 @@
 ---
-sidebar_position: 1
-description: Test networking between Charon dependant services
+sidebar_position: 5
+description: Test the performance of a candidate Distributed Validator Cluster setup.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Network tests
+# Test a Cluster
 
 :::caution
-The charon test command is in alpha state and is still in development. It can not do any harm, but there is no guarantee it is stable and working as expected.
+The `charon alpha test` command is in an alpha state and is subject to change until it is made available as `charon test` in a future version.
 :::
 
-Charon test command evaluates network performance and effectiveness of the machine it is running on and the targeted external service - other Charon peers, beacon node(s), etc.. It prints a performance report to the standard output and a machine-readable TOML format of the report if `output-toml` flag is set.
+Charon test commands are designed to help you evaluate the performance and readiness of your candidate cluster. It allows you to test your connection to other Charon peers, the performance of your beacon node(s), and the readiness of your validator client. It prints a performance report to the standard output (which can be omitted by with the `--quiet` flag) and a machine-readable TOML format of the report if the `--output-toml` flag is set.
 
-## Peers
+## Test your connection to peers
 
-Run tests towards other Charon peers to evaluate the effectiveness of a potential cluster setup. The command sets up a libp2p node, similarly to what Charon originally does. This test command **has to be running simultaneously with other peers**. After the node is up it waits for other peers to get their nodes up and running, retrying connection every 3 seconds. The libp2p node connects to relays (configurable with `p2p-relays` flag) and to other libp2p nodes via TCP. Other peer nodes are discoverable by using their ENRs. Note that for a peer to be successfully discovered, it needs to be connected to the same relay. After completion of the test suite the libp2p node stays alive (duration configurable with `keep-alive` flag) for other peers to continue testing against it. The node can be forcefully stopped as well.
+Run tests towards other Charon peers to evaluate the effectiveness of a potential cluster setup. The command sets up a libp2p node, similarly to what Charon normally does. This test command **has to be running simultaneously with the other peers**. After the node is up it waits for other peers to get their nodes up and running, retrying the connection every 3 seconds. The libp2p node connects to relays (configurable with `p2p-relays` flag) and to other libp2p nodes via TCP. Other peer nodes are discoverable by using their ENRs. Note that for a peer to be successfully discovered, it needs to be connected to the same relay. After completion of the test suite the libp2p node stays alive (duration configurable with `keep-alive` flag) for other peers to continue testing against it. The node can be forcefully stopped as well.
 
 To be able to establish direct connection, you have to ensure:
 
@@ -28,9 +28,9 @@ If all points are satisfied by you and the other peers, you should be able to es
 
 ### Pre-requisites
 
-- [Create ENR](../charon/charon-cli-reference#creating-an-enr-for-charon).
-- Share your ENR with other peers which will test against you.
-- Obtain the ENRs of the other peers against which you will test.
+- [Create an ENR](../charon/charon-cli-reference#creating-an-enr-for-charon).
+- Share your ENR with the other peers which will test with you.
+- Obtain the ENRs of the other peers with which you will test.
 
 ### Run
 
@@ -46,9 +46,9 @@ docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:
   --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZs,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY"
 ```
 
-## Beacon
+## Test your beacon node
 
-Run tests towards beacon node(s), evaluating the effectiveness of a potential connection of a Charon node running on the same machine.
+Run tests towards your beacon node(s), to evaluate its effectiveness for a Distributed Validator cluster.
 
 ### Pre-requisites
 
