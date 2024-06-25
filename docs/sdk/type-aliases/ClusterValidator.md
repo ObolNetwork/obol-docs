@@ -1,8 +1,14 @@
+> **ClusterValidator**: `object`
+
 Validator withdrawal configuration
 
-## Properties
+## Type declaration
 
-| Property | Type | Description |
+| Member | Type | Description |
 | :------ | :------ | :------ |
 | `fee_recipient_address` | `string` | The validator fee recipient address. |
 | `withdrawal_address` | `string` | The validator reward address. |
+
+## Source
+
+types.ts:60
