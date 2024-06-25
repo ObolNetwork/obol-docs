@@ -136,7 +136,10 @@ const config = {
       },
     ],
   ],
-
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ru'],
+  },
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -179,6 +182,9 @@ const config = {
           {
             type: "docsVersionDropdown",
             position: "right",
+          },
+          {
+            type: 'localeDropdown',
           },
         ],
       },
