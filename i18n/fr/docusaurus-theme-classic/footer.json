@@ -1,0 +1,46 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Community": {
+    "message": "Community",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.More": {
+    "message": "More",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Intro to Obol": {
+    "message": "Intro to Obol",
+    "description": "The label of footer link with label=Intro to Obol linking to /docs/intro"
+  },
+  "link.item.label.Charon": {
+    "message": "Charon",
+    "description": "The label of footer link with label=Charon linking to /docs/charon/intro"
+  },
+  "link.item.label.DV Launchpad": {
+    "message": "DV Launchpad",
+    "description": "The label of footer link with label=DV Launchpad linking to /docs/dvl/intro"
+  },
+  "link.item.label.Discord": {
+    "message": "Discord",
+    "description": "The label of footer link with label=Discord linking to https://discord.gg/n6ebKsX46w"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/obolnetwork"
+  },
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to https://blog.obol.tech/"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/obolnetwork/"
+  },
+  "copyright": {
+    "message": "Copyright © 2023 Obol Labs, Inc. ",
+    "description": "The footer copyright"
+  }
+}
