@@ -47,3 +47,9 @@ scrape_configs:
     static_configs:
       - targets: [ "lodestar:5064" ]
 ```
+
+After updating and saving the `prometheus/prometheus.yml`, you must restart the `prometheus` container for the monitoring credentials to take effect:
+
+```shell
+docker compose restart prometheus
+```
