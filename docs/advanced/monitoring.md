@@ -42,7 +42,7 @@ When alerts are triggered, they are routed to contact points according notificat
 1. On left nav bar in Grafana console, under `Alerts`  section, click on contact points.
 2. Click on `+ Add contact point`. It will show following page. Choose Discord in the  `Integration` drop down.
 
-    ![AlertsContactPoint](../../static/img/AlertsContactPoint.png)
+    ![AlertsContactPoint](/img/AlertsContactPoint.png)
 
 3. Give a descriptive name to the alert. Create a channel in Discord and copy its `webhook url`.  Once done, click `Save contact point` to finish.
 4. When the alerts are fired, it will send without filling in the variables for cluster detail. For example, `cluster_hash` variable is missing here `cluster_hash = {{.cluster_hash}}`. This is done to save disk space. To find the details, use `docker compose -f docker-compose.yml -f compose-debug.yml up`. More description [here](https://docs.obol.tech/docs/advanced/adv-docker-configs).
