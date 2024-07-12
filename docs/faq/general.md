@@ -128,7 +128,7 @@ A node is a single instance of Ethereum EL+CL clients that can communicate with 
 
 A validator is a node that participates in the consensus process by verifying transactions and creating new blocks. Multiple validators can run from the same node.
 
-A cluster is a group of nodes that act together as one or several validators, which allows for a more efficient use of resources, reduces operational costs, and provides better reliability and fault tolerance.
+A cluster is a group of nodes that act together as one or several validators which allows for a more efficient use of resources, reduces operational costs, and provides better reliability and fault tolerance.
 
 ### Can I migrate an existing Charon node to a new machine?
 
