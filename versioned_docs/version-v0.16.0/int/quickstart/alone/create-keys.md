@@ -42,7 +42,7 @@ Alternatively, the private key shares can be created in a lower-trust manner wit
     Then, run this command to create all the key shares and cluster artifacts locally:<br/><br/>
     <pre>
       <code>
-      docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.16.0 create cluster --name="mycluster" --withdrawal-addresses="{'${WITHDRAWAL_ADDR}'}" --fee-recipient-addresses="{'${FEE_RECIPIENT_ADDR}'}" --nodes="{'${NB_NODES}'}"
+      docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.16.0 create cluster --name="Quickstart Cluster" --withdrawal-addresses="{'\$\{WITHDRAWAL_ADDR\}'}" --fee-recipient-addresses="{'\$\{FEE_RECIPIENT_ADDR\}'}" --nodes="{'\$\{NB_NODES\}'}" --network="goerli" --num-validators=1 --cluster-dir="cluster"
       </code>
     </pre>
   </TabItem>

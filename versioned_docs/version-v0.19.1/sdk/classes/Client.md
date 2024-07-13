@@ -143,7 +143,7 @@ index.ts:148
 
 ### request()
 
-> **`protected`** **request**<`T`\>(`endpoint`, `options`?): `Promise`< `T` \>
+> **`protected`** **request**&lt; `T`\>(`endpoint`, `options`?): `Promise`&lt;  `T` \>
 
 #### Type parameters
 
