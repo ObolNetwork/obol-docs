@@ -30,7 +30,7 @@ The Obol Network consists of four core public goods:
 
 The Obol Ecosystem is inspired by previous work on Ethereum public goods and experimenting with circular economics. We believe that to unlock innovation in staking use cases, a credibly neutral layer must exist for innovation to flow and evolve vertically. Without this layer highly available uptime will continue to be a moat and stake will accumulate amongst a few products.
 
-The Obol Network will become an open, community governed, self-sustaining project over the coming months and years. Together we will incentivize, build, and maintain distributed validator technology that makes public networks a more secure and resilient foundation to build on top of.
+The Obol Network will become an open, community governed, self-sustaining project over the coming months and years. Together we will incentivize, build, and maintain distributed validator technology that makes public networks a more secure and resilient foundation to build on top of. Read more about our economic model in our [One Percent For Decentralisation](https://blog.obol.tech/1-percent-for-decentralisation/) announcement.
 
 ## The Vision
 
@@ -40,11 +40,11 @@ The road to decentralizing stake is a long one. At Obol we have divided our visi
 
 ![Multi Operator DV Cluster](/img/MultiOperator7.png)
 
-The first version of distributed validators will have dispute resolution out of band. Meaning you need to know and communicate with your counterparty operators if there is an issue with your shared cluster.
+The first version of distributed validators will have dispute resolution out of band. Meaning you need to know and communicate with your other operators if there is an issue with your shared cluster.
 
 A DV without in-band dispute resolution/incentivisation is still extremely valuable. Individuals and staking as a service providers can deploy DVs on their own to make their validators fault tolerant. Groups can run DVs together, but need to bring their own dispute resolution to the table, whether that be a smart contract of their own, a traditional legal service agreement, or simply high trust between the group.
 
-Obol V1 will utilize retroactive public goods principles to lay the foundation of its economic ecosystem. The Obol Community will responsibly allocate the collected ETH as grants to projects in the staking ecosystem for the entirety of V1.
+Obol V1 utilises a retroactive funding model to lay the foundation of its economic ecosystem. The Obol Community will responsibly allocate the collected ETH as grants to projects in the staking ecosystem for the entirety of V1.
 
 ### V2 - Trustless Distributed Validators
 

@@ -172,14 +172,17 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
     </p>
     <Tabs groupId="Launchpad-other">
       <TabItem value="Launchpad" label="Launchpad" default>
-        You will use the Launchpad to create an invitation, and share it with
-        the operators.
-        <br />
-        This video shows the flow within the{" "}
-        <a href="/docs/dvl/intro#dv-launchpad-links" target="_blank">
-          DV Launchpad
-        </a>
-        :<p align="center">
+        <p>
+          You will use the Launchpad to create an invitation, and share it with
+          the operators.
+          <br />
+          This video shows the flow within the{" "}
+          <a href="/docs/dvl/intro#dv-launchpad-links" target="_blank">
+            DV Launchpad
+          </a>
+          :
+        </p>
+        <p align="center">
           <iframe
             width="560"
             height="315"

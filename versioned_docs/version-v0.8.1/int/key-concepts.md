@@ -12,7 +12,7 @@ This page outlines a number of the key concepts behind the various technologies 
 
 A distributed validator is an Ethereum proof-of-stake validator that runs on more than one node/machine. This functionality is provided by **Distributed Validator Technology** (DVT).
 
-Distributed validator technology removes the problem of single-point failure. Should <33% of the participating nodes in the DVT cluster go offline, the remaining active nodes are still able to come to consensus on what to sign and produce valid signatures for their staking duties. This is known as Active/Active redundancy, a common pattern for minimizing downtime in mission critical systems.
+Distributed validator technology removes the problem of single-point failure. Should &lt;33% of the participating nodes in the DVT cluster go offline, the remaining active nodes are still able to come to consensus on what to sign and produce valid signatures for their staking duties. This is known as Active/Active redundancy, a common pattern for minimizing downtime in mission critical systems.
 ​
 
 ## Distributed Validator Node

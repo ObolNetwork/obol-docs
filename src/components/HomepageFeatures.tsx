@@ -24,7 +24,7 @@ const FeatureList: FeatureItem[] = [
     alt: "Image copyright Turkkub, courtesy of the Noun Project",
     description: (
       <>
-        The <Link to="/docs/dvl/intro">Distributed Validator Launchpad</Link> is
+        The <Link to="https://launchpad.obol.org/">Distributed Validator Launchpad</Link> is
         an interface to enable distributed key generation for Distributed
         Validators.
       </>

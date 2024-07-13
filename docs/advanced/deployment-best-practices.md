@@ -40,7 +40,7 @@ It is recommended to **keep peer ping latency below 235 milliseconds for all pee
 
 In cases where latencies exceed these thresholds, efforts should be made to reduce the physical distance between nodes or optimize Internet Service Provider (ISP) settings accordingly. Ensure all nodes are connecting to one another directly rather than through a relay.
 
-For high-scale, performance deployments; inter-peer latency of <25ms is optimal, along with an average consensus duration under 100ms.
+For high-scale, performance deployments; inter-peer latency of &lt; 25ms is optimal, along with an average consensus duration under 100ms.
 
 ## Node Locations
 
@@ -66,7 +66,7 @@ Cluster sizes that allow for Byzantine Fault Tolerance are recommended as they a
 
 ## MEV-Boost Relays
 
-MEV relays are configured at the Consensus Layer or MEV-boost client level. Refer to our [guide](./quickstart-builder-api.md) to ensure all necessary configuration has been applied to your clients. As with all validators, low latency during proposal opportunities is extremely important. By default, MEV-Boost waits for all configured relays to return a bid, or will timeout if any have not returned a bid within 950ms. This default timeout is generally too slow for a distributed cluster (think of this time as additive to the time it takes the cluster to come to consensus, both of which need to happen within a 2 second window for optimal proposal broadcasting). It is likely better to only list relays that are located geographically near your node, so that once all relays respond (e.g. in < 50ms) your cluster will move forward with the proposal.
+MEV relays are configured at the Consensus Layer or MEV-boost client level. Refer to our [guide](./quickstart-builder-api.md) to ensure all necessary configuration has been applied to your clients. As with all validators, low latency during proposal opportunities is extremely important. By default, MEV-Boost waits for all configured relays to return a bid, or will timeout if any have not returned a bid within 950ms. This default timeout is generally too slow for a distributed cluster (think of this time as additive to the time it takes the cluster to come to consensus, both of which need to happen within a 2 second window for optimal proposal broadcasting). It is likely better to only list relays that are located geographically near your node, so that once all relays respond (e.g. in &lt; 50ms) your cluster will move forward with the proposal.
 
 ## Client Diversity
 
@@ -88,7 +88,7 @@ Leveraging [Obol Splits](../sc/introducing-obol-splits.md) smart contracts allow
 
 Deposit processes can be done via an automated script. This can be used for DV clusters until they reach the desired number of validators.
 
-It is important to allow time for the validators to be activated (usually <24 hours).
+It is important to allow time for the validators to be activated (usually &lt; 24 hours).
 
 Consider using batching smart contracts to reduce the gas cost of a script, but take caution in their integration not to make an invalid deposit.
 
