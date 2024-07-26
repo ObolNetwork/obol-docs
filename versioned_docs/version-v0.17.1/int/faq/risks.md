@@ -8,7 +8,7 @@ description: Centralization Risks and mitigation
 ## Risk: Obol hosting the relay infrastructure
 **Mitigation**: Self-host a relay
 
-One of the risks associated with Obol hosting the [LibP2P relays](docs/charon/networking.md) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network.
+One of the risks associated with Obol hosting the [LibP2P relays](../../charon/networking.md) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network.
 
 ## Risk: Obol being able to update Charon code
 **Mitigation**: Pin specific docker versions or compile from source on a trusted commit
