@@ -158,7 +158,7 @@ Generally Obol Splits are deployed in an immutable fashion, meaning you cannot e
 
 ### How do Obol Splits work?
 
-You can read more about how Obol Splits work [here](../sc/introducing-obol-splits.md).
+You can read more about how Obol Splits work [here](../sc/introducing-obol-splits.mdx).
 
 ### Are Obol Splits open source?
 
@@ -166,7 +166,7 @@ Yes, Obol Splits are licensed under GPLv3 and the source code is available [here
 
 ### Are Obol Splits audited?
 
-The Obol Splits contracts have been audited, though further development has continued on the contracts since. Consult the audit results [here](../sec/smart_contract_audit.md).
+The Obol Splits contracts have been audited, though further development has continued on the contracts since. Consult the audit results [here](../sec/smart_contract_audit.mdx).
 
 ### Are the Obol Splits contracts verified on Etherscan?
 
@@ -180,7 +180,7 @@ No. Any address can trigger the contracts to move the funds, they do not need to
 
 The most important decision is to be aware of whether or not the Split contract you are using has been set up with editability. If a splitter is editable, you should understand what the address that can edit the split does. Is the editor an EOA? Who controls that address? How secure is their seed phrase? Is it a smart contract? What can that contract do? Can the controller contract be upgraded? etc. Generally, the safest thing in Obol's perspective is not to have an editable splitter, and if in future you are unhappy with the configuration, that you exit the validator and create a fresh cluster with new settings that fit your needs.
 
-Another aspect to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract. There are edge cases relating to not calling the contracts periodically or ahead of a withdrawal, activating more validators than the contract was configured for, and a worst case mass slashing on the network. Consult the documentation on the contract [here](../sc/introducing-obol-splits.md#optimistic-withdrawal-recipient), its audit [here](../sec/smart_contract_audit.md), and follow up with the core team if you have further questions.
+Another aspect to be aware of is how the splitting of principal from rewards works using the Optimistic Withdrawal Recipient contract. There are edge cases relating to not calling the contracts periodically or ahead of a withdrawal, activating more validators than the contract was configured for, and a worst case mass slashing on the network. Consult the documentation on the contract [here](../sc/introducing-obol-splits.mdx#optimistic-withdrawal-recipient), its audit [here](../sec/smart_contract_audit.mdx), and follow up with the core team if you have further questions.
 
 ## Debugging Errors in Logs
 

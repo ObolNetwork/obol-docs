@@ -66,7 +66,7 @@ Obol’s product consists of three main components, each run by its own team: a 
 
 - [DV Launchpad](../dvl/intro.md): A webapp to create and manage distributed validators.
 - [Charon](../charon/intro.md): A middleware client that enables operators to run distributed validators.
-- [Solidity](../sc/introducing-obol-splits.md): Withdrawal and fee recipient contracts for use with distributed validators.
+- [Solidity](../sc/introducing-obol-splits.mdx): Withdrawal and fee recipient contracts for use with distributed validators.
 
 ## Analysis - Cluster Setup and DKG
 
