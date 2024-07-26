@@ -21,7 +21,7 @@ For more information on running Charon in a UI friendly way through the DV Launc
 
 | Ethereum Network  | Launchpad                                |
 |--------------|-------------------------------------|
-| Mainnet      | https://beta.launchpad.obol.tech    |
-| Gnosis Chain      | https://gnosischain.launchpad.obol.tech    |
-| Holesky      | https://holesky.launchpad.obol.tech |
-| Sepolia      | https://sepolia.launchpad.obol.tech |
+| Mainnet      | https://launchpad.obol.org    |
+| Gnosis Chain      | https://gnosischain.launchpad.obol.org    |
+| Holesky      | https://holesky.launchpad.obol.org |
+| Sepolia      | https://sepolia.launchpad.obol.org |
