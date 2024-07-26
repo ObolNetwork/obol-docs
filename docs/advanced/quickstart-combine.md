@@ -5,7 +5,7 @@ description: Combine distributed validator private key shares to recover the val
 
 # Combine DV private key shares
 
-:::warning
+:::danger
 Reconstituting Distributed Validator private key shares into a standard validator private key is a security risk, and can potentially cause your validator to be slashed.
 
 Only combine private keys as a last resort and do so with extreme caution.
@@ -70,7 +70,7 @@ cluster/
         └── keystore-1.txt
 ```
 
-:::caution
+:::warning
 Make sure to never mix the various `.charon` directories with one another.
 
 Doing so can potentially cause the combination process to fail.

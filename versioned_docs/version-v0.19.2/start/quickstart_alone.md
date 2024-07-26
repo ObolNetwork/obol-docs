@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Create a DV alone
 
-:::caution
+:::warning
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
@@ -104,7 +104,7 @@ open http://localhost:3000/d/laEp8vupp
   </TabItem>
   <TabItem value="Run the nodes on many machines" label="Run the nodes on multiple machines">
 
-:::caution
+:::warning
 To distribute your cluster across multiple machines, each node in the cluster needs one of the folders called `node*/` to be copied to it. Each folder should be copied to a CDVN repo and renamed from `node*` to `.charon`.
 
 Right now, the `charon create cluster` command [used earlier to create the private keys](./quickstart_alone#step-1-create-the-key-shares-locally) outputs a folder structure like `cluster/node*/`. Make sure to grab the `./node*/` folders, *rename* them to `.charon` and then move them to one of the single node repos below. Once all nodes are online, synced, and connected, you will be ready to activate your validator.

@@ -5,7 +5,7 @@ description: Run one node in a multi-operator distributed validator cluster
 
 # Run a cluster with others
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
@@ -47,7 +47,7 @@ To create a distributed validator cluster with a group of other node operators r
    enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGDqEcoQkeJ98Pw7GaGAYFI7eoegmlkgnY0gmlwhCKNyGGJc2VjcDI1NmsxoQI6SQlzw3WGZ_VxFHLhawQFhCK8Aw7Z0zq8IABksuJEJIN0Y3CCPoODdWRwgj6E
    ```
 
-   :::caution
+   :::warning
    The ability to replace a deleted or compromised private key is limited at this point. Please make a secure backup of this private key if this distributed validator is important to you.  
    :::
 

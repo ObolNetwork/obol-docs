@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Create an EigenLayer DV
 
-:::caution
+:::warning
 The Obol-SDK is in a beta state and should be used with caution. Ensure you validate all important data.
 :::
 

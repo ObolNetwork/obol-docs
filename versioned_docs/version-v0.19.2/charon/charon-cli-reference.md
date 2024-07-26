@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # CLI reference
 
-:::caution
+:::warning
 
 The `charon` client is under heavy development, interfaces are subject to change until a first major version is published. 
 
@@ -317,7 +317,7 @@ By default, the `combine` command will refuse to overwrite any private key that 
 
 To force the process, use the `--force` flag.
 
-:::caution
+:::warning
 
 The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2335.md) format, and can be imported in any Ethereum validator client that supports it.
 

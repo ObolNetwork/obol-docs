@@ -7,7 +7,7 @@ description: Combine distributed validator keyshares
 
 Combine distributed validator keyshares into an Ethereum validator key
 
-:::caution
+:::warning
 Combining keyshares into an Ethereum validator key is a security hazard, and can potentially get you slashed.
 
 Only combine keyshares for a cluster that's about to be shut down.
@@ -69,7 +69,7 @@ validators-to-be-combined/
         └── keystore-1.txt
 ```
 
-:::caution
+:::warning
 Make sure to never mix the various `.charon` directories one with another!
 
 Doing can potentially mix the keyshares in an unsupported way, and the combination process will fail.

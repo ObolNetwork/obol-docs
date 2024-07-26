@@ -52,7 +52,7 @@ Once your clients can connect and sync appropriately, your DV stack is now mainn
 
 ### Using a remote mainnet beacon node
 
-:::caution
+:::warning
 Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
 :::
 

@@ -5,7 +5,7 @@ description: Run a cluster on mainnet
 
 # Run a cluster on mainnet
 
-:::caution
+:::warning
 Note that you should proceed only if you accept the risk and have tested this on goerli testnet.
 
 DKG keys created for goerli cannot be used on mainnet and vice versa.

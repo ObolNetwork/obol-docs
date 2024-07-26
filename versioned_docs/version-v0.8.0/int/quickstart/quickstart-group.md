@@ -5,7 +5,7 @@ description: Run one node in a multi-operator distributed validator cluster
 
 # Run a cluster with others
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
@@ -56,7 +56,7 @@ To create a distributed validator cluster with a group of other node operators r
    docker run --rm -v "$(pwd):/opt/charon" ghcr.io/obolnetwork/charon:v0.8.0 create enr
    ```
 
-   :::caution
+   :::warning
    The ability to replace a deleted or compromised private key is limited at this point. Please make a secure backup of this private key if this distributed validator is important to you.  
    :::
    This command will print your charon client's ENR to the command line. It should look something like:

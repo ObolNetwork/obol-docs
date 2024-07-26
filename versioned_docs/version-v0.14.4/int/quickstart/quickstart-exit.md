@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Exit a validator
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet.
 :::
 

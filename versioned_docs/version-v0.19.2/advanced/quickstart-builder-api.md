@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Enable MEV
 
-:::caution
+:::warning
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 

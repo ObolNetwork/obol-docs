@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Cluster configuration
 
-:::caution
+:::warning
 These cluster definition and cluster lock files are a work in progress. The intention is for the files to be standardised for operating distributed validators via the [EIP process](https://eips.ethereum.org/) when appropriate.
 :::
 

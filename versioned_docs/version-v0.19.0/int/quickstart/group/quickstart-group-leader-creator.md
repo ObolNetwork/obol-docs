@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Creator & Leader Journey
 
-:::caution
+:::warning
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
@@ -62,7 +62,7 @@ You should expect to see a console output like
 
 If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](../../faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
-:::caution
+:::warning
 Ensure you create a backup of the private key stored in the '.charon' folder, specifically at '.charon/charon-enr-private-key'. This is the file used to generate your private key. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
 :::
 

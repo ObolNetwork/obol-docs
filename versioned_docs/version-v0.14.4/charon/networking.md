@@ -60,7 +60,7 @@ address:
 - `--p2p-external-ip`: Explicitly sets the external IP address.
 - `--p2p-external-hostname`: Explicitly sets the external DNS host name.
 
-:::caution
+:::warning
 If a pair of charon clients are not publicly accessible, due to being behind a NAT, they will not be able to upgrade their relay connections to a direct connection. 
 Even though this is supported, it isn’t recommended as relay connections introduce additional latency and reduced throughput and will result in decreased validator effectiveness 
 and possible missed block proposals and attestations.

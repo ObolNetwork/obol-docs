@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Create a DV using the SDK
 
-:::caution
+:::warning
 
 The Obol-SDK is in an alpha state and should be used with caution., particularly on mainnet.
 :::

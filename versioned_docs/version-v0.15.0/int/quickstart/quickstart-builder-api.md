@@ -5,7 +5,7 @@ description: Run a distributed validator cluster with the builder API (MEV-Boost
 
 # Run a cluster with MEV-Boost
 
-:::caution
+:::warning
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
 Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In future this process aims to be much more automated and seamless from the users perspective.

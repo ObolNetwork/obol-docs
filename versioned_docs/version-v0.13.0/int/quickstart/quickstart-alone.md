@@ -5,7 +5,7 @@ description: Run all nodes in a distributed validator cluster
 
 # Run a cluster alone
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
@@ -88,7 +88,7 @@ This process can take a minimum of 16 hours, with the maximum time to activation
 
 ## Step 5. Validator Voluntary Exit
 
-:::caution
+:::warning
 This step only needs to be taken when you decide to exit your DV cluster. 
 :::
 A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.
