@@ -5,7 +5,7 @@ description: Take part in a distributed validator cluster
 
 # Quickstart
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 

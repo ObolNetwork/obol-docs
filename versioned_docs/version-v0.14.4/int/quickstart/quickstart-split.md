@@ -5,7 +5,7 @@ description: Split existing validator keys
 
 # Split existing validator keys
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet.
 
 This process should only be used if you want to split an existing validator key into multiple keyshares.

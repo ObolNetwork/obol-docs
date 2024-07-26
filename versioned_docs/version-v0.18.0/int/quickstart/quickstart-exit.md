@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Exit a DV
 
-:::caution
+:::warning
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 
@@ -100,7 +100,7 @@ The process of a validator exiting from staking takes variable amounts of time, 
 
 Immediately upon broadcasting a signed voluntary exit message, the exit epoch and withdrawable epoch values are calculated based off the current epoch number. These values determine exactly when the validator will no longer be required to be online performing validation, and when the validator is eligible for a full withdrawal respectively.
 1. Exit epoch - epoch at which your validator is no longer active, no longer earning rewards, and is no longer subject to slashing rules.
-  :::caution
+  :::warning
   Up until this epoch (while "in the queue") your validator is expected to be online and is held to the same slashing rules as always. Do not turn your DV node off until this epoch is reached.
   :::
 2. Withdrawable epoch - epoch at which your validator funds are eligible for a full withdrawal during the next validator sweep.

@@ -5,7 +5,7 @@ description: Split existing validator keys
 
 # Split existing validator private keys
 
-:::caution
+:::warning
 Charon is in a beta state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
 This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed.

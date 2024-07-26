@@ -1,6 +1,6 @@
 # Run a cluster with others
 
-:::caution
+:::warning
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 :::
 

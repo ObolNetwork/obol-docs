@@ -55,6 +55,6 @@ cluster
 
 :point_right: Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
 
-:::caution
+:::warning
 Right now, the `charon create cluster` command [used earlier to create the private keys](./create-keys) outputs a folder structure like `cluster/node*/`. Make sure to grab the `./node*/` folders, *rename* them to `.charon` and then move them to one of the single node repos above. Once all nodes are online, synced, and connected, you will be ready to activate your validator.
 :::

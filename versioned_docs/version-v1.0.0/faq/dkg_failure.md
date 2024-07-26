@@ -65,7 +65,7 @@ In order to retry the DKG process one must delete the following entities, if pre
 - `cluster-lock.json` file
 - `deposit-data.json` file
 
-:::caution
+:::warning
 The `charon-enr-private-key` file **must be preserved**, failure to do so requires the DKG process to be restarted from the beginning by creating a new cluster definition.
 :::
 If you're doing a DKG with a custom cluster definition - for example, create with `charon create dkg`, rather than the Obol Launchpad - you can re-use the same file.

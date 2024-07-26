@@ -41,7 +41,7 @@ Each Charon client has a secp256k1 private key. The associated public key is enc
 For ease of use and to align with the Ethereum ecosystem, Charon encodes these public keys in the [ENR format](https://eips.ethereum.org/EIPS/eip-778),
 not in [libp2p’s Peer ID format](https://docs.libp2p.io/concepts/fundamentals/peers/).
 
-:::caution
+:::warning
 Each Charon node's secp256k1 private key is critical for authentication and must be kept secure to prevent cluster compromise.
 
 Do not use the same key across multiple clusters, as this can lead to security issues.
@@ -71,7 +71,7 @@ address:
 - `--p2p-external-ip`: Explicitly sets the external IP address.
 - `--p2p-external-hostname`: Explicitly sets the external DNS host name.
 
-:::caution
+:::warning
 If a pair of Charon clients are not publicly accessible, due to being behind a NAT, they will not be able to upgrade their relay connections to a direct connection.
 Even though this is supported, it isn’t recommended as relay connections introduce additional latency and reduced throughput and will result in decreased validator effectiveness
 and possible missed block proposals and attestations.

@@ -5,7 +5,7 @@ description: Run all nodes in a distributed validator cluster
 
 # Run a cluster alone
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 

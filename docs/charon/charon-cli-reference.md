@@ -77,7 +77,7 @@ Flags:
 
 The `charon create cluster` command creates a set of distributed validators locally; including the private keys, a `cluster-lock.json` file, and deposit data. This command should only be used for solo-operation of distributed validators. To run a distributed validator cluster with a group of operators, it is preferable to create these artifacts using the [DV Launchpad](../dvl/intro.md) and the `charon dkg` command. That way, no single operator custodies all of the private keys to a distributed validator.
 
-:::caution
+:::warning
 This command produces new distributed validator private keys or handles and splits pre-existing traditional validator private keys, please use caution and keep these private keys securely backed up and secret.
 :::
 
@@ -254,7 +254,7 @@ Use "charon exit [command] --help" for more information about a command.
 
 ### Pre-sign exit messages for active validators
 
-:::caution
+:::warning
 This command requires Charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
 
 The default `publish-address` for this command sends signed exit messages to Obol's [API](/api) for aggregation and distribution. Exit signatures are stored in line with Obol's [terms and contiditions](https://obol.tech/terms.pdf).
@@ -347,7 +347,7 @@ Flags:
 
 The `combine` command combines many validator key shares into a single Ethereum validator key.
 
-:::caution
+:::warning
 This command requires Charon to access the distributed validator's private keys, please use caution and keep these private keys securely backed up and secret.
 :::
 
@@ -439,7 +439,7 @@ By default, the `combine` command will refuse to overwrite any private key that 
 
 To force the process, use the `--force` flag.
 
-:::caution
+:::danger
 
 The generated private keys are in the standard [EIP-2335](https://github.com/ethereum/ercs/blob/master/ERCS/erc-2335.md) format, and can be imported in any Ethereum validator client that supports it.
 

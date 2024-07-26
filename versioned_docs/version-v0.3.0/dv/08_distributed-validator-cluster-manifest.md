@@ -4,7 +4,7 @@ description: Documenting a Distributed Validator Cluster in a standardised file 
 
 # Distributed validator cluster manifest
 
-:::caution
+:::warning
 This manifest file is a work in progress, and intends to be standardised for operating distributed validators via the [EIP process](../dvk/01_distributed-validator-keys.md#standardising-the-format-of-dvks) when appropriate.
 :::
 

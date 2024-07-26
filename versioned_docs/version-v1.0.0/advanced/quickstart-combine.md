@@ -70,7 +70,7 @@ cluster/
         └── keystore-1.txt
 ```
 
-:::caution
+:::warning
 Make sure to never mix the various `.charon` directories with one another.
 
 Doing so can potentially cause the combination process to fail.

@@ -1,6 +1,6 @@
 # Run a cluster with others
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 

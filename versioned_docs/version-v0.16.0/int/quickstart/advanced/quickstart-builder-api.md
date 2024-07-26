@@ -5,7 +5,7 @@ description: Run a distributed validator cluster with the builder API (MEV-Boost
 
 # Run a cluster with MEV-Boost
 
-:::caution
+:::warning
 Charon is in an alpha state and should be used with caution according to its [Terms of Use](https://obol.tech/terms.pdf).
 
 Charon's integration with MEV-Boost is also in an alpha state and requires a non-trivial amount of configuration to get working successfully. In the future, this process aims to be much more automated and seamless from a user's perspective.
@@ -61,9 +61,9 @@ For Lighthouse, we are currently waiting on the following [PR](https://github.co
 
 Once you have executed the above steps, you can verify if your setup is functional by reviewing your proposed blocks on [beaconcha.in](https://beaconcha.in) dashboards or via the Relay API endpoints.
 
-:::caution
+:::warning
 Note that the mainnet block in the below description is taken only for representation, and not actually proposed by a distributed validator.
-:::caution
+:::warning
 
 As an example, if my validator was the block proposer for block `17370078` on mainnet, I can review the following resources:
 

@@ -47,7 +47,7 @@ An Optimistic Withdrawal Recipient [contract](https://github.com/ObolNetwork/obo
 
 This contract **assumes that any ether that has appeared in it's address since it was last able to do balance accounting is skimming reward from an ongoing validator** (or number of validators) unless the change is > 16 ether. This means balance skimming is immediately claimable as reward, while an inflow of e.g. 31 ether is tracked as a return of principal (despite being slashed in this example).
 
-:::warning
+:::danger
 
 Worst-case mass slashings can theoretically exceed 16 ether, if this were to occur, the returned principal would be misclassified as a reward, and distributed to the wrong address. This risk is the drawback that makes this contract variant 'optimistic'. If you intend to use this contract type, **it is important you understand and accept this risk**, however minute.
 

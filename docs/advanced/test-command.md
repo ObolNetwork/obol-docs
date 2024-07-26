@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Test a Cluster
 
-:::caution
+:::warning
 The `charon alpha test` command is in an alpha state and is subject to change until it is made available as `charon test` in a future version.
 :::
 

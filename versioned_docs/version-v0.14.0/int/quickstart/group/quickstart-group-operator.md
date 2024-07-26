@@ -5,7 +5,7 @@ description: A node operator joins a DV cluster
 
 # Operator Journey
 
-:::caution
+:::warning
 Charon is in an early alpha state and is not ready to be run on mainnet
 :::
 
@@ -45,7 +45,7 @@ You should expect to see a console output like
 
 If instead of being shown your `enr` you see an error saying `permission denied` then you may need to [update docker permissions](../../faq/errors#docker-permission-denied-error) to allow the command to run successfully.
 
-:::caution
+:::warning
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony and start the DV cluster successfully.**
 :::
 
@@ -98,7 +98,7 @@ For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running 
     - A `cluster-lock.json` file. This contains the information needed by charon to operate the distributed validator cluster with its peers.
     - A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
 
-:::caution
+:::warning
 Please make sure to create a backup of `.charon/validator_keys`. **If you lose your keys you won't be able to start the DV cluster successfully.**
 :::
 
@@ -189,7 +189,7 @@ scrape_configs:
 
 ## Step 8. Validator Voluntary Exit
 
-:::caution
+:::warning
 This step only needs to be taken when you decide to exit your DV cluster. 
 :::
 A voluntary exit is when a validator chooses to stop performing its duties, and exits the beacon chain permanently. To voluntarily exit, the validator must continue performing its validator duties until successfully exited to avoid penalties.

@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # CLI reference
 
-:::caution
+:::warning
 
 The `charon` client is under heavy development, interfaces are subject to change until a first major version is published. 
 

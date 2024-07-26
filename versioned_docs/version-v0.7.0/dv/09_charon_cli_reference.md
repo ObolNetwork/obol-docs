@@ -4,7 +4,7 @@ description: A go-based middleware client for taking part in Distributed Validat
 
 # Charon CLI reference
 
-:::caution
+:::warning
 
 The `charon` client is under heavy development, interfaces are subject to change until a first major version is published. 
 
