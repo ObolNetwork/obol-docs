@@ -25,12 +25,6 @@ You can earn contributions by:
 
 Your DV earns rewards which are distributed to operators based on the predefined percentages in the split contract. Each DV contributes 1% of its staking rewards to the Obol Collective. This means that the higher the effectiveness and uptime of your validators, the more rewards (and thus contributions) you will generate.
 
-For example, if the total rewards \( R \) for a validator are split among operators with percentages \( p_1, p_2, ..., p_n \), the contributions \( C \) for each operator can be calculated as:
-
-Cᵢ = R × pᵢ × 0.01
-
-where pᵢ is the split percentage for the i-th operator.
-
 ## Tracking and Recognition
 
 Your contributions are tracked off-chain in a centralised database. Contributions are updated daily using the aforementioned formula. You can query your contributions using our [API](https://docs.obol.org/api) or view them on the [Obol DV Launchpad](https://launchpad.obol.org/cluster/list/) and our partners' staking platforms. Note that the Launchpad only shows direct contributions by Squads and Clusters. Users who contributed through partners will need to access their partner’s UI to find their contributions.
