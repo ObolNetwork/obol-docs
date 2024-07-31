@@ -19,7 +19,7 @@ You can earn contributions by:
 
 - **Lido / Mellow**: The Obol vault accepts ETH deposits into the Simple DVT Module, bridging robust institutional staking and decentralized native staking. [Learn more](https://lido.fi).
 - **Chorus One / Stakewise**: Stakewise and Chorus One offer a platform for ETH staking with integrated Obol DVs. [Learn more](https://opus.chorus.one/pool/stake).
-- **Stakely**: Another partner enabling contributions through DV staking. [Learn more](https://stakely.io/).
+- **Stakely**: Our partner enabling contributions through DV staking. [Learn more](https://stakely.io/).
 
 ## How Contributions are Accumulated
 
