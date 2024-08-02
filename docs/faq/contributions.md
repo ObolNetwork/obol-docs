@@ -23,11 +23,7 @@ You can participate in the Obol Contributions Program by:
 
 1. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/). This allows you to directly participate in the network's decentralisation efforts and earn contributions. You can also visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members.
 
-2. **Staking through Staking Partners**: By participating in staking through our partners, your staking rewards will also contribute to the Obol Collective. Here’s how you can start earning contributions through our partners:
-
-- **Lido / Mellow**: The Obol vault accepts ETH deposits into the Simple DVT Module, bridging robust institutional staking and decentralised native staking. [Learn more](https://app.mellow.finance/restake).
-- **Chorus One / Stakewise**: Stakewise and Chorus One offer a platform for ETH staking with integrated Obol DVs. [Learn more](https://opus.chorus.one/pool/stake).
-- **Stakely**: Our partner enabling contributions through DV staking. [Learn more](https://stakely.io).
+2. **Staking through Staking Partners**: By participating in staking through our partners, your staking rewards will also contribute to the Obol Collective. For the current list of staking partners, please visit [obol.org/contributions](https://obol.org/contributions)
 
 ## How can I track my contributions?
 
@@ -45,9 +41,9 @@ If the total rewards \( R \) for a validator are split among operators with perc
 
 Cᵢ = R × pᵢ × 0.01 × 1.01
 
-where pᵢ is the split percentage for the i-th operator.
+where pᵢ is the split percentage for the i-th operator. We multiply by 1.01 to ensure that the full 1% contribution is accurately distributed among operators, compensating for the initial deduction of 1% from the total rewards.
 
-## I’ve already run a mainnet Obol DV? What about me?
+## I’m already running a mainnet Obol DV? What about me?
 
 If you are running an existing mainnet DV without the 1% split, you will not have tracked contributions and will need to deploy a new DV configuration to participate.
 
@@ -61,7 +57,7 @@ Users of Obol distributed validator (DV) clusters contribute 1% of their staking
 
 ## Do I need to run my own validator to participate?
 
-No, you can stake on DVs and track your contributions through partners like Stakely, Chorus One Vault for Stakewise, or Mellow Vault for Lido. More partners are coming soon.
+No, you can stake on DVs and track your contributions through the partners listed on [obol.org/contributions](https://obol.org/contributions). More partners are coming soon.
 
 ## Can I withdraw my staked ETH at any time?
 
@@ -73,11 +69,11 @@ The minimum amount varies by staking protocol, please refer to each partner to d
 
 ## What happens if my validator has downtime?
 
-Since Contributions are tied to staking rewards. The amount of Contributions earned is impacted by on performance metrics like effectiveness and uptime.
+Since Contributions are tied to staking rewards, the amount of Contributions earned is impacted by on performance metrics like effectiveness and uptime.
 
 ## Will my contributions be public?
 
-Yes, contributions can be viewed through the Obol API, though specific visibility settings depend on the protocol.
+Yes, contributions can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), though specific visibility settings depend on the protocol.
 
 ## How do I know my contributions are being counted accurately?
 
