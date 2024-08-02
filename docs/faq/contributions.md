@@ -27,7 +27,7 @@ You can participate in the Obol Contributions Program by:
 
 - **Lido / Mellow**: The Obol vault accepts ETH deposits into the Simple DVT Module, bridging robust institutional staking and decentralised native staking. [Learn more](https://app.mellow.finance/restake).
 - **Chorus One / Stakewise**: Stakewise and Chorus One offer a platform for ETH staking with integrated Obol DVs. [Learn more](https://opus.chorus.one/pool/stake).
-- **Stakely**: Our partner enabling contributions through DV staking. [Learn more](obol-portal.stakely.io).
+- **Stakely**: Our partner enabling contributions through DV staking. [Learn more](https://stakely.io).
 
 ## How can I track my contributions?
 
