@@ -49,7 +49,7 @@ where pᵢ is the split percentage for the i-th operator.
 
 ## I’ve already run a mainnet Obol DV? What about me?
 
-If you are running an existing mainnet DV without the 1% split, you will not have tracked contributions and will need to deploy a new DV configuration to participate. With that said, for badge holders who participated in our early Mainnet phases, such as Alpha or Beta, and/or our testing phases, they will be recognised in other ways in the future.
+If you are running an existing mainnet DV without the 1% split, you will not have tracked contributions and will need to deploy a new DV configuration to participate.
 
 ## Wen Token?
 
