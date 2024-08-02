@@ -14,10 +14,11 @@ const customObolDarkTheme = {
 const config = {
   title: "Obol Network",
   tagline: "Building Distributed Validators for Ethereum",
-  url: "https://docs.obol.tech/",
+  url: "https://docs.obol.org/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
+  onBrokenAnchors: "warn",
   favicon: "img/favicon.ico",
   organizationName: "ObolNetwork", // Usually your GitHub org/user name.
   projectName: "obol-docs", // Usually your repo name.

@@ -11,7 +11,7 @@ description: Centralization Risks and mitigation
 
 One of the risks associated with Obol hosting the [LibP2P relays](../charon/networking.mdx) infrastructure allowing peer discovery is that if Obol-hosted relays go down, peers won't be able to discover each other and perform the DKG. To mitigate this risk, external organizations and node operators can consider self-hosting a relay. This way, if Obol's relays go down, the clusters can still operate through other relays in the network. Ensure that all nodes in the cluster use the same relays, or they will not be able to find each other if they are connected to different relays.
 
-The following non-Obol entities run relays that you can consider adding to your cluster (you can have more than one per cluster, see the `--p2p-relays` flag of [`charon run`](../charon/charon-cli-reference.md#the-run-subcommand)):
+The following non-Obol entities run relays that you can consider adding to your cluster (you can have more than one per cluster, see the `--p2p-relays` flag of [`charon run`](../charon/charon-cli-reference.md#the-run-command)):
 
 | Entity    | Relay URL                                   |
 |-----------|---------------------------------------|
@@ -29,7 +29,7 @@ Another risk associated with Obol is the Labs team having the ability to update 
 
 ## Risk: Obol hosting the DV Launchpad
 
-**Mitigation**: Use [`create cluster`](../charon/charon-cli-reference.md#the-create-subcommand) or [`create dkg`](../charon/charon-cli-reference.md#creating-the-configuration-for-a-dkg-ceremony) locally and distribute the files manually.
+**Mitigation**: Use [`create cluster`](../charon/charon-cli-reference.md#the-create-command) or [`create dkg`](../charon/charon-cli-reference.md#creating-the-configuration-for-a-dkg-ceremony) locally and distribute the files manually.
 
 Hosting the first Charon frontend, the [DV Launchpad](../dvl/intro.md), on a centralized server could create a single point of failure, as users would have to rely on Obol's server to access the protocol. This could limit the decentralization of the protocol and could make it vulnerable to attacks or downtime. Obol hosting the launchpad on a decentralized network, such as IPFS is a first step but not enough. This is why the Charon code is open-source and contains a CLI interface to interact with the protocol locally.
 
