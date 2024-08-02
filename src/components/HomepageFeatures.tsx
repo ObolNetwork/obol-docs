@@ -56,13 +56,13 @@ const FeatureList: FeatureItem[] = [
     link: "/docs/sc/introducing-obol-splits",
   },
   {
-    title: "Take part in Beta",
-    image: "/img/noun_laboratory.png",
+    title: "Earn Contributions",
+    image: "/img/noun_gardening.png",
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        You can run one Distributed Validator on mainnet as part of Obol's{" "}
-        <Link to="https://blog.obol.tech/mainnet-open-beta-launch-blog/">Open Beta.</Link>
+        Run Distributed Validators on mainnet and take part in Obol's{" "}
+        <Link to="https://blog.obol.org/recognizing-contributions-to-the-obol-collective/">Contributions Program.</Link>
       </>
     ),
     link: "/docs/start/quickstart_overview",
