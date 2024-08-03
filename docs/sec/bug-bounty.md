@@ -53,7 +53,7 @@ Rewards are issued based on the severity and impact of the disclosed vulnerabili
 
 ### Critical Vulnerabilities: Up to $100,000
 
-A Critical-level vulnerability is one that has a severe impact on the security of the in-production system from an unauthenicated external attacker, and requires immediate attention to fix. Highly likely to have a material impact on validator private key security, and/or loss of funds.
+A Critical-level vulnerability is one that has a severe impact on the security of the in-production system from an unauthenticated external attacker, and requires immediate attention to fix. Highly likely to have a material impact on validator private key security, and/or loss of funds.
 
 - High impact, high likelihood
 
@@ -70,7 +70,7 @@ Impacts:
 
 ### High Vulnerabilities: Up to $10,000
 
-For significant security risks that impact the system from a position of low-trust and requires a significant effort to fix.
+For significant security risks that impact the system from a position of low-trust and require a significant effort to fix.
 
 - High impact, medium likelihood
 - Medium impact, high likelihood
@@ -115,7 +115,7 @@ Impacts:
 - Shutdown of greater than or equal to 30% of network processing nodes without brute force actions, but does not shut down the network
 - Charon cluster identity private key theft
 - Rogue node operator to penetrate and compromise other nodes to disturb the cluster’s lifecycle
-- Charon public relay node is compromised and lead to cluster topologies getting discovered and disrupted
+- Charon public relay node is compromised and leads to cluster topologies getting discovered and disrupted
 - Smart contract unable to operate due to lack of token funds
 - Block stuffing
 - Griefing (e.g. no profit motive for an attacker, but damage to the users or the protocol)
@@ -153,7 +153,7 @@ Rewards may be issued as cash, merchandise, or other forms of recognition, at Ob
 - Attempting phishing or other social engineering attacks against our employees and/or customers
 - Any testing with third-party systems and applications (e.g. browser extensions) as well as websites (e.g. SSO providers, advertising networks)
 - Any denial of service attacks that are executed against project assets
-- Automated testing of services that generates significant amounts of traffic
+- Automated testing of services that generate significant amounts of traffic
 - Public disclosure of an unpatched vulnerability in an embargoed bounty
 
 ## Submission process
