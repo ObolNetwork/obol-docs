@@ -74,7 +74,7 @@ Once this process has been completed, the cluster operators can retry a DKG.
 
 ## Further debugging
 
-If for some reason the DKG process fails again, node operators are adviced to reach out to the Obol team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing what troubleshooting steps were taken and providing **debug logs**.
+If for some reason the DKG process fails again, node operators are advised to reach out to the Obol team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing what troubleshooting steps were taken and providing **debug logs**.
 
 To enable debug logs first clean up the Charon data directory as explained in [the previous paragraph](#cleaning-up-the-charon-directory), then run your DKG command by appending `--log-level=debug` at the end.
 
