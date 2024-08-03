@@ -1,6 +1,6 @@
 # Documentation standards
 
-This section outlines the formatting standards presented within this documentation. In order to maintain continuity and quality, all pull requests must best conform to the specifics below.
+This section outlines the formatting standards presented within this documentation. In order to maintain continuity and quality, all pull requests must conform to the specifics below.
 
 ## Content types
 
@@ -10,7 +10,7 @@ Walkthroughs and conceptual articles explained.
 
 The purpose of a walkthrough is to tell the user _how_ to do something. They do not need to convince the reader of something or explain a concept. Walkthroughs are a list of steps the reader must follow to achieve a process or function.
 
-The vast majority of documentation within this manual falls under the _Walkthrough_ category. Walkthroughs are generally quite short, have a neutral tone, and teach the reader how to achieve a particular process or function. They present the reader with concrete steps on where to go, what to type, and things they should click on. There is little to no _conceptual_ information within walkthroughs.
+The vast majority of documentation within this manual falls under the _Walkthrough_ category. Walkthroughs are generally quite short, have a neutral tone and teach the reader how to achieve a particular process or function. They present the reader with concrete steps on where to go, what to type, and things they should click on. There is little to no _conceptual_ information within walkthroughs.
 
 #### Function or process
 
@@ -20,7 +20,7 @@ Take an installation page for example: Following this walkthrough isn't going to
 
 #### Short length
 
-Since walkthroughs cover one particular function or process, they tend to be quite short. The estimated reading time of a walkthrough is somewhere between 2 and 10 minutes. Most of the time, the most critical content in a walkthrough is presented in a numbered list. Images and gifs can help the reader understand what they should be doing.
+Since walkthroughs cover one particular function or process, they tend to be quite short. The estimated reading time of a walkthrough is somewhere between 2 and 10 minutes. Most of the time, the most critical content on a walkthrough is presented in a numbered list. Images and gifs can help the reader understand what they should be doing.
 
 If a walkthrough is converted into a video, that video should be no longer than 5 minutes.
 
@@ -31,7 +31,7 @@ Walkthroughs are split into three major sections:
 1. Context to the topics covered.
 2. What we're about to do.
 3. The steps we need to do.
-4. Summary of what we just did, and potential next steps.
+4. Summary of what we just did and potential next steps.
 
 ### Conceptual articles
 
