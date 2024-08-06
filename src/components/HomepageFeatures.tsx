@@ -62,7 +62,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Run Distributed Validators on mainnet and take part in Obol's{" "}
-        <Link to="https://blog.obol.org/recognizing-contributions-to-the-obol-collective/">Contributions Program.</Link>
+        <Link to="https://obol.org/contributions">Contributions Program.</Link>
       </>
     ),
     link: "/docs/start/quickstart_overview",
