@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkobol_docs=self.webpackChunkobol_docs||[]).push([[19130],{21258:s=>{s.exports=JSON.parse('{"name":"docusaurus-plugin-redoc","id":"plugin-redoc-0"}')}}]);
