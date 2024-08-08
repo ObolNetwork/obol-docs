@@ -102,7 +102,7 @@ Flags:
       --nodes int                         The number of charon nodes in the cluster. Minimum is 3.
       --num-validators int                The number of distributed validators needed in the cluster.
       --publish                           Publish lock file to obol-api.
-      --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech")
+      --publish-address string            The URL to publish the lock file to. (default "https://api.obol.tech/v1")
       --split-existing-keys               Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
       --split-keys-dir string             Directory containing keys to split. Expects keys in keystore-*.json and passwords in keystore-*.txt. Requires --split-existing-keys.
       --testnet-chain-id uint             Chain ID of the custom test network.
@@ -170,7 +170,7 @@ Flags:
       --p2p-relays strings             Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
       --p2p-tcp-address strings        Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
       --publish                        Publish the created cluster to a remote API.
-      --publish-address string         The URL to publish the cluster to. (default "https://api.obol.tech")
+      --publish-address string         The URL to publish the cluster to. (default "https://api.obol.tech/v1")
       --publish-timeout duration       Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 30s)
       --shutdown-delay duration        Graceful shutdown delay. (default 1s)
       --timeout duration               Timeout for the DKG process, should be increased if DKG times out. (default 1m0s)
@@ -190,43 +190,47 @@ Usage:
   charon run [flags]
 
 Flags:
-      --beacon-node-endpoints strings      Comma separated list of one or more beacon node endpoint URLs.
-      --builder-api                        Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
-      --debug-address string               Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
-      --feature-set string                 Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
-      --feature-set-disable strings        Comma-separated list of features to disable, overriding the default minimum feature set.
-      --feature-set-enable strings         Comma-separated list of features to enable, overriding the default minimum feature set.
-  -h, --help                               Help for run
-      --jaeger-address string              Listening address for jaeger tracing.
-      --jaeger-service string              Service name used for jaeger tracing. (default "charon")
-      --lock-file string                   The path to the cluster lock file defining the distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
-      --log-color string                   Log color; auto, force, disable. (default "auto")
-      --log-format string                  Log format; console, logfmt or json (default "console")
-      --log-level string                   Log level; debug, info, warn or error (default "info")
-      --log-output-path string             Path in which to write on-disk logs.
-      --loki-addresses strings             Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
-      --loki-service string                Service label sent with logs to Loki. (default "charon")
-      --manifest-file string               The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
-      --monitoring-address string          Listening address (ip and port) for the monitoring API (prometheus). (default "127.0.0.1:3620")
-      --no-verify                          Disables cluster definition and lock file verification.
-      --p2p-disable-reuseport              Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string       The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string             The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                 Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
-      --p2p-tcp-address strings            Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string            The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
-      --private-key-file-lock              Enables private key locking to prevent multiple instances using the same key.
-      --simnet-beacon-mock                 Enables an internal mock beacon node for running a simnet.
-      --simnet-beacon-mock-fuzz            Configures simnet beaconmock to return fuzzed responses.
-      --simnet-slot-duration duration      Configures slot duration in simnet beacon mock. (default 1s)
-      --simnet-validator-keys-dir string   The directory containing the simnet validator key shares. (default ".charon/validator_keys")
-      --simnet-validator-mock              Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
-      --synthetic-block-proposals          Enables additional synthetic block proposal duties. Used for testing of rare duties.
-      --testnet-chain-id uint              Chain ID of the custom test network.
-      --testnet-fork-version string        Genesis fork version in hex of the custom test network.
-      --testnet-genesis-timestamp int      Genesis timestamp of the custom test network.
-      --testnet-name string                Name of the custom test network.
-      --validator-api-address string       Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
+      --beacon-node-endpoints strings         Comma separated list of one or more beacon node endpoint URLs.
+      --beacon-node-submit-timeout duration   Timeout for the submission-related HTTP requests Charon makes to the configured beacon nodes. (default 2s)
+      --beacon-node-timeout duration          Timeout for the HTTP requests Charon makes to the configured beacon nodes. (default 2s)
+      --builder-api                           Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
+      --debug-address string                  Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
+      --feature-set string                    Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
+      --feature-set-disable strings           Comma-separated list of features to disable, overriding the default minimum feature set.
+      --feature-set-enable strings            Comma-separated list of features to enable, overriding the default minimum feature set.
+  -h, --help                                  Help for run
+      --jaeger-address string                 Listening address for jaeger tracing.
+      --jaeger-service string                 Service name used for jaeger tracing. (default "charon")
+      --lock-file string                      The path to the cluster lock file defining the distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
+      --log-color string                      Log color; auto, force, disable. (default "auto")
+      --log-format string                     Log format; console, logfmt or json (default "console")
+      --log-level string                      Log level; debug, info, warn or error (default "info")
+      --log-output-path string                Path in which to write on-disk logs.
+      --loki-addresses strings                Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
+      --loki-service string                   Service label sent with logs to Loki. (default "charon")
+      --manifest-file string                  The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
+      --monitoring-address string             Listening address (ip and port) for the monitoring API (prometheus). (default "127.0.0.1:3620")
+      --no-verify                             Disables cluster definition and lock file verification.
+      --p2p-disable-reuseport                 Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string          The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                    Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
+      --p2p-tcp-address strings               Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string               The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
+      --private-key-file-lock                 Enables private key locking to prevent multiple instances using the same key.
+      --proc-directory string                 Directory to look into in order to detect other stack components running on the host.
+      --simnet-beacon-mock                    Enables an internal mock beacon node for running a simnet.
+      --simnet-beacon-mock-fuzz               Configures simnet beaconmock to return fuzzed responses.
+      --simnet-slot-duration duration         Configures slot duration in simnet beacon mock. (default 1s)
+      --simnet-validator-keys-dir string      The directory containing the simnet validator key shares. (default ".charon/validator_keys")
+      --simnet-validator-mock                 Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
+      --synthetic-block-proposals             Enables additional synthetic block proposal duties. Used for testing of rare duties.
+      --testnet-capella-hard-fork string      Capella hard fork version of the custom test network.
+      --testnet-chain-id uint                 Chain ID of the custom test network.
+      --testnet-fork-version string           Genesis fork version in hex of the custom test network.
+      --testnet-genesis-timestamp int         Genesis timestamp of the custom test network.
+      --testnet-name string                   Name of the custom test network.
+      --validator-api-address string          Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
 
 ## The `exit` command
@@ -280,9 +284,9 @@ Flags:
       --log-level string                Log level; debug, info, warn or error (default "info")
       --log-output-path string          Path in which to write on-disk logs.
       --private-key-file string         The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish-address string          The URL of the remote API. (default "https://api.obol.tech")
+      --publish-address string          The URL of the remote API. (default "https://api.obol.tech/v1")
       --publish-timeout duration        Timeout for publishing a signed exit to the publish-address API. (default 30s)
-      --validator-index uint            Validator index of the validator to exit, the associated public key must be present in the cluster lock manifest. If --validator-pubkey is also provided, validator liveliness won't be checked on the beacon chain.
+      --validator-index uint            Validator index of the validator to exit, the associated public key must be present in the cluster lock manifest. If --validator-public-key is also provided, validator liveliness won't be checked on the beacon chain.
       --validator-keys-dir string       Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
       --validator-public-key string     Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain.
 ```
@@ -307,7 +311,7 @@ Flags:
       --log-level string              Log level; debug, info, warn or error (default "info")
       --log-output-path string        Path in which to write on-disk logs.
       --private-key-file string       The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish-address string        The URL of the remote API. (default "https://api.obol.tech")
+      --publish-address string        The URL of the remote API. (default "https://api.obol.tech/v1")
       --publish-timeout duration      Timeout for publishing a signed exit to the publish-address API. (default 30s)
       --validator-public-key string   Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain. [REQUIRED]
 ```
@@ -317,7 +321,7 @@ Flags:
 The `charon exit broadcast` subcommand can be used to broadcast either a signed exit message from a file that was downloaded via the `fetch` command, or it can retrieve and broadcast an exit message directly from the API.
 
 ```markdown
-charon exit broadcast --exit
+charon exit broadcast --help
 Retrieves and broadcasts to the configured beacon node a fully signed validator exit message, aggregated with the available partial signatures retrieved from the publish-address. Can also read a signed exit message from disk, in order to be broadcasted to the configured beacon node.
 
 Usage:
@@ -335,7 +339,7 @@ Flags:
       --log-level string                Log level; debug, info, warn or error (default "info")
       --log-output-path string          Path in which to write on-disk logs.
       --private-key-file string         The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish-address string          The URL of the remote API. (default "https://api.obol.tech")
+      --publish-address string          The URL of the remote API. (default "https://api.obol.tech/v1")
       --publish-timeout duration        Timeout for publishing a signed exit to the publish-address API. (default 30s)
       --validator-keys-dir string       Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
       --validator-public-key string     Public key of the validator to exit, must be present in the cluster lock manifest. If --validator-index is also provided, validator liveliness won't be checked on the beacon chain. [REQUIRED]
@@ -493,18 +497,133 @@ Charon comes with a test suite for understanding the suitability and readiness o
 
 ```markdown
 charon alpha test --help
-Test subcommands provide test suite to evaluate current cluster setup. Currently there is support for peer connection tests, beacon node and validator API.
+Test subcommands provide test suite to evaluate current cluster setup. The full validator stack can be tested - charon peers, consensus layer, validator client, MEV. Current machine's performance can be examined as well.
 
 Usage:
   charon alpha test [command]
 
 Available Commands:
   beacon      Run multiple tests towards beacon nodes
+  mev         Run multiple tests towards mev nodes
   peers       Run multiple tests towards peer nodes
+  performance Run multiple hardware and connectivity performance tests
   validator   Run multiple tests towards validator client
 
 Flags:
   -h, --help   Help for test
 
 Use "charon alpha test [command] --help" for more information about a command.
+```
+
+#### Test beacon node
+
+```markdown
+charon alpha test beacon --help
+
+Run multiple tests towards beacon nodes. Verify that Charon can efficiently interact with Beacon Node(s).
+
+Usage:
+  charon alpha test beacon [flags]
+
+Flags:
+      --enable-load-test              Enable load test, not advisable when testing towards external beacon nodes.
+      --endpoints strings             [REQUIRED] Comma separated list of one or more beacon node endpoint URLs.
+  -h, --help                          Help for beacon
+      --load-test-duration duration   Time to keep running the load tests in seconds. For each second a new continuous ping instance is spawned. (default 5s)
+      --output-toml string            File path to which output can be written in TOML format.
+      --quiet                         Do not print test results to stdout.
+      --test-cases strings            List of comma separated names of tests to be exeucted. Available tests are: [peerCount pingLoad ping pingMeasure isSynced]
+      --timeout duration              Execution timeout for all tests. (default 5m0s)
+```
+
+#### Test MEV
+
+```markdown
+charon alpha test mev --help
+
+Run multiple tests towards mev nodes. Verify that Charon can efficiently interact with MEV Node(s).
+
+Usage:
+  charon alpha test mev [flags]
+
+Flags:
+      --endpoints strings    [REQUIRED] Comma separated list of one or more MEV relay endpoint URLs.
+  -h, --help                 Help for mev
+      --output-toml string   File path to which output can be written in TOML format.
+      --quiet                Do not print test results to stdout.
+      --test-cases strings   List of comma separated names of tests to be exeucted. Available tests are: [ping pingMeasure]
+      --timeout duration     Execution timeout for all tests. (default 5m0s)
+```
+
+#### Test Charon peers
+
+```markdown
+charon alpha test peers --help
+
+Run multiple tests towards peer nodes. Verify that Charon can efficiently interact with Validator Client.
+
+Usage:
+  charon alpha test peers [flags]
+
+Flags:
+      --data-dir string                      The directory where charon will store all its internal data. (default ".charon")
+      --direct-connection-timeout duration   Time to keep trying to establish direct connection to peer. (default 2m0s)
+      --enrs strings                         [REQUIRED] Comma-separated list of each peer ENR address.
+  -h, --help                                 Help for peers
+      --keep-alive duration                  Time to keep TCP node alive after test completion, so connection is open for other peers to test on their end. (default 30m0s)
+      --load-test-duration duration          Time to keep running the load tests in seconds. For each second a new continuous ping instance is spawned. (default 30s)
+      --log-color string                     Log color; auto, force, disable. (default "auto")
+      --log-format string                    Log format; console, logfmt or json (default "console")
+      --log-level string                     Log level; debug, info, warn or error (default "info")
+      --log-output-path string               Path in which to write on-disk logs.
+      --output-toml string                   File path to which output can be written in TOML format.
+      --p2p-disable-reuseport                Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string         The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string               The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                   Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://1.relay.obol.tech])
+      --p2p-tcp-address strings              Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --quiet                                Do not print test results to stdout.
+      --test-cases strings                   List of comma separated names of tests to be exeucted. Available tests are: [pingLoad directConn ping pingMeasure libp2pTCPPortOpenTest]
+      --timeout duration                     Execution timeout for all tests. (default 5m0s)
+```
+
+#### Test current machine's performance
+
+```markdown
+charon alpha test performance --help
+
+Run multiple hardware and connectivity performance tests. Verify that Charon is running on host with sufficient capabilities.
+
+Usage:
+  charon alpha test performance [flags]
+
+Flags:
+      --disk-io-block-size-kb int               The block size in kilobytes used for I/O units. Same value applies for both reads and writes. (default 4096)
+  -h, --help                                    Help for performance
+      --internet-test-servers-exclude strings   List of server names to be excluded from the tests. To be specified only if you experience issues with a server that is wrongly considered best performing.
+      --internet-test-servers-only strings      List of specific server names to be included for the internet tests, the best performing one is chosen. If not provided, closest and best performing servers are chosen automatically.
+      --output-toml string                      File path to which output can be written in TOML format.
+      --quiet                                   Do not print test results to stdout.
+      --test-cases strings                      List of comma separated names of tests to be exeucted. Available tests are: [diskWriteSpeed diskWriteIOPS diskReadSpeed diskReadIOPS internetLatency availableMemory totalMemory internetDownloadSpeed internetUploadSpeed]
+      --timeout duration                        Execution timeout for all tests. (default 5m0s)
+```
+
+#### Test validator client
+
+```markdown
+charon alpha test validator --help
+
+Run multiple tests towards validator client. Verify that Charon can efficiently interact with its validator client.
+
+Usage:
+  charon alpha test validator [flags]
+
+Flags:
+  -h, --help                           Help for validator
+      --load-test-duration duration    Time to keep running the load tests in seconds. For each second a new continuous ping instance is spawned. (default 5s)
+      --output-toml string             File path to which output can be written in TOML format.
+      --quiet                          Do not print test results to stdout.
+      --test-cases strings             List of comma separated names of tests to be exeucted. Available tests are: [pingMeasure pingLoad ping]
+      --timeout duration               Execution timeout for all tests. (default 5m0s)
+      --validator-api-address string   Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
