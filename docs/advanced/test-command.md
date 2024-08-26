@@ -50,7 +50,7 @@ docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:
 
 ## Test your beacon node
 
-Run tests towards beacon node(s), to evaluate its effectiveness for a Distributed Validator cluster. It is advised to run tests against the beacon node as it is usually the instance getting the most load, especially with high number of validators serviced by the validator client and Charon. If the beacon node is self-hosted (which is highly recommended), the flag `--enable-load-test` can be added.
+Run tests towards beacon node(s), to evaluate its effectiveness for a Distributed Validator cluster. The beacon node is usually the instance getting the most load, especially with high number of validators serviced by the validator client and Charon. If the beacon node is self-hosted (which is highly recommended), the flag `--enable-load-test` can be added.
 
 At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
@@ -96,7 +96,7 @@ docker run obolnetwork/charon:v1.1.0 alpha test validator
 
 ## Test MEV relay
 
-Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV relay is configured for Charon, it is of utmost importance that the connection to it is fast. If not, the chance of missing a block proposal raises significantly, because of a slow building of the block from the MEV.
+Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV boost instance is configured for the validator node, it is of utmost importance that the connection to it is fast. If not, the chance of missing a block proposal raises significantly, because of a slow building of the block from the MEV.
 
 At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
