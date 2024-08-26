@@ -24,7 +24,9 @@ To be able to establish direct connection, you have to ensure:
 - You add flag `p2p-tcp-address` (i.e.: `127.0.0.1:9001`) flag and the port specified in it is free and publicly accessible.
 - You add the flag `p2p-external-ip` (i.e.: `8.8.8.8`) and specify your public ip.
 
-If all points are satisfied by you and the other peers, you should be able to establish a direct TCP connection between each other. Note that a relay is still required, as it is used for peer discovery. 
+If all points are satisfied by you and the other peers, you should be able to establish a direct TCP connection between each other. Note that a relay is still required, as it is used for peer discovery.
+
+At least 1 enr is required to be supplied to the `--enrs` flag.
 
 ### Pre-requisites
 
@@ -42,13 +44,15 @@ charon alpha test peers \
 ### Run with Docker
 
 ```shell
-docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:v1.0.0 alpha test peers \
+docker run -v /Users/obol/charon/.charon:/opt/charon/.charon obolnetwork/charon:v1.1.0 alpha test peers \
   --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZs,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY"
 ```
 
 ## Test your beacon node
 
-Run tests towards your beacon node(s), to evaluate its effectiveness for a Distributed Validator cluster.
+Run tests towards beacon node(s), to evaluate its effectiveness for a Distributed Validator cluster. The beacon node is usually the instance getting the most load, especially with high number of validators serviced by the validator client and Charon. If the beacon node is self-hosted (which is highly recommended), the flag `--enable-load-test` can be added.
+
+At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
 ### Pre-requisites
 
@@ -64,6 +68,81 @@ charon alpha test beacon \
 ### Run with Docker
 
 ```shell
-docker run obolnetwork/charon:v1.0.0 alpha test beacon \
+docker run obolnetwork/charon:v1.1.0 alpha test beacon \
   --endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com"
+```
+
+## Test your validator client
+
+Run tests towards your validator client, to evaluate its effectiveness for a Distributed Validator cluster.
+
+Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be changed by supplying different endpoint to the `--validator-api-address` flag.
+
+### Pre-requisites
+
+- Running validator client towards which tests will be executed.
+
+### Run
+
+```shell
+charon alpha test validator
+```
+
+### Run with Docker
+
+```shell
+docker run obolnetwork/charon:v1.1.0 alpha test validator
+```
+
+## Test MEV relay
+
+Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV boost instance is configured for the validator node, it is of utmost importance that the connection to it is fast. If not, the chance of missing a block proposal raises significantly, because of a slow building of the block from the MEV.
+
+At least 1 endpoint is required to be supplied to the `--endpoints` flag.
+
+### Pre-requisites
+
+- Running MEV relay(s) towards which tests will be executed.
+
+### Run
+
+```shell
+charon alpha test mev \
+  --endpoints="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"
+```
+
+### Run with Docker
+
+```shell
+docker run obolnetwork/charon:v1.1.0 alpha test mev \
+  --endpoints="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"
+```
+
+## Test your machine and network performance
+
+Run tests towards your machine and network, to evaluate its effectiveness for a Distributed Validator cluster. While Charon does not require highly performant hardware, the network connectivity of the machine it is running on should be good. In comparison, the beacon node requires not only good connectivity, but also performant storage with high input-output operations per second, enough memory and also good network connectivity. This test aims to address all those requirements and give a good overview of the system.
+
+Note that the storage tests require `fio` installed. `fio` is already pre-installed in the Docker images. Read more about `fio` [here](https://fio.readthedocs.io/en/latest/fio_doc.html).
+
+### Pre-requisites
+
+None.
+
+### Run
+
+```shell
+charon alpha test performance
+```
+
+### Run with Docker
+
+```shell
+docker run obolnetwork/charon:v1.1.0 alpha test performance
+```
+
+For proper examination of the disk performance, it is advised to run the tests in a Docker volume.
+
+```shell
+docker run -v ${HOME}/charon/test:/opt/charon/test obolnetwork/charon:v1.1.0 alpha test performance \
+  --disk-io-test-file-dir=/opt/charon/test
 ```
