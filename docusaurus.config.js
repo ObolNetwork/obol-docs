@@ -237,6 +237,10 @@ const config = {
                 label: "GitHub",
                 to: "https://github.com/obolnetwork/",
               },
+              {
+                label: "Status",
+                to: "https://status.obol.org/",
+              },
             ],
           },
         ],
