@@ -151,13 +151,13 @@ following formulas from [this](https://arxiv.org/pdf/1909.10194.pdf) paper:
 n = cluster size
 
 Threshold: min number of honest nodes required to reach quorum given size n
-Quarom(n) = ceiling(2n/3) 
+Quorum(n) = ceiling(2n/3) 
 
 BFT #: max number of faulty (byzantine) nodes given size n
 f(n) = floor((n-1)/3)
 
 CFT #: max number of unavailable (crashed) nodes given size n
-crashed(n) = n - Quarom(n) 
+crashed(n) = n - Quorum(n) 
 ```
 
 
