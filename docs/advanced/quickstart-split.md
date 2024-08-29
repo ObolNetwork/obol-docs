@@ -1,16 +1,14 @@
 ---
 sidebar_position: 7
-description: Split existing validator keys
+description: Migrate an existing validator by splitting its private key into shares
 ---
 
-# Split validator private keys
+# Migrate a validator
 
 :::warning
-This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed.
+This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. **If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed**.
 
 If you are starting a new validator, you should follow a [quickstart guide](../start/quickstart_overview.md) instead.
-
-If you use MEV-Boost, make sure you turned off your MEV-Boost service for the time of splitting the keys, otherwise you may hit [this issue](https://github.com/ObolNetwork/charon/issues/2770).
 :::
 
 Split an existing Ethereum validator key into multiple key shares for use in an [Obol Distributed Validator Cluster](../int/key-concepts.md#distributed-validator-cluster).
@@ -20,23 +18,20 @@ Split an existing Ethereum validator key into multiple key shares for use in an 
 - Ensure you have the existing validator keystores (the ones to split) and passwords.
 - Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
 - Make sure `docker` is running before executing the commands below.
+- If you use MEV-Boost, you must either:
+    - Turn off your MEV-Boost client before you split your keys, or;
+    - Temporarily use a relay you won't be using when running the Distributed Validator; to prevent registering for MEV with a timestamp more recent than the one Charon prepares at the moment of key splitting.
 
-## Step 1. Clone the charon repo and copy existing keystore files
+## Step 1. Prepare the existing keystore files
 
-Clone the [Charon](https://github.com/ObolNetwork/charon) repo.
+Create a folder to hold the encrypted keystores, along with the passwords to decrypt them.
 
 ```shell
-   # Clone the repo
-   git clone https://github.com/ObolNetwork/charon.git
-
-   # Change directory
-   cd charon/
-
-   # Create a folder within this checked out repo
+   # Create a folder
    mkdir split_keys
 ```
 
-Copy the existing validator `keystore.json` files into this new folder. Alongside them, with a matching filename but ending with `.txt` should be the password to the keystore (e.g.: `keystore-0.json`, `keystore-0.txt`).
+Copy the existing validator `keystore.json` files into this new folder. Alongside them, with a matching filename but ending with `.txt` should be the password to the keystore (e.g.: `keystore-0.json`, `keystore-0.txt`). The files must start with `keystore*`.
 
 At the end of this process, you should have a tree like this:
 
@@ -53,7 +48,7 @@ At the end of this process, you should have a tree like this:
 
 ## Step 2. Split the keys using the charon docker command
 
-Run the following docker command to split the keys:
+Run the following docker command to split the keys (for mainnet):
 
 ```shell
 CHARON_VERSION=                # E.g. v1.1.0
@@ -96,3 +91,14 @@ Created Charon cluster:
 ```
 
 These split keys can now be used to start a Charon cluster.
+
+## Step 3. (Optional) Encrypt artifacts for distribution
+
+Within each folder are the encrypted [private key shares](../int/key-concepts.md#distributed-validator-key-share), along with the decryption passwords. To transmit these folders to the operators/machines where they will run, it might be prudent to encrypt the folder as a `.zip` to transport them.
+
+```shell
+# For each folder in ./cluster/ encrypt it with a different password
+zip -er node1.zip ./cluster/node1/
+
+# Repeat for node2,...,nodeN.
+```
