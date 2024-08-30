@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # CLI reference
 
-The following is a reference for Charon version [`v1.0.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.0.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for Charon version [`v1.1.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.1.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use.
 
