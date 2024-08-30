@@ -34,7 +34,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 cd charon-distributed-validator-node/
 
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.0 create enr
 ```
 
 You should expect to see a console output like this:
@@ -280,7 +280,7 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
               Run the <code>charon create dkg</code> command that generates DKG
               cluster-definition.json file.
               <pre>
-                docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 create dkg {'\n'}
+                docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.0 create dkg {'\n'}
                 --name="Quickstart" {'\n'}
                 --num-validators=1 {'\n'}
                 --fee-recipient-addresses="0x0000000000000000000000000000000000000000" {'\n'}
@@ -400,7 +400,7 @@ For the [DKG](../charon/dkg.md) to complete, all operators need to be running th
 
   </TabItem>
   <TabItem value="CLI" label="CLI">
-    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.0.0 dkg --publish</pre> and the DKG process should begin.
+    Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.0 dkg --publish</pre> and the DKG process should begin.
   </TabItem>
   <TabItem value="DappnodeTab" label="Dappnode">
     Follow this step if you are signing through the DV Launchpad, importing the cluster definition URL into the DappNode package's config & then running the DKG inside the DappNode, followed by cluster run.<br/>
