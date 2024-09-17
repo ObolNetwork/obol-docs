@@ -1,10 +1,10 @@
 ---
 sidebar_position: 6
-description: Resources for further reading
+description: A collection of links to products and content relating to Distributed Validators.
 ---
 
-# Resources and Further Reading
-See here a list of internal and external resources for further reading and exploration.
+# Useful Links
+The following is a curated list of the best internal and external resources for using, creating, running, building, and researching Distributed Validators. To add to this list, please open a [pull request](https://github.com/ObolNetwork/obol-docs/pulls/).
 
 
 ## Deposit Interfaces
