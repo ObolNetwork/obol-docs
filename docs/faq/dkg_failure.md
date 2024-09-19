@@ -11,7 +11,7 @@ Our DKG is designed in a way that doesn't allow for inconsistent results: either
 
 This is a **safety** feature: you don't want to deposit an Ethereum distributed validator that not every operator is able to participate in.
 
-The most common source of issues lies in the network stack: if any of the peer's Internet connection glitches substantially, the DKG will fail. If you are attempting to run the `dkg` command in two places at once, or you have a `charon run` command with the same `charon-enr-private-key` as you are trying to DKG with, these may also disrupt a key generation ceremony.
+The most common source of issues lies in the network stack: if any of the peers' Internet connection glitches substantially, the DKG will fail. If you are attempting to run the `dkg` command in two places at once, or you have a `charon run` command with the same `charon-enr-private-key` as you are trying to DKG with, these may also disrupt a key generation ceremony.
 
 Charon's DKG doesn't allow peer reconnection once the process is started, but it does allow for re-connections before that.
 
@@ -75,7 +75,7 @@ Once this process has been completed, the cluster operators can retry a DKG.
 
 ## Further debugging
 
-If you are trying to create an extremely large, geographically diverse cluster, there is a chance the process could be timing out. Consider adding the flags `--timeout=5m --shutdown-delay=60s` to alot more time for the ceremony to complete and safely shut down across all nodes.
+If you are trying to create an extremely large, geographically diverse cluster, there is a chance the process could be timing out. Consider adding the flags `--timeout=5m --shutdown-delay=60s` to allow more time for the ceremony to complete and safely shut down across all nodes.
 
 If for some reason the DKG process still fails, node operators are advised to reach out to the Obol team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing the troubleshooting steps that were taken and providing **debug logs**.
 
@@ -83,4 +83,4 @@ To enable debug logs, first clean up the Charon data directory as explained in [
 
 In order for the Obol team to debug your issue as quickly and precisely as possible, please provide full logs in text form, not through screenshots or display photos.
 
-Providing complete debug logs is particularly important, since it allows the team to reconstruct precisely what happened throughout the ceremony.
+Providing complete debug logs from all peers is particularly important, since it allows the team to reconstruct precisely what happened throughout the ceremony.

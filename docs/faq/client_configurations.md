@@ -14,7 +14,7 @@ Many execution, consensus, and validator clients need custom flags or parameters
 
 ### Consensus Client
 
-Nothing specific for DVs are required.
+Nothing specific for distributed validators is required. If you are configuring MEV-boost, consult the settings you need [here](../advanced/quickstart-builder-api.mdx#consensus-clients).
 
 ### Validator Client
 
@@ -27,7 +27,7 @@ Required flags:
 
 ### Consensus Client
 
-Nothing specific for DVs is required.
+Nothing specific for distributed validators is required. If you are configuring MEV-boost, consult the settings you need [here](../advanced/quickstart-builder-api.mdx#consensus-clients).
 
 ### Validator Client
 
@@ -56,7 +56,7 @@ Required flags:
 
 ### Consensus Client
 
-Nothing specific for DVs is required.
+Nothing specific for distributed validators is required. If you are configuring MEV-boost, consult the settings you need [here](../advanced/quickstart-builder-api.mdx#consensus-clients).
 
 ### Validator Client
 

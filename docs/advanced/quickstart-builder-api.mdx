@@ -43,7 +43,7 @@ charon run --builder-api
 
 ### Consensus Clients
 
-The following flags need to be configured on your chosen consensus client. A Flashbots relay URL is provided for example purposes, you should choose a relay that suits your preferences from [this list](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md#mev-relay-list-for-mainnet). 
+The following flags need to be configured on your chosen consensus client. A Flashbots relay URL is provided for example purposes, you should use the [charon test mev command](./test-command.md#test-mev-relay) and select the two or three relays with the lowest latency to your node that also conform to your block building preferences. A public list of MEV relays is available [here](https://github.com/eth-educators/ethstaker-guides/blob/main/MEV-relay-list.md#mev-relay-list-for-mainnet).
 
 <Tabs groupId="consensus-clients">
   <TabItem value="teku" label="Teku" default>
