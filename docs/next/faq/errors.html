@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTT2S469C4"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-DTT2S469C4",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.dbaa67c0.css">
-<script src="/assets/js/runtime~main.8ba908e0.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d3d16d69.js" defer="defer"></script>
 <script src="/assets/js/main.d3d4f011.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard" data-theme="light">
@@ -26,7 +26,7 @@ data contained
 </a> in their ENR. This private key is by default found at <code>
 .charon/charon-enr-private-key
 </code>, and should be kept secure, and not checked into version control.</p><br><br><p>An ENR looks something like this:</p><pre><code><p>enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGDqEcoQkeJ98Pw7GaGAYFI7eoegmlkgnY0gmlwhCKNyGGJc2VjcDI1NmsxoQI6SQlzw3WGZ_VxFHLhawQFhCK8Aw7Z0zq8IABksuJEJIN0Y3CCPoODdWRwgj6E</p></code></pre><p></p></div></div></details><details class="details_lb9f alert alert--info details_b_Ee details" data-collapsed="true"><summary><h4 id="generate-enr-again"><p>How do I get my ENR if I want to generate it again?</p></h4></summary><div><div class="collapsibleContent_i85q"><ul><li><p><code>cd</code> to the directory where your private keys are located
-(ex: <code>cd /path/to/charon/enr/private/key</code>)</p></li><li><p>Run<!-- --> </p><code><p>docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon<!-- -->:latest<!-- --> enr</p></code><p>. This prints the ENR on your screen.<!-- --> </p></li><li><p>Please note that this ENR is not the same as the one generated when you
+(ex: <code>cd /path/to/charon/enr/private/key</code>)</p></li><li><p>Run<!-- --> </p><code><p>docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon<!-- -->:v1<!-- -->.1.1 enr</p></code><p>. This prints the ENR on your screen.<!-- --> </p></li><li><p>Please note that this ENR is not the same as the one generated when you
 created it for the first time. This is because the process of generating
 ENRs includes the current timestamp.</p></li></ul></div></div></details><details class="details_lb9f alert alert--info details_b_Ee details" data-collapsed="true"><summary><h4 id="lost-enr-private-key"> <p>What do I do if lose my <code>charon-enr-private-key</code>?<!-- --> </p></h4></summary><div><div class="collapsibleContent_i85q"><ul><li> <p>For now, ENR rotation/replacement is not supported, it will be supported
 in a future release.<!-- --> </p></li><li> <p>Therefore, it&#x27;s advised to always keep a backup of your <code>
