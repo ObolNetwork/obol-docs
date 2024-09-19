@@ -9,9 +9,9 @@ While the DKG process has been tested and validated against many different confi
 
 Our DKG is designed in a way that doesn't allow for inconsistent results: either it finishes correctly for every peer, or it fails.
 
-This is a **safety** feature: you don't want to deposit an Ethereum distributed validator that not every operator is able to participate to, or even reach threshold for.
+This is a **safety** feature: you don't want to deposit an Ethereum distributed validator that not every operator is able to participate in.
 
-The most common source of issues lies in the network stack: if any of the peer's Internet connection glitches substantially, the DKG will fail.
+The most common source of issues lies in the network stack: if any of the peers' Internet connection glitches substantially, the DKG will fail. If you are attempting to run the `dkg` command in two places at once, or you have a `charon run` command with the same `charon-enr-private-key` as you are trying to DKG with, these may also disrupt a key generation ceremony.
 
 Charon's DKG doesn't allow peer reconnection once the process is started, but it does allow for re-connections before that.
 
@@ -68,16 +68,19 @@ In order to retry the DKG process one must delete the following entities, if pre
 :::warning
 The `charon-enr-private-key` file **must be preserved**, failure to do so requires the DKG process to be restarted from the beginning by creating a new cluster definition.
 :::
+
 If you're doing a DKG with a custom cluster definition - for example, create with `charon create dkg`, rather than the Obol Launchpad - you can re-use the same file.
 
 Once this process has been completed, the cluster operators can retry a DKG.
 
 ## Further debugging
 
-If for some reason the DKG process fails again, node operators are advised to reach out to the Obol team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing what troubleshooting steps were taken and providing **debug logs**.
+If you are trying to create an extremely large, geographically diverse cluster, there is a chance the process could be timing out. Consider adding the flags `--timeout=5m --shutdown-delay=60s` to allow more time for the ceremony to complete and safely shut down across all nodes.
 
-To enable debug logs first clean up the Charon data directory as explained in [the previous paragraph](#cleaning-up-the-charon-directory), then run your DKG command by appending `--log-level=debug` at the end.
+If for some reason the DKG process still fails, node operators are advised to reach out to the Obol team by opening an [issue](https://github.com/ObolNetwork/charon/issues), detailing the troubleshooting steps that were taken and providing **debug logs**.
 
-In order for the Obol team to debug your issue as quickly and precisely as possible please provide full logs in textual form, not through screenshots or display photos.
+To enable debug logs, first clean up the Charon data directory as explained in [the previous section](#cleaning-up-the-charon-directory), then run your DKG command while appending `--log-level=debug` at the end.
 
-Providing complete logs is particularly important, since it allows the team to reconstruct precisely what happened.
+In order for the Obol team to debug your issue as quickly and precisely as possible, please provide full logs in text form, not through screenshots or display photos.
+
+Providing complete debug logs from all peers is particularly important, since it allows the team to reconstruct precisely what happened throughout the ceremony.
