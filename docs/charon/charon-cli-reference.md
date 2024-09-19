@@ -115,7 +115,7 @@ Flags:
 
 ### Creating the configuration for a DKG Ceremony
 
-This `charon create dkg` command creates a cluster_definition file used for the `charon dkg` command.
+This `charon create dkg` command creates a `cluster_definition.json` file used for the `charon dkg` command.
 
 ```markdown
 charon create dkg --help
@@ -419,7 +419,7 @@ cluster/
         └── keystore-1.txt
 ```
 
-That is, each operator '.charon' directory must be placed in a parent directory, and renamed to avoid conflicts.
+That is, each operator `.charon` directory must be placed in a parent directory, and renamed to avoid conflicts.
 
 If for example the lock file defines 2 validators, each `validator_keys` directory must contain exactly 4 files, a JSON and TXT file for each validator.
 
