@@ -11,7 +11,7 @@ This page looks at the community testing efforts organised by Obol to test Distr
 
 Over the last number of years, DV Labs has coordinated and hosted progressively larger testing efforts to help harden the Charon client and iterate on the key generation tooling.
 
-The following is a breakdown of the testing initiatives, the features that were to be completed by each testnet, and their completion date and duration.
+Below is a breakdown of the testing initiatives, the features targeted for completion in each testnet, along with their respective completion dates and durations.
 
 # Testing Programs on Testnet
 
