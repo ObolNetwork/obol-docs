@@ -15,7 +15,7 @@ Below is a breakdown of the testing initiatives, the features targeted for compl
 
 # Testing Programs on Testnet
 
-In order of most recent to oldest:
+Listed from most recent to oldest:
 
 - [x] [Lido Testnet 3 - SimpleDVT](#lido-testnet-wave-3---simpledvt)
 - [x] [Lido Testnet 2](#lido-testnet-wave-2)
