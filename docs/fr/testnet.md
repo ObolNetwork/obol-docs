@@ -27,7 +27,7 @@ In order of most recent to oldest:
 
 ## Lido Testnet Wave 3 - SimpleDVT
 
-Official report [available here](https://obol.org/lido_obol_3.pdf). The metrics presented were derived from a 45-day monitoring period starting on November 18th, 2023. Each cluster initially ran 5 validators, a number that was subsequently scaled up to 50 and then 100 for most clusters. Throughout the testing, various challenges were encountered, primarily stemming from infrastructure limitations attributable to the nascent stage of the Holesky testnet. Throughout this monitoring phase, the aggregate metrics of Obol DVT clusters surpassed both Lido’s minimum requirements and the Holesky network averages.
+Official report [available here](https://obol.org/lido_obol_3.pdf). The metrics presented were derived from a 45-day monitoring period starting on November 18th, 2023. Each cluster initially ran 5 validators, a number that was subsequently scaled up to 50 and then 100 for most clusters. Throughout the testing, various challenges were encountered, primarily stemming from infrastructure limitations due to the early-stage development of the Holesky testnet. Throughout this monitoring phase, the aggregate metrics of Obol DVT clusters surpassed both Lido’s minimum requirements and the Holesky network averages.
 
 **Participants:**  Professional and community operators. Initially 214 participants, which later fell to 196.
 
