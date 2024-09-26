@@ -170,7 +170,7 @@ This was also the first time Charon was run in variable, non-virtual networks (i
 
 ## Devnet 1
 
-The first devnet aimed to have a number of trusted operators test out our earliest tutorial flows. The aim was for a single user to complete these tutorials alone, using `docker compose` to spin up 4 Charon clients and 4 different validator clients on a single machine, with a remote consensus client. The keys were created locally in Charon and activated with the existing launchpad.
+The first devnet aimed to have a number of trusted operators test out our earliest tutorial flows. The aim was for a single user to complete the tutorials alone, using `docker compose` to spin up 4 Charon clients, and 4 different validator clients on a single machine, using a remote consensus client. The keys were created locally in Charon and activated with the existing launchpad.
 
 **Participants:** Obol Dev Team, Client team advisors.
 
