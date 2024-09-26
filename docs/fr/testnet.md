@@ -184,6 +184,6 @@ The first devnet aimed to have a number of trusted operators test out our earlie
 
 **Goals:**
 
-- A single user completes a first tutorial alone, using `docker compose` to spin up 4 Charon clients on a single machine, with a remote consensus client. The keys are created locally in Charon and activated with the existing launchpad.
+- A single user completes the first tutorial alone, using `docker compose` to spin up 4 Charon clients on a single machine, with a remote consensus client. The keys are created locally in Charon and activated with the existing launchpad.
 - Prove that the distributed validator paradigm with 4 separate VC implementations together operating as one logical validator works.
 - Get the basics of monitoring in place, for the following testnet where accurate monitoring will be important due to Charon running across a network.
