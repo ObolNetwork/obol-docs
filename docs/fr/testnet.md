@@ -144,7 +144,7 @@ This was an unincentivized testnet and formed the basis for us to figure out a S
 
 The second devnet aimed to have a number of trusted operators test out our earliest tutorial flows **together** for the first time.
 
-The aim was for groups of 4 testers to complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients and 4 different validator clients (Lighthouse, Teku, Lodestar and Vouch), each on their own machine at each operator's home or their place of choosing, running at least a kiln consensus client.
+The aim was for groups of 4 testers to complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients and 4 different validator clients (Lighthouse, Teku, Lodestar and Vouch), each on their own machine located either at the operator's home or a location of their choice, while running at least a kiln consensus client.
 
 This devnet was the first time `charon dkg` was tested with users. A core focus of this devnet was to collect network performance data.
 
