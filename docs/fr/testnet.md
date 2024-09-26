@@ -42,7 +42,7 @@ Official report [available here](https://obol.org/lido_obol_3.pdf). The metrics 
 **Goals:**
 
 - Engage a broad set of node operators.
-- Run high numbers of validators on each cluster.
+- Operate a high number of validators on each cluster.
 - Gather performance data on potential candidates for Lido SimpleDVT onboarding.
 - Conduct large-scale testing within Lido's framework. 
 - Demonstrate good performance, even with a large degree of geographic, client, and hardware diversity.
