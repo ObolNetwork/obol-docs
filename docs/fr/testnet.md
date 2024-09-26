@@ -162,7 +162,7 @@ This was also the first time Charon was run in variable, non-virtual networks (i
 
 **Goals:**
 
-- Groups of 4 testers complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients, each on their own machine at each operator's home or their place of choosing, running at least a kiln consensus client.
+- Groups of 4 testers complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients, each on their own machine located either at the operator's home or a location of their choice, while running at least a kiln consensus client.
 - Operators avoid exposing Charon to the public internet on a static IP address through the use of Obol-hosted relay nodes.
 - Users test `charon dkg`. The launchpad is not used, and this dkg is triggered by a manifest config file created locally by a single operator using the `charon create dkg` command.
 - Effective collection of network performance data, to enable gathering even higher signal performance data at scale during public testnets.
