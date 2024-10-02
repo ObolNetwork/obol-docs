@@ -15,7 +15,7 @@ You may have been provided with **Monitoring Credentials** used to push distribu
 - Inside your `.env` file, uncomment the `PROM_REMOTE_WRITE_TOKEN` line by removing the `#` symbol.  
 - Enter your monitoring token in the format shown below:
 
-```bash
+```shell
 PROM_REMOTE_WRITE_TOKEN=your_monitoring_token
 ```
 
