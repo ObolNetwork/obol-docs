@@ -22,6 +22,6 @@ PROM_REMOTE_WRITE_TOKEN=your_monitoring_token
 ## Save the `.env` file and restart Prometheus  
 Save the .env file, and restart Prometheus to apply the changes:
 
-```bash
+```shell
 docker compose restart prometheus
 ```
