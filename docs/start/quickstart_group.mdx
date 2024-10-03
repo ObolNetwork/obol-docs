@@ -149,11 +149,8 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
           You will use the Launchpad to create an invitation, and share it with
           the operators.
           <br />
-          This video shows the flow within the{" "}
-          <a href="/docs/dvl/intro#dv-launchpad-links" target="_blank">
-            DV Launchpad
-          </a>
-          :
+          This video shows the flow within the {" "}
+          <a href="/docs/dvl/intro#dv-launchpad-links" target="_blank">DV Launchpad:</a>
         </p>
         <p align="center">
           <iframe
@@ -192,11 +189,30 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
                 be functioning for the validator(s) to stay active.
               </li>
             </ul>
+             :::info
+              If you are configuring a cluster for use within Lido's Community Stake Module (CSM),
+              in the following steps you need to:
+              <ul>
+                <li>
+                  Set the <code>validators</code> field to 1. (only 1 CSM Validator can be deployed per cluster via the launchpad). 
+                </li>
+                <li>
+                  Set the <code>withdrawal configuration</code> to <code>custom</code>.  
+                </li>
+                <li>
+                  Set <code>withdrawal address</code> to Lido’s Withdrawal Vault Address: 0xF0179dEC45a37423EAD4FaD5fCb136197872EAd9 per [Lido’s documentation](https://docs.lido.fi/deployed-contracts/holesky/).  
+                </li>
+                <li>
+                  Set the <code>fee recipient</code> to Lido’s Execution Layer Rewards Vault Address: 0xE73a3602b99f1f913e72F8bdcBC235e206794Ac8 per Lido’s [documentation](https://docs.lido.fi/deployed-contracts/holesky/).   
+                </li>
+              </ul>
+              :::
             <li>
               Input the Ethereum addresses for each operator that you collected
               previously. If you will be taking part as an operator, click the
               "Use My Address" button for Operator 1.
             </li>
+
             <ul>
               <li>
                 Select the desired amount of validators (32 ETH each) the
@@ -209,7 +225,7 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
                 the "What is your charon client's ENR?" field.
               </li>
               <li>
-                Enter the <code>Principal address</code> which should receive
+                Enter the <code>Withdrawal Address</code> which should receive
                 the principal 32 ETH and the accrued consensus layer rewards
                 when the validator is exited. This can optionally be set to the
                 contract address of a multisig / splitter contract.
@@ -261,6 +277,21 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
         <p>
           You will use the CLI to create the cluster definition file, which you
           will distribute it to the operators manually.
+              :::info
+              If you are configuring a cluster for use within Lido's Community Stake Module (CSM),
+              in the following steps you need to:
+              <ul>
+                <li>
+                  Set <code>num-validators=1</code>. (only 1 CSM Validator can be deployed per cluster via the launchpad). 
+                </li>
+                  <li>
+                  Set <code>fee-recipient-address="0xE73a3602b99f1f913e72F8bdcBC235e206794Ac8"</code>. This is Lido’s Execution Layer Rewards Vault Address, per the Lido [documentation](https://docs.lido.fi/deployed-contracts/holesky/).   
+                </li>
+                <li>
+                  Set <code>withdrawal-addresses="0xF0179dEC45a37423EAD4FaD5fCb136197872EAd9"</code>. This is Lido’s Withdrawal Vault Address, per the Lido [documentation](https://docs.lido.fi/deployed-contracts/holesky/).  
+                </li>
+              </ul>
+              :::
           <ol>
             <li>
               The leader or creator of the cluster will prepare the
