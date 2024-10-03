@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Getting started": {
+    "message": "Getting started",
+    "description": "The label for category Getting started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Quickstart Guides": {
+    "message": "Quickstart Guides",
+    "description": "The label for category Quickstart Guides in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Run a cluster with others": {
+    "message": "Run a cluster with others",
+    "description": "The label for category Run a cluster with others in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.FAQ": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Charon": {
+    "message": "Charon",
+    "description": "The label for category Charon in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.DV Launchpad": {
+    "message": "DV Launchpad",
+    "description": "The label for category DV Launchpad in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Smart contracts": {
+    "message": "Smart contracts",
+    "description": "The label for category Smart contracts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Contribution guidelines": {
+    "message": "Contribution guidelines",
+    "description": "The label for category Contribution guidelines in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Further reading": {
+    "message": "Further reading",
+    "description": "The label for category Further reading in sidebar tutorialSidebar"
+  }
+}
