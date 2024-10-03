@@ -1,0 +1,50 @@
+name: Update Docs Version
+
+on:
+  repository_dispatch:
+    types: [update-version]
+
+jobs:
+  update-docs-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v3
+
+      - name: Extract tag name
+        run: echo "TAG_NAME=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
+
+      - name: Update docs to new version
+        run: |
+          TAG_NAME="${{ env.TAG_NAME#v }}"
+
+          # Update docs to use the new version
+          sed -i -E "s/v\.?[0-9]+\.[0-9]+\.[0-9]+[a-zA-Z0-9\-]*/v${TAG_NAME}/g" \
+          docs/advanced/quickstart-split.md \
+          docs/advanced/test-command.md \
+          docs/advanced/quickstart-combine.md \
+          docs/charon/charon-cli-reference.md \
+          docs/faq/errors.mdx \
+          docs/start/quickstart_group.mdx \
+          docs/start/quickstart_alone.mdx
+          
+          #install dependencies
+          yarn
+
+          # Update version with yarn
+          yarn run version v${TAG_NAME}
+
+          # Commit and push changes
+          git checkout -b update-version-${{ env.TAG_NAME }}
+          git add .
+          git commit -m "Update docs to use version v${TAG_NAME}"
+          git push origin update-version-${{ env.TAG_NAME }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: update-version-${{ env.TAG_NAME }}
+          title: "Update docs to use version v${TAG_NAME}"
+          body: "Automatically generated PR to update documentation for version v${TAG_NAME}"
