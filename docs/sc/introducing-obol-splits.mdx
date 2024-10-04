@@ -13,7 +13,7 @@ Obol develops and maintains a suite of smart contracts for use with Distributed 
 
 Two key goals of validator reward management are:
 
-1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage the _reward_ they accrue for the principal provider rather than a percentage of _principal+reward_.
+1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage of the _reward_ they accrue for the principal provider rather than a percentage of _principal+reward_.
 2. To be able to withdraw the rewards in an ongoing manner without exiting the validator.
 
 Without access to the consensus layer state in the EVM to check a validator's status or balance, and due to the incoming ether being from an irregular state transition, neither of these requirements are easily satisfiable.
@@ -45,11 +45,11 @@ An Optimistic Withdrawal Recipient [contract](https://github.com/ObolNetwork/obo
 - A _reward_ address: The address where the accruing reward ether is transferred to.
 - The amount of ether that makes up the principal.
 
-This contract **assumes that any ether that has appeared in it's address since it was last able to do balance accounting is skimming reward from an ongoing validator** (or number of validators) unless the change is > 16 ether. This means balance skimming is immediately claimable as reward, while an inflow of e.g. 31 ether is tracked as a return of principal (despite being slashed in this example).
+This contract **assumes that any ether that has appeared in its address since it was last able to do balance accounting is skimming reward from an ongoing validator** (or number of validators) unless the change is > 16 ether. This means balance skimming is immediately claimable as reward, while an inflow of e.g. 31 ether is tracked as a return of principal (despite being slashed in this example).
 
 :::danger
 
-Worst-case mass slashings can theoretically exceed 16 ether, if this were to occur, the returned principal would be misclassified as a reward, and distributed to the wrong address. This risk is the drawback that makes this contract variant 'optimistic'. If you intend to use this contract type, **it is important you understand and accept this risk**, however minute.
+Worst-case mass slashings can theoretically exceed 16 ether, if this were to occur, the returned principal would be misclassified as a reward, and distributed to the wrong address. This risk is the drawback that makes this contract variant 'optimistic'. If you intend to use this contract type, **it is important you fully understand and accept this risk**.
 
 The alternative is to use an splits.org [waterfall contract](https://docs.splits.org/core/waterfall), which won't allow the claiming of rewards until all principal ether has been returned, meaning validators need to be exited for operators to claim their CL rewards.
 
