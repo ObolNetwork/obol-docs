@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 description: Test the performance of a candidate Distributed Validator Cluster setup.
 ---
 
