@@ -4,11 +4,11 @@ Pre-generated Signed Validator Builder Registration
 
 ## Type declaration
 
-| Member | Type | Description |
-| :------ | :------ | :------ |
-| `message` | [`BuilderRegistrationMessage`](BuilderRegistrationMessage.md) | Builder registration message. |
-| `signature` | `string` | BLS signature of the builder registration message. |
+| Name | Type | Description | Defined in |
+| ------ | ------ | ------ | ------ |
+| `message` | [`BuilderRegistrationMessage`](BuilderRegistrationMessage.md) | Builder registration message. | types.ts:184 |
+| `signature` | `string` | BLS signature of the builder registration message. | types.ts:187 |
 
-## Source
+## Defined in
 
-types.ts:143
+types.ts:182

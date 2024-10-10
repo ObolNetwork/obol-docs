@@ -1,7 +1,7 @@
-> **OperatorPayload**: `Partial` \<[`ClusterOperator`](ClusterOperator.md)\> & `Required`\<`Pick` \<[`ClusterOperator`](ClusterOperator.md), `"enr"` \| `"version"`\>\>
+> **OperatorPayload**: `Partial`\<[`ClusterOperator`](ClusterOperator.md)\> & `Required`\<`Pick`\<[`ClusterOperator`](ClusterOperator.md), `"enr"` \| `"version"`\>\>
 
 A partial view of `ClusterOperator` with `enr` and `version` as required properties.
 
-## Source
+## Defined in
 
 types.ts:44

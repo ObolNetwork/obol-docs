@@ -3,21 +3,27 @@ hide_title: true
 ---
 
 <span className="theme-doc-version-badge badge badge--secondary">
-      <strong>SDK Version:</strong> v1.0.17
+      <strong>SDK Version:</strong> v2.1.1
 </span>
 
-![Obol Logo](https://obol.tech/obolnetwork.png)
+![Obol Logo](https://obol.org/obolnetwork.png)
 
 <h1 align="center">Obol SDK</h1>
 
-This repo contains the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](https://docs.obol.tech/api).
+This repo contains the Obol Software Development Kit, for creating Distributed Validators with the help of the [Obol API](https://docs.obol.org/api).
 
 ## Getting Started
 
-Checkout our [docs](https://docs.obol.tech/docs/advanced/quickstart-sdk), [examples](https://github.com/ObolNetwork/obol-sdk-examples/), and SDK [reference](https://obolnetwork.github.io/obol-sdk). Further guides and walkthroughs coming soon.
+Checkout our [docs](https://docs.obol.org/docs/advanced/quickstart-sdk), [examples](https://github.com/ObolNetwork/obol-sdk-examples/), and SDK [reference](https://obolnetwork.github.io/obol-sdk). Further guides and walkthroughs coming soon.
 
 ## Terms and Conditions
-To use obol-sdk and in order to be able to create a cluster definition or accept an invite to join a cluster, you must accept the [latest Obol terms and conditions](https://obol.tech/terms.pdf) by calling acceptObolLatestTermsAndConditions.
+To use obol-sdk and in order to be able to create a cluster definition or accept an invite to join a cluster, you must accept the [latest Obol terms and conditions](https://obol.org/terms.pdf) by calling acceptObolLatestTermsAndConditions.
+
+## ⚠️ Important Security Notice:
+If you're integrating this SDK with a **backend** (e.g., in Node.js), and you store a private key for executing splitter transactions, handle it with extreme caution. Ensure that:
+
+- The private key is securely stored (e.g., in an `.env` file).
+- Never commit or push your `.env` file containing the private key to version control.
 
 ## Contributing
 
@@ -50,33 +56,35 @@ All contributions are reviewed before they are merged into the main branch. Plea
 
 Thank you for contributing to Obol-SDK!
 
-## API Index
-
-### Enumerations
+## Enumerations
 
 - [FORK\_MAPPING](enumerations/FORK_MAPPING.md)
 
-### Classes
+## Classes
 
 - [Client](classes/Client.md)
 
-### Interfaces
+## Interfaces
 
 - [ClusterDefinition](interfaces/ClusterDefinition.md)
+- [RewardsSplitPayload](interfaces/RewardsSplitPayload.md)
 
-### Type Aliases
+## Type Aliases
 
 - [ClusterOperator](type-aliases/ClusterOperator.md)
 - [OperatorPayload](type-aliases/OperatorPayload.md)
 - [ClusterCreator](type-aliases/ClusterCreator.md)
 - [ClusterValidator](type-aliases/ClusterValidator.md)
 - [ClusterPayload](type-aliases/ClusterPayload.md)
+- [SplitRecipient](type-aliases/SplitRecipient.md)
+- [TotalSplitPayload](type-aliases/TotalSplitPayload.md)
 - [BuilderRegistrationMessage](type-aliases/BuilderRegistrationMessage.md)
 - [BuilderRegistration](type-aliases/BuilderRegistration.md)
 - [DepositData](type-aliases/DepositData.md)
 - [DistributedValidator](type-aliases/DistributedValidator.md)
 - [ClusterLock](type-aliases/ClusterLock.md)
+- [ETH\_ADDRESS](type-aliases/ETH_ADDRESS.md)
 
-### Functions
+## Functions
 
 - [validateClusterLock](functions/validateClusterLock.md)
