@@ -4,15 +4,15 @@ Node operator data
 
 ## Type declaration
 
-| Member | Type | Description |
-| :------ | :------ | :------ |
-| `address` | `string` | The operator address. |
-| `enr` | `string` | The operator ethereum node record. |
-| `fork_version` | `string` | The cluster fork_version. |
-| `version` | `string` | The cluster version. |
-| `enr_signature` | `string` | The operator enr signature. |
-| `config_signature` | `string` | The operator configuration signature. |
+| Name | Type | Description | Defined in |
+| ------ | ------ | ------ | ------ |
+| `address` | `string` | The operator address. | types.ts:23 |
+| `enr`? | `string` | The operator ethereum node record. | types.ts:26 |
+| `fork_version`? | `string` | The cluster fork_version. | types.ts:29 |
+| `version`? | `string` | The cluster version. | types.ts:32 |
+| `enr_signature`? | `string` | The operator enr signature. | types.ts:35 |
+| `config_signature`? | `string` | The operator configuration signature. | types.ts:38 |
 
-## Source
+## Defined in
 
 types.ts:21
