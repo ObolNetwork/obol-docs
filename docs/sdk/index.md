@@ -3,7 +3,7 @@ hide_title: true
 ---
 
 <span className="theme-doc-version-badge badge badge--secondary">
-      <strong>SDK Version:</strong> v2.1.1
+      <strong>SDK Version:</strong> v2.1.0
 </span>
 
 ![Obol Logo](https://obol.org/obolnetwork.png)
