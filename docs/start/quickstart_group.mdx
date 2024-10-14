@@ -573,13 +573,26 @@ services:
 ...
 ```
 
-3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your beacon node's URL
+3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your beacon node's URL. If your beacon node is running on the same machine, the URL is the LAN one, usually starting by `192.168.`.
 
 ```shell
 ...
 # Connect to one or more external beacon nodes. Use a comma separated list excluding spaces.
 CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_BEACON_NODE_URL>
 ...
+```
+
+If you have `ufw` enabled, you might have to allow connections from the charon container to your beacon node.
+First get your charon container ip address by running
+
+```shell
+docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' charon-distributed-validator-node-charon-1
+```
+
+then using the IP (x.x.x.x) you just got
+
+```shell
+sudo ufw allow from x.x.x.x/16 to any port 5052 comment 'Allow Charon access to beacon'
 ```
 
 4. Restart your docker compose
