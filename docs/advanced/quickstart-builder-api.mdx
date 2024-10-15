@@ -64,13 +64,13 @@ The following flags need to be configured on your chosen consensus client. A Fla
     Lighthouse can communicate with a single relay directly:
     <pre>
       <code>
-    {String.raw`lighthouse bn --builder "https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
+    {String.raw`lighthouse bn --builder="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
       </code>
     </pre>
     Or you can configure it to communicate with a local <a href="https://github.com/flashbots/mev-boost" target="_blank">MEV-boost</a> sidecar to configure multiple relays:
     <pre>
       <code>
-    {String.raw`lighthouse bn --builder "http://mev-boost:18550"`}
+    {String.raw`lighthouse bn --builder="http://mev-boost:18550"`}
       </code>
     </pre>
   </TabItem>
@@ -78,7 +78,7 @@ The following flags need to be configured on your chosen consensus client. A Fla
     Prysm can communicate with a single relay directly:
     <pre>
       <code>
-    {String.raw`prysm beacon-chain --http-mev-relay "https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
+    {String.raw`prysm beacon-chain --http-mev-relay="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
       </code>
     </pre>
   </TabItem>
@@ -91,13 +91,13 @@ The following flags need to be configured on your chosen consensus client. A Fla
         --payload-builder-url="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
       </code>
     </pre>
-    You should also consider adding <code>--local-block-value-boost 3</code> as a flag, to favour locally built blocks if they are withing 3% in value of the relay block, to improve the chances of a successful proposal.
+    You should also consider adding <code>--local-block-value-boost=3</code> as a flag, to favour locally built blocks if they are withing 3% in value of the relay block, to improve the chances of a successful proposal.
   </TabItem>
   <TabItem value="lodestar" label="Lodestar">
     Lodestar can communicate with a single relay directly:
     <pre>
       <code>
-    {String.raw`node ./lodestar --builder --builder.urls "https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
+    {String.raw`node ./lodestar --builder --builder.urls="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
       </code>
     </pre>
   </TabItem>
