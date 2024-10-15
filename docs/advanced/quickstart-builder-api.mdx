@@ -91,7 +91,7 @@ The following flags need to be configured on your chosen consensus client. A Fla
         --payload-builder-url="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net"`}
       </code>
     </pre>
-    You should also consider adding <code>--local-block-value-boost 3</code> as a flag, to favour locally built blocks if they are withing 3% in value of the relay block, to improve the chances of a successful proposal.
+    You should also consider adding <code>--local-block-value-boost 3</code> as a flag, to favour locally built blocks if they are with 3% in value of the relay block, to improve the chances of a successful proposal.
   </TabItem>
   <TabItem value="lodestar" label="Lodestar">
     Lodestar can communicate with a single relay directly:
@@ -156,10 +156,10 @@ When your cluster is running, you should see if Charon is logging something like
 13:10:47.094 INFO bcast      Successfully submitted validator registration to beacon node {"delay": "24913h10m12.094667699s", "pubkey": "84b_713", "duty": "1/builder_registration"}
 ```
 
-This indicates that your Charon node is successfully registering with the relay for a blinded block when the time comes.
+This indicates that your Charon node is successfully registering with the relay for a blind block when the time comes.
 
 If you are using the [ultrasound relay](https://relay.ultrasound.money), you can enter your cluster's distributed validator public key(s) into their website, to confirm they also see the validator as correctly registered.
 
-You should check that your validator client's logs look healthy, and ensure that you haven't added a `fee-recipient` address that conflicts with what has been selected by your cluster in your cluster-lock file, as that may prevent your validator from producing a signature for the block when the opportunity arises. You should also confirm the same for all of the other peers in your cluster.
+You should check that your validator client's logs look healthy, and ensure that you haven't added a `fee-recipient` address that conflicts with what has been selected by your cluster in your `cluster-lock.json file`, as that may prevent your validator from producing a signature for the block when the opportunity arises. You should also confirm the same for all of the other peers in your cluster.
 
 Once a proposal has been made, you should look at the `Block Extra Data` field under `Execution Payload` for the block on [Beaconcha.in](https://beaconcha.in/block/18450364), and confirm there is text present, this generally suggests the block came from a builder, and was not a locally constructed block.
