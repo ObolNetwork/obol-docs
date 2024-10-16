@@ -19,4 +19,6 @@ You can use the [Obol Launchpad](../dvl/intro.md) to configure a DV for use with
 - On Holesky, this is `0xE73a3602b99f1f913e72F8bdcBC235e206794Ac8`
 - On Mainnet, this is `0x388C818CA8B9251b393131C08a736A67ccB19297`
 
+<img src="/img/CSMConfig.png" alt="CSM Config on Holesky" />
+
 Once all operators sign the cluster configuration, the next step is the distributed key generation. If you are not planning on operating a node, and were only configuring the cluster for the operators, your journey ends here. But if you are one of the cluster operators, continue to Step 3 of the [Quickstart](../start/quickstart_group.mdx#step-3-run-the-distributed-key-generation-dkg-ceremony)
