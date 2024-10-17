@@ -12,7 +12,7 @@ The local Grafana server will have a few pre-built dashboards:
 
 1. Charon Overview
 
-    This is the main dashboard that provides all the relavant details about the Charon node, for example - peer connectivity, duty completion, health of beacon node and downstream validator, etc. To open, navigate to `charon-distributed-validator-node` directory and open the following `uri`  in the browser `http://localhost:3000/d/d6qujIJVk/`.
+    This is the main dashboard that provides all the relevant details about the Charon node, for example - peer connectivity, duty completion, health of beacon node and downstream validator, etc. To open, navigate to `charon-distributed-validator-node` directory and open the following `uri`  in the browser `http://localhost:3000/d/d6qujIJVk/`.
 
 2. Single Charon Node Dashboard (deprecated)
 
@@ -24,8 +24,8 @@ The local Grafana server will have a few pre-built dashboards:
 
 | Alert Name | Description | Troubleshoot |
 | --- | --- | --- |
-| ClusterBeaconNodeDown | This alert is activated when the beacon node in a the cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster. | Most likely data is corrupted. Wipe data from the point you know data was corrupted and restart beacon node so it can be synced again. |
-| ClusterMissedAttestations | This alert indicates that there have been missed attestations in the cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster. | This alert is triggered when 3 attestation are missed in 2 minutes. Check if the minimum threshold of peers are online. If correct, check for beacon node API errors and downstream validator errors using Loki. Lastly, debug from Docker using `docker compose debug`. |
+| ClusterBeaconNodeDown | This alert is activated when the beacon node in the cluster is offline. The beacon node is crucial for validating transactions and producing new blocks. Its unavailability could disrupt the overall functionality of the cluster. | Most likely data is corrupted. Wipe data from the point you know data was corrupted and restart beacon node so it can be synced again. |
+| ClusterMissedAttestations | This alert indicates that there have been missed attestations in the cluster. Missed attestations may suggest that validators are not operating correctly, compromising the security and efficiency of the cluster. | This alert is triggered when 3 attestations are missed in 2 minutes. Check if the minimum threshold of peers are online. If correct, check for beacon node API errors and downstream validator errors using Loki. Lastly, debug from Docker using `docker compose debug`. |
 | ClusterInUnknownStatus | This alert is designed to activate when a node within the cluster is detected to be in an unknown state. The condition is evaluated by checking whether the maximum of the `app_monitoring_readyz` metric is 0. | This is most likely a bug in Charon. Report to us via [Discord](https://discord.com/channels/849256203614945310/970759460693901362). |
 | ClusterInsufficientPeers | This alert is set to activate when the number of peers for a node in the cluster is insufficient. The condition is evaluated by checking whether the maximum of the `app_monitoring_readyz` equals 4. | If you are running group cluster, check with other peers to troubleshoot the issue. If you are running solo cluster, look into other machines running the DVs to find the problem. |
 | ClusterFailureRate | This alert is activated when the failure rate of the cluster exceeds a certain threshold, more specifically - more than 5% failures in duties in the last 6 hours. | Check the upstream and downstream dependencies, latency and hardware issues. |
