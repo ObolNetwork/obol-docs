@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-const {themes} = require('prism-react-renderer');
-const lightCodeTheme = themes.github
-const darkCodeTheme = themes.palenight
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/palenight');
 
 // Override code blocks to be Obol coloured
 const customObolDarkTheme = {
@@ -18,7 +17,6 @@ const config = {
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
-  onBrokenAnchors: "warn",
   favicon: "img/favicon.ico",
   organizationName: "ObolNetwork", // Usually your GitHub org/user name.
   projectName: "obol-docs", // Usually your repo name.
