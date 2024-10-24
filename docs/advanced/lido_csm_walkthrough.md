@@ -186,7 +186,7 @@ Each cluster member should start the node with the following command:
 docker compose up -d
 ```
 
-At this point, execution and consensus clients should start syncing, and Charon and the validator client should start waiting for the validator to be activated. 
+At this point, execution and consensus clients should start syncing. Charon and the validator client should start waiting for the consensus client to be synced and the validator to be activated. 
 
 
 ## Part 3: Deploy the keys to Lido CSM
