@@ -163,7 +163,7 @@ New files were generated:  `cluster-lock.json`, `deposit-data.json`, `validator_
 
 Copy and rename the .env.sample.mainnet file to .env
 
-```
+```sh
 cp -n .env.sample.holesky .env
 ```
 
