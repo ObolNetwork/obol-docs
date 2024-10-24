@@ -217,6 +217,6 @@ EA member clicks on the `Create Node Operator` button...
 
 
 
-Sign the transaction, and the cluster is ready for deposit from Lido CSM.
+Sign the transaction. The cluster is ready for deposit from Lido CSM.
 
 
