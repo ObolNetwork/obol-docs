@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkobol_docs=self.webpackChunkobol_docs||[]).push([[16897],{74632:e=>{e.exports=JSON.parse('{"title":"API Reference","description":"An API for preparing Distributed Validator Key Generation Ceremonies built by Obol Labs.","keywords":["Distributed Validators","Ethereum","DVT","Obol","API"]}')}}]);
