@@ -32,11 +32,11 @@ Detailed instructions on how to create a SAFE Wallet can be found [here](https:/
 
 The squad leader should obtain signing addresses for all the cluster members, to create a new SAFE with the operators all as owners. 
 
-![SAFE UI Login Screen](../../static/img/CSM_walkthrough1.png)
+![SAFE UI Login Screen](/img/CSM_walkthrough1.png)
 
 After giving the Safe a name and selecting the appropriate network, continue by clicking the **Next** button.
 
-![Create SAFE UI](../../static/img/CSM_walkthrough2.png)
+![Create SAFE UI](/img/CSM_walkthrough2.png)
 
 Add all the signer addresses of the cluster members, select a threshold, and proceed to the final step by clicking the **Next** button.
 
@@ -44,25 +44,25 @@ Add all the signer addresses of the cluster members, select a threshold, and pro
 Don't require 100% of signers to approve transactions, in case someone loses access to their address. Using the same [threshold](../int/key-concepts.md#distributed-validator-threshold) as your cluster will use is a reasonable starting point.
 :::
 
-![Setting SAFE Threshold](../../static/img/CSM_walkthrough3.png)
+![Setting SAFE Threshold](/img/CSM_walkthrough3.png)
 
 Finally, submit the transaction to create the Safe by clicking on the **Create** button.
 
-![Creating the SAFE](../../static/img/CSM_walkthrough4.png)
+![Creating the SAFE](/img/CSM_walkthrough4.png)
 
 ### Deploy the Splitter Contract
 
 The squad leader should obtain the reward addresses from all the cluster members (if members want to use a distinct address to the one they sign with for receiving rewards). Open https://app.splits.org and create a `New contract`. Make sure to select the appropriate network. 
 
-![Choosing Network](../../static/img/CSM_walkthrough5.png)
+![Choosing Network](/img/CSM_walkthrough5.png)
 
 Select `Split` for the contract type.
 
-![Selecting Split Contract](../../static/img/CSM_walkthrough6.png)
+![Selecting Split Contract](/img/CSM_walkthrough6.png)
 
 Add the reward addresses of all cluster members. Choose whether the contract is immutable (reccommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and optionally whether to set a distribution bounty such that third parties could pay the gas costs of distributing the accrued rewards in exchange for a small fee.
 
-![Adding recipients](../../static/img/CSM_walkthrough7.png)
+![Adding recipients](/img/CSM_walkthrough7.png)
 
 Finally, click the **Create Split** button, execute the transaction and share the created split contract with all cluster members for review.
 
@@ -94,7 +94,7 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
 
-![Creating a charon ENR key pair](../../static/img/CSM_walkthrough8.png)
+![Creating a charon ENR key pair](/img/CSM_walkthrough8.png)
 
 :::caution
 What you see in the console starting with `enr:-` is the **public key** for your Charon node (known as an ENR). The **private key** is in the file `.charon/charon-enr-private-key`, be sure to back it up securely. 
@@ -107,45 +107,45 @@ Obol has integrated a CSM details into the DV Launchpad. Choosing the "Lido CSM"
 
 To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects their wallet and chooses **Create a cluster with a group**.
 
-![DV Launchpad Home Page](../../static/img/CSM_walkthrough9.png)
+![DV Launchpad Home Page](/img/CSM_walkthrough9.png)
 
 Then click **Get Started**.
 
-![Creation Summary Screen](../../static/img/CSM_walkthrough10.png)
+![Creation Summary Screen](/img/CSM_walkthrough10.png)
 
 Accept all the necessary advisories and sign to confirm.
 
-![Obol Warnings, Terms, and Advisories](../../static/img/CSM_walkthrough11.png)
+![Obol Warnings, Terms, and Advisories](/img/CSM_walkthrough11.png)
 
 Cluster configuration begins next. First, select the cluster name and size, then enter all cluster members signer addresses.
 
-![Configure Cluster Page](../../static/img/CSM_walkthrough12.png)
+![Configure Cluster Page](/img/CSM_walkthrough12.png)
 
 - Select the number of validators to create (CSM's Early Access phase is capped at a maximum 12 validators).
 - (If the cluster creator is taking part in the cluster) Enter your Charon node's ENR which was generated during [step 2](#step-2-create-enr-and-backup-your-private-key) above.
 - In the **Withdrawal Configuration** field, select `LIDO CSM`. This will automatically fill the required Withdrawal Address and Fee Recipient Addresss per [Lido's Documentation](https://operatorportal.lido.fi/modules/community-staking-module#block-d8e94f551b2e47029a54e6cedea914a7).
 - Finally, click on the **Create Cluster Configuration** button.
 
-![Further Cluster Configuration](../../static/img/CSM_walkthrough13.png)
+![Further Cluster Configuration](/img/CSM_walkthrough13.png)
 
 Lastly, share the cluster invite link with the other cluster members.
 
-![Cluster Invitation Page](../../static/img/CSM_walkthrough14.png)
+![Cluster Invitation Page](/img/CSM_walkthrough14.png)
 
 
 ### Step 4: Distributed Key Generation (DKG)
 
 All squad members need to open the cluster invitation link, connect their wallet, accept all necessary advisories, and to verify the cluster configuration is correct with a signature. Each squad member will also need to upload and sign an ENR to represent their charon client, so see [steps 1](#step-1-clone-the-repo) and [2](#step-2-create-enr-and-backup-your-private-key) above.
 
-![Cluster Invitation Acceptance Page](../../static/img/CSM_walkthrough15.png)
+![Cluster Invitation Acceptance Page](/img/CSM_walkthrough15.png)
 
 Once all members confirm the configuration they will see the **Continue** button.
 
-![Prepare for DKG Page](../../static/img/CSM_walkthrough16.png)
+![Prepare for DKG Page](/img/CSM_walkthrough16.png)
 
 On the next page, they will find a CLI command which is used to begin the Distributed Key Generation (DKG) ceremony. All members need to synchronously complete this step. 
 
-![DKG Command to Run](../../static/img/CSM_walkthrough17.png)
+![DKG Command to Run](/img/CSM_walkthrough17.png)
 
 :::tip
 Go back to the terminal and make sure you're in the `charon-distributed-validator-node` directory before running the DKG command:
@@ -159,7 +159,7 @@ If you are not, navigate to it using the `cd` command.
 
 Paste the DKG command into your terminal and wait for all the other squad members to connect and complete the DKG ceremony.
 
-![Completed DKG CLI Output](../../static/img/CSM_walkthrough18.png)
+![Completed DKG CLI Output](/img/CSM_walkthrough18.png)
 
 New files were generated:  `cluster-lock.json`, `deposit-data.json`, `validator_keys` are all found in the  `.charon` folder (hidden by default). This contains each operator's partial key signatures for the validators.
 
@@ -203,11 +203,11 @@ CSM is launching with a whitelisted set of approved operators (Early Access). Th
 
 The EA member will head to [CSM Extended Mode](https://csm.testnet.fi/?mode=extended) and connect their wallet. (Note the `mode=extended` parameter.) This allows the Lido CSM reward address to be set to the split contract created earlier. 
 
-![CSM Connect Wallet Modal](../../static/img/CSM_walkthrough19.png)
+![CSM Connect Wallet Modal](/img/CSM_walkthrough19.png)
 
 The EA member clicks on the **Create Node Operator** button.
 
-![CSM Create Node Operator Modal](../../static/img/CSM_walkthrough20.png)
+![CSM Create Node Operator Modal](/img/CSM_walkthrough20.png)
 
 - The EA member pastes the contents of the `deposit-data.json` file into the `Upload deposit data` field. The EA member should have enough ETH/stETH/wstETH to cover the bond.
 
@@ -219,6 +219,6 @@ The EA member clicks on the **Create Node Operator** button.
 
 - Check that the correct addresses are set and click the **Create Node Operator** button.
 
-![CSM Extended Mode Settings](../../static/img/CSM_walkthrough21.png)
+![CSM Extended Mode Settings](/img/CSM_walkthrough21.png)
 
 Sign the transaction. The cluster is ready for deposit from Lido CSM.
