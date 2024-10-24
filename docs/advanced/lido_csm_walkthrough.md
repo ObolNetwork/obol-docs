@@ -213,6 +213,4 @@ EA member clicks on the `Create Node Operator` button...
 
 ![csmui](https://gist.github.com/user-attachments/assets/ee1e8a3b-a361-41c6-910b-88fcb0e536f1)
 
-
-
 Sign the transaction. The cluster is ready for deposit from Lido CSM.
