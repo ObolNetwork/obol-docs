@@ -60,7 +60,6 @@ Add the reward addresses of all cluster members. Choose whether the contract is 
 Finally, click the `Create Split` button, execute the transaction and share the created split contract with all cluster members for review.
 
 
-
 ## Part 2: Use Obol Launchpad + CLI to create the cluster
 
 `Charon` is the middleware client that enables validators to be run by a group of independent node operators - a cluster or squad. A complete multi-container `Docker` setup including execution client, consensus client, validator client, MEV-Boost and the `Charon` client can be found in this repository https://github.com/ObolNetwork/charon-distributed-validator-node. 
