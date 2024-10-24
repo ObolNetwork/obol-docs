@@ -6,7 +6,7 @@ description: Create a DV within Lido CSM
 
 To start, this guide makes a couple assumptions:
 
-1.  You're running Linux and you've installed Git and Docker. 
+1.  You're running on a Linux distribution and you've installed Git and Docker. 
 2.  You'll be delpoying on mainnet. Some screenshots in this guide are from Holesky, so please verify mainnet addresses.
 
 ## Getting started
