@@ -143,11 +143,13 @@ On the next page, they will find a CLI command which is used to begin the DKG.
 
 ![dkgcommandpic](https://gist.github.com/user-attachments/assets/4a4eee7c-716f-41a7-a0c0-8d43c00734cc)
 
-All members need to synchronously complete this step. Go back to terminal, make sure you're in the correct directory:
+All members need to synchronously complete this step. Go back to the terminal and make sure you're in the `charon-distributed-validator-node` directory:
 
+```sh
+pwd
 ```
-cd charon-distributed-validator-node
-```
+
+If you are not, navigate to it using the `cd` command.
 Paste the DKG command into your terminal and wait for all the other squad members to connect and complete the DKG ceremony.
 
 ![dkgclipic](https://gist.github.com/user-attachments/assets/4d748e29-2a0f-4963-9639-226897d8384a)
