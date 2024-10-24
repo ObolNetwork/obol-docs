@@ -29,33 +29,33 @@ Detailed instructions on how to create a Safe Wallet can be found [here](https:/
 
 Squad leader should obtain the signer addresses from all the cluster members, then connect their signer wallet and create a new Safe. 
 
-![chrome_ofxRcHQItb](https://hackmd.io/_uploads/HJImiiVh0.png)
+![chrome_ofxRcHQItb](../../static/img/CSM_walkthrough1.png)
 
 After giving the Safe a name and selecting the appropriate network, continue by clicking the `Next` button.
 
-![chrome_0n8nPU5G5q](https://hackmd.io/_uploads/SkrQijV2R.png )
+![chrome_0n8nPU5G5q](../../static/img/CSM_walkthrough2.png)
 
 Add all the signer addresses of the cluster members, select a threshold, and proceed to the final step by clicking the `Next` button.
 
-![chrome_qvPajGtE0N](https://hackmd.io/_uploads/S18mijE3A.png)
+![chrome_qvPajGtE0N](../../static/img/CSM_walkthrough3.png)
 
 Finally, submit the transaction to create the Safe by clicking on the `Create` button.
 
-![chrome_BfjGLxjtYM](https://hackmd.io/_uploads/SkrmjoV3C.png)
+![chrome_BfjGLxjtYM](../../static/img/CSM_walkthrough4.png)
 
 ## Creating the reward split contract
 
 Squad leader should obtain the reward addresses from all the cluster members. Open https://app.splits.org and create a `new contract`. Make sure to select the appropriate network. 
 
-![image](https://hackmd.io/_uploads/B1VDt6S2A.png)
+![image](../../static/img/CSM_walkthrough5.png)
 
 Select `Split` for the contract type.
 
-![image2](https://hackmd.io/_uploads/BknFFprh0.png)
+![image2](../../static/img/CSM_walkthrough6.png)
 
 Add the reward addresses of all cluster members. Choose whether the contract is immutable (recommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and whether there is a distribution bounty so that third parties can distribute the rewards in exchange for a small fee.
 
-![image3](https://hackmd.io/_uploads/H1q0KaS20.png)
+![image3](../../static/img/CSM_walkthrough7.png)
 
 Finally, click the `Create Split` button, execute the transaction and share the created split contract with all cluster members for review.
 
@@ -94,7 +94,7 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
 
-![enrpic](https://gist.github.com/user-attachments/assets/88c7e09f-3433-4c13-b1b5-65a0ae6c0e50)
+![enrpic](../../static/img/CSM_walkthrough8.png)
 
 
 ### Step 3: Create the DV cluster configuration using the Launchpad
@@ -103,45 +103,45 @@ Obol has inegrated a CSM configuration into the launchpad. Choosing this configu
 
 To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects their wallet and chooses `Create a cluster with a group`.
 
-![image4](https://hackmd.io/_uploads/B1arp242R.png)
+![image4](../../static/img/CSM_walkthrough9.png)
 
 Then click `Get Started`.
 
-![chrome_WW8rTcaqeQ](https://hackmd.io/_uploads/H1LXijNnR.png)
+![chrome_WW8rTcaqeQ](../../static/img/CSM_walkthrough10.png)
 
 Accept all the necessary advisories and sign to confirm.
 
-![chrome_rQIeibZpcj](https://hackmd.io/_uploads/HkL7ioN20.png)
+![chrome_rQIeibZpcj](../../static/img/CSM_walkthrough11.png)
 
 Cluster configuration begins here. First, select the cluster name and size, then enter all cluster members signer addresses.
 
-![configurepic](https://gist.github.com/user-attachments/assets/687d99ae-cea7-4fdc-8a14-a2661e2aeece)
+![configurepic](../../static/img/CSM_walkthrough12.png)
 
 - Select the number of validators (up to 12 for CSM EA) to deploy. 
 - Enter the complete Public ENR which was generated during step 2 above.
 - In the `Withdrawal Configuration` field, select `LIDO CSM`. This will automatically fill the required Withdrawal Address and Fee Recipient Addresss per [Lido Documentation](https://operatorportal.lido.fi/modules/community-staking-module#block-d8e94f551b2e47029a54e6cedea914a7).
 - Finally, click on the `Create cluster configuration` button.
 
-![configure2pic](https://gist.github.com/user-attachments/assets/33270037-474b-4921-bfc1-e8ba27f05f8a)
+![configure2pic](../../static/img/CSM_walkthrough13.png)
 
 Lastly, share the cluster configuration link with the other cluster members.
 
-![chrome_wHk3z8Tz9S](https://hackmd.io/_uploads/By8XoiE2R.png)
+![chrome_wHk3z8Tz9S](../../static/img/CSM_walkthrough14.png)
 
 
-### Step 4: Distributed Key Generation
+### Step 4: Distributed Key Generation (DKG)
 
 All squad members need to open the cluster invite link, connect their wallet, accept all necessary advisories, and verify the cluster configuration with a signature. Each squad member will need to input their ENR, so see steps 1 and 2 above.
 
-![acceptpic](https://gist.github.com/user-attachments/assets/5209b0a2-cf09-431e-9d8d-e3845d75aecd)
+![acceptpic](../../static/img/CSM_walkthrough15.png)
 
 Once all members confirm the configuration they will see the `continue` button.
 
-![image5](https://hackmd.io/_uploads/HkHwc6VhC.png)
+![image5](../../static/img/CSM_walkthrough16.png)
 
-On the next page, they will find a CLI command which is used to begin the DKG.
+On the next page, they will find a CLI command which is used to begin the Distributed Key Generation (DKG).
 
-![dkgcommandpic](https://gist.github.com/user-attachments/assets/4a4eee7c-716f-41a7-a0c0-8d43c00734cc)
+![dkgcommandpic](../../static/img/CSM_walkthrough17.png)
 
 All members need to synchronously complete this step. Go back to the terminal and make sure you're in the `charon-distributed-validator-node` directory:
 
@@ -152,7 +152,7 @@ pwd
 If you are not, navigate to it using the `cd` command.
 Paste the DKG command into your terminal and wait for all the other squad members to connect and complete the DKG ceremony.
 
-![dkgclipic](https://gist.github.com/user-attachments/assets/4d748e29-2a0f-4963-9639-226897d8384a)
+![dkgclipic](../../static/img/CSM_walkthrough18.png)
 
 New files were generated:  `cluster-lock.json`, `deposit-data.json`, `validator_keys` are all found in the  `.charon` folder (hidden by default). This contains each operator's partial key signatures for the validators.
 
@@ -195,22 +195,22 @@ CSM is launching with a whitelisted set of approved operators (Early Access). Th
 
 EA member will head to [CSM Extended Mode](https://csm.testnet.fi/?mode=extended) and connect their wallet. Note the `mode=extended` parameter. This allows the Lido CSM reward address to be set to the split contract created earlier. 
 
-![image6](https://hackmd.io/_uploads/HkNhlaHhA.png)
+![image6](../../static/img/CSM_walkthrough19.png)
 
 EA member clicks on the `Create Node Operator` button...
 
-![image7](https://hackmd.io/_uploads/BkVsfpr2R.png)
+![image7](../../static/img/CSM_walkthrough20.png)
 
 - EA member pastes the contents of the `deposit-data.json` file into the `Upload deposit data` field. EA member should have enough ETH/stETH/wstETH to cover the bond.
 
 - Expand the `Specify custom addresses` section...
 
-- Set the `Reward Address` field to the `Split` contract address and the `Manager Address` field to the `Safe` wallet address. 
+- Set the `Reward Address` field to the `Split` contract address and the `Manager Address` field to the `Safe` wallet address. (These were created previously in part 1.)
 
 - Verify that the `Extended` box is outlined. This ensures that the `Safe` address has the ability to change the reward address if necessary. 
 
 - Check that the correct addresses are set and click the `Create Node Operator` button.
 
-![csmui](https://gist.github.com/user-attachments/assets/ee1e8a3b-a361-41c6-910b-88fcb0e536f1)
+![csmui](../../static/img/CSM_walkthrough21.png)
 
 Sign the transaction. The cluster is ready for deposit from Lido CSM.
