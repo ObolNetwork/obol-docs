@@ -135,8 +135,6 @@ All squad members need to open the cluster invite link, connect their wallet, ac
 
 ![acceptpic](https://gist.github.com/user-attachments/assets/5209b0a2-cf09-431e-9d8d-e3845d75aecd)
 
-
-
 Once all members confirm the configuration they will see the `continue` button.
 
 ![image5](https://hackmd.io/_uploads/HkHwc6VhC.png)
