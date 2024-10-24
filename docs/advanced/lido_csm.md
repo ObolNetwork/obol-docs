@@ -10,7 +10,7 @@ For a step-by-step guide more suited to beginners, please see [here.](./lido_csm
 
 You can use the [Obol Launchpad](../dvl/intro.md) to configure a DV for use within Lido's Community Staking Module (CSM). From within the configuration page of the launchpad:
 
-1. Enter your clusters size and Node Operator addresses.
+1. Enter your cluster's size and Node Operator addresses.
 2. Set the `validators` field to the appropriate value (up to 12 for CSM Early Access).
 3. Set `withdrawal configuration` to `LIDO CSM` 
 4. `Withdrawal address` is automatically set to *Lido’s Withdrawal Vault address:*, [0xB9D7934878B5FB9610B3fE8A5e441e8fad7E293f](https://etherscan.io/address/0xb9d7934878b5fb9610b3fe8a5e441e8fad7e293f) as per Lido’s [documentation](https://operatorportal.lido.fi/modules/community-staking-module#block-d8e94f551b2e47029a54e6cedea914a7).
