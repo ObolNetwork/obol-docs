@@ -167,7 +167,7 @@ Copy and rename the .env.sample.mainnet file to .env
 cp -n .env.sample.holesky .env
 ```
 
-Open the `.env` file using you favorite editor:
+Open the `.env` file using you favourite editor:
 
 ```
 sudo nano .env
