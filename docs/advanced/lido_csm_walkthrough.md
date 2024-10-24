@@ -101,7 +101,7 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 
 Obol has inegrated a CSM configuration into the launchpad. Choosing this configuration allows you to create up to 12 validator keys (CSM EA Limit) with Lido's required withdrawal and fee recipient addresses.
 
-To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects  their wallet and chooses `Create a cluster with a group`.
+To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects their wallet and chooses `Create a cluster with a group`.
 
 ![image4](https://hackmd.io/_uploads/B1arp242R.png)
 
