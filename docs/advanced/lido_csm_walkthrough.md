@@ -80,7 +80,7 @@ If you're logged in via ssh, restart your session.
 
 ### Step 2: Create ENR and Backup your Private Key
 
-Change into the CDVN directory:
+Enter the CDVN directory:
 ```
 cd charon-distributed-validator-node
 ```
