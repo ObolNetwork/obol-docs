@@ -85,6 +85,7 @@ Enter the CDVN directory:
 ```sh
 cd charon-distributed-validator-node
 ```
+
 Use docker to create an ENR
 
 ```
