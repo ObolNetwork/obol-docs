@@ -169,7 +169,7 @@ cp -n .env.sample.holesky .env
 
 Open the `.env` file using you favourite editor:
 
-```
+```sh
 sudo nano .env
 ```
 
