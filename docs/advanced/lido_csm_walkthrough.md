@@ -154,8 +154,6 @@ Paste the DKG command into your terminal and wait for all the other squad member
 
 ![dkgclipic](https://gist.github.com/user-attachments/assets/4d748e29-2a0f-4963-9639-226897d8384a)
 
-
-
 New files were generated:  `cluster-lock.json`, `deposit-data.json`, `validator_keys` are all found in the  `.charon` folder (hidden by default). This contains each operator's partial key signatures for the validators.
 
 **At this point, each operator must make a backup of the `.charon` folder and keep it safe, as validator keys can't be recreated.**
