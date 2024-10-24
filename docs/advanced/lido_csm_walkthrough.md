@@ -117,7 +117,6 @@ Cluster configuration begins here. First, select the cluster name and size, then
 
 ![configurepic](https://gist.github.com/user-attachments/assets/687d99ae-cea7-4fdc-8a14-a2661e2aeece)
 
-
 - Select the number of validators (up to 12 for CSM EA) to deploy. 
 - Enter the complete Public ENR which was generated during step 2 above.
 - In the `Withdrawal Configuration` field, select `LIDO CSM`. This will automatically fill the required Withdrawal Address and Fee Recipient Addresss per [Lido Documentation](https://operatorportal.lido.fi/modules/community-staking-module#block-d8e94f551b2e47029a54e6cedea914a7) 
