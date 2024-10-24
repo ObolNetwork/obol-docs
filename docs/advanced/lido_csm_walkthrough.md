@@ -145,8 +145,6 @@ On the next page, they will find a CLI command which is used to begin the DKG.
 
 ![dkgcommandpic](https://gist.github.com/user-attachments/assets/4a4eee7c-716f-41a7-a0c0-8d43c00734cc)
 
-
-
 All members need to synchronously complete this step. Go back to terminal, make sure you're in the correct directory:
 
 ```
