@@ -182,7 +182,7 @@ Uncomment `MEVBOOST_RELAYS=` and set it to the URL of at least one of Lido's app
 
 Each cluster member should start the node with the following command:
 
-```
+```sh
 docker compose up -d
 ```
 
