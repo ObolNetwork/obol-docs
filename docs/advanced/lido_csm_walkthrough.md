@@ -201,7 +201,7 @@ EA member clicks on the `Create Node Operator` button...
 
 ![image7](https://hackmd.io/_uploads/BkVsfpr2R.png)
 
-- EA member pastes the contents of the `deposit-data.json` file into the `Upload deposit data` field. EA member should have enough ETH/stETH/wstETH  to cover the bond.
+- EA member pastes the contents of the `deposit-data.json` file into the `Upload deposit data` field. EA member should have enough ETH/stETH/wstETH to cover the bond.
 
 - Expand the `Specify custom addresses` section...
 
