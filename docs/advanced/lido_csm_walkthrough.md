@@ -67,7 +67,7 @@ Finally, click the `Create Split` button, execute the transaction and share the 
 
 ### Step 1: Clone the repo and add give $USER permissions
 
-```
+```sh
 git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 ```
 
