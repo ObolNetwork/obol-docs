@@ -97,7 +97,6 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 ![enrpic](https://gist.github.com/user-attachments/assets/88c7e09f-3433-4c13-b1b5-65a0ae6c0e50)
 
 
-
 ### Step 3: Create the DV cluster configuration using the Launchpad
 
 Obol has inegrated a CSM configuration into the launchpad. Choosing this configuration allows you to create up to 12 validator keys (CSM EA Limit) with Lido's required withdrawal and fee recipient addresses.
