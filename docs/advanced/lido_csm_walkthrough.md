@@ -70,7 +70,8 @@ Finally, click the `Create Split` button, execute the transaction and share the 
 ```
 git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
 ```
-```
+
+```sh
 sudo usermod -a -G docker $USER
 ```
 
