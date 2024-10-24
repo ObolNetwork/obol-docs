@@ -91,6 +91,7 @@ Use docker to create an ENR
 ```sh
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 ```
+
 ### Back up the private key located in `.charon/charon-enr-private-key`
 
 ![enrpic](https://gist.github.com/user-attachments/assets/88c7e09f-3433-4c13-b1b5-65a0ae6c0e50)
