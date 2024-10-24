@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 The `charon alpha test` command is in an alpha state and is subject to change until it is made available as `charon test` in a future version.
 :::
 
-Charon test commands are designed to help you evaluate the performance and readiness of your candidate cluster. It allows you to test your connection to other Charon peers, the performance of your beacon node(s), and the readiness of your validator client. It prints a performance report to the standard output (which can be omitted by with the `--quiet` flag) and a machine-readable TOML format of the report if the `--output-toml` flag is set.
+Charon test commands are designed to help you evaluate the performance and readiness of your candidate cluster. It allows you to test your connection to other Charon peers, the performance of your beacon node(s), and the readiness of your validator client. It prints a performance report to the standard output (which can be omitted with the `--quiet` flag) and a machine-readable TOML format of the report if the `--output-toml` flag is set.
 
 ## Test your connection to peers
 
@@ -22,11 +22,11 @@ To be able to establish direct connection, you have to ensure:
 
 - Your machine is publicly accessible on the internet or at least a specific port is.
 - You add flag `p2p-tcp-address` (i.e.: `127.0.0.1:9001`) flag and the port specified in it is free and publicly accessible.
-- You add the flag `p2p-external-ip` (i.e.: `8.8.8.8`) and specify your public ip.
+- You add the flag `p2p-external-ip` (i.e.: `8.8.8.8`) and specify your public IP.
 
 If all points are satisfied by you and the other peers, you should be able to establish a direct TCP connection between each other. Note that a relay is still required, as it is used for peer discovery.
 
-At least 1 enr is required to be supplied to the `--enrs` flag.
+At least 1 ENR is required to be supplied to the `--enrs` flag.
 
 ### Pre-requisites
 
@@ -96,7 +96,7 @@ docker run obolnetwork/charon:v1.1.1 alpha test validator
 
 ## Test MEV relay
 
-Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV boost instance is configured for the validator node, it is of utmost importance that the connection to it is fast. If not, the chance of missing a block proposal raises significantly, because of a slow building of the block from the MEV.
+Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV-Boost instance is configured for the validator node, it is of utmost importance that the connection to it is fast. If not, the chance of missing a block proposal increases significantly, because of a slow building of the block from the MEV.
 
 At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
@@ -119,7 +119,7 @@ docker run -it obolnetwork/charon:v1.1.1 alpha test mev --endpoints="https://0xa
 
 ## Test your machine and network performance
 
-Run tests towards your machine and network, to evaluate its effectiveness for a Distributed Validator cluster. While Charon does not require highly performant hardware, the network connectivity of the machine it is running on should be good. In comparison, the beacon node requires not only good connectivity, but also performant storage with high input-output operations per second, enough memory and also good network connectivity. This test aims to address all those requirements and give a good overview of the system.
+Run tests towards your machine and network, to evaluate their effectiveness for a Distributed Validator cluster. While Charon does not require highly performant hardware, the network connectivity of the machine it is running on should be good. In comparison, the beacon node requires not only good connectivity, but also performant storage with high input-output operations per second, enough memory and also good network connectivity. This test aims to address all those requirements and give a good overview of the system.
 
 ### Pre-requisites
 
