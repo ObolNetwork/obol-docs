@@ -124,7 +124,6 @@ Cluster configuration begins here. First, select the cluster name and size, then
 
 ![configure2pic](https://gist.github.com/user-attachments/assets/33270037-474b-4921-bfc1-e8ba27f05f8a)
 
-
 Lastly, share the cluster configuration link with the other cluster members.
 
 ![chrome_wHk3z8Tz9S](https://hackmd.io/_uploads/By8XoiE2R.png)
