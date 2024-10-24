@@ -19,6 +19,6 @@ You can use the [Obol Launchpad](../dvl/intro.md) to configure a DV for use with
 ![CSM tab of the Launchpad](/img/CSM_launchpad_tab.png)
 
 6. Once all operators sign the cluster configuration, the next step is the distributed key generation.
-7. Once DKG is complete, you have the appropriate deposit-data.json file to upload to Lido CSM. 
+7. Once DKG is complete, you have the appropriate `deposit-data.json` file to upload to Lido CSM. 
 8. If you are not planning on operating a node, and were only configuring the cluster for the operators, your journey ends here. 
 9. If you are one of the cluster operators, continue to the next step.
