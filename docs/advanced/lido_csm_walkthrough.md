@@ -88,7 +88,7 @@ cd charon-distributed-validator-node
 
 Use docker to create an ENR
 
-```
+```sh
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
 ```
 ### Back up the private key located in `.charon/charon-enr-private-key`
