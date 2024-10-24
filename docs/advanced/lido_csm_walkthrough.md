@@ -206,7 +206,9 @@ EA member clicks on the `Create Node Operator` button...
 - Expand the `Specify custom addresses` section...
 
 - Set the `Reward Address` field to the `Split` contract address and the `Manager Address` field to the `Safe` wallet address. 
+
 - Verify that the `Extended` box is outlined. This ensures that the `Safe` address has the ability to change the reward address if necessary. 
+
 - Check that the correct addresses are set and click the `Create Node Operator` button.
 
 ![csmui](https://gist.github.com/user-attachments/assets/ee1e8a3b-a361-41c6-910b-88fcb0e536f1)
