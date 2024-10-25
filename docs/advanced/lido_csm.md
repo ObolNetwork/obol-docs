@@ -62,6 +62,10 @@ Select `Split` for the contract type.
 
 Add the reward addresses of all cluster members. Choose whether the contract is immutable (reccommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and optionally whether to set a distribution bounty such that third parties could pay the gas costs of distributing the accrued rewards in exchange for a small fee.
 
+:::tip
+If your cluster would like to contribute a portion of it's rewards to Obol’s 1% for Decentralization Fund, thereby earning [contributions](https://docs.obol.org/docs/faq/contributions), you can optionally add [retroactivefunding.obol.eth](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) to the splitter contract.
+:::
+
 ![Adding recipients](/img/CSM_walkthrough7.png)
 
 Finally, click the **Create Split** button, execute the transaction and share the created split contract with all cluster members for review.
@@ -201,7 +205,7 @@ At this point, execution and consensus clients should start syncing. Charon and 
 
 CSM is launching with a whitelisted set of approved operators (Early Access). The squad member with EA should be the one to create the node through the CSM widget. 
 
-The EA member will head to [CSM Extended Mode](https://csm.testnet.fi/?mode=extended) and connect their wallet. (Note the `mode=extended` parameter.) This allows the Lido CSM reward address to be set to the split contract created earlier. 
+The EA member will head to [CSM Extended Mode](https://csm.lido.fi/?mode=extended) and connect their wallet. (Note the `mode=extended` parameter.) This allows the Lido CSM reward address to be set to the split contract created earlier. 
 
 ![CSM Connect Wallet Modal](/img/CSM_walkthrough19.png)
 
@@ -221,4 +225,8 @@ The EA member clicks on the **Create Node Operator** button.
 
 ![CSM Extended Mode Settings](/img/CSM_walkthrough21.png)
 
-Sign the transaction. The cluster is ready for deposit from Lido CSM.
+Sign the transaction. The cluster is ready for deposit from Lido CSM. At this point, you're job is finished.
+
+:::info
+When claiming your clusters rewards, be sure to claim in either native ETH or wstETH. Rebasing tokens like stETH may not receive the incremental yield you’re expecting. More information can be found in [0xSplits documentation](https://docs.splits.org/core/split#how-it-works).
+:::
