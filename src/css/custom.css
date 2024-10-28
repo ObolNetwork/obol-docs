@@ -114,6 +114,26 @@ html[data-theme="light"] {
   --aa-input-background-color-alpha: 0.1 !important;
 }
 
+/* Adding super-section headers which are bold and not clickable */
+
+.menuSection > div > a {
+  background: none !important;
+  font-weight: bold !important;
+}
+
+.menuSection > div > a:hover {
+  background: none !important;
+}
+
+.menuSection > div:hover {
+  background: none !important;
+}
+
+.hidden {
+  display: none !important;
+  }
+
+
 /* html[data-theme="dark"] div.scrollbar-container > div  {
   background-color: #091011;
 } */
