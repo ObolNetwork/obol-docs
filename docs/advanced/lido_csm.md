@@ -227,6 +227,6 @@ The EA member clicks on the **Create Node Operator** button.
 
 Sign the transaction. The cluster is ready for deposit from Lido CSM. At this point, your job is finished.
 
-:::info
+:::warning
 When claiming your cluster's rewards, be sure to claim in either native ETH or wstETH. Rebasing tokens like stETH may not receive the incremental yield you’re expecting. More information can be found in [0xSplits documentation](https://docs.splits.org/core/split#how-it-works).
 :::
