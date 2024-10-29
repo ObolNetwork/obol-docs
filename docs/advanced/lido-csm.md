@@ -93,7 +93,7 @@ cd charon-distributed-validator-node
 Use docker to create an ENR
 
 ```sh
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 create enr
 ```
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
@@ -228,5 +228,5 @@ The EA member clicks on the **Create Node Operator** button.
 Sign the transaction. The cluster is ready for deposit from Lido CSM. At this point, your job is finished.
 
 :::warning
-When claiming your cluster's rewards, be sure to claim in either native ETH or wstETH. Rebasing tokens like stETH may not receive the incremental yield you’re expecting. More information can be found in the [splits.org documentation](https://docs.splits.org/core/split#how-it-works).
+When claiming your cluster's rewards, **be sure to claim in wstETH only** (Wrapped Staked Ether). Ether withdrawal gives you an NFT that is not compatible with a splitter, while a rebasing token like stETH may not receive the incremental yield you’re expecting. More information can be found in the [splits.org documentation](https://docs.splits.org/core/split#how-it-works).
 :::
