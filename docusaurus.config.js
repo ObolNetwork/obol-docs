@@ -38,9 +38,189 @@ const config = {
         redirects: [
          // /docs/oldDoc -> /docs/newDoc
           {
-            to: '/next/learn/intro/obol-collective',
+            to: '/learn/intro/obol-collective',
             from: '/docs/int/Overview',
           },
+          {
+            to: '/learn/intro/key-concepts',
+            from: '/docs/int/key-concepts',
+          },
+          {
+            to: '/run/prepare/how_where_DVs',
+            from: '/docs/next/int/how_where_DVs',
+          },
+          {
+            to: '/run/start/quickstart_overview',
+            from: '/docs/start/quickstart_overview',
+          },
+          {
+            to: '/run/start/quickstart_alone',
+            from: '/docs/start/quickstart_alone',
+          },
+          {
+            to: '/run/start/quickstart_group',
+            from: '/docs/start/quickstart_group',
+          },
+          {
+            to: '/run/running/activate-dv',
+            from: '/docs/start/activate-dv',
+          },
+          {
+            to: '/run/running/update',
+            from: '/docs/start/update',
+          },
+          {
+            to: '/run/running/quickstart-exit',
+            from: '/docs/start/quickstart-exit',
+          },
+          {
+            to: '/run/start/quickstart-builder-api',
+            from: '/docs/advanced/quickstart-builder-api',
+          },
+          {
+            to: '/run/running/monitoring',
+            from: '/docs/advanced/monitoring',
+          },
+          {
+            to: '/run/start/obol-monitoring',
+            from: '/docs/advanced/obol-monitoring',
+          },
+          {
+            to: '/adv/advanced/quickstart-sdk',
+            from: '/docs/advanced/quickstart-sdk',
+          },
+          {
+            to: '/run/integrations/quickstart-eigenpod',
+            from: '/docs/advanced/quickstart-eigenpod',
+          },
+          {
+            to: '/run/prepare/test-command',
+            from: '/docs/advanced/test-command',
+          },
+          {
+            to: '/adv/advanced/quickstart-split',
+            from: '/docs/advanced/quickstart-split',
+          },
+          {
+            to: '/adv/advanced/quickstart-combine',
+            from: '/docs/advanced/quickstart-combine',
+          },
+          {
+            to: '/adv/advanced/self-relay',
+            from: '/docs/advanced/self-relay',
+          },
+          {
+            to: '/run/prepare/deployment-best-practices',
+            from: '/docs/advanced/deployment-best-practices',
+          },
+          {
+            to: '/adv/advanced/adv-docker-configs',
+            from: '/docs/advanced/adv-docker-configs',
+          },
+          {
+            to: '/learn/intro/faq',
+            from: '/docs/faq/general',
+          },
+          {
+            to: '/adv/troubleshooting/errors',
+            from: '/docs/faq/errors',
+          },
+          {
+            to: '/adv/security/risks',
+            from: '/docs/faq/risks',
+          },
+          {
+            to: '/adv/troubleshooting/dkg_failure',
+            from: '/docs/faq/dkg_failure',
+          },
+          {
+            to: '/adv/troubleshooting/client_configurations',
+            from: '/docs/faq/client_configurations',
+          },
+          {
+            to: '/gov/governance/contributions',
+            from: '/docs/faq/contributions',
+          },
+          {
+            to: '/learn/futher-reading/peer_score',
+            from: '/docs/faq/peer_score',
+          },
+          {
+            to: '/learn/charon/intro',
+            from: '/docs/charon/intro',
+          },
+          {
+            to: '/learn/charon/dkg',
+            from: '/docs/charon/dkg',
+          },
+          {
+            to: '/learn/charon/cluster-configuration',
+            from: '/docs/charon/cluster-configuration',
+          },
+          {
+            to: '/learn/charon/networking',
+            from: '/docs/charon/networking',
+          },
+          {
+            to: '/learn/charon/charon-cli-reference',
+            from: '/docs/charon/charon-cli-reference',
+          },
+          {
+            to: '/learn/intro/launchpad',
+            from: '/docs/dvl/intro',
+          },
+          {
+            to: '/learn/intro/obol-splits',
+            from: '/docs/sc/introducing-obol-splits',
+          },
+          {
+            to: '/adv/security/overview',
+            from: '/docs/sec/overview',
+          },
+          {
+            to: '/adv/security/bug-bounty',
+            from: '/docs/sec/bug-bounty',
+          },
+          {
+            to: '/adv/security/contact',
+            from: '/docs/sec/contact',
+          },
+          {
+            to: '/adv/security/ev-assessment',
+            from: '/docs/sec/ev-assessment',
+          },
+          {
+            to: '/adv/security/smart_contract_audit',
+            from: '/docs/sec/smart_contract_audit',
+          },
+          {
+            to: '/adv/security/threat_model',
+            from: '/docs/sec/threat_model',
+          },
+          {
+            to: '/gov/contribution/bug-report',
+            from: '/docs/cf/bug-report',
+          },
+          {
+            to: '/gov/contribution/docs',
+            from: '/docs/cf/docs',
+          },
+          {
+            to: '/gov/contribution/feedback',
+            from: '/docs/cf/feedback',
+          },
+          {
+            to: '/learn/futher-reading/ethereum_and_dvt',
+            from: '/docs/fr/ethereum_and_dvt',
+          },
+          {
+            to: '/learn/futher-reading/testnet',
+            from: '/docs/fr/testnet',
+          },
+          {
+            to: '/learn/futher-reading/resources',
+            from: '/docs/fr/resources',
+          },          
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
