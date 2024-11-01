@@ -51,7 +51,7 @@ At the end of this process, you should have a tree like this:
 Run the following docker command to split the keys (for mainnet):
 
 ```shell
-CHARON_VERSION=                # E.g. v1.1.1
+CHARON_VERSION=                # E.g. v1.1.2
 CLUSTER_NAME=                  # The name of the cluster you want to create.
 WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals (this is just for accuracy in your lock file, you can't change a withdrawal address for a validator that has already been deposited)
 FEE_RECIPIENT_ADDRESS=         # The address you want to use for block reward and MEV payments.

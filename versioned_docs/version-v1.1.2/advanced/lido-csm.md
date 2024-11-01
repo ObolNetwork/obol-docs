@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 description: Setup and run a DV within the Lido Community Staking Module 
 ---
 # Create a Lido CSM DV
@@ -62,6 +62,10 @@ Select `Split` for the contract type.
 
 Add the reward addresses of all cluster members. Choose whether the contract is immutable (reccommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and optionally whether to set a distribution bounty such that third parties could pay the gas costs of distributing the accrued rewards in exchange for a small fee.
 
+:::tip
+If your cluster would like to contribute a portion of its rewards to Obol’s '[1% for Decentralisation](https://blog.obol.org/1-percent-for-decentralisation/)' Retroactive Fund, thereby earning [Obol Contributions](https://obol.org/contributions) as part of Lido's [integration of CSM](https://research.lido.fi/t/integrate-csm-into-the-decentralized-validator-vault/8621) into the  DV Vault, you must add [retroactivefunding.obol.eth](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient of 0.1% of the splitter contract. This will contribute 0.1% of rewards **and your CSM bond** to Obol's RAF. Future versions of CSM integrations will enable contributing exactly 1% of accruing CSM rewards.
+:::
+
 ![Adding recipients](/img/CSM_walkthrough7.png)
 
 Finally, click the **Create Split** button, execute the transaction and share the created split contract with all cluster members for review.
@@ -89,7 +93,7 @@ cd charon-distributed-validator-node
 Use docker to create an ENR
 
 ```sh
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 create enr
 ```
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
@@ -201,7 +205,7 @@ At this point, execution and consensus clients should start syncing. Charon and 
 
 CSM is launching with a whitelisted set of approved operators (Early Access). The squad member with EA should be the one to create the node through the CSM widget. 
 
-The EA member will head to [CSM Extended Mode](https://csm.testnet.fi/?mode=extended) and connect their wallet. (Note the `mode=extended` parameter.) This allows the Lido CSM reward address to be set to the split contract created earlier. 
+The EA member will head to [CSM Extended Mode](https://csm.lido.fi/?mode=extended) and connect their wallet. (Note the `mode=extended` parameter.) This allows the Lido CSM reward address to be set to the split contract created earlier. 
 
 ![CSM Connect Wallet Modal](/img/CSM_walkthrough19.png)
 
@@ -221,4 +225,8 @@ The EA member clicks on the **Create Node Operator** button.
 
 ![CSM Extended Mode Settings](/img/CSM_walkthrough21.png)
 
-Sign the transaction. The cluster is ready for deposit from Lido CSM.
+Sign the transaction. The cluster is ready for deposit from Lido CSM. At this point, your job is finished.
+
+:::warning
+When claiming your cluster's rewards, **be sure to claim in wstETH only** (Wrapped Staked Ether). Ether withdrawal gives you an NFT that is not compatible with a splitter, while a rebasing token like stETH may not receive the incremental yield you’re expecting. More information can be found in the [splits.org documentation](https://docs.splits.org/core/split#how-it-works).
+:::
