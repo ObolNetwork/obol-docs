@@ -16,6 +16,7 @@ Obol's distributed key generation (DKG) event generates key shares for each node
 An alternative approach to doing this is to split it into shares, encrypt each share with the public key of a node operator, and publish the encrypted private key on chain. The operators’ node key could then decrypt the validator private key. In our opinion, this is not secure. We believe that the safest approach is to avoid the existence of a singular private key, and certainly never to post any private key to a public blockchain network.
 
 ## Cluster independance: Clusters can upgrade independently
+
 DV clusters are independent from one another. They can run different versions of Charon, and don't need to upgrade together. Charon will NEVER require a hard fork or simultaneous update for any upgrades.  
 
 In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with SSL. Clusters are independent and do not need to communicate with one another. When a new version of Obol’s Charon is released, Obol DV clusters can upgrade on their own time, individually from other DV clusters. 
