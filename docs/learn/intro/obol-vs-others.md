@@ -51,6 +51,7 @@ The alternative approach is to create a token and require stakers to pay operato
 
 
 ## Non-custodial reward splits
+
 (see also the [docs page on Splits](../../learn/intro/obol-splits.mdx), and the [0x Splits blog article](https://splits.org/blog/obol-ethereum-resilience/).)
 
 To pay out rewards to operators, splitter contracts like Obol Splits can be used to withdraw and share rewards on a continuous basis. Two key goals of validator reward management are:
