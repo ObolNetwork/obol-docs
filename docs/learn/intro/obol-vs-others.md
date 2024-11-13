@@ -32,6 +32,7 @@ For other DVT implementations, each DV cluster communicates with every other clu
 ![Gossip Network](/img/GossipNetwork.png)
 
 ## Works with existing validator clients and PKI
+
 We built Obol’s DV implementation as a secure and trust-minimised middleware architecture. Our middleware client, Charon, doesn’t replace anything in the client stack, instead it sits between the consensus and validator clients. Node operators integrating the Charon DVT middleware into their stack can continue to use the same clients and private key infrastructure as before, albeit with a different key generation method. 
 
 The alternative approach to DV design is to replace the validator client with a DV-native client, which has custody of the private keys and the capability to sign arbitrary data. However, in our opinion a full validator client capable of signing and exfiltrating arbitrary data without the oversight of a second software implementation has much higher risk of causing correlated slashing. 
