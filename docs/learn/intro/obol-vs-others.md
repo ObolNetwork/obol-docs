@@ -42,6 +42,7 @@ The alternative approach to DV design is to replace the validator client with a 
 This gives the benefit of having both Charon and the existing validator client as failsafes, greatly reducing the odds of unintended slashing. Even in the worst case scenario where Charon is compromised by a supply chain attack or a remote code execution attack, or the Obol team become bad actors and push a malicious release, Charon cannot do a lot of damage as a middleware. If a compromised Charon client proposes a potential double vote or surround vote for a validator to sign, the validator client will check its anti-slashing database, see that it has already signed something conflicting, and simply refuse to return a signature. Charon could propose that a validator should sign an invalid block, but the chain would reject this and simply consider the proposal missed  - a much better outcome than slashing.
 
 ## No non-ETH token risk
+
 Obol makes no changes to Ethereum’s standard bonding and reward mechanism, and does not require nodes to post any bonds additional to the 32 ETH required for a validator. To pay out rewards to operators, splitter contracts like Obol Splits can be used to withdraw and share rewards on a continuous basis. This allows products like liquid staking protocols to be built on top of Obol, implementing a bond or unique token into their protocol, should they choose to do so.
 
 ![ETH only](/img/ETHonly.png)
