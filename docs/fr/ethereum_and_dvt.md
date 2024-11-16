@@ -37,7 +37,7 @@ Minimizing correlation is vital when designing DVT as Ethereum Proof of Stake is
 [**Read more about Designing Non-Correlation Here**](https://blog.obol.tech/deep-dive-into-dvt-and-charons-architecture/)
 
 ### Performance Testing Distributed Validators
-In our mission to help make Ethereum consensus more resilient and decentralised with distributed validators (DVs), it’s critical that we do not compromise on the performance and effectiveness of validators. Earlier this year, we worked with MigaLabs, the blockchain ecosystem observatory located in Barcelona, to perform an independent test to validate the performance of Obol DVs under different configurations and conditions. After taking a few weeks to fully analyse the results together with MigaLabs, we’re happy to share the results of these performance tests.
+In our mission to help make Ethereum consensus more resilient and decentralized with distributed validators (DVs), it’s critical that we do not compromise on the performance and effectiveness of validators. Earlier this year, we worked with MigaLabs, the blockchain ecosystem observatory located in Barcelona, to perform an independent test to validate the performance of Obol DVs under different configurations and conditions. After taking a few weeks to fully analyse the results together with MigaLabs, we’re happy to share the results of these performance tests.
 
 [**Read More About The Performance Test Results Here**](https://blog.obol.tech/performance-testing-distributed-validators/)
 
