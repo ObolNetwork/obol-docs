@@ -82,7 +82,7 @@ Run the following command:
 
 ```shell
 # Combine a clusters private keys
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.1 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
 ```
 
 This command will store the combined keys in the `output-dir`, in this case a folder named `combined`.
