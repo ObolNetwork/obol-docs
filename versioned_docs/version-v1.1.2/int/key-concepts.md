@@ -20,7 +20,7 @@ Distributed validator technology removes some of the single points of failure in
 
 ![A Distributed Validator Node](/img/DVNode.png)
 
-A distributed validator node is the set of clients an operator needs to configure and run to fulfil the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like [mev-boost](https://github.com/flashbots/mev-boost), or other monitoring or telemetry services on the same hardware to ensure optimal performance.
+A distributed validator node is the set of clients an operator needs to configure and run to fulfill the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like [mev-boost](https://github.com/flashbots/mev-boost), or other monitoring or telemetry services on the same hardware to ensure optimal performance.
 
 In the above example, the stack includes Geth, Lighthouse, Charon and Teku.
 
