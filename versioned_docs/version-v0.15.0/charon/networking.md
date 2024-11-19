@@ -28,7 +28,7 @@ The Charon clients in a DV cluster are connected to each other via a small p2p n
 discovered via an external "relay" server. The p2p connections are over the public internet so the charon p2p port must be publicly accessible. Charon leverages
 the popular [libp2p](https://libp2p.io/) protocol.
 
-Related [Charon configuration flags](docs/charon/charon-cli-reference.md):
+Related [Charon configuration flags](../charon/charon-cli-reference.md):
 - `--p2p-tcp-addresses`: Addresses for Charon to listen on and serve p2p requests.
 - `--p2p-relays`: Connect charon to one or more relay servers.
 - `--private-key-file`: Private key identifying the charon client.

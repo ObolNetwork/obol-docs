@@ -17,57 +17,7 @@ type FeatureItem = {
   link: string;
 };
 
-const FeatureList: FeatureItem[] = [
-  {
-    title: "Generate Key Shares",
-    image: "/img/noun_Key.png",
-    alt: "Image copyright Turkkub, courtesy of the Noun Project",
-    description: (
-      <>
-        The <Link to="https://launchpad.obol.org/">Distributed Validator Launchpad</Link> is
-        an interface to enable distributed key generation for Distributed
-        Validators.
-      </>
-    ),
-    link: "/docs/dvl/intro",
-  },
-  {
-    title: "Deploy Distributed Validators",
-    image: "/img/CharonLogo.svg",
-    alt: "Charon Distributed Validator Client Logomark",
-    description: (
-      <>
-        <Link to="/docs/charon/intro">Charon</Link> is a Distributed Validator
-        Client for running Ethereum validators in a fault tolerant manner.
-      </>
-    ),
-    link: "/docs/charon/intro",
-  },
-  {
-    title: "Build on the Obol Network",
-    image: "/img/noun_ethereum.png",
-    alt: "Image courtesy of the Noun Project",
-    description: (
-      <>
-        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are smart
-        contracts for the distribution of rewards from Distributed Validators.
-      </>
-    ),
-    link: "/docs/sc/introducing-obol-splits",
-  },
-  {
-    title: "Earn Contributions",
-    image: "/img/noun_gardening.png",
-    alt: "Image courtesy of the Noun Project",
-    description: (
-      <>
-        Run Distributed Validators on mainnet and take part in Obol's{" "}
-        <Link to="https://obol.org/contributions">Contributions Program.</Link>
-      </>
-    ),
-    link: "/docs/start/quickstart_overview",
-  },
-];
+
 
 function Feature({ title, image, description, alt, link }: FeatureItem) {
   return (
@@ -93,11 +43,6 @@ export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ const config = {
   tagline: "Building Distributed Validators for Ethereum",
   url: "https://docs.obol.org/",
   baseUrl: "/",
-  onBrokenLinks: "warn",
+  onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   onBrokenAnchors: "warn",
   favicon: "img/favicon.ico",
@@ -388,20 +388,6 @@ const config = {
         links: [
           {
             title: "Docs",
-            items: [
-              {
-                label: "Intro to Obol",
-                to: "/docs/int/Overview",
-              },
-              {
-                label: "Charon",
-                to: "/docs/charon/intro",
-              },
-              {
-                label: "DV Launchpad",
-                to: "/docs/dvl/intro",
-              },
-            ],
           },
           {
             title: "Community",

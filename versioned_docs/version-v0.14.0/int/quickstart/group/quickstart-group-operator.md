@@ -75,7 +75,7 @@ After receiving the invite link created by the **Leader** or **Creator**, you wi
 
 ## Step 4. Run the DKG
 :::info
-For the [DKG](docs/charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
+For the [DKG](../charon/dkg.md) to complete, all operators need to be running the command simultaneously. It helps to coordinate an agreed upon time amongst operators at which to run the command.
 :::
 
 ### Overview
