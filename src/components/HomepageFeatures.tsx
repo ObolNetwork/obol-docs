@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
         Validators.
       </>
     ),
-    link: "/docs/dvl/intro",
+    link: "/next/learn/intro/launchpad",
   },
   {
     title: "Deploy Distributed Validators",
@@ -37,11 +37,10 @@ const FeatureList: FeatureItem[] = [
     alt: "Charon Distributed Validator Client Logomark",
     description: (
       <>
-        <Link to="/docs/charon/intro">Charon</Link> is a Distributed Validator
-        Client for running Ethereum validators in a fault tolerant manner.
+        <Link to="/next/learn/charon/intro">Charon</Link> is a Distributed Validator Client for running Ethereum validators in a fault tolerant manner.
       </>
     ),
-    link: "/docs/charon/intro",
+    link: "/next/learn/charon/intro",
   },
   {
     title: "Build on the Obol Network",
@@ -49,11 +48,10 @@ const FeatureList: FeatureItem[] = [
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/docs/sc/introducing-obol-splits">Obol Splits</Link> are smart
-        contracts for the distribution of rewards from Distributed Validators.
+        <Link to="/next/learn/intro/obol-splits">Obol Splits</Link> are smart contracts for the distribution of rewards from Distributed Validators.
       </>
     ),
-    link: "/docs/sc/introducing-obol-splits",
+    link: "/next/learn/intro/obol-splits",
   },
   {
     title: "Earn Contributions",
@@ -65,7 +63,7 @@ const FeatureList: FeatureItem[] = [
         <Link to="https://obol.org/contributions">Contributions Program.</Link>
       </>
     ),
-    link: "/docs/start/quickstart_overview",
+    link: "/next/run/start/quickstart_overview",
   },
 ];
 

@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ## Overview
 
-A [**distributed validator key**](docs/int/key-concepts.md#distributed-validator-key) is a group of BLS private keys that together operate as a threshold key for participating in proof-of-stake consensus.
+A [**distributed validator key**](../int/key-concepts.md#distributed-validator-key) is a group of BLS private keys that together operate as a threshold key for participating in proof-of-stake consensus.
 
 To make a distributed validator with no fault-tolerance (i.e. all nodes need to be online to sign every message), due to the BLS signature scheme used by Proof of Stake Ethereum, each key share could be chosen by operators independently. However, to create a distributed validator that can stay online despite a subset of its nodes going offline, the key shares need to be generated together (4 randomly chosen points on a graph don't all necessarily sit on the same order three curve). To do this in a secure manner with no one party being trusted to distribute the keys requires what is known as a [**distributed key generation ceremony**](../int/key-concepts.md#distributed-validator-key-generation-ceremony).
 

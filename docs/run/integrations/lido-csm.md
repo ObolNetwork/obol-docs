@@ -4,7 +4,7 @@ description: Setup and run a DV within the Lido Community Staking Module
 ---
 # Create a Lido CSM DV
 
-This is a guide on taking part in Lido's [Community Staking Module](https://operatorportal.lido.fi/modules/community-staking-module) (CSM) with a squad as part of a [Distributed Validator Cluster](../int/key-concepts.md#distributed-validator-cluster).
+This is a guide on taking part in Lido's [Community Staking Module](https://operatorportal.lido.fi/modules/community-staking-module) (CSM) with a squad as part of a [Distributed Validator Cluster](../../learn/intro/key-concepts.md#distributed-validator-cluster).
 
 To start, this guide makes a couple assumptions:
 
@@ -41,7 +41,7 @@ After giving the Safe a name and selecting the appropriate network, continue by 
 Add all the signer addresses of the cluster members, select a threshold, and proceed to the final step by clicking the **Next** button.
 
 :::tip
-Don't require 100% of signers to approve transactions, in case someone loses access to their address. Using the same [threshold](../int/key-concepts.md#distributed-validator-threshold) as your cluster will use is a reasonable starting point.
+Don't require 100% of signers to approve transactions, in case someone loses access to their address. Using the same [threshold](../../learn/intro/key-concepts.md#distributed-validator-threshold) as your cluster will use is a reasonable starting point.
 :::
 
 ![Setting SAFE Threshold](/img/CSM_walkthrough3.png)
@@ -187,7 +187,7 @@ nano .env
 
 Uncomment and set `BUILDER_API_ENABLED=true`.
 
-Uncomment `MEVBOOST_RELAYS=` and set it to the URL of at least one of Lido's approved MEV relays [here](https://enchanted-direction-844.notion.site/6d369eb33f664487800b0dedfe32171e?v=8e5d1f1276b0493caea8a2aa1517ed65). Multiple relays must be separated by a comma. Consult our [deployment best practices](./deployment-best-practices.md#mev-boost-relays) for further info on MEV relay selection. 
+Uncomment `MEVBOOST_RELAYS=` and set it to the URL of at least one of Lido's approved MEV relays [here](https://enchanted-direction-844.notion.site/6d369eb33f664487800b0dedfe32171e?v=8e5d1f1276b0493caea8a2aa1517ed65). Multiple relays must be separated by a comma. Consult our [deployment best practices](../prepare/deployment-best-practices.md#mev-boost-relays) for further info on MEV relay selection. 
 
 
 ### Step 6: Starting the Node

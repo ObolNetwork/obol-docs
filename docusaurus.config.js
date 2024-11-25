@@ -16,7 +16,7 @@ const config = {
   tagline: "Building Distributed Validators for Ethereum",
   url: "https://docs.obol.org/",
   baseUrl: "/",
-  onBrokenLinks: "warn",
+  onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   onBrokenAnchors: "warn",
   favicon: "img/favicon.ico",
@@ -391,15 +391,15 @@ const config = {
             items: [
               {
                 label: "Intro to Obol",
-                to: "/docs/int/Overview",
+                to: "/next/learn/intro/obol-collective",
               },
               {
                 label: "Charon",
-                to: "/docs/charon/intro",
+                to: "/next/learn/charon/intro",
               },
               {
                 label: "DV Launchpad",
-                to: "/docs/dvl/intro",
+                to: "/next/learn/intro/launchpad",
               },
             ],
           },
@@ -421,7 +421,7 @@ const config = {
             items: [
               {
                 label: "Blog",
-                to: "https://blog.obol.tech/",
+                to: "https://blog.obol.org/",
               },
               {
                 label: "GitHub",

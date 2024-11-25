@@ -7,8 +7,6 @@ description: The Obol Collective
 
 ## What is the Obol Collective?
 
-test [here](../../docs/int/Overview)
-
 The Obol Collective is a collection of tools, teams, and communities dedicated to scaling Ethereum by strengthening the security, resiliency, and decentralisation of the consensus layer through the development and deployment of distributed validators. The Distributed Validator middleware client, Charon, boosts the security, resilience, and decentralisation of the Ethereum validator network by enabling “squad staking”. The Collective is fueled by Obol’s economic model, which directs 1% of staking rewards from DVs to ecosystem projects via retroactive funding - a positive flywheel to accelerate adoption of DVs and scale the consensus layer.
 
 The list of Obol Collective participants includes 50+ staking protocols, client teams, software tools, education & community projects, professional node operators, home operators, and stakers, including names like EigenLayer, Lido, EtherFi, Figment, Bitcoin Suisse, Stakewise, Nethermind, Blockdaemon, Chorus One, DappNode, and many more. Learn more at [Obol.org](https://obol.org).
