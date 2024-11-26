@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-description: Walkthough guides.
+description: Walkthrough guides.
 ---
 
 # Walkthough guides
