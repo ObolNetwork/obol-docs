@@ -17,15 +17,13 @@ An alternative approach to doing this is to split it into shares, encrypt each s
 
 ## Cluster independance: Clusters can upgrade independently
 
-DV clusters are independent from one another. They can run different versions of Charon, and don't need to upgrade together. Charon will NEVER require a hard fork or simultaneous update for any upgrades.  
-
-In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with SSL. Clusters are independent and do not need to communicate with one another. When a new version of Obol’s Charon is released, Obol DV clusters can upgrade on their own time, individually from other DV clusters. 
+In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with TLS. Clusters are independent from one another, can run different versions of Charon, and don't need to upgrade together. This means that when a new version of Obol’s Charon is released, Obol DV clusters can upgrade on their own time, individually from other DV clusters. Charon will NEVER require a hard fork or simultaneous updates across clusters for any upgrades. 
 
 ![Cluster Independence](/img/ClusterIndependence.png)
 
-## Cluster independance: No reliance on a single P2P gossip network
+## Cluster independance: No reliance on a common P2P gossip network
 
-In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with SSL. This direct communication of nodes within a cluster improves latency, and makes cluster communications harder to attack with a denial of service (DOS) attack. It also allows an Obol DV cluster to be run within a private network. This may allow cost savings on data egress costs, for operators running cluster nodes across multiple locations of a single cloud provider, for example.
+In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with TSL. This direct communication of nodes within a cluster improves latency, and makes cluster communications harder to attack with a denial of service (DOS) attack. It also allows an Obol DV cluster to be run within a private network. This may allow cost savings on data egress costs, for operators running cluster nodes across multiple locations of a single cloud provider, for example.
 
 For other DVT implementations, each DV cluster communicates with every other cluster, creating a large, cumbersome gossip network. This limits scaling and requires the nodes of every DV cluster to run the same version. A drawback: the public gossip network relies on nodes to voluntarily open their ports and participate in peering and gossip, resulting in higher data egress costs, since each node is relaying many more messages than only the ones related to that node’s cluster. This may require some type of artificial incentivization to encourage nodes to participate in gossip messaging. In the event that nodes don’t broadly participate in peering, it may be necessary for the network developers to run a central messaging relayer in order to support the gossip network and ensure continued performance between all gossip nodes. (The costs associated with this central relaying would somehow need to be passed onto the network operators and users.)
 
