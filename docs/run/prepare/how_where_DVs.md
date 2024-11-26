@@ -18,9 +18,9 @@ description: How and where to run DVs
 - [Terraform Grafana Charon dashboards](https://github.com/ObolNetwork/terraform-grafana-dashboards)
 
 ## Quickstart Guides 
-- [Run a DV alone](https://docs.obol.org/start/quickstart_alone)
-- [Run a DV as a group](https://docs.obol.org/start/quickstart_group)
-- [Run a DV using the SDK](https://docs.obol.org/advanced/quickstart-sdk)
+- [Run a DV alone](../start/quickstart_alone.mdx)
+- [Run a DV as a group](../start/quickstart_group.mdx)
+- [Run a DV using the SDK](../../adv/advanced/quickstart-sdk.mdx)
 
 ## CL+VC Combinations:
 
