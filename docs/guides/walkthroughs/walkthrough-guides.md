@@ -5,6 +5,6 @@ description: Walkthrough guides.
 
 # Walkthrough guides
 
-Walkthough guides for beginner users. These guides are specific to hardware and operating system setups, and cannot but used in place of more general documentation. However, they contain more detailed step-by-step information which may be useful for beginner users with limited experience with Linux, validators, and other topics which the docs assume as pre-requisites. 
+This section contains walkthrough guides for beginner users. Some of these guides are specific to particular hardware or operating systems, and may not replace more general documentation. These guides contain more detailed step-by-step information which may be useful for beginner users with limited experience with Linux, validators, and other topics which the primary guides assume some prior familiarity of. 
 
-Some of these guides are community-created, and may contain errors. These guides should be regarded as seperate from the official documentation, and not a replacement for the quickstart guides, for example.
+Some of these guides are community-created, and may contain issues or omissions.
