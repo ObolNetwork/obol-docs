@@ -43,21 +43,21 @@ This gives the benefit of having both Charon and the existing validator client a
 
 ## No non-ETH token risk
 
-Obol makes no changes to Ethereum’s standard bonding and reward mechanism, and does not require nodes to post any bonds additional to the 32 ETH required for a validator. To pay out rewards to operators, splitter contracts like Obol Splits can be used to withdraw and share rewards on a continuous basis. This allows products like liquid staking protocols to be built on top of Obol, implementing a bond or unique token into their protocol, should they choose to do so.
+Obol makes no changes to Ethereum’s standard bonding and reward mechanism, and does not require nodes to post any bonds additional to the 32 ETH required for a validator. To pay out rewards to operators, splitter contracts like [Obol Splits](../intro/obol-splits.mdx) can be used to withdraw and share rewards on a continuous basis. This allows products like liquid staking protocols to be built on top of Obol, implementing a bond or unique token into their protocol, should they choose to do so.
 
 ![ETH only](/img/ETHonly.png)
 
 The alternative approach is to create a token and require stakers to pay operators in that token. This would require stakers to keep a balance of the network token ready for fee paying, in order to continue using the staking service. This mechanism would be informed by oracles, which decide when to post rewards and punish operators. This alternative model has some drawbacks. Namely, the varying price of the network’s unique token will change relative to the price of ETH: operators are not able to determine their commission as a percentage of ETH staked, and stakers likewise must consider the additional initial cost of purchasing the token to determine their long-term rate of return on their staked ETH.
 
-![ETH an Fee](/img/ETHandFee.png)
+![ETH and Fee Token](/img/ETHandFee.png)
 
 
 ## Non-custodial reward splits
 
-(see also the [docs page on Splits](../../learn/intro/obol-splits.mdx), and the [0x Splits blog article](https://splits.org/blog/obol-ethereum-resilience/).)
+(see also the [docs page on Splits](../../learn/intro/obol-splits.mdx), and the [Splits.org blog article](https://splits.org/blog/obol-ethereum-resilience/).)
 
 To pay out rewards to operators, splitter contracts like Obol Splits can be used to withdraw and share rewards on a continuous basis. Two key goals of validator reward management are:
-    1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage the *reward* they accrue for the principal provider rather than a percentage of *principal+reward*.
+    1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage of the *reward* they accrue for the principal provider, rather than a percentage of *principal and reward*.
     2. To be able to withdraw the rewards in an ongoing manner without exiting the validator.
 This allows products like liquid staking protocols to be built on top of Obol, implementing a bond or unique token into their protocol, should they choose to do so.
 

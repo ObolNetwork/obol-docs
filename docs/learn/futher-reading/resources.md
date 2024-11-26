@@ -26,22 +26,22 @@ The following is a curated list of the best internal and external resources for 
 - [Terraform Grafana Charon dashboards](https://github.com/ObolNetwork/terraform-grafana-dashboards)
 
 ## Quickstart Guides 
-- [Run a DV alone](https://docs.obol.org/start/quickstart_alone)
-- [Run a DV as a group](https://docs.obol.org/start/quickstart_group)
-- [Run a DV using the SDK](https://docs.obol.org/advanced/quickstart-sdk)
+- [Run a DV alone](../../../docs/run/start/quickstart_alone.mdx)
+- [Run a DV as a group](../../../docs/run/start/quickstart_group.mdx)
+- [Run a DV using the SDK](../../../docs/adv/advanced/quickstart-sdk.mdx)
 
 ## Security and Best Practices
 - [Audits](https://github.com/ObolNetwork/obol-security/tree/main/audits)
 - [Security repo](https://github.com/ObolNetwork/obol-security)
-- [Security Docs Page](https://docs.obol.org/sec/overview)
-- [Best practices doc](https://docs.obol.org/advanced/deployment-best-practices)
+- [Security Docs Page](../../../docs/adv/security/overview.md)
+- [Best practices doc](../../../docs/run/prepare/deployment-best-practices.md)
 - [Status Page](https://status.obol.org/)
 
 ## Security Audits and Assessments
-- A [review](https://docs.obol.tech/docs/sec/ev-assessment) of Obol Labs development processes by Ethereal Ventures
+- A [review](../../../docs/adv/security/ev-assessment.md) of Obol Labs development processes by Ethereal Ventures
 - A [security assessment](https://github.com/ObolNetwork/obol-security/blob/f9d7b0ad0bb8897f74ccb34cd4bd83012ad1d2b5/audits/Sigma_Prime_Obol_Network_Charon_Security_Assessment_Report_v2_1.pdf) of Charon by [Sigma Prime](https://sigmaprime.io/).
-- A [solidity audit](https://docs.obol.tech/docs/sec/smart_contract_audit) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
-- [Charon Threat model](https://docs.obol.org/sec/threat_model)
+- A [solidity audit](../../../docs/adv/security/smart_contract_audit.mdx) of the Obol Splits contracts by [Zach Obront](https://zachobront.com/).
+- [Charon Threat model](../../../docs/adv/security/threat_model.md)
 - [QuantStamp Charon audit Q4 2023](https://obol.tech/charon_quantstamp_assessment.pdf)
 
 ## Research and Development
