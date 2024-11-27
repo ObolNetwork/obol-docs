@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 description: Add monitoring credentials to help the Obol Team monitor the health of your cluster
 ---
 import Tabs from "@theme/Tabs";

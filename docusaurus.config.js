@@ -229,6 +229,10 @@ const config = {
             to: '/next/run/integrations/Dappnode',
             from: '/docs/faq/Dappnode',
           },
+          {
+            to: '/next/sdk',
+            from: '/docs/sdk',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
