@@ -3,7 +3,7 @@ sidebar_position: 3
 description: Migrate an existing validator by splitting its private key into shares
 ---
 
-# Migrate an existing validator
+# Migrate an Existing Validator
 
 :::warning
 This process should only be used if you want to split an *existing validator private key* into multiple private key shares for use in a Distributed Validator Cluster. **If your existing validator is not properly shut down before the Distributed Validator starts, your validator may be slashed**.

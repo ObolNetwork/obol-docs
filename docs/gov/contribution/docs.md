@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 
 
-# Documentation standards
+# Documentation Standards
 
 This section outlines the formatting standards presented within this documentation. In order to maintain continuity and quality, all pull requests must conform to the specifics below.
 

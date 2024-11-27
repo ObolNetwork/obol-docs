@@ -2,7 +2,7 @@
 sidebar_position: 5
 description: Claiming rewards from your DV using the Launchpad.
 ---
-# Claiming DV rewards
+# Claiming DV Rewards
 
 ## Claim rewards using the Launchpad. 
 

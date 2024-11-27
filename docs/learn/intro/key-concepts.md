@@ -3,7 +3,7 @@ sidebar_position: 2
 description: Some of the key terms in the field of Distributed Validator Technology
 ---
 
-# Key staking concepts
+# Key Staking Concepts
 
 This page outlines a number of the key concepts behind the various technologies that Obol is developing.
 
