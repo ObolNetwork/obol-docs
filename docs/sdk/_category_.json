@@ -1,5 +1,6 @@
 {
     "label": "SDK",
     "position": 8,
-    "collapsed": true
+    "collapsed": true,
+    "className": "hidden"
 }

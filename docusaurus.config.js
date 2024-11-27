@@ -30,27 +30,215 @@ const config = {
         indexBlog: false,
       },
     ], 
-    // [
-    //   '@docusaurus/plugin-client-redirects',
-    //   {
-    //     // redirects: [
-    //     //   // /docs/oldDoc -> /docs/newDoc
-    //     //   {
-    //     //     to: '/docs/newDoc',
-    //     //     from: '/docs/oldDoc',
-    //     //   },
-    //     // ],
-    //     createRedirects(existingPath) {
-    //       if (existingPath.includes('/int/faq')) {
-    //         // Redirect from /int/faq/X to /faq/X
-    //         return [
-    //           existingPath.replace('/faq', '/int/faq')
-    //         ];
-    //       }
-    //       return undefined; // Return a falsy value: no redirect created
-    //     },
-    //   },
-    // ],
+    [
+     '@docusaurus/plugin-client-redirects',
+     {
+        fromExtensions: ['html', 'htm'], // /myPage.html -> /myPage
+        toExtensions: ['exe', 'zip'], // /myAsset -> /myAsset.zip (if latter exists)
+        redirects: [
+         // /docs/oldDoc -> /docs/newDoc
+          {
+          to: '/next/learn/intro/obol-collective',
+          from: '/docs/int/Overview',
+          },
+          {
+            to: '/next/learn/intro/key-concepts',
+            from: '/docs/int/key-concepts',
+          },
+          {
+            to: '/next/run/prepare/how_where_DVs',
+            from: '/docs/next/int/how_where_DVs',
+          },
+          {
+            to: '/next/run/start/quickstart_overview',
+            from: '/docs/start/quickstart_overview',
+          },
+          {
+            to: '/next/run/start/quickstart_alone',
+            from: '/docs/start/quickstart_alone',
+          },
+          {
+            to: '/next/run/start/quickstart_group',
+            from: '/docs/start/quickstart_group',
+          },
+          {
+            to: '/next/run/running/activate-dv',
+            from: '/docs/start/activate-dv',
+          },
+          {
+            to: '/next/run/running/update',
+            from: '/docs/start/update',
+          },
+          {
+            to: '/next/run/running/quickstart-exit',
+            from: '/docs/start/quickstart-exit',
+          },
+          {
+            to: '/next/run/start/quickstart-builder-api',
+            from: '/docs/advanced/quickstart-builder-api',
+          },
+          {
+            to: '/next/run/running/monitoring',
+            from: '/docs/advanced/monitoring',
+          },
+          {
+            to: '/next/run/start/obol-monitoring',
+            from: '/docs/advanced/obol-monitoring',
+          },
+          {
+            to: '/next/adv/advanced/quickstart-sdk',
+            from: '/docs/advanced/quickstart-sdk',
+          },
+          {
+            to: '/next/run/integrations/quickstart-eigenpod',
+            from: '/docs/advanced/quickstart-eigenpod',
+          },
+          {
+            to: '/next/run/prepare/test-command',
+            from: '/docs/advanced/test-command',
+          },
+          {
+            to: '/next/adv/advanced/quickstart-split',
+            from: '/docs/advanced/quickstart-split',
+          },
+          {
+            to: '/next/adv/advanced/quickstart-combine',
+            from: '/docs/advanced/quickstart-combine',
+          },
+          {
+            to: '/next/adv/advanced/self-relay',
+            from: '/docs/advanced/self-relay',
+          },
+          {
+            to: '/next/run/prepare/deployment-best-practices',
+            from: '/docs/advanced/deployment-best-practices',
+          },
+          {
+            to: '/next/adv/advanced/adv-docker-configs',
+            from: '/docs/advanced/adv-docker-configs',
+          },
+          {
+            to: '/next/learn/intro/faq',
+            from: '/docs/faq/general',
+          },
+          {
+            to: '/next/adv/troubleshooting/errors',
+            from: '/docs/faq/errors',
+          },
+          {
+            to: '/next/adv/security/risks',
+            from: '/docs/faq/risks',
+          },
+          {
+            to: '/next/adv/troubleshooting/dkg_failure',
+            from: '/docs/faq/dkg_failure',
+          },
+          {
+            to: '/next/adv/troubleshooting/client_configurations',
+            from: '/docs/faq/client_configurations',
+          },
+          {
+            to: '/next/gov/governance/contributions',
+            from: '/docs/faq/contributions',
+          },
+          {
+            to: '/next/learn/futher-reading/peer_score',
+            from: '/docs/faq/peer_score',
+          },
+          {
+            to: '/next/learn/charon/intro',
+            from: '/docs/charon/intro',
+          },
+          {
+            to: '/next/learn/charon/dkg',
+            from: '/docs/charon/dkg',
+          },
+          {
+            to: '/next/learn/charon/cluster-configuration',
+            from: '/docs/charon/cluster-configuration',
+          },
+          {
+            to: '/next/learn/charon/networking',
+            from: '/docs/charon/networking',
+          },
+          {
+            to: '/next/learn/charon/charon-cli-reference',
+            from: '/docs/charon/charon-cli-reference',
+          },
+          {
+            to: '/next/learn/intro/launchpad',
+            from: '/docs/dvl/intro',
+          },
+          {
+            to: '/next/learn/intro/obol-splits',
+            from: '/docs/sc/introducing-obol-splits',
+          },
+          {
+            to: '/next/adv/security/overview',
+            from: '/docs/sec/overview',
+          },
+          {
+            to: '/next/adv/security/bug-bounty',
+            from: '/docs/sec/bug-bounty',
+          },
+          {
+            to: '/next/adv/security/contact',
+            from: '/docs/sec/contact',
+          },
+          {
+            to: '/next/adv/security/ev-assessment',
+            from: '/docs/sec/ev-assessment',
+          },
+          {
+            to: '/next/adv/security/smart_contract_audit',
+            from: '/docs/sec/smart_contract_audit',
+          },
+          {
+            to: '/next/adv/security/threat_model',
+            from: '/docs/sec/threat_model',
+          },
+          {
+            to: '/next/gov/contribution/bug-report',
+            from: '/docs/cf/bug-report',
+          },
+          {
+            to: '/next/gov/contribution/docs',
+            from: '/docs/cf/docs',
+          },
+          {
+            to: '/next/gov/contribution/feedback',
+            from: '/docs/cf/feedback',
+          },
+          {
+            to: '/next/learn/futher-reading/ethereum_and_dvt',
+            from: '/docs/fr/ethereum_and_dvt',
+          },
+          {
+            to: '/next/learn/futher-reading/testnet',
+            from: '/docs/fr/testnet',
+          },
+          {
+            to: '/next/learn/futher-reading/resources',
+            from: '/docs/fr/resources',
+          },
+          //Redirect from multiple old paths to the new path
+          // {
+          //   to: '/docs/newDoc2',
+          //   from: ['/docs/oldDocFrom2019', '/docs/legacyDocFrom2016'],
+          // },
+       ],
+        // createRedirects(existingPath) {
+        //   if (existingPath.includes('/learn/intro/obol-collective')) {
+        //     // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
+        //     return [
+        //       existingPath.replace('/learn/intro/obol-collective', '/docs/int/Overview'),
+        //       //existingPath.replace('/community', '/docs/support'),
+        //     ];
+        //   }
+        //   return undefined; // Return a falsy value: no redirect created
+        // },
+     },
+   ],
     // [
     //   "docusaurus-plugin-typedoc",
 
@@ -77,6 +265,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          "routeBasePath": '/',
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/ObolNetwork/obol-docs/edit/main/",
@@ -202,15 +391,15 @@ const config = {
             items: [
               {
                 label: "Intro to Obol",
-                to: "/docs/int/Overview",
+                to: "/next/learn/intro/obol-collective",
               },
               {
                 label: "Charon",
-                to: "/docs/charon/intro",
+                to: "/next/learn/charon/intro",
               },
               {
                 label: "DV Launchpad",
-                to: "/docs/dvl/intro",
+                to: "/next/learn/intro/launchpad",
               },
             ],
           },
@@ -232,7 +421,7 @@ const config = {
             items: [
               {
                 label: "Blog",
-                to: "https://blog.obol.tech/",
+                to: "https://blog.obol.org/",
               },
               {
                 label: "GitHub",
