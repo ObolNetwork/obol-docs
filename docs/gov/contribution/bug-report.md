@@ -3,7 +3,7 @@ description: Filing a bug report
 sidebar_position: 1
 ---
 
-# Filing a bug report
+# Filing a Bug Report
 
 Bug reports are critical to the rapid development of Obol. In order to make the process quick and efficient for all parties, it is best to follow some common reporting etiquette when filing to avoid double issues or miscommunications.
 

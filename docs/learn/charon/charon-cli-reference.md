@@ -3,7 +3,7 @@ description: A go-based middleware client for taking part in Distributed Validat
 sidebar_position: 5
 ---
 
-# CLI reference
+# CLI Reference
 
 The following is a reference for Charon version [`v1.1.2`](https://github.com/ObolNetwork/charon/releases/tag/v1.1.2). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 

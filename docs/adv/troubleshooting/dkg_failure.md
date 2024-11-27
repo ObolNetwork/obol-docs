@@ -3,7 +3,7 @@ sidebar_position: 2
 description: Handling DKG failure
 ---
 
-# Handling DKG failure
+# Handling DKG Failure
 
 While the DKG process has been tested and validated against many different configuration instances, it can still encounter issues which might result in failure.
 

@@ -3,7 +3,7 @@ sidebar_position: 2
 description: Centralization Risks and mitigation
 ---
 
-# Centralization risks and mitigation
+# Centralization Risks and Mitigation
 
 ## Risk: Obol hosting the relay infrastructure
 

@@ -3,7 +3,7 @@ sidebar_position: 5
 description: Threat model for a Distributed Validator
 ---
 
-# Charon threat model
+# Charon Threat Model
 
 This page outlines a threat model for Charon, in the context of it being a Distributed Validator middleware for Ethereum validator clients.
 

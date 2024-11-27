@@ -3,7 +3,7 @@ sidebar_position: 4
 description: Combine distributed validator private key shares to recover the validator private key.
 ---
 
-# Combine DV private key shares
+# Combine DV Private Key Shares
 
 :::danger
 Reconstituting Distributed Validator private key shares into a standard validator private key is a security risk, and can potentially cause your validator to be slashed.

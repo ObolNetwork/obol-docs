@@ -2,7 +2,7 @@
 sidebar_position: 4
 description: Add monitoring credentials to help the Obol Team monitor the health of your cluster
 ---
-# Monitoring your Node
+# Monitoring Your Node
 
 This comprehensive guide will assist you in effectively monitoring your Charon clusters and setting up alerts by running your own Prometheus and Grafana server. If you want to use Obol’s [public dashboard](https://grafana.monitoring.gcp.obol.tech/d/d895e47a-3c2d-46b7-9b15-8f31202681af/clusters-aggregate-view?orgId=6) instead of running your servers, refer to [this section](../../run/start/obol-monitoring.md) in Obol docs that teaches you how to push Prometheus metrics to Obol.
 
