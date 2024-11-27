@@ -25,8 +25,6 @@ In an Obol DV cluster, nodes use LibP2P to communicate directly with each other,
 
 In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with TSL. This direct communication of nodes within a cluster improves latency, and makes cluster communications harder to attack with a denial of service (DOS) attack. It also allows an Obol DV cluster to be run within a private network. This may allow cost savings on data egress costs, for operators running cluster nodes across multiple locations of a single cloud provider, for example.
 
-For other DVT implementations, each DV cluster communicates with every other cluster, creating a large, cumbersome gossip network. This limits scaling and requires the nodes of every DV cluster to run the same version. A drawback: the public gossip network relies on nodes to voluntarily open their ports and participate in peering and gossip, resulting in higher data egress costs, since each node is relaying many more messages than only the ones related to that node’s cluster. This may require some type of artificial incentivization to encourage nodes to participate in gossip messaging. In the event that nodes don’t broadly participate in peering, it may be necessary for the network developers to run a central messaging relayer in order to support the gossip network and ensure continued performance between all gossip nodes. (The costs associated with this central relaying would somehow need to be passed onto the network operators and users.)
-
 ![Gossip Network](/img/GossipNetwork.png)
 
 ## Works with existing validator clients and PKI
