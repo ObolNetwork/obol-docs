@@ -226,10 +226,6 @@ const config = {
             from: '/docs/advanced/lido_csm',
           },
           {
-            to: '/next/guides/walkthroughs/CSM-walkthrough',
-            from: '/docs/advanced/lido_csm',
-          },
-          {
             to: '/next/run/integrations/Dappnode',
             from: '/docs/faq/Dappnode',
           },
