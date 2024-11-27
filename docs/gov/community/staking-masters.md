@@ -23,4 +23,4 @@ We're empowering the next generation of masters, the Ethereum Staking Masters.
 2. **Interview:** Outstanding applicants will be interviewed to discuss their unique skills and how those can be best applied to advancing Ethereum staking adoption.
 3. **Lead:** Selected Staking Masters will lead a project of their choosing for the length of their cohort, with support and recognition from DV Labs.
 
-Apply now at [squadstaking.com/mastery](squadstaking.com/mastery)!
+Apply now at [squadstaking.com/mastery](https://squadstaking.com/mastery)!
