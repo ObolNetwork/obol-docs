@@ -7,10 +7,12 @@ description: The Obol Modular Staking Stack
 
 ## The Components
 
-[Charon](../charon/intro.md) - Obol's DV Middleware client. 
-[Obol Splits](../intro/obol-splits.mdx) - A suite of smart contracts for use with distributed validators.
-[DV Launchpad](../intro/launchpad.md) - A website interface for configuring and activating distributed validators.
-[Obol SDK](../../adv/advanced/quickstart-sdk.mdx) - for creating Distributed Validators with the help of the Obol API.
+- [Charon](../charon/intro.md) - Obol's DV Middleware client. 
+- [Obol Splits](../intro/obol-splits.mdx) - A suite of smart contracts for use with distributed validators.
+- [DV Launchpad](../intro/launchpad.md) - A website interface for configuring and activating distributed validators.
+- [Obol SDK](../../adv/advanced/quickstart-sdk.mdx) - for creating Distributed Validators with the help of the Obol API.
+
+![Obol Stacking Stack](/img/StakingStack.png)
 
 ## The Vision
 
