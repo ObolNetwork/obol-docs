@@ -221,6 +221,18 @@ const config = {
             to: '/next/learn/futher-reading/resources',
             from: '/docs/fr/resources',
           },
+          {
+            to: '/next/guides/walkthroughs/CSM-walkthrough',
+            from: '/docs/advanced/lido_csm',
+          },
+          {
+            to: '/next/guides/walkthroughs/CSM-walkthrough',
+            from: '/docs/advanced/lido_csm',
+          },
+          {
+            to: '/next/run/integrations/Dappnode',
+            from: '/docs/faq/Dappnode',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
