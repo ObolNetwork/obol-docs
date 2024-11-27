@@ -127,6 +127,121 @@ With a fully synced Ethereum node now running on the DappNode, the below steps w
   </ol>
 </p>
 </TabItem>
+<TabItem value="Sedge" label="Sedge">
+This quick start guide for the Sedge integration explains how to launch a Distributed Validator (DV) node using Sedge, a user-friendly, one-click setup tool for running an Ethereum validator. With Sedge, you can easily deploy and manage a validator without needing prior technical knowledge.
+
+The guide focuses on deploying and running a validator on the Holesky testnet. However, the same steps can be applied to the mainnet by simply updating the relevant environment variables.
+
+This guide is tailored for Mac operating system users. However, for installation on other operating systems, such as Linux or Windows, please refer to the <a href="https://docs.sedge.nethermind.io/docs/quickstart/install-guide" target="_blank">official Sedge installation guide</a>
+
+## Minimum Holesky Requirements 
+- 4 CPU cores
+- 8 GB RAM
+- 300 GB solid state storage
+- 100 Mbps download, 20 Mbps upload broadband connection
+
+## Minimum Mainnet Requirements 
+For up-to-date hardware considerations, check out the <a href="https://ethereum.org/en/developers/docs/nodes-and-clients/run-a-node/#environment-and-hardware" target="_blank">ethereum.org guides</a> which explores various setups and trade-offs, such as running the node locally or in the cloud. 
+
+## Build from source using 'make'  
+In order to build from source, make sure you have the following software dependencies installed: 
+
+- Git - Git is a widely used version control system. You can install it using Hombrew.
+- GoLang -  install the Go programming language following the <a href="https://go.dev/doc/install" target="_blank">official instructions</a>.  You need at least version `1.20`.
+
+In your mac terminal, run the following commands to install sedge. 
+<p>
+          <ol>
+            <li>
+              Install make
+              ```shell
+              sudo apt install make 
+              ```
+            </li>
+            <li>
+              Clone git repo
+              ```shell
+              git clone https://github.com/ObolNetwork/sedge 
+              ```
+            </li>
+            <li>
+               Change directory & install 
+              ```shell
+              cd sedge
+              make install 
+              ```
+            </li>
+            <li>
+               In case you want the binary in your PATH please copy the binary to `/usr/local/bin:`
+              ```shell
+              sudo cp sedge/build/sedge /usr/local/bin/
+              ```
+            </li>
+            </ol>
+        </p>
+
+## Install using Homebrew
+To install Sedge via Homebrew, you’ll first need to install the Homebrew package manager on your Mac. Use the official installation script provided on the <a href="https://brew.sh/" target="_blank">Homebrew homepage</a>.
+<p>
+          <ol>
+            <li>
+              Once Homebrew is installed, you’re ready to set up Sedge. Simply add the official Sedge repository and proceed with the installation:
+              ```shell
+              brew install nethermindeth/sedge/sedge
+              ```
+            </li>
+            <li>
+              If you want to update Sedge, you can use the following commands:
+              ```shell
+              brew updatebrew upgrade sedge
+              ```
+            </li>
+            </ol>
+        </p>
+##  Check the install was successful 
+<p>
+          <ol>
+            <li>
+              Run the below command to check if your have successfully installed sedge in your computer. 
+              ```shell
+              sedge 
+              ```
+            </li>
+            <li>
+              Expected output: 
+              ```shell
+              A tool to allow deploying validators with ease.
+
+                Usage:
+                  sedge [command]
+
+                Available Commands:
+                  cli             Generate a node setup interactively
+                  clients         List supported clients
+                  deps            Manage dependencies
+                  down            Shutdown sedge running containers
+                  generate        Generate new setups according to selected options
+                  help            Help about any command
+                  import-key      Import validator keys
+                  keys            Generate keystore folder
+                  logs            Get running container logs
+                  networks        List supported networks
+                  run             Run services
+                  show            Show useful information about sedge running containers
+                  slashing-export Export slashing protection data
+                  slashing-import Import slashing protection data
+                  version         Print sedge version
+
+                Flags:
+                  -h, --help               help for sedge
+                      --log-level string   Set Log Level, e.g panic, fatal, error, warn, warning, info, debug, trace (default "info")
+
+                Use "sedge [command] --help" for more information about a command.
+              ```
+            </li>
+            </ol>
+        </p>
+</TabItem>
 </Tabs>
 
 For Step 2, select the "Creator" tab if you are coordinating the creation of the cluster (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to). Select the "Operator" tab if you are accepting an invitation to operate a node in a cluster, proposed by the cluster creator.
@@ -442,6 +557,112 @@ For the [DKG](../../learn/charon/dkg.md) to complete, all operators need to be r
      </ol>
   
   </TabItem>
+<TabItem value="Sedge" label="Sedge">
+## Sedge generate 
+With Sedge now installed, it’s time to deploy a distributed validator. Using the `sedge generate` command and its subcommands, Sedge will create a Docker Compose file needed to run the validator node.
+<p>
+          <ol>
+            <li>
+              The following command generates the artifacts required to deploy a distributed validator on the Holesky network, using Teku as the validator client, Prysm as the consensus client, and Geth as the execution client. For additional supported client combinations, <a href="https://github.com/ObolNetwork/sedge?tab=readme-ov-file#supported-networks-and-clients" target="_blank">refer to the documentation here</a>.
+              ```shell
+              sedge generate full-node --validator=teku --consensus=prysm --execution=geth --network=holesky --distributed
+              ```
+              You should be shown a long list of configuration outputs with the following endings:
+              ```shell
+              2024-09-20 12:56:15 -- [INFO] Generation of files successfully, happy staking! You can use now 'sedge run' to start the setup.
+              ```
+            </li>
+            <li>
+              Explore the config files
+              You should now see a sedge-data directory created in the folder where you ran the `sedge generate` command.
+              To view the directory contents, use the `ls` command. 
+              ```shell
+              > ls
+              sedge-data
+              ```
+              change dir and list the files inside sedge-data
+               ```shell
+              > cd sedge-data 
+              > ls 
+              docker-compose.yml jwtsecret
+              ```
+            </li>
+            </ol>
+        </p>
+## Sedge Import-key
+Ideally you would do your charon DKG process before deploying your DV node. Once you have successfully completed your DKG process, it would generate the DV keys which you will need to import into sedge using the `sedge import-key command.` 
+
+Use the following command to import keys from the directory where the .charon dir is located. In the below example, node0 is the directory where you will find the .charon folder.
+```shell
+sedge import-key --from node0 holesky teku 
+```
+## Sedge Run
+After confirming the configurations and ensuring all files are in place, use the sedge run command to deploy the DV Docker containers. Sedge will then begin pulling all the required Docker images.
+
+```shell
+> sedge run
+2024-09-20 13:11:49 -- [INFO] [Logger Init] Log level: info
+2024-09-20 13:11:49 -- [WARN] A new Version of sedge is available. Please update to the latest Version. See https://github.com/NethermindEth/sedge/releases for more information. Latest detected tag: fatal: not a git repository (or any of the parent directories): .git
+2024-09-20 13:11:50 -- [INFO] Setting up containers
+2024-09-20 13:11:50 -- [INFO] Running command: docker compose -f /sedge/sedge-data/docker-compose.yml build
+2024-09-20 13:11:50 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml pull
+[+] Pulling 16/44
+ ⠇ consensus [⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] Pulling                                                                                                                                                     20.8s
+   ⠙ b003b463d750 Downloading [===============>                                   ]   32.9kB/103.7kB                                                                                                14.2s
+   ⠙ fe5ca62666f0 Waiting                                                                                                                                                                           14.2s
+   ⠙ b02a7525f878 Waiting                                                                                                                                                                           14.2s
+   ⠙ fcb6f6d2c998 Waiting                                                                                                                                                                           14.2s
+   ⠙ e8c73c638ae9 Waiting                                                                                                                                                                           14.2s
+   ⠙ 1e3d9b7d1452 Waiting                                                                                                                                                                           14.2s
+   ⠙ 4aa0ea1413d3 Waiting                                                                                                                                                                           14.2s
+   ⠙ 7c881f9ab25e Waiting                                                                                                                                                                           14.2s
+   ⠙ 5627a970d25e Waiting                                                                                                                                                                           14.2s
+   ⠙ 5cf83054c259 Waiting                                                                                                                                                                           14.2s
+   ⠙ fec68abcb14d Waiting                                                                                                                                                                           14.2s
+   ⠙ 4d5ad547ce94 Waiting                                                                                                                                                                           14.2s
+   ⠙ e1ea80853e89 Waiting                                                                                                                                                                           14.2s
+   ⠙ 17b1d7e8d99a Waiting                                                                                                                                                                           14.2s
+   ⠙ 841a2fc14521 Waiting                                                                                                                                                                           14.2s
+   ⠙ 55b44d28dd62 Waiting                                                                                                                                                                           14.2s
+   ⠙ f3e3115c6547 Pulling fs layer                                                                                                                                                                  14.2s
+   ⠙ 3cec53649029 Waiting                                                                                                                                                                           14.2s
+   ⠙ 01739568079a Waiting                                                                                                                                                                           14.2s
+   ⠙ c6bd24b188db Waiting                                                                                                                                                                           14.2s
+   ⠙ fe8d2e9c9467 Waiting                                                                                                                                                                           14.2s
+   ⠙ c151008cbec0 Waiting                                                                                                                                                                           14.2s
+   ⠙ de1ef6c90686 Waiting                                                                                                                                                                           14.2s
+   ⠙ 03d09d97b125 Waiting                                                                                                                                                                           14.2s
+ ✔ execution Pulled                                                                                                                                                                                  9.3s
+   ✔ a258b2a6b59a Pull complete                                                                                                                                                                      1.5s
+   ✔ a2d6cf6afda3 Pull complete                                                                                                                                                                      1.7s
+   ✔ a3dd8256fc41 Pull complete                                                                                                                                                                      6.9s
+```
+Once all docker images are pulled, sedge will create & start the containers to run all the required clients. See below for example output of the progress. 
+
+```shell
+✔ 8db8b5d461a7 Pull complete                                                                                                                                                                     24.1s
+   ✔ 2288b86b1d5f Pull complete                                                                                                                                                                     24.3s
+   ✔ 4becb7b9a44b Pull complete                                                                                                                                                                     24.3s
+   ✔ 4f4fb700ef54 Pull complete                                                                                                                                                                     24.3s
+   ✔ 5c35e3728c84 Pull complete                                                                                                                                                                     35.1s
+2024-09-20 13:12:45 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml create
+[+] Creating 7/7
+ ✔ Network sedge-network              Created                                                                                                                                                        0.1s
+ ✔ Container sedge-dv-client          Created                                                                                                                                                        0.4s
+ ✔ Container sedge-consensus-client   Created                                                                                                                                                        0.4s
+ ✔ Container sedge-execution-client   Created                                                                                                                                                        0.4s
+ ✔ Container sedge-mev-boost          Created                                                                                                                                                        0.4s
+ ✔ Container sedge-validator-blocker  Created                                                                                                                                                        0.4s
+ ✔ Container sedge-validator-client   Created                                                                                                                                                        0.1s
+2024-09-20 13:12:45 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml up -d
+[+] Running 4/5
+ ✔ Container sedge-consensus-client   Started                                                                                                                                                        1.0s
+ ⠧ Container sedge-validator-blocker  Waiting                                                                                                                                                      130.8s
+ ✔ Container sedge-dv-client          Started                                                                                                                                                        1.0s
+ ✔ Container sedge-execution-client   Started                                                                                                                                                        1.3s
+ ✔ Container sedge-mev-boost          Started      
+```
+</TabItem>
 </Tabs>
 
 :::danger
