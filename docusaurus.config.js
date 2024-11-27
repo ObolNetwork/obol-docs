@@ -221,6 +221,10 @@ const config = {
             to: '/next/learn/futher-reading/resources',
             from: '/docs/fr/resources',
           },
+          {
+            to: '/next/guides/walkthroughs/CSM-walkthrough',
+            from: '/docs/advanced/lido_csm',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
