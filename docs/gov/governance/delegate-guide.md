@@ -23,7 +23,7 @@ Please see the toolkit on the forum [here](https://community.obol.org/t/governan
 
 ### How to vote in the RAF:
 
-1. Visit the  RAF portal at http://raf.obol.org
+1. Visit the  RAF portal at http://raf.obol.org.
 2. Click the “projects” tab on the top of the page.
 3. Click `+` to add your favourite projects to the Ballot, after reviewing their impact. To examine a project, click anywhere on the project card to open the project details page.
 4. Click on ‘Go to Ballot’ at the top right of the page, which will take you to the Ballot Page, with the projects you have chosen. In the screenshot below, you can see two choices. 
@@ -40,5 +40,5 @@ Allocating funding is not a perfect process. You may not feel like an expert on 
 - **Make sense together**
     Feel free to engage with other contributors and the broader Obol Collective in evaluating project impact.
     
-- **Make wholistic impact determinations, but when in doubt, don’t make assumptions.**
+- **Make holistic impact determinations, but when in doubt, don’t make assumptions.**
     A combination of data and research should leave you qualified to make an informed decision about a given applicant. Still, there might be some projects whose impact argument is more subjective and hard to quantify (in the education category, for example). Use your gut in these situations, but don’t be *too* charitable with an applicant. If an impact statement seems like a stretch, it probably is.

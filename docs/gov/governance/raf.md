@@ -43,7 +43,7 @@ OBOL Delegates vote on projects in proportion to their voting power. Here’s ho
 2. **Voting Process:** Delegates vote using the [raf.obol.org](http://raf.obol.org) app. Depending on the type of application being reviewed, a specific set of criteria should be used to judge a project's contributions to the Obol Collective.
 
 :::warning
-The Obol Association will monitor votes to ensure contributors are not voting for projects they are directly involved in or where a substantial conflict of interest may be present. Delegates are expected to act in accordance with the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206/2) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum.
+The Obol Association will monitor votes to ensure contributors are not voting for projects they are directly involved in or where a substantial conflict of interest may be present. Delegates are expected to act in accordance with the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum.
 :::
 
 ### Step 5: Tallying Results

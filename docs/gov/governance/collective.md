@@ -11,8 +11,8 @@ The Obol Collective’s governance system has two primary goals:
 
 1. **Resource allocation.** Allocate resources effectively to support the Collective’s vision and grow the Obol Collective's sustainable value. Long-term vision may sometimes conflict with short-term value creation; thus, governance requires a blend of short-term and long-term thinking to allocate the token treasury and protocol revenue effectively.
 2. **Capture resistance.** Governance plays a key role in securing the anti-capture and censorship resistance of the Obol Collective. Governance should: 
-    1. make it possible for operations to continue over the long term without reliance on any individual entity
-    2. prevent any one entity or small group of entities from being able to control or censor
+    1. make it possible for operations to continue over the long term without reliance on any individual entity;
+    2. prevent any one entity or small group of entities from being able to control or censor.
 
 ## Overview: The Obol Token House and RAF
 
@@ -22,7 +22,7 @@ In the **Token House,** OBOL Token holders are responsible for submitting, delib
 
 In the **Obol Retroactive Fund (RAF)**, OBOL Token Delegates are responsible for allocating funds within the RAF to projects and teams that provide value to the Obol Collective.
 
-All OBOL holders and Delegates are expected to exercise their authority responsibly and follow the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206/2) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum.
+All OBOL holders and Delegates are expected to exercise their authority responsibly and follow the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum.
 
 ![Goverance Houses](/img/GovernanceHouses.png)
 
@@ -37,7 +37,7 @@ After taking any Emergency Action, the Security Council must issue a full transp
 
 ## Administration and Implementation
 
-In all cases, Obol Collective governance is intended to be carried out in a manner consistent with the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206/2) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum. The Obol Association will steward this process as described below, with the goal of increasingly decentralising its role over time.
+In all cases, Obol Collective governance is intended to be carried out in a manner consistent with the Delegate [Rules of Engagement](https://community.obol.org/t/delegates-rules-of-engagement/206) and the general [Code of Conduct](https://community.obol.org/t/code-of-conduct-for-discussion-forum/205) for the forum. The Obol Association will steward this process as described below, with the goal of increasingly decentralising its role over time.
 
 The Obol Association, via its governance administrators, will facilitate administration to ensure that anyone may participate thoughtfully in governance. Such administrative services may include:
 

@@ -23,7 +23,7 @@ You can participate in the Obol Contributions Program by:
 
 1. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/). This allows you to directly participate in the network's decentralisation efforts and earn contributions. You can also visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members.
 
-2. **Staking through Staking Partners**: By participating in staking through our partners, your staking rewards will also contribute to the Obol Collective. For the current list of staking partners, please visit [obol.org/contributions](https://obol.org/contributions)
+2. **Staking through Staking Partners**: By participating in staking through our partners, your staking rewards will also contribute to the Obol Collective. For the current list of staking partners, please visit [obol.org/contributions](https://obol.org/contributions).
 
 ## How can I track my contributions?
 
