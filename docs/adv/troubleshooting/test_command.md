@@ -3,9 +3,8 @@ sidebar_position: 3
 description: Troubleshoot issues spotted by the test command
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 # Test Commands
+
 This page aims to give guidance on the causes, and potential for troubleshooting or improvement, of failed tests or low test scores from the [Charon Test commands](../../run/prepare/test-command.md).
 
 ## Peers
