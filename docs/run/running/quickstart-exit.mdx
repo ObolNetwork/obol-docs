@@ -1,0 +1,302 @@
+---
+sidebar_position: 3
+description: Exit a validator
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+# Exit a DV
+
+Users looking to exit staking entirely and withdraw their full balance back must also sign and broadcast a "voluntary exit" message with validator keys which will start the process of exiting from staking. This is done with your validator client and submitted to your beacon node, and does not require gas. In the case of a DV, each Charon node needs to broadcast a partial exit to the other nodes of the cluster. Once a threshold of partial exits has been received by any node, the full voluntary exit will be sent to the beacon chain.
+
+This process will take 27 hours or longer depending on the current length of the exit queue.
+
+:::info
+- A threshold of operators needs to run the exit command for the exit to succeed.
+- If a Charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all Charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
+:::
+
+## Run the `voluntary-exit` command on your validator client
+
+Run the appropriate command on your validator client to broadcast an exit message from your validator client to its upstream Charon client.
+
+It needs to be the validator client that is connected to your Charon client taking part in the DV, as you are only signing a partial exit message, with a partial private key share, which your Charon client will combine with the other partial exit messages from the other operators.
+
+:::info
+- All operators need to use the same `EXIT_EPOCH` for the exit to be successful. Assuming you want to exit as soon as possible, the default epochs included in the below commands should be sufficient for the respective network.
+- Partial exits can be broadcasted by any validator client as long as the sum reaches the threshold for the cluster.
+:::
+
+<Tabs groupId="validator-clients">
+  <TabItem value="Holesky" label="Holesky">
+    <Tabs groupId="validator-clients">
+      <TabItem value="teku" label="Teku" default>
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            --beacon-node-api-endpoint="http://charon:3600/" \
+            --confirmation-enabled=false \
+            --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+            --epoch=256`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="nimbus" label="Nimbus">
+        The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+        <br/><br/>
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c ' \
+        
+            mkdir /home/user/data/wd
+            cp -r /home/user/data/charon/ /home/user/data/wd
+                
+            /home/user/nimbus_beacon_node deposits exit --all --epoch=256 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
+          </code>
+        </pre>
+      </TabItem>
+        <TabItem value="lodestar" label="Lodestar" default>
+        The following executes an interactive command inside the Lodestar VC container to exit all validators.
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
+            --beaconNodes="http://charon:3600" \
+            --dataDir=/opt/data \
+            --exitEpoch=256 \
+            --network=holesky \
+            --yes`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="lighthouse" label="Lighthouse" default>
+        The following executes an interactive command inside the Lighthouse VC container to exit all validators. The exit is submitted for the current epoch.
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
+                for file in /opt/charon/keys/*; do \
+                  filename=$(basename $file);
+                  if [[ $filename == *".json"* ]]; then
+                  `}
+                    {String.raw`  keystore=$`}
+                    {String.raw`{filename%.*};
+                    `}
+                    {String.raw`lighthouse account validator exit \
+                      --beacon-node http://charon:3600 \
+                      --keystore /opt/charon/keys/$keystore.json \
+                      --network holesky \
+                      --password-file /opt/charon/keys/$keystore.txt \
+                      --no-confirmation \
+                      --no-wait;
+                  fi;
+                done;'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="prysm" label="Prysm" default>
+      Currently voluntary exits through Prysm are not supported. This is because <a href="https://docs.prylabs.network/docs/wallet/exiting-a-validator" target="_blank">Prysm support voluntary exits only if both the validator client and the beacon node are running on Prysm</a>. Note that this is incompatible with Charon, as the Charon client intercepts the communication between the validator client and the consensus layer.
+      </TabItem>
+      <TabItem value="charon" label="Charon" default>
+      Voluntary exit can be submitted directly through Charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through Charon are submitted per validator. All active validators public keys for a given cluster lock can be listed with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list \
+    --beacon-node-endpoints="http://lighthouse:5052"'`}
+          </code>
+        </pre>
+      Then a signed partial exit for validator can be submitted by:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during the cluster creation. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="Dappnode" label="Dappnode">
+      <h2>Exit a distributed validator using DappNode</h2>
+       <ol>
+            <li>
+             Navigate to the config tab of your Obol DappNode package. Click 'Packages', then click 'My Packages', and enter the Obol package. Go to the config tab. At the bottom right corner of the page, click on 'Show Advanced Editor'.
+              <img src="/img/ConfigTabExit.png" alt="Config Tab" />
+            </li>
+            <li>
+             The advanced editor config page provides ENV configs for each validator. Scroll to the validator number you want to exit and type “true” in the column opposite SIGN_EXIT.
+              <img src="/img/TypeTrue.png" alt="Config Tab" />
+            </li>
+            <li>
+             Scroll to the bottom of the page and click the 'update' button for the changes to take effect.
+              <img src="/img/ExitUpdate.png" alt="Config Tab" />
+            </li>
+            <li>
+             Check your logs to confirm the exit process has started. 
+            </li>
+            </ol>
+            </TabItem>
+    </Tabs>
+  </TabItem>
+  <TabItem value="Mainnet" label="Mainnet">
+    <Tabs groupId="validator-clients">
+      <TabItem value="teku" label="Teku" default>
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
+            --beacon-node-api-endpoint="http://charon:3600/" \
+            --confirmation-enabled=false \
+            --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
+            --epoch=194048`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="nimbus" label="Nimbus">
+        The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+        <br/><br/>
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c ' \
+            
+            mkdir /home/user/data/wd
+            cp -r /home/user/data/charon/ /home/user/data/wd
+            
+            /home/user/nimbus_beacon_node deposits exit --all --epoch=194048 --rest-url=http://charon:3600/ --data-dir=/home/user/data/wd/'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="lodestar" label="Lodestar" default>
+        The following executes an interactive command inside the Lodestar VC container to exit all validators.
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
+            --beaconNodes="http://charon:3600" \
+            --dataDir=/opt/data \
+            --exitEpoch=194048 \
+            --network=mainnet \
+            --yes`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="lighthouse" label="Lighthouse" default>
+        The following executes an interactive command inside the Lighthouse VC container to exit all validators. The exit is submitted for the current epoch.
+        <pre>
+          <code>
+            {String.raw`docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
+                for file in /opt/charon/keys/*; do \
+                  filename=$(basename $file);
+                  if [[ $filename == *".json"* ]]; then
+                  `}
+                    {String.raw`  keystore=$`}
+                    {String.raw`{filename%.*};
+                    `}
+                    {String.raw`lighthouse account validator exit \
+                      --beacon-node http://charon:3600 \
+                      --keystore /opt/charon/keys/$keystore.json \
+                      --network mainnet \
+                      --password-file /opt/charon/keys/$keystore.txt \
+                      --no-confirmation \
+                      --no-wait;
+                  fi;
+                done;'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="prysm" label="Prysm" default>
+      Currently voluntary exits through Prysm are not supported. This is because <a href="https://docs.prylabs.network/docs/wallet/exiting-a-validator" target="_blank">Prysm support voluntary exits only if both the validator client and the beacon node are running on Prysm</a>. Note that this is incompatible with Charon, as the Charon client intercepts the communication between the validator client and the consensus layer.
+      </TabItem>
+      <TabItem value="charon" label="Charon" default>
+      Voluntary exit can be submitted directly through Charon as well. The partially signed exit messages are stored (centrally) on Obol's infrastructure. Exits through Charon are submitted per validator. All active validators public keys for a given cluster lock can be listed with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit active-validator-list \
+    --beacon-node-endpoints="http://lighthouse:5052"'`}
+          </code>
+        </pre>
+      Then a signed partial exit for validator can be submitted by:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      After a sufficient amount of signed partial exits from node operators in the cluster is cumulated, a full (complete) exit is created. The threshold is the same as the one submitted during the cluster creation. After a full exit message is created, any operator from the cluster can broadcast it to the beacon chain with:
+        <pre>
+          <code>
+        {String.raw`docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+    --beacon-node-endpoints="http://lighthouse:5052" \
+    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+    --publish-timeout="5m"'`}
+          </code>
+        </pre>
+      </TabItem>
+      <TabItem value="Dappnode" label="Dappnode">
+      <h2>Exit a distributed validator using DappNode</h2>
+      Below steps provide steps to exit a validator using DappNode. 
+       <ol>
+            <li>
+             Navigate to the config tab of your Obol DappNode package. Click 'Packages', then click 'My Packages', and enter the Obol package. Go to the config tab. At the bottom right corner of the page, click on 'Show Advanced Editor'.
+              <img src="/img/ConfigTabExit.png" alt="Config Tab" />
+            </li>
+            <li>
+             The advanced editor config page provides ENV configs for each validator. Scroll to the validator number you want to exit and type “true” in the column opposite SIGN_EXIT.
+              <img src="/img/TypeTrue.png" alt="Config Tab" />
+            </li>
+            <li>
+             Scroll to the bottom of the page and click the 'update' button for the changes to take effect.
+              <img src="/img/ExitUpdate.png" alt="Config Tab" />
+            </li>
+            <li>
+             Check your logs to confirm the exit process has started. 
+            </li>
+            </ol>
+            </TabItem>
+    </Tabs>
+  </TabItem>
+</Tabs>
+
+When submitting through a validator client (not through charon directly), once a threshold of exit signatures has been received by any single Charon client, it will craft a valid voluntary exit message and will submit it to the beacon chain for inclusion. You can monitor partial exits stored by each node in the [Grafana Dashboard](https://github.com/ObolNetwork/charon-distributed-validator-node).
+
+## Exit epoch and withdrawable epoch
+
+The process of a validator exiting from staking takes variable amounts of time, depending on how many others are exiting at the same time.
+
+Immediately upon broadcasting a signed voluntary exit message, the exit epoch and withdrawable epoch values are calculated based off the current epoch number. These values determine exactly when the validator will no longer be required to be online performing validation, and when the validator is eligible for a full withdrawal respectively.
+
+1. Exit epoch - epoch at which your validator is no longer active, no longer earning rewards, and is no longer subject to slashing rules.
+   :::warning
+   Up until this epoch (while "in the queue") your validator is expected to be online and is held to the same slashing rules as always. Do not turn your DV node off until this epoch is reached.
+   :::
+2. Withdrawable epoch - epoch at which your validator funds are eligible for a full withdrawal during the next validator sweep.
+   This occurs 256 epochs after the exit epoch, which takes ~27.3 hours.
+
+## How to verify a validator exit
+
+Consult the examples below and compare them to your validator's monitoring to verify that exits from each operator in the cluster are being received. This example is a cluster of 4 nodes with 2 validators and threshold of 3 nodes broadcasting exits are needed.
+
+1. Operator 1 broadcasts an exit on validator client 1.
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-01.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-01.png)
+2. Operator 2 broadcasts an exit on validator client 2.
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-02.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-02.png)
+3. Operator 3 broadcasts an exit on validator client 3.
+   ![Verify in Grafana Exit panel](/img/ExitPromQuery-03.png)
+   ![Verify in Grafana Exit panel](/img/DutyExit-03.png)
+
+At this point, the threshold of 3 has been reached and the validator exit process will start. The logs will show the following:
+![Verify in Grafana Exit panel](/img/ExitLogs.png)
+
+:::tip
+Once a validator has broadcasted an exit message, it must continue to validate for at least 27 hours or longer. Do not shut off your distributed validator nodes until your validator is fully exited.
+:::
