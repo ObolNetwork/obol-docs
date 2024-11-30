@@ -16,7 +16,7 @@ The following specifications are recommended for bare metal machines for cluster
 
 - A CPU with 4+ cores, favouring high clock speed over more cores. ( >3.0GHz and higher or a cpubenchmark [single thread](https://www.cpubenchmark.net/singleThread.html) score of >2,500)
 - 16GB of RAM
-- 2TB+ free SSD disk space (for mainnet)
+- 2TB+ free SSD disk space for mainnet, 1TB+ for Holesky
 - 10mb/s internet bandwidth
 
 ### Recommended Specs for extremely large clusters

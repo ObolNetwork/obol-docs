@@ -19,12 +19,6 @@ who work with MEV searchers to produce the most valuable blocks a validator can 
 block relays (who communicate with the "Block Builders") for blocks to propose. The block that pays the largest reward to the validator will be signed and returned to the relay for broadcasting to the wider
 network. The end result for the validator is generally an increased APR as they receive some share of the MEV.
 
-:::info
-Before completing this guide, please check your cluster version, which can be found inside the `cluster-lock.json` file. If you are using cluster-lock version `1.7.0` or higher, Charon seamlessly accommodates all validator client implementations within a MEV-enabled distributed validator cluster.
-
-For clusters with a `cluster-lock.json` version `1.6.0` and below, Charon is compatible only with [Teku](https://github.com/ConsenSys/teku). Use the version history feature of this documentation to see the instructions for configuring a cluster in that manner (`v0.16.0`).
-:::
-
 ## Client configuration
 
 :::note

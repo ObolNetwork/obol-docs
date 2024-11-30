@@ -14,7 +14,7 @@ This is **optional** and does not confer any special privileges within the Obol 
 <Tabs groupId="set-prom-remote-write">
   <TabItem value="Quickstart" label="Quickstart">
 
-This is for operators using the [example repo](https://github.com/ObolNetwork/charon-distributed-validator-node) from our [quickstart guide](../start/quickstart_overview.md), and have been provided with **Monitoring Credentials** used to push distributed validator metrics to Obol's central Prometheus cluster to monitor, analyze, and improve your Distributed Validator Cluster's performance. (For example, this is necessary to participate in the Obol [Techne](https://squadstaking.com/techne) credential program.)
+This is for operators using the [starter repo](https://github.com/ObolNetwork/charon-distributed-validator-node) from our [quickstart guide](../start/quickstart_group.md), and have been provided with **Monitoring Credentials** used to push distributed validator metrics to Obol's central Prometheus cluster to monitor, analyze, and improve your Distributed Validator Cluster's performance. (For example, this is necessary to participate in the Obol [Techne](https://squadstaking.com/techne) credential program.)
 
 ## Update the monitoring token in the `.env` file  
 - Inside your `.env` file, uncomment the `PROM_REMOTE_WRITE_TOKEN` line by removing the `#` symbol.  
