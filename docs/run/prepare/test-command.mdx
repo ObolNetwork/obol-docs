@@ -349,10 +349,10 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
             ```shell
             docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
+              --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
               --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz" \
-              --infra-disk-io-test-file-dir="/opt/charon/test" \
-              --data-dir="/opt/charon/test/.charon" \
+              --infra-disk-io-test-file-dir="/opt/charon/test"
             ```
 
         </TabItem>
@@ -368,11 +368,11 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
 
               ```shell
               docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
-                --peers-definition-file="./.charon/cluster-definition.json" \
+                --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
+                --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz" \
-                --infra-disk-io-test-file-dir="/opt/charon/test" \
-                --data-dir="/opt/charon/test/.charon" \
+                --infra-disk-io-test-file-dir="/opt/charon/test"
               ```
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
@@ -387,11 +387,11 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
 
               ```shell
               docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
-                --peers-lock-file="./.charon/cluster-lock.json" \
+                --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
+                --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz" \
                 --infra-disk-io-test-file-dir="/opt/charon/test" \
-                --data-dir="/opt/charon/test/.charon" \
               ```
         </TabItem>
       </Tabs>
@@ -418,7 +418,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
             ```shell
             docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
-              --data-dir="/opt/charon/test" \
+              --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
@@ -442,8 +442,8 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
 
             ```shell
             docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
-              --peers-definition-file="./.charon/cluster-definition.json" \
-              --data-dir="/opt/charon/test" \
+              --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
+              --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
@@ -467,8 +467,8 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
 
             ```shell
             docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
-              --peers-lock-file="./.charon/cluster-lock.json" \
-              --data-dir="/opt/charon/test" \
+              --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
+              --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
