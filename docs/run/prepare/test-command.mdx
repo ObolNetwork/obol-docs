@@ -271,7 +271,7 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 
 ## Test MEV relay
 
-Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV-Boost instance is configured for the validator node, it is of utmost importance that the connection to the relays it connects to is fast and reliable. If not, the chance of missing a block proposal increases significantly, because of a slow building of the block from the MEV. It is possible to also run a load test towards the MEV relay(s), where an actual block building will take place. This can be done by supplying `--load-test` flag and a second flog where beacon node endpoint is specified: `--beacon-node-endpoint`.
+Run tests towards MEV relays, to evaluate their effectiveness for a Distributed Validator cluster. If MEV-Boost clients are configured for the distributed validator nodes, it is of utmost importance that the relays they connect to are fast and reliable. If not, the chance of missing a block proposal increases significantly. Supplying `--beacon-node-endpoint` and `--load-test` flags allows the test to ask relays for real MEV headers, increasing the accuracy (and duration) of this test.
 
 At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
@@ -598,7 +598,7 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 
 ## Test MEV relay
 
-Run tests towards MEV relay(s), to evaluate its effectiveness for a Distributed Validator cluster. If a MEV-Boost instance is configured for the validator node, it is of utmost importance that the connection to the relays it connects to is fast and reliable. If not, the chance of missing a block proposal increases significantly, because of a slow building of the block from the MEV. It is possible to also run a load test towards the MEV relay(s), where an actual block building will take place. This can be done by supplying `--load-test` flag and a second flog where beacon node endpoint is specified: `--beacon-node-endpoint`.
+Run tests towards MEV relays, to evaluate their effectiveness for a Distributed Validator cluster. If MEV-Boost clients are configured for the distributed validator nodes, it is of utmost importance that the relays they connect to are fast and reliable. If not, the chance of missing a block proposal increases significantly. Supplying `--beacon-node-endpoint` and `--load-test` flags allows the test to ask relays for real MEV headers, increasing the accuracy (and duration) of this test.
 
 At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
