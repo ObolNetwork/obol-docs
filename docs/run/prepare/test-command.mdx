@@ -11,7 +11,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
 <Tabs groupId="run-test">
   <TabItem value="Executable" label="Executable" default>
-  ## Test all
+## Test all
   Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
 
   <Tabs groupId="load-test">
@@ -24,7 +24,7 @@ Charon test commands are designed to help you evaluate the performance and readi
         <TabItem value="Just starting" label="Just starting" default>
           ### Pre-requisites
 
-            - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+            - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
@@ -85,7 +85,7 @@ Charon test commands are designed to help you evaluate the performance and readi
         <TabItem value="Just starting" label="Just starting" default>
           ### Pre-requisites
 
-            - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+            - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
             - Running validator client towards which tests will be executed.
@@ -174,14 +174,14 @@ Based on which stage you are with your cluster creation, some steps are easened.
     <TabItem value="Just starting" label="Just starting" default>
       ### Pre-requisites
 
-        - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+        - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
         - Peers' ENRs, supplied to the `--enrs` flag.
 
       ### Example run
 
           ```shell
           charon test peers \
-            --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
+            --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY"
           ```
     </TabItem>
     <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
@@ -193,7 +193,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
 
           ```shell
           charon test peers \
-            --definition-file="./.charon/cluster-definition.json" \
+            --definition-file="./.charon/cluster-definition.json"
           ```
     </TabItem>
     <TabItem value="Completed DKG" label="Completed DKG" default>
@@ -205,7 +205,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
 
           ```shell
           charon test peers \
-            --lock-file="./.charon/cluster-lock.json" \
+            --lock-file="./.charon/cluster-lock.json"
           ```
     </TabItem>
   </Tabs>
@@ -247,7 +247,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
       ```shell
       charon test beacon \
         --endpoints="http://lighthouse:5052/" \
-        --beacon-load-test
+        --load-test
       ```
     </TabItem>
   </Tabs>
@@ -300,7 +300,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
       ```shell
       charon test mev \
-        --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz"
+        --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
         --load-test \
         --beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com"
       ```
@@ -325,7 +325,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
   </TabItem>
   <TabItem value="Docker" label="Docker" default>
 
-    ## Test all
+## Test all
   Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
 
   <Tabs groupId="load-test">
@@ -338,7 +338,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
         <TabItem value="Just starting" label="Just starting" default>
           ### Pre-requisites
 
-            - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+            - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
@@ -391,7 +391,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
                 --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz" \
-                --infra-disk-io-test-file-dir="/opt/charon/test" \
+                --infra-disk-io-test-file-dir="/opt/charon/test"
               ```
         </TabItem>
       </Tabs>
@@ -406,7 +406,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
         <TabItem value="Just starting" label="Just starting" default>
           ### Pre-requisites
 
-            - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+            - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
             - Running validator client towards which tests will be executed.
@@ -484,7 +484,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
     </TabItem>
   </Tabs>
 
-    ## Test connection to peers
+## Test connection to peers
 
     Run tests towards other Charon peers to evaluate the effectiveness of a potential cluster setup. The command sets up a libp2p node, similarly to what Charon normally does. This test command **has to be run simultaneously with the other peers**. After the node is up it waits for other peers to get their nodes up and running, retrying the connection every 3 seconds. The libp2p node connects to relays (configurable with `p2p-relays` flag) and to other libp2p nodes via TCP. Other peer nodes are discoverable by using their ENRs. Note that for a peer to be successfully discovered, it needs to be connected to the same relay. After completion of the test suite the libp2p node stays alive (duration configurable with `keep-alive` flag) for other peers to continue testing against it. The node can be forcefully stopped as well.
 
@@ -501,14 +501,15 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
         <TabItem value="Just starting" label="Just starting" default>
           ### Pre-requisites
 
-            - [Creating an ENR](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
+            - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--enrs` flag.
 
           ### Example run
 
               ```shell
-              charon test peers \
+              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
                 --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
+                --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
@@ -519,8 +520,9 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              charon test peers \
-                --definition-file="./.charon/cluster-definition.json" \
+              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+                --definition-file="/opt/charon/test/.charon/cluster-definition.json" \
+                --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
@@ -531,8 +533,9 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              charon test peers \
-                --lock-file="./.charon/cluster-lock.json" \
+              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+                --lock-file="/opt/charon/test/.charon/cluster-lock.json" \
+                --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
         </TabItem>
       </Tabs>
@@ -611,7 +614,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      docker run -it obolnetwork/charon:v1.1.2 test mev \
+      docker run obolnetwork/charon:v1.1.2 test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xb0b07cd0abef743db4260b0ed50619cf6ad4d82064cb4fbec9d3ec530f7c5e6793d9f286c4e082c0244ffb9f2658fe88@bloxroute.regulated.blxrbdn.com,https://0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be@relay.edennetwork.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@titanrelay.xyz"
       ```
 
@@ -626,7 +629,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      docker run -it obolnetwork/charon:v1.1.2 test mev \
+      docker run obolnetwork/charon:v1.1.2 test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
         --load-test \
         --beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com"
@@ -646,7 +649,7 @@ Run tests of your machine and network, to evaluate their effectiveness for a Dis
   ### Run
 
       ```shell
-      docker run -v "$(pwd)/test:/opt/charon/test" obolnetwork/charon:v1.1.2 test infra \
+      docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test infra \
         --disk-io-test-file-dir=/opt/charon/test
       ```
 
