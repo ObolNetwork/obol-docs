@@ -126,19 +126,19 @@ Same causes as CreateBlock test apply here.
 
 #### DiskWriteSpeed
 
-- Your SSD/HDD write speed is too low. Minimum write speed is 500MBs, recommended write speed is 1000MBs.
+- Read more in our [Deployment Best Practices](../../run/prepare/deployment-best-practices#hardware-specifications).
 
 #### DiskWriteIOPS
 
-- Your SSD/HDD write operations per second are too low. Minimum write IOPS are 1000, recommended write IOPS are 2000.
+- Read more in our [Deployment Best Practices](../../run/prepare/deployment-best-practices#hardware-specifications).
 
 #### DiskReadSpeed
 
-- Your SSD/HDD read speed is too low. Minimum read speed is 500MBs, recommended read speed is 1000MBs.
+- Read more in our [Deployment Best Practices](../../run/prepare/deployment-best-practices#hardware-specifications).
 
 #### DiskReadIOPS
 
-- Your SSD/HDD read operations per second are too low. Minimum read IOPS are 1000, recommended read IOPS are 2000.
+- Read more in our [Deployment Best Practices](../../run/prepare/deployment-best-practices#hardware-specifications).
 
 #### AvailableMemory
 

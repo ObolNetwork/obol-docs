@@ -17,6 +17,8 @@ The following specifications are recommended for bare metal machines for cluster
 - A CPU with 4+ cores, favouring high clock speed over more cores. ( >3.0GHz and higher or a cpubenchmark [single thread](https://www.cpubenchmark.net/singleThread.html) score of >2,500)
 - 16GB of RAM
 - 2TB+ free SSD disk space (for mainnet)
+- 1000 read/write SSD IOPS
+- 500MB/s read/write SSD speed
 - 10mb/s internet bandwidth
 
 ### Recommended Specs for extremely large clusters
@@ -24,6 +26,8 @@ The following specifications are recommended for bare metal machines for cluster
 - A CPU with 8+ physical cores, with clock speeds >3.5Ghz
 - 32GB+ RAM (depending on the EL+CL clients)
 - 4TB+ NVMe storage
+- 2000 read/write SSD IOPS
+- 1000MB/s read/write SSD speed
 - 25mb/s internet bandwidth
 
 An NVMe storage device is **highly recommended for optimal performance**, offering nearly 10x more random read/writes per second than a standard SSD.
