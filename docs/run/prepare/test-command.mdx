@@ -347,7 +347,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -367,7 +367,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
                 --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
                 --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -386,7 +386,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
                 --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
                 --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -416,7 +416,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -441,7 +441,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -466,7 +466,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
               --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -507,7 +507,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
                 --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -520,7 +520,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
                 --definition-file="/opt/charon/test/.charon/cluster-definition.json" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -533,7 +533,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
                 --lock-file="/opt/charon/test/.charon/cluster-lock.json" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -575,7 +575,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     ### Example run
 
       ```shell
-      docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test beacon \
+      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test beacon \
         --endpoints="http://lighthouse:5052/" \
         --simulation-file-dir="/opt/charon/test" \
         --load-test
@@ -649,7 +649,7 @@ Run tests of your machine and network, to evaluate their effectiveness for a Dis
   ### Run
 
       ```shell
-      docker run -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test infra \
+      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test infra \
         --disk-io-test-file-dir=/opt/charon/test
       ```
 
