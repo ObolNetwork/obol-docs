@@ -33,7 +33,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
               ```shell
-              charon test all \
+              charon alpha test all \
                 --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz"
@@ -50,7 +50,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
               ```shell
-              charon test all \
+              charon alpha test all \
                 --peers-definition-file="./.charon/cluster-definition.json" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz"
@@ -67,7 +67,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
               ```shell
-              charon test all \
+              charon alpha test all \
                 --peers-lock-file="./.charon/cluster-lock.json" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
                 --mev-endpoints="https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,global.titanrelay.xyz"
@@ -95,7 +95,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
             ```shell
-            charon test all \
+            charon alpha test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-load-test \
@@ -117,7 +117,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
             ```shell
-            charon test all \
+            charon alpha test all \
               --peers-definition-file="./.charon/cluster-definition.json" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-load-test \
@@ -139,7 +139,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Example run
 
             ```shell
-            charon test all \
+            charon alpha test all \
               --peers-lock-file="./.charon/cluster-lock.json" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-load-test \
@@ -180,7 +180,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
       ### Example run
 
           ```shell
-          charon test peers \
+          charon alpha test peers \
             --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY"
           ```
     </TabItem>
@@ -192,7 +192,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
       ### Example run
 
           ```shell
-          charon test peers \
+          charon alpha test peers \
             --definition-file="./.charon/cluster-definition.json"
           ```
     </TabItem>
@@ -204,7 +204,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
       ### Example run
 
           ```shell
-          charon test peers \
+          charon alpha test peers \
             --lock-file="./.charon/cluster-lock.json"
           ```
     </TabItem>
@@ -226,7 +226,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     ### Example run
 
         ```shell
-        charon test beacon \
+        charon alpha test beacon \
           --endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com"
         ```
     </TabItem>
@@ -245,7 +245,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     ### Example run
 
       ```shell
-      charon test beacon \
+      charon alpha test beacon \
         --endpoints="http://lighthouse:5052/" \
         --load-test
       ```
@@ -266,7 +266,7 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 
 
     ```shell
-    charon test validator
+    charon alpha test validator
     ```
 
 ## Test MEV relay
@@ -284,7 +284,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      charon test mev \
+      charon alpha test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz"
       ```
 
@@ -299,7 +299,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      charon test mev \
+      charon alpha test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
         --load-test \
         --beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com"
@@ -319,7 +319,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
 ### Run
 
     ```shell
-    charon test infra
+    charon alpha test infra
     ```
 
   </TabItem>
@@ -347,7 +347,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -367,7 +367,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
                 --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
                 --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -386,7 +386,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
                 --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
                 --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
                 --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -416,7 +416,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -441,7 +441,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -466,7 +466,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test all \
+            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com" \
@@ -507,7 +507,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
                 --enrs="enr:-HW4QNDXi9MzdH9Af65g20jDfelAJ0kJhclitkYYgFziYHXhRFF6JyB_CnVnimB7VxKBGBSkHbmy-Tu8BJq8JQkfptiAgmlkgnY0iXNlY3AyNTZrMaEDBVt5pk6x0A2fjth25pjLOEE9DpqCG-BCYyvutY04TZ,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -520,7 +520,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
                 --definition-file="/opt/charon/test/.charon/cluster-definition.json" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -533,7 +533,7 @@ The storage tests require `fio` to be installed. Read more about `fio` [here](ht
           ### Example run
 
               ```shell
-              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test peers \
+              docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
                 --lock-file="/opt/charon/test/.charon/cluster-lock.json" \
                 --private-key-file="/opt/charon/test/.charon/charon-enr-private-key"
               ```
@@ -556,7 +556,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     ### Example run
 
         ```shell
-        docker run obolnetwork/charon:v1.1.2 test beacon \
+        docker run obolnetwork/charon:v1.1.2 alpha test beacon \
           --endpoints="https://ethereum-holesky-beacon-api.publicnode.com,https://ethereum-sepolia-beacon-api.publicnode.com"
         ```
     </TabItem>
@@ -575,7 +575,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     ### Example run
 
       ```shell
-      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test beacon \
+      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test beacon \
         --endpoints="http://lighthouse:5052/" \
         --simulation-file-dir="/opt/charon/test" \
         --load-test
@@ -596,7 +596,7 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 ### Run
 
   ```shell
-  docker run obolnetwork/charon:v1.1.2 test validator
+  docker run obolnetwork/charon:v1.1.2 alpha test validator
   ```
 
 ## Test MEV relay
@@ -614,7 +614,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      docker run obolnetwork/charon:v1.1.2 test mev \
+      docker run obolnetwork/charon:v1.1.2 alpha test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xb0b07cd0abef743db4260b0ed50619cf6ad4d82064cb4fbec9d3ec530f7c5e6793d9f286c4e082c0244ffb9f2658fe88@bloxroute.regulated.blxrbdn.com,https://0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be@relay.edennetwork.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@titanrelay.xyz"
       ```
 
@@ -629,7 +629,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     ### Run
 
       ```shell
-      docker run obolnetwork/charon:v1.1.2 test mev \
+      docker run obolnetwork/charon:v1.1.2 alpha test mev \
         --endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,.io,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
         --load-test \
         --beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com"
@@ -649,7 +649,7 @@ Run tests of your machine and network, to evaluate their effectiveness for a Dis
   ### Run
 
       ```shell
-      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 test infra \
+      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test infra \
         --disk-io-test-file-dir=/opt/charon/test
       ```
 
