@@ -12,7 +12,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
 <Tabs groupId="run-test">
   <TabItem value="Executable" label="Executable" default>
-## Test all
+<h2>Test all</h2>
   Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
 
   <Tabs groupId="load-test">
@@ -23,7 +23,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
       <Tabs groupId="cluster-creation-stage">
         <TabItem value="Just starting" label="Just starting" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
@@ -31,7 +31,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               charon alpha test all \
@@ -41,14 +41,14 @@ Charon test commands are designed to help you evaluate the performance and readi
               ```
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               charon alpha test all \
@@ -58,14 +58,14 @@ Charon test commands are designed to help you evaluate the performance and readi
               ```
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               charon alpha test all \
@@ -84,7 +84,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
       <Tabs groupId="cluster-creation-stage">
         <TabItem value="Just starting" label="Just starting" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
@@ -93,7 +93,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             charon alpha test all \
@@ -107,7 +107,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
@@ -115,7 +115,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             charon alpha test all \
@@ -129,7 +129,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
@@ -137,7 +137,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             charon alpha test all \
@@ -156,7 +156,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
   </Tabs>
 
-## Test connection to peers
+<h2>Test connection to peers</h2>
 
 Run tests towards other Charon peers to evaluate the effectiveness of a potential cluster setup. The command sets up a libp2p node, similarly to what Charon normally does. This test command **has to be run simultaneously with the other peers**. After the node is up it waits for other peers to get their nodes up and running, retrying the connection every 3 seconds. The libp2p node connects to relays (configurable with `p2p-relays` flag) and to other libp2p nodes via TCP. Other peer nodes are discoverable by using their ENRs. Note that for a peer to be successfully discovered, it needs to be connected to the same relay. After completion of the test suite the libp2p node stays alive (duration configurable with `keep-alive` flag) for other peers to continue testing against it. The node can be forcefully stopped as well.
 
@@ -172,12 +172,12 @@ Based on which stage you are with your cluster creation, some steps are easened.
 
   <Tabs groupId="cluster-creation-stage">
     <TabItem value="Just starting" label="Just starting" default>
-      ### Pre-requisites
+      <h3>Pre-requisites</h3>
 
         - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
         - Peers' ENRs, supplied to the `--enrs` flag.
 
-      ### Example run
+      <h3>Example run</h3>
 
           ```shell
           charon alpha test peers \
@@ -185,11 +185,11 @@ Based on which stage you are with your cluster creation, some steps are easened.
           ```
     </TabItem>
     <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-      ### Pre-requisites
+      <h3>Pre-requisites</h3>
 
         - Cluster definition file, supplied to the `--definition-file` flag.
 
-      ### Example run
+      <h3>Example run</h3>
 
           ```shell
           charon alpha test peers \
@@ -197,11 +197,11 @@ Based on which stage you are with your cluster creation, some steps are easened.
           ```
     </TabItem>
     <TabItem value="Completed DKG" label="Completed DKG" default>
-      ### Pre-requisites
+      <h3>Pre-requisites</h3>
 
         - Cluster lock file, supplied to the `--lock-file` flag.
 
-      ### Example run
+      <h3>Example run</h3>
 
           ```shell
           charon alpha test peers \
@@ -211,7 +211,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
 
   </Tabs>
 
-## Test beacon node
+<h2>Test beacon node</h2>
 
 Run tests on beacon node(s), to evaluate their effectiveness for a Distributed Validator cluster. The beacon node is usually the client doing the most work in a validating stack, especially with a high number of validators being serviced by the validator client(s) and Charon(s) that depend on it.
 
@@ -220,11 +220,11 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     Regular tests intended for relatively fast run, without putting any major load on any tested system.
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag.
 
-    ### Example run
+    <h3>Example run</h3>
 
         ```shell
         charon alpha test beacon \
@@ -239,11 +239,11 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     A file with detailed results about simulations done is saved at the current working directory (configurable by `--simulation-file-dir` flag).
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
 
-    ### Example run
+    <h3>Example run</h3>
 
       ```shell
       charon alpha test beacon \
@@ -254,23 +254,23 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
   </Tabs>
 
-## Test validator client
+<h2>Test validator client</h2>
 
 Run tests towards your validator client, to evaluate its effectiveness for a Distributed Validator cluster.
 
 Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be changed by supplying different endpoint to the `--validator-api-address` flag.
 
-### Pre-requisites
+<h3>Pre-requisites</h3>
 
 - Running validator client towards which tests will be executed.
 
-### Example Run
+<h3>Example run</h3>
 
     ```shell
     charon alpha test validator
     ```
 
-## Test MEV relay
+<h2>Test MEV relay</h2>
 
 Run tests towards MEV relays, to evaluate their effectiveness for a Distributed Validator cluster. If MEV-Boost clients are configured for the distributed validator nodes, it is of utmost importance that the relays they connect to are fast and reliable. If not, the chance of missing a block proposal increases significantly. Supplying `--beacon-node-endpoint` and `--load-test` flags allows the test to ask relays for real MEV headers, increasing the accuracy (and duration) of this test.
 
@@ -278,11 +278,11 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running MEV relay(s) towards which tests will be executed.
 
-    ### Example Run
+    <h3>Example run</h3>
 
       ```shell
       charon alpha test mev \
@@ -292,12 +292,12 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running MEV relay(s) towards which tests will be executed.
       - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-    ### Example Run
+    <h3>Example run</h3>
 
       ```shell
       charon alpha test mev \
@@ -310,15 +310,15 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
   </Tabs>
 
-## Test machine and network performance
+<h2>Test machine and network performance</h2>
 
 Run tests of your machine and network, to evaluate their effectiveness for a Distributed Validator cluster. Distributed Validators need stable, low-latency, internet, a reasonable amount of RAM, and a highly performant disk drive for storage. This test aims to analyse these requirements to give an overview of the systems suitability.
 
-### Pre-requisites
+<h3>Pre-requisites</h3>
 
 The storage tests require `fio` to be installed on your machine. Read more about `fio` [here](https://fio.readthedocs.io/en/latest/fio_doc.html).
 
-### Example Run
+<h3>Example run</h3>
 
     ```shell
     charon alpha test infra
@@ -327,7 +327,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
   </TabItem>
   <TabItem value="Docker" label="Docker" default>
 
-## Test all
+<h2>Test all</h2>
 
 Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
 
@@ -339,7 +339,7 @@ Intended for running tests across all categories. Each flag should have a prefix
 
       <Tabs groupId="cluster-creation-stage">
         <TabItem value="Just starting" label="Just starting" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
@@ -347,7 +347,7 @@ Intended for running tests across all categories. Each flag should have a prefix
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
             ```shell
             docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-enrs="enr:-HW4QMno_MB_ID6GFVxoIQAHHVHZZZjzFctxtX2tm9D95tvaPbHathi8YUP8jh8v2YUAVu2fYWEOB_BT14pt8QgiGg2AgmlkgnY0iXNlY3AyNTZrMaECdpnK83s0dbBwCaEfDIkQ-3nJkkC93STvv6Vmi0bYlzg,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
@@ -359,14 +359,14 @@ Intended for running tests across all categories. Each flag should have a prefix
 
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
@@ -378,14 +378,14 @@ Intended for running tests across all categories. Each flag should have a prefix
               ```
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
@@ -406,7 +406,7 @@ Intended for running tests across all categories. Each flag should have a prefix
 
       <Tabs groupId="cluster-creation-stage">
         <TabItem value="Just starting" label="Just starting" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
@@ -415,7 +415,7 @@ Intended for running tests across all categories. Each flag should have a prefix
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
@@ -432,7 +432,7 @@ Intended for running tests across all categories. Each flag should have a prefix
 
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
@@ -440,7 +440,7 @@ Intended for running tests across all categories. Each flag should have a prefix
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
@@ -457,7 +457,7 @@ Intended for running tests across all categories. Each flag should have a prefix
 
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
             - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
@@ -465,7 +465,7 @@ Intended for running tests across all categories. Each flag should have a prefix
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-          ### Example run
+          <h3>Example run</h3>
 
             ```shell
             docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
@@ -487,7 +487,7 @@ Intended for running tests across all categories. Each flag should have a prefix
 
   </Tabs>
 
-## Test connection to peers
+<h2>Test connection to peers</h2>
 
     Run tests towards other Charon peers to evaluate the effectiveness of a potential cluster setup. The command sets up a libp2p node, similarly to what Charon normally does. This test command **has to be run simultaneously with the other peers**. After the node is up it waits for other peers to get their nodes up and running, retrying the connection every 3 seconds. The libp2p node connects to relays (configurable with `p2p-relays` flag) and to other libp2p nodes via TCP. Other peer nodes are discoverable by using their ENRs. Note that for a peer to be successfully discovered, it needs to be connected to the same relay. After completion of the test suite the libp2p node stays alive (duration configurable with `keep-alive` flag) for other peers to continue testing against it. The node can be forcefully stopped as well.
 
@@ -502,12 +502,12 @@ Intended for running tests across all categories. Each flag should have a prefix
     Based on which stage you are with your cluster creation, some steps are easened.
       <Tabs groupId="cluster-creation-stage">
         <TabItem value="Just starting" label="Just starting" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--enrs` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
@@ -516,11 +516,11 @@ Intended for running tests across all categories. Each flag should have a prefix
               ```
         </TabItem>
         <TabItem value="Completed cluster creation" label="Completed cluster creation" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster definition file, supplied to the `--definition-file` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
@@ -529,11 +529,11 @@ Intended for running tests across all categories. Each flag should have a prefix
               ```
         </TabItem>
         <TabItem value="Completed DKG" label="Completed DKG" default>
-          ### Pre-requisites
+          <h3>Pre-requisites</h3>
 
             - Cluster lock file, supplied to the `--lock-file` flag.
 
-          ### Example run
+          <h3>Example run</h3>
 
               ```shell
               docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test peers \
@@ -543,7 +543,7 @@ Intended for running tests across all categories. Each flag should have a prefix
         </TabItem>
       </Tabs>
 
-## Test beacon node
+<h2>Test beacon node</h2>
 
 Run tests on beacon node(s), to evaluate their effectiveness for a Distributed Validator cluster. The beacon node is usually the client doing the most work in a validating stack, especially with a high number of validators being serviced by the validator client(s) and Charon(s) that depend on it.
 
@@ -552,11 +552,11 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     Regular tests intended for relatively fast run, without putting any major load on any tested system.
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag.
 
-    ### Example run
+    <h3>Example run</h3>
 
         ```shell
         docker run obolnetwork/charon:v1.1.2 alpha test beacon \
@@ -571,11 +571,11 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     A file with detailed results about simulations done is saved at the current working directory (configurable by changing the volume mapped from `$(pwd)` to the desired directory).
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
 
-    ### Example run
+    <h3>Example run</h3>
 
       ```shell
       docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test beacon \
@@ -587,23 +587,23 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
   </Tabs>
 
-## Test validator client
+<h2>Test validator client</h2>
 
 Run tests towards your validator client, to evaluate its effectiveness for a Distributed Validator cluster.
 
 Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be changed by supplying different endpoint to the `--validator-api-address` flag.
 
-### Pre-requisites
+<h3>Pre-requisites</h3>
 
 - Running validator client towards which tests will be executed.
 
-### Example Run
+<h3>Example run</h3>
 
 ```shell
 docker run obolnetwork/charon:v1.1.2 alpha test validator
 ```
 
-## Test MEV relay
+<h2>Test MEV relay</h2>
 
 Run tests towards MEV relays, to evaluate their effectiveness for a Distributed Validator cluster. If MEV-Boost clients are configured for the distributed validator nodes, it is of utmost importance that the relays they connect to are fast and reliable. If not, the chance of missing a block proposal increases significantly. Supplying `--beacon-node-endpoint` and `--load-test` flags allows the test to ask relays for real MEV headers, increasing the accuracy (and duration) of this test.
 
@@ -611,11 +611,11 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running MEV relay(s) towards which tests will be executed.
 
-    ### Example Run
+    <h3>Example run</h3>
 
       ```shell
       docker run obolnetwork/charon:v1.1.2 alpha test mev \
@@ -625,12 +625,12 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
 
-    ### Pre-requisites
+    <h3>Pre-requisites</h3>
 
       - Running MEV relay(s) towards which tests will be executed.
       - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
 
-    ### Example Run
+    <h3>Example run</h3>
 
       ```shell
       docker run obolnetwork/charon:v1.1.2 alpha test mev \
@@ -643,15 +643,15 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
 
   </Tabs>
 
-## Test machine and network performance
+<h2>Test machine and network performance</h2>
 
 Run tests of your machine and network, to evaluate their effectiveness for a Distributed Validator cluster. Distributed Validators need stable, low-latency, internet, a reasonable amount of RAM, and a highly performant disk drive for storage. This test aims to analyse these requirements to give an overview of the systems suitability.
 
-### Pre-requisites
+<h3>Pre-requisites</h3>
 
 None.
 
-### Example Run
+<h3>Example run</h3>
 
       ```shell
       docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test infra \
