@@ -87,7 +87,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -109,7 +109,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Pre-requisites
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -131,7 +131,7 @@ Charon test commands are designed to help you evaluate the performance and readi
           ### Pre-requisites
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -240,7 +240,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     ### Pre-requisites
 
-      - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+      - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
 
     ### Example run
 
@@ -408,7 +408,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
 
             - [ENR private key](../../learn/charon/charon-cli-reference#creating-an-enr-for-charon).
             - Peers' ENRs, supplied to the `--peers-enrs` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -433,7 +433,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
           ### Pre-requisites
 
             - Cluster definition file, supplied to the `--peers-definition-file` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -458,7 +458,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
           ### Pre-requisites
 
             - Cluster lock file, supplied to the `--peers-lock-file` flag.
-            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+            - Running beacon node(s) towards which tests will be executed, supplied to `--beacon-endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
             - Running validator client towards which tests will be executed.
             - Running MEV relay(s) towards which tests will be executed, supplied to `--mev-endpoints` flag.
             - Running beacon node which will be used for fetching data required by the MEV relay for block creation, supplied to `--mev-beacon-node-endpoint`. There is no restrictions on the node and a public one can be used.
@@ -570,7 +570,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
     ### Pre-requisites
 
-      - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one (i.e.: https://ethereum-holesky-beacon-api.publicnode.com).
+      - Running beacon node(s) towards which tests will be executed, supplied to `--endpoints` flag. It is important that the node is expecting to handle huge load and that it is **not** a publicly accessible one, which can block you.
 
     ### Example run
 
