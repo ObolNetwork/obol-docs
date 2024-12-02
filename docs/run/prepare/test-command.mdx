@@ -2,6 +2,7 @@
 sidebar_position: 3
 description: Test the performance of a candidate Distributed Validator Cluster setup.
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -77,7 +78,7 @@ Charon test commands are designed to help you evaluate the performance and readi
 
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
-  
+
     Load tests intended for more time consuming run. Beacon nodes are put under heavy load. MEV relays are required to create real blocks.
     Based on which stage you are with your cluster creation, some steps are easened.
 
@@ -152,9 +153,8 @@ Charon test commands are designed to help you evaluate the performance and readi
       </Tabs>
 
     </TabItem>
+
   </Tabs>
-
-
 
 ## Test connection to peers
 
@@ -208,6 +208,7 @@ Based on which stage you are with your cluster creation, some steps are easened.
             --lock-file="./.charon/cluster-lock.json"
           ```
     </TabItem>
+
   </Tabs>
 
 ## Test beacon node
@@ -231,7 +232,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
         ```
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
-  
+
     Load tests intended for more time consuming run. Beacon nodes are put under heavy load.
 
     These tests include simulated workloads for an increasing number of validators, and the process takes some time (approximately ~33 minutes). It is normal to observe some warnings during the simulations.
@@ -250,6 +251,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
         --load-test
       ```
     </TabItem>
+
   </Tabs>
 
 ## Test validator client
@@ -305,6 +307,7 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
       ```
 
     </TabItem>
+
   </Tabs>
 
 ## Test machine and network performance
@@ -325,7 +328,8 @@ The storage tests require `fio` to be installed on your machine. Read more about
   <TabItem value="Docker" label="Docker" default>
 
 ## Test all
-  Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
+
+Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
 
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
@@ -397,7 +401,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
 
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
-  
+
     Load tests intended for more time consuming run. Beacon nodes are put under heavy load. MEV relays are required to create real blocks.
     Based on which stage you are with your cluster creation, some steps are easened.
 
@@ -481,6 +485,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
       </Tabs>
 
     </TabItem>
+
   </Tabs>
 
 ## Test connection to peers
@@ -560,7 +565,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
         ```
     </TabItem>
     <TabItem value="Load test" label="Load test" default>
-  
+
     Load tests intended for more time consuming run. Beacon nodes are put under heavy load.
 
     These tests include simulated workloads for an increasing number of validators, and the process takes some time (approximately ~33 minutes). It is normal to observe some warnings during the simulations.
@@ -580,6 +585,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
         --load-test
       ```
     </TabItem>
+
   </Tabs>
 
 ## Test validator client
@@ -594,9 +600,9 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 
 ### Example Run
 
-  ```shell
-  docker run obolnetwork/charon:v1.1.2 alpha test validator
-  ```
+```shell
+docker run obolnetwork/charon:v1.1.2 alpha test validator
+```
 
 ## Test MEV relay
 
@@ -635,17 +641,18 @@ At least 1 endpoint is required to be supplied to the `--endpoints` flag.
       ```
 
     </TabItem>
+
   </Tabs>
 
 ## Test machine and network performance
 
 Run tests of your machine and network, to evaluate their effectiveness for a Distributed Validator cluster. Distributed Validators need stable, low-latency, internet, a reasonable amount of RAM, and a highly performant disk drive for storage. This test aims to analyse these requirements to give an overview of the systems suitability.
 
-  ### Pre-requisites
+### Pre-requisites
 
-  None.
+None.
 
-  ### Example Run
+### Example Run
 
       ```shell
       docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test infra \
