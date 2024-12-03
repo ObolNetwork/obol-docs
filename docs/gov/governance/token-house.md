@@ -15,6 +15,8 @@ In the Token House, OBOL Token holders are responsible for submitting, deliberat
 - If your proposal is passed, the Obol Association will facilitate its administration, including distributing approved OBOL Tokens grants.
 - If your proposal fails, you can make a new proposal in the next cycle, specifying how you have incorporated significant changes from your first proposal.
 
+![Token House Explainer](/img/TokenHouseExplainer.png)
+
 ## Token House Governance Proposal Process
 
 Anyone can submit a proposal to the Token House by using the Governance Portal. Proposals are accepted or rejected using a voting process. A proposal must be one of the valid proposal types listed below and follow the voting process described here.
