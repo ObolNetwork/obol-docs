@@ -38,199 +38,199 @@ const config = {
         redirects: [
          // /docs/oldDoc -> /docs/newDoc
           {
-          to: '/next/learn/intro/obol-collective',
+          to: '/learn/intro/obol-collective',
           from: '/docs/int/Overview',
           },
           {
-            to: '/next/learn/intro/key-concepts',
+            to: '/learn/intro/key-concepts',
             from: '/docs/int/key-concepts',
           },
           {
-            to: '/next/run/prepare/how_where_DVs',
+            to: '/run/prepare/how_where_DVs',
             from: '/docs/next/int/how_where_DVs',
           },
           {
-            to: '/next/run/start/quickstart_overview',
+            to: '/run/start/quickstart_overview',
             from: '/docs/start/quickstart_overview',
           },
           {
-            to: '/next/run/start/quickstart_alone',
+            to: '/run/start/quickstart_alone',
             from: '/docs/start/quickstart_alone',
           },
           {
-            to: '/next/run/start/quickstart_group',
+            to: '/run/start/quickstart_group',
             from: '/docs/start/quickstart_group',
           },
           {
-            to: '/next/run/running/activate-dv',
+            to: '/run/running/activate-dv',
             from: '/docs/start/activate-dv',
           },
           {
-            to: '/next/run/running/update',
+            to: '/run/running/update',
             from: '/docs/start/update',
           },
           {
-            to: '/next/run/running/quickstart-exit',
+            to: '/run/running/quickstart-exit',
             from: '/docs/start/quickstart-exit',
           },
           {
-            to: '/next/run/start/quickstart-builder-api',
+            to: '/run/start/quickstart-builder-api',
             from: '/docs/advanced/quickstart-builder-api',
           },
           {
-            to: '/next/run/running/monitoring',
+            to: '/run/running/monitoring',
             from: '/docs/advanced/monitoring',
           },
           {
-            to: '/next/run/start/obol-monitoring',
+            to: '/run/start/obol-monitoring',
             from: '/docs/advanced/obol-monitoring',
           },
           {
-            to: '/next/adv/advanced/quickstart-sdk',
+            to: '/adv/advanced/quickstart-sdk',
             from: '/docs/advanced/quickstart-sdk',
           },
           {
-            to: '/next/run/integrations/quickstart-eigenpod',
+            to: '/run/integrations/quickstart-eigenpod',
             from: '/docs/advanced/quickstart-eigenpod',
           },
           {
-            to: '/next/run/prepare/test-command',
+            to: '/run/prepare/test-command',
             from: '/docs/advanced/test-command',
           },
           {
-            to: '/next/adv/advanced/quickstart-split',
+            to: '/adv/advanced/quickstart-split',
             from: '/docs/advanced/quickstart-split',
           },
           {
-            to: '/next/adv/advanced/quickstart-combine',
+            to: '/adv/advanced/quickstart-combine',
             from: '/docs/advanced/quickstart-combine',
           },
           {
-            to: '/next/adv/advanced/self-relay',
+            to: '/adv/advanced/self-relay',
             from: '/docs/advanced/self-relay',
           },
           {
-            to: '/next/run/prepare/deployment-best-practices',
+            to: '/run/prepare/deployment-best-practices',
             from: '/docs/advanced/deployment-best-practices',
           },
           {
-            to: '/next/adv/advanced/adv-docker-configs',
+            to: '/adv/advanced/adv-docker-configs',
             from: '/docs/advanced/adv-docker-configs',
           },
           {
-            to: '/next/learn/intro/faq',
+            to: '/learn/intro/faq',
             from: '/docs/faq/general',
           },
           {
-            to: '/next/adv/troubleshooting/errors',
+            to: '/adv/troubleshooting/errors',
             from: '/docs/faq/errors',
           },
           {
-            to: '/next/adv/security/risks',
+            to: '/adv/security/risks',
             from: '/docs/faq/risks',
           },
           {
-            to: '/next/adv/troubleshooting/dkg_failure',
+            to: '/adv/troubleshooting/dkg_failure',
             from: '/docs/faq/dkg_failure',
           },
           {
-            to: '/next/adv/troubleshooting/client_configurations',
+            to: '/adv/troubleshooting/client_configurations',
             from: '/docs/faq/client_configurations',
           },
           {
-            to: '/next/gov/governance/contributions',
+            to: '/gov/governance/contributions',
             from: '/docs/faq/contributions',
           },
           {
-            to: '/next/learn/futher-reading/peer_score',
+            to: '/learn/futher-reading/peer_score',
             from: '/docs/faq/peer_score',
           },
           {
-            to: '/next/learn/charon/intro',
+            to: '/learn/charon/intro',
             from: '/docs/charon/intro',
           },
           {
-            to: '/next/learn/charon/dkg',
+            to: '/learn/charon/dkg',
             from: '/docs/charon/dkg',
           },
           {
-            to: '/next/learn/charon/cluster-configuration',
+            to: '/learn/charon/cluster-configuration',
             from: '/docs/charon/cluster-configuration',
           },
           {
-            to: '/next/learn/charon/networking',
+            to: '/learn/charon/networking',
             from: '/docs/charon/networking',
           },
           {
-            to: '/next/learn/charon/charon-cli-reference',
+            to: '/learn/charon/charon-cli-reference',
             from: '/docs/charon/charon-cli-reference',
           },
           {
-            to: '/next/learn/intro/launchpad',
+            to: '/learn/intro/launchpad',
             from: '/docs/dvl/intro',
           },
           {
-            to: '/next/learn/intro/obol-splits',
+            to: '/learn/intro/obol-splits',
             from: '/docs/sc/introducing-obol-splits',
           },
           {
-            to: '/next/adv/security/overview',
+            to: '/adv/security/overview',
             from: '/docs/sec/overview',
           },
           {
-            to: '/next/adv/security/bug-bounty',
+            to: '/adv/security/bug-bounty',
             from: '/docs/sec/bug-bounty',
           },
           {
-            to: '/next/adv/security/contact',
+            to: '/adv/security/contact',
             from: '/docs/sec/contact',
           },
           {
-            to: '/next/adv/security/ev-assessment',
+            to: '/adv/security/ev-assessment',
             from: '/docs/sec/ev-assessment',
           },
           {
-            to: '/next/adv/security/smart_contract_audit',
+            to: '/adv/security/smart_contract_audit',
             from: '/docs/sec/smart_contract_audit',
           },
           {
-            to: '/next/adv/security/threat_model',
+            to: '/adv/security/threat_model',
             from: '/docs/sec/threat_model',
           },
           {
-            to: '/next/gov/contribution/bug-report',
+            to: '/gov/contribution/bug-report',
             from: '/docs/cf/bug-report',
           },
           {
-            to: '/next/gov/contribution/docs',
+            to: '/gov/contribution/docs',
             from: '/docs/cf/docs',
           },
           {
-            to: '/next/gov/contribution/feedback',
+            to: '/gov/contribution/feedback',
             from: '/docs/cf/feedback',
           },
           {
-            to: '/next/learn/futher-reading/ethereum_and_dvt',
+            to: '/learn/futher-reading/ethereum_and_dvt',
             from: '/docs/fr/ethereum_and_dvt',
           },
           {
-            to: '/next/learn/futher-reading/testnet',
+            to: '/learn/futher-reading/testnet',
             from: '/docs/fr/testnet',
           },
           {
-            to: '/next/learn/futher-reading/resources',
+            to: '/learn/futher-reading/resources',
             from: '/docs/fr/resources',
           },
           {
-            to: '/next/run/integrations/lido-csm',
+            to: '/run/integrations/lido-csm',
             from: '/docs/advanced/lido_csm',
           },
           {
-            to: '/next/run/integrations/Dappnode',
+            to: '/run/integrations/Dappnode',
             from: '/docs/faq/Dappnode',
           },
           {
-            to: '/next/sdk',
+            to: '/sdk',
             from: '/docs/sdk',
           },
           //Redirect from multiple old paths to the new path
