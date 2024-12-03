@@ -102,7 +102,7 @@ These final steps are potentially the most difficult, and may require significan
 
 From my interviews, it seems that the user deploys both the withdrawal and fee recipient contracts through the Launchpad.
 
-What I’m picturing is that during the first parts of the cluster setup process, the user is prompted to sign one or more transactions deploying the withdrawal and fee recipient contracts to mainnet. The Launchpad apparently uses an npm package to deploy these contracts: `0xsplits/splits-sdk`, which I assume provides either JSON artifacts or a factory address on chain. The Launchpad then places the deployed contracts into the cluster config file, and the process moves on.
+What I’m picturing is that during the first parts of the cluster setup process, the user is prompted to sign one or more transactions deploying the withdrawal and fee recipient contracts to mainnet. The Launchpad apparently uses a npm package to deploy these contracts: `0xsplits/splits-sdk`, which I assume provides either JSON artifacts or a factory address on chain. The Launchpad then places the deployed contracts into the cluster config file, and the process moves on.
 
 If an attacker has published a malicious update to the Launchpad (or compromised an underlying dependency), the contracts deployed by the Launchpad may be malicious. The questions I’d like to pose are:
 
@@ -199,7 +199,7 @@ This is not likely to be particularly motivating to potential attackers - and pa
 
 During setup, users should only sign one transaction via the Launchpad - to a contract located at an Obol-held ENS (e.g. `launchpad.obol.eth`). This contract should deploy everything needed for the cluster to operate, like the withdrawal and fee recipient contracts. It should also initialize them with the provided reward split configuration (and any other config needed).
 
-Rather than using an NPM library to supply a factory address or JSON artifacts, this has the benefit of being both:
+Rather than using a NPM library to supply a factory address or JSON artifacts, this has the benefit of being both:
 
 - **Harder to compromise:** as long as the user knows launchpad.obol.eth, it’s pretty difficult to trick them into deploying the wrong contracts.
 - **Easier to validate** for non-technical users: the Obol contract can be queried for deployment information via etherscan. For example:
