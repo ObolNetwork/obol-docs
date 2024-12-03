@@ -222,7 +222,7 @@ const config = {
             from: '/docs/fr/resources',
           },
           {
-            to: '/next/guides/walkthroughs/CSM-walkthrough',
+            to: '/next/run/integrations/lido-csm',
             from: '/docs/advanced/lido_csm',
           },
           {
