@@ -23,12 +23,25 @@ Please see the toolkit on the forum [here](https://community.obol.org/t/governan
 
 ### How to vote in the RAF:
 
-1. Visit the  RAF portal at http://raf.obol.org.
-2. Click the “projects” tab on the top of the page.
-3. Click `+` to add your favourite projects to the Ballot, after reviewing their impact. To examine a project, click anywhere on the project card to open the project details page.
-4. Click on ‘Go to Ballot’ at the top right of the page, which will take you to the Ballot Page, with the projects you have chosen. In the screenshot below, you can see two choices. 
-5. Give each project the desired number of votes, based on your total vote allocation.
-6. Click “submit ballot” and sign the transaction.
+1. Visit the  RAF portal at http://raf.obol.org. You will see information about the current or upcoming RAF round.
+
+![RAF Portal Homepage](/img/RAFPortalExplainer1.png)
+
+2. Click the “projects” tab on the top of the page. Here you see the projects applying to the current RAF round. 
+
+![RAF Portal Projects Page](/img/RAFPortalExplainer2.png)
+
+3. Add your favourite projects to your Ballot, after reviewing their impact. (To examine a project, click anywhere on the project card to open the project details page.) Then, click on ‘View Ballot’ to visit the Ballot Page.
+
+![RAF Portal Project Selection](/img/RAFPortalExplainer3.png)
+
+4. The Ballot Page shows the projects you have chosen. Enter the desired number of votes for each project, based on your total vote allocation. Click “submit ballot” and sign the transaction.
+
+![RAF Ballot Review](/img/RAFPortalExplainer4.png)
+
+5. Once the RAF round is over, you will be able to see the results by clicking on the "stats" button at the top of the portal.
+
+![RAF Round Stats](/img/RAFPortalExplainer5.png)
 
 ### How to evaluate projects
 
