@@ -27,11 +27,11 @@ Please see the toolkit on the forum [here](https://community.obol.org/t/governan
 
 ![RAF Portal Homepage](/img/RAFPortalExplainer1.png)
 
-2. Click the “projects” tab on the top of the page. Here you see the projects applying to the current RAF round. 
+2. Click the “projects” tab on the top of the page. Here you see the projects applying to the current RAF round and that have been approved. 
 
 ![RAF Portal Projects Page](/img/RAFPortalExplainer2.png)
 
-3. Add your favourite projects to your Ballot, after reviewing their impact. (To examine a project, click anywhere on the project card to open the project details page.) Then, click on ‘View Ballot’ to visit the Ballot Page.
+3. Add projects to your Ballot after reviewing their impact. (To examine a project, click anywhere on the project card to open the project details page.) Then, click on ‘View Ballot’ to visit the Ballot Page.
 
 ![RAF Portal Project Selection](/img/RAFPortalExplainer3.png)
 
@@ -39,7 +39,7 @@ Please see the toolkit on the forum [here](https://community.obol.org/t/governan
 
 ![RAF Ballot Review](/img/RAFPortalExplainer4.png)
 
-5. Once the RAF round is over, you will be able to see the results by clicking on the "stats" button at the top of the portal.
+5. Once the RAF round is over, you will be able to see the results by clicking on the "stats" button at the top of the portal. The voting power of each OBOL Token Delegate is proportional to the amount of OBOL tokens delegated to them. However, the funding results are calculated using quadratic funding, meaning that the square root of the votes is used to determine the final allocation. This approach ensures a broader distribution of funding across the Obol Collective, rather than allowing a small number of winners to dominate.
 
 ![RAF Round Stats](/img/RAFPortalExplainer5.png)
 
