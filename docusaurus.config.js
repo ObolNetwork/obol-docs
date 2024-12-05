@@ -411,11 +411,11 @@ const config = {
               },
               {
                 label: "DV Launchpad",
-                to: "next/learn/intro/launchpad",
+                to: "learn/intro/launchpad",
               },
               {
                 label: "Useful Links",
-                to: "next/learn/futher-reading/resources",
+                to: "learn/futher-reading/resources",
               },
             ],
           },
