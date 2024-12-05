@@ -16,6 +16,8 @@ Voting and funding distributions occur over a series of **Obol Retroactive Fund 
 - The Obol RAF rounds occur at intervals and include phases for scoping, application creation, application review, voting, and funding distribution.
 - The Obol Association will collect information from projects to distribute grants, including KYC, where required.
 
+Below is described the steps within each RAF round. Each step takes approximately one week. 
+
 ![RAF Explainer](/img/RAFexplainer.png)
 
 ### Step 1: Scoping
