@@ -395,53 +395,86 @@ const config = {
           srcDark: "/img/ObolLineWhite.svg",
           width: "30px",
           height: "30px",
-          href: "https://obol.tech/",
+          href: "https://obol.org/",
         },
         links: [
           {
-            title: "Docs",
+            title: "Discover",
             items: [
               {
-                label: "Intro to Obol",
-                to: "/next/learn/intro/obol-collective",
-              },
-              {
-                label: "Charon",
-                to: "/next/learn/charon/intro",
-              },
-              {
-                label: "DV Launchpad",
-                to: "/next/learn/intro/launchpad",
-              },
-            ],
-          },
-          {
-            title: "Community",
-            items: [
-              {
-                label: "Discord",
-                to: "https://discord.gg/n6ebKsX46w",
-              },
-              {
-                label: "Twitter",
-                to: "https://twitter.com/obolnetwork",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Blog",
-                to: "https://blog.obol.org/",
-              },
-              {
-                label: "GitHub",
-                to: "https://github.com/obolnetwork/",
+                label: "Github",
+                to: "https://github.com/ObolNetwork",
               },
               {
                 label: "Status",
-                to: "https://status.obol.org/",
+                to: "https://status.obol.org",
+              },
+              {
+                label: "DV Launchpad",
+                to: "next/learn/intro/launchpad",
+              },
+              {
+                label: "Useful Links",
+                to: "next/learn/futher-reading/resources",
+              },
+            ],
+          },
+          {
+            title: "Obol Collective",
+            items: [
+              {
+                label: "Obol.org",
+                to: "https://obol.org",
+              },
+              {
+                label: "Discord",
+                to: "https://discord.gg/obol",
+              },
+              {
+                label: "Twitter",
+                to: "https://x.com/Obol_Collective",
+              },
+              {
+                label: "Blog",
+                to: "https://blog.obol.org",
+              },
+            ],
+          },
+          {
+            title: "DV Labs",
+            items: [
+              {
+                label: "DVLabs.tech",
+                to: "https://dvlabs.tech",
+              },
+              {
+                label: "Twitter",
+                to: "https://x.com/DV_Labs",
+              },
+              {
+                label: "Blog",
+                to: "https://dvlabs.tech/blog",
+              },
+            ],
+          },
+          {
+            title: "Get Started",
+            items: [
+              {
+                label: "Staking Protocols",
+                to: "https://obol.org/lsp",
+              },
+              {
+                label: "Node Operators",
+                to: "https://obol.org/node-operators",
+              },
+              {
+                label: "Home Stakers",
+                to: "https://obol.org/home-stakers",
+              },
+              {
+                label: "Stakers",
+                to: "https://obol.org/eth-holders",
               },
             ],
           },
