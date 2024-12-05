@@ -411,11 +411,11 @@ const config = {
               },
               {
                 label: "DV Launchpad",
-                to: "/learn/intro/launchpad",
+                to: "next/learn/intro/launchpad",
               },
               {
                 label: "Useful Links",
-                to: "https://docs.obol.org/learn/futher-reading/resources",
+                to: "next/learn/futher-reading/resources",
               },
             ],
           },
