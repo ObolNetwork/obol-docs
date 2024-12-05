@@ -440,44 +440,6 @@ const config = {
               },
             ],
           },
-          {
-            title: "DV Labs",
-            items: [
-              {
-                label: "DVLabs.tech",
-                to: "https://dvlabs.tech",
-              },
-              {
-                label: "Twitter",
-                to: "https://x.com/DV_Labs",
-              },
-              {
-                label: "Blog",
-                to: "https://dvlabs.tech/blog",
-              },
-            ],
-          },
-          {
-            title: "Get Started",
-            items: [
-              {
-                label: "Staking Protocols",
-                to: "https://obol.org/lsp",
-              },
-              {
-                label: "Node Operators",
-                to: "https://obol.org/node-operators",
-              },
-              {
-                label: "Home Stakers",
-                to: "https://obol.org/home-stakers",
-              },
-              {
-                label: "Stakers",
-                to: "https://obol.org/eth-holders",
-              },
-            ],
-          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Obol Labs, Inc. `,
       },
