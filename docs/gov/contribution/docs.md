@@ -73,9 +73,9 @@ When designing a tutorial, keep in mind the walkthroughs and articles that alrea
 
 Here are some language-specific rules that the Obol documentation follows. If you use a writing service like [Grammarly](https://www.grammarly.com/), most of these rules are turned on by default.
 
-### American English
+### British English
 
-The Obol documentation portal is written in American English. 
+The Obol documentation portal is written in British English. 
 
 ### The Oxford comma
 
