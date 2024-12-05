@@ -17,6 +17,8 @@ The following specifications are recommended for bare metal machines for cluster
 - A CPU with 4+ cores, favouring high clock speed over more cores. ( >3.0GHz and higher or a cpubenchmark [single thread](https://www.cpubenchmark.net/singleThread.html) score of >2,500)
 - 16GB of RAM
 - 2TB+ free SSD disk space (for mainnet)
+- 1000 read/write SSD IOPS
+- 500MB/s read/write SSD speed
 - 10mb/s internet bandwidth
 
 ### Recommended Specs for extremely large clusters
@@ -24,6 +26,8 @@ The following specifications are recommended for bare metal machines for cluster
 - A CPU with 8+ physical cores, with clock speeds >3.5Ghz
 - 32GB+ RAM (depending on the EL+CL clients)
 - 4TB+ NVMe storage
+- 2000 read/write SSD IOPS
+- 1000MB/s read/write SSD speed
 - 25mb/s internet bandwidth
 
 An NVMe storage device is **highly recommended for optimal performance**, offering nearly 10x more random read/writes per second than a standard SSD.
@@ -68,7 +72,7 @@ Cluster sizes that allow for Byzantine Fault Tolerance are recommended as they a
 
 MEV relays are configured at the Consensus Layer or MEV-boost client level. Refer to our [guide](../../run/start/quickstart-builder-api.mdx) to ensure all necessary configuration has been applied to your clients. As with all validators, low latency during proposal opportunities is extremely important. By default, MEV-Boost waits for all configured relays to return a bid, or will timeout if any have not returned a bid within 950ms. This default timeout is generally too slow for a distributed cluster (think of this time as additive to the time it takes the cluster to come to consensus, both of which need to happen within a 2 second window for optimal proposal broadcasting). It is likely better to only list relays that are located geographically near your node, so that once all relays respond (e.g. in &lt; 50ms) your cluster will move forward with the proposal.
 
-Use Charon's [`test mev` command](../../run/prepare/test-command.md#test-mev-relay) to test a number of your preferred relays, and select the two or three relays with the lowest latency to your node(s), you do not need to have the same relays on each node in a cluster.
+Use Charon's [`test mev` command](../../run/prepare/test-command.mdx#test-mev-relay) to test a number of your preferred relays, and select the two or three relays with the lowest latency to your node(s), you do not need to have the same relays on each node in a cluster.
 
 ## Client Diversity
 
