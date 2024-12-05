@@ -440,6 +440,23 @@ const config = {
               },
             ],
           },
+          {
+            title: "DV Labs",
+            items: [
+              {
+                label: "DVLabs.tech",
+                to: "https://dvlabs.tech",
+              },
+              {
+                label: "Twitter",
+                to: "https://x.com/DV_Labs",
+              },
+              {
+                label: "Blog",
+                to: "https://dvlabs.tech/blog",
+              },
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Obol Labs, Inc. `,
       },
