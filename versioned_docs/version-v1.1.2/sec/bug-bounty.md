@@ -108,7 +108,7 @@ For vulnerabilities with a moderate impact, affecting system availability or int
 Impacts:
 
 - Attacker that is a member of a cluster can exfiltrate K1 key material from another member.
-- Attacker that is a member of the cluster can denial of service attack enough peers in the cluster to prevent operation of the validator(s)
+- Attacker that is a member of the cluster can denial-of-service attack enough peers in the cluster to prevent operation of the validator(s)
 - Attacker that is a member of the cluster can bias the protocol in a manner to control the majority of block proposal opportunities.
 - Attacker can get a DV Launchpad user to inadvertently interact with a smart contract that is not a part of normal operation of the launchpad.
 - Increasing network processing node resource consumption by at least 30% without brute force actions, compared to the preceding 24 hours
@@ -152,7 +152,7 @@ Rewards may be issued as cash, merchandise, or other forms of recognition, at Ob
 - Any testing with pricing oracles or third-party smart contracts
 - Attempting phishing or other social engineering attacks against our employees and/or customers
 - Any testing with third-party systems and applications (e.g. browser extensions) as well as websites (e.g. SSO providers, advertising networks)
-- Any denial of service attacks that are executed against project assets
+- Any denial-of-service attacks that are executed against project assets
 - Automated testing of services that generate significant amounts of traffic
 - Public disclosure of an unpatched vulnerability in an embargoed bounty
 
