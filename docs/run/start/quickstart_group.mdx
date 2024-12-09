@@ -2,7 +2,6 @@
 sidebar_position: 3
 description: Create a DV with a group
 ---
-
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -11,39 +10,35 @@ import TabItem from "@theme/TabItem";
 This quickstart guide will walk you through creating a Distributed Validator Cluster with a number of other node operators.
 
 ## Pre-requisites
-  <ul>
-    <li>A basic <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/" target="_blank">knowledge</a> of Ethereum nodes and validators.</li>
-    <li>Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.</li>
-    <li>Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.</li>
-    <li>(If you are taking part using a DappNode) A computer with an up to date version of <a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank"> DappNode</a>'s software and an internet connection.</li>
-    <li>Make sure <code>docker</code> is running before executing the commands below.</li>
-  </ul>
+- A basic <a href="https://docs.ethstaker.cc/ethstaker-knowledge-base/" target="_blank">knowledge</a> of Ethereum nodes and validators.
+- A machine that meets the [minimum requirements](../prepare/deployment-best-practices#hardware-specifications) for the network you intend to validate.
+- If you are taking part using a [DappNode](https://dappnode.com/):
+    - A computer with an up to date version of <a href="https://docs.dappnode.io/docs/user/install/overview/" target="_blank"> DappNode</a>'s software and an internet connection.
+- If you are taking part using [Sedge](https://www.nethermind.io/sedge), or [Charon's Distributed Validator Node](https://github.com/ObolNetwork/lido-charon-distributed-validator-node) (CDVN) starter repo:
+    - Ensure you have <a href="https://git-scm.com/downloads" target="_blank">git</a> installed.
+    - Ensure you have <a href="https://docs.docker.com/engine/install/" target="_blank">docker</a> installed.
+    - Make sure <code>docker</code> is running before executing the commands below.
 
 ## Step 1: Get your ENR
 
 <Tabs groupId="Get-ENR">
-  <TabItem value="CLI" label="CLI">
-  
+  <TabItem value="CLI" label="CDVN">
+
 In order to prepare for a distributed key generation ceremony, you need to create an ENR for your Charon client. This ENR is a public/private key pair that allows the other Charon clients in the DKG to identify and connect to your node. If you are creating a cluster but not taking part as a node operator in it, you can skip this step.
 
 ```shell
 # Clone the repo
 git clone https://github.com/ObolNetwork/charon-distributed-validator-node.git
-
 # Change directory
 cd charon-distributed-validator-node/
-
 # Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 create enr
 ```
-
 You should expect to see a console output like this:
-
 ```logs
 Created ENR private key: .charon/charon-enr-private-key
 enr:-JG4QGQpV4qYe32QFUAbY1UyGNtNcrVMip83cvJRhw1brMslPeyELIz3q6dsZ7GblVaCjL_8FKQhF6Syg-O_kIWztimGAYHY5EvPgmlkgnY0gmlwhH8AAAGJc2VjcDI1NmsxoQKzMe_GFPpSqtnYl-mJr8uZAUtmkqccsAx7ojGmFy-FY4N0Y3CCDhqDdWRwgg4u
 ```
-
 :::warning
 Please make sure to create a backup of the private key at `.charon/charon-enr-private-key`. Be careful not to commit it to git! **If you lose this file you won't be able to take part in the DKG ceremony nor start the DV cluster successfully.**
 :::
@@ -54,11 +49,8 @@ If instead of being shown your `enr` you see an error saying `permission denied`
 
 </TabItem>
 <TabItem value="Dappnode" label="Dappnode">
-
 #### Prepare an Execution and Consensus client
-
 Before preparing the DappNode to take part in a Distributed Validator Cluster, you must ensure you have selected an execution client & consensus client on your DappNode under the 'Stakers' tab for the network you intend to validate.
-
 <p>
           <ol>
             <li>
@@ -78,11 +70,8 @@ Before preparing the DappNode to take part in a Distributed Validator Cluster, y
             </li>
             </ol>
         </p>
-
 #### Install the Obol DappNode package
-
 With a fully synced Ethereum node now running on the DappNode, the below steps will walk through installing the Obol package via an IPFS hash and preparing for a Distributed Key Generation ceremony. Future versions of this guide will download the package from the official DappNode DappStore once a stable 1.0 release is made.
-
 <p>
   <ol>
     <li>
@@ -127,9 +116,58 @@ With a fully synced Ethereum node now running on the DappNode, the below steps w
   </ol>
 </p>
 </TabItem>
+<TabItem value="Sedge" label="Sedge">
+
+#### Installing Sedge
+
+First you must install Sedge, please refer to the <a href="https://docs.sedge.nethermind.io/docs/quickstart/install-guide" target="_blank">official Sedge installation guide</a> to do so.
+
+####  Check the install was successful
+
+Run the below command to check if your have successfully installed sedge in your computer.
+```shell
+sedge
+```
+
+Expected output:
+```log
+A tool to allow deploying validators with ease.
+  Usage:
+    sedge [command]
+  Available Commands:
+    cli             Generate a node setup interactively
+    clients         List supported clients
+    deps            Manage dependencies
+    down            Shutdown sedge running containers
+    generate        Generate new setups according to selected options
+    help            Help about any command
+    import-key      Import validator keys
+    keys            Generate keystore folder
+    logs            Get running container logs
+    networks        List supported networks
+    run             Run services
+    show            Show useful information about sedge running containers
+    slashing-export Export slashing protection data
+    slashing-import Import slashing protection data
+    version         Print sedge version
+  Flags:
+    -h, --help               help for sedge
+        --log-level string   Set Log Level, e.g panic, fatal, error, warn, warning, info, debug, trace (default "info")
+  Use "sedge [command] --help" for more information about a command.
+```
+
+Create an ENR using charon:
+
+```shell
+# Use docker to create an ENR. Backup the file `.charon/charon-enr-private-key`.
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 create enr
+```
+</TabItem>
 </Tabs>
 
-For Step 2, select the "Creator" tab if you are coordinating the creation of the cluster (This role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to). Select the "Operator" tab if you are accepting an invitation to operate a node in a cluster, proposed by the cluster creator.
+For Step 2 of the quickstart:
+- Select the **Creator** tab if you are coordinating the creation of the cluster (this role holds no position of privilege in the cluster, it only sets the initial terms of the cluster that the other operators agree to).
+- Select the **Operator** tab if you are accepting an invitation to operate a node in a cluster, proposed by the cluster creator.
 
 ## Step 2: Create a cluster or accept an invitation to a cluster
 
@@ -251,7 +289,7 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
           </ol>
         </p>
       </TabItem>
-      <TabItem value="CLI" label="CLI">
+      <TabItem value="CLI" label="CDVN">
         <p>
           You will use the CLI to create the cluster definition file, which you
           will distribute it to the operators manually.
@@ -341,7 +379,7 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
         operators in your cluster to also finish these steps.</li>
         </ol>
       </TabItem>
-      <TabItem value="CLI" label="CLI">
+      <TabItem value="CLI" label="CDVN">
         You'll receive the <code>cluster-definition.json</code> file created by
         the leader/creator. You should save it in the <code>.charon/</code>{" "}
         folder that was created initially. (Alternatively, you can use the{" "}
@@ -351,12 +389,9 @@ For Step 2, select the "Creator" tab if you are coordinating the creation of the
     </Tabs>
   </TabItem>
 </Tabs>
-
 Once every participating operator is ready, the next step is the distributed key generation amongst the operators.
-
 - If you are not planning on operating a node, and were only configuring the cluster for the operators, your journey ends here. Well done!
 - If you are one of the cluster operators, continue to the next step.
-
 ## Step 3: Run the Distributed Key Generation (DKG) ceremony
 
 :::tip
@@ -376,24 +411,18 @@ For the [DKG](../../learn/charon/dkg.md) to complete, all operators need to be r
       allowfullscreen
     ></iframe>
   </p>
-
 1. Once all operators successfully signed, your screen will automatically advance to the next step and look like this. Click `Continue`. (If you closed the tab, you can always go back to the invite link shared by the leader and connect your wallet.)
-
 ![Config Signing Success](/img/Guide08.png)
-
 2. Copy and run the `docker` command on the screen into your terminal. It will retrieve the remote cluster details and begin the DKG process.
-
    ![Run the DKG](/img/Guide10.png)
-
 3. Assuming the DKG is successful, a number of artefacts will be created in the `.charon` folder of the node. These include:
-
    - A `deposit-data.json` file. This contains the information needed to activate the validator on the Ethereum network.
    - A `cluster-lock.json` file. This contains the information needed by Charon to operate the distributed validator cluster with its peers.
    - A `validator_keys/` folder. This folder contains the private key shares and passwords for the created distributed validators.
 
 
   </TabItem>
-  <TabItem value="CLI" label="CLI">
+  <TabItem value="CLI" label="CDVN">
     Once the creator gives you the <code>cluster-definition.json</code> file and you place it in a <code>.charon</code> subdirectory, run: <pre>docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 dkg --publish</pre> and the DKG process should begin.
   </TabItem>
   <TabItem value="DappnodeTab" label="Dappnode">
@@ -415,7 +444,7 @@ For the [DKG](../../learn/charon/dkg.md) to complete, all operators need to be r
               <img src="/img/RestartContainer.png" alt="Restart Charon validator container" />
             </li>
             <li>
-              The node is now ready and will attempt to complete the DKG. You can monitor the DKG progress via the 'Logs' tab of the package. Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching <code>cluster_definition_hash</code>), the key generation ceremony begins.
+              The node is now ready and will attempt to complete the DKG. You can monitor the DKG progress via the 'Logs' tab of the package. Once all clients in the cluster can establish a connection with one another and they each complete a handshake (confirm everyone has a matching <code>cluster_definition_hash</code>), the key generation ceremony begins.
               <img src="/img/ConnectPeers.png" alt="Connect to peers in logs tab" />
             </li>
              <li>
@@ -440,62 +469,63 @@ For the [DKG](../../learn/charon/dkg.md) to complete, all operators need to be r
      <img src="/img/Node.png" alt="artefacts" />
      </li>
      </ol>
-  
+
   </TabItem>
+<TabItem value="Sedge" label="Sedge">
+
+Sedge does not currently support taking part in a DKG. Follow the instructions for **Launchpad** to take part in the DKG with Charon, and in Step 4 you will import these keys into Sedge.
+
+</TabItem>
 </Tabs>
 
 :::danger
 Please make sure to create a backup of your `.charon/` folder. **If you lose your private keys you won't be able to start the DV cluster successfully and may risk your validator deposit becoming unrecoverable.** Ensure every operator has their `.charon` folder securely and privately backed up before activating any validators.
 :::
-
 :::info
 The `cluster-lock` and `deposit-data` files are identical for each operator, if lost, they can be copied from one operator to another.
 :::
-
 Now that the DKG has been completed, all operators can start their nodes.
-
 ## Step 4: Start your Distributed Validator Node
-
 With the DKG ceremony over, the last phase before activation is to prepare your node for validating over the long term.
 
 <Tabs groupId="Full-Pre-Existing">
   <TabItem value="Full Node" label="Full Node" default>
-    The <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">CDVN repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>) using Docker Compose. You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests.
+    The <a href="https://github.com/ObolNetwork/charon-distributed-validator-node" target="_blank">CDVN repository</a> is configured to sync an execution layer client (<code>Nethermind</code>) and a consensus layer client (<code>Lighthouse</code>) using Docker Compose, further client combinations can be prepared using Sedge. You can also leverage alternative ways to run a node such as Ansible, Helm, or Kubernetes manifests.
 
 <Tabs groupId="Docker-Helm">
-  
-  <TabItem value="Docker" label="Docker" default>
+
+  <TabItem value="Docker" label="CDVN" default>
 
 :::info
-Currently, the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node) configures a node for the Holesky testnet. It is possible to choose a different network (another testnet, or mainnet) by overriding the `.env` file.
-From within the `charon-distributed-validator-node` directory:
+Currently, the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node) has defaults for the Holesky testnet and for mainnet.
 
-`.env.sample` is a sample environment file that allows overriding default configuration defined in `docker-compose.yml`. Uncomment and set any variable to override its value.
-
-Setup the desired inputs for the DV, including the network you wish to operate on. Check the [Charon CLI reference](../../learn/charon/charon-cli-reference.md) for additional optional flags to set.
+Start by copying the appropriate `.env.sample.<NETWORK>` file to `.env`, and modifying values as needed.
 
 ```shell
-# Copy ".env.sample", renaming it ".env"
+# To prepare the node for the Holesky test network
+# Copy ".env.sample.holesky", renaming it ".env"
 cp .env.sample.holesky .env
-```
 
-:::
 
-:::warning
-If you manually update `docker compose` to mount `lighthouse` from your locally synced `~/.lighthouse`, the whole chain database may get deleted. It'd be best not to manually update as `lighthouse` checkpoint-syncs so the syncing doesn't take much time.<br />
-:::
+# To prepare the node for the main Ethereum network
+# Copy ".env.sample.mainnet", renaming it ".env"
+cp .env.sample.mainnet .env
 
-:::note
-If you have a `nethermind` node already synced, you can simply copy over the directory. For example: `cp -r ~/.ethereum/goerli data/nethermind`. This makes everything faster since you start from a synced nethermind node.
-:::
+
+In the same folder where you created your ENR in Step 1, and ran the DKG in Step 3, start your node in the DV cluster with docker compose.
 
 ```shell
-# Delete lighthouse data if it exists
-rm -r ./data/lighthouse
 
+# To be run from the ./charon-distributed-validator-node folder
 # Spin up a Distributed Validator Node with a Validator Client
 docker compose up -d
 ```
+
+:::warning
+
+Do not start this node until the DKG is complete, as the charon container will interfere with the charon instance attempting to take part in the DKG ceremony.
+
+:::
 
 If at any point you need to turn off your node, you can run:
 
@@ -503,24 +533,126 @@ If at any point you need to turn off your node, you can run:
 # Shut down the currently running Distributed Validator Node
 docker compose down
 ```
-
 You should use the Grafana dashboard that accompanies the quickstart repo to see whether your cluster is healthy.
-
 ```shell
 # Open Grafana dashboard
 open http://localhost:3000/d/d6qujIJVk/
 ```
-
 In particular you should check:
-
 - That your Charon client can connect to the configured beacon client.
 - That your Charon client can connect to all peers directly.
 - That your validator client is connected to Charon, and has the private keys it needs loaded and accessible.
-
 Most components in the dashboard have some help text there to assist you in understanding your cluster performance.
-
 You might notice that there are logs indicating that a validator cannot be found and that APIs are returning 404. This is to be expected at this point, as the validator public keys listed in the lock file have not been deposited and acknowledged on the consensus layer yet (usually it takes ~16 hours after the deposit is made).
 
+</TabItem>
+ <TabItem value="Sedge" label="Sedge">
+
+To prepare a Distributed Validator node using sedge, we will use the `sedge generate` command to prepare a docker-compose file of our preferred clients, `sedge import-key` to import the artifacts created during the DKG ceremony, and `sedge run` to begin running the node.
+
+#### Sedge generate
+With Sedge installed, and the DKG complete, it’s time to deploy a Distributed Validator. Using the `sedge generate` command and its subcommands, Sedge will create a Docker Compose file needed to run the validator node.
+<p>
+          <ol>
+            <li>
+              The following command generates the artifacts required to deploy a distributed validator on the Holesky network, using Teku as the validator client, Prysm as the consensus client, and Geth as the execution client. For additional supported client combinations, <a href="https://github.com/NethermindEth/sedge?tab=readme-ov-file#supported-networks-and-clients" target="_blank">refer to the documentation here</a>.
+              ```shell
+              sedge generate full-node --validator=teku --consensus=prysm --execution=geth --network=holesky --distributed
+              ```
+              You should be shown a long list of configuration outputs with the following endings:
+              ```shell
+              2024-09-20 12:56:15 -- [INFO] Generation of files successfully, happy staking! You can use now 'sedge run' to start the setup.
+              ```
+            </li>
+            <li>
+              Explore the config files.
+
+              You should now see a `sedge-data` directory created in the folder where you ran the `sedge generate` command.
+              To view the directory contents, use the `ls` command. 
+              ```shell
+              ls sedge-data
+              > docker-compose.yml jwtsecret
+              ```
+
+            </li>
+          </ol>
+        </p>
+#### Sedge Import-key
+
+Use the following command to import keys from the directory where the `.charon` dir is located.
+```shell
+sedge import-key --from ./ holesky teku
+```
+#### Sedge Run
+After confirming the configurations and ensuring all files are in place, use the `sedge run` command to deploy the DV docker containers. Sedge will then begin pulling all the required Docker images.
+
+```shell
+> sedge run
+2024-09-20 13:11:49 -- [INFO] [Logger Init] Log level: info
+2024-09-20 13:11:49 -- [WARN] A new Version of sedge is available. Please update to the latest Version. See https://github.com/NethermindEth/sedge/releases for more information. Latest detected tag: fatal: not a git repository (or any of the parent directories): .git
+2024-09-20 13:11:50 -- [INFO] Setting up containers
+2024-09-20 13:11:50 -- [INFO] Running command: docker compose -f /sedge/sedge-data/docker-compose.yml build
+2024-09-20 13:11:50 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml pull
+[+] Pulling 16/44
+ ⠇ consensus [⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] Pulling                                                                                                                                                     20.8s
+   ⠙ b003b463d750 Downloading [===============>                                   ]   32.9kB/103.7kB                                                                                                14.2s
+   ⠙ fe5ca62666f0 Waiting                                                                                                                                                                           14.2s
+   ⠙ b02a7525f878 Waiting                                                                                                                                                                           14.2s
+   ⠙ fcb6f6d2c998 Waiting                                                                                                                                                                           14.2s
+   ⠙ e8c73c638ae9 Waiting                                                                                                                                                                           14.2s
+   ⠙ 1e3d9b7d1452 Waiting                                                                                                                                                                           14.2s
+   ⠙ 4aa0ea1413d3 Waiting                                                                                                                                                                           14.2s
+   ⠙ 7c881f9ab25e Waiting                                                                                                                                                                           14.2s
+   ⠙ 5627a970d25e Waiting                                                                                                                                                                           14.2s
+   ⠙ 5cf83054c259 Waiting                                                                                                                                                                           14.2s
+   ⠙ fec68abcb14d Waiting                                                                                                                                                                           14.2s
+   ⠙ 4d5ad547ce94 Waiting                                                                                                                                                                           14.2s
+   ⠙ e1ea80853e89 Waiting                                                                                                                                                                           14.2s
+   ⠙ 17b1d7e8d99a Waiting                                                                                                                                                                           14.2s
+   ⠙ 841a2fc14521 Waiting                                                                                                                                                                           14.2s
+   ⠙ 55b44d28dd62 Waiting                                                                                                                                                                           14.2s
+   ⠙ f3e3115c6547 Pulling fs layer                                                                                                                                                                  14.2s
+   ⠙ 3cec53649029 Waiting                                                                                                                                                                           14.2s
+   ⠙ 01739568079a Waiting                                                                                                                                                                           14.2s
+   ⠙ c6bd24b188db Waiting                                                                                                                                                                           14.2s
+   ⠙ fe8d2e9c9467 Waiting                                                                                                                                                                           14.2s
+   ⠙ c151008cbec0 Waiting                                                                                                                                                                           14.2s
+   ⠙ de1ef6c90686 Waiting                                                                                                                                                                           14.2s
+   ⠙ 03d09d97b125 Waiting                                                                                                                                                                           14.2s
+ ✔ execution Pulled                                                                                                                                                                                  9.3s
+   ✔ a258b2a6b59a Pull complete                                                                                                                                                                      1.5s
+   ✔ a2d6cf6afda3 Pull complete                                                                                                                                                                      1.7s
+   ✔ a3dd8256fc41 Pull complete                                                                                                                                                                      6.9s
+```
+Once all docker images are pulled, sedge will create & start the containers to run all the required clients. See below for example output of the progress. 
+
+```shell
+✔ 8db8b5d461a7 Pull complete                                                                                                                                                                     24.1s
+   ✔ 2288b86b1d5f Pull complete                                                                                                                                                                     24.3s
+   ✔ 4becb7b9a44b Pull complete                                                                                                                                                                     24.3s
+   ✔ 4f4fb700ef54 Pull complete                                                                                                                                                                     24.3s
+   ✔ 5c35e3728c84 Pull complete                                                                                                                                                                     35.1s
+2024-09-20 13:12:45 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml create
+[+] Creating 7/7
+ ✔ Network sedge-network              Created                                                                                                                                                        0.1s
+ ✔ Container sedge-dv-client          Created                                                                                                                                                        0.4s
+ ✔ Container sedge-consensus-client   Created                                                                                                                                                        0.4s
+ ✔ Container sedge-execution-client   Created                                                                                                                                                        0.4s
+ ✔ Container sedge-mev-boost          Created                                                                                                                                                        0.4s
+ ✔ Container sedge-validator-blocker  Created                                                                                                                                                        0.4s
+ ✔ Container sedge-validator-client   Created                                                                                                                                                        0.1s
+2024-09-20 13:12:45 -- [INFO] Running command: docker compose -f /sedge-data/docker-compose.yml up -d
+[+] Running 4/5
+ ✔ Container sedge-consensus-client   Started                                                                                                                                                        1.0s
+ ⠧ Container sedge-validator-blocker  Waiting                                                                                                                                                      130.8s
+ ✔ Container sedge-dv-client          Started                                                                                                                                                        1.0s
+ ✔ Container sedge-execution-client   Started                                                                                                                                                        1.3s
+ ✔ Container sedge-mev-boost          Started      
+```
+
+Given time, the execution and consensus clients should complete syncing, and if a Distributed Validator has already been activated, the node should begin to validate.
+
+If you encounter issues with using Sedge as part of a DV cluster, consider consulting the [Sedge docs](https://docs.sedge.nethermind.io/) directly, or opening an [issue](https://github.com/NethermindEth/sedge/issues) or [pull request](https://github.com/NethermindEth/sedge/pulls) if appropriate.
   </TabItem>
 
   <TabItem value="Ansible" label="Ansible">
@@ -533,25 +665,17 @@ You might notice that there are logs indicating that a validator cannot be found
     Use Kubernetes manifests to start your Charon client and validator client. These manifests expect an existing Beacon Node Endpoint to connect to. <a href="https://github.com/ObolNetwork/charon-k8s-distributed-validator-node" target="_blank">See the repo here</a> for further instructions.
   </TabItem>
   </Tabs>
-
 </TabItem>
-
 <TabItem value="Existing Beacon Node" label="Existing Beacon Node">
-
 :::warning
 Using a remote beacon node will impact the performance of your Distributed Validator and should be used sparingly.
 :::
-
 If you already have a beacon node running somewhere and you want to use that instead of running an EL (`nethermind`) & CL (`lighthouse`) as part of the example repo, you can disable these images. To do so, follow these steps:
-
 1. Copy the `docker-compose.override.yml.sample` file
-
 ```shell
 cp -n docker-compose.override.yml.sample docker-compose.override.yml
 ```
-
 2. Uncomment the `profiles: [disable]` section for both `nethermind` and `lighthouse`. The override file should now look like this
-
 ```docker
 services:
   nethermind:
@@ -562,7 +686,6 @@ services:
       #- 8545:8545 # JSON-RPC
       #- 8551:8551 # AUTH-RPC
       #- 6060:6060 # Metrics
-
   lighthouse:
     # Disable lighthouse
     profiles: [disable]
@@ -572,23 +695,18 @@ services:
       #- 5054:5054 # Metrics
 ...
 ```
-
 3. Then, uncomment and set the `CHARON_BEACON_NODE_ENDPOINTS` variable in the `.env` file to your beacon node's URL
-
 ```shell
 ...
 # Connect to one or more external beacon nodes. Use a comma separated list excluding spaces.
 CHARON_BEACON_NODE_ENDPOINTS=<YOUR_REMOTE_BEACON_NODE_URL>
 ...
 ```
-
 4. Restart your docker compose
-
 ```shell
 docker compose down
 docker compose up -d
 ```
-
   </TabItem>
 </Tabs>
 
@@ -596,4 +714,4 @@ docker compose up -d
 In a Distributed Validator Cluster, it is important to have a low latency connection to your peers. Charon clients will use the NAT protocol to attempt to establish a direct connection to one another automatically. If this doesn't happen, you should port forward Charon's p2p port to the public internet to facilitate direct connections. The default port to expose is `:3610`. Read more about Charon's networking [here](../../learn/charon/networking.mdx).
 :::
 
-If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to activating your validator to begin staking.
+If you have gotten to this stage, every node is up, synced and connected, congratulations. You can now move forward to [activating your validator](../running/activate-dv.mdx) to begin staking.
