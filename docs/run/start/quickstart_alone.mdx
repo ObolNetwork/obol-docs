@@ -35,7 +35,7 @@ The private key shares can be created centrally and distributed securely to each
   cd charon-distributed-validator-cluster/
 
   # Run the command provided in the DV Launchpad "Create a cluster alone" flow
-  docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.1.2 create cluster --definition-file=...
+  docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.2.0 create cluster --definition-file=...
   ```
 
   </TabItem>
@@ -58,7 +58,7 @@ The private key shares can be created centrally and distributed securely to each
   Check the [Charon CLI reference](../../learn/charon/charon-cli-reference.md#create-a-full-cluster-locally) for additional, optional flags to set.
 
   ```shell
-    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.1.2 create cluster \
+    docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 create cluster \
       --nodes=4 \
       --network=holesky \
       --num-validators=1 \
