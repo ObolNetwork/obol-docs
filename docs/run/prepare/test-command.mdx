@@ -327,11 +327,11 @@ The storage tests require `fio` to be installed on your machine. Read more about
   </TabItem>
   <TabItem value="Docker" label="Docker" default>
 
+If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`. This is the case with running Charon cluster using the [charon-distributed-validator-node repository](https://github.com/ObolNetwork/charon-distributed-validator-node/), as usually services like the beacon node and validator client are hosted locally. Read more about docker networking [here](https://docs.docker.com/engine/network/).
+
 <h2>Test all</h2>
 
 Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
-
-If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
 
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
@@ -552,8 +552,6 @@ If you are running the tests towards another Docker container, you need to inclu
 
 Run tests on beacon node(s), to evaluate their effectiveness for a Distributed Validator cluster. The beacon node is usually the client doing the most work in a validating stack, especially with a high number of validators being serviced by the validator client(s) and Charon(s) that depend on it.
 
-If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
-
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
 
@@ -599,8 +597,6 @@ If you are running the tests towards another Docker container, you need to inclu
 Run tests towards your validator client, to evaluate its effectiveness for a Distributed Validator cluster.
 
 Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be changed by supplying different endpoint to the `--validator-api-address` flag.
-
-If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
 
 <h3>Pre-requisites</h3>
 
