@@ -47,7 +47,7 @@ const config = {
           },
           {
             to: '/run/prepare/how_where_DVs',
-            from: '/docs/next/int/how_where_DVs',
+            from: '/docs/int/how_where_DVs',
           },
           {
             to: '/run/start/quickstart_overview',
@@ -360,7 +360,7 @@ const config = {
         items: [
           {
             type: "doc",
-            docId: "int/Overview",
+            docId: "learn/intro/obol-collective",
             position: "left",
             label: "Docs",
           },
