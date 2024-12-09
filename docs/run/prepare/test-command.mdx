@@ -98,7 +98,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             ```shell
             charon alpha test all \
               --peers-enrs="enr:-HW4QMno_MB_ID6GFVxoIQAHHVHZZZjzFctxtX2tm9D95tvaPbHathi8YUP8jh8v2YUAVu2fYWEOB_BT14pt8QgiGg2AgmlkgnY0iXNlY3AyNTZrMaECdpnK83s0dbBwCaEfDIkQ-3nJkkC93STvv6Vmi0bYlzg,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
-              --beacon-endpoints="http://lighthouse:5052/" \
+              --beacon-endpoints="http://127.0.0.1:5052/" \
               --beacon-load-test \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
@@ -120,7 +120,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             ```shell
             charon alpha test all \
               --peers-definition-file="./.charon/cluster-definition.json" \
-              --beacon-endpoints="http://lighthouse:5052/" \
+              --beacon-endpoints="http://127.0.0.1:5052/" \
               --beacon-load-test \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
@@ -142,7 +142,7 @@ Charon test commands are designed to help you evaluate the performance and readi
             ```shell
             charon alpha test all \
               --peers-lock-file="./.charon/cluster-lock.json" \
-              --beacon-endpoints="http://lighthouse:5052/" \
+              --beacon-endpoints="http://127.0.0.1:5052/" \
               --beacon-load-test \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
@@ -247,7 +247,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
 
       ```shell
       charon alpha test beacon \
-        --endpoints="http://lighthouse:5052/" \
+        --endpoints="http://127.0.0.1:5052/" \
         --load-test
       ```
     </TabItem>
@@ -330,6 +330,8 @@ The storage tests require `fio` to be installed on your machine. Read more about
 <h2>Test all</h2>
 
 Intended for running tests across all categories. Each flag should have a prefix for its category (i.e.: the flag `--endpoints` from the beacon tests becomes `--beacon-endpoints`). For details about each category refer to their respective sections.
+
+If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
 
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
@@ -418,12 +420,13 @@ Intended for running tests across all categories. Each flag should have a prefix
           <h3>Example run</h3>
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
+            docker run --network="charon-distributed-validator-node_dvnode" -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-enrs="enr:-HW4QMno_MB_ID6GFVxoIQAHHVHZZZjzFctxtX2tm9D95tvaPbHathi8YUP8jh8v2YUAVu2fYWEOB_BT14pt8QgiGg2AgmlkgnY0iXNlY3AyNTZrMaECdpnK83s0dbBwCaEfDIkQ-3nJkkC93STvv6Vmi0bYlzg,enr:-HW4QO2vefLueTBEUGly5hkcpL7NWdMKWx7Nuy9f7z6XZInCbFAc0IZj6bsnmj-Wi4ElS6jNa0Mge5Rkc2WGTVemas2AgmlkgnY0iXNlY3AyNTZrMaECR9SmYQ_1HRgJmNxvh_ER2Sxx78HgKKgKaOkCROYwaDY" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
+              --validator-api-address="lodestar:5064" \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
               --mev-load-test \
@@ -443,12 +446,13 @@ Intended for running tests across all categories. Each flag should have a prefix
           <h3>Example run</h3>
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
+            docker run --network="charon-distributed-validator-node_dvnode" -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-definition-file="/opt/charon/test/.charon/cluster-definition.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
+              --validator-api-address="lodestar:5064" \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
               --mev-load-test \
@@ -468,12 +472,13 @@ Intended for running tests across all categories. Each flag should have a prefix
           <h3>Example run</h3>
 
             ```shell
-            docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
+            docker run --network="charon-distributed-validator-node_dvnode" -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test all \
               --peers-lock-file="/opt/charon/test/.charon/cluster-lock.json" \
               --peers-private-key-file="/opt/charon/test/.charon/charon-enr-private-key" \
               --beacon-endpoints="http://lighthouse:5052/" \
               --beacon-simulation-file-dir="/opt/charon/test" \
               --beacon-load-test \
+              --validator-api-address="lodestar:5064" \
               --mev-endpoints="https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live,https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net,https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com,https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net,https://0xa1559ace749633b997cb3fdacffb890aeebdb0f5a3b6aaa7eeeaf1a38af0a8fe88b9e4b1f61f236d2e64d95733327a62@relay.ultrasound.money,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@regional.titanrelay.xyz,https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@global.titanrelay.xyz" \
               --mev-beacon-node-endpoint="https://ethereum-beacon-api.publicnode.com" \
               --mev-load-test \
@@ -547,6 +552,8 @@ Intended for running tests across all categories. Each flag should have a prefix
 
 Run tests on beacon node(s), to evaluate their effectiveness for a Distributed Validator cluster. The beacon node is usually the client doing the most work in a validating stack, especially with a high number of validators being serviced by the validator client(s) and Charon(s) that depend on it.
 
+If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
+
   <Tabs groupId="load-test">
     <TabItem value="Regular test" label="Regular test" default>
 
@@ -578,7 +585,7 @@ Run tests on beacon node(s), to evaluate their effectiveness for a Distributed V
     <h3>Example run</h3>
 
       ```shell
-      docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test beacon \
+      docker run --network="charon-distributed-validator-node_dvnode" -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon/test" obolnetwork/charon:v1.1.2 alpha test beacon \
         --endpoints="http://lighthouse:5052/" \
         --simulation-file-dir="/opt/charon/test" \
         --load-test
@@ -593,6 +600,8 @@ Run tests towards your validator client, to evaluate its effectiveness for a Dis
 
 Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be changed by supplying different endpoint to the `--validator-api-address` flag.
 
+If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`.
+
 <h3>Pre-requisites</h3>
 
 - Running validator client towards which tests will be executed.
@@ -600,7 +609,8 @@ Default endpoint for validator and port is used at `127.0.0.1:3600`. This can be
 <h3>Example run</h3>
 
 ```shell
-docker run obolnetwork/charon:v1.1.2 alpha test validator
+docker run --network="charon-distributed-validator-node_dvnode" obolnetwork/charon:v1.1.2 alpha test validator \
+  --validator-api-address="lodestar:5064"
 ```
 
 <h2>Test MEV relay</h2>
