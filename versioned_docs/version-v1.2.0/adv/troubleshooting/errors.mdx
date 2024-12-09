@@ -1,0 +1,694 @@
+---
+sidebar_position: 1
+description: Errors & Resolutions
+---
+
+# Errors & Resolutions
+
+All operators should try to restart their nodes and should check if they are on the latest stable version before attempting anything other configuration change as we are still in beta and frequently releasing fixes. You can restart and update with the following commands:
+
+```shell
+docker compose down
+git pull
+docker compose up
+```
+
+You can check your logs using
+
+```shell
+docker compose logs
+```
+
+<details open className="details">
+  <summary>
+    <h2 id="enrs-keys">ENRs & Keys</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="what-is-an-enr">What is an ENR?</h4>
+    </summary>
+    <p>
+      An ENR is shorthand for an{" "}
+      <a href="https://eips.ethereum.org/EIPS/eip-778">Ethereum Node Record</a>.
+      It is a way to represent a node on a public network, with a reliable
+      mechanism to update its information.
+      <br />
+      <br />
+      At Obol we use ENRs to identify Charon nodes to one another such that they
+      can form clusters with the right Charon nodes and not impostors. ENRs have
+      private keys they use to sign updates to the <a href="https://enr-viewer.com/">
+        data contained
+      </a> in their ENR. This private key is by default found at <code>
+        .charon/charon-enr-private-key
+      </code>, and should be kept secure, and not checked into version control.
+      <br />
+      <br />
+      An ENR looks something like this:
+      <pre>
+        <code>
+          enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGDqEcoQkeJ98Pw7GaGAYFI7eoegmlkgnY0gmlwhCKNyGGJc2VjcDI1NmsxoQI6SQlzw3WGZ_VxFHLhawQFhCK8Aw7Z0zq8IABksuJEJIN0Y3CCPoODdWRwgj6E
+        </code>
+      </pre>
+    </p>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="generate-enr-again">
+        How do I get my ENR if I want to generate it again?
+      </h4>
+    </summary>
+    <ul>
+      <li>
+        <code>cd</code> to the directory where your private keys are located
+        (ex: <code>cd /path/to/charon/enr/private/key</code>)
+      </li>
+      <li>
+        Run{" "}
+        <code>
+          docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 enr
+        </code>
+        . This prints the ENR on your screen.{" "}
+      </li>
+      <li>
+        Please note that this ENR is not the same as the one generated when you
+        created it for the first time. This is because the process of generating
+        ENRs includes the current timestamp.
+      </li>
+    </ul>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="lost-enr-private-key">
+        {" "}
+        What do I do if lose my <code>charon-enr-private-key</code>?{" "}
+      </h4>
+    </summary>
+    <ul>
+      <li>
+        {" "}
+        For now, ENR rotation/replacement is not supported, it will be supported
+        in a future release.{" "}
+      </li>
+      <li>
+        {" "}
+        Therefore, it's advised to always keep a backup of your <code>
+          charon-enr-private-key
+        </code> in a secure location (ex: cloud storage, USB Flash drive, etc.).{" "}
+      </li>
+    </ul>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="lost-keys">I can't find the keys anywhere</h4>
+    </summary>
+    <ul>
+      <li>
+        The <code>charon-enr-private-key</code> is generated inside a hidden
+        folder <code>.charon</code>.{" "}
+      </li>
+      <li>
+        To view it, run <code>ls -al</code> in your terminal.{" "}
+      </li>
+      <li>
+        You can then copy the key to your <code>~/Downloads</code> folder for
+        easy access by running{" "}
+        <code>cp .charon/charon-enr-private-key ~/Downloads</code>. This step
+        maybe a bit different for Windows.{" "}
+      </li>
+      <li>
+        Else, if you are on macOS, press <code>Cmd + Shift + .</code> to view
+        the <code>.charon</code> folder in the Finder application.{" "}
+      </li>
+    </ul>
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="lighthouse">Lighthouse</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="downloading-historical-blocks">Downloading historical blocks</h4>
+    </summary>
+    <p>
+      This means that Lighthouse is still syncing which will throw a lot of
+      errors down the line. Wait for the sync before moving further.
+    </p>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="failed-to-request-attester-duties">
+        <code>Failed to request attester duties</code> error
+      </h4>
+    </summary>
+    <p>
+      Indicates there is something wrong with your Lighthouse beacon node. This
+      might be because the request buffer is full as your node is never starting
+      consensus since it never gets the duties.
+    </p>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="discovery-search-timeout">
+        <code>Not enough time for a discovery seach</code> error
+      </h4>
+    </summary>
+    <p>
+      This could be linked to a internet connection being too slow or relying on
+      a slow third-party service such as Infura.
+    </p>
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="beacon-node">Beacon Node</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="error-communicating-with-beacon-node-api">
+        <code>Error communicating with Beacon Node API</code> &{" "}
+        <code>Error while connecting to beacon node event stream</code>
+      </h4>
+    </summary>{" "}
+    This is likely due to Lighthouse not done syncing, wait and try again once
+    synced. Can also be linked to Teku keystore issue.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="clock-sync-issues">Clock sync issues</h4>
+    </summary>{" "}
+    Either your clock server time is off, or you are talking to a remote beacon
+    client that is super slow (this is why we advise against using services like
+    Infura).
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="beacon-node-API-flaky">
+        My beacon node API is flaky with lots of errors and timeouts
+      </h4>
+    </summary>
+    A good quality beacon node API is critical to validator performance. It is always
+    advised to run your own beacon node to ensure low latencies to boost validator
+    performance.
+    <br />
+    <br />
+    Using 3rd party services like Infura's beacon node API has significant
+    disadvantages since the quality is often low. Requests often return 500s or
+    timeout (Charon times out after 2s). This results in lots of warnings and
+    errors and failed duties. Running a local beacon node is always preferred.
+    We are not yet considering increasing the 2s timeout since that can have
+    knock-on effects.
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="charon">Charon</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="attester-failed-in-consensus-component-error">
+        <code>Attester failed in consensus component</code> error
+      </h4>
+    </summary>{" "}
+    The required number of operators defined in your cluster-lock file is
+    probably not online to sign successfully. Make sure all operators are
+    running the latest version of Charon. To check if some peers are not online:{" "}
+    <code>
+      {" "}
+      docker logs charon-distributed-validator-node-charon-1 2>&1 | grep 'absent'{" "}
+    </code>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="load-private-key-error">
+        <code>Load private key</code> error
+      </h4>
+    </summary>{" "}
+    Make sure you have successfully run a DKG before running the node. The key
+    should be created and placed in the right directory during the ceremony.
+    Also, make sure you are working in the right directory:{" "}
+    <code>charon-distributed-validator-node</code>.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="failed-to-confirm-node-connection-error">
+        <code>Failed to confirm node connection</code> error
+      </h4>
+    </summary>{" "}
+    Wait for Teku & Lighthouse sync to be complete.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="reserve-relay-circuit-error">
+        <code>Reserve relay circuit: reservation failed</code> error
+      </h4>
+    </summary>
+    <code>RESERVATION_REFUSED</code> is returned by the libp2p relay when some maximum
+    limit has been reached. This is most often due to "maximum reservations per IP/peer".
+    This is when your Charon node is restarting or in some error loop and constantly
+    attempting to create new relay reservations reaching the maximum.
+    <br />
+    <br />
+    To fix this error, stop your Charon node for 30mins before restarting it.
+    This should allow the relay enough time to reset your IP/peer limits and
+    should then allow new reservations. This could also be due to the relay
+    being overloaded in general, so reaching a server wide "maximum connections"
+    limit. This is an issue with relay scalability and we are working in a long
+    term fix for this.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="opening-relay-circuit-error">
+        <code>Error opening relay circuit: NO_RESERVATION</code> error
+      </h4>
+    </summary>
+    <code>Error opening relay circuit NO_RESERVATION (204)</code> indicates the peer
+    isn't connected to the relay, so the the Charon client cannot connect to the
+    peer via the relay. That might be because the peer is offline or the peer is
+    configured to connect to a different relay.
+    <br />
+    <br />
+    To fix this error, ensure the peer is online and configured with the exact
+    same <code>--p2p-relays</code> flag.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="duty-data-from-beacon-node-error">
+        <code>Couldn't fetch duty data from the beacon node</code> error
+      </h4>
+    </summary>
+    <code>msgFetcher</code> indicates a duty failed in the fetcher component when
+    it failed to fetch the required data from the beacon node API. This indicates
+    a problem with the upstream beacon node.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="aggregate-attestation-error">
+        <code>Couldn't aggregate attestation due to failed attester duty</code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgFetcherAggregatorNoAttData</code> indicates an attestation aggregation
+    duty failed in the fetcher component since it couldn't fetch the prerequisite
+    attestation data. This indicates the associated attestation duty failed to obtain
+    a cluster agreed upon value.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="aggregate-attestation-insufficient-partial-v2-committee-error">
+        <code>
+          Couldn't aggregate attestation due to insufficient partial v2
+          committee subscriptions
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgFetcherAggregatorZeroPrepares</code> indicates an attestation aggregation
+    duty failed in the fetcher component since it couldn't fetch the prerequisite
+    aggregated v2 committee subscription. This indicates the associated prepare aggregation
+    duty failed due to no partial v2 committee subscription submitted by the cluster
+    validator clients.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="aggregate-attestation-failed-prepare-aggregator-duty-error">
+        <code>
+          Couldn't aggregate attestation due to failed prepare aggregator duty
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgFetcherAggregatorFailedPrepare</code> indicates an attestation aggregation
+    duty failed in the fetcher component since it couldn't fetch the prerequisite
+    aggregated v2 committee subscription. This indicates the associated prepare aggregation
+    duty failed.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="insufficient-partial-randao-signatures-error">
+        <code>
+          Couldn't propose block due to insufficient partial randao signatures
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgFetcherProposerFewRandaos</code> indicates a block proposer duty failed
+    in the fetcher component since it couldn't fetch the prerequisite aggregated
+    RANDAO. This indicates the associated randao duty failed due to insufficient
+    partial randao signatures submitted by the cluster validator clients.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="zero-partial-randao-signatures-error">
+        <code>
+          Couldn't propose block due to zero partial randao signatures
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgFetcherProposerZeroRandaos</code> indicates a block proposer duty failed
+    in the fetcher component since it couldn't fetch the prerequisite aggregated
+    RANDAO. This indicates the associated randao duty failed due to no partial randao
+    signatures submitted by the cluster validator clients.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="failed-randao-duty-error">
+        <code>Couldn't propose block due to failed randao duty</code> error
+      </h4>
+    </summary>
+    <code>msgFetcherProposerZeroRandaos</code> indicates a block proposer duty failed
+    in the fetcher component since it couldn't fetch the prerequisite aggregated
+    RANDAO. This indicates the associated randao duty failed.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="consensus-algorithm-not-complete-error">
+        <code>Consensus algorithm didn't complete</code> error
+      </h4>
+    </summary>
+    <code>msgConsensus</code> indicates a duty failed in consensus component. This
+    could indicate that insufficient honest peers participated in consensus or p2p
+    network connection problems.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="signed-duty-not-submitted-error">
+        <code>Signed duty not submitted by local validator client</code> error
+      </h4>
+    </summary>
+    <code>msgValidatorAPI</code> indicates that partial signature were never submitted
+    by the local validator client. This could indicate that the local validator client
+    is offline, or has connection problems with Charon, or has some other problem.
+    See validator client logs for more details.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="partial-signature-exchange-error">
+        <code>
+          Bug: partial signature database didn't trigger partial signature
+          exchange
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgParSigDBInternal</code> indicates a bug in the partial signature database
+    as it is unexpected.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="no-partial-signature-received-error">
+        <code>No partial signatures received from peers</code> error
+      </h4>
+    </summary>
+    <code>msgParSigEx</code> indicates that no partial signature for the duty was
+    received from any peer. This indicates all peers are offline or p2p network connection
+    problems.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="insufficient-partial-signatures-received-error">
+        <code>
+          Insufficient partial signatures received, minimum required threshold
+          not reached
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgParSigDBThreshold</code> indicates that insufficient partial signatures
+    for the duty was received from peers. This indicates problems with peers or p2p
+    network connection problems.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="inconsistent-signed-data-error">
+        <code>
+          Bug: threshold aggregation of partial signatures failed due to
+          inconsistent signed data
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <code>msgSigAgg</code> indicates that BLS threshold aggregation of sufficient
+    partial signatures failed. This indicates inconsistent signed data. This indicates
+    a bug in Charon as it is unexpected.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="private-key-lock-error">
+        <code>
+          Existing private key lock file found, another charon instance may be
+          running on your machine
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    When you turn on the <code>--private-key-file-lock</code> option in Charon, it
+    checks for a special file called the private key lock file. This file has the
+    same name as the ENR private key file but with a <code>.lock</code> extension.
+    If the private key lock file exists and is not older than 5 seconds, Charon won't
+    run. It doesn't allow running multiple Charon instances with the same ENR private
+    key. If the private key lock file has a timestamp older than 5 seconds, Charon
+    will replace it and continue with its work. If you're sure that no other Charon
+    instances are running, you can delete the private key lock file.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="mismatching-validator-client-key">
+        <code>
+          Validator api 5xx response: mismatching validator client key share
+          index, Mth key share submitted to Nth charon peer
+        </code>{" "}
+        error
+      </h4>
+    </summary>
+    <p>
+      The issue revolves around an invalid setup or deployment, where the
+      validators private key shares don't match the ENR private key. There may
+      have been a mix-up during deployment, leading to a mismatching validator
+      client key share index.
+    </p>
+    <p>For example:</p>
+    <ul>
+      <li>
+        <p>
+          Imagine node N is Alice, and node M is Bob, the error would read:{" "}
+          <code>
+            mismatching validator client key share index, Bob's key share
+            submitted to Alice's charon node
+          </code>
+          .
+        </p>
+      </li>
+      <li>
+        Bob's private key share(s) are imported to a VC that is connected to
+        Alice's Charon node. This is a invalid setup/deployment. Alice's Charon
+        node should only be connected to Alice's VC.
+      </li>
+      <li>
+        Check the partial public key shares of each node inside
+        cluster-lock.json and see that matches with the public key inside{" "}
+        <code>node(num)/validator_keys/keystore-0.json</code>.
+      </li>
+    </ul>
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="teku">Teku</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="teku-keystore-file-error">
+        Teku <code>keystore file</code> error{" "}
+      </h4>
+    </summary>{" "}
+    Teku sometimes logs an error which looks like{" "}
+    <code>
+      Keystore file /opt/charon/validator_keys/keystore-0.json.lock already in
+      use
+    </code>
+    . This can be solved by deleting the file(s) ending with <code>.lock</code> in
+    the folder <code>.charon/validator_keys</code>. It is caused by an unsafe shut
+    down of Teku (usually by double pressing <code>Ctrl+C</code> to shutdown containers
+    faster).
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="grafana"> Grafana </h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="how-to-fix-grafana-dashboard">
+        {" "}
+        How to fix the Grafana dashboard?{" "}
+      </h4>
+    </summary>{" "}
+    Sometimes, Grafana dashboard doesn't load any data first time around. You
+    can solve this by following the steps below:{" "}
+    <ul>
+      <li>Click the Wheel Icon > Datasources.</li>
+      <li>Click prometheus.</li>
+      <li>
+        Change the "Access" field from <code>Server (default)</code> to{" "}
+        <code>Browser</code>. Press "Save & Test". It should fail.{" "}
+      </li>
+      <li>
+        Change the "Access" field back to <code>Server (default)</code> and
+        press "Save & Test". You should be presented with a green success icon
+        saying "Data source is working" and you can return to the dashboard
+        page.{" "}
+      </li>
+    </ul>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="no-data-validator-info-panel">
+        <code>N/A</code> & <code>No data</code> in validator info panel
+      </h4>
+    </summary>{" "}
+    Can be linked to a Teku keystore issue.
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="prometheus">Prometheus</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="unauthorized-invalid-token-error">
+        <code>Unauthorized: authentication error: invalid token</code>
+      </h4>
+    </summary>{" "}
+    You can ignore this error unless you have been contacted by the Obol Team
+    with monitoring credentials. In that case, follow{" "}
+    <a href="../advanced/monitoring">Getting Started Monitoring your Node</a> in
+    our advanced guides. It does not affect cluster performance or prevent the
+    cluster from running.
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="docker"> Docker </h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="docker-permission-denied-error">
+        {" "}
+        How to fix <code>permission denied</code> errors?{" "}
+      </h4>
+    </summary>{" "}
+    Permission denied errors can come up in a variety of manners, particularly
+    on Linux and WSL for Windows systems. In the interest of security, the
+    charon docker image runs as a non-root user, and this user often does not
+    have the permissions to write in the directory you have checked out the code
+    to. This can be generally be fixed with some of the following:{" "}
+    <ul>
+      <li>
+        Running docker commands with <code>sudo</code>, if you haven't{" "}
+        <a href="https://docs.docker.com/engine/install/linux-postinstall/">
+          setup docker to be run as a non-root user
+        </a>
+        .{" "}
+      </li>
+      <li>
+        Changing the permissions of the <code>.charon</code> folder with the
+        commands:{" "}
+      </li>
+      <ul>
+        <li>
+          <code>mkdir .charon</code> (if it doesn't already exist);
+        </li>
+        <li>
+          <code>sudo chmod -R 666 .charon</code>.
+        </li>
+      </ul>
+    </ul>
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="running-docker-compose-up-error">
+        {" "}
+        I see a lot of errors after running <code>docker compose up</code>
+      </h4>
+    </summary>{" "}
+    It's because both Geth and Lighthouse start syncing and so there's
+    connectivity issues among the containers. Simply let the containers run for
+    a while. You won't observe frequent errors when Geth finishes syncing. You
+    can also add a second beacon node endpoint for something like Infura by
+    adding a comma separated API URL to the end of{" "}
+    <code>CHARON_BEACON_NODE_ENDPOINTS</code> in the docker-compose.yml.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="loki-plugin-not-found-error">
+        {" "}
+        How do I fix the <code>plugin "loki" not found</code> error?
+      </h4>
+    </summary>{" "}
+    If you get the following error when calling <code>docker compose up</code>:
+    <br />
+    <code>
+      Error response from daemon: error looking up logging plugin loki: plugin
+      "loki" not found
+    </code>
+    .<br />
+    Then it probably means that the Loki docker driver isn't installed. In that
+    case, run the following command to install loki:
+    <br />
+    <code>
+      docker plugin install grafana/loki-docker-driver:latest --alias loki
+      --grant-all-permissions
+    </code>
+    .
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="Relay">Relay</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="resolve-ip-or-p2p-external-host-flag-error">
+        <code>
+          {" "}
+          Resolve IP of p2p external host flag: lookup replace.with.public.ip.or.hostname:
+          no such host{" "}
+        </code>{" "}
+        error
+      </h4>
+    </summary>{" "}
+    Replace <code>replace.with.public.ip.or.hostname</code> in the
+    relay/docker-compose.yml with your real public IP or DNS hostname.
+  </details>
+  <details className="details">
+    <summary>
+      <h4 id="timeout-resolving-bootnode-enr">
+        <code> Timeout resolving bootnode ENR: context deadline exceeded </code>{" "}
+        error
+      </h4>
+    </summary>{" "}
+    The relay you are trying to connect to your peers via is offline or
+    unreachable.
+  </details>
+</details>
+<details open className="details">
+  <summary>
+    <h2 id="Lodestar">Lodestar</h2>
+  </summary>
+  <details className="details">
+    <summary>
+      <h4 id="Potential-next-epoch-attester-duties-reorg-slot-821-error">
+        <code> warn: Potential next epoch attester duties reorg</code> error
+      </h4>
+    </summary>{" "}
+    Lodestar logs these warnings because Charon is not able to return proper{" "}
+    <code>dependent_root</code> value in <code>getAttesterDuties</code> API
+    response whenever Lodestar calls this API. This is because Charon uses{" "}
+    <code>go-eth2-client</code> for all the beacon API calls and it doesn't
+    provide <code>dependent_root</code> value in responses. We have reported
+    this to them{" "}
+    <a href="https://github.com/attestantio/go-eth2-client/issues/35">here</a>.
+  </details>
+</details>
