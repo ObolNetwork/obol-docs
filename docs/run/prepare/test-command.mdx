@@ -327,7 +327,7 @@ The storage tests require `fio` to be installed on your machine. Read more about
   </TabItem>
   <TabItem value="Docker" label="Docker" default>
 
-If you are running the tests towards another Docker container, you need to include its network as well. Check docker networks with `docker network ls` and specify the Docker network with `--network <name>`. This is the case with running Charon cluster using the [charon-distributed-validator-node repository](https://github.com/ObolNetwork/charon-distributed-validator-node/), as usually services like the beacon node and validator client are hosted locally. Read more about docker networking [here](https://docs.docker.com/engine/network/).
+If you are running Charon  using the [charon-distributed-validator-node repository](https://github.com/ObolNetwork/charon-distributed-validator-node/), services like the beacon node and validator client are hosted locally. To run the beacon node and validator client tests, you need to point them toward the correct Docker container, and also include the Docker container’s network. Check your docker networks with `docker network ls`. When you run the test command, specify the Docker network with `--network <name>`. Read more about docker networking [here](https://docs.docker.com/engine/network/).
 
 <h2>Test all</h2>
 
