@@ -60,7 +60,7 @@ Select `Split` for the contract type.
 
 ![Selecting Split Contract](/img/CSM_walkthrough6.png)
 
-Add the reward addresses of all cluster members. Choose whether the contract is immutable (reccommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and optionally whether to set a distribution bounty such that third parties could pay the gas costs of distributing the accrued rewards in exchange for a small fee.
+Add the reward addresses of all cluster members. Choose whether the contract is immutable (recommended option), whether to sponsor the maintainers of [splits.org](https://splits.org), and optionally whether to set a distribution bounty such that third parties could pay the gas costs of distributing the accrued rewards in exchange for a small fee.
 
 :::tip
 If your cluster would like to contribute a portion of its rewards to Obol’s '[1% for Decentralisation](https://blog.obol.org/1-percent-for-decentralisation/)' Retroactive Fund, thereby earning [Obol Contributions](https://obol.org/contributions) as part of Lido's [integration of CSM](https://research.lido.fi/t/integrate-csm-into-the-decentralized-validator-vault/8621) into the  DV Vault, you must add [retroactivefunding.obol.eth](https://etherscan.io/address/0xDe5aE4De36c966747Ea7DF13BD9589642e2B1D0d) as a recipient of 0.1% of the splitter contract. This will contribute 0.1% of rewards **and your CSM bond** to Obol's RAF. Future versions of CSM integrations will enable contributing exactly 1% of accruing CSM rewards.
