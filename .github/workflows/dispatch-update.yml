@@ -16,18 +16,9 @@ jobs:
 
       - name: Update docs to new version
         run: |
-          TAG_NAME="$(echo "${TAG_NAME}" | sed 's/^v//')"
+          LATEST_VERSION=$(jq -r '.[0]' versions.json)
+          find docs -type f -exec sed -i -E "s/$LATEST_VERSION/${TAG_NAME}/g" {} +
 
-          # Update docs to use the new version
-          sed -i -E "s/v\.?[0-9]+\.[0-9]+\.[0-9]+[a-zA-Z0-9\-]*/v${TAG_NAME}/g" \
-          docs/advanced/quickstart-split.md \
-          docs/advanced/test-command.md \
-          docs/advanced/quickstart-combine.md \
-          docs/charon/charon-cli-reference.md \
-          docs/faq/errors.mdx \
-          docs/start/quickstart_group.mdx \
-          docs/start/quickstart_alone.mdx
-          
           #install dependencies
           yarn
 
