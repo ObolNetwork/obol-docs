@@ -223,7 +223,7 @@ const config = {
           },
           {
             to: '/run/integrations/lido-csm',
-            from: '/docs/advanced/lido_csm',
+            from: '/docs/advanced/lido-csm',
           },
           {
             to: '/run/integrations/Dappnode',
