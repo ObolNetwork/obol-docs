@@ -22,7 +22,7 @@ docker compose -f docker-compose.yml -f compose-debug.yml up
 
 - `docker-compose.override.yml.sample` is intended to override the default configuration provided in `docker-compose.yml`. This is useful when, for example, you wish to add port mappings or want to disable a container.
 
-- To use it, just copy the sample file to `docker-compose.override.yml` and customise it to your liking. Please create this file ONLY when you want to tweak something. This is because the default override file is empty and docker errors if you provide an empty compose file.
+- To use it, just copy the sample file to `docker-compose.override.yml` and customize it to your liking. Please create this file ONLY when you want to tweak something. This is because the default override file is empty and docker errors if you provide an empty compose file.
 
 ```shell
 cp docker-compose.override.yml.sample docker-compose.override.yml

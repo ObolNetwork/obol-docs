@@ -16,7 +16,7 @@ Participants must meet the following criteria to be eligible for the Bug Bounty 
 - Not reside in countries where participation in such programs is prohibited.
 - Be at least 14 years of age and possess the legal capacity to participate.
 - Have received consent from your employer, if applicable.
-- Not have been employed or contracted by Obol Labs, nor be an immediate family member of an employee, within the last 12 months.
+- Not have been employed or contracted by Obol Labs, nor have they been an immediate family member of an employee, within the last 12 months.
 
 ## Scope of the Program
 

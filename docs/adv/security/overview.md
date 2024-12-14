@@ -19,7 +19,7 @@ This page is updated quarterly. The last update was on 2024-June-19.
 
 ## List of Security Audits and Assessments
 
-The completed audits reports are linked [here](https://github.com/ObolNetwork/obol-security/tree/main/audits).
+The completed audit reports are linked [here](https://github.com/ObolNetwork/obol-security/tree/main/audits).
 
 - A review of Obol Labs [development processes](./ev-assessment) by [Ethereal Ventures](https://www.etherealventures.com/).
 

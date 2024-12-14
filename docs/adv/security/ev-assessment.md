@@ -262,7 +262,7 @@ We removed individual’s ability to merge changes without review, enforced MFA,
 
 ### Vulnerability Disclosure
 
-During the interviews, I got some conflicting information when asking about Obol’s vulnerability disclosure process.
+During the interviews, I got some conflicting information when asked about Obol’s vulnerability disclosure process.
 
 Some interviewees directed me towards Obol’s security repo, which details security contacts: [ObolNetwork/obol-security](https://github.com/ObolNetwork/obol-security), while some answered that disclosure should happen primarily through Immunefi. While these may both be part of the correct answer, it seems that Obol’s disclosure process may not be as well-defined as it could be. Here are some notes:
 
@@ -282,7 +282,7 @@ we addressed all of the concerns in the obol-security repository:
 
   1. The security policy link has been fixed
   2. The Bug Bounty program received an overhaul and clearly states rewards, eligibility, and scope
-  3. We list two GPG public keys for which we accept encrypted vulnerabilities reports.
+  3. We list two GPG public keys for which we accept encrypted vulnerability reports.
 
 We are actively working towards integrating Immunefi in our security pipeline.
 
