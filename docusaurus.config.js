@@ -234,7 +234,7 @@ const config = {
             from: '/docs/sdk',
           },
           {
-            to: '/gov/community/contributions',
+            to: '/next/gov/community/contributions',
             from: '/gov/governance/contributions',
           },
 
