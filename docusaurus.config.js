@@ -233,6 +233,10 @@ const config = {
             to: '/sdk',
             from: '/docs/sdk',
           },
+          {
+            to: '/gov/community/contributions',
+            from: '/gov/governance/contributions',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
