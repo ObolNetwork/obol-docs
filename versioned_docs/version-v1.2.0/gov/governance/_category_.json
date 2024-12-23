@@ -1,5 +1,6 @@
 {
   "label": "Governance",
   "position": 1,
-  "collapsed": true
+  "collapsed": true,
+  "className": "hidden"
 }
