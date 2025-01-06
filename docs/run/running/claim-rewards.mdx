@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 For every epoch, active validators earn ETH rewards from both the consensus layer and the execution layer. The consensus layer rewards are derived from validator duties such as attestation, proposals, and sync committees. These rewards are accumulated in the validator’s withdrawal address. Execution rewards, which are earned from MEV and transaction priority tips, are accumulated in the fee recipient address.
 
-Depending on the withdrawal configuration of the Cluster, there are several ways to claim rewards. The table below provides the most up-to-date information on how and where to claim rewards.
+The method for claiming rewards depends on the Cluster's withdrawal configuration, whether it's an [**OWR**](learn/intro/obol-splits.mdx#optimistic-withdrawal-recipient)  or an [**Exitable Withdrawal Configuration**](learn/intro/obol-splits.mdx#exitable-withdrawal-recipient) . The table below outlines the latest details on how and where to claim rewards.
 
 ## Claim Status
 
@@ -20,8 +20,8 @@ Depending on the withdrawal configuration of the Cluster, there are several ways
 | --- | --- | --- | --- |
 | 1. Claim principal + rewards without splits - Exit and get rewards  | To claim principal or rewards without splits, users currently have to exit the validator. | ✅| Cluster details page in the Operator Dashboard. For example, [here](https://holesky.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
 | 2. Splits only rewards using OWR - ETH | For all clusters with ETH rewards. | ✅ | Cluster details page in the Operator Dashboard. For example, [here](https://holesky.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
-| 3. Split principal + rewards - ETH, wstETH, or weETH | For clusters configured to split both principal and rewards. | ✅ | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1). |
-| 4. Splits only rewards using OWR - wstETH or weETH | For Lido and EtherFi clusters earning rewards in protocol-specific tokens. | In Progress ➡️ | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1). |
+| 3. Split principal + rewards - ETH | For clusters configured to split both principal and rewards. | ✅ | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1). |
+| 4. Splits non-ETH rewards using any withdrawal config - wstETH or weETH | For Lido and EtherFi clusters earning rewards in protocol-specific tokens. | In Progress ➡️ | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1). |
 | 5. Lido CSM rewards - wstETH | For all Lido CSM clusters earning wstETH rewards. | In Progress ➡️ | Similar to row number 3, use the Splits UI. More details can be found at the bottom of [this page](https://docs.obol.org/run/integrations/lido-csm). |
 
 ## Claim Flow
@@ -38,7 +38,7 @@ To understand how claims via Launchpad work, it is highly recommended to first u
 4. The Split Main then sends proportional rewards to **address A**, completing steps 2a, 3, and 4 with a single click.
 5. Other addresses (e.g., B, C, D) can later click on `Claim All` to receive their share of the rewards.
 
-## Edge Cases
+## Launchpad Edge Cases
 
 We are constantly improving the user experience. Below are some edge cases to avoid confusion:
 
