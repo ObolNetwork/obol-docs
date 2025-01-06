@@ -237,7 +237,10 @@ const config = {
             to: '/next/gov/community/contributions',
             from: '/gov/governance/contributions',
           },
-
+          {
+            to: '/learn/intro/obol-collective',
+            from: '/',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
