@@ -47,6 +47,12 @@ clusters
 
 <Tabs groupId="cluster-creation-stage">
   <TabItem value="already running" label="I already have single cluster running" default>
+    Run the setup, by specifying a name in place of the CLUSTER_NAME:
+
+    ```shell
+      make name=CLUSTER_NAME
+    ```
+
     As there is already a cluster set and running, all the cluster specific data from the root directory will be moved to the first cluster in `clusters/` directory. You can expect short disruption of a couple of seconds when setting up the multi cluster CDVN - this is stopping the cluster specific containers from the root docker compose and starting them from inside the cluster specific docker compose. Usually this is 2-5 seconds and is highly unlikely to cause an issue.
 
     All the changes done during setup are:
@@ -63,14 +69,14 @@ clusters
       - `data/prometheus/` is renamed to `data/prometheus-migrated-to-multi/` and a README is added to it with details about the migration
       - docker containers from `docker-compose.yml` for Charon, VC and Prometheus are stopped (if they are running)
       - docker containers from `clusters/{CLUSTER_NAME}/docker-compose.yml` for Charon, VC and Prometheus are started (if they were running)
-
+  </TabItem>
+  <TabItem value="just starting" label="I am just starting with CDVN" default>
     Run the setup, by specifying a name in place of the CLUSTER_NAME:
 
     ```shell
       make name=CLUSTER_NAME
     ```
-  </TabItem>
-  <TabItem value="just starting" label="I am just starting with CDVN" default>
+
     As there is no cluster setup and running, there is no downtime and cluster specific data copied
 
     All the changes done during setup are:
@@ -81,12 +87,6 @@ clusters
       - `docker-compose.yml` is copied to `clusters/{CLUSTER_NAME}/docker-compose.yml`
       - `data/lodestar/` is renamed to `data/lodestar-migrated-to-multi/` and a README is added to it with details about the migration
       - `data/prometheus/` is renamed to `data/prometheus-migrated-to-multi/` and a README is added to it with details about the migration
-
-    Run the setup, by specifying a name in place of the CLUSTER_NAME:
-
-    ```shell
-      make name=CLUSTER_NAME
-    ```
   </TabItem>
 </Tabs>
 
@@ -102,7 +102,11 @@ The base containers (consensus layer client, execution layer client, etc.) shoul
 
 #### Add new cluster
 
-Add a new cluster with a name to the `clusters/` directory. A new folder with the specified name will be created. A free port is chosen for the new libp2p port of the cluster.
+Add a new cluster with a name to the `clusters/` directory, by specifying a name in place of the NEW_CLUSTER_NAME. A new folder with the specified name will be created. A free port is chosen for the new libp2p port of the cluster.
+
+```shell
+  make multi-cluster-add-cluster name=NEW_CLUSTER_NAME
+```
 
 The structure of the new folder looks like such:
 
@@ -123,13 +127,9 @@ Couple of things that can be configured, if desired:
 
 After the new cluster is created, all Charon specific tasks, like creating ENR, should be done **from inside the cluster's directory**.
 
-```shell
-  make multi-cluster-add-cluster name=NEW_CLUSTER_NAME
-```
-
 #### Delete cluster
 
-Clusters can also be deleted by specifying their name, this is in scenarios like finished voluntary exits.
+Clusters can also be deleted, by specifying their name in place of the CLUSTER_NAME. This is in scenarios like finished voluntary exits.
 
 :::danger
 By deleting a cluster you delete all private key material associated with it as well. Delete only if you know what you are doing.
@@ -141,17 +141,17 @@ By deleting a cluster you delete all private key material associated with it as 
 
 #### Start cluster
 
-Start a cluster from the `clusters/` directory by specifying its name.
-
-This is to be done in cases of first startup for a new cluster, machine has been restarted or the cluster has been stopped for any other reason.
+Start a cluster from the `clusters/` directory, by specifying its name in place of the CLUSTER_NAME.
 
 ```shell
   make multi-cluster-start-cluster name=CLUSTER_NAME
 ```
 
+This is to be done in cases of first startup for a new cluster, machine has been restarted or the cluster has been stopped for any other reason.
+
 #### Stop cluster
 
-Stop a cluster from the `clusters/` directory by specifying its name.
+Stop a cluster from the `clusters/` directory, by specifying its name in place of the CLUSTER_NAME.
 
 This is to be done in cases of some planned maintenance, version updates, etc.
 
