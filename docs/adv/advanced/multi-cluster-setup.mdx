@@ -53,7 +53,7 @@ clusters
       make name=CLUSTER_NAME
     ```
 
-    As was already a cluster set and running, all the cluster specific data from the root directory will be moved to the first cluster in `clusters/` directory. You can expect a delay of a few seconds when running the setup command - this is stopping the cluster specific containers from the root docker compose and starting them from inside the cluster specific docker compose. Usually this is 2-5 seconds and is highly unlikely to cause an issue.
+    As was already a cluster set and running, all the cluster specific data from the root directory will be moved to the first cluster in `clusters/` directory. You can expect a downtime of the node of a few seconds when running the setup command - this is stopping the cluster specific containers from the root docker compose and starting them from inside the cluster specific docker compose. Usually this is 2-5 seconds and is highly unlikely to cause an issue.
 
     The setup command carries out the following actions:
       - `clusters/` directory is created
