@@ -1,0 +1,180 @@
+---
+sidebar_position: 7
+description: Multi cluster setup
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Multi cluster setup
+
+:::caution
+Multi cluster setup should be used with caution as it is still in experimental phase.
+:::
+
+To spin up multiple clusters that use a single consensus layer client (beacon node) and execution layer client, the multi cluster setup in the [charon-distributed-validator-node](https://github.com/ObolNetwork/charon-distributed-validator-node) (CDVN) repository can be used. Multi cluster setup is aimed towards power users that want to spin up multiple clusters **for the same network** on the same machine for different reasons, some of which might be:
+
+- squad staking with multiple squads;
+- receiving delegated stake from different parties, using separate clusters to separate concerns;
+- combinations of all of the above.
+
+## Concerns
+
+In order to achieve that, each cluster requires separate Charon and validator client instances. Charon P2P ports need to be different for each cluster, separate validator clients need to point to different charon instances, any other changes regarding the accompanying infra should be taken into account (think Prometheus, Grafana, etc.).
+
+## Setup
+
+To achieve that in an easier way for [CDVN](https://github.com/ObolNetwork/charon-distributed-validator-node) users, there are scripts to setup and manage a multi cluster CDVN directory.
+
+To ease the management of multiple cluster, what is done in those scripts is to separate the shared resources - consensus layer client (beacon node) and execution layer client, Grafana. The cluster specific resources are separated in folders in a `clusters/` directory:
+
+```directory
+clusters
+└───{CLUSTER_NAME}     # cluster name
+│   │   .charon             # folder including secret material used by charon
+│   │   data                # data from the validator client and Prometheus
+│   │   lodestar            # scripts used by lodestar
+│   │   prometheus          # scripts and configs used by Prometheus
+│   │   .env                # environment variables used by the cluster
+│   │   docker-compose.yml  # docker compose used by the cluster
+│                           # N.B.: only services with profile "cluster" are ran
+└───{CLUSTER_NAME_2}
+└───{CLUSTER_NAME_...}
+└───{CLUSTER_NAME_N}
+```
+
+### Setup Multi cluster CDVN
+
+<Tabs groupId="cluster-creation-stage">
+  <TabItem value="already running" label="I already have single cluster running" default>
+    As there is already a cluster set and running, all the cluster specific data from the root directory will be moved to the first cluster in `clusters/` directory. You can expect short disruption of a couple of seconds when setting up the multi cluster CDVN - this is stopping the cluster specific containers from the root docker compose and starting them from inside the cluster specific docker compose. Usually this is 2-5 seconds and is highly unlikely to cause an issue.
+
+    All the changes done during setup are:
+      - `clusters/` directory is created
+      - `.charon/` is copied to `clusters/{CLUSTER_NAME}/.charon/`
+      - `.env` is copied to `clusters/{CLUSTER_NAME}/.env`
+      - `data/lodestar/` is copied to `clusters/{CLUSTER_NAME}/data/lodestar/`
+      - `data/prometheus/` is copied to `clusters/{CLUSTER_NAME}/data/prometheus/`
+      - `lodestar/` is copied to `clusters/{CLUSTER_NAME}/lodestar/`
+      - `prometheus/` is copied to `clusters/{CLUSTER_NAME}/prometheus/`
+      - `docker-compose.yml` is copied to `clusters/{CLUSTER_NAME}/docker-compose.yml`
+      - `.charon/` is renamed to `.charon-migrated-to-multi/` and a README is added to it with details about the migration
+      - `data/lodestar/` is renamed to `data/lodestar-migrated-to-multi/` and a README is added to it with details about the migration
+      - `data/prometheus/` is renamed to `data/prometheus-migrated-to-multi/` and a README is added to it with details about the migration
+      - docker containers from `docker-compose.yml` for Charon, VC and Prometheus are stopped (if they are running)
+      - docker containers from `clusters/{CLUSTER_NAME}/docker-compose.yml` for Charon, VC and Prometheus are started (if they were running)
+
+    Run the setup, by specifying a name in place of the CLUSTER_NAME:
+
+    ```shell
+      make name=CLUSTER_NAME
+    ```
+  </TabItem>
+  <TabItem value="just starting" label="I am just starting with CDVN" default>
+    As there is no cluster setup and running, there is no downtime and cluster specific data copied
+
+    All the changes done during setup are:
+      - `clusters/` directory is created
+      - `.env` is copied to `clusters/{CLUSTER_NAME}/.env`
+      - `lodestar/` is copied to `clusters/{CLUSTER_NAME}/lodestar/`
+      - `prometheus/` is copied to `clusters/{CLUSTER_NAME}/prometheus/`
+      - `docker-compose.yml` is copied to `clusters/{CLUSTER_NAME}/docker-compose.yml`
+      - `data/lodestar/` is renamed to `data/lodestar-migrated-to-multi/` and a README is added to it with details about the migration
+      - `data/prometheus/` is renamed to `data/prometheus-migrated-to-multi/` and a README is added to it with details about the migration
+
+    Run the setup, by specifying a name in place of the CLUSTER_NAME:
+
+    ```shell
+      make name=CLUSTER_NAME
+    ```
+  </TabItem>
+</Tabs>
+
+## Manage
+
+As now there are multiple clusters, each one with its own Charon and VC, management becomes a bit more complex.
+
+The private keys and ENRs of each Charon node should be separated, the data used from each VC, potentially each Prometheus instance as well.
+
+The base containers (consensus layer client, execution layer client, etc.) should be managed with caution as well, as they impact multiple clusters now.
+
+### Manage clusters
+
+#### Add new cluster
+
+Add a new cluster with a name to the `clusters/` directory. A new folder with the specified name will be created. A free port is chosen for the new libp2p port of the cluster.
+
+The structure of the new folder looks like such:
+
+```directory
+{NEW_CLUSTER_NAME}
+│   data                # empty data folder at which validator client and Prometheus data folders will be created once the node is started
+│   lodestar            # scripts used by lodestar, copied from the root directory
+│   prometheus          # scripts and configs used by Prometheus, copied from the root directory
+│   .env                # environment variables used by the cluster, copied from the root directory
+│   docker-compose.yml  # docker compose used by the cluster, copied from the root directory
+```
+
+Couple of things that can be configured, if desired:
+
+- .env file found in `clusters/{NEW_CLUSTER_NAME}/.env` with some cluster-specific variables (i.e.: Charon relays);
+- Prometheus config found in `clusters/{NEW_CLUSTER_NAME}/prometheus/prometheus.yml.example` (i.e.: if writing metrics to different remote server);
+- Docker compose found in `clusters/{NEW_CLUSTER_NAME}/docker-compose.yml` (i.e.: if you want to change configurations of the validator client). Mind you that only containers with profile `"cluster"` are started from here, meaning that if you make changes to any other container, they won't be taken into account.
+
+After the new cluster is created, all Charon specific tasks, like creating ENR, should be done **from inside the cluster's directory**.
+
+```shell
+  make multi-cluster-add-cluster name=NEW_CLUSTER_NAME
+```
+
+#### Delete cluster
+
+Clusters can also be deleted by specifying their name, this is in scenarios like finished voluntary exits.
+
+:::danger
+By deleting a cluster you delete all private key material associated with it as well. Delete only if you know what you are doing.
+:::
+
+```shell
+  make multi-cluster-delete-cluster name=CLUSTER_NAME
+```
+
+#### Start cluster
+
+Start a cluster from the `clusters/` directory by specifying its name.
+
+This is to be done in cases of first startup for a new cluster, machine has been restarted or the cluster has been stopped for any other reason.
+
+```shell
+  make multi-cluster-start-cluster name=CLUSTER_NAME
+```
+
+#### Stop cluster
+
+Stop a cluster from the `clusters/` directory by specifying its name.
+
+This is to be done in cases of some planned maintenance, version updates, etc.
+
+```shell
+  make multi-cluster-stop-cluster name=CLUSTER_NAME
+```
+
+### Manage base
+
+Now that the validator stack (Charon, validator client) is decoupled and can be managed, the base - consensus layer client, execution layer client, MEV-boost, Grafana containers should be managed on its own as well. Here the actions are simpler.
+
+#### Start base
+
+Start the base containers.
+
+```shell
+  make multi-cluster-start-base
+```
+
+#### Stop base
+
+Stop the base containers. Note that this impacts **all** of your clusters in `clusters/`.
+
+```shell
+  make multi-cluster-stop-base
+```
