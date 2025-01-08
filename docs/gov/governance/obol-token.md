@@ -15,4 +15,4 @@ The OBOL Token is central to the governance and operation of the Obol Collective
 
 3. **DeFi:** Plans are in place to launch several DeFi avenues for the OBOL Token post-TGE, such as liquidity pools and lending protocols.
 
-4. **More Utility Coming Soon:** Once governance is up and running, the Obol community can propose and vote to add more functionality to the Obol token, for example a staking program, or integration with other staking or restaking applications.
+4. **More Utility Coming Soon:** Via governance proposals, the Obol community add more functionality to the Obol token, for example a staking program, or integration with other staking or restaking applications.
