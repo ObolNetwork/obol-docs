@@ -75,7 +75,7 @@ Rewards increase with more stake, as well as higher performance and uptime of yo
 
 ## What are the benefits of using distributed validators?
 
-Distributed validators increase the security, resiliency, and decentralisation of Ethereum. Learn more at [obol.org/learn](obol.org/learn).
+Distributed validators increase the security, resiliency, and decentralisation of Ethereum. Learn more at [obol.org/learn](https://obol.org/learn).
 
 ## How can I get support if I have issues?
 
