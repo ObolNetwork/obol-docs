@@ -237,7 +237,14 @@ const config = {
             to: '/next/gov/community/contributions',
             from: '/gov/governance/contributions',
           },
-
+          {
+            to: '/gov/governance/contributions',
+            from: '/gov/community/contributions',
+          },
+          {
+            to: '/gov/governance/contributions',
+            from: '/gov/governance/rewards',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',
