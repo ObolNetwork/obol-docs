@@ -1,12 +1,42 @@
 ![Obol Logo](https://obol.tech/obolnetwork.png)
 
-<h1 align="center">Obol Network</h1>
+<h1 align="center">Obol Network Documentation</h1>
 
-This repo intends to serve as a documentation site for the Obol Network.
+Welcome to the official documentation repository for the Obol Network. This documentation site aims to provide comprehensive information about the Obol Network, its components, and how to participate in the ecosystem.
 
-## Quickstart
+## 📋 Table of Contents
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+- [Prerequisites](#-prerequisites)
+- [Quickstart](#-quickstart)
+  - [Installation](#installation)
+  - [Local Development](#local-development)
+  - [Build](#build)
+  - [Deployment](#deployment)
+  - [Versioning](#versioning)
+    - [Create a docs version](#create-a-docs-version)
+    - [Add a Version Dropdown](#add-a-version-dropdown)
+    - [Update an existing version](#update-an-existing-version)
+  - [Translate your site](#translate-your-site)
+    - [Configure i18n](#configure-i18n)
+    - [Translate a doc](#translate-a-doc)
+    - [Start your localized site](#start-your-localized-site)
+    - [Add a Locale Dropdown](#add-a-locale-dropdown)
+    - [Build your localized site](#build-your-localized-site)
+- [Contributing](#-contributing)
+  - [Development Guidelines](#development-guidelines)
+- [Known Issues and Troubleshooting](#-known-issues-and-troubleshooting)
+- [Useful Links](#-useful-links)
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Yarn](https://yarnpkg.com/) package manager
+- Git
+
+## 🚀 Quickstart
+
+This documentation site is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ### Installation
 
@@ -177,6 +207,34 @@ Or build your site to include all the locales at once:
 npm run build
 ```
 
-## Notes/Bugs/Gotchas
+## 🤝 Contributing
 
-Configure a documentation page's extra details with these [metadata fields](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-frontmatter).
+We welcome contributions from the community! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes
+4. Run tests and ensure the site builds locally
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+6. Push to the branch (`git push origin feature/AmazingFeature`)
+7. Open a Pull Request
+
+### Development Guidelines
+
+- Follow the existing documentation structure
+- Use clear and concise language
+- Include code examples where appropriate
+- Add screenshots for UI-related changes
+- Update the table of contents if necessary
+
+## 🐛 Known Issues and Troubleshooting
+
+- When running the development server, only one locale can be used at a time
+- Ensure all image paths are correct when adding new documentation
+- Check the [Docusaurus documentation](https://docusaurus.io/docs) for advanced configuration options
+
+## 🔗 Useful Links
+
+- [Obol Network Website](https://obol.tech)
+- [Docusaurus Documentation](https://docusaurus.io/docs)
+- [Markdown Guide](https://www.markdownguide.org/)
