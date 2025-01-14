@@ -5,7 +5,7 @@ description: Earning OBOL Programmatic Incentives
 
 # OBOL Programmatic Incentives Program
 
-*Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their contribution.*
+*Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their capital contribution.*
 
 *By basing OBOL incentives on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)*
 
