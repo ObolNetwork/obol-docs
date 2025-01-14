@@ -13,7 +13,7 @@ description: Earning OBOL Programmatic Incentives
 
 ## What is the OBOL Programmatic Incentives Program?
 
-OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to stakers in the first year. 
+OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to ETH stakers on Obol DVs in the first year. 
 
 ## How do I participate in the OBOL Programmatic Incentives Program?
 
