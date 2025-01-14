@@ -5,15 +5,17 @@ description: Earning OBOL Programmatic Incentives
 
 # OBOL Programmatic Incentives Program
 
-*Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their capital contribution.*
+*Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their participation in staking on DVs.*
 
 *By basing OBOL incentives on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)*
 
-*Rewards are tracked in a centralised database off-chain - our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much incentives they have accumulated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.*
+*Incentives are tracked in a centralised database off-chain - our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much incentives they have generated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.*
 
 ## What is the OBOL Programmatic Incentives Program?
 
-OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to ETH stakers on Obol DVs in the first year. 
+OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to stakers in the first year. 
+
+Each week, 1/52 of 2.5% of the 500m OBOL Token supply will be distributed. Incentives *need to be claimed* either via the DV Launchpad, or via the UI frontend of participating partners. 
 
 ## How do I participate in the OBOL Programmatic Incentives Program?
 
@@ -23,9 +25,13 @@ You can participate in the OBOL Programmatic Incentives Program by:
 
 2. **Staking through Staking Partners**: Staking through Staking Partners: For the current list of staking partners, please visit [obol.org/stake](https://obol.org/stake).
 
+## Is stake from the previous Contributions program eligible?
+
+No, existing stake within protocols as of the snapshot date of January 13th is not eligible. Only new stake that was deposited after January 13th is eligible. The exception is stake deposited directly on DVs, outside of staking protocols. (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+
 ## How can I track my OBOL incentives?
 
-If you’re running your own DV, your incentives will be displayed on the [DV Launchpad](https://launchpad.obol.org). If you’re staking through a partner product, they should display your share of programmatic incentives and distribute them to you through their interface directly.
+If you’re running your own DV, your incentives will be displayed on the [DV Launchpad](https://launchpad.obol.org). If you’re staking through a partner product, they should display your incentives and distribute them to you.
 
 ## What benefits do I get from the OBOL Token?
 
@@ -33,17 +39,13 @@ OBOL Tokens serve as the basis for ownership and governance of the Obol Collecti
 
 ## How are incentives calculated?
 
-OBOL incentives are based on validator staking rewards. They are calculated daily and tracked off-chain. The higher the effectiveness and uptime of your validators, the more incentives you will accumulate.
+OBOL incentives are based on validator staking rewards. They are calculated daily and tracked off-chain. The higher the effectiveness and uptime of your validators, the more incentives you will generate.
 
 If the total staking rewards \( R \) for a validator are split among operators with percentages \( p_1, p_2, ..., p_n \), the rewards \( O \) for each operator can be calculated as:
 
 Cᵢ = R × pᵢ × 0.01 × 1.01
 
 where pᵢ is the split percentage for the i-th operator. We multiply by 1.01 to ensure that the full 1% contribution is accurately distributed among operators, compensating for the initial deduction of 1% from the total rewards.
-
-## I’m already running a mainnet Obol DV? What about me?
-
-If you are running an existing mainnet DV without the 1% split, you will not have tracked incentives and will need to deploy a new DV configuration to participate.
 
 ## Do I need to run my own validator to participate?
 
@@ -63,7 +65,7 @@ Since OBOL incentives are tied to staking rewards, the amount of incentives earn
 
 ## Will my contributions be public?
 
-Yes, incentives are public and can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), if you have the address of the protocol your are staking with or your own individual address if you are running your own DV.
+Yes, incentives are public and can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), if you have the address of the protocol.
 
 ## How do I know my contributions are being counted accurately?
 
