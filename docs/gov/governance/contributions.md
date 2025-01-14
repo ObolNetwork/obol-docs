@@ -25,7 +25,7 @@ You can participate in the OBOL Programmatic Incentives Program by:
 
 ## How can I track my OBOL incentives?
 
-If you’re running your own DV, your incentives will be displayed on the [DV Launchpad](https://launchpad.obol.org). If you’re staking through a partner product, they should display your incentives and distribute them to you.
+If you’re running your own DV, your incentives will be displayed on the [DV Launchpad](https://launchpad.obol.org). If you’re staking through a partner product, they should display your share of programmatic incentives and distribute them to you through their interface directly.
 
 ## What benefits do I get from the OBOL Token?
 
