@@ -23,4 +23,4 @@ The total supply is capped at 500 million tokens. The full supply is not immedia
 
 3. **DeFi:** Plans are in place to launch several DeFi avenues for the OBOL Token post-TGE, such as liquidity pools and lending protocols.
 
-4. **More Utility Coming Soon:** Via governance proposals, the Obol community can add more functionality to the Obol token, for example a staking program, or integration with other staking or restaking applications.
+4. **More Utility Coming Soon:** Via governance proposals, the Obol community can add more functionality to the OBOL Token, for example a staking program, or integration with other staking or restaking applications.
