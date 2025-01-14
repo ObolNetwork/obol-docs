@@ -33,7 +33,7 @@ OBOL Tokens serve as the basis for ownership and governance of the Obol Collecti
 
 ## How are incentives calculated?
 
-OBOL incentives are based on validator staking rewards. They are calculated daily and tracked off-chain. The higher the effectiveness and uptime of your validators, the more incentives you will generate.
+OBOL incentives are based on validator staking rewards. They are calculated daily and tracked off-chain. The higher the effectiveness and uptime of your validators, the more incentives you will accumulate.
 
 If the total staking rewards \( R \) for a validator are split among operators with percentages \( p_1, p_2, ..., p_n \), the rewards \( O \) for each operator can be calculated as:
 
