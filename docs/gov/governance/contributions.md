@@ -63,7 +63,7 @@ Since OBOL incentives are tied to staking rewards, the amount of incentives earn
 
 ## Will my contributions be public?
 
-Yes, incentives are public and can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), if you have the address of the protocol.
+Yes, incentives are public and can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), if you have the address of the protocol your are staking with or your own individual address if you are running your own DV.
 
 ## How do I know my contributions are being counted accurately?
 
