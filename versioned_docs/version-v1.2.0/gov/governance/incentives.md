@@ -65,13 +65,13 @@ The minimum amount varies by staking protocol, please refer to each partner to d
 
 Since OBOL incentives are tied to staking rewards, the amount of incentives earned is impacted by validator performance metrics like effectiveness and uptime.
 
-## Will my contributions be public?
+## Will my incentives be public?
 
-Yes, incentives are public and can be viewed through the [Obol API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions), if you have the address of the protocol.
+Yes, incentives are public and can be viewed through the Obol API, if you have the address of the protocol.
 
-## How do I know my contributions are being counted accurately?
+## How do I know my incentives are being counted accurately?
 
-OBOL incentives are tracked based on validator staking rewards, and you can verify them through [our API](https://docs.obol.org/api#tag/Address/operation/AddressController_getAddressContributions).
+OBOL incentives are tracked on a daily basis, based on validator staking rewards, and can be verified via our API.
 
 ## How can I increase my OBOL Programmatic Incentives?
 
