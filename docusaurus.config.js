@@ -234,12 +234,8 @@ const config = {
             from: '/docs/sdk',
           },
           {
-            to: '/gov/governance/contributions',
-            from: '/gov/community/contributions',
-          },
-          {
-            to: '/gov/governance/contributions',
-            from: '/gov/governance/rewards',
+            to: '/gov/governance/incentives',
+            from: '/gov/governance/contributions',
           },
           //Redirect from multiple old paths to the new path
           // {
