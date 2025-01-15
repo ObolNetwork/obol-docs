@@ -37,7 +37,7 @@ If you’re running your own DV, your incentives will be displayed on the [DV La
 
 ## What benefits do I get from the OBOL Token?
 
-OBOL Tokens serve as the basis for ownership and governance of the Obol Collective. Learn more on the [token page](./obol-token.md) of the docs.
+OBOL Tokens serve as the basis for ownership and governance of the Obol Collective. Learn more on the [OBOL Token page](./obol-token.md) of the docs.
 
 ## How are incentives calculated?
 
