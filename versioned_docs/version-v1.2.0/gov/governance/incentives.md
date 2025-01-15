@@ -5,11 +5,7 @@ description: Earning OBOL Programmatic Incentives
 
 # OBOL Programmatic Incentives Program
 
-*Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their participation in staking on DVs.*
-
-*By basing OBOL incentives on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)*
-
-*Incentives are tracked in a centralised database off-chain - our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much incentives they have generated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.*
+Our aim is to encourage continuous participation and sustained support for Ethereum’s infrastructure network. The Obol Programmatic Incentives Program program is designed to be fair and transparent, acknowledging stakers for their participation in staking on DVs.
 
 ## What is the OBOL Programmatic Incentives Program?
 
@@ -21,13 +17,19 @@ Each week, 1/52 of 2.5% of the 500m OBOL Token supply will be distributed. Incen
 
 You can participate in the OBOL Programmatic Incentives Program by:
 
-1. **Running your own DV Cluster**: Running your own DV Cluster: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/) or other hardware. This allows you to directly participate in the network's decentralisation efforts and earn OBOL incentives. Visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members. 
+1. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/) or other hardware. This allows you to directly participate in the network's decentralisation efforts and earn OBOL incentives. Visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members. 
 
-2. **Staking through Staking Partners**: Staking through Staking Partners: For the current list of staking partners, please visit [obol.org/stake](https://obol.org/stake).
+2. **Staking through Staking Partners**: For the current list of staking partners, please visit [obol.org/stake](https://obol.org/stake).
 
 ## Is stake from the previous Contributions program eligible?
 
-No, existing stake within protocols as of the snapshot date of January 13th is not eligible. Only new stake that was deposited after January 13th is eligible. The exception is stake deposited directly on DVs, outside of staking protocols. (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+No, existing stake within protocols as of the snapshot date of January 13th is not eligible. Only new stake that was deposited after January 13th is eligible. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+
+## How are incentives tracked?
+
+By basing OBOL incentives on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)
+
+Incentives are tracked in a centralised database off-chain - our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much incentives they have generated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.
 
 ## How can I track my OBOL incentives?
 
@@ -43,7 +45,7 @@ OBOL incentives are based on validator staking rewards. They are calculated dail
 
 If the total staking rewards \( R \) for a validator are split among operators with percentages \( p_1, p_2, ..., p_n \), the rewards \( O \) for each operator can be calculated as:
 
-Cᵢ = R × pᵢ × 0.01 × 1.01
+Oᵢ = R × pᵢ × 0.01 × 1.01
 
 where pᵢ is the split percentage for the i-th operator. We multiply by 1.01 to ensure that the full 1% contribution is accurately distributed among operators, compensating for the initial deduction of 1% from the total rewards.
 
