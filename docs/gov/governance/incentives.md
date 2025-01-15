@@ -47,7 +47,7 @@ If the total staking rewards \( R \) for a validator are split among operators w
 
 Oᵢ = R × pᵢ × 0.01 × 1.01
 
-where pᵢ is the split percentage for the i-th operator. We multiply by 1.01 to ensure that the full 1% contribution is accurately distributed among operators, compensating for the initial deduction of 1% from the total rewards.
+where pᵢ is the split percentage for the i-th operator. We multiply by 1.01 to ensure that the full 1% of rewards is accurately distributed among operators, compensating for the initial deduction of 1% from the total rewards.
 
 ## Do I need to run my own validator to participate?
 
