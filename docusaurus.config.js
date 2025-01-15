@@ -138,7 +138,7 @@ const config = {
             from: '/docs/faq/client_configurations',
           },
           {
-            to: '/gov/governance/contributions',
+            to: '/gov/governance/incentives',
             from: '/docs/faq/contributions',
           },
           {
