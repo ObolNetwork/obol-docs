@@ -194,6 +194,9 @@ As per your preferences, choose the correct combination of -
         <Tabs groupId="nimbus-single-all">
             <TabItem value="nimbus-single" label="Single Validator" default>
                 Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
+                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
                 
                 ```shell
                 docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
@@ -211,6 +214,9 @@ As per your preferences, choose the correct combination of -
 
             <TabItem value="nimbus-all" label="All Validators" default>
                 The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
+                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
+                
                 
                 ```shell  
                 docker exec -it kurtosis-charon-vc1-nimbus-1 /bin/bash -c "\
@@ -542,6 +548,8 @@ As per your preferences, choose the correct combination of -
         <Tabs groupId="nimbus-single-all">
             <TabItem value="nimbus-single" label="Single Validator" default>
                 Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
+                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
                 
                 ```shell
                 docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
@@ -560,6 +568,8 @@ As per your preferences, choose the correct combination of -
 
             <TabItem value="nimbus-all" label="All Validators" default>
                 The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
+                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
                 
                 ```shell  
                 docker exec -it kurtosis-charon-vc1-nimbus-1 /bin/bash -c "\
