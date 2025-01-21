@@ -7,7 +7,7 @@ description: The RAF
 
 Obol’s Retroactive Funding (RAF) mechanism is designed to strengthen and promote the decentralisation of Ethereum's settlement layer by rewarding projects that add value and drive impact for Ethereum’s decentralisation. Read more about the Obol RAF [here](https://blog.obol.org/1-percent-for-decentralisation/).
 
-Voting and funding distributions occur over a series of **Obol Retroactive Fund (RAF)** rounds, with OBOL token Delegates determining how funds from the RAF are allocated.
+Voting and funding distributions occur over a series of **Obol Retroactive Fund (RAF)** rounds, with OBOL token Delegates determining how funds from the RAF are allocated. The first RAF round will open in February 2025.
 
 ## Overview of the Obol RAF:
 
@@ -28,7 +28,7 @@ The scope of the round’s impact and the amount of funding to be allocated is d
 
 Projects are invited to create an application on the RAF Portal. Any project or team can apply, but in the future, governance may decide that an application needs to be made by someone holding a minimum amount of OBOL tokens.
 
-To apply for the Obol RAF, projects can create an application on [raf.obol.org](http://raf.obol.org/) by following these steps:
+Once a RAF round is opened, to apply for the Obol RAF, projects can create an application on [raf.obol.org](http://raf.obol.org/) by following these steps:
 
 1. **Create an Application:** Fill out the application form using the RAF Portal.
 2. **Describe Impact:** Specify the category of the project and its impact.
