@@ -52,3 +52,9 @@ Approved governance proposals will be routed to the Obol Association for impleme
 
 - If it is, the Association will act diligently and in a commercially reasonable manner to consider the proposal for implementation.
 - If it is not, the Association may, at its discretion, remove the proposal for resubmission or implement it with guardrails, coupled with an explanation.
+
+## Vision for Fully On-Chain Governance
+
+Once Collective’s governance develops and is deemed as sufficiently mature by the Obol Association, the implementations of passed proposals will follow full on-chain execution, where possible. Instead of the Collective’s reliance on the Obol Association for implementation, passed proposals will be moved to a queue to prepare for execution. The queue action will send the proposal to a Timelock contract, which starts a countdown until the proposal can be executed. 
+
+Executing a proposal will run its function calls on-chain. Each proposal can be associated with one or more function calls. These calls will perform actions such as transferring assets from the treasury, updating the Governor's parameters, or calling another smart contract.

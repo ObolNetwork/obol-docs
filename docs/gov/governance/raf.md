@@ -11,7 +11,7 @@ Voting and funding distributions occur over a series of **Obol Retroactive Fund 
 
 ## Overview of the Obol RAF:
 
-- Any Obol Collective project can make an application.
+- Any project that meets the RAF round’s criteria can make an application.
 - OBOL Token Delegates vote on applications proportional to their delegated power and using [quadratic funding](https://qf.gitcoin.co/).
 - The Obol RAF rounds occur at intervals and include phases for scoping, application creation, application review, voting, and funding distribution.
 - The Obol Association will collect information from projects to distribute grants, including KYC, where required.
@@ -26,11 +26,11 @@ The scope of the round’s impact and the amount of funding to be allocated is d
 
 ### Step 2: Application Registration
 
-Projects are invited to create an application on the RAF Portal. Any project or team can apply, but in the future, governance may decide that an application needs to be made by someone holding a minimum amount of OBOL tokens.
+Projects are invited to create an application on the [RAF App](http://raf.obol.org/). Any project or team can apply, but in the future, governance may decide that an application needs to be made by someone holding a minimum amount of OBOL tokens.
 
 Once a RAF round is opened, to apply for the Obol RAF, projects can create an application on [raf.obol.org](http://raf.obol.org/) by following these steps:
 
-1. **Create an Application:** Fill out the application form using the RAF Portal.
+1. **Create an Application:** Fill out the application form using the [RAF App](http://raf.obol.org/).
 2. **Describe Impact:** Specify the category of the project and its impact.
 
 ### Step 3: Application Review
