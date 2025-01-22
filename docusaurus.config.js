@@ -15,7 +15,7 @@ const config = {
   title: "Obol Collective",
   tagline: "Building Distributed Validators for Ethereum",
   url: "https://docs.obol.org/",
-  baseUrl: "/learn/intro/",
+  baseUrl: "/learn/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   onBrokenAnchors: "warn",
