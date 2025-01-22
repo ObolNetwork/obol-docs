@@ -65,3 +65,7 @@ The overall reward amount for the round is divided among the winning projects ba
 ### **Step 8: Community retrospective**
 
 After each round, The Obol Association will conduct a retrospective and gather community feedback.
+
+## Guides for each Round
+
+RAF1: see the [RAF1 guide](https://community.obol.org/t/guide-for-raf-round-1-raf1/227) in the forum. 
