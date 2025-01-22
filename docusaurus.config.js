@@ -12,10 +12,10 @@ const customObolDarkTheme = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Obol Network",
+  title: "Obol Collective",
   tagline: "Building Distributed Validators for Ethereum",
   url: "https://docs.obol.org/",
-  baseUrl: "/",
+  baseUrl: "/learn/intro/obol-collective",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   onBrokenAnchors: "warn",
