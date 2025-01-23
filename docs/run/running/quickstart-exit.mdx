@@ -24,7 +24,7 @@ In this case, users cannot use launchpad to monitor exit status and will have to
 
 :::info
 
-- A threshold of operators needs to run the exit command for the exit to succeed which is the same as the one submitted during the cluster creation.
+- A threshold of operators ( which is the same as the one submitted during the cluster creation) need to run the exit command for the exit to succeed.
 - **Ensure that all operators within a cluster consistently use either the hosted solution (Charon Exit) or the non-hosted solution (Validator Client Exit). Mixing both solutions within the same cluster—where some operators use Charon Exit while others use Validator Client Exit—is not allowed.**
 - In case of validator client native exits, partial exits can be broadcasted by any validator client as long as the sum reaches the threshold for the cluster.
 - If a Charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all Charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
@@ -86,8 +86,8 @@ As per your preferences, choose the correct combination of -
 
         Once the partial exit threshold is reached, a full exit can be broadcasted from any of the operator. There are two options to do it, depending on your use-case
         
-        1. **Fetch the full exit and broadcast instantaneously** - users can choose it for a single validator or all validators in the cluster.
-        2. **Fetch the full exit and broadcast it later** - users can choose it for a single validator or all validators in the cluster.
+        1. **Fetch the full exit and broadcast instantaneously (Broadcast directly )** - users can choose it for a single validator or all validators in the cluster.
+        2. **Fetch the full exit and broadcast it later(Fetch & Broadcast later )** - users can choose it for a single validator or all validators in the cluster.
 
         <Tabs groupId="charon-exit-broadcast-fetch">
             <TabItem value="charon-broadcast-directly" label="Broadcast directly" default>
@@ -118,7 +118,7 @@ As per your preferences, choose the correct combination of -
 
             </TabItem>
 
-            <TabItem value="charon-fetch-broadcast" label="Fetch & Broadcast" default>
+            <TabItem value="charon-fetch-broadcast" label="Fetch & Broadcast later" default>
 
                 <Tabs groupId="single-all">
                     <TabItem value="charon-single" label="Single Validator" default>
@@ -488,8 +488,8 @@ As per your preferences, choose the correct combination of -
 
             Once the partial exit threshold is reached, a full exit can be broadcasted from any of the operator. There are two options to do it, depending on your use-case
             
-            1. **Fetch the full exit and broadcast instantaneously** - users can choose it for a single validator or all validators in the cluster.
-            2. **Fetch the full exit and broadcast it later** - users can choose it for a single validator or all validators in the cluster.
+            1. **Fetch the full exit and broadcast instantaneously (Broadcast directly )** - users can choose it for a single validator or all validators in the cluster.
+            2. **Fetch the full exit and broadcast it later(Fetch & Broadcast later )** - users can choose it for a single validator or all validators in the cluster.
 
             <Tabs groupId="charon-exit-broadcast-fetch">
                 <TabItem value="charon-broadcast-directly" label="Broadcast directly" default>
