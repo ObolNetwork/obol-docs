@@ -26,7 +26,7 @@ In this case, users cannot use launchpad to monitor exit status and will have to
 
 - A threshold of operators need to run the exit command for the exit to succeed. This is the same threshold as is specified during cluster creation.
 - **Ensure that all operators within a cluster consistently use either the hosted solution (Charon Exit) or the non-hosted solution (Validator Client Exit). Mixing both solutions within the same cluster—where some operators use Charon Exit while others use Validator Client Exit—is not allowed.**
-- In case of validator client native exits, partial exits can be broadcasted by any validator client as long as the sum reaches the threshold for the cluster.
+- In case of validator client native exits, partial exits can be broadcast by any validator client as long as the threshold for the cluster is reached.
 - If a Charon client restarts after the exit command is run but before the threshold is reached, it will lose the partial exits it has received from the other nodes. If all Charon clients restart and thus all partial exits are lost before the required threshold of exit messages are received, operators will have to rebroadcast their partial exit messages.
 - All operators need to use the same `EXIT_EPOCH` for the exit to be successful. Assuming you want to exit as soon as possible, the default epochs included in the below commands should be sufficient for the respective network.
 :::
@@ -141,7 +141,7 @@ As per your preferences, choose the correct combination of -
 
                     <TabItem value="charon-all" label="All Validators" default>
                     
-                    **Download Exits** : The following command downloads the full exit signature for a all the active public keys and stores it in a directory.
+                    **Download Exits** : The following command downloads the full exit signature for all the active public keys and stores it in a directory.
                     ```shell
                     docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
                     --all \
@@ -543,7 +543,7 @@ As per your preferences, choose the correct combination of -
 
                         <TabItem value="charon-all" label="All Validators" default>
                         
-                        **Download Exits** : The following command downloads the full exit signature for a all the active public keys and stores it in a directory.
+                        **Download Exits** : The following command downloads the full exit signature for all the active public keys and stores it in a directory.
                         ```shell
                         docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
                         --all \
