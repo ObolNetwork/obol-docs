@@ -41,130 +41,163 @@ As per your preferences, choose the correct combination of -
 <Tabs groupId="validator-clients">
   <TabItem value="Holesky" label="Holesky">
     <Tabs groupId="charon-exits">
-        <TabItem value="charon" label="Charon" default>
-            Voluntary exit can be submitted directly through Charon. This approach is validator client agnostic as Charon abstracts validator client's native exit commands underneath. It must be noted that Charon only supports exits if the validator clients are Teku, Nimbus, Lodestar and Lighthouse. For details on Prysm, click on to Prysm Tab.
+      <TabItem value="charon" label="Charon" default>
+        Voluntary exit can be submitted directly through Charon. This approach is validator client agnostic as Charon abstracts validator client's native exit commands underneath.
 
-            **Step 1: submit partial exit for all active validators**
-            ```shell
+        **Step 1: Submit partial exit**
+
+        <Tabs groupId="charon-single-all">
+            <TabItem value="charon-single" label="Single Validator" default>
+
+                Following command signs a partial exit for a specific validator pubkey.
+
+                ```shell
+                docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+                --beacon-node-endpoints="http://lighthouse:5052" \
+                --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+                --exit-epoch=256'
+                ```
+
+                Replace `<VALIDATOR_PUBLIC_KEY>` with the validator's full pubkey (as visible in Ethereum).
+
+            </TabItem>
+
+            <TabItem value="charon-all" label="All Validators" default>
+ 
+                Following command signs partial exits for all validators.
+
+                ```shell
                 docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
                 --beacon-node-endpoints="http://lighthouse:5052" \
                 --all \
                 --exit-epoch=256'
-            ```
-            **Step 2: Monitor the Partial Exits' status**
+                ```
 
-            After a threshold of signed partial exits from node operators in the cluster is accumulated, a full (complete) exit can be created.  For example, in the cluster below, only 2 out of 4 clusters have reached the threshold. Operators will have to wait for one more partial exit signature, either from operator 1 or 3 to create a full exit message.
-            
-            <img src="/img/PartialExitsStatus.png" alt="Partial Exit Status" />
+            </TabItem>
+        </Tabs>
 
-            **Step 3: Broadcast the full exit**
+        **Step 2: Monitor the Partial Exits' status**
 
-            Once the partial exit threshold is reached, a full exit can be broadcasted from any of the operator. There are two options to do it, depending on your use-case
-            
-            1. **Fetch the full exit and broadcast instantaneously** - users can choose it for a single validator or all validators in the cluster.
-            2. **Fetch the full exit and broadcast it later** - users can choose it for a single validator or all validators in the cluster.
+        After a threshold of signed partial exits from node operators in the cluster is accumulated, a full (complete) exit can be created.  For example, in the cluster below, only 2 out of 4 clusters have reached the threshold. Operators will have to wait for one more partial exit signature, either from operator 1 or 3 to create a full exit message.
+        
+        <img src="/img/PartialExitsStatus.png" alt="Partial Exit Status" />
 
-            <Tabs groupId="charon-exit-broadcast-fetch">
-                <TabItem value="charon-broadcast-directly" label="Broadcast directly" default>
+        **Step 3: Broadcast the full exit**
 
-                    <Tabs groupId="single-all">
-                        <TabItem value="charon-single" label="Single Validator" default>
+        Once the partial exit threshold is reached, a full exit can be broadcasted from any of the operator. There are two options to do it, depending on your use-case
+        
+        1. **Fetch the full exit and broadcast instantaneously** - users can choose it for a single validator or all validators in the cluster.
+        2. **Fetch the full exit and broadcast it later** - users can choose it for a single validator or all validators in the cluster.
 
-                        Following command fetches full exit and broadcasts it instantaneously for a specific validator.
+        <Tabs groupId="charon-exit-broadcast-fetch">
+            <TabItem value="charon-broadcast-directly" label="Broadcast directly" default>
 
-                            ```shell 
-                                docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                                --beacon-node-endpoints="http://lighthouse:5052" \
-                                --validator-public-key="<VALIDATOR_PUBLIC_KEY>"'
-                            ```
-                        </TabItem>
+                <Tabs groupId="charon-single-all">
+                    <TabItem value="charon-single" label="Single Validator" default>
 
-                        <TabItem value="charon-all" label="All Validators" default>
+                    Following command fetches full exit and broadcasts it instantaneously for a specific validator.
 
-                        Following command fetches full exits and broadcasts them instantaneously for all the validators that have reached a partial exit threshold.
-
-                        ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --all'
-                            ```
-                      </TabItem>
-                    </Tabs>
-
-                </TabItem>
-
-                <TabItem value="charon-fetch-broadcast" label="Fetch & Broadcast" default>
-
-                    <Tabs groupId="single-all">
-                        <TabItem value="charon-single" label="Single Validator" default>
-
-                        **Download Exits** : The following command downloads the full exit signature for a specific public key and stores it in a file.
-                        ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
-                            --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
-                            --fetched-exit-path="/opt/charon/.charon"'
+                        ```shell 
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                        --beacon-node-endpoints="http://lighthouse:5052" \
+                        --validator-public-key="<VALIDATOR_PUBLIC_KEY>"'
                         ```
+                    </TabItem>
 
-                        **Broadcast Exits** : The following command uses the full exit signature for a specific public key from the file and broadcasts it to the network.
+                    <TabItem value="charon-all" label="All Validators" default>
 
-                        ```shell  
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --exit-from-file="/opt/charon/.charon/<FILENAME>"''
+                    Following command fetches full exits and broadcasts them instantaneously for all the validators that have reached a partial exit threshold.
+
+                    ```shell
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                    --beacon-node-endpoints="http://lighthouse:5052" \
+                    --all'
                         ```
-                        </TabItem>
+                    </TabItem>
+                </Tabs>
 
-                        <TabItem value="charon-all" label="All Validators" default>
-                        
-                        **Download Exits** : The following command downloads the full exit signature for a all the active public keys and stores it in a directory.
-                        ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
-                            --all \
-                            --fetched-exit-path="/opt/charon/.charon"'
-                        ```
+            </TabItem>
 
-                        **Broadcast Exits** : The following command uses the full exit signatures from the directory and broadcasts it to the network.
+            <TabItem value="charon-fetch-broadcast" label="Fetch & Broadcast" default>
 
-                        ```shell  
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --all \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --exit-from-dir="/opt/charon/.charon"'
-                        ```
-                        </TabItem>
-                    </Tabs>
-                </TabItem>
-            </Tabs>
-            
-            
+                <Tabs groupId="single-all">
+                    <TabItem value="charon-single" label="Single Validator" default>
 
-        </TabItem>
+                    **Download Exits** : The following command downloads the full exit signature for a specific public key and stores it in a file.
+                    ```shell
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
+                    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+                    --fetched-exit-path="/opt/charon/.charon"'
+                    ```
+
+                    **Broadcast Exits** : The following command uses the full exit signature for a specific public key from the file and broadcasts it to the network.
+
+                    ```shell  
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                    --beacon-node-endpoints="http://lighthouse:5052" \
+                    --exit-from-file="/opt/charon/.charon/<FILENAME>"''
+                    ```
+                    </TabItem>
+
+                    <TabItem value="charon-all" label="All Validators" default>
+                    
+                    **Download Exits** : The following command downloads the full exit signature for a all the active public keys and stores it in a directory.
+                    ```shell
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
+                    --all \
+                    --fetched-exit-path="/opt/charon/.charon"'
+                    ```
+
+                    **Broadcast Exits** : The following command uses the full exit signatures from the directory and broadcasts it to the network.
+
+                    ```shell  
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                    --all \
+                    --beacon-node-endpoints="http://lighthouse:5052" \
+                    --exit-from-dir="/opt/charon/.charon"'
+                    ```
+                    </TabItem>
+                </Tabs>
+            </TabItem>
+        </Tabs>
+        
+        
+
+      </TabItem>
       <TabItem value="teku" label="Teku" default>
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
         <Tabs groupId="teku-single-all">
             <TabItem value="teku-single" label="Single Validator" default>
-                Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+
+                Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
+
                 ```shell 
                 docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
                 --beacon-node-api-endpoint="http://charon:3600/" \
-                --validator-public-keys={PUBLIC_SHARE_KEY} \
-                --config-file="/opt/charon/teku/teku-config.yaml" \
+                --validator-public-keys=<PARTIAL_PUBLIC_KEY> \
+                --network=holesky \
                 --epoch=256 \
                 --confirmation-enabled=false
                 ```
-            </TabItem>
 
+                Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
+            </TabItem>
 
             <TabItem value="teku-all" label="All Validators" default>
  
-            Following command signs Partial Exits for all the validator pubkeys and broadcast it instantaneously when full exit can be created.
+            Following command signs partial exits for all validator pubkeys and broadcast them instantaneously as soon as a full exit can be created.
+
                 ```shell  
                 docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
                 --beacon-node-api-endpoint="http://charon:3600/" \
-                --confirmation-enabled=false \
                 --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-                --epoch=256
+                --network=holesky \
+                --epoch=256 \
+                --confirmation-enabled=false
                 ```
+
             </TabItem>
         </Tabs>
 
@@ -190,44 +223,42 @@ As per your preferences, choose the correct combination of -
 
       </TabItem>
       <TabItem value="nimbus" label="Nimbus">
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
         <Tabs groupId="nimbus-single-all">
             <TabItem value="nimbus-single" label="Single Validator" default>
-                Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
-                It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
-                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
-                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
-                
+                Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
+                It copies all files and directories from the keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directory referenced here as `/home/user/data/node0/` is the data directory specified on start of Nimbus. [As an example in CDVC](https://github.com/ObolNetwork/charon-distributed-validator-cluster/blob/4faf38a1fc20ad241a2672021b32c90bf7ac9eb9/nimbus/run.sh#L40) the `/home/user/data/node2/` and `/home/user/data/node5/` are used.                
+
                 ```shell
                 docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
                 mkdir -p /home/user/data/wd; \
                 cp -r /home/user/data/node0/ /home/user/data/wd/; \
-                cat /home/user/data/wd/node1/secrets/{VALIDATOR_KEY_SHARE} | /home/user/nimbus_beacon_node deposits exit \ 
-                    --validator=/home/user/data/wd/node0/validators/0x881f948603014e8a596cde35b952026b5c49e04b14e8d641441d1ac68278e11a8757236bd79f0a5fa65be17036a0e8ef/keystore.json \
-                    --epoch=256 \
+                cat /home/user/data/wd/node0/secrets/<PARTIAL_PUBLIC_KEY> | /home/user/nimbus_beacon_node deposits exit \ 
                     --rest-url=http://charon:3600/ \
+                    --validator=/home/user/data/wd/node0/validators/<PARTIAL_PUBLIC_KEY>/keystore.json \
+                    --epoch=256 \
                     --data-dir=/home/user/data/wd/node0/;"
                 ```
+
+                Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
 
             </TabItem>
 
 
             <TabItem value="nimbus-all" label="All Validators" default>
-                The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
-                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
-                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
-                
-                
-                ```shell  
-                docker exec -it kurtosis-charon-vc1-nimbus-1 /bin/bash -c "\
-                mkdir /home/user/exits/
-                cp -r /home/user/data/node1/ /home/user/exits/
-            
-                cat /home/user/data/wd/node1/secrets/{VALIDATOR_KEY_SHARE} | /home/user/nimbus_beacon_node deposits exit \ 
-                --all 
-                --epoch=256 
-                --rest-url=http://node1:3600/ 
-                --data-dir=/home/user/exits/node1/"
+                Following command executes an interactive command inside the Nimbus VC container. It copies all files and directories from the keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directory referenced here as `/home/user/data/node0/` is the data directory specified on start of Nimbus. [As an example in CDVC](https://github.com/ObolNetwork/charon-distributed-validator-cluster/blob/4faf38a1fc20ad241a2672021b32c90bf7ac9eb9/nimbus/run.sh#L40) the `/home/user/data/node2/` and `/home/user/data/node5/` are used.                
+                ```shell
+                docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
+                mkdir -p /home/user/data/wd; \
+                cp -r /home/user/data/node0/ /home/user/data/wd/; \
+                /home/user/nimbus_beacon_node deposits exit \ 
+                    --rest-url=http://charon:3600/ \
+                    --all \
+                    --epoch=256 \
+                    --data-dir=/home/user/data/wd/node0/;"
                 ```
             </TabItem>
         </Tabs>
@@ -253,33 +284,37 @@ As per your preferences, choose the correct combination of -
 
         
       </TabItem>
-        <TabItem value="lodestar" label="Lodestar" default>
-        **Step 1: submit partial exit for all active validators**
+      <TabItem value="lodestar" label="Lodestar" default>
+        **Step 1: Submit partial exit**
             <Tabs groupId="lodestar-single-all">
                 <TabItem value="lodestar-single" label="Single Validator" default>
-                    Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                    Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
                     
                     ```shell
                     docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
                     --beaconNodes="http://charon:3600" \
+                    --pubkeys=<PARTIAL_PUBLIC_KEY> \
                     --network=holesky \
-                    --dataDir=/opt/data \
-                    --pubkeys={PUBLIC_SHARE_KEY} \
                     --exitEpoch=256 \
+                    --dataDir=/opt/data \
                     --yes
                     ```
+
+                    Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                    To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
                 </TabItem>
 
 
                 <TabItem value="lodestar-all" label="All Validators" default>
-                     The following executes an interactive command inside the Lodestar VC container to exit all validators.
+                    Following command signs partial exits for all validator pubkeys and broadcast them instantaneously as soon as a full exit can be created.
                     
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
                     --beaconNodes="http://charon:3600" \
-                    --dataDir=/opt/data \
-                    --exitEpoch=256 \
                     --network=holesky \
+                    --exitEpoch=256 \
+                    --dataDir=/opt/data \
                     --yes
                     ```
                 </TabItem>
@@ -306,14 +341,19 @@ As per your preferences, choose the correct combination of -
 
       </TabItem>
       <TabItem value="lighthouse" label="Lighthouse" default>
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
             <Tabs groupId="lighthouse-single-all">
                 <TabItem value="lighthouse-single" label="Single Validator" default>
-                    Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                    :::note
+                    Lighthouse VC cannot perform an exit for custom epoch and always uses the current one. This means you should coordinate your efforts between cluster peers, in order to sign the same payload.
+                    If you sign exit messages in different epochs, signatures will not be aggregated as they will missmatch and new signing of exit messages needs to be done.
+                    :::
+
+                    Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
 
                     ```shell 
                     docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
-                    file="/opt/charon/keys/keystore-{N}.json"; \
+                    file="/opt/charon/keys/keystore-<N>.json"; \
                     filename=$(basename $file);
                     keystore=${filename%.*};
                     lighthouse account validator exit \
@@ -324,11 +364,20 @@ As per your preferences, choose the correct combination of -
                         --no-confirmation \
                         --no-wait;'
                     ```
+
+                    Replace `<N>` with the keystore index. Keystore indeces can be found in `.charon/validator_keys/`. Each JSON file has a `pubkey` field corresponding to the partial pubkey.
+                    To which full pubkey this partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
                 </TabItem>
 
 
                 <TabItem value="lighthouse-all" label="All Validators" default>
-                    The following executes an interactive command inside the Lighthouse VC container to exit all validators. The exit is submitted for the current epoch.
+                    :::note
+                    Lighthouse VC cannot perform an exit for custom epoch and always uses the current one. This means you should coordinate your efforts between cluster peers, in order to sign the same payload.
+                    If you sign exit messages in different epochs, signatures will not be aggregated as they will missmatch and new signing of exit messages needs to be done.
+                    :::
+
+                   Following command executes an interactive command inside the Lighthouse VC container.
                     
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
@@ -396,14 +445,39 @@ As per your preferences, choose the correct combination of -
   <TabItem value="Mainnet" label="Mainnet">
     <Tabs groupId="charon-exits">
         <TabItem value="charon" label="Charon" default>
-            Voluntary exit can be submitted directly through Charon. This approach is validator client agnostic as Charon abstracts validator client's native exit commands underneath. It must be noted that Charon only supports exits if the validator clients are Teku, Nimbus, Lodestar and Lighthouse. For details on Prysm, click on to Prysm Tab.
+            Voluntary exit can be submitted directly through Charon. This approach is validator client agnostic as Charon abstracts validator client's native exit commands underneath.
 
-            **Step 1: submit partial exit for all active validators**
-            ```shell
-                docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
-                --beacon-node-endpoints="http://lighthouse:5052" \
-                --all'
-            ```
+            **Step 1: Submit partial exit**
+            <Tabs groupId="charon-single-all">
+
+                <TabItem value="charon-single" label="Single Validator" default>
+
+                    Following command signs a partial exit for a specific validator pubkey.
+
+                    ```shell
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+                    --beacon-node-endpoints="http://lighthouse:5052" \
+                    --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+                    --exit-epoch=194048'
+                    ```
+
+                    Replace `<VALIDATOR_PUBLIC_KEY>` with the validator's full pubkey (as visible in Ethereum).
+
+                </TabItem>
+
+                <TabItem value="charon-all" label="All Validators" default>
+    
+                    Following command signs partial exits for all validators.
+
+                    ```shell
+                    docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit sign \
+                    --beacon-node-endpoints="http://lighthouse:5052" \
+                    --all \
+                    --exit-epoch=194048'
+                    ```
+
+                </TabItem>
+            </Tabs>
             **Step 2: Monitor the Partial Exits' status**
 
             After a threshold of signed partial exits from node operators in the cluster is accumulated, a full (complete) exit can be created.  For example, in the cluster below, only 2 out of 4 clusters have reached the threshold. Operators will have to wait for one more partial exit signature, either from operator 1 or 3 to create a full exit message.
@@ -426,9 +500,9 @@ As per your preferences, choose the correct combination of -
                         Following command fetches full exit and broadcasts it instantaneously for a specific validator.
 
                             ```shell 
-                                docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                                --beacon-node-endpoints="http://lighthouse:5052" \
-                                --validator-public-key="<VALIDATOR_PUBLIC_KEY>"'
+                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                            --beacon-node-endpoints="http://lighthouse:5052" \
+                            --validator-public-key="<VALIDATOR_PUBLIC_KEY>"'
                             ```
                         </TabItem>
 
@@ -437,10 +511,10 @@ As per your preferences, choose the correct combination of -
                         Following command fetches full exits and broadcasts them instantaneously for all the validators that have reached a partial exit threshold.
 
                         ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --all'
-                            ```
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                        --beacon-node-endpoints="http://lighthouse:5052" \
+                        --all'
+                        ```
                       </TabItem>
                     </Tabs>
 
@@ -453,17 +527,17 @@ As per your preferences, choose the correct combination of -
 
                         **Download Exits** : The following command downloads the full exit signature for a specific public key and stores it in a file.
                         ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
-                            --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
-                            --fetched-exit-path="/opt/charon/.charon"'
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
+                        --validator-public-key="<VALIDATOR_PUBLIC_KEY>" \
+                        --fetched-exit-path="/opt/charon/.charon"'
                         ```
 
                         **Broadcast Exits** : The following command uses the full exit signature for a specific public key from the file and broadcasts it to the network.
 
                         ```shell  
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --exit-from-file="/opt/charon/.charon/<FILENAME>"''
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                        --beacon-node-endpoints="http://lighthouse:5052" \
+                        --exit-from-file="/opt/charon/.charon/<FILENAME>"''
                         ```
                         </TabItem>
 
@@ -471,18 +545,18 @@ As per your preferences, choose the correct combination of -
                         
                         **Download Exits** : The following command downloads the full exit signature for a all the active public keys and stores it in a directory.
                         ```shell
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
-                            --all \
-                            --fetched-exit-path="/opt/charon/.charon"'
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit fetch \
+                        --all \
+                        --fetched-exit-path="/opt/charon/.charon"'
                         ```
 
                         **Broadcast Exits** : The following command uses the full exit signatures from the directory and broadcasts it to the network.
 
                         ```shell  
-                            docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
-                            --all \
-                            --beacon-node-endpoints="http://lighthouse:5052" \
-                            --exit-from-dir="/opt/charon/.charon"'
+                        docker exec -it charon-distributed-validator-node-charon-1 /bin/sh -c 'charon exit broadcast \
+                        --all \
+                        --beacon-node-endpoints="http://lighthouse:5052" \
+                        --exit-from-dir="/opt/charon/.charon"'
                         ```
                         </TabItem>
                     </Tabs>
@@ -493,31 +567,36 @@ As per your preferences, choose the correct combination of -
 
         </TabItem>
       <TabItem value="teku" label="Teku" default>
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
         <Tabs groupId="teku-single-all">
             <TabItem value="teku-single" label="Single Validator" default>
-                Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
                 
                 ```shell
                 docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
                 --beacon-node-api-endpoint="http://charon:3600/" \
-                --validator-public-keys={PUBLIC_SHARE_KEY} \
-                --config-file="/opt/charon/teku/teku-config.yaml" \
+                --validator-public-keys=<PARTIAL_PUBLIC_KEY> \
+                --network=mainnet \
                 --epoch=194048 \
                 --confirmation-enabled=false
                 ``` 
+
+                Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
             </TabItem>
 
 
             <TabItem value="teku-all" label="All Validators" default>
  
-            Following command signs Partial Exits for all the validator pubkeys and broadcast it instantaneously when full exit can be created.
+            Following command signs partial exits for all validator pubkeys and broadcast them instantaneously as soon as a full exit can be created.
                 ```shell  
                 docker exec -it charon-distributed-validator-node-teku-1 /opt/teku/bin/teku voluntary-exit \
                 --beacon-node-api-endpoint="http://charon:3600/" \
-                --confirmation-enabled=false \
                 --validator-keys="/opt/charon/validator_keys:/opt/charon/validator_keys" \
-                --epoch=194048
+                --network=mainnet \
+                --epoch=194048 \
+                --confirmation-enabled=false
                 ```
             </TabItem>
         </Tabs>
@@ -544,43 +623,44 @@ As per your preferences, choose the correct combination of -
 
       </TabItem>
       <TabItem value="nimbus" label="Nimbus">
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
         <Tabs groupId="nimbus-single-all">
             <TabItem value="nimbus-single" label="Single Validator" default>
-                Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
-                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
-                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
-                
+                Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
+                It copies all files and directories from the keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directory referenced here as `/home/user/data/node0/` is the data directory specified on start of Nimbus. [As an example in CDVC](https://github.com/ObolNetwork/charon-distributed-validator-cluster/blob/4faf38a1fc20ad241a2672021b32c90bf7ac9eb9/nimbus/run.sh#L40) the `/home/user/data/node2/` and `/home/user/data/node5/` are used.                
+
                 ```shell
                 docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
                 mkdir -p /home/user/data/wd; \
                 cp -r /home/user/data/node0/ /home/user/data/wd/; \
-                cat /home/user/data/wd/node1/secrets/{VALIDATOR_KEY_SHARE} | /home/user/nimbus_beacon_node deposits exit \ 
-                    --validator=/home/user/data/wd/node0/validators/0x881f948603014e8a596cde35b952026b5c49e04b14e8d641441d1ac68278e11a8757236bd79f0a5fa65be17036a0e8ef/keystore.json \
-                    --epoch=194048 \
+                cat /home/user/data/wd/node0/secrets/<PARTIAL_PUBLIC_KEY> | /home/user/nimbus_beacon_node deposits exit \ 
                     --rest-url=http://charon:3600/ \
+                    --validator=/home/user/data/wd/node0/validators/<PARTIAL_PUBLIC_KEY>/keystore.json \
+                    --epoch=194048 \
                     --data-dir=/home/user/data/wd/node0/;"
                 ```
+
+                Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
 
 
             </TabItem>
 
 
             <TabItem value="nimbus-all" label="All Validators" default>
-                The following executes an interactive command inside the Nimbus VC container. It copies all files and directories from the Keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
-                The directories referenced here (and their subdirectories related to the node) originate from the mapping in CDVC (note: CDVC isn't ideal as the vc-nimbus container applies to both 2 and 5).
-                If you've customized your volume mappings, the directory structure may not align with the defaults mentioned here. Ensure your mappings are consistent with your configuration for seamless integration.
-                
-                ```shell  
-                docker exec -it kurtosis-charon-vc1-nimbus-1 /bin/bash -c "\
-                mkdir /home/user/exits/
-                cp -r /home/user/data/node1/ /home/user/exits/
-            
-                cat /home/user/data/wd/node1/secrets/{VALIDATOR_KEY_SHARE} | /home/user/nimbus_beacon_node deposits exit \
-                --all 
-                --epoch=194048
-                --rest-url=http://node1:3600/ 
-                --data-dir=/home/user/exits/node1/"
+                Following command executes an interactive command inside the Nimbus VC container. It copies all files and directories from the keystore path <code>/home/user/data/charon</code> to the newly created <code>/home/user/data/wd</code> directory.
+                The directory referenced here as `/home/user/data/node0/` is the data directory specified on start of Nimbus. [As an example in CDVC](https://github.com/ObolNetwork/charon-distributed-validator-cluster/blob/4faf38a1fc20ad241a2672021b32c90bf7ac9eb9/nimbus/run.sh#L40) the `/home/user/data/node2/` and `/home/user/data/node5/` are used.                
+
+                ```shell
+                docker exec -it charon-distributed-validator-node-nimbus-1 /bin/bash -c "\
+                mkdir -p /home/user/data/wd; \
+                cp -r /home/user/data/node0/ /home/user/data/wd/; \
+                /home/user/nimbus_beacon_node deposits exit \ 
+                    --rest-url=http://charon:3600/ \
+                    --all \
+                    --epoch=194048 \
+                    --data-dir=/home/user/data/wd/node0/;"
                 ```
             </TabItem>
         </Tabs>
@@ -607,34 +687,39 @@ As per your preferences, choose the correct combination of -
         
       </TabItem>
         <TabItem value="lodestar" label="Lodestar" default>
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
             <Tabs groupId="lodestar-single-all">
                 <TabItem value="lodestar-single" label="Single Validator" default>
-                    Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                    Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
                     
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
                     --beaconNodes="http://charon:3600" \
+                    --pubkeys=<PARTIAL_PUBLIC_KEY> \
                     --network=mainnet \
-                    --dataDir=/opt/data \
-                    --pubkeys={PUBLIC_SHARE_KEY} \
                     --exitEpoch=194048 \
+                    --dataDir=/opt/data \
                     --yes
                     ```
+
+                    Replace `<PARTIAL_PUBLIC_KEY>` with the partial pubkey found in the keystores in `.charon/validator_keys/`, under `pubkey` field.
+                    To which full pubkey a partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
                 </TabItem>
 
 
                 <TabItem value="lodestar-all" label="All Validators" default>
-                     The following executes an interactive command inside the Lodestar VC container to exit all validators.
+                    Following command signs partial exits for all validator pubkeys and broadcast them instantaneously as soon as a full exit can be created.
                     
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lodestar-1 node /usr/app/packages/cli/bin/lodestar validator voluntary-exit \
                     --beaconNodes="http://charon:3600" \
-                    --dataDir=/opt/data \
-                    --exitEpoch=194048 \
                     --network=mainnet \
+                    --exitEpoch=194048 \
+                    --dataDir=/opt/data \
                     --yes
                     ```
+
                 </TabItem>
             </Tabs>
         **Step 2: Monitor partial exit for all active validators**
@@ -659,14 +744,19 @@ As per your preferences, choose the correct combination of -
 
       </TabItem>
       <TabItem value="lighthouse" label="Lighthouse" default>
-        **Step 1: submit partial exit for all active validators**
+        **Step 1: Submit partial exit**
             <Tabs groupId="lighthouse-single-all">
                 <TabItem value="lighthouse-single" label="Single Validator" default>
-                    Following command signs Partial Exits for a sepcific validator pubkeys and broadcasts it instantaneously when full exit can be created.
+                    :::note
+                    Lighthouse VC cannot perform an exit for custom epoch and always uses the current one. This means you should coordinate your efforts between cluster peers, in order to sign the same payload.
+                    If you sign exit messages in different epochs, signatures will not be aggregated as they will missmatch and new signing of exit messages needs to be done.
+                    :::
+
+                    Following command signs a partial exit for a specific validator pubkey and broadcasts it instantaneously as soon as full exit can be created.
 
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
-                    file="/opt/charon/keys/keystore-{N}.json"; \
+                    file="/opt/charon/keys/keystore-<N>.json"; \
                     filename=$(basename $file);
                     keystore=${filename%.*};
                     lighthouse account validator exit \
@@ -677,11 +767,20 @@ As per your preferences, choose the correct combination of -
                         --no-confirmation \
                         --no-wait;'
                     ```
+
+                    Replace `<N>` with the keystore index. Keystore indeces can be found in `.charon/validator_keys/`. Each JSON file has a `pubkey` field corresponding to the partial pubkey.
+                    To which full pubkey this partial pubkey corresponds (as visible in Ethereum), can be looked up in the `.charon/cluster-lock.json`, under `distributed_validators` field.
+
                 </TabItem>
 
 
                 <TabItem value="lighthouse-all" label="All Validators" default>
-                    The following executes an interactive command inside the Lighthouse VC container to exit all validators. The exit is submitted for the current epoch.
+                    :::note
+                    Lighthouse VC cannot perform an exit for custom epoch and always uses the current one. This means you should coordinate your efforts between cluster peers, in order to sign the same payload.
+                    If you sign exit messages in different epochs, signatures will not be aggregated as they will missmatch and new signing of exit messages needs to be done.
+                    :::
+
+                    Following command executes an interactive command inside the Lighthouse VC container.
                     
                     ```shell  
                     docker exec -it charon-distributed-validator-node-lighthouse-1 /bin/bash -c '\
@@ -699,6 +798,7 @@ As per your preferences, choose the correct combination of -
                             fi;
                     done;'
                     ```
+
                 </TabItem>
             </Tabs>
 
