@@ -5,7 +5,7 @@ description: The Token House
 
 # The Token House
 
-In the Token House, OBOL Token holders are responsible for submitting, deliberating, and voting on various Obol Collective governance proposals. They may do so by directly voting with their OBOL Tokens (by delegating the voting power of their OBOL tokens to their own address) or by delegating their OBOL Token voting power to an eligible third party. Addresses with delegated OBOL voting power are called “Delegates”.
+In the Token House, OBOL Token holders are responsible for submitting, deliberating, and voting on various Obol Collective governance proposals.
 
 ## Overview of the Obol Token House
 
@@ -33,6 +33,22 @@ All governance proposals must fall within one of the following categories:
 - Treasury allocations
 - Work agreements
 - Veto on the Obol RAF operations
+
+The different requirements for submission and approval of each Proposal Type are summarized below. If a specific template is not specified below, proposals should follow this standard proposal template.
+
+All Ecosystem grant applications are processed by the Association.
+
+Below are listed types of Token House Proposals. Each has a two-week review period plus one week voting window, with an approval threshold of 51%.
+
+| Proposal Type | Description | Submission Requirements              |
+|:------------:|:---------:|:------------------|
+|Ecosystem grants|The Obol Association’s treasury may be used to support development of the Collective and/or growth of the ecosystem via the proposal template.|Forum proposal + On-Chain Voting|
+|Token inflation adjustment|Changes to the OBOL Token Contract or its supply.|Forum proposal + On-Chain Voting|
+|Treasury Appropriations|The amount of OBOL Tokens the Obol Association may spend or distribute annually|Proposal initiated by the Association + On-Chain Voting|
+|Work agreements|Formal arrangements between the Obol Association and contributors, teams, or organizations tasked with advancing specific initiatives or responsibilities within the ecosystem|Forum proposal  + On-Chain Voting|
+|Veto on the Obol RAF operations|The veto mechanism serves as a safeguard against decisions or actions within the RAF operations that are misaligned with the mission of decentralization, transparency, or the collective interests of the community.|Forum proposal + On-Chain Voting|
+|Protocol upgrades|Scheduled changes to the on-chain smart contracts comprising the protocol or governance contracts.|Forum proposal + On-Chain Voting|
+
 
 ### Weeks 1-2: Feedback and Review
 
