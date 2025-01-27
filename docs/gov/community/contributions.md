@@ -5,24 +5,23 @@ description: Earning Obol Contributions
 
 # Obol Contributions Program
 
-*Our aim is to encourage continuous participation and sustained support for Ethereum’s consensus. The Obol Contributions program is therefore designed to be fair and transparent, without arbitrary gimmicks promoting short-term interest at the cost of long-term participation. Obol Contributions are meant to acknowledge all of the actors in the staking stack for their contribution to Ethereum’s decentralisation.*
+_Our aim is to encourage continuous participation and sustained support for Ethereum’s consensus. The Obol Contributions program is therefore designed to be fair and transparent, without arbitrary gimmicks promoting short-term interest at the cost of long-term participation. Obol Contributions are meant to acknowledge all of the actors in the staking stack for their contribution to Ethereum’s decentralisation. test_
 
-*Each Obol DV contributes 1% of the total staking reward it earns to the Obol Collective. This economic stream is the basis for recognized Contributions. By basing Contributions on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)*
+_Each Obol DV contributes 1% of the total staking reward it earns to the Obol Collective. This economic stream is the basis for recognized Contributions. By basing Contributions on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)_
 
-*Contributions are tracked in a centralised database off-chain, not on the blockchain as transferable or non-transferable tokens. Our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much they have contributed. These endpoints are used to show individuals’ Contributions within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.*
+_Contributions are tracked in a centralised database off-chain, not on the blockchain as transferable or non-transferable tokens. Our_ [_API endpoints_](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) _enable users and protocols to query how much they have contributed. These endpoints are used to show individuals’ Contributions within the_ [_Obol DV Launchpad_](https://launchpad.obol.org) _and partners’ staking platforms._
 
 ## What is the Obol Contributions Program?
 
-- An opportunity for every staker to participate in and get recognised for scaling and decentralising Ethereum by staking on Obol Distributed Validators (DVs).
-- Stake deployed on Obol DVs will contribute 1% of staking rewards to the Obol Collective’s retroactive funding mechanism.
-- Those contributions will be tracked and recognised, and serve as the basis for future governance and ownership in the Obol Collective.
+* An opportunity for every staker to participate in and get recognised for scaling and decentralising Ethereum by staking on Obol Distributed Validators (DVs).
+* Stake deployed on Obol DVs will contribute 1% of staking rewards to the Obol Collective’s retroactive funding mechanism.
+* Those contributions will be tracked and recognised, and serve as the basis for future governance and ownership in the Obol Collective.
 
 ## How do I participate in the Obol Contributions Program?
 
 You can participate in the Obol Contributions Program by:
 
 1. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/). This allows you to directly participate in the network's decentralisation efforts and earn contributions. You can also visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members.
-
 2. **Staking through Staking Partners**: By participating in staking through our partners, your staking rewards will also contribute to the Obol Collective. For the current list of staking partners, please visit [obol.org/contributions](https://obol.org/contributions).
 
 ## How can I track my contributions?
@@ -37,7 +36,7 @@ Contributions will serve as the basis for future ownership and governance of the
 
 Contributions are based on 1% of validator rewards, which are contributed to the Obol Collective’s “1% for Decentralization” retroactive fund. (retroactivefunding.obol.eth) Contributions are calculated daily and tracked off-chain. This means that the higher the effectiveness and uptime of your validators, the more rewards (and thus contributions) you will generate.
 
-If the total rewards \( R \) for a validator are split among operators with percentages \( p_1, p_2, ..., p_n \), the contributions \( C \) for each operator can be calculated as:
+If the total rewards ( R ) for a validator are split among operators with percentages ( p\_1, p\_2, ..., p\_n ), the contributions ( C ) for each operator can be calculated as:
 
 Cᵢ = R × pᵢ × 0.01 × 1.01
 
@@ -53,7 +52,7 @@ Obol Contributions are not a promise or indication of any future plans for an Ob
 
 ## What is the 1% for Decentralization retroactive funding program?
 
-Users of Obol distributed validator (DV) clusters contribute 1% of their staking rewards to a retroactive funding program. These funds will reward projects and innovations which add value and drive impact towards Ethereum’s decentralisation. Read more on our blog or on obol.org/governance. 
+Users of Obol distributed validator (DV) clusters contribute 1% of their staking rewards to a retroactive funding program. These funds will reward projects and innovations which add value and drive impact towards Ethereum’s decentralisation. Read more on our blog or on obol.org/governance.
 
 ## Do I need to run my own validator to participate?
 
@@ -61,7 +60,7 @@ No, you can stake on DVs and track your contributions through the partners liste
 
 ## Can I withdraw my staked ETH at any time?
 
-There is no penalty for exiting your validator. You simply stop accruing Contributions. The specific withdrawal policy will depend on the staking protocol used. 
+There is no penalty for exiting your validator. You simply stop accruing Contributions. The specific withdrawal policy will depend on the staking protocol used.
 
 ## What is the minimum amount of ETH needed to stake?
 

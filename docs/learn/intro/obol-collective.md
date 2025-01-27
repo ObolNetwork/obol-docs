@@ -2,7 +2,7 @@
 sidebar_position: 1
 description: The Obol Collective
 ---
-
+ 
 # Obol Collective
 
 ## What is the Obol Collective?
