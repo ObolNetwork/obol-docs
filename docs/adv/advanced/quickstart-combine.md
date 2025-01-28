@@ -81,7 +81,7 @@ Doing so can potentially cause the combination process to fail.
 Run the following command:
 
 ```shell
-# Combine a clusters private keys
+# Combine a cluster private keys
 docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 combine --cluster-dir /opt/charon/cluster --output-dir /opt/charon/combined
 ```
 
