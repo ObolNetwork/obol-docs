@@ -24,7 +24,7 @@ You can participate in the OBOL Programmatic Incentives Program by:
 
 ## Is existing stake eligible?
 
-No, only new stake deposited after January 24th will accrue incentives. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+Stake deposited after January 13th will accrue incentives. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
 
 ## How much OBOL will I receive per ETH staked on DVs?
 
@@ -35,7 +35,7 @@ The amount of OBOL you receive per ETH staked depends on the total amount of ETH
 
 By basing OBOL incentives on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)
 
-Incentives are tracked in a centralised database off-chain - our [API endpoints](https://docs.obol.tech/api#tag/Address/operation/AddressController_getAddressContributions) enable users and protocols to query how much incentives they have generated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.
+Incentives are tracked in a centralised database off-chain - our API endpoints enable users and protocols to query how much incentives they have generated. These endpoints are used to show individuals’ incentives within the [Obol DV Launchpad](https://launchpad.obol.org) and partners’ staking platforms.
 
 ## How can I track my OBOL incentives?
 
@@ -61,7 +61,7 @@ No, you can stake on DVs and track your incentives through the partners listed o
 
 ## Can I withdraw my staked ETH at any time?
 
-There is no penalty for exiting your validator. You simply stop accruing incentives. The specific withdrawal policy will depend on the staking protocol used.
+There is no penalty for withdrawing stake or exiting your validator. You simply stop accruing incentives. The specific withdrawal policy will depend on the staking protocol used.
 
 ## What is the minimum amount of ETH needed to stake?
 
@@ -74,10 +74,6 @@ Since OBOL incentives are tied to staking rewards, the amount of incentives earn
 ## Will my incentives be public?
 
 Yes, incentives are public and can be viewed through the Obol API, if you have the address of the protocol.
-
-## How do I know my incentives are being counted accurately?
-
-OBOL incentives are tracked on a daily basis, based on validator staking rewards, and can be verified via our API.
 
 ## How can I increase my OBOL Programmatic Incentives?
 
