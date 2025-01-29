@@ -9,7 +9,7 @@ Our aim is to encourage continuous participation and sustained support for Ether
 
 ## What is the OBOL Programmatic Incentives Program?
 
-OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to stakers in the first year. 
+OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to stakers in the first year (2025). 
 
 Each week, 1/52 of 2.5% of the 500m OBOL Token supply will be distributed. Incentives *need to be claimed* either via the DV Launchpad, or via the UI frontend of participating partners. 
 
@@ -17,13 +17,14 @@ Each week, 1/52 of 2.5% of the 500m OBOL Token supply will be distributed. Incen
 
 You can participate in the OBOL Programmatic Incentives Program by:
 
-1. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/) or other hardware. This allows you to directly participate in the network's decentralisation efforts and earn OBOL incentives. Visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members. 
+1. **Staking through Staking Partners**: For the current list of staking partners, please visit [obol.org/stake](https://obol.org/stake).
 
-2. **Staking through Staking Partners**: For the current list of staking partners, please visit [obol.org/stake](https://obol.org/stake).
+2. **Running your own DV Cluster**: You can create and manage your own DV cluster using our [DV Launchpad](https://launchpad.obol.org), for example using a [DappNode](https://dappnode.com/) or other hardware. This allows you to directly participate in the network's decentralisation efforts and earn OBOL incentives. Visit our [Squad Staking](https://squadstaking.com) page for inspiration and to find squad members. 
 
-## Is stake from the previous Contributions program eligible?
 
-No, existing stake within protocols as of the snapshot date of January 13th is not eligible. Only new stake that was deposited after January 13th is eligible. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+## Is existing stake eligible?
+
+No, only new stake deposited after January 24th will accrue incentives. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
 
 ## How are incentives tracked?
 
