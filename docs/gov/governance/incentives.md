@@ -9,9 +9,9 @@ Our aim is to encourage continuous participation and sustained support for Ether
 
 ## What is the OBOL Programmatic Incentives Program?
 
-OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens will be rewarded to stakers in the first year (2025). 
+OBOL Programmatic Incentives offer an opportunity for every staker to earn access to governance and ownership in the Obol Collective, by staking ETH on distributed validators. 2.5% of the supply of OBOL Tokens, or 12.5m OBOL, will be rewarded to stakers in the first year (2025).
 
-Each week, 1/52 of 2.5% of the 500m OBOL Token supply will be distributed. Incentives *need to be claimed* either via the DV Launchpad, or via the UI frontend of participating partners. 
+Each week, 1/52 of the 12.5m OBOL will be distributed, or about 240,385 OBOL. Incentives *need to be claimed* either via the DV Launchpad, or via the UI frontend of participating partners. 
 
 ## How do I participate in the OBOL Programmatic Incentives Program?
 
@@ -25,6 +25,11 @@ You can participate in the OBOL Programmatic Incentives Program by:
 ## Is existing stake eligible?
 
 No, only new stake deposited after January 24th will accrue incentives. The exception is stake deposited directly on DVs, outside of staking protocols (via our DV Launchpad, for example). Such stake is eligible regardless of when it was deposited. 
+
+## How much OBOL will I receive per ETH staked on DVs?
+
+The amount of OBOL you receive per ETH staked depends on the total amount of ETH participating in the program. The 240,385 OBOL per week will be distributed evenly across all participating ETH, so your share of the total participating ETH will determine your share of the OBOL incentives.  
+
 
 ## How are incentives tracked?
 
