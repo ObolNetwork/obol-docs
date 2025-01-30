@@ -7,7 +7,7 @@ description: The RAF
 
 The Retroactive Funding (RAF) program by the Obol Collective aims to strengthen and promote the Obol Collective’s Decentralized Operator Ecosystem and its ability to scale decentralized infrastructure networks like Ethereum.
 
-Voting and funding distributions occur over a series of **Obol Retroactive Fund (RAF)** rounds, with OBOL token Delegates determining how funds from the RAF are allocated. The [first RAF round](blog.obol.org/raf1/) will open in February 2025, and will focus on public goods. 
+Voting and funding distributions occur over a series of **Obol Retroactive Fund (RAF)** rounds, with OBOL token Delegates determining how funds from the RAF are allocated. The [first RAF round](https://blog.obol.org/raf1) will open in February 2025, and will focus on public goods. 
 
 ## Overview of the Obol RAF:
 
