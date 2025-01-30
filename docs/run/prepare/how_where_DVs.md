@@ -20,7 +20,6 @@ description: How and where to run DVs
 ## Quickstart Guides 
 - [Run a DV alone](../start/quickstart_alone.mdx)
 - [Run a DV as a group](../start/quickstart_group.mdx)
-- [Run a DV using the SDK](../../adv/advanced/quickstart-sdk.mdx)
 
 ## CL+VC Combinations:
 
@@ -38,12 +37,3 @@ description: How and where to run DVs
 | Nimbus v24.7.0          | 🟡            | 🟡                 | ✅                | ✅              | ✅                                                             | Nimbus beacon nodes requires that you add the following flag to **charon run**: `charon run --feature-set-enable=json_requests` |
 | Prysm v5.0.3            |  🟡            | 🟡                 | ✅                | ✅              | ✅                                                             | Prysm `validator` needs a particular [pull request](https://github.com/prysmaticlabs/prysm/pull/13995) merged and released for aggregation duties to succeed.                                                                                                     |
 | Lodestar v1.20.2        | 🟡            | 🟡                 | ✅                | ✅              | 🔴                                                             |                                                                                                                  |
-
-[^lhagg]: sync committee and aggregator duties are not yet supported in a DV setup by Lighthouse, all other duties work as expected.
-
-
-### Note:
-  <ul>
-    <li>Blinded beacon block proposals are only supported from<a href="https://github.com/ObolNetwork/charon/blob/main/docs/configuration.md#cluster-config-change-log"> cluster lock</a> version v1.7 and <a href="https://github.com/ObolNetwork/charon/releases"> charon release</a> v0.17.0 onwards.</li>
-    <li>Prysm VC support is added from prysm version v5.0.0 onwards.</li>
-  </ul>
