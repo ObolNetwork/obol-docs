@@ -180,7 +180,7 @@ by the local validator client. This could indicate that the local validator clie
 is offline, or has connection problems with Charon, or has some other problem.
 See validator client logs for more details.
 
-### `Bug: partial signature database didn`t trigger partial signature exchange`
+### `Bug: partial signature database didn't trigger partial signature exchange`
 
 `msgParSigDBInternal` indicates a bug in the partial signature database
 as it is unexpected.
