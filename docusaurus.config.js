@@ -234,7 +234,7 @@ const config = {
             from: '/docs/sdk',
           },
           {
-            to: '/docs/next/adv/advanced/quickstart-builder-api',
+            to: 'next/docs/adv/advanced/quickstart-builder-api',
             from: '/docs/run/start/quickstart-builder-api',
           },
           //Redirect from multiple old paths to the new path
