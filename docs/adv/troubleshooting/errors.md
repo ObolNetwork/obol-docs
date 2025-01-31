@@ -73,8 +73,7 @@ Either your clock server time is off, or you are talking to a remote beacon clie
 ### My beacon node API is flaky with lots of errors and timeouts
 
 A good quality beacon node API is critical to validator performance. It is always advised to run your own beacon node to ensure low latencies to boost validator performance.
-Using 3rd party services like Infura`s beacon node API has significant disadvantages since the quality is often low. Requests often return 500s or timeout (Charon times out after 2s). This results in lots of warnings and errors and failed duties. Running a local beacon node is always preferred.
-We are not yet considering increasing the 2s timeout since that can have knock-on effects.
+Using 3rd party services like Infura's beacon node API has significant disadvantages since the quality is often low. Requests often return 500s or timeout. This results in lots of warnings and errors and failed duties. Running a local beacon node is always preferred.
 
 ## Charon Errors
 
