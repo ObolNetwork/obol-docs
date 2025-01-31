@@ -279,9 +279,9 @@ to. This can be generally be fixed with some of the following:
   - `sudo chmod -R 666 .charon`.
 
 ### I see a lot of errors after running `docker compose up`
-    It`s because both Geth and Lighthouse start syncing and so there`s
+    It`s because both Nethermind and Lighthouse start syncing and so there's
     connectivity issues among the containers. Simply let the containers run for
-    a while. You won`t observe frequent errors when Geth finishes syncing. You
+    a while. You won't observe frequent errors when Nethermind finishes syncing. You
     can also add a second beacon node endpoint for something like Infura by
     adding a comma separated API URL to the end of
     `CHARON_BEACON_NODE_ENDPOINTS` in the docker-compose.yml.
