@@ -307,16 +307,3 @@ relay/docker-compose.yml with your real public IP or DNS hostname.
 The relay you are trying to connect to your peers via is offline or
 unreachable.
 
-
-
-## Lodestar
-
-### ` warn: Potential next epoch attester duties reorg`
-
-Lodestar logs these warnings because Charon is not able to return proper
-`dependent_root` value in `getAttesterDuties` API
-response whenever Lodestar calls this API. This is because Charon uses
-`go-eth2-client` for all the beacon API calls and it doesn`t
-provide `dependent_root` value in responses. We have reported
-this to them [here](https://github.com/attestantio/go-eth2-client/issues/35).
-
