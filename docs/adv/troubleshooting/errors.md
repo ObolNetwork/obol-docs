@@ -167,7 +167,7 @@ signatures submitted by the cluster validator clients.
 in the fetcher component since it couldn`t fetch the prerequisite aggregated
 RANDAO. This indicates the associated randao duty failed.
 
-### `Consensus algorithm didn`t complete`
+### `Consensus algorithm didn't complete`
 
 `msgConsensus` indicates a duty failed in consensus component. This
 could indicate that insufficient honest peers participated in consensus or p2p
