@@ -5,7 +5,7 @@ description: Errors & Resolutions
 
 # Errors & Resolutions
 
-All operators should try to restart their nodes and should check if they are on the latest stable version before attempting anything other configuration change as we are still in beta and frequently releasing fixes. You can restart and update with the following commands:
+All operators should try to restart their nodes and should check if they are on the latest stable version before attempting anything other configuration change. You can restart and update with the following commands:
 
 ```shell
 docker compose down
