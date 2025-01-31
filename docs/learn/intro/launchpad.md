@@ -11,7 +11,7 @@ The vast majority of users that created validators to date have used the **[~~Et
 
 To facilitate the generation of distributed validator keys amongst remote users with high trust, the Obol Network developed and maintains a website that enables a group of users to come together and create these threshold keys: **The DV Launchpad**.
 
-![DV Launchpad Promo Image](/img/LaunchpadFrontpage.png)
+![DV Launchpad Promo Image](/img/LaunchpadFrontPage.png)
  
 ## Getting started
 
