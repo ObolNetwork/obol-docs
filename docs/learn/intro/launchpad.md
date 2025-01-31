@@ -12,7 +12,7 @@ The vast majority of users that created validators to date have used the **[~~Et
 To facilitate the generation of distributed validator keys amongst remote users with high trust, the Obol Network developed and maintains a website that enables a group of users to come together and create these threshold keys: **The DV Launchpad**.
 
 ![DV Launchpad Promo Image](/img/LaunchpadFrontpage.png)
-
+ 
 ## Getting started
 
 For more information on running Charon in a UI friendly way through the DV Launchpad, take a look at our [Quickstart Guides](../../run/start/quickstart_overview.md).
