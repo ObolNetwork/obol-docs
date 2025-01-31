@@ -35,9 +35,6 @@ An ENR looks something like this:
 
 Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 enr`. This prints the ENR on your screen.
 
-Please note that this ENR is not the same as the one generated when you created it for the first time. This is because the process of generating ENRs includes the current timestamp.
-
-
 ### What do I do if lose my `charon-enr-private-key`?
 
 For now, ENR rotation/replacement is not supported, it will be supported in a future release. Therefore, its advised to always keep a backup of your `charon-enr-private-key ` in a secure location (ex: cloud storage, USB Flash drive, etc.).
