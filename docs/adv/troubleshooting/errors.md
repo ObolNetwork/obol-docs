@@ -40,10 +40,8 @@ Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 enr`. Thi
 For now, ENR rotation/replacement is not supported, it will be supported in a future release. Therefore, its advised to always keep a backup of your `charon-enr-private-key ` in a secure location (ex: cloud storage, USB Flash drive, etc.).
 
 ### I can`t find the keys anywhere
-The `charon-enr-private-key` is generated inside a hidden folder `.charon`. To view it, run `ls -al` in your terminal. You can then copy the key to your `~/Downloads` folder for easy access by running `cp .charon/charon-enr-private-key ~/Downloads`. This step may be a bit different for Windows.
+The `charon-enr-private-key` is generated inside a hidden folder `.charon`. To view it, run `ls -al` in your terminal. This step may be a bit different for Windows.
 Else, if you are on macOS, press `Cmd + Shift + .` to view the `.charon` folder in the Finder application.
-
-
 ## Lighthouse
 
 
