@@ -19,7 +19,7 @@ Distributed validator technology removes some of the single points of failure in
 
 ![A Distributed Validator Node](/img/DVNode.png)
 
-A distributed validator node is the set of clients an operator needs to configure and run to fulfil the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relayer like [mev-boost](https://github.com/flashbots/mev-boost), or other monitoring or telemetry services on the same hardware to ensure optimal performance.
+A distributed validator node is the set of clients an operator needs to configure and run to fulfill the duties of a Distributed Validator Operator. An operator may also run redundant execution and consensus clients, an execution payload relay service like [mev-boost](https://github.com/flashbots/mev-boost), or other monitoring or telemetry services on the same hardware to ensure optimal performance.
 
 In the above example, the stack includes Geth, Lighthouse, Charon and Teku.
 
@@ -39,7 +39,7 @@ Examples of execution clients include:
 
 ![A Geth Client](/img/POSClient.png)
 
-A consensus client's duty is to run the proof of stake consensus layer of Ethereum, often referred to as the beacon chain.
+A consensus client is responsible for running Ethereum’s proof-of-stake consensus layer, also known as the beacon chain.
 
 Examples of Consensus clients include:
 
@@ -64,7 +64,7 @@ The only example of a distributed validator client built with a non-custodial mi
 
 ![A Lighthouse Client](/img/ValidatorBrick.png)
 
-A validator client is a piece of code that operates one or more Ethereum validators.
+A validator client is software that operates one or more Ethereum validators.
 
 Examples of validator clients include:
 
@@ -105,6 +105,6 @@ The number of nodes in a cluster that needs to be online and honest for their di
 
 ### Distributed Validator Key Generation Ceremony
 
-To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to never construct the full private key at any point, by having each operator in the distributed validator cluster participate in what is known as a Distributed Key Generation ceremony. 
+To achieve fault tolerance in a distributed validator, the individual private key shares need to be generated together. Rather than have a trusted dealer produce a private key, split it and distribute it, the preferred approach is to avoid constructing the full private key at any point by having each operator in the distributed validator cluster participate in a Distributed Key Generation (DKG) ceremony.
 
 A distributed validator key generation ceremony is a type of DKG ceremony. A ceremony produces signed validator deposit and exit data, along with all of the validator key shares and their associated metadata. Read more about these ceremonies [here](../charon/dkg). 
