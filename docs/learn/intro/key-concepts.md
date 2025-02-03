@@ -25,7 +25,7 @@ In the above example, the stack includes Geth, Lighthouse, Charon and Teku.
 
 ### Execution Client
 
-![A Geth Client](/img/POWNodeV2.png)
+![A Geth Client](/img/ExecutionClientNethermind.png)
 
 An execution client (formerly known as an Eth1 client) specializes in running the EVM and managing the transaction pool for the Ethereum network. These clients provide execution payloads to consensus clients for inclusion into blocks.
 
@@ -37,7 +37,7 @@ Examples of execution clients include:
 
 ### Consensus Client
 
-![A Geth Client](/img/POSClient.png)
+![A Geth Client](/img/ConsensusClientLighthouse.png)
 
 A consensus client's duty is to run the proof of stake consensus layer of Ethereum, often referred to as the beacon chain.
 
@@ -51,7 +51,7 @@ Examples of Consensus clients include:
 
 ### Distributed Validator Client
 
-![A Charon Client](/img/CharonBrick.png)
+![A Charon Client](/img/DVClientCharon.png)
 
 A distributed validator client intercepts the validator client ↔ consensus client communication flow over the [standardised REST API](https://ethereum.github.io/beacon-APIs/#/ValidatorRequiredApi), and focuses on two core duties:
 
@@ -62,16 +62,17 @@ The only example of a distributed validator client built with a non-custodial mi
 
 ### Validator Client
 
-![A Lighthouse Client](/img/ValidatorBrick.png)
+![A Lighthouse Client](/img/ValidatorClientLodestar.png)
 
 A validator client is a piece of code that operates one or more Ethereum validators.
 
 Examples of validator clients include:
 
-- [Vouch](https://www.attestant.io/posts/introducing-vouch/)
 - [Prysm](https://docs.prylabs.network/docs/how-prysm-works/prysm-validator-client/)
+- [Lodestar](https://github.com/ChainSafe/lodestar)
 - [Teku](https://docs.teku.consensys.net/en/stable/)
 - [Lighthouse](https://lighthouse-book.sigmaprime.io/api-vc.html)
+- [Vouch](https://www.attestant.io/posts/introducing-vouch/)
 
 ## Distributed Validator Cluster
 
