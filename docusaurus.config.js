@@ -233,6 +233,10 @@ const config = {
             to: '/sdk',
             from: '/docs/sdk',
           },
+          {
+            to: 'next/docs/adv/advanced/quickstart-builder-api',
+            from: '/docs/run/start/quickstart-builder-api',
+          },
           //Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/newDoc2',

@@ -22,16 +22,5 @@ Use any of the following tools to deposit. Please use the third-party tools at y
 
 * <a href="https://launchpad.obol.org/deposit/advisories/" target="_blank">Obol Distributed Validator Launchpad</a>
 * <a href="https://launchpad.ethereum.org/" target="_blank">ethereum.org Staking Launchpad</a>
-* From a <a href="https://safe.global/">SAFE</a> Multisig:<br/>
-(Repeat these steps for every validator to deposit in your cluster)
-  * From the SAFE UI, click on <code>New Transaction</code> then <code>Transaction Builder</code> to create a new custom transaction
-  * Enter the beacon chain contract for Deposit on mainnet - you can find it <a href="https://ethereum.org/en/staking/deposit-contract/">here</a>
-  * Fill the transaction information
-  * Set amount to <code>32</code> in ETH
-  * Use your <code>deposit-data.json</code> to fill the required data : <code>pubkey</code>,<code>withdrawal credentials</code>,<code>signature</code>,<code>deposit_data_root</code>. Make sure to prefix the input with <code>0x</code> to format them in bytes
-  * Click on <code>Add transaction</code>
-  * Click on <code>Create Batch</code>
-  * Click on <code>Send Batch</code>, you can click on <code>Simulate</code> to check if the transaction will execute successfully
-  * Get the minimum threshold of signatures from the other addresses and execute the custom transaction
 
 The activation process can take a minimum of 16 hours, with the maximum time to activation being dictated by the length of the activation queue, which can be weeks.

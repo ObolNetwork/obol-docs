@@ -21,12 +21,6 @@ In an Obol DV cluster, nodes use LibP2P to communicate directly with each other,
 
 ![Cluster Independence](/img/ClusterIndependence.png)
 
-## Cluster independance: No reliance on a common P2P gossip network
-
-In an Obol DV cluster, nodes use LibP2P to communicate directly with each other, and communications are end-to-end encrypted with TSL. This direct communication of nodes within a cluster improves latency, and makes cluster communications harder to attack with a denial of service (DOS) attack. It also allows an Obol DV cluster to be run within a private network. This may allow cost savings on data egress costs, for operators running cluster nodes across multiple locations of a single cloud provider, for example.
-
-![Gossip Network](/img/GossipNetwork.png)
-
 ## Works with existing validator clients and PKI
 
 We built Obol’s DV implementation as a secure and trust-minimised middleware architecture. Our middleware client, Charon, doesn’t replace anything in the client stack, instead it sits between the consensus and validator clients. Node operators integrating the Charon DVT middleware into their stack can continue to use the same clients and private key infrastructure as before, albeit with a different key generation method. 

@@ -134,6 +134,16 @@ A cluster is a group of nodes that act together as one or several validators whi
 
 It is possible to migrate your Charon node to another machine running the same config by moving the `.charon` folder with its contents to your new machine. Make sure the EL and CL on the new machine are synced before proceeding to the move to minimize downtime.
 
+### What is an ENR?
+
+An ENR is shorthand for an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778). It is a way to represent a node on a public network, with a reliable mechanism to update its information.
+
+At Obol we use ENRs to identify Charon nodes to one another such that they can form clusters with the right Charon nodes and not impostors. ENRs have private keys they use to sign updates to the [data contained in their ENR](https://enr-viewer.com/). This private key is by default found at `.charon/charon-enr-private-key`, and should be kept secure, and not checked into version control.
+
+An ENR looks something like this:
+`enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGDqEcoQkeJ98Pw7GaGAYFI7eoegmlkgnY0gmlwhCKNyGGJc2VjcDI1NmsxoQI6SQlzw3WGZ_VxFHLhawQFhCK8Aw7Z0zq8IABksuJEJIN0Y3CCPoODdWRwgj6E`
+
+
 ## Distributed Key Generation
 
 ### What are the min and max numbers of operators for a Distributed Validator?
@@ -186,4 +196,4 @@ Another aspect to be aware of is how the splitting of principal from rewards wor
 
 You can check if the containers on your node are outputting errors by running `docker compose logs` on a machine with a running cluster.
 
-Diagnose some common errors and view their resolutions [here](../../adv/troubleshooting/errors.mdx).
+Diagnose some common errors and view their resolutions [here](../../adv/troubleshooting/errors.md).
