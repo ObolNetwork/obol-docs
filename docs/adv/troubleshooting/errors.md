@@ -20,15 +20,6 @@ docker compose logs
 
 ## ENRs & Keys
 
-### What is an ENR?
-
-An ENR is shorthand for an [Ethereum Node Record](https://eips.ethereum.org/EIPS/eip-778). It is a way to represent a node on a public network, with a reliable mechanism to update its information.
-
-At Obol we use ENRs to identify Charon nodes to one another such that they can form clusters with the right Charon nodes and not impostors. ENRs have private keys they use to sign updates to the [data contained in their ENR](https://enr-viewer.com/). This private key is by default found at `.charon/charon-enr-private-key`, and should be kept secure, and not checked into version control.
-
-An ENR looks something like this:
-`enr:-JG4QAgAOXjGFcTIkXBO30aUMzg2YSo1CYV0OH8Sf2s7zA2kFjVC9ZQ_jZZItdE8gA-tUXW-rWGDqEcoQkeJ98Pw7GaGAYFI7eoegmlkgnY0gmlwhCKNyGGJc2VjcDI1NmsxoQI6SQlzw3WGZ_VxFHLhawQFhCK8Aw7Z0zq8IABksuJEJIN0Y3CCPoODdWRwgj6E`
-
 ### How do I get my ENR if I want to generate it again?
 
 `cd` to the directory where your private keys are located (ex: `cd /path/to/charon/enr/private/key`)
@@ -42,6 +33,8 @@ For now, ENR rotation/replacement is not supported, it will be supported in a fu
 ### I can`t find the keys anywhere
 The `charon-enr-private-key` is generated inside a hidden folder `.charon`. To view it, run `ls -al` in your terminal. This step may be a bit different for Windows.
 Else, if you are on macOS, press `Cmd + Shift + .` to view the `.charon` folder in the Finder application.
+
+
 ## Lighthouse
 
 
@@ -230,17 +223,6 @@ Alice`s Charon node should only be connected to Alice`s VC.
 Check the partial public key shares of each node inside
 cluster-lock.json and see that matches with the public key inside
 `node(num)/validator_keys/keystore-0.json`.
-
-
-## Teku
-
-### Teku `keystore file` error
-
-Teku sometimes logs an error which looks like
-`Keystore file /opt/charon/validator_keys/keystore-0.json.lock already in use `. 
-This can be solved by deleting the file(s) ending with `.lock` in the folder `.charon/validator_keys`. It is caused by an unsafe shut
-down of Teku (usually by double pressing `Ctrl+C` to shutdown containers faster).
-
 
 ## Grafana
 
