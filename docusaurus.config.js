@@ -138,7 +138,7 @@ const config = {
             from: '/docs/faq/client_configurations',
           },
           {
-            to: '/gov/governance/contributions',
+            to: '/gov/governance/incentives',
             from: '/docs/faq/contributions',
           },
           {
@@ -232,6 +232,10 @@ const config = {
           {
             to: '/sdk',
             from: '/docs/sdk',
+          },
+          {
+            to: '/gov/governance/incentives',
+            from: '/gov/governance/contributions',
           },
           //Redirect from multiple old paths to the new path
           // {
