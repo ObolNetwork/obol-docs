@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTT2S469C4"></script>
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-DTT2S469C4",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.8db7a3f7.css">
-<script src="/assets/js/runtime~main.aaa7eaeb.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.821b7fd0.js" defer="defer"></script>
 <script src="/assets/js/main.8d55accb.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard" data-theme="light">
@@ -16,7 +16,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-is-charon">What is Charon?<a href="#what-is-charon" class="hash-link" aria-label="Direct link to What is Charon?" title="Direct link to What is Charon?">​</a></h2>
 <p>Charon is a GoLang-based, HTTP middleware built by Obol to enable any existing Ethereum validator clients to operate together as part of a distributed validator.</p>
 <p>Charon sits as a middleware between a normal validating client and its connected beacon node, intercepting and proxying API traffic. Multiple Charon clients are configured to communicate together to come to consensus on validator duties and behave as a single unified proof-of-stake validator together. The nodes form a cluster that is <em>byzantine-fault tolerant</em> and continues to progress assuming a supermajority of working/honest nodes is met.</p>
-<p><img decoding="async" loading="lazy" alt="Charon Cluster" src="/assets/images/DVCluster-d161355b3dfd1808a86148c8fe28271e.png" width="1200" height="630" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="Charon Cluster" src="/assets/images/DVCluster-24b527a11b75042887277ca0a937402e.png" width="1200" height="578" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="charon-architecture">Charon Architecture<a href="#charon-architecture" class="hash-link" aria-label="Direct link to Charon Architecture" title="Direct link to Charon Architecture">​</a></h2>
 <p>Charon is an Ethereum proof of stake distributed validator (DV) client. Like any validator client, its main purpose is to perform validation duties for the Beacon Chain, primarily attestations and block proposals. The beacon client handles a lot of the heavy lifting, leaving the validator client to focus on fetching duty data, signing that data, and submitting it back to the beacon client.</p>
 <p>Charon is designed as a generic event-driven workflow with different components coordinating to perform validation duties. All duties follow the same flow, the only difference being the signed data. The workflow can be divided into phases consisting of one or more components:</p>
