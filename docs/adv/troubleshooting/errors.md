@@ -30,7 +30,7 @@ Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.2.0 enr`. Thi
 
 For now, ENR rotation/replacement is not supported, it will be supported in a future release. Therefore, its advised to always keep a backup of your `charon-enr-private-key ` in a secure location (ex: cloud storage, USB Flash drive, etc.).
 
-### I can`t find the keys anywhere
+### I can't find the keys anywhere
 The `charon-enr-private-key` is generated inside a hidden folder `.charon`. To view it, run `ls -al` in your terminal. This step may be a bit different for Windows.
 Else, if you are on macOS, press `Cmd + Shift + .` to view the `.charon` folder in the Finder application.
 
@@ -105,7 +105,7 @@ term fix for this.
 ### `Error opening relay circuit: NO_RESERVATION`
 
 Error opening relay circuit NO_RESERVATION (204)` indicates the peer
-isn`t connected to the relay, so the the Charon client cannot connect to the
+isn't connected to the relay, so the the Charon client cannot connect to the
 peer via the relay. That might be because the peer is offline or the peer is
 configured to connect to a different relay.
 
@@ -121,14 +121,14 @@ a problem with the upstream beacon node.
 ### `Couldnt aggregate attestation due to failed attester duty`
 
 `msgFetcherAggregatorNoAttData` indicates an attestation aggregation
-duty failed in the fetcher component since it couldn`t fetch the prerequisite
+duty failed in the fetcher component since it couldn't fetch the prerequisite
 attestation data. This indicates the associated attestation duty failed to obtain
 a cluster agreed upon value.
 
 ### `Couldnt aggregate attestation due to insufficient partial v2 committee subscriptions`
 
 `msgFetcherAggregatorZeroPrepares` indicates an attestation aggregation
-duty failed in the fetcher component since it couldn`t fetch the prerequisite
+duty failed in the fetcher component since it couldn't fetch the prerequisite
 aggregated v2 committee subscription. This indicates the associated prepare aggregation
 duty failed due to no partial v2 committee subscription submitted by the cluster
 validator clients.
@@ -136,28 +136,28 @@ validator clients.
 ### `Couldnt aggregate attestation due to failed prepare aggregator duty`
 
 `msgFetcherAggregatorFailedPrepare` indicates an attestation aggregation
-duty failed in the fetcher component since it couldn`t fetch the prerequisite
+duty failed in the fetcher component since it couldn't fetch the prerequisite
 aggregated v2 committee subscription. This indicates the associated prepare aggregation
 duty failed.
 
 ### `Couldnt propose block due to insufficient partial randao signatures`
 
 `msgFetcherProposerFewRandaos` indicates a block proposer duty failed
-in the fetcher component since it couldn`t fetch the prerequisite aggregated
+in the fetcher component since it couldn't fetch the prerequisite aggregated
 RANDAO. This indicates the associated randao duty failed due to insufficient
 partial randao signatures submitted by the cluster validator clients.
 
 ### `Couldnt propose block due to zero partial randao signatures`
 
 `msgFetcherProposerZeroRandaos` indicates a block proposer duty failed
-in the fetcher component since it couldn`t fetch the prerequisite aggregated
+in the fetcher component since it couldn't fetch the prerequisite aggregated
 RANDAO. This indicates the associated randao duty failed due to no partial randao
 signatures submitted by the cluster validator clients.
 
 ### `Couldnt propose block due to failed randao duty` 
 
 `msgFetcherProposerZeroRandaos` indicates a block proposer duty failed
-in the fetcher component since it couldn`t fetch the prerequisite aggregated
+in the fetcher component since it couldn't fetch the prerequisite aggregated
 RANDAO. This indicates the associated randao duty failed.
 
 ### `Consensus algorithm didn't complete`
@@ -201,8 +201,8 @@ a bug in Charon as it is unexpected.
 When you turn on the `--private-key-file-lock` option in Charon, it
 checks for a special file called the private key lock file. This file has the
 same name as the ENR private key file but with a `.lock` extension.
-If the private key lock file exists and is not older than 5 seconds, Charon won`t
-run. It doesn`t allow running multiple Charon instances with the same ENR private
+If the private key lock file exists and is not older than 5 seconds, Charon won't
+run. It doesn't allow running multiple Charon instances with the same ENR private
 key. If the private key lock file has a timestamp older than 5 seconds, Charon
 will replace it and continue with its work. If you`re sure that no other Charon
 instances are running, you can delete the private key lock file.
@@ -210,7 +210,7 @@ instances are running, you can delete the private key lock file.
 ### `Validator api 5xx response: mismatching validator client key share index, Mth key share submitted to Nth charon peer`
 
 The issue revolves around an invalid setup or deployment, where the
-validators private key shares don`t match the ENR private key. There may
+validators private key shares don't match the ENR private key. There may
 have been a mix-up during deployment, leading to a mismatching validator
 client key share index.
 
@@ -228,7 +228,7 @@ cluster-lock.json and see that matches with the public key inside
 
 ### How to fix the Grafana dashboard?
 
-Sometimes, Grafana dashboard doesn`t load any data first time around.
+Sometimes, Grafana dashboard doesn't load any data first time around.
 You can solve this by following the steps below:
 - Click the Wheel Icon > Datasources.
 - Click prometheus.
@@ -255,9 +255,9 @@ on Linux and WSL for Windows systems. In the interest of security, the
 charon docker image runs as a non-root user, and this user often does not
 have the permissions to write in the directory you have checked out the code
 to. This can be generally be fixed with some of the following:
-- Running docker commands with `sudo`, if you haven`t [setup docker to be run as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
+- Running docker commands with `sudo`, if you haven't [setup docker to be run as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/)
 - Changing the permissions of the `.charon` folder with the commands:
-  - `mkdir .charon` (if it doesn`t already exist);
+  - `mkdir .charon` (if it doesn't already exist);
   - `sudo chmod -R 666 .charon`.
 
 ### I see a lot of errors after running `docker compose up`
@@ -273,7 +273,7 @@ to. This can be generally be fixed with some of the following:
 
 `Error response from daemon: error looking up logging plugin loki: plugin "loki" not found`.
 
-Then it probably means that the Loki docker driver isn`t installed. In that case, run the following command to install loki:
+Then it probably means that the Loki docker driver isn't installed. In that case, run the following command to install loki:
 
 `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions`.
 
