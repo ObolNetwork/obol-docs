@@ -5,7 +5,7 @@ description: Earning Obol Contributions
 
 # Obol Contributions Program
 
-_Our aim is to encourage continuous participation and sustained support for Ethereum’s consensus. The Obol Contributions program is therefore designed to be fair and transparent, without arbitrary gimmicks promoting short-term interest at the cost of long-term participation. Obol Contributions are meant to acknowledge all of the actors in the staking stack for their contribution to Ethereum’s decentralisation. test_
+_Our aim is to encourage continuous participation and sustained support for Ethereum’s consensus. The Obol Contributions program is therefore designed to be fair and transparent, without arbitrary gimmicks promoting short-term interest at the cost of long-term participation. Obol Contributions are meant to acknowledge all of the actors in the staking stack for their contribution to Ethereum’s decentralisation. test test_
 
 _Each Obol DV contributes 1% of the total staking reward it earns to the Obol Collective. This economic stream is the basis for recognized Contributions. By basing Contributions on staking rewards accumulated by validators (pubkeys), performance is factored in (i.e. effectiveness, uptime, etc.)_
 
