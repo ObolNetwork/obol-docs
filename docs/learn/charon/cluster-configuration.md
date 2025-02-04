@@ -36,27 +36,41 @@ The schema of the `cluster-definition.json` is defined as:
     "address": "0x123..abfc", //ETH1 address of the creator
     "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
   },
-  "version": "v1.2.0", // Schema version
-  "num_validators": 2, // Number of distributed validators to be created in cluster-lock.json
+  "version": "v1.8", // Schema version
+  "num_validators": 1, // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3, // Optional threshold required for signature reconstruction
   "dkg_algorithm": "default", // Optional DKG algorithm for key generation
-  "fork_version": "0x00112233", // Chain/Network identifier
+  "fork_version": "0x01017000", // Chain/Network identifier
   "config_hash": "0xabcfde...acbfed", // Hash of the static (non-changing) fields
-  "timestamp": "2022-01-01T12:00:00+00:00", // Creation timestamp
+  "timestamp": "2025-01-01T12:00:00+00:00", // Creation timestamp
     "operators": [
     {
       "address": "0x123..abfc", // ETH1 address of the operator
       "enr": "enr://abcdef...12345", // Charon node ENR
       "enr_signature": "0x123654...abcedf", // EIP712 Signature of ENR by ETH1 address priv key
       "config_signature": "0x123456...abcdef" // EIP712 Signature of config_hash by ETH1 address priv key
+    },
+    {
+      "address": "0x123..abfc", 
+      "enr": "enr://abcdef...12345", 
+      "enr_signature": "0x123654...abcedf", 
+      "config_signature": "0x123456...abcdef" 
+    },
+    {
+      "address": "0x123..abfc", 
+      "enr": "enr://abcdef...12345", 
+      "enr_signature": "0x123654...abcedf", 
+      "config_signature": "0x123456...abcdef" 
+    },
+    {
+      "address": "0x123..abfc", 
+      "enr": "enr://abcdef...12345", 
+      "enr_signature": "0x123654...abcedf", 
+      "config_signature": "0x123456...abcdef" 
     }
   ],
   "definition_hash": "0xabcdef...abcedef", // Final hash of all fields
   "validators": [
-    {
-      "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address of validator
-      "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
-    },
     {
       "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address of validator
       "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
