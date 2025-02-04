@@ -31,23 +31,27 @@ The schema of the `cluster-definition.json` is defined as:
 ```json
 {
   "name": "best cluster", // Optional cosmetic identifier
+  "uuid": "1234-abcdef-1234-abcdef", // Random unique identifier.
   "creator": {
     "address": "0x123..abfc", //ETH1 address of the creator
     "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
   },
-  "operators": [
+  "version": "v1.2.0", // Schema version
+  "num_validators": 2, // Number of distributed validators to be created in cluster-lock.json
+  "threshold": 3, // Optional threshold required for signature reconstruction
+  "dkg_algorithm": "default", // Optional DKG algorithm for key generation
+  "fork_version": "0x00112233", // Chain/Network identifier
+  "config_hash": "0xabcfde...acbfed", // Hash of the static (non-changing) fields
+  "timestamp": "2022-01-01T12:00:00+00:00", // Creation timestamp
+    "operators": [
     {
       "address": "0x123..abfc", // ETH1 address of the operator
       "enr": "enr://abcdef...12345", // Charon node ENR
-      "config_signature": "0x123456...abcdef", // EIP712 Signature of config_hash by ETH1 address priv key
-      "enr_signature": "0x123654...abcedf" // EIP712 Signature of ENR by ETH1 address priv key
+      "enr_signature": "0x123654...abcedf", // EIP712 Signature of ENR by ETH1 address priv key
+      "config_signature": "0x123456...abcdef" // EIP712 Signature of config_hash by ETH1 address priv key
     }
   ],
-  "uuid": "1234-abcdef-1234-abcdef", // Random unique identifier.
-  "version": "v1.2.0", // Schema version
-  "timestamp": "2022-01-01T12:00:00+00:00", // Creation timestamp
-  "num_validators": 2, // Number of distributed validators to be created in cluster-lock.json
-  "threshold": 3, // Optional threshold required for signature reconstruction
+  "definition_hash": "0xabcdef...abcedef", // Final hash of all fields
   "validators": [
     {
       "fee_recipient_address": "0x123..abfc", // ETH1 fee_recipient address of validator
@@ -58,10 +62,9 @@ The schema of the `cluster-definition.json` is defined as:
       "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
     }
   ],
-  "dkg_algorithm": "foo_dkg_v1", // Optional DKG algorithm for key generation
-  "fork_version": "0x00112233", // Chain/Network identifier
-  "config_hash": "0xabcfde...acbfed", // Hash of the static (non-changing) fields
-  "definition_hash": "0xabcdef...abcedef" // Final hash of all fields
+  "deposit_amounts": [
+    "32000000000"
+  ]
 }
 ```
 
@@ -88,11 +91,34 @@ The `cluster-lock.json` has the following schema:
     {
       "distributed_public_key":  "0x123..abfc",             // DV root pubkey
       "public_shares": [ "abc...fed", "cfd...bfe"],         // Length equal to cluster_definition.operators
-      "fee_recipient": "0x123..abfc"                        // Defaults to withdrawal address if not set, can be edited manually
+      "partial_deposit_data": [
+        {
+          "pubkey": "0x123..abfc",
+          "withdrawal_credentials": "0x123..abfc",
+          "amount": "32000000000",
+          "signature": "0x123456...abcdef",
+          "deposit_data_root": "0x123456...abcdef"
+        }
+      ],
+      "builder_registration": {
+        "message": {
+          "fee_recipient": "0x123456...abcdef",
+          "gas_limit": 30000000,
+          "timestamp": 1696000704,
+          "pubkey": "0x123456...abcdef"
+        },
+        "signature": "0x123456...abcdef"
+        }
     }
   ],
+  "signature_aggregate": "abcdef...abcedef",                 // BLS aggregate signature of the lock hash signed by each DV pubkey.
   "lock_hash": "abcdef...abcedef",                          // Config_hash plus distributed_validators
-  "signature_aggregate": "abcdef...abcedef"                 // BLS aggregate signature of the lock hash signed by each DV pubkey.
+  "node_signatures": [
+    "0x123456...abcdef",
+    "0x123456...abcdef",
+    "0x123456...abcdef",
+    "0x123456...abcdef"
+  ]
 }
 ```
 
