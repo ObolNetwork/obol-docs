@@ -126,7 +126,7 @@ The `cluster-lock.json` has the following schema:
     }
   ],
   "signature_aggregate": "abcdef...abcedef",                 // BLS aggregate signature of the lock hash signed by each DV pubkey.
-  "lock_hash": "abcdef...abcedef",                          // Config_hash plus distributed_validators
+  "lock_hash": "abcdef...abcedef",                          // definition_hash plus distributed_validators
   "node_signatures": [
     "0x123456...abcdef",
     "0x123456...abcdef",
