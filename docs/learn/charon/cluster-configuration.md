@@ -36,7 +36,7 @@ The schema of the `cluster-definition.json` is defined as:
     "address": "0x123..abfc", //ETH1 address of the creator
     "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
   },
-  "version": "v1.8", // Schema version
+  "version": "v1.8.0", // Schema version
   "num_validators": 1, // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3, // Optional threshold required for signature reconstruction
   "dkg_algorithm": "default", // Optional DKG algorithm for key generation
