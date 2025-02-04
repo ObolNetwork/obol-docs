@@ -19,51 +19,48 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Generate Key Shares",
-    image: "/img/noun_Key.png",
-    alt: "Image copyright Turkkub, courtesy of the Noun Project",
-    description: (
-      <>
-        The <Link to="https://launchpad.obol.org/">Distributed Validator Launchpad</Link> is
-        an interface to enable distributed key generation for Distributed
-        Validators.
-      </>
-    ),
-    link: "/next/learn/intro/launchpad",
-  },
-  {
-    title: "Deploy Distributed Validators",
+    title: "Learn",
     image: "/img/CharonLogo.svg",
     alt: "Charon Distributed Validator Client Logomark",
     description: (
       <>
-        <Link to="/next/learn/charon/intro">Charon</Link> is a Distributed Validator Client for running Ethereum validators in a fault tolerant manner.
+        Understand how Charon powers Obol distributed validators.
       </>
     ),
-    link: "/next/learn/charon/intro",
+    link: "/learn/charon/intro",
   },
   {
-    title: "Build on the Obol Network",
+    title: "Run a DV",
     image: "/img/noun_ethereum.png",
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        <Link to="/next/learn/intro/obol-splits">Obol Splits</Link> are smart contracts for the distribution of rewards from Distributed Validators.
+        Jump straight into our quickstart guides.
       </>
     ),
-    link: "/next/learn/intro/obol-splits",
+    link: "/run/start/quickstart_overview",
   },
   {
-    title: "Earn Contributions",
+    title: "Advanced Guides",
+    image: "/img/noun_laboratory.png",
+    alt: "Image courtesy of the Noun Project",
+    description: (
+      <>
+        Use the SDK, migrate existing validators, and more. 
+      </>
+    ),
+    link: "/adv/advanced/quickstart-sdk",
+  },
+  {
+    title: "Community & Governance",
     image: "/img/noun_gardening.png",
     alt: "Image courtesy of the Noun Project",
     description: (
       <>
-        Run Distributed Validators on mainnet and take part in Obol's{" "}
-        <Link to="https://obol.org/contributions">Contributions Program.</Link>
+        Info on Obol’s governance, RAF, token, Techne Credential, and Staking Mastery program.
       </>
     ),
-    link: "/next/run/start/quickstart_overview",
+    link: "/gov/governance/collective",
   },
 ];
 
