@@ -13,7 +13,7 @@ The official token contract address of the OBOL Token is [0x0B010000b7624eb9B3Df
 
 ### Token Supply
 
-The total supply is capped at 500 million tokens. The full supply is not immediately circulating and tokens will unlock over the coming months and years. Please see the [airdrop announcement](http://blog.obol.org/airdrop/) for more details. 
+The total supply is 500 million tokens. The full supply is not immediately circulating and tokens will unlock over the coming months and years. Please see the [airdrop announcement](http://blog.obol.org/airdrop/) for more details. 
 
 ### Token Utility
 
