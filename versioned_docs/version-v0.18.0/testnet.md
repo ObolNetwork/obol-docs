@@ -5,7 +5,7 @@ description: Obol testnets roadmap
 
 # Testnets
 
-Over the coming quarters, Obol Labs has and will continue to coordinate and host a number of progressively larger testnets to help harden the Charon client and iterate on the key generation tooling.
+Over the coming quarters, Obol Labs has been and will continue to coordinate and host a number of progressively larger testnets to help harden the Charon client and iterate on the key generation tooling.
 
 The following is a breakdown of the intended testnet roadmap, the features that are to be completed by each testnet, and their target start date and duration.
 
@@ -42,7 +42,7 @@ The second devnet aimed to have a number of trusted operators test out our earli
 
 The aim was for groups of 4 testers to complete a group onboarding tutorial, using `docker compose` to spin up 4 Charon clients and 4 different validator clients (lighthouse, teku, lodestar and vouch), each on their own machine at each operator's home or their place of choosing, running at least a kiln consensus client. 
 
-This devnet was the first time `charon dkg` was tested with users. A core focus of this devnet was to collect network performance data.
+This devnet was the first time `charon dkg` was tested with users. A primary focus of this devnet was to collect network performance data.
 
 This was also the first time Charon was run in variable, non-virtual networks (i.e. the real internet).
 

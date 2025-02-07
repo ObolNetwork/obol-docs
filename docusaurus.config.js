@@ -363,8 +363,7 @@ const config = {
         },
         items: [
           {
-            type: "doc",
-            docId: "learn/intro/obol-collective",
+            type: "docsVersionDropdown",
             position: "left",
             label: "Docs",
           },

@@ -32,7 +32,7 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
-This repo is configured with Github Actions to deploy the built site to github pages. Committing or merging to master will update the production documentation site.
+This repo is configured with GitHub Actions to deploy the built site to GitHub pages. Committing or merging to master will update the production documentation site.
 
 ### Versioning
 

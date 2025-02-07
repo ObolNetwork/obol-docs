@@ -11,12 +11,12 @@ Obol develops and maintains a suite of smart contracts for use with Distributed 
 - Split contracts: Contracts to split ether across multiple entities. Developed by [Splits.org](https://splits.org)
 - Split controllers: Contracts that can mutate a splitter's configuration.
 
-Two key goals of validator reward management are:
+The two key goals of validator reward management are:
 
-1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage the _reward_ they accrue for the principal provider rather than a percentage of _principal+reward_.
+1. To be able to differentiate reward ether from principal ether such that node operators can be paid a percentage of the _reward_ they accrue for the principal provider rather than a percentage of _principal+reward_.
 2. To be able to withdraw the rewards in an ongoing manner without exiting the validator.
 
-Without access to the consensus layer state in the EVM to check a validator's status or balance, and due to the incoming ether being from an irregular state transition, neither of these requirements are easily satisfiable.
+Without access to the consensus layer state in the EVM to check a validator's status or balance, and due to incoming ether originating from an irregular state transition, neither of these requirements are easily satisfiable.
 
 The following sections outline different contracts that can be composed to form a solution for one or both goals.
 

@@ -1,6 +1,6 @@
 # Documentation standards
 
-This section outlines the formatting standards presented within this documentation. In order to maintain continuity and quality, all pull requests must best conform to the specifics below.
+This section outlines the formatting standards presented within this documentation. In order to maintain continuity and quality, all pull requests must conform to the specifics below.
 
 ## Content types
 
@@ -26,7 +26,7 @@ If a walkthrough is converted into a video, that video should be no longer than 
 
 #### Walkthrough structure
 
-Walkthroughs are split into three major sections:
+Walkthroughs are split into four major sections:
 
 1. Context to the topics covered.
 2. What we're about to do.
@@ -82,7 +82,7 @@ Follow each list of three or more items with a comma `,`:
 
 ### Acronyms
 
-If you have to use an acronym, spell the full phrase first and include the acronym in parentheses `()` the first time it is used in each document. Exception: This generally isn't necessary for commonly-encountered acronyms like _EVM_, unless writing for a stand-alone article that may not be presented alongside project documentation.
+If you have to use an acronym, spell the full phrase first and include the acronym in parentheses `()` the first time it is used in each document. Exception: This is generally unnecessary for common acronyms like _EVM_, unless writing for a stand-alone article that may not be presented alongside project documentation.
 
 > Virtual Machine (VM), Decentralized Web (DWeb).
 
