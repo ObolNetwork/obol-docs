@@ -381,6 +381,10 @@ const config = {
           },
           { to: "https://blog.obol.tech", label: "Blog", position: "left" },
           {
+          type: 'localeDropdown',
+          position: 'right',
+          },
+          {
             href: "https://github.com/obolnetwork/obol-docs",
             label: "GitHub",
             position: "right",
@@ -475,6 +479,15 @@ const config = {
         { property: "og:image:height", content: "630" },
       ],
     }),
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en-GB',
+      },
+    },
+  },
 };
 
 module.exports = config;
