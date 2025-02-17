@@ -14,7 +14,7 @@ jobs:
     # Steps
     steps:
       - name: Add Issue To Project
-        uses: actions/add-to-project@v0.3.0
+        uses: actions/add-to-project@v0.6.1
         with:
           # URL of the project to add issues to
           project-url: https://github.com/orgs/ObolNetwork/projects/7
