@@ -90,6 +90,7 @@ Usage:
 
 Flags:
       --cluster-dir string                The target folder to create the cluster in. (default "./")
+      --compounding                       Enable compounding rewards for validators by using 0x02 withdrawal credentials.
       --definition-file string            Optional path to a cluster definition file or an HTTP URL. This overrides all other configuration flags.
       --deposit-amounts ints              List of partial deposit amounts (integers) in ETH. Values must sum up to exactly 32ETH.
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
@@ -109,6 +110,7 @@ Flags:
       --testnet-fork-version string       Genesis fork version of the custom test network (in hex).
       --testnet-genesis-timestamp int     Genesis timestamp of the custom test network.
       --testnet-name string               Name of the custom test network.
+      --target-gas-limit uint             Preferred target gas limit for transactions. (default 36000000)
       --threshold int                     Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
       --withdrawal-addresses strings      Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
 ```
@@ -125,6 +127,7 @@ Usage:
   charon create dkg [flags]
 
 Flags:
+      --compounding                       Enable compounding rewards for validators by using 0x02 withdrawal credentials.
       --deposit-amounts ints              List of partial deposit amounts (integers) in ETH. Values must sum up to exactly 32ETH.
       --dkg-algorithm string              DKG algorithm to use; default, frost (default "default")
       --fee-recipient-addresses strings   Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
@@ -134,6 +137,7 @@ Flags:
       --num-validators int                The number of distributed validators the cluster will manage (32ETH staked for each). (default 1)
       --operator-enrs strings             [REQUIRED] Comma-separated list of each operator's Charon ENR address.
       --output-dir string                 The folder to write the output cluster-definition.json file to. (default ".charon")
+      --target-gas-limit uint             Preferred target gas limit for transactions. (default 36000000)
   -t, --threshold int                     Optional override of threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security.
       --withdrawal-addresses strings      Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
 ```
@@ -190,47 +194,50 @@ Usage:
   charon run [flags]
 
 Flags:
-      --beacon-node-endpoints strings         Comma separated list of one or more beacon node endpoint URLs.
-      --beacon-node-submit-timeout duration   Timeout for the submission-related HTTP requests Charon makes to the configured beacon nodes. (default 2s)
-      --beacon-node-timeout duration          Timeout for the HTTP requests Charon makes to the configured beacon nodes. (default 2s)
-      --builder-api                           Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
-      --debug-address string                  Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
-      --feature-set string                    Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
-      --feature-set-disable strings           Comma-separated list of features to disable, overriding the default minimum feature set.
-      --feature-set-enable strings            Comma-separated list of features to enable, overriding the default minimum feature set.
-  -h, --help                                  Help for run
-      --jaeger-address string                 Listening address for jaeger tracing.
-      --jaeger-service string                 Service name used for jaeger tracing. (default "charon")
-      --lock-file string                      The path to the cluster lock file defining the distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
-      --log-color string                      Log color; auto, force, disable. (default "auto")
-      --log-format string                     Log format; console, logfmt or json (default "console")
-      --log-level string                      Log level; debug, info, warn or error (default "info")
-      --log-output-path string                Path in which to write on-disk logs.
-      --loki-addresses strings                Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
-      --loki-service string                   Service label sent with logs to Loki. (default "charon")
-      --manifest-file string                  The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
-      --monitoring-address string             Listening address (ip and port) for the monitoring API (prometheus). (default "127.0.0.1:3620")
-      --no-verify                             Disables cluster definition and lock file verification.
-      --p2p-disable-reuseport                 Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string          The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                    Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://2.relay.obol.dev,https://1.relay.obol.tech])
-      --p2p-tcp-address strings               Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string               The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
-      --private-key-file-lock                 Enables private key locking to prevent multiple instances using the same key.
-      --proc-directory string                 Directory to look into in order to detect other stack components running on the host.
-      --simnet-beacon-mock                    Enables an internal mock beacon node for running a simnet.
-      --simnet-beacon-mock-fuzz               Configures simnet beaconmock to return fuzzed responses.
-      --simnet-slot-duration duration         Configures slot duration in simnet beacon mock. (default 1s)
-      --simnet-validator-keys-dir string      The directory containing the simnet validator key shares. (default ".charon/validator_keys")
-      --simnet-validator-mock                 Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
-      --synthetic-block-proposals             Enables additional synthetic block proposal duties. Used for testing of rare duties.
-      --testnet-capella-hard-fork string      Capella hard fork version of the custom test network.
-      --testnet-chain-id uint                 Chain ID of the custom test network.
-      --testnet-fork-version string           Genesis fork version in hex of the custom test network.
-      --testnet-genesis-timestamp int         Genesis timestamp of the custom test network.
-      --testnet-name string                   Name of the custom test network.
-      --validator-api-address string          Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
+      --beacon-node-endpoints strings           Comma separated list of one or more beacon node endpoint URLs.
+      --beacon-node-headers strings             Comma separated list of headers formatted as header=value
+      --beacon-node-submit-timeout duration     Timeout for the submission-related HTTP requests Charon makes to the configured beacon nodes. (default 2s)
+      --beacon-node-timeout duration            Timeout for the HTTP requests Charon makes to the configured beacon nodes. (default 2s)
+      --builder-api                             Enables the builder api. Will only produce builder blocks. Builder API must also be enabled on the validator client. Beacon node must be connected to a builder-relay to access the builder network.
+      --debug-address string                    Listening address (ip and port) for the pprof and QBFT debug API. It is not enabled by default.
+      --fallback-beacon-node-endpoints strings  A list of beacon nodes to use if the primary list are offline or unhealthy.
+      --feature-set string                      Minimum feature set to enable by default: alpha, beta, or stable. Warning: modify at own risk. (default "stable")
+      --feature-set-disable strings             Comma-separated list of features to disable, overriding the default minimum feature set.
+      --feature-set-enable strings              Comma-separated list of features to enable, overriding the default minimum feature set.
+  -h, --help                                    Help for run
+      --jaeger-address string                   Listening address for jaeger tracing.
+      --jaeger-service string                   Service name used for jaeger tracing. (default "charon")
+      --lock-file string                        The path to the cluster lock file defining the distributed validator cluster. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-lock.json")
+      --log-color string                        Log color; auto, force, disable. (default "auto")
+      --log-format string                       Log format; console, logfmt or json (default "console")
+      --log-level string                        Log level; debug, info, warn or error (default "info")
+      --log-output-path string                  Path in which to write on-disk logs.
+      --loki-addresses strings                  Enables sending of logfmt structured logs to these Loki log aggregation server addresses. This is in addition to normal stderr logs.
+      --loki-service string                     Service label sent with logs to Loki. (default "charon")
+      --manifest-file string                    The path to the cluster manifest file. If both cluster manifest and cluster lock files are provided, the cluster manifest file takes precedence. (default ".charon/cluster-manifest.pb")
+      --monitoring-address string               Listening address (ip and port) for the monitoring API (prometheus). (default "127.0.0.1:3620")
+      --nickname string                         Human friendly peer nickname. Maximum 32 characters.
+      --no-verify                               Disables cluster definition and lock file verification.
+      --p2p-disable-reuseport                   Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string            The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                  The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                      Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://0.relay.obol.tech,https://2.relay.obol.dev,https://1.relay.obol.tech])
+      --p2p-tcp-address strings                 Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string                 The path to the charon enr private key file. (default ".charon/charon-enr-private-key")
+      --private-key-file-lock                   Enables private key locking to prevent multiple instances using the same key.
+      --proc-directory string                   Directory to look into in order to detect other stack components running on the host.
+      --simnet-beacon-mock                      Enables an internal mock beacon node for running a simnet.
+      --simnet-beacon-mock-fuzz                 Configures simnet beaconmock to return fuzzed responses.
+      --simnet-slot-duration duration           Configures slot duration in simnet beacon mock. (default 1s)
+      --simnet-validator-keys-dir string        The directory containing the simnet validator key shares. (default ".charon/validator_keys")
+      --simnet-validator-mock                   Enables an internal mock validator client when running a simnet. Requires simnet-beacon-mock.
+      --synthetic-block-proposals               Enables additional synthetic block proposal duties. Used for testing of rare duties.
+      --testnet-capella-hard-fork string        Capella hard fork version of the custom test network.
+      --testnet-chain-id uint                   Chain ID of the custom test network.
+      --testnet-fork-version string             Genesis fork version in hex of the custom test network.
+      --testnet-genesis-timestamp int           Genesis timestamp of the custom test network.
+      --testnet-name string                     Name of the custom test network.
+      --validator-api-address string            Listening address (ip and port) for validator-facing traffic proxying the beacon-node API. (default "127.0.0.1:3600")
 ```
 
 ## The `exit` command
@@ -276,6 +283,7 @@ Usage:
 Flags:
       --all                                Exit all currently active validators in the cluster.
       --beacon-node-endpoints strings      Comma separated list of one or more beacon node endpoint URLs. [REQUIRED]
+      --beacon-node-headers strings        Comma separated list of headers formatted as header=value
       --beacon-node-timeout duration       Timeout for beacon node HTTP calls. (default 30s)
       --exit-epoch uint                    Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
   -h, --help                               Help for sign
@@ -342,6 +350,7 @@ Usage:
 Flags:
       --all                                Exit all currently active validators in the cluster.
       --beacon-node-endpoints strings      Comma separated list of one or more beacon node endpoint URLs. [REQUIRED]
+      --beacon-node-headers strings        Comma separated list of headers formatted as header=value
       --beacon-node-timeout duration       Timeout for beacon node HTTP calls. (default 30s)
       --exit-epoch uint                    Exit epoch at which the validator will exit, must be the same across all the partial exits. (default 162304)
       --exit-from-dir string               Retrieves a signed exit messages from a pre-prepared files in a directory instead of --publish-address.
