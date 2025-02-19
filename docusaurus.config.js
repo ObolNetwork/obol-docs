@@ -142,7 +142,7 @@ const config = {
             from: '/docs/faq/contributions',
           },
           {
-            to: '/learn/futher-reading/peer_score',
+            to: '/learn/further-reading/peer_score',
             from: '/docs/faq/peer_score',
           },
           {
@@ -210,15 +210,15 @@ const config = {
             from: '/docs/cf/feedback',
           },
           {
-            to: '/learn/futher-reading/ethereum_and_dvt',
+            to: '/learn/further-reading/ethereum_and_dvt',
             from: '/docs/fr/ethereum_and_dvt',
           },
           {
-            to: '/learn/futher-reading/testnet',
+            to: '/learn/further-reading/testnet',
             from: '/docs/fr/testnet',
           },
           {
-            to: '/learn/futher-reading/resources',
+            to: '/learn/further-reading/resources',
             from: '/docs/fr/resources',
           },
           {
@@ -419,7 +419,7 @@ const config = {
               },
               {
                 label: "Useful Links",
-                to: "/learn/futher-reading/resources",
+                to: "/learn/further-reading/resources",
               },
             ],
           },
