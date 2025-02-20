@@ -76,8 +76,8 @@ During the third week, Delegates (including OBOL Token holders who have self-del
 
 A governance proposal is **approved** if it satisfies two requirements:
 
-- **Quorum:** A minimum number of OBOL Token votes measured as *a % of the total votable OBOL Token supply, as of the start of the voting period.* “Votable supply” is the total amount of OBOL Tokens that have been delegated (including to oneself) and, therefore, can participate in voting.
-- **Approval threshold:** The minimum  *% of votes cast in support relative to the total number of votes.*
+- **Quorum:** A minimum number of OBOL Token votes measured as *a % of the total votable OBOL Token supply, as of the start of the voting period.* “Votable supply” is the total amount of OBOL Tokens that have been delegated (including to oneself) and, therefore, can participate in voting. The current definition for the OBOL Token House is 0.8% of minted supply.
+- **Approval threshold:** The minimum  *% of votes cast in support relative to the total number of votes.* The current definition for the OBOL Token House is 0.01% of minted supply.
 
 A snapshot is taken at the start of each voting period to determine each delegate’s voting power. Voting is hosted on the Obol Governance Portal. 
 
