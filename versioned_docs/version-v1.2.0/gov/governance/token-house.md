@@ -47,7 +47,7 @@ Below are listed types of Token House Proposals. Each has a two-week review peri
 |Treasury Appropriations|The amount of OBOL Tokens the Obol Association may spend or distribute annually|Proposal initiated by the Association + On-Chain Voting|
 |Work agreements|Formal arrangements between the Obol Association and contributors, teams, or organizations tasked with advancing specific initiatives or responsibilities within the ecosystem|Forum proposal  + On-Chain Voting|
 |Veto on the Obol RAF operations|The veto mechanism serves as a safeguard against decisions or actions within the RAF operations that are misaligned with the mission of decentralization, transparency, or the collective interests of the community.|Forum proposal + On-Chain Voting|
-|Protocol upgrades|Scheduled changes to the on-chain smart contracts comprising the protocol or governance contracts.|Forum proposal + On-Chain Voting|
+|Contract upgrades|Scheduled changes to the on-chain smart contracts comprising the protocol or governance contracts.|Forum proposal + On-Chain Voting|
 
 
 ### Weeks 1-2: Feedback and Review
@@ -76,8 +76,8 @@ During the third week, Delegates (including OBOL Token holders who have self-del
 
 A governance proposal is **approved** if it satisfies two requirements:
 
-- **Quorum:** A minimum number of OBOL Token votes measured as *a % of the total votable OBOL Token supply, as of the start of the voting period.* “Votable supply” is the total amount of OBOL Tokens that have been delegated (including to oneself) and, therefore, can participate in voting.
-- **Approval threshold:** The minimum  *% of votes cast in support relative to the total number of votes.*
+- **Quorum:** A minimum number of OBOL Token votes measured as *a % of the total votable OBOL Token supply, as of the start of the voting period.* “Votable supply” is the total amount of OBOL Tokens that have been delegated (including to oneself) and, therefore, can participate in voting. The current definition for the OBOL Token House is 0.8% of minted supply.
+- **Approval threshold:** The minimum  *% of votes cast in support relative to the total number of votes.* The current definition for the OBOL Token House is 0.01% of minted supply.
 
 A snapshot is taken at the start of each voting period to determine each delegate’s voting power. Voting is hosted on the Obol Governance Portal. 
 
