@@ -138,10 +138,6 @@ const config = {
             from: '/docs/faq/client_configurations',
           },
           {
-            to: '/gov/governance/contributions',
-            from: '/docs/faq/contributions',
-          },
-          {
             to: '/learn/futher-reading/peer_score',
             from: '/docs/faq/peer_score',
           },
