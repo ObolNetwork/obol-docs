@@ -7,7 +7,7 @@ description: Measuring Individual Performance in Distributed Validators
 
 ## Introduction
 
-Validator effectiveness is a critical metric for assessing the health of a rated network. It determines how well validators perform their attestation and block proposal duties. Existing solutions, like RAVER (Rated Validator Effectiveness Rating), provide a effectiveness score of a validator. In a monolithic validator that is run by a single operator, validator effectiveness can be considered as a proxy for the effectiveness or “score” of that operator. However, this approach falls short when dealing with distributed validators (DVs) maintained by multiple operators.
+Validator effectiveness is a critical metric for assessing the health of a rated network. It determines how well validators perform their attestation and block proposal duties. Existing solutions, like RAVER (Rated Validator Effectiveness Rating), provide an effectiveness score of a validator. In a monolithic validator that is run by a single operator, validator effectiveness can be considered as a proxy for the effectiveness or “score” of that operator. However, this approach falls short when dealing with distributed validators (DVs) maintained by multiple operators.
 
 Peer Score v0 addresses this limitation by introducing a method to evaluate the performance of individual operators within a DV. This enables a more granular assessment of contribution within a distributed setting.
 
@@ -42,6 +42,6 @@ Peer Score v0 lays the foundation for a more comprehensive evaluation system. Pl
 
 Peer Score offers valuable insights for various stakeholders:
 
-- **Staking/Restaking Protocols:** Peer Score is crucial component of Obol’s Techne Credential Program. LSPs and LRPs can utilize Techne Credentials ,and hence Peer Score, to identify efficient operators for expanding their operator sets.
+- **Staking/Restaking Protocols:** Peer Score is a crucial component of Obol’s Techne Credential Program. LSPs and LRPs can utilize Techne Credentials, and hence Peer Score, to identify efficient operators for expanding their operator sets.
 - **DV Operators:** Forming operator collectives based on peer effectiveness and potentially removing underperforming peers from DVs (with Charon v2 cluster mutability).
 - **DV Software Developers:** Establishing a standardized metric for evaluating operator performance across various DV software, enabling the development of new tools and services.

@@ -235,7 +235,7 @@ Flags:
 
 ## The `exit` command
 
-A running Charon client will [aggregate and broadcast](../start/quickstart-exit.mdx) signed exit messages it receives from its valdiator client immediately. These `exit` commands are instead used to *pre-sign* exit messages for an active distributed validator, to save to disk, or to broadcast; once enough of the operators of the cluster have submitted their partial exit signatures. Fully signed exit messages give a user or protocol a guarantee that they can exit an active validator at any point in future without the further assistance of the cluster's operators. In future, [execution-layer initiated exits](https://eips.ethereum.org/EIPS/eip-7002) will provide an even stronger guarantee that a validator can be exited by the withdrawal address it belongs to.
+A running Charon client will [aggregate and broadcast](../start/quickstart-exit.mdx) signed exit messages it receives from its validator client immediately. These `exit` commands are instead used to *pre-sign* exit messages for an active distributed validator, to save to disk, or to broadcast; once enough of the operators of the cluster have submitted their partial exit signatures. Fully signed exit messages give a user or protocol a guarantee that they can exit an active validator at any point in future without the further assistance of the cluster's operators. In future, [execution-layer initiated exits](https://eips.ethereum.org/EIPS/eip-7002) will provide an even stronger guarantee that a validator can be exited by the withdrawal address it belongs to.
 
 ```markdown
 charon exit --help

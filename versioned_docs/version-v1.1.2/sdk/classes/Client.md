@@ -79,7 +79,7 @@ Deploys OWR and Splitter Proxy.
 
 `Promise`\<[`ClusterValidator`](../type-aliases/ClusterValidator.md)\>
 
-owr address as withdrawal address and splitter as fee recipient
+our address as withdrawal address and splitter as fee recipient
 
 An example of how to use createObolRewardsSplit:
 [createObolRewardsSplit](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L141)
@@ -105,7 +105,7 @@ Deploys Splitter Proxy.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `totalSplitPayload` | [`TotalSplitPayload`](../type-aliases/TotalSplitPayload.md) | Data needed to deploy splitter if it doesnt exist. |
+| `totalSplitPayload` | [`TotalSplitPayload`](../type-aliases/TotalSplitPayload.md) | Data needed to deploy splitter if it doesn't exist. |
 
 #### Returns
 
