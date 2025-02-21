@@ -1,10 +1,10 @@
 # Ethereum and its Relationship with DVT
 
-Our goal for this page is to equip you with the foundational knowledge needed to actively contribute to the advancement of Obol while also directing you to valuable Ethereum and DVT related resources. Additionally, we will shed light on the intersection of DVT and Ethereum, offering curated articles and blog posts to enhance your understanding.
+Our goal on this page is to provide you with foundational knowledge to actively contribute to Obol’s advancement while also directing you to valuable Ethereum and DVT-related resources. Additionally, we explore the intersection of DVT and Ethereum, offering curated articles and blog posts to deepen your understanding.
 
 ## **Understanding Ethereum**
 
-To grasp the current landscape of Ethereum's PoS development, we encourage you to delve into the wealth of information available on the [Official Ethereum Website.](https://ethereum.org/en/learn/)
+To understand Ethereum’s current PoS landscape, we encourage you to explore the wealth of information available on the [Official Ethereum Website.](https://ethereum.org/en/learn/)
 The Ethereum website serves as a hub for all things Ethereum, catering to individuals at various levels of expertise, whether you're just starting your journey or are an Ethereum veteran. Here, you'll find a trove of resources that cater to diverse learning needs and preferences, ensuring that there's something valuable for everyone in the Ethereum community to discover.
 
 ## **DVT & Ethereum**
@@ -22,12 +22,12 @@ If you haven’t yet heard, Distributed Validator Technology, or DVT, is the nex
 ***Vitalik's Ethereum Roadmap***
 
 ### Deep Dive Into DVT and Charon’s Architecture
-Minimizing correlation is vital when designing DVT as Ethereum Proof of Stake is designed to heavily punish correlated behavior. In designing Obol, we’ve made careful choices to create a trust-minimized and non-correlated architecture. 
+Minimizing correlation is crucial in DVT design, as Ethereum’s Proof of Stake heavily penalizes correlated behavior. In designing Obol, we’ve made careful choices to create a trust-minimized and non-correlated architecture. 
 
 [**Read more about Designing Non-Correlation Here**](https://blog.obol.tech/deep-dive-into-dvt-and-charons-architecture/)
 
 ### Performance Testing Distributed Validators
-In our mission to help make Ethereum consensus more resilient and decentralised with distributed validators (DVs), it’s critical that we do not compromise on the performance and effectiveness of validators. Earlier this year, we worked with MigaLabs, the blockchain ecosystem observatory located in Barcelona, to perform an independent test to validate the performance of Obol DVs under different configurations and conditions. After taking a few weeks to fully analyse the results together with MigaLabs, we’re happy to share the results of these performance tests. 
+In our mission to help make Ethereum consensus more resilient and decentralised with distributed validators (DVs), it’s critical that we do not compromise on the performance and effectiveness of validators. Earlier this year, we collaborated with MigaLabs, a blockchain ecosystem observatory in Barcelona, to conduct an independent performance test on Obol DVs under various configurations and conditions. After taking a few weeks to fully analyse the results together with MigaLabs, we’re happy to share the results of these performance tests. 
 
 [**Read More About The Performance Test Results Here**](https://blog.obol.tech/performance-testing-distributed-validators/)
 

@@ -1,12 +1,12 @@
 # Filing a bug report
 
-Bug reports are critical to the rapid development of Obol. In order to make the process quick and efficient for all parties, it is best to follow some common reporting etiquette when filing to avoid double issues or miscommunications.
+Bug reports are critical to the rapid development of Obol. In order to make the process quick and efficient for all parties, it is best to follow some common reporting etiquette when filing to avoid duplicate issues or miscommunication.
 
 ## Checking if your issue exists
 
-Duplicate tickets are a hindrance to the development process and, as such, it is crucial to first check through Charon's existing issues to see if what you are experiencing has already been indexed.
+Duplicate tickets hinder the development process; therefore, it is crucial to first check Charon's existing issues to see if what you are experiencing has already been indexed.
 
-To do so, head over to the [issue page](https://github.com/ObolNetwork/charon/issues) and enter some related keywords into the search bar. This may include a sample from the output or specific components it affects.
+To check for existing issues, visit the [issue page](https://github.com/ObolNetwork/charon/issues) and enter relevant keywords into the search bar. This may include an output sample or the affected components.
 
 If searches have shown the issue in question has not been reported yet, feel free to open up a new issue ticket.
 

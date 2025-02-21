@@ -83,7 +83,7 @@ The `cluster-lock.json` has the following schema:
 
 ```json
 {
-  "cluster_definition": {...},                              // Cluster definiition json, identical schema to above,
+  "cluster_definition": {...},                              // Cluster definition json, identical schema to above,
   "distributed_validators": [                               // Length equal to cluster_definition.num_validators.
     {
       "distributed_public_key":  "0x123..abfc",             // DV root pubkey
@@ -98,7 +98,7 @@ The `cluster-lock.json` has the following schema:
 
 ## Cluster Size and Resilience
 
-The cluster size (the number of nodes/operators in the cluster) determines the resilience of the cluster; its ability remain operational under diverse failure scenarios.
+The cluster size (the number of nodes/operators in the cluster) determines the resilience of the cluster; it's to ability remain operational under diverse failure scenarios.
 Larger clusters can tolerate more faulty nodes.
 However, increased cluster size implies higher operational costs and potential network latency, which may negatively affect performance
 
