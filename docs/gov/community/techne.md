@@ -100,7 +100,7 @@ Additional Resources
 
 **It looks like there is no wave active right now, how can I earn a Techne Credential?**
 
-There are curerntly no active waves for earning Base or Bronze, but we plan to offer another wave in January of 2025. Currently, you still do have the ability to earn Silver. Please head to the [Obol Discord](https://discord.gg/obol) to learn more about earning a Silver Techne Credential.
+There are currently no active waves for earning Base or Bronze, but we plan to offer another wave in January of 2025. Currently, you still do have the ability to earn Silver. Please head to the [Obol Discord](https://discord.gg/obol) to learn more about earning a Silver Techne Credential.
 
 **It has been 24 hours since I filled out the form to receive my Holesky ETH, but I haven't received anything yet. Is this normal?**
 
