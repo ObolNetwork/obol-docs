@@ -15,6 +15,9 @@ The official token contract address of the OBOL Token is [0x0B010000b7624eb9B3Df
 
 The total supply is 500 million tokens. The full supply is not immediately circulating and tokens will unlock over the coming months and years. Please see the [airdrop announcement](http://blog.obol.org/airdrop/) for more details. 
 
+![Token Supply Distribution](/img/TokenSupplyDistribution.png)
+![Token Unlock Schedule](/img/TokenUnlockSchedule.png)
+
 ### Token Utility
 
 1. **Token Governance:** OBOL Token holders delegate their voting power to delegates who participate in the Token House decision-making processes. This includes voting on proposals affecting the Obol Collective’s direction, upgrades, and funding allocations. Read more about the Token House [here](./token-house.md). 
