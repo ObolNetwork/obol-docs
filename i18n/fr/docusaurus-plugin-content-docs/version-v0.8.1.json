@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "v0.8.1",
+    "description": "The label for version v0.8.1"
+  },
+  "sidebar.tutorialSidebar.category.Getting started": {
+    "message": "Getting started",
+    "description": "The label for category Getting started in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Quickstart Guides": {
+    "message": "Quickstart Guides",
+    "description": "The label for category Quickstart Guides in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Distributed validators": {
+    "message": "Distributed validators",
+    "description": "The label for category Distributed validators in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Key generation": {
+    "message": "Key generation",
+    "description": "The label for category Key generation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Smart contracts": {
+    "message": "Smart contracts",
+    "description": "The label for category Smart contracts in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Contribution guidelines": {
+    "message": "Contribution guidelines",
+    "description": "The label for category Contribution guidelines in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Further reading": {
+    "message": "Further reading",
+    "description": "The label for category Further reading in sidebar tutorialSidebar"
+  }
+}
