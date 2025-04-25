@@ -125,7 +125,7 @@ Cluster configuration begins next. First, select the cluster name and size, then
 
 ![Configure Cluster Page](/img/CSM_walkthrough12.png)
 
-- Select the number of validators to create (CSM's Early Access phase is capped at a maximum 12 validators).
+- Select the number of validators to create.
 - (If the cluster creator is taking part in the cluster) Enter your Charon node's ENR which was generated during [step 2](#step-2-create-enr-and-backup-your-private-key) above.
 - In the **Withdrawal Configuration** field, select `LIDO CSM`. This will automatically fill the required Withdrawal Address and Fee Recipient Addresss per [Lido's Documentation](https://operatorportal.lido.fi/modules/community-staking-module#block-d8e94f551b2e47029a54e6cedea914a7).
 - Finally, click on the **Create Cluster Configuration** button.
