@@ -1,8 +1,11 @@
 name: Update Docs Version
 
+# Disabled - version updates are done manually
+# on:
+#   repository_dispatch:
+#     types: [update-version]
 on:
-  repository_dispatch:
-    types: [update-version]
+  workflow_dispatch: # Allow manual trigger only
 
 jobs:
   update-docs-version:
