@@ -24,8 +24,13 @@ Eligible submissions must involve software and services developed by Obol, speci
 
 - Charon the DV Middleware Client
 - Obol DV Launchpad and Public API
+- Obol SDK and APIs
 - Obol Splits Contracts
 - Obol Labs hosted Public Relay Infrastructure
+
+:::note
+Vulnerabilities found in Charon code under the `alpha` subcommand may be down-weighted in severity, as these features are not recommended for production use.
+:::
 
 Submissions related to the following are considered out of scope:
 
