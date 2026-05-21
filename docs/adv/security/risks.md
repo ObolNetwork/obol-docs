@@ -21,6 +21,8 @@ The following non-Obol entities run relays that you can consider adding to your 
 | [Hashquark](https://www.hashquark.io/) | https://relay-2.prod-relay.721.land/  |
 | [Figment](https://figment.io/)   | https://relay-1.obol.figment.io/ |
 | [Node Guardians](https://nodeguardians.io/)   | https://obol-relay.nodeguardians.io/ |
+| [Nethermind](https://nethermind.io/)   | https://pluto-relay-0.ovh.dev-nethermind.xyz/ |
+| [Nethermind](https://nethermind.io/)   | https://pluto-relay-1.ovh.dev-nethermind.xyz/ |
 
 ## Risk: Obol being able to update Charon code
 
