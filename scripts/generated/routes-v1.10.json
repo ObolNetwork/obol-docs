@@ -1,0 +1,1298 @@
+[
+  {
+    "id": "README",
+    "file": "README.md",
+    "slug": "learn/readme",
+    "route": "/learn/readme",
+    "title": "Introduction",
+    "description": "Documentation, integration guides, and protocol specifications",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/introduction/learn-about-obol/README",
+    "file": "learn/introduction/learn-about-obol/README.md",
+    "slug": "learn/readme/learn-about-obol",
+    "route": "/learn/readme/learn-about-obol",
+    "title": "Learn About Obol",
+    "description": "Start here for the core concepts behind Obol and distributed validators",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/obol-collective",
+    "file": "learn/intro/obol-collective.md",
+    "slug": "learn/readme/obol-collective",
+    "route": "/learn/readme/obol-collective",
+    "title": "Obol Collective",
+    "description": "The Obol Collective",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/obol-incentives",
+    "file": "learn/intro/obol-incentives.md",
+    "slug": "learn/readme/obol-incentives",
+    "route": "/learn/readme/obol-incentives",
+    "title": "OBOL Incentives",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/key-concepts",
+    "file": "learn/intro/key-concepts.md",
+    "slug": "learn/readme/key-concepts",
+    "route": "/learn/readme/key-concepts",
+    "title": "Key Staking Concepts",
+    "description": "Some of the key terms in the field of Distributed Validator Technology",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/obol-vs-others",
+    "file": "learn/intro/obol-vs-others.md",
+    "slug": "learn/readme/obol-vs-others",
+    "route": "/learn/readme/obol-vs-others",
+    "title": "Obol vs Other DV Implementations",
+    "description": "Some of the key terms in the field of Distributed Validator Technology",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/obol-splits",
+    "file": "learn/intro/obol-splits.md",
+    "slug": "learn/readme/obol-splits",
+    "route": "/learn/readme/obol-splits",
+    "title": "Obol Splits",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/launchpad",
+    "file": "learn/intro/launchpad.md",
+    "slug": "learn/readme/launchpad",
+    "route": "/learn/readme/launchpad",
+    "title": "DV Launchpad",
+    "description": "A dapp to securely create Distributed Validators alone or with a group.",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/intro/frequently-asked-questions",
+    "file": "learn/intro/frequently-asked-questions.mdx",
+    "slug": "learn/readme/frequently-asked-questions",
+    "route": "/learn/readme/frequently-asked-questions",
+    "title": "Frequently Asked Questions",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/README",
+    "file": "learn/charon/README.md",
+    "slug": "learn/charon",
+    "route": "/learn/charon",
+    "title": "Charon",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/intro",
+    "file": "learn/charon/intro.md",
+    "slug": "learn/charon/intro",
+    "route": "/learn/charon/intro",
+    "title": "Introduction to Charon",
+    "description": "Charon - The Distributed Validator Client",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/dkg",
+    "file": "learn/charon/dkg.md",
+    "slug": "learn/charon/dkg",
+    "route": "/learn/charon/dkg",
+    "title": "Distributed Key Generation",
+    "description": "Generating private keys for a Distributed Validator requires a Distributed Key Generation (DKG) Ceremony.",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/cluster-configuration",
+    "file": "learn/charon/cluster-configuration.md",
+    "slug": "learn/charon/cluster-configuration",
+    "route": "/learn/charon/cluster-configuration",
+    "title": "Cluster Configuration",
+    "description": "Documenting a Distributed Validator Cluster in a standardized file format",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/charon-networking",
+    "file": "learn/charon/charon-networking.md",
+    "slug": "learn/charon/charon-networking",
+    "route": "/learn/charon/charon-networking",
+    "title": "Charon Networking",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/charon/charon-cli-reference",
+    "file": "learn/charon/charon-cli-reference.md",
+    "slug": "learn/charon/charon-cli-reference",
+    "route": "/learn/charon/charon-cli-reference",
+    "title": "CLI Reference",
+    "description": "A go-based middleware client for taking part in Distributed Validator clusters.",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/further-reading/README",
+    "file": "learn/further-reading/README.md",
+    "slug": "learn/further-reading",
+    "route": "/learn/further-reading",
+    "title": "Further Reading",
+    "description": null,
+    "group": "Learn"
+  },
+  {
+    "id": "learn/further-reading/ethereum_and_dvt",
+    "file": "learn/further-reading/ethereum_and_dvt.md",
+    "slug": "learn/further-reading/ethereum_and_dvt",
+    "route": "/learn/further-reading/ethereum_and_dvt",
+    "title": "Ethereum and Its Relationship With DVT",
+    "description": "Ethereum and its relationship with DVT",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/further-reading/testnet",
+    "file": "learn/further-reading/testnet.md",
+    "slug": "learn/further-reading/testnet",
+    "route": "/learn/further-reading/testnet",
+    "title": "Community Testing",
+    "description": "Community testing efforts",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/further-reading/peer_score",
+    "file": "learn/further-reading/peer_score.md",
+    "slug": "learn/further-reading/peer_score",
+    "route": "/learn/further-reading/peer_score",
+    "title": "Peer Score",
+    "description": "Measuring Individual Performance in Distributed Validators",
+    "group": "Learn"
+  },
+  {
+    "id": "learn/further-reading/resources",
+    "file": "learn/further-reading/resources.md",
+    "slug": "learn/further-reading/resources",
+    "route": "/learn/further-reading/resources",
+    "title": "Useful Links",
+    "description": "A collection of links to products and content relating to Distributed Validators.",
+    "group": "Learn"
+  },
+  {
+    "id": "run-a-dv/start/README",
+    "file": "run-a-dv/start/README.md",
+    "slug": "run-a-dv/start",
+    "route": "/run-a-dv/start",
+    "title": "Quickstart",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/start/quickstart_overview",
+    "file": "run-a-dv/start/quickstart_overview.md",
+    "slug": "run-a-dv/start/quickstart_overview",
+    "route": "/run-a-dv/start/quickstart_overview",
+    "title": "Quickstart Overview",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/start/create-a-dv-alone",
+    "file": "run-a-dv/start/create-a-dv-alone.mdx",
+    "slug": "run-a-dv/start/create-a-dv-alone",
+    "route": "/run-a-dv/start/create-a-dv-alone",
+    "title": "Create a DV Alone",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/start/create-a-dv-with-a-group",
+    "file": "run-a-dv/start/create-a-dv-with-a-group.mdx",
+    "slug": "run-a-dv/start/create-a-dv-with-a-group",
+    "route": "/run-a-dv/start/create-a-dv-with-a-group",
+    "title": "Create a DV With a Group",
+    "description": "This quickstart guide will walk you through creating a Distributed Validator Cluster with a number of other node operators.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/start/obol-monitoring",
+    "file": "run-a-dv/start/obol-monitoring.mdx",
+    "slug": "run-a-dv/start/obol-monitoring",
+    "route": "/run-a-dv/start/obol-monitoring",
+    "title": "Push Metrics and Logs to Obol",
+    "description": "Add credentials to help the Obol Team monitor the health of your cluster",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/prepare/README",
+    "file": "run-a-dv/prepare/README.md",
+    "slug": "run-a-dv/prepare",
+    "route": "/run-a-dv/prepare",
+    "title": "Prepare to Run a DV",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/prepare/how_where_dvs",
+    "file": "run-a-dv/prepare/how_where_dvs.md",
+    "slug": "run-a-dv/prepare/how_where_dvs",
+    "route": "/run-a-dv/prepare/how_where_dvs",
+    "title": "How and Where To Run DVs",
+    "description": "How and where to run DVs",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/prepare/deployment-best-practices",
+    "file": "run-a-dv/prepare/deployment-best-practices.md",
+    "slug": "run-a-dv/prepare/deployment-best-practices",
+    "route": "/run-a-dv/prepare/deployment-best-practices",
+    "title": "Deployment Best Practices",
+    "description": "DV Deployment best practices, for running an optimal Distributed Validator setup at scale.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/prepare/test-a-cluster",
+    "file": "run-a-dv/prepare/test-a-cluster.mdx",
+    "slug": "run-a-dv/prepare/test-a-cluster",
+    "route": "/run-a-dv/prepare/test-a-cluster",
+    "title": "Test a Cluster",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/README",
+    "file": "run-a-dv/running/README.md",
+    "slug": "run-a-dv/running",
+    "route": "/run-a-dv/running",
+    "title": "Running a DV",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/activate-a-dv",
+    "file": "run-a-dv/running/activate-a-dv.md",
+    "slug": "run-a-dv/running/activate-a-dv",
+    "route": "/run-a-dv/running/activate-a-dv",
+    "title": "Activate a DV",
+    "description": "Learn how to activate your distributed validator cluster using the new deposit flow with support for compounding validators and OVM integration.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/request-withdrawal",
+    "file": "run-a-dv/running/request-withdrawal.md",
+    "slug": "run-a-dv/running/request-withdrawal",
+    "route": "/run-a-dv/running/request-withdrawal",
+    "title": "Request Withdrawal",
+    "description": "Learn how to request withdrawals from validators with 0x02 withdrawal credentials using OVM, including batching and principal/rewards distinction.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/distribute-rewards",
+    "file": "run-a-dv/running/distribute-rewards.md",
+    "slug": "run-a-dv/running/distribute-rewards",
+    "route": "/run-a-dv/running/distribute-rewards",
+    "title": "Distribute Rewards",
+    "description": "Learn how distribution works for OVM and splitter contracts, including how principal and rewards are distributed based on principal threshold.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/claim-rewards",
+    "file": "run-a-dv/running/claim-rewards.md",
+    "slug": "run-a-dv/running/claim-rewards",
+    "route": "/run-a-dv/running/claim-rewards",
+    "title": "Claim Rewards",
+    "description": "Learn how to claim rewards from your distributed validator cluster, including the new 3-step process for 0x02 validators and legacy OWR flow.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/update-a-dv",
+    "file": "run-a-dv/running/update-a-dv.mdx",
+    "slug": "run-a-dv/running/update-a-dv",
+    "route": "/run-a-dv/running/update-a-dv",
+    "title": "Update a DV",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/monitoring",
+    "file": "run-a-dv/running/monitoring.md",
+    "slug": "run-a-dv/running/monitoring",
+    "route": "/run-a-dv/running/monitoring",
+    "title": "Monitoring Your Node",
+    "description": "Add monitoring credentials to help the Obol Team monitor the health of your cluster",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/running/exit-a-dv",
+    "file": "run-a-dv/running/exit-a-dv.mdx",
+    "slug": "run-a-dv/running/exit-a-dv",
+    "route": "/run-a-dv/running/exit-a-dv",
+    "title": "Exit a DV",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/README",
+    "file": "run-a-dv/editing/README.md",
+    "slug": "run-a-dv/editing",
+    "route": "/run-a-dv/editing",
+    "title": "Edit a Cluster",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/add-validators",
+    "file": "run-a-dv/editing/add-validators.md",
+    "slug": "run-a-dv/editing/add-validators",
+    "route": "/run-a-dv/editing/add-validators",
+    "title": "Adding Validators",
+    "description": "Add validators to your existing distributed validator cluster using the charon alpha edit add-validators command.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/add-operators",
+    "file": "run-a-dv/editing/add-operators.md",
+    "slug": "run-a-dv/editing/add-operators",
+    "route": "/run-a-dv/editing/add-operators",
+    "title": "Adding Operators",
+    "description": "Add operators to your existing distributed validator cluster using the charon alpha edit add-operators command.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/remove-operators",
+    "file": "run-a-dv/editing/remove-operators.md",
+    "slug": "run-a-dv/editing/remove-operators",
+    "route": "/run-a-dv/editing/remove-operators",
+    "title": "Removing Operators",
+    "description": "Remove operators from your existing distributed validator cluster using the charon alpha edit remove-operators command.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/replace-operator",
+    "file": "run-a-dv/editing/replace-operator.md",
+    "slug": "run-a-dv/editing/replace-operator",
+    "route": "/run-a-dv/editing/replace-operator",
+    "title": "Replacing Operators",
+    "description": "Replace operators in your distributed validator cluster using the edit command or validator consolidation.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/editing/recreate-private-keys",
+    "file": "run-a-dv/editing/recreate-private-keys.md",
+    "slug": "run-a-dv/editing/recreate-private-keys",
+    "route": "/run-a-dv/editing/recreate-private-keys",
+    "title": "Recreating Private Keys",
+    "description": "Create new private key shares for your existing distributed validator cluster using the charon alpha edit recreate-private-keys command.",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/README",
+    "file": "run-a-dv/integrations/README.md",
+    "slug": "run-a-dv/integrations",
+    "route": "/run-a-dv/integrations",
+    "title": "Partner Integrations",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/create-an-eigenlayer-dv",
+    "file": "run-a-dv/integrations/create-an-eigenlayer-dv.mdx",
+    "slug": "run-a-dv/integrations/create-an-eigenlayer-dv",
+    "route": "/run-a-dv/integrations/create-an-eigenlayer-dv",
+    "title": "Create an EigenLayer DV",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/lido-csm",
+    "file": "run-a-dv/integrations/lido-csm.mdx",
+    "slug": "run-a-dv/integrations/lido-csm",
+    "route": "/run-a-dv/integrations/lido-csm",
+    "title": "Create a Lido CSM DV",
+    "description": "Setup and run a DV within the Lido Community Staking Module",
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/lido-v3-stvault-integration-kit",
+    "file": "run-a-dv/integrations/lido-v3-stvault-integration-kit.md",
+    "slug": "run-a-dv/integrations/lido-v3-stvault-integration-kit",
+    "route": "/run-a-dv/integrations/lido-v3-stvault-integration-kit",
+    "title": "Create a Lido stVault",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/lido-v3-stvault-for-node-operator",
+    "file": "run-a-dv/integrations/lido-v3-stvault-for-node-operator.md",
+    "slug": "run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-node-operator",
+    "route": "/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-node-operator",
+    "title": "For Node Operators",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/lido-v3-stvault-for-capital-allocators",
+    "file": "run-a-dv/integrations/lido-v3-stvault-for-capital-allocators.md",
+    "slug": "run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-capital-allocators",
+    "route": "/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-capital-allocators",
+    "title": "For Capital Allocators",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "run-a-dv/integrations/dappnode",
+    "file": "run-a-dv/integrations/dappnode.md",
+    "slug": "run-a-dv/integrations/dappnode",
+    "route": "/run-a-dv/integrations/dappnode",
+    "title": "Run a DV on a DappNode",
+    "description": null,
+    "group": "Run a DV"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/README",
+    "file": "advanced-and-troubleshooting/advanced/README.md",
+    "slug": "advanced-and-troubleshooting/advanced",
+    "route": "/advanced-and-troubleshooting/advanced",
+    "title": "Advanced Guides",
+    "description": null,
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/client-swap",
+    "file": "advanced-and-troubleshooting/advanced/client-swap.md",
+    "slug": "advanced-and-troubleshooting/advanced/client-swap",
+    "route": "/advanced-and-troubleshooting/advanced/client-swap",
+    "title": "Swapping Clients",
+    "description": "Swap EL, CL, VC and MEV clients in the stack.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/quickstart-split",
+    "file": "advanced-and-troubleshooting/advanced/quickstart-split.md",
+    "slug": "advanced-and-troubleshooting/advanced/quickstart-split",
+    "route": "/advanced-and-troubleshooting/advanced/quickstart-split",
+    "title": "Migrate an Existing Validator",
+    "description": "Migrate an existing validator by splitting its private key into shares",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk",
+    "file": "advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx",
+    "slug": "advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk",
+    "route": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk",
+    "title": "Create a DV Using the SDK",
+    "description": null,
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/ovm-predeploy",
+    "file": "advanced-and-troubleshooting/advanced/ovm-predeploy.mdx",
+    "slug": "advanced-and-troubleshooting/advanced/ovm-predeploy",
+    "route": "/advanced-and-troubleshooting/advanced/ovm-predeploy",
+    "title": "Pre-Create a DV with an OVM",
+    "description": "Assign pre-created validators to customers on demand",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/enable-mev",
+    "file": "advanced-and-troubleshooting/advanced/enable-mev.mdx",
+    "slug": "advanced-and-troubleshooting/advanced/enable-mev",
+    "route": "/advanced-and-troubleshooting/advanced/enable-mev",
+    "title": "Enable MEV",
+    "description": null,
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/change-fee-recipient",
+    "file": "advanced-and-troubleshooting/advanced/change-fee-recipient.md",
+    "slug": "advanced-and-troubleshooting/advanced/change-fee-recipient",
+    "route": "/advanced-and-troubleshooting/advanced/change-fee-recipient",
+    "title": "Change Fee Recipient",
+    "description": "Change the fee recipient address for validators in a distributed validator cluster.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/quickstart-combine",
+    "file": "advanced-and-troubleshooting/advanced/quickstart-combine.md",
+    "slug": "advanced-and-troubleshooting/advanced/quickstart-combine",
+    "route": "/advanced-and-troubleshooting/advanced/quickstart-combine",
+    "title": "Combine DV Private Key Shares",
+    "description": "Combine distributed validator private key shares to recover the validator private key.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/beacon-node-authentication",
+    "file": "advanced-and-troubleshooting/advanced/beacon-node-authentication.md",
+    "slug": "advanced-and-troubleshooting/advanced/beacon-node-authentication",
+    "route": "/advanced-and-troubleshooting/advanced/beacon-node-authentication",
+    "title": "Beacon node authentication",
+    "description": "Send authenticated requests to a beacon node protected by HTTP Basic, or header-based access control.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/alter-withdrawal-addresses",
+    "file": "advanced-and-troubleshooting/advanced/alter-withdrawal-addresses.md",
+    "slug": "advanced-and-troubleshooting/advanced/alter-withdrawal-addresses",
+    "route": "/advanced-and-troubleshooting/advanced/alter-withdrawal-addresses",
+    "title": "Alter Withdrawal Addresses",
+    "description": "Prepare an alternative deposit for an unused validator",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/partial-deposit",
+    "file": "advanced-and-troubleshooting/advanced/partial-deposit.md",
+    "slug": "advanced-and-troubleshooting/advanced/partial-deposit",
+    "route": "/advanced-and-troubleshooting/advanced/partial-deposit",
+    "title": "Partial Deposits",
+    "description": "Submit and fetch (partial) deposits.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/custom-graffiti",
+    "file": "advanced-and-troubleshooting/advanced/custom-graffiti.md",
+    "slug": "advanced-and-troubleshooting/advanced/custom-graffiti",
+    "route": "/advanced-and-troubleshooting/advanced/custom-graffiti",
+    "title": "Custom Graffiti",
+    "description": "Add custom graffiti to your block proposals",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/enable-tls-protocol",
+    "file": "advanced-and-troubleshooting/advanced/enable-tls-protocol.md",
+    "slug": "advanced-and-troubleshooting/advanced/enable-tls-protocol",
+    "route": "/advanced-and-troubleshooting/advanced/enable-tls-protocol",
+    "title": "Enable TLS Protocol",
+    "description": "Enable the TLS protocol to secure HTTPS requests made by the Validator Client to Charon.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/fallback-beacon-nodes",
+    "file": "advanced-and-troubleshooting/advanced/fallback-beacon-nodes.md",
+    "slug": "advanced-and-troubleshooting/advanced/fallback-beacon-nodes",
+    "route": "/advanced-and-troubleshooting/advanced/fallback-beacon-nodes",
+    "title": "Fallback Beacon Nodes",
+    "description": "Add fallback beacon nodes to use when primary beacon node fails",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/nicknames",
+    "file": "advanced-and-troubleshooting/advanced/nicknames.md",
+    "slug": "advanced-and-troubleshooting/advanced/nicknames",
+    "route": "/advanced-and-troubleshooting/advanced/nicknames",
+    "title": "Set a Nickname",
+    "description": "Add a nickname to your Charon node",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/self-relay",
+    "file": "advanced-and-troubleshooting/advanced/self-relay.md",
+    "slug": "advanced-and-troubleshooting/advanced/self-relay",
+    "route": "/advanced-and-troubleshooting/advanced/self-relay",
+    "title": "Self-Host a Relay",
+    "description": "Self-host a relay",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/adv-docker-configs",
+    "file": "advanced-and-troubleshooting/advanced/adv-docker-configs.md",
+    "slug": "advanced-and-troubleshooting/advanced/adv-docker-configs",
+    "route": "/advanced-and-troubleshooting/advanced/adv-docker-configs",
+    "title": "Advanced Docker Configs",
+    "description": "Use advanced docker-compose features to have more flexibility and power to change the default configuration.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/assign-ovm-roles",
+    "file": "advanced-and-troubleshooting/advanced/assign-ovm-roles.md",
+    "slug": "advanced-and-troubleshooting/advanced/assign-ovm-roles",
+    "route": "/advanced-and-troubleshooting/advanced/assign-ovm-roles",
+    "title": "Assign OVM Roles",
+    "description": "Learn how to assign permissions within the Obol Vault Manager (OVM) smart contract using the efficient bitwise role system.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/advanced/hole-punching",
+    "file": "advanced-and-troubleshooting/advanced/hole-punching.md",
+    "slug": "advanced-and-troubleshooting/advanced/hole-punching",
+    "route": "/advanced-and-troubleshooting/advanced/hole-punching",
+    "title": "NAT Hole Punching",
+    "description": "Achieve a P2P direct connection under a private IP (NAT hole punching).",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/troubleshooting/README",
+    "file": "advanced-and-troubleshooting/troubleshooting/README.md",
+    "slug": "advanced-and-troubleshooting/troubleshooting",
+    "route": "/advanced-and-troubleshooting/troubleshooting",
+    "title": "Troubleshooting",
+    "description": null,
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/troubleshooting/errors",
+    "file": "advanced-and-troubleshooting/troubleshooting/errors.md",
+    "slug": "advanced-and-troubleshooting/troubleshooting/errors",
+    "route": "/advanced-and-troubleshooting/troubleshooting/errors",
+    "title": "Errors & Resolutions",
+    "description": "Errors & Resolutions",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/troubleshooting/dkg_failure",
+    "file": "advanced-and-troubleshooting/troubleshooting/dkg_failure.md",
+    "slug": "advanced-and-troubleshooting/troubleshooting/dkg_failure",
+    "route": "/advanced-and-troubleshooting/troubleshooting/dkg_failure",
+    "title": "Handling DKG Failure",
+    "description": "Handling DKG failure",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/troubleshooting/client_configurations",
+    "file": "advanced-and-troubleshooting/troubleshooting/client_configurations.md",
+    "slug": "advanced-and-troubleshooting/troubleshooting/client_configurations",
+    "route": "/advanced-and-troubleshooting/troubleshooting/client_configurations",
+    "title": "Client Configuration",
+    "description": "A reference for extra configuration of Ethereum Clients when running in DVs.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/troubleshooting/test_command",
+    "file": "advanced-and-troubleshooting/troubleshooting/test_command.mdx",
+    "slug": "advanced-and-troubleshooting/troubleshooting/test_command",
+    "route": "/advanced-and-troubleshooting/troubleshooting/test_command",
+    "title": "Test Commands",
+    "description": "Troubleshoot issues spotted by the test command",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/README",
+    "file": "advanced-and-troubleshooting/security/README.md",
+    "slug": "advanced-and-troubleshooting/security",
+    "route": "/advanced-and-troubleshooting/security",
+    "title": "Security",
+    "description": null,
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/overview",
+    "file": "advanced-and-troubleshooting/security/overview.md",
+    "slug": "advanced-and-troubleshooting/security/overview",
+    "route": "/advanced-and-troubleshooting/security/overview",
+    "title": "Overview",
+    "description": "An overview of Obol's security posture — official domains, completed audits, threat model references, and the bug bounty program.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/risks",
+    "file": "advanced-and-troubleshooting/security/risks.md",
+    "slug": "advanced-and-troubleshooting/security/risks",
+    "route": "/advanced-and-troubleshooting/security/risks",
+    "title": "Centralization Risks and Mitigation",
+    "description": "Outlining potential centralization risks and their mitigations",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/bug-bounty",
+    "file": "advanced-and-troubleshooting/security/bug-bounty.md",
+    "slug": "advanced-and-troubleshooting/security/bug-bounty",
+    "route": "/advanced-and-troubleshooting/security/bug-bounty",
+    "title": "Obol Bug Bounty Program",
+    "description": "Obol's bug bounty program, scope, and reward structure for security researchers reporting vulnerabilities in our distributed validator software.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/smart-contract-audit",
+    "file": "advanced-and-troubleshooting/security/smart-contract-audit.md",
+    "slug": "advanced-and-troubleshooting/security/smart-contract-audit",
+    "route": "/advanced-and-troubleshooting/security/smart-contract-audit",
+    "title": "Smart Contract Audit",
+    "description": "Public audit reports for the Obol Splits and Obol Validator Manager smart contracts.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/ev-assessment",
+    "file": "advanced-and-troubleshooting/security/ev-assessment.md",
+    "slug": "advanced-and-troubleshooting/security/ev-assessment",
+    "route": "/advanced-and-troubleshooting/security/ev-assessment",
+    "title": "Software Development at Obol",
+    "description": "Ethereal Ventures' assessment of Obol's software development lifecycle and operational security practices, with the team's responses to each recommendation.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/threat_model",
+    "file": "advanced-and-troubleshooting/security/threat_model.md",
+    "slug": "advanced-and-troubleshooting/security/threat_model",
+    "route": "/advanced-and-troubleshooting/security/threat_model",
+    "title": "Charon Threat Model",
+    "description": "A threat model for Charon as a distributed validator middleware — actors, attack surfaces, and the cryptographic and BFT properties that bound each risk.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "advanced-and-troubleshooting/security/contact",
+    "file": "advanced-and-troubleshooting/security/contact.md",
+    "slug": "advanced-and-troubleshooting/security/contact",
+    "route": "/advanced-and-troubleshooting/security/contact",
+    "title": "Contacts",
+    "description": "How to report a security incident or vulnerability to Obol, and where to find Obol's public security disclosures.",
+    "group": "Advanced & Troubleshooting"
+  },
+  {
+    "id": "community-and-governance/governance",
+    "file": "community-and-governance/governance.md",
+    "slug": "community-and-governance/governance",
+    "route": "/community-and-governance/governance",
+    "title": "Governance",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/obol-token/README",
+    "file": "community-and-governance/obol-token/README.md",
+    "slug": "community-and-governance/obol-token",
+    "route": "/community-and-governance/obol-token",
+    "title": "The OBOL Token",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/obol-token/token-distribution-and-liquidity",
+    "file": "community-and-governance/obol-token/token-distribution-and-liquidity.md",
+    "slug": "community-and-governance/obol-token/token-distribution-and-liquidity",
+    "route": "/community-and-governance/obol-token/token-distribution-and-liquidity",
+    "title": "Token Distribution & Liquidity",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/obol-token/guide-for-unstaking-obol",
+    "file": "community-and-governance/obol-token/guide-for-unstaking-obol.md",
+    "slug": "community-and-governance/obol-token/guide-for-unstaking-obol",
+    "route": "/community-and-governance/obol-token/guide-for-unstaking-obol",
+    "title": "Guide for Unstaking OBOL",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/community/README",
+    "file": "community-and-governance/community/README.md",
+    "slug": "community-and-governance/community",
+    "route": "/community-and-governance/community",
+    "title": "Community",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/community/grants-program",
+    "file": "community-and-governance/community/grants-program.md",
+    "slug": "community-and-governance/community/grants-program",
+    "route": "/community-and-governance/community/grants-program",
+    "title": "Grants Program",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/community/techne",
+    "file": "community-and-governance/community/techne.md",
+    "slug": "community-and-governance/community/techne",
+    "route": "/community-and-governance/community/techne",
+    "title": "Techne",
+    "description": "Information about the Techne Credential Program.",
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/community/staking-masters",
+    "file": "community-and-governance/community/staking-masters.md",
+    "slug": "community-and-governance/community/staking-masters",
+    "route": "/community-and-governance/community/staking-masters",
+    "title": "Staking Mastery Program (Archived)",
+    "description": "Information about the Staking Mastery Program",
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/contribution/README",
+    "file": "community-and-governance/contribution/README.md",
+    "slug": "community-and-governance/contribution",
+    "route": "/community-and-governance/contribution",
+    "title": "Contribution & Feedback",
+    "description": null,
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/contribution/bug-report",
+    "file": "community-and-governance/contribution/bug-report.md",
+    "slug": "community-and-governance/contribution/bug-report",
+    "route": "/community-and-governance/contribution/bug-report",
+    "title": "Filing a Bug Report",
+    "description": "Filing a bug report",
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/contribution/docs",
+    "file": "community-and-governance/contribution/docs.md",
+    "slug": "community-and-governance/contribution/docs",
+    "route": "/community-and-governance/contribution/docs",
+    "title": "Documentation Standards",
+    "description": "Documentation Standards",
+    "group": "Community & Governance"
+  },
+  {
+    "id": "community-and-governance/contribution/feedback",
+    "file": "community-and-governance/contribution/feedback.md",
+    "slug": "community-and-governance/contribution/feedback",
+    "route": "/community-and-governance/contribution/feedback",
+    "title": "Feedback",
+    "description": "Feedback for us",
+    "group": "Community & Governance"
+  },
+  {
+    "id": "obol-stack/README",
+    "file": "obol-stack/README.md",
+    "slug": "obol-stack/obol-stack",
+    "route": "/obol-stack/obol-stack",
+    "title": "Introduction",
+    "description": "A framework for AI agents to run decentralized infrastructure locally",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/quickstart",
+    "file": "obol-stack/quickstart.mdx",
+    "slug": "obol-stack/quickstart",
+    "route": "/obol-stack/quickstart",
+    "title": "Quickstart",
+    "description": "Get started with the Obol Stack in under 10 minutes",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/build-a-profitable-stack",
+    "file": "obol-stack/build-a-profitable-stack.md",
+    "slug": "obol-stack/build-a-profitable-stack",
+    "route": "/obol-stack/build-a-profitable-stack",
+    "title": "Build a Profitable Obol Stack",
+    "description": "An end-to-end walkthrough — sync a bounded archive node, build a specialized quant agent on top, expose it as a paid service, and get it discoverable on agent marketplaces.",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/selling-services",
+    "file": "obol-stack/selling-services.md",
+    "slug": "obol-stack/selling-services",
+    "route": "/obol-stack/selling-services",
+    "title": "Selling Agent Services",
+    "description": "Sell agent services from your Obol Stack — payment-gated HTTP endpoints, inference, and full agent businesses paid in OBOL or USDC over x402.",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/permanent-url",
+    "file": "obol-stack/permanent-url.md",
+    "slug": "obol-stack/permanent-url",
+    "route": "/obol-stack/permanent-url",
+    "title": "Set up a Permanent URL",
+    "description": "Give your stack a permanent public URL with a Cloudflare tunnel, so buyers can reliably reach the services you sell.",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/installing-networks",
+    "file": "obol-stack/installing-networks.mdx",
+    "slug": "obol-stack/installing-networks",
+    "route": "/obol-stack/installing-networks",
+    "title": "Installing Networks",
+    "description": "Deploy blockchain networks on your local Obol Stack",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/installing-apps",
+    "file": "obol-stack/installing-apps.md",
+    "slug": "obol-stack/installing-apps",
+    "route": "/obol-stack/installing-apps",
+    "title": "Installing Apps",
+    "description": "Deploy additional applications on your Obol Stack",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "obol-stack/faq",
+    "file": "obol-stack/faq.md",
+    "slug": "obol-stack/faq",
+    "route": "/obol-stack/faq",
+    "title": "FAQ",
+    "description": "Frequently asked questions about the Obol Stack",
+    "group": "Obol Stack"
+  },
+  {
+    "id": "walkthrough-guides/walkthroughs/README",
+    "file": "walkthrough-guides/walkthroughs/README.md",
+    "slug": "walkthrough-guides/walkthroughs",
+    "route": "/walkthrough-guides/walkthroughs",
+    "title": "Walkthroughs",
+    "description": null,
+    "group": "Walkthrough Guides"
+  },
+  {
+    "id": "walkthrough-guides/walkthroughs/walkthrough-guides",
+    "file": "walkthrough-guides/walkthroughs/walkthrough-guides.md",
+    "slug": "walkthrough-guides/walkthroughs/walkthrough-guides",
+    "route": "/walkthrough-guides/walkthroughs/walkthrough-guides",
+    "title": "Walkthrough Guides",
+    "description": "Walkthrough guides",
+    "group": "Walkthrough Guides"
+  },
+  {
+    "id": "sdk/index",
+    "file": "sdk/index.md",
+    "slug": "sdk/index",
+    "route": "/sdk/index",
+    "title": "Intro",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/enumerations/README",
+    "file": "sdk/enumerations/README.md",
+    "slug": "sdk/enumerations",
+    "route": "/sdk/enumerations",
+    "title": "Enumerations",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/enumerations/FORK_MAPPING",
+    "file": "sdk/enumerations/FORK_MAPPING.md",
+    "slug": "sdk/enumerations/fork_mapping",
+    "route": "/sdk/enumerations/fork_mapping",
+    "title": "FORK_MAPPING",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/classes/README",
+    "file": "sdk/classes/README.md",
+    "slug": "sdk/classes",
+    "route": "/sdk/classes",
+    "title": "Classes",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/classes/Client",
+    "file": "sdk/classes/Client.md",
+    "slug": "sdk/classes/client",
+    "route": "/sdk/classes/client",
+    "title": "Client",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/interfaces/README",
+    "file": "sdk/interfaces/README.md",
+    "slug": "sdk/interfaces",
+    "route": "/sdk/interfaces",
+    "title": "Interfaces",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/interfaces/ClusterDefinition",
+    "file": "sdk/interfaces/ClusterDefinition.md",
+    "slug": "sdk/interfaces/clusterdefinition",
+    "route": "/sdk/interfaces/clusterdefinition",
+    "title": "ClusterDefinition",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/interfaces/RewardsSplitPayload",
+    "file": "sdk/interfaces/RewardsSplitPayload.md",
+    "slug": "sdk/interfaces/rewardssplitpayload",
+    "route": "/sdk/interfaces/rewardssplitpayload",
+    "title": "RewardsSplitPayload",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/README",
+    "file": "sdk/type-aliases/README.md",
+    "slug": "sdk/type-aliases",
+    "route": "/sdk/type-aliases",
+    "title": "Type-Aliases",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/BuilderRegistration",
+    "file": "sdk/type-aliases/BuilderRegistration.md",
+    "slug": "sdk/type-aliases/builderregistration",
+    "route": "/sdk/type-aliases/builderregistration",
+    "title": "BuilderRegistration",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/BuilderRegistrationMessage",
+    "file": "sdk/type-aliases/BuilderRegistrationMessage.md",
+    "slug": "sdk/type-aliases/builderregistrationmessage",
+    "route": "/sdk/type-aliases/builderregistrationmessage",
+    "title": "BuilderRegistrationMessage",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ClusterCreator",
+    "file": "sdk/type-aliases/ClusterCreator.md",
+    "slug": "sdk/type-aliases/clustercreator",
+    "route": "/sdk/type-aliases/clustercreator",
+    "title": "ClusterCreator",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ClusterLock",
+    "file": "sdk/type-aliases/ClusterLock.md",
+    "slug": "sdk/type-aliases/clusterlock",
+    "route": "/sdk/type-aliases/clusterlock",
+    "title": "ClusterLock",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ClusterOperator",
+    "file": "sdk/type-aliases/ClusterOperator.md",
+    "slug": "sdk/type-aliases/clusteroperator",
+    "route": "/sdk/type-aliases/clusteroperator",
+    "title": "ClusterOperator",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ClusterPayload",
+    "file": "sdk/type-aliases/ClusterPayload.md",
+    "slug": "sdk/type-aliases/clusterpayload",
+    "route": "/sdk/type-aliases/clusterpayload",
+    "title": "ClusterPayload",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ClusterValidator",
+    "file": "sdk/type-aliases/ClusterValidator.md",
+    "slug": "sdk/type-aliases/clustervalidator",
+    "route": "/sdk/type-aliases/clustervalidator",
+    "title": "ClusterValidator",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/DepositData",
+    "file": "sdk/type-aliases/DepositData.md",
+    "slug": "sdk/type-aliases/depositdata",
+    "route": "/sdk/type-aliases/depositdata",
+    "title": "DepositData",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/DistributedValidator",
+    "file": "sdk/type-aliases/DistributedValidator.md",
+    "slug": "sdk/type-aliases/distributedvalidator",
+    "route": "/sdk/type-aliases/distributedvalidator",
+    "title": "DistributedValidator",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/ETH_ADDRESS",
+    "file": "sdk/type-aliases/ETH_ADDRESS.md",
+    "slug": "sdk/type-aliases/eth_address",
+    "route": "/sdk/type-aliases/eth_address",
+    "title": "ETH_ADDRESS",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/OperatorPayload",
+    "file": "sdk/type-aliases/OperatorPayload.md",
+    "slug": "sdk/type-aliases/operatorpayload",
+    "route": "/sdk/type-aliases/operatorpayload",
+    "title": "OperatorPayload",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/SplitRecipient",
+    "file": "sdk/type-aliases/SplitRecipient.md",
+    "slug": "sdk/type-aliases/splitrecipient",
+    "route": "/sdk/type-aliases/splitrecipient",
+    "title": "SplitRecipient",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/type-aliases/TotalSplitPayload",
+    "file": "sdk/type-aliases/TotalSplitPayload.md",
+    "slug": "sdk/type-aliases/totalsplitpayload",
+    "route": "/sdk/type-aliases/totalsplitpayload",
+    "title": "TotalSplitPayload",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/functions/README",
+    "file": "sdk/functions/README.md",
+    "slug": "sdk/functions",
+    "route": "/sdk/functions",
+    "title": "Functions",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "sdk/functions/validateClusterLock",
+    "file": "sdk/functions/validateClusterLock.md",
+    "slug": "sdk/functions/validateclusterlock",
+    "route": "/sdk/functions/validateclusterlock",
+    "title": "validateClusterLock",
+    "description": null,
+    "group": "SDK"
+  },
+  {
+    "id": "api/what-is-this-api",
+    "file": "api/what-is-this-api.md",
+    "slug": "api/what-is-this-api",
+    "route": "/api/what-is-this-api",
+    "title": "What is this API?",
+    "description": "Download OpenAPI specifications: https://api.obol.tech/docs-json",
+    "group": "API"
+  },
+  {
+    "id": "api/system",
+    "file": "api/system.mdx",
+    "slug": "api/system",
+    "route": "/api/system",
+    "title": "System",
+    "description": "System related endpoints.",
+    "group": "API"
+  },
+  {
+    "id": "api/metrics",
+    "file": "api/metrics.mdx",
+    "slug": "api/metrics",
+    "route": "/api/metrics",
+    "title": "Metrics",
+    "description": "MetricsController_metrics",
+    "group": "API"
+  },
+  {
+    "id": "api/cluster-definition",
+    "file": "api/cluster-definition.mdx",
+    "slug": "api/cluster-definition",
+    "route": "/api/cluster-definition",
+    "title": "Cluster Definition",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/cluster-lock",
+    "file": "api/cluster-lock.mdx",
+    "slug": "api/cluster-lock",
+    "route": "/api/cluster-lock",
+    "title": "Cluster Lock",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/state",
+    "file": "api/state.mdx",
+    "slug": "api/state",
+    "route": "/api/state",
+    "title": "State",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/dv-exit",
+    "file": "api/dv-exit.mdx",
+    "slug": "api/dv-exit",
+    "route": "/api/dv-exit",
+    "title": "DV Exit",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/dv-migrate",
+    "file": "api/dv-migrate.mdx",
+    "slug": "api/dv-migrate",
+    "route": "/api/dv-migrate",
+    "title": "DV Migrate",
+    "description": "DV Migrate related endpoints.",
+    "group": "API"
+  },
+  {
+    "id": "api/cluster-effectiveness",
+    "file": "api/cluster-effectiveness.mdx",
+    "slug": "api/cluster-effectiveness",
+    "route": "/api/cluster-effectiveness",
+    "title": "Cluster Effectiveness",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/deposit-data",
+    "file": "api/deposit-data.mdx",
+    "slug": "api/deposit-data",
+    "route": "/api/deposit-data",
+    "title": "Deposit Data",
+    "description": "Deposit Data related endpoints.",
+    "group": "API"
+  },
+  {
+    "id": "api/terms-and-conditions",
+    "file": "api/terms-and-conditions.mdx",
+    "slug": "api/terms-and-conditions",
+    "route": "/api/terms-and-conditions",
+    "title": "Terms And Conditions",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/techne-credentials",
+    "file": "api/techne-credentials.mdx",
+    "slug": "api/techne-credentials",
+    "route": "/api/techne-credentials",
+    "title": "Techne Credentials",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/address",
+    "file": "api/address.mdx",
+    "slug": "api/address",
+    "route": "/api/address",
+    "title": "Address",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/owr-information",
+    "file": "api/owr-information.mdx",
+    "slug": "api/owr-information",
+    "route": "/api/owr-information",
+    "title": "OWR Information",
+    "description": null,
+    "group": "API"
+  },
+  {
+    "id": "api/test",
+    "file": "api/test.mdx",
+    "slug": "api/test",
+    "route": "/api/test",
+    "title": "Test",
+    "description": "Test related endpoints.",
+    "group": "API"
+  },
+  {
+    "id": "api/tvs",
+    "file": "api/tvs.mdx",
+    "slug": "api/tvs",
+    "route": "/api/tvs",
+    "title": "TVS",
+    "description": "TVS (Total Value Staked) related endpoints.",
+    "group": "API"
+  }
+]
