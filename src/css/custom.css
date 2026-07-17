@@ -1,139 +1,277 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Obol Docs — global styles.
+ * Brand: deep-sea teal ink + mint signal accents.
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #16968E;
-  --ifm-color-primary-dark: #2FE4AB;
-  --ifm-color-primary-darker: #16968E;
-  --ifm-color-primary-darkest: #111F22;
-  --ifm-color-primary-light: #81bba3;
-  --ifm-color-primary-lighter: #81bba3;
-  --ifm-color-primary-lightest: #D9ECF3;
-  --ifm-footer-background-color: #33474D;
-  --ifm-color-info-dark: #D9ECF3;
-  --ifm-code-font-size: 95%;
-  --prism-background-color: #243D42;
-  font-family: 'Avenir Next', Montserrat, sans-serif;
+  /* Obol palette */
+  --obol-ink: #111f22;
+  --obol-ink-2: #182d32;
+  --obol-ink-3: #243d42;
+  --obol-teal: #16968e;
+  --obol-teal-deep: #0d6b65;
+  --obol-mint: #2fe4ab;
+  --obol-foam: #d9ecf3;
+
+  --ifm-color-primary: #0f8a82;
+  --ifm-color-primary-dark: #0d7c75;
+  --ifm-color-primary-darker: #0c756e;
+  --ifm-color-primary-darkest: #0a615b;
+  --ifm-color-primary-light: #12988f;
+  --ifm-color-primary-lighter: #139f96;
+  --ifm-color-primary-lightest: #16b3a9;
+
+  --ifm-font-family-base: 'Figtree', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Helvetica, Arial, sans-serif;
+  --ifm-heading-font-family: 'Sora', var(--ifm-font-family-base);
+  --ifm-font-family-monospace: 'IBM Plex Mono', SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  --ifm-code-font-size: 90%;
+  --ifm-heading-font-weight: 700;
+  --ifm-global-radius: 0.5rem;
+  --ifm-navbar-shadow: 0 1px 0 var(--ifm-color-emphasis-200);
+  --docusaurus-highlighted-code-line-bg: rgba(22, 150, 142, 0.12);
 }
 
-html[data-theme="dark"] {
-  --ifm-background-color: #111F22;
-  --ifm-navbar-background-color: #182D32;
-  --prism-background-color: #243D42;
+[data-theme='dark'] {
+  --ifm-color-primary: #2fe4ab;
+  --ifm-color-primary-dark: #1cd99e;
+  --ifm-color-primary-darker: #19cd95;
+  --ifm-color-primary-darkest: #15a97b;
+  --ifm-color-primary-light: #49e8b5;
+  --ifm-color-primary-lighter: #56eaba;
+  --ifm-color-primary-lightest: #7defc9;
+
+  --ifm-background-color: #111f22;
+  --ifm-background-surface-color: #182d32;
+  --ifm-navbar-background-color: rgba(17, 31, 34, 0.85);
+  --ifm-card-background-color: #16282d;
+  --ifm-toc-border-color: #243d42;
+  --ifm-color-emphasis-200: #243d42;
+  --ifm-color-emphasis-300: #2d4a50;
+  --docusaurus-highlighted-code-line-bg: rgba(47, 228, 171, 0.09);
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+html {
+  scroll-behavior: smooth;
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
-  background-color: rgba(0, 0, 0, 0.3);
+/* ---------------------------------------------------------------- navbar */
+.navbar {
+  backdrop-filter: saturate(140%) blur(10px);
 }
 
-html[data-theme='dark'] footer.footer {
-  background-color: #091011;
+[data-theme='light'] .navbar {
+  background: rgba(255, 255, 255, 0.85);
 }
 
-html[data-theme='light'] footer.footer {
-  background-color: #091011;
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-html[data-theme='dark'] .hero__title {
-  color: #fff;
+.header-github-link::before {
+  content: '';
+  display: flex;
+  width: 22px;
+  height: 22px;
+  background-color: var(--ifm-navbar-link-color);
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .32.21.7.83.58A12 12 0 0 0 12 .3'/%3E%3C/svg%3E")
+    no-repeat center / contain;
 }
 
-html[data-theme='dark'] .hero__subtitle {
-  color: #fff;
+.header-github-link:hover::before {
+  background-color: var(--ifm-color-primary);
 }
 
-html[data-theme="dark"] .text--center--title {
-  color: #fff;
+.navbar-cta {
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 999px;
+  padding: 0.28rem 0.95rem !important;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary) !important;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-html[data-theme="light"] .text--center--title {
-  color: #011216;
+.navbar-cta:hover {
+  background: var(--ifm-color-primary);
+  color: var(--obol-ink) !important;
 }
 
-html[data-theme="dark"] .details {
-  background-color: #243D42;
+[data-theme='light'] .navbar-cta:hover {
+  color: #fff !important;
 }
 
-html[data-theme="light"] .details {
-  background-color: #f6f8fa;
+/* --------------------------------------------------------------- sidebar */
+.sidebar-section-title {
+  margin: 1.4rem 0 0.4rem;
+  padding: 0 var(--ifm-menu-link-padding-horizontal);
+  font-family: var(--ifm-heading-font-family);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
 }
 
-/* Docusaurus Colors */
-
-html[data-theme="dark"] .menu-content {
-  background-color: #111F22;
+.menu__list-item:first-child > .sidebar-section-title {
+  margin-top: 0.4rem;
 }
 
-html[data-theme="light"] .menu-content {
-  background-color: #ffffff;
+.menu__link {
+  font-size: 0.9rem;
 }
 
-html[data-theme="dark"] li > label  {
-  background-color: #111F22;
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 2px solid var(--ifm-color-primary);
+  border-radius: 0 var(--ifm-global-radius) var(--ifm-global-radius) 0;
 }
 
-html[data-theme="light"]  li > label  {
-  background-color: #ffffff;
+/* ------------------------------------------------------------ doc content */
+.markdown h1:first-child {
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
 }
 
-html[data-theme="dark"] div.scrollbar-container > div  {
-  background-color: #091011;
+.markdown a:not(.gb-card) {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
+  text-underline-offset: 3px;
 }
 
-/* Search Bar */
-body[data-theme="light"] {
-  --aa-primary-color-rgb: 28, 30, 33 !important;
+.markdown a:not(.gb-card):hover {
+  text-decoration-color: var(--ifm-color-primary);
 }
 
-body[data-theme="dark"] {
-  --aa-primary-color-rgb: 235, 237, 240 !important;
-  --aa-background-color-rgb: 17,31,35 !important;
-  --aa-muted-color-rgb: 235, 237, 240, 0.5 !important;
-  --aa-input-background-color-rgb: 17, 31, 34 !important;
+.markdown img {
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-200);
 }
 
-.aa-DetachedSearchButton  {
-  border: 0px solid #1c1e21 !important;
-  border-radius: 20px !important;
-  margin-right: 30px !important;
+figcaption {
+  margin: -0.4rem 0 1rem;
+  font-size: 0.82rem;
+  text-align: center;
+  color: var(--ifm-color-emphasis-600);
 }
 
-html[data-theme="light"] {
-  --aa-input-background-color-rgb: 22, 150, 142 !important;
-  --aa-input-background-color-alpha: 0.1 !important;
+.theme-admonition {
+  border-radius: 10px;
 }
 
-/* Adding super-section headers which are bold and not clickable */
-
-.menuSection > div > a {
-  background: none !important;
-  font-weight: bold !important;
+/* GitBook-imported card grids */
+.gb-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 1.75rem;
 }
 
-.menuSection > div > a:hover {
-  background: none !important;
+.gb-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  background: var(--ifm-card-background-color);
+  color: var(--ifm-font-color-base) !important;
+  text-decoration: none !important;
+  transition: border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-.menuSection > div:hover {
-  background: none !important;
+a.gb-card:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(22, 150, 142, 0.15);
 }
 
-.hidden {
-  display: none !important;
-  }
+.gb-card img {
+  width: calc(100% + 2.4rem);
+  max-width: none;
+  margin: -1.1rem -1.2rem 0.6rem;
+  height: 120px;
+  object-fit: cover;
+  border: none;
+  border-radius: 11px 11px 0 0;
+}
 
+.gb-card h3 {
+  margin: 0;
+  font-size: 1.02rem;
+}
 
-/* html[data-theme="dark"] div.scrollbar-container > div  {
-  background-color: #091011;
-} */
+.gb-card p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* YouTube embeds imported from GitBook */
+.video-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  margin: 1rem 0 1.5rem;
+}
+
+/* tables */
+.markdown table {
+  display: table;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+/* version badge/banner polish */
+.theme-doc-version-banner {
+  border-radius: 10px;
+}
+
+/* pagination */
+.pagination-nav__link {
+  border-radius: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.pagination-nav__link:hover {
+  transform: translateY(-1px);
+}
+
+/* footer */
+.footer--dark {
+  --ifm-footer-background-color: #0b1517;
+  border-top: 1px solid #1d3237;
+}
+
+.footer__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--obol-mint);
+}
+
+/* code blocks */
+pre code {
+  font-variant-ligatures: none;
+}
+
+[data-theme='light'] .prism-code {
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* breadcrumbs */
+.breadcrumbs__link {
+  font-size: 0.8rem;
+}
+
+/* search */
+.navbar__search-input {
+  border-radius: 999px;
+}

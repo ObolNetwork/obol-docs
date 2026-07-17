@@ -1,0 +1,114 @@
+.endpoint {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  margin: 0.65rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  background: var(--ifm-card-background-color);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.endpoint:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(22, 150, 142, 0.14);
+}
+
+.method {
+  flex-shrink: 0;
+  min-width: 4.2rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #fff;
+  background: var(--ifm-color-emphasis-600);
+}
+
+.method[data-method='get'] {
+  background: #16968e;
+}
+.method[data-method='post'] {
+  background: #0e7a5f;
+}
+.method[data-method='put'] {
+  background: #9167e4;
+}
+.method[data-method='patch'] {
+  background: #b98e2f;
+}
+.method[data-method='delete'] {
+  background: #dd603c;
+}
+
+.path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.path code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.deprecated {
+  flex-shrink: 0;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #dd603c;
+  border: 1px solid #dd603c;
+}
+
+.summary {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow {
+  flex-shrink: 0;
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.endpoint:hover .arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 640px) {
+  .endpoint {
+    flex-wrap: wrap;
+  }
+  .summary {
+    flex-basis: 100%;
+    white-space: normal;
+  }
+}

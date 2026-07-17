@@ -1,0 +1,4826 @@
+[
+  {
+    "from": "/adv/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/adv/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/adv/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/adv/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/adv/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/adv/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/adv/security/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/adv/security/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/adv/security/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/adv/security/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/adv/security/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/adv/security/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/adv/security/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/adv/troubleshooting/client_configurations",
+    "to": "/advanced-and-troubleshooting/troubleshooting/client_configurations"
+  },
+  {
+    "from": "/adv/troubleshooting/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/adv/troubleshooting/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/adv/troubleshooting/test_command",
+    "to": "/advanced-and-troubleshooting/troubleshooting/test_command"
+  },
+  {
+    "from": "/docs/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/docs/advanced/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/docs/advanced/lido-csm",
+    "to": "/run-a-dv/integrations/lido-csm"
+  },
+  {
+    "from": "/docs/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/docs/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/docs/advanced/obol-validator-manager",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/docs/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/docs/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/docs/advanced/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/docs/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/docs/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/docs/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/docs/advanced/splitter-manual-config",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/docs/advanced/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/docs/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/docs/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/docs/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/docs/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/docs/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/docs/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/docs/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/docs/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/docs/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/docs/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/docs/faq/Dappnode",
+    "to": "/run-a-dv/integrations/dappnode"
+  },
+  {
+    "from": "/docs/faq/client_configurations",
+    "to": "/advanced-and-troubleshooting/troubleshooting/client_configurations"
+  },
+  {
+    "from": "/docs/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/docs/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/docs/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/docs/faq/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/docs/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/docs/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/docs/fr/resources",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/docs/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/docs/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/docs/int/how_where_DVs",
+    "to": "/run-a-dv/prepare/how_where_dvs"
+  },
+  {
+    "from": "/docs/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/docs/next/start/activate",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/docs/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/docs/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/docs/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/docs/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/docs/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/docs/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/docs/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/docs/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/docs/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/docs/start/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/docs/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/docs/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/docs/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/docs/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/docs/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/gov/community/contributions",
+    "to": "/community-and-governance/community"
+  },
+  {
+    "from": "/gov/community/staking-masters",
+    "to": "/community-and-governance/community/staking-masters"
+  },
+  {
+    "from": "/gov/community/techne",
+    "to": "/community-and-governance/community/techne"
+  },
+  {
+    "from": "/gov/contribution/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/gov/contribution/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/gov/contribution/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/gov/governance/collective",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/gov/governance/delegate-guide",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/gov/governance/obol-token",
+    "to": "/community-and-governance/obol-token"
+  },
+  {
+    "from": "/gov/governance/raf",
+    "to": "/community-and-governance/community/grants-program"
+  },
+  {
+    "from": "/gov/governance/raf1-guide",
+    "to": "/community-and-governance/community/grants-program"
+  },
+  {
+    "from": "/gov/governance/token-house",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/guides/walkthroughs/walkthrough-guides",
+    "to": "/walkthrough-guides/walkthroughs/walkthrough-guides"
+  },
+  {
+    "from": "/learn/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/learn/futher-reading/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/learn/futher-reading/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/learn/futher-reading/resources",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/learn/futher-reading/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/learn/intro/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/learn/intro/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/learn/intro/launchpad",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/learn/intro/obol-collective",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/learn/intro/obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/learn/intro/obol-vs-others",
+    "to": "/learn/readme/obol-vs-others"
+  },
+  {
+    "from": "/run/integrations/Dappnode",
+    "to": "/run-a-dv/integrations/dappnode"
+  },
+  {
+    "from": "/run/integrations/lido-csm",
+    "to": "/run-a-dv/integrations/lido-csm"
+  },
+  {
+    "from": "/run/integrations/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/run/prepare/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/run/prepare/how_where_DVs",
+    "to": "/run-a-dv/prepare/how_where_dvs"
+  },
+  {
+    "from": "/run/prepare/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/run/running/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/run/running/claim-rewards",
+    "to": "/run-a-dv/running/claim-rewards"
+  },
+  {
+    "from": "/run/running/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/run/running/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/run/running/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/run/start/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/run/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/run/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/run/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/sdk/classes/Client",
+    "to": "/sdk/classes/client"
+  },
+  {
+    "from": "/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/enumerations/fork_mapping"
+  },
+  {
+    "from": "/sdk/functions/validateClusterLock",
+    "to": "/sdk/functions/validateclusterlock"
+  },
+  {
+    "from": "/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/interfaces/clusterdefinition"
+  },
+  {
+    "from": "/sdk/interfaces/RewardsSplitPayload",
+    "to": "/sdk/interfaces/rewardssplitpayload"
+  },
+  {
+    "from": "/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/type-aliases/builderregistration"
+  },
+  {
+    "from": "/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/type-aliases/builderregistrationmessage"
+  },
+  {
+    "from": "/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/type-aliases/clustercreator"
+  },
+  {
+    "from": "/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/type-aliases/clusterlock"
+  },
+  {
+    "from": "/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/type-aliases/clusteroperator"
+  },
+  {
+    "from": "/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/type-aliases/clusterpayload"
+  },
+  {
+    "from": "/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/type-aliases/clustervalidator"
+  },
+  {
+    "from": "/sdk/type-aliases/DepositData",
+    "to": "/sdk/type-aliases/depositdata"
+  },
+  {
+    "from": "/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/type-aliases/distributedvalidator"
+  },
+  {
+    "from": "/sdk/type-aliases/ETH_ADDRESS",
+    "to": "/sdk/type-aliases/eth_address"
+  },
+  {
+    "from": "/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/type-aliases/operatorpayload"
+  },
+  {
+    "from": "/sdk/type-aliases/SplitRecipient",
+    "to": "/sdk/type-aliases/splitrecipient"
+  },
+  {
+    "from": "/sdk/type-aliases/TotalSplitPayload",
+    "to": "/sdk/type-aliases/totalsplitpayload"
+  },
+  {
+    "from": "/v0.10.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.10.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.10.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.10.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.10.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.10.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.10.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.10.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.10.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.10.1/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.10.1/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.10.1/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.10.1/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.10.1/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.10.1/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.10.1/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.10.1/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.10.1/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.10.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.10.1/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/int/quickstart/group/quickstart-group-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.10.1/int/quickstart/group/quickstart-group-launchpad",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.10.1/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.11.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.11.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.11.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.11.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.11.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.11.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.11.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.11.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.11.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.11.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.11.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/int/quickstart/group/quickstart-group-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.11.0/int/quickstart/group/quickstart-group-launchpad",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.11.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.12.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.12.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.12.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.12.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.12.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.12.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.12.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.12.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.12.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.12.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.12.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/int/quickstart/group/quickstart-group-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.12.0/int/quickstart/group/quickstart-group-launchpad",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.12.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.13.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.13.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.13.0/charon/charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.13.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.13.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.13.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.13.0/charon/p2p-interface",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.13.0/charon/peer-discovery",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.13.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.13.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.13.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.13.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.13.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.13.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.13.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/int/quickstart/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.13.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.13.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.14.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.14.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.14.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.14.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.14.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.14.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.14.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.14.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.14.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.14.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.14.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.14.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.14.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.14.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.14.0/int/quickstart/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.14.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.14.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.14.0/sec/roadmap",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.14.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.14.4/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.14.4/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.14.4/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.14.4/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.14.4/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.14.4/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.14.4/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.14.4/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.14.4/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.14.4/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.14.4/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.14.4/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.14.4/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.14.4/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/int/quickstart/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.14.4/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.14.4/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.14.4/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.14.4/sec/roadmap",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.14.4/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.15.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.15.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.15.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.15.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.15.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.15.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.15.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.15.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.15.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.15.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.15.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.15.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.15.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.15.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/int/quickstart/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.15.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.15.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.15.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.15.0/sec/roadmap",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.15.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.16.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.16.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.16.0/cg/feedback",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.16.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.16.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.16.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.16.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.16.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.16.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.16.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.16.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.16.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.16.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.16.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.16.0/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.16.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/activate-dv",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/adv-docker-configs",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/monitoring-credentials",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/prysm-vc",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/advanced/self-relay",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/alone/create-keys",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/alone/deploy",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/alone/test-locally",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/group/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/int/quickstart/update",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.16.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.16.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.16.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.16.0/sec/roadmap",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.16.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.17.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.0/cg/feedback",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.17.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.17.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.17.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.17.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.17.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.17.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.17.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.17.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.17.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.0/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.0/int/faq/threat_model",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/activate-dv",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/adv-docker-configs",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/obol-monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/prysm-vc",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/quickstart-sdk",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/advanced/self-relay",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/alone/create-keys",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/alone/deploy",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/alone/test-locally",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/group/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/int/quickstart/update",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.17.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.17.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.17.0/sec/roadmap",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.17.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.17.1/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.1/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.1/cg/feedback",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.17.1/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.17.1/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.17.1/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.17.1/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.17.1/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.17.1/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.17.1/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.17.1/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.17.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.17.1/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.1/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.1/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.17.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/activate-dv",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/adv-docker-configs",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/obol-monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/quickstart-sdk",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/advanced/self-relay",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/alone/create-keys",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/alone/deploy",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/alone/test-locally",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/group/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/int/quickstart/update",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.17.1/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.17.1/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.17.1/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v0.17.1/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.17.1/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v0.17.1/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v0.17.1/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.18.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.18.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.18.0/cg/feedback",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.18.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.18.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.18.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.18.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.18.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.18.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.18.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.18.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.18.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.18.0/int/faq/dkg_failure",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.18.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.18.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.18.0/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.18.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/activate-dv",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/adv-docker-configs",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/obol-monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/quickstart-sdk",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/advanced/self-relay",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/alone/create-keys",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/alone/deploy",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/alone/test-locally",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/group/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/int/quickstart/update",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.18.0/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v0.18.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.18.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.18.0/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v0.18.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.18.0/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v0.18.0/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v0.18.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.19.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.19.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.19.0/cg/feedback",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.19.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.19.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.19.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.19.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.19.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.19.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.19.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.19.0/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.19.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.19.0/int/faq/dkg_failure",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.19.0/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.0/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.0/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/activate-dv",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/adv-docker-configs",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/obol-monitoring",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/quickstart-builder-api",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/quickstart-combine",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/quickstart-sdk",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/quickstart-split",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/advanced/self-relay",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/alone/create-keys",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/alone/deploy",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/alone/test-locally",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/group/quickstart-cli",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/group/quickstart-group-leader-creator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/group/quickstart-group-operator",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/quickstart-exit",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/quickstart-mainnet",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/int/quickstart/update",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.19.0/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v0.19.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.19.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.19.0/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v0.19.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.19.0/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v0.19.0/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v0.19.1/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v0.19.1/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v0.19.1/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v0.19.1/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v0.19.1/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v0.19.1/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v0.19.1/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v0.19.1/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v0.19.1/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v0.19.1/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v0.19.1/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v0.19.1/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.19.1/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.19.1/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.19.1/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.19.1/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.19.1/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.19.1/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v0.19.1/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.19.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.19.1/int/faq/dkg_failure",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.19.1/int/faq/errors",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.1/int/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.1/int/faq/risks",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.19.1/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v0.19.1/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/interfaces/ClusterDefintion",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/interfaces/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/interfaces/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.1/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.19.1/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.19.1/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v0.19.1/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.19.1/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v0.19.1/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v0.19.1/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v0.19.1/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v0.19.1/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v0.19.1/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v0.19.1/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v0.19.1/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v0.19.2/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v0.19.2/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v0.19.2/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v0.19.2/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v0.19.2/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v0.19.2/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v0.19.2/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v0.19.2/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v0.19.2/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v0.19.2/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v0.19.2/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v0.19.2/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.19.2/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v0.19.2/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v0.19.2/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.19.2/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v0.19.2/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v0.19.2/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v0.19.2/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v0.19.2/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.19.2/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v0.19.2/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v0.19.2/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.19.2/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.19.2/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.19.2/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v0.19.2/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/functions/validateClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/interfaces/ClusterDefintion",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v0.19.2/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v0.19.2/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v0.19.2/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v0.19.2/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v0.19.2/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v0.19.2/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v0.19.2/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v0.19.2/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v0.19.2/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v0.19.2/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v0.19.2/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v0.19.2/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v0.3.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.3.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.3.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.3.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.3.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.3.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.3.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.3.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.3.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.3.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.3.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.3.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.3.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.3.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.4.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.4.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.4.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.4.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.4.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.4.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.4.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.4.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.4.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.4.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.4.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.4.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.4.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.4.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.5.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.5.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.5.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.5.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.5.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.5.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.5.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.5.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.5.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.5.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.5.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.5.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.5.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.5.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.5.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.6.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.6.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.6.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.6.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.6.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.6.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.6.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.6.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.6.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.6.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.6.1/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.6.1/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.6.1/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.6.1/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.6.1/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.6.1/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.6.1/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.6.1/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.6.1/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.6.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.6.1/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.6.1/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.7.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.7.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.7.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.7.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.7.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/dvk/03_dkg_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.7.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.7.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.7.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.7.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.7.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.7.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.7.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.8.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.8.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.8.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.8.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.8.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.8.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.8.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.8.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.8.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.8.1/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.8.1/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.8.1/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.8.1/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.8.1/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.8.1/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.8.1/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.8.1/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.8.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.8.1/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.8.1/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v0.9.0/cg/bug-report",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.9.0/cg/docs",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v0.9.0/dv/01_introducing-charon",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v0.9.0/dv/02_validator-creation",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dv/04_middleware-daemon",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dv/06_peer-discovery",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dv/07_p2p-interface",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dv/08_distributed-validator-cluster-manifest",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dv/09_charon_cli_reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v0.9.0/dvk/01_distributed-validator-keys",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/dvk/02_distributed_validator_launchpad",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/fr/eth",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.9.0/fr/golang",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v0.9.0/glossary",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v0.9.0/int/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v0.9.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v0.9.0/int/quickstart",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/int/quickstart/quickstart-alone",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/int/quickstart/quickstart-group",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/int/working-groups",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/intro",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/sc/01_introducing-obol-managers",
+    "to": "/learn/readme/learn-about-obol"
+  },
+  {
+    "from": "/v0.9.0/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.0.0/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v1.0.0/advanced/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/v1.0.0/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v1.0.0/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v1.0.0/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v1.0.0/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v1.0.0/advanced/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/v1.0.0/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v1.0.0/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v1.0.0/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v1.0.0/advanced/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/v1.0.0/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v1.0.0/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v1.0.0/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v1.0.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v1.0.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v1.0.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v1.0.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v1.0.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v1.0.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v1.0.0/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v1.0.0/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v1.0.0/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.0.0/faq/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/v1.0.0/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v1.0.0/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v1.0.0/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.0.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.0.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v1.0.0/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v1.0.0/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/functions/validateClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/interfaces/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.0.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v1.0.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v1.0.0/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v1.0.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v1.0.0/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v1.0.0/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v1.0.0/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v1.0.0/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v1.0.0/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v1.0.0/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v1.0.0/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v1.0.0/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v1.1.0/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v1.1.0/advanced/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/v1.1.0/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v1.1.0/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v1.1.0/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v1.1.0/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v1.1.0/advanced/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/v1.1.0/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v1.1.0/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v1.1.0/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v1.1.0/advanced/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/v1.1.0/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v1.1.0/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v1.1.0/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v1.1.0/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v1.1.0/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v1.1.0/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v1.1.0/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v1.1.0/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v1.1.0/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v1.1.0/faq/contributions",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.0/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v1.1.0/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v1.1.0/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.0/faq/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/v1.1.0/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v1.1.0/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v1.1.0/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.1.0/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.1.0/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v1.1.0/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v1.1.0/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/functions/validateClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.0/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v1.1.0/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v1.1.0/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v1.1.0/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v1.1.0/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v1.1.0/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v1.1.0/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v1.1.0/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v1.1.0/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v1.1.0/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v1.1.0/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v1.1.0/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v1.1.1/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v1.1.1/advanced/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/v1.1.1/advanced/lido_csm",
+    "to": "/run-a-dv/integrations/lido-csm"
+  },
+  {
+    "from": "/v1.1.1/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v1.1.1/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v1.1.1/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v1.1.1/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v1.1.1/advanced/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/v1.1.1/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v1.1.1/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v1.1.1/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v1.1.1/advanced/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/v1.1.1/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v1.1.1/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v1.1.1/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v1.1.1/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v1.1.1/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v1.1.1/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v1.1.1/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v1.1.1/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v1.1.1/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v1.1.1/faq/client_configurations",
+    "to": "/advanced-and-troubleshooting/troubleshooting/client_configurations"
+  },
+  {
+    "from": "/v1.1.1/faq/contributions",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.1/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v1.1.1/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v1.1.1/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.1/faq/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/v1.1.1/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v1.1.1/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v1.1.1/fr/resources",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v1.1.1/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.1.1/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.1.1/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v1.1.1/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v1.1.1/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/functions/validateClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.1/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v1.1.1/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v1.1.1/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v1.1.1/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v1.1.1/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v1.1.1/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v1.1.1/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v1.1.1/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v1.1.1/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v1.1.1/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v1.1.1/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v1.1.1/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v1.1.2/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v1.1.2/advanced/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/v1.1.2/advanced/lido-csm",
+    "to": "/run-a-dv/integrations/lido-csm"
+  },
+  {
+    "from": "/v1.1.2/advanced/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v1.1.2/advanced/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v1.1.2/advanced/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v1.1.2/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v1.1.2/advanced/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/v1.1.2/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v1.1.2/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v1.1.2/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v1.1.2/advanced/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/v1.1.2/cf/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v1.1.2/cf/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v1.1.2/cf/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v1.1.2/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v1.1.2/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v1.1.2/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v1.1.2/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v1.1.2/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v1.1.2/dvl/intro",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v1.1.2/faq/Dappnode",
+    "to": "/run-a-dv/integrations/dappnode"
+  },
+  {
+    "from": "/v1.1.2/faq/client_configurations",
+    "to": "/advanced-and-troubleshooting/troubleshooting/client_configurations"
+  },
+  {
+    "from": "/v1.1.2/faq/contributions",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.2/faq/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v1.1.2/faq/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v1.1.2/faq/general",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.1.2/faq/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/v1.1.2/faq/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v1.1.2/fr/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v1.1.2/fr/resources",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v1.1.2/fr/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.1.2/int/Overview",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.1.2/int/how_where_DVs",
+    "to": "/run-a-dv/prepare/how_where_dvs"
+  },
+  {
+    "from": "/v1.1.2/int/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v1.1.2/sc/introducing-obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v1.1.2/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/classes/Client",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/functions/validateClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/interfaces/RewardsSplitPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/DepositData",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/ETH_ADDRESS",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/SplitRecipient",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sdk/type-aliases/TotalSplitPayload",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.1.2/sec/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v1.1.2/sec/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v1.1.2/sec/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v1.1.2/sec/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v1.1.2/sec/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v1.1.2/sec/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v1.1.2/start/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v1.1.2/start/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v1.1.2/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v1.1.2/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v1.1.2/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v1.1.2/start/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v1.2.0/adv/advanced/adv-docker-configs",
+    "to": "/advanced-and-troubleshooting/advanced/adv-docker-configs"
+  },
+  {
+    "from": "/v1.2.0/adv/advanced/quickstart-combine",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-combine"
+  },
+  {
+    "from": "/v1.2.0/adv/advanced/quickstart-sdk",
+    "to": "/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk"
+  },
+  {
+    "from": "/v1.2.0/adv/advanced/quickstart-split",
+    "to": "/advanced-and-troubleshooting/advanced/quickstart-split"
+  },
+  {
+    "from": "/v1.2.0/adv/advanced/self-relay",
+    "to": "/advanced-and-troubleshooting/advanced/self-relay"
+  },
+  {
+    "from": "/v1.2.0/adv/security/bug-bounty",
+    "to": "/advanced-and-troubleshooting/security/bug-bounty"
+  },
+  {
+    "from": "/v1.2.0/adv/security/contact",
+    "to": "/advanced-and-troubleshooting/security/contact"
+  },
+  {
+    "from": "/v1.2.0/adv/security/ev-assessment",
+    "to": "/advanced-and-troubleshooting/security/ev-assessment"
+  },
+  {
+    "from": "/v1.2.0/adv/security/overview",
+    "to": "/advanced-and-troubleshooting/security/overview"
+  },
+  {
+    "from": "/v1.2.0/adv/security/risks",
+    "to": "/advanced-and-troubleshooting/security/risks"
+  },
+  {
+    "from": "/v1.2.0/adv/security/smart_contract_audit",
+    "to": "/advanced-and-troubleshooting/security/smart-contract-audit"
+  },
+  {
+    "from": "/v1.2.0/adv/security/threat_model",
+    "to": "/advanced-and-troubleshooting/security/threat_model"
+  },
+  {
+    "from": "/v1.2.0/adv/troubleshooting/client_configurations",
+    "to": "/advanced-and-troubleshooting/troubleshooting/client_configurations"
+  },
+  {
+    "from": "/v1.2.0/adv/troubleshooting/dkg_failure",
+    "to": "/advanced-and-troubleshooting/troubleshooting/dkg_failure"
+  },
+  {
+    "from": "/v1.2.0/adv/troubleshooting/errors",
+    "to": "/advanced-and-troubleshooting/troubleshooting/errors"
+  },
+  {
+    "from": "/v1.2.0/adv/troubleshooting/test_command",
+    "to": "/advanced-and-troubleshooting/troubleshooting/test_command"
+  },
+  {
+    "from": "/v1.2.0/gov/community/staking-masters",
+    "to": "/community-and-governance/community/staking-masters"
+  },
+  {
+    "from": "/v1.2.0/gov/community/techne",
+    "to": "/community-and-governance/community/techne"
+  },
+  {
+    "from": "/v1.2.0/gov/contribution/bug-report",
+    "to": "/community-and-governance/contribution/bug-report"
+  },
+  {
+    "from": "/v1.2.0/gov/contribution/docs",
+    "to": "/community-and-governance/contribution/docs"
+  },
+  {
+    "from": "/v1.2.0/gov/contribution/feedback",
+    "to": "/community-and-governance/contribution/feedback"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/collective",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/delegate-guide",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/obol-token",
+    "to": "/community-and-governance/obol-token"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/raf",
+    "to": "/community-and-governance/community/grants-program"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/raf1-guide",
+    "to": "/community-and-governance/community/grants-program"
+  },
+  {
+    "from": "/v1.2.0/gov/governance/token-house",
+    "to": "/community-and-governance/governance"
+  },
+  {
+    "from": "/v1.2.0/guides/walkthroughs/walkthrough-guides",
+    "to": "/walkthrough-guides/walkthroughs/walkthrough-guides"
+  },
+  {
+    "from": "/v1.2.0/learn/charon/charon-cli-reference",
+    "to": "/learn/charon/charon-cli-reference"
+  },
+  {
+    "from": "/v1.2.0/learn/charon/cluster-configuration",
+    "to": "/learn/charon/cluster-configuration"
+  },
+  {
+    "from": "/v1.2.0/learn/charon/dkg",
+    "to": "/learn/charon/dkg"
+  },
+  {
+    "from": "/v1.2.0/learn/charon/intro",
+    "to": "/learn/charon/intro"
+  },
+  {
+    "from": "/v1.2.0/learn/charon/networking",
+    "to": "/learn/charon/charon-networking"
+  },
+  {
+    "from": "/v1.2.0/learn/futher-reading/ethereum_and_dvt",
+    "to": "/learn/further-reading/ethereum_and_dvt"
+  },
+  {
+    "from": "/v1.2.0/learn/futher-reading/peer_score",
+    "to": "/learn/further-reading/peer_score"
+  },
+  {
+    "from": "/v1.2.0/learn/futher-reading/resources",
+    "to": "/learn/further-reading/resources"
+  },
+  {
+    "from": "/v1.2.0/learn/futher-reading/testnet",
+    "to": "/learn/further-reading/testnet"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/faq",
+    "to": "/learn/readme/frequently-asked-questions"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/key-concepts",
+    "to": "/learn/readme/key-concepts"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/launchpad",
+    "to": "/learn/readme/launchpad"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/obol-collective",
+    "to": "/learn/readme/obol-collective"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/obol-splits",
+    "to": "/learn/readme/obol-splits"
+  },
+  {
+    "from": "/v1.2.0/learn/intro/obol-vs-others",
+    "to": "/learn/readme/obol-vs-others"
+  },
+  {
+    "from": "/v1.2.0/run/integrations/Dappnode",
+    "to": "/run-a-dv/integrations/dappnode"
+  },
+  {
+    "from": "/v1.2.0/run/integrations/lido-csm",
+    "to": "/run-a-dv/integrations/lido-csm"
+  },
+  {
+    "from": "/v1.2.0/run/integrations/quickstart-eigenpod",
+    "to": "/run-a-dv/integrations/create-an-eigenlayer-dv"
+  },
+  {
+    "from": "/v1.2.0/run/prepare/deployment-best-practices",
+    "to": "/run-a-dv/prepare/deployment-best-practices"
+  },
+  {
+    "from": "/v1.2.0/run/prepare/how_where_DVs",
+    "to": "/run-a-dv/prepare/how_where_dvs"
+  },
+  {
+    "from": "/v1.2.0/run/prepare/test-command",
+    "to": "/run-a-dv/prepare/test-a-cluster"
+  },
+  {
+    "from": "/v1.2.0/run/running/activate-dv",
+    "to": "/run-a-dv/running/activate-a-dv"
+  },
+  {
+    "from": "/v1.2.0/run/running/monitoring",
+    "to": "/run-a-dv/running/monitoring"
+  },
+  {
+    "from": "/v1.2.0/run/running/quickstart-exit",
+    "to": "/run-a-dv/running/exit-a-dv"
+  },
+  {
+    "from": "/v1.2.0/run/running/update",
+    "to": "/run-a-dv/running/update-a-dv"
+  },
+  {
+    "from": "/v1.2.0/run/start/obol-monitoring",
+    "to": "/run-a-dv/start/obol-monitoring"
+  },
+  {
+    "from": "/v1.2.0/run/start/quickstart-builder-api",
+    "to": "/advanced-and-troubleshooting/advanced/enable-mev"
+  },
+  {
+    "from": "/v1.2.0/run/start/quickstart_alone",
+    "to": "/run-a-dv/start/create-a-dv-alone"
+  },
+  {
+    "from": "/v1.2.0/run/start/quickstart_group",
+    "to": "/run-a-dv/start/create-a-dv-with-a-group"
+  },
+  {
+    "from": "/v1.2.0/run/start/quickstart_overview",
+    "to": "/run-a-dv/start/quickstart_overview"
+  },
+  {
+    "from": "/v1.2.0/sdk",
+    "to": "/sdk/index"
+  },
+  {
+    "from": "/v1.2.0/sdk/classes/Client",
+    "to": "/sdk/classes/client"
+  },
+  {
+    "from": "/v1.2.0/sdk/enumerations/FORK_MAPPING",
+    "to": "/sdk/enumerations/fork_mapping"
+  },
+  {
+    "from": "/v1.2.0/sdk/functions/validateClusterLock",
+    "to": "/sdk/functions/validateclusterlock"
+  },
+  {
+    "from": "/v1.2.0/sdk/interfaces/ClusterDefinition",
+    "to": "/sdk/interfaces/clusterdefinition"
+  },
+  {
+    "from": "/v1.2.0/sdk/interfaces/RewardsSplitPayload",
+    "to": "/sdk/interfaces/rewardssplitpayload"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/BuilderRegistration",
+    "to": "/sdk/type-aliases/builderregistration"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/BuilderRegistrationMessage",
+    "to": "/sdk/type-aliases/builderregistrationmessage"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ClusterCreator",
+    "to": "/sdk/type-aliases/clustercreator"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ClusterLock",
+    "to": "/sdk/type-aliases/clusterlock"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ClusterOperator",
+    "to": "/sdk/type-aliases/clusteroperator"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ClusterPayload",
+    "to": "/sdk/type-aliases/clusterpayload"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ClusterValidator",
+    "to": "/sdk/type-aliases/clustervalidator"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/DepositData",
+    "to": "/sdk/type-aliases/depositdata"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/DistributedValidator",
+    "to": "/sdk/type-aliases/distributedvalidator"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/ETH_ADDRESS",
+    "to": "/sdk/type-aliases/eth_address"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/OperatorPayload",
+    "to": "/sdk/type-aliases/operatorpayload"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/SplitRecipient",
+    "to": "/sdk/type-aliases/splitrecipient"
+  },
+  {
+    "from": "/v1.2.0/sdk/type-aliases/TotalSplitPayload",
+    "to": "/sdk/type-aliases/totalsplitpayload"
+  }
+]

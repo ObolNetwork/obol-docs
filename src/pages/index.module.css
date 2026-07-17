@@ -1,86 +1,488 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* Obol Docs homepage — deep-sea control room. */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+/* ------------------------------------------------------------------ hero */
+.hero {
   position: relative;
   overflow: hidden;
-  background: --ifm-background-color;
-  background: linear-gradient(90deg, #16968E 0%, #2FE4AB 100%);
+  padding: 5rem 1.5rem 4.5rem;
+  background:
+    radial-gradient(1200px 500px at 15% -10%, rgba(22, 150, 142, 0.28), transparent 60%),
+    radial-gradient(900px 420px at 90% 10%, rgba(47, 228, 171, 0.12), transparent 55%),
+    linear-gradient(180deg, #0b1517 0%, #111f22 70%, #111f22 100%);
+  color: #e8f3f1;
 }
 
-html[data-theme='dark'] .heroBanner {
-  background: linear-gradient(90deg, #192d31 0%,  #16968E 100%);
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(217, 236, 243, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 85%);
+  pointer-events: none;
 }
 
-.heroLogo {
-  width: 40%;
-  padding-bottom: 2rem;
+.heroInner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1160px;
+  margin: 0 auto;
 }
 
-html[data-theme='dark'] .heroLogo {
-  filter: brightness(0) saturate(100%) invert(99%) sepia(45%) saturate(979%) hue-rotate(169deg) brightness(99%) contrast(92%);
+.heroCopy {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-@media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-
-  .heroLogo {
-    width: 80%;
-    padding: 2rem;
-  }
+.eyebrow {
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #2fe4ab;
 }
 
-.buttons {
+.title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.2rem;
+  color: #f4fbf9;
+}
+
+.accent {
+  color: #2fe4ab;
+  white-space: nowrap;
+}
+
+.subtitle {
+  max-width: 34rem;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: #b9d2d5;
+  margin-bottom: 2rem;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.ctaPrimary {
+  background: #2fe4ab;
+  border: 1px solid #2fe4ab;
+  color: #0b1517;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ctaPrimary:hover {
+  background: #4de9b8;
+  border-color: #4de9b8;
+  color: #0b1517;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(47, 228, 171, 0.35);
+}
+
+.ctaGhost {
+  background: transparent;
+  border: 1px solid rgba(217, 236, 243, 0.35);
+  color: #e8f3f1;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.ctaGhost:hover {
+  border-color: #2fe4ab;
+  color: #2fe4ab;
+  transform: translateY(-2px);
+}
+
+/* hero right panel */
+.heroPanel {
+  position: relative;
+  animation: rise 0.7s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.motif {
+  position: absolute;
+  top: -3.2rem;
+  right: -1rem;
+  width: 240px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.motifNode {
+  fill: #2fe4ab;
+}
+
+.motifHalo {
+  fill: none;
+  stroke: rgba(47, 228, 171, 0.5);
+  stroke-width: 1;
+  animation: pulse 3.6s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.motifEdge {
+  stroke: rgba(22, 150, 142, 0.55);
+  stroke-width: 1;
+  stroke-dasharray: 5 7;
+  animation: march 6s linear infinite;
+}
+
+.terminal {
+  position: relative;
+  margin-top: 3rem;
+  border: 1px solid rgba(47, 228, 171, 0.22);
+  border-radius: 14px;
+  background: rgba(11, 21, 23, 0.92);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(22, 150, 142, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.terminalBar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid rgba(217, 236, 243, 0.09);
 }
 
-html[data-theme='dark'] .button {
-  background-color: #d9ecf3;
+.terminalBar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(217, 236, 243, 0.18);
 }
 
-.obolDots {
+.terminalBar span:first-child {
+  background: rgba(221, 96, 60, 0.7);
+}
+
+.terminalBar em {
+  margin-left: 0.6rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-style: normal;
+  color: rgba(217, 236, 243, 0.45);
+}
+
+.terminalBody {
+  padding: 1rem 1.1rem 1.2rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  line-height: 1.75;
+}
+
+.terminalLine {
+  color: #c8dcdf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: type-in 0.5s ease both;
+}
+
+.prompt {
+  color: #16968e;
+  font-weight: 600;
+}
+
+.terminalMint {
+  color: #2fe4ab;
+}
+
+.terminalDim {
+  color: rgba(200, 220, 223, 0.45);
+}
+
+/* ----------------------------------------------------------------- paths */
+.paths {
+  padding: 3.5rem 0 1rem;
+}
+
+.pathGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.1rem;
+}
+
+.pathCard {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: 1.4rem 1.4rem 1.2rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+  background: var(--ifm-card-background-color);
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transition: border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.pathCard:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(22, 150, 142, 0.14);
+}
+
+.pathHead {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.pathHead:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.pathHead h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.glyph {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+}
+
+.pathArrow {
+  margin-left: auto;
+  color: var(--ifm-color-primary);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.pathCard:hover .pathArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pathCard > p {
+  margin: 0.7rem 0 0.9rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.pathCard ul {
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px dashed var(--ifm-color-emphasis-200);
+}
+
+.pathCard li {
+  padding-top: 0.55rem;
+}
+
+.pathCard li a {
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------- guides */
+.guides {
+  padding: 3rem 0;
+}
+
+.guidesHead {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.guidesHead h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.guidesHead p {
+  margin: 0;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.9rem;
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.6rem;
+}
+
+.guideLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.guideLink span {
+  color: var(--ifm-color-primary);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.guideLink:hover {
+  border-color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 6%, transparent);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+.guideLink:hover span {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- agents */
+.agents {
+  padding: 1rem 0 4rem;
+}
+
+.agentsCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 2rem;
-  padding-bottom: 2rem;
+  align-items: center;
+  padding: 2rem 2.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(47, 228, 171, 0.25);
+  background:
+    radial-gradient(600px 200px at 100% 0%, rgba(47, 228, 171, 0.1), transparent 60%),
+    var(--ifm-card-background-color);
 }
 
-.obolDot1 {
-  background-color: #2FE4AB;
-  height: 0.6rem;
-  width: 0.6rem;
-  border-radius: 50%;
-  display: inline-block;
+.agentsCard h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.6rem;
 }
 
-.obolDot2 {
-  background: #3CD2DD;
-  height: 0.6rem;
-  width: 0.6rem;
-  border-radius: 50%;
-  display: inline-block;
+.agentsCard p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
 }
 
-.obolDot3 {
-  background: #8C3CDD;
-  height: 0.6rem;
-  width: 0.6rem;
-  border-radius: 50%;
-  display: inline-block;
+.agentsSnippet {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: #0b1517;
+  color: #2fe4ab;
+  font-size: 0.8rem;
+  line-height: 1.9;
+  overflow-x: auto;
 }
 
-.obolDot4 {
-  background: #DD603C;
-  height: 0.6rem;
-  width: 0.6rem;
-  border-radius: 50%;
-  display: inline-block;
+.agentsSnippet code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ------------------------------------------------------------ animations */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes type-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.1;
+  }
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy,
+  .heroPanel,
+  .pathCard,
+  .terminalLine {
+    animation: none;
+  }
+  .motifEdge,
+  .motifHalo {
+    animation: none;
+  }
+}
+
+/* -------------------------------------------------------------- responsive */
+@media (max-width: 996px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .motif {
+    top: -2rem;
+    width: 180px;
+  }
+  .terminal {
+    margin-top: 1.5rem;
+  }
+  .agentsCard {
+    grid-template-columns: 1fr;
+  }
 }

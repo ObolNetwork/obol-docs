@@ -4,37 +4,43 @@ on:
   push:
     branches: [main]
 
+# Allow one concurrent deployment per branch; a newer push cancels an
+# in-flight run so we always publish the latest commit.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # PREVIEW MODE: publishes to https://obolnetwork.github.io/obol-docs/
+  # (no CNAME, baseUrl /obol-docs/) so the site can be shared while
+  # docs.obol.org still points at GitBook.
+  #
+  # To go to production (docs.obol.org): set DEPLOY_PREVIEW to "false"
+  # and point DNS/GitHub Pages custom domain back at this repo.
+  DEPLOY_PREVIEW: "true"
+
 jobs:
   deploy:
+    name: Build and deploy
     runs-on: ubuntu-24.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
+          cache: yarn
 
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-website-
+      - name: Build site
+        run: yarn build
 
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build

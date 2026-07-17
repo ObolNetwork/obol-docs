@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://docs.obol.org/sitemap.xml
+
+# AI agents: see https://docs.obol.org/llms.txt and /llms-full.txt

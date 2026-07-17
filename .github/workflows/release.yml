@@ -1,50 +1,54 @@
+name: Cut a docs version
 
+# Snapshots the current docs/ ("next") into versioned_docs/version-<input>
+# and opens a PR. The newest entry in versions.json is automatically served
+# at the site root (see docusaurus.config.js); the previous release moves to
+# /<version>/ with an "unmaintained" banner.
 on:
-  push:
-    tags:
-      - 'v*'
-name: Publish Release
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to cut (e.g. v1.11)"
+        required: true
+
 jobs:
-  deploy:
+  cut-version:
+    name: Snapshot docs version
     runs-on: ubuntu-24.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
+          cache: yarn
 
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-      - name: Cache dependencies
-        uses: actions/cache@v4
+      - name: Cut version
+        run: yarn docusaurus docs:version "${{ github.event.inputs.version }}"
+
+      - name: Verify build
+        run: yarn build
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-website-
+          branch: release/${{ github.event.inputs.version }}
+          title: "docs: cut version ${{ github.event.inputs.version }}"
+          commit-message: "docs: cut version ${{ github.event.inputs.version }}"
+          body: |
+            Snapshots `docs/` as **${{ github.event.inputs.version }}**.
 
-      - run: yarn install --frozen-lockfile
-
-      - name: Get version tag from git
-        id: get-tag
-        run: |
-          tag=$(echo "${{ github.ref }}" | cut -d / -f 3)
-          echo "::set-output name=tag::$tag"
-
-      - name: Create a new versioned history of the docs
-        run: yarn run version ${{steps.get-tag.outputs.tag}}
-
-      - run: yarn build
-       
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+            Once merged, this version is served at the site root and the
+            previous release moves to its own `/<version>/` path.
+          add-paths: |
+            versioned_docs/
+            versioned_sidebars/
+            versions.json
