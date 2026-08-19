@@ -11,8 +11,7 @@
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "typecheck": "tsc",
-    "version": "docusaurus docs:version",
-    "migrate": "node scripts/migrate-gitbook.mjs"
+    "version": "docusaurus docs:version"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.2",

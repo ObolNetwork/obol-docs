@@ -102,19 +102,17 @@ sidebars and page frontmatter, so they stay correct as content evolves.
 
 ## History: the GitBook import
 
-`scripts/migrate-gitbook.mjs` (`yarn migrate`) performed the one-time import
-from the obol-gitbook repo: it converted GitBook-flavoured markdown (hints,
-tabs, OpenAPI blocks, card tables, figures, explicit heading anchors) to
-Docusaurus markdown/MDX, derived slugs from the live site's `llms.txt`,
-generated sidebars from `SUMMARY.md`, and normalized assets. It is kept for
-reference and for re-importing a branch if ever needed:
+The content in this repo was imported once from the obol-gitbook repo by a
+migration script (`scripts/migrate-gitbook.mjs`) that converted
+GitBook-flavoured markdown (hints, tabs, OpenAPI blocks, card tables,
+figures, explicit heading anchors) to Docusaurus markdown/MDX, derived slugs
+from the live site's `llms.txt`, generated sidebars from `SUMMARY.md`, and
+normalized assets. The script has since been deleted — content is authored
+here now, and re-running it would have overwritten local edits. If it is
+ever needed again, recover it from git history:
 
 ```shell
-node scripts/migrate-gitbook.mjs \
-  --source <obol-gitbook-worktree> --version next \
-  --llms <llms.txt> --llms-section "Next" \
-  --out docs --sidebar sidebars.js
+git log --diff-filter=D -- scripts/migrate-gitbook.mjs
 ```
 
-⚠️ Re-running it **overwrites** the target docs directory, discarding any
-edits made here since the import.
+Its lasting output is the content itself plus `scripts/generated/redirects.json`.
