@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// Refreshes the vendored Obol API OpenAPI spec used by Redocusaurus (/api)
-// and by scripts/migrate-gitbook.mjs endpoint cards.
+// Refreshes the vendored Obol API OpenAPI spec used by Redocusaurus (/api).
 // Usage: node scripts/update-api-spec.mjs
 const res = await fetch('https://api.obol.tech/docs-json');
 if (!res.ok) {

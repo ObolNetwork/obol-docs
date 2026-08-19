@@ -4,7 +4,8 @@
     "config:recommended"
   ],
   "enabledManagers": [
-    "github-actions"
+    "github-actions",
+    "npm"
   ],
   "packageRules": [
     {
@@ -24,6 +25,40 @@
         "renovate/github-actions"
       ],
       "groupName": "GitHub Actions updates"
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "schedule": [
+        "every weekend"
+      ],
+      "labels": [
+        "renovate/npm"
+      ],
+      "groupName": "npm dependencies (non-major)"
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "schedule": [
+        "every weekend"
+      ],
+      "labels": [
+        "renovate/npm"
+      ]
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": []
+  }
 }
