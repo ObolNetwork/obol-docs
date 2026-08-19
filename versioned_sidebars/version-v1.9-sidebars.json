@@ -1,0 +1,857 @@
+{
+  "docs": [
+    {
+      "type": "html",
+      "value": "Learn",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "category",
+      "label": "Introduction",
+      "link": {
+        "type": "doc",
+        "id": "README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "learn/introduction/learn-about-obol/README",
+          "label": "Learn About Obol"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/obol-collective",
+          "label": "Obol Collective"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/obol-incentives",
+          "label": "OBOL Incentives"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/key-concepts",
+          "label": "Key Staking Concepts"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/obol-vs-others",
+          "label": "Obol vs Other DV Implementations"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/obol-splits",
+          "label": "Obol Splits"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/launchpad",
+          "label": "DV Launchpad"
+        },
+        {
+          "type": "doc",
+          "id": "learn/intro/frequently-asked-questions",
+          "label": "Frequently Asked Questions"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Charon",
+      "link": {
+        "type": "doc",
+        "id": "learn/charon/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "learn/charon/intro",
+          "label": "Introduction to Charon"
+        },
+        {
+          "type": "doc",
+          "id": "learn/charon/dkg",
+          "label": "Distributed Key Generation"
+        },
+        {
+          "type": "doc",
+          "id": "learn/charon/cluster-configuration",
+          "label": "Cluster Configuration"
+        },
+        {
+          "type": "doc",
+          "id": "learn/charon/charon-networking",
+          "label": "Charon Networking"
+        },
+        {
+          "type": "doc",
+          "id": "learn/charon/charon-cli-reference",
+          "label": "CLI Reference"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Further Reading",
+      "link": {
+        "type": "doc",
+        "id": "learn/further-reading/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "learn/further-reading/ethereum_and_dvt",
+          "label": "Ethereum and Its Relationship With DVT"
+        },
+        {
+          "type": "doc",
+          "id": "learn/further-reading/testnet",
+          "label": "Community Testing"
+        },
+        {
+          "type": "doc",
+          "id": "learn/further-reading/peer_score",
+          "label": "Peer Score"
+        },
+        {
+          "type": "doc",
+          "id": "learn/further-reading/resources",
+          "label": "Useful Links"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "Run a DV",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "category",
+      "label": "Quickstart",
+      "link": {
+        "type": "doc",
+        "id": "run-a-dv/start/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "run-a-dv/start/quickstart_overview",
+          "label": "Quickstart Overview"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/start/create-a-dv-alone",
+          "label": "Create a DV Alone"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/start/create-a-dv-with-a-group",
+          "label": "Create a DV With a Group"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/start/obol-monitoring",
+          "label": "Push Metrics and Logs to Obol"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Prepare to Run a DV",
+      "link": {
+        "type": "doc",
+        "id": "run-a-dv/prepare/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "run-a-dv/prepare/how_where_dvs",
+          "label": "How and Where To Run DVs"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/prepare/deployment-best-practices",
+          "label": "Deployment Best Practices"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/prepare/test-a-cluster",
+          "label": "Test a Cluster"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Running a DV",
+      "link": {
+        "type": "doc",
+        "id": "run-a-dv/running/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/activate-a-dv",
+          "label": "Activate a DV"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/request-withdrawal",
+          "label": "Request Withdrawal"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/distribute-rewards",
+          "label": "Distribute Rewards"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/claim-rewards",
+          "label": "Claim Rewards"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/update-a-dv",
+          "label": "Update a DV"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/monitoring",
+          "label": "Monitoring Your Node"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/running/exit-a-dv",
+          "label": "Exit a DV"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Edit a Cluster",
+      "link": {
+        "type": "doc",
+        "id": "run-a-dv/editing/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "run-a-dv/editing/add-validators",
+          "label": "Adding Validators"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/editing/add-operators",
+          "label": "Adding Operators"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/editing/remove-operators",
+          "label": "Removing Operators"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/editing/replace-operator",
+          "label": "Replace an Operator"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/editing/recreate-private-keys",
+          "label": "Recreating Private Keys"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Partner Integrations",
+      "link": {
+        "type": "doc",
+        "id": "run-a-dv/integrations/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "run-a-dv/integrations/create-an-eigenlayer-dv",
+          "label": "Create an EigenLayer DV"
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/integrations/lido-csm",
+          "label": "Create a Lido CSM DV"
+        },
+        {
+          "type": "category",
+          "label": "Create a Lido stVault",
+          "link": {
+            "type": "doc",
+            "id": "run-a-dv/integrations/lido-v3-stvault-integration-kit"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "id": "run-a-dv/integrations/lido-v3-stvault-for-node-operator",
+              "label": "For Node Operators"
+            },
+            {
+              "type": "doc",
+              "id": "run-a-dv/integrations/lido-v3-stvault-for-capital-allocators",
+              "label": "For Capital Allocators"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "run-a-dv/integrations/dappnode",
+          "label": "Run a DV on a DappNode"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "Advanced & Troubleshooting",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "category",
+      "label": "Advanced Guides",
+      "link": {
+        "type": "doc",
+        "id": "advanced-and-troubleshooting/advanced/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/client-swap",
+          "label": "Swapping Clients"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/operator-rotation",
+          "label": "Operator Rotation"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/quickstart-split",
+          "label": "Migrate an Existing Validator"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk",
+          "label": "Create a DV Using the SDK"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/ovm-predeploy",
+          "label": "Pre-Create a DV with an OVM"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/enable-mev",
+          "label": "Enable MEV"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/quickstart-combine",
+          "label": "Combine DV Private Key Shares"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/beacon-node-authentication",
+          "label": "Beacon node authentication"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/alter-withdrawal-addresses",
+          "label": "Alter Withdrawal Addresses"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/custom-graffiti",
+          "label": "Custom Graffiti"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/enable-tls-protocol",
+          "label": "Enable TLS Protocol"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/fallback-beacon-nodes",
+          "label": "Fallback Beacon Nodes"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/nicknames",
+          "label": "Set a Nickname"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/self-relay",
+          "label": "Self-Host a Relay"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/adv-docker-configs",
+          "label": "Advanced Docker Configs"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/advanced/assign-ovm-roles",
+          "label": "Assign OVM Roles"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Troubleshooting",
+      "link": {
+        "type": "doc",
+        "id": "advanced-and-troubleshooting/troubleshooting/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/troubleshooting/errors",
+          "label": "Errors & Resolutions"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/troubleshooting/dkg_failure",
+          "label": "Handling DKG Failure"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/troubleshooting/client_configurations",
+          "label": "Client Configuration"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/troubleshooting/test_command",
+          "label": "Test Commands"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Security",
+      "link": {
+        "type": "doc",
+        "id": "advanced-and-troubleshooting/security/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/overview",
+          "label": "Overview"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/risks",
+          "label": "Centralization Risks and Mitigation"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/bug-bounty",
+          "label": "Obol Bug Bounty Program"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/smart-contract-audit",
+          "label": "Smart Contract Audit"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/ev-assessment",
+          "label": "Software Development at Obol"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/threat_model",
+          "label": "Charon Threat Model"
+        },
+        {
+          "type": "doc",
+          "id": "advanced-and-troubleshooting/security/contact",
+          "label": "Contacts"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "Community & Governance",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "doc",
+      "id": "community-and-governance/governance",
+      "label": "Governance"
+    },
+    {
+      "type": "category",
+      "label": "The OBOL Token",
+      "link": {
+        "type": "doc",
+        "id": "community-and-governance/obol-token/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "community-and-governance/obol-token/token-distribution-and-liquidity",
+          "label": "Token Distribution & Liquidity"
+        },
+        {
+          "type": "doc",
+          "id": "community-and-governance/obol-token/guide-for-unstaking-obol",
+          "label": "Guide for Unstaking OBOL"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Community",
+      "link": {
+        "type": "doc",
+        "id": "community-and-governance/community/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "community-and-governance/community/grants-program",
+          "label": "Grants Program"
+        },
+        {
+          "type": "doc",
+          "id": "community-and-governance/community/techne",
+          "label": "Techne"
+        },
+        {
+          "type": "doc",
+          "id": "community-and-governance/community/staking-masters",
+          "label": "Staking Mastery Program (Archived)"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Contribution & Feedback",
+      "link": {
+        "type": "doc",
+        "id": "community-and-governance/contribution/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "community-and-governance/contribution/bug-report",
+          "label": "Filing a Bug Report"
+        },
+        {
+          "type": "doc",
+          "id": "community-and-governance/contribution/docs",
+          "label": "Documentation Standards"
+        },
+        {
+          "type": "doc",
+          "id": "community-and-governance/contribution/feedback",
+          "label": "Feedback"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "Obol Stack",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "doc",
+      "id": "obol-stack/README",
+      "label": "Introduction"
+    },
+    {
+      "type": "doc",
+      "id": "obol-stack/quickstart",
+      "label": "Quickstart"
+    },
+    {
+      "type": "doc",
+      "id": "obol-stack/installing-networks",
+      "label": "Installing Networks"
+    },
+    {
+      "type": "doc",
+      "id": "obol-stack/installing-apps",
+      "label": "Installing Apps"
+    },
+    {
+      "type": "doc",
+      "id": "obol-stack/faq",
+      "label": "FAQ"
+    },
+    {
+      "type": "html",
+      "value": "Walkthrough Guides",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "category",
+      "label": "Walkthroughs",
+      "link": {
+        "type": "doc",
+        "id": "walkthrough-guides/walkthroughs/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "walkthrough-guides/walkthroughs/walkthrough-guides",
+          "label": "Walkthrough Guides"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "SDK",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "doc",
+      "id": "sdk/index",
+      "label": "Intro"
+    },
+    {
+      "type": "category",
+      "label": "Enumerations",
+      "link": {
+        "type": "doc",
+        "id": "sdk/enumerations/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/enumerations/FORK_MAPPING",
+          "label": "FORK_MAPPING"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Classes",
+      "link": {
+        "type": "doc",
+        "id": "sdk/classes/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/classes/Client",
+          "label": "Client"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Interfaces",
+      "link": {
+        "type": "doc",
+        "id": "sdk/interfaces/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/interfaces/ClusterDefinition",
+          "label": "ClusterDefinition"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/interfaces/RewardsSplitPayload",
+          "label": "RewardsSplitPayload"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Type-Aliases",
+      "link": {
+        "type": "doc",
+        "id": "sdk/type-aliases/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/BuilderRegistration",
+          "label": "BuilderRegistration"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/BuilderRegistrationMessage",
+          "label": "BuilderRegistrationMessage"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ClusterCreator",
+          "label": "ClusterCreator"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ClusterLock",
+          "label": "ClusterLock"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ClusterOperator",
+          "label": "ClusterOperator"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ClusterPayload",
+          "label": "ClusterPayload"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ClusterValidator",
+          "label": "ClusterValidator"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/DepositData",
+          "label": "DepositData"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/DistributedValidator",
+          "label": "DistributedValidator"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ETH_ADDRESS",
+          "label": "ETH_ADDRESS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/OperatorPayload",
+          "label": "OperatorPayload"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/SplitRecipient",
+          "label": "SplitRecipient"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/TotalSplitPayload",
+          "label": "TotalSplitPayload"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Functions",
+      "link": {
+        "type": "doc",
+        "id": "sdk/functions/README"
+      },
+      "items": [
+        {
+          "type": "doc",
+          "id": "sdk/functions/validateClusterLock",
+          "label": "validateClusterLock"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "API",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "doc",
+      "id": "api/what-is-this-api",
+      "label": "What is this API?"
+    },
+    {
+      "type": "doc",
+      "id": "api/system",
+      "label": "System"
+    },
+    {
+      "type": "doc",
+      "id": "api/metrics",
+      "label": "Metrics"
+    },
+    {
+      "type": "doc",
+      "id": "api/cluster-definition",
+      "label": "Cluster Definition"
+    },
+    {
+      "type": "doc",
+      "id": "api/cluster-lock",
+      "label": "Cluster Lock"
+    },
+    {
+      "type": "doc",
+      "id": "api/state",
+      "label": "State"
+    },
+    {
+      "type": "doc",
+      "id": "api/dv-exit",
+      "label": "DV Exit"
+    },
+    {
+      "type": "doc",
+      "id": "api/dv-migrate",
+      "label": "DV Migrate"
+    },
+    {
+      "type": "doc",
+      "id": "api/cluster-effectiveness",
+      "label": "Cluster Effectiveness"
+    },
+    {
+      "type": "doc",
+      "id": "api/deposit-data",
+      "label": "Deposit Data"
+    },
+    {
+      "type": "doc",
+      "id": "api/terms-and-conditions",
+      "label": "Terms And Conditions"
+    },
+    {
+      "type": "doc",
+      "id": "api/techne-credentials",
+      "label": "Techne Credentials"
+    },
+    {
+      "type": "doc",
+      "id": "api/address",
+      "label": "Address"
+    },
+    {
+      "type": "doc",
+      "id": "api/owr-information",
+      "label": "OWR Information"
+    },
+    {
+      "type": "doc",
+      "id": "api/test",
+      "label": "Test"
+    },
+    {
+      "type": "doc",
+      "id": "api/tvs",
+      "label": "TVS"
+    },
+    {
+      "type": "link",
+      "label": "Specification",
+      "href": "https://api.obol.tech/docs-json"
+    }
+  ]
+}

@@ -115,6 +115,12 @@ const config = {
       {
         fromExtensions: ['html', 'htm'],
         redirects: legacyRedirects,
+        // GitBook served old versions at /version-vX.Y/... — keep those URLs
+        // alive now that the same pages live at /vX.Y/...
+        createRedirects(existingPath) {
+          const m = existingPath.match(/^\/(v\d+\.\d+)\//);
+          return m ? [existingPath.replace(m[0], `/version-${m[1]}/`)] : [];
+        },
       },
     ],
     './plugins/llms-txt',
@@ -261,6 +267,14 @@ const config = {
           {
             type: 'docsVersionDropdown',
             position: 'right',
+            dropdownItemsAfter: [
+              {
+                // Pre-v1.3 docs were removed in the 2026 rebuild; they live in
+                // this repo's history at the last commit before the rebuild.
+                href: 'https://github.com/ObolNetwork/obol-docs/tree/000db7c5b0/versioned_docs',
+                label: 'Legacy (pre-v1.3)',
+              },
+            ],
           },
           {
             href: 'https://launchpad.obol.org',

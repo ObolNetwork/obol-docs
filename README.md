@@ -102,17 +102,21 @@ sidebars and page frontmatter, so they stay correct as content evolves.
 
 ## History: the GitBook import
 
-The content in this repo was imported once from the obol-gitbook repo by a
-migration script (`scripts/migrate-gitbook.mjs`) that converted
-GitBook-flavoured markdown (hints, tabs, OpenAPI blocks, card tables,
-figures, explicit heading anchors) to Docusaurus markdown/MDX, derived slugs
-from the live site's `llms.txt`, generated sidebars from `SUMMARY.md`, and
-normalized assets. The script has since been deleted — content is authored
-here now, and re-running it would have overwritten local edits. If it is
-ever needed again, recover it from git history:
+All content in this repo (`next` + v1.10, and later v1.3–v1.9 from the
+obol-gitbook `version-*` branches) was imported by a migration script that
+converted GitBook-flavoured markdown (hints, tabs, OpenAPI blocks, card
+tables, figures, explicit heading anchors) to Docusaurus markdown/MDX,
+derived slugs from the live site's `llms.txt`, generated sidebars from
+`SUMMARY.md`, and normalized assets. With every version migrated, the script
+has been deleted; content is authored in this repo now, and each ported
+version received manual link/anchor fixes after import that a re-run would
+have clobbered. If it is ever needed again, recover it from git history:
 
 ```shell
 git log --diff-filter=D -- scripts/migrate-gitbook.mjs
 ```
 
-Its lasting output is the content itself plus `scripts/generated/redirects.json`.
+Versions before v1.3 were removed in the 2026 rebuild. They remain available
+in this repo's history — the last commit carrying them is
+[`000db7c5b0`](https://github.com/ObolNetwork/obol-docs/tree/000db7c5b0/versioned_docs)
+— and the version dropdown's "Legacy (pre-v1.3)" item points there.
