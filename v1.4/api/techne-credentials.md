@@ -1,0 +1,9 @@
+# Techne Credentials
+
+<ApiEndpoint method="get" path="/v1/techne/base/{index}" summary="Retrieve Base techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getBaseCred_v1" />
+
+<ApiEndpoint method="get" path="/v1/techne/bronze/{index}" summary="Retrieve Bronze techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getBronzeCred_v1" />
+
+<ApiEndpoint method="get" path="/v1/techne/silver/{index}" summary="Retrieve Silver techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getSilverCred_v1" />
+
+<ApiEndpoint method="get" path="/v1/techne/gold/{index}" summary="Retrieve Gold techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getGoldCred_v1" />

@@ -1,0 +1,9 @@
+# Deposit Data
+
+<ApiEndpoint method="get" path="/deposit_data/{lockHash}/{pubkey}" summary="Retrieve partial deposit data for a validator" href="/api/#tag/Deposit-Data/operation/DepositController_getDeposits[0]" />
+
+<ApiEndpoint method="get" path="/v1/deposit_data/{lockHash}/{pubkey}" summary="Retrieve partial deposit data for a validator" href="/api/#tag/Deposit-Data/operation/DepositController_getDeposits[1]_v1" />
+
+<ApiEndpoint method="post" path="/deposit_data/partial_deposits/{lockHash}/{share_index}" summary="Push partial deposit data" href="/api/#tag/Deposit-Data/operation/DepositController_submitPartialDeposits[0]" />
+
+<ApiEndpoint method="post" path="/v1/deposit_data/partial_deposits/{lockHash}/{share_index}" summary="Push partial deposit data" href="/api/#tag/Deposit-Data/operation/DepositController_submitPartialDeposits[1]_v1" />
