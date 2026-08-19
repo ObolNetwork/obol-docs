@@ -91,9 +91,10 @@ module.exports = function llmsTxtPlugin(context) {
       const {siteDir} = context;
       // e.g. https://docs.obol.org or https://obolnetwork.github.io/obol-docs
       const siteUrl = `${siteConfig.url}${siteConfig.baseUrl.replace(/\/$/, '')}`;
-      const lastVersion = JSON.parse(
+      const allVersions = JSON.parse(
         fs.readFileSync(path.join(siteDir, 'versions.json'), 'utf8'),
-      )[0];
+      );
+      const lastVersion = allVersions[0];
       const versions = [
         {name: 'next', heading: 'Next', base: '/next'},
         {
@@ -102,6 +103,11 @@ module.exports = function llmsTxtPlugin(context) {
           base: '',
           isCurrent: true,
         },
+        ...allVersions.slice(1).map((name) => ({
+          name,
+          heading: name,
+          base: `/${name}`,
+        })),
       ];
 
       const sections = [];
