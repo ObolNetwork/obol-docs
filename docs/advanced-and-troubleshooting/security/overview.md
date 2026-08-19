@@ -14,7 +14,7 @@ View the operational status of Obol's supporting infrastructure at https://statu
 
 ## Table of Contents
 
-* [Overview](overview.md#overview)
+* [Overview](overview.md)
   * [Table of Contents](overview.md#table-of-contents)
   * [Official Domains and Channels](overview.md#domain-names-and-official-channels)
   * [List of Security Audits and Assessments](overview.md#list-of-security-audits-and-assessments)

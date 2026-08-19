@@ -316,7 +316,7 @@ Build a **DV cluster** that can qualify for Lido's **DVT category** and DVT tier
     - best practices on monitoring and upgrades.
 - Prepares technical input for the **Identified Node Operator** submission (DVT category).
 
-For detailed steps on the identification process, see the [Node Operator Guide](lido-v3-stvault-for-node-operator.md#51-dvt-cluster-identification-process).
+For detailed steps on the identification process, see the [Node Operator Guide](lido-v3-stvault-for-node-operator.md#51-dv-cluster-identification-process).
 
 ---
 

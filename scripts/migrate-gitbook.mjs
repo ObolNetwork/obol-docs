@@ -437,8 +437,13 @@ function transformDoc(raw, ctx) {
     }
     let t = seg.text;
 
-    // drop HTML comments (invalid in MDX, invisible in CommonMark anyway)
-    t = t.replace(/<!--[\s\S]*?-->/g, '');
+    // drop HTML comments (invalid in MDX, invisible in CommonMark anyway);
+    // loop so removals can't splice together a fresh "<!--"
+    let before;
+    do {
+      before = t;
+      t = t.replace(/<!--[\s\S]*?-->/g, '');
+    } while (t !== before);
 
     // hints -> admonitions
     t = t.replace(/{%\s*hint\s+style="(\w+)"\s*%}/g, (m, s) => `:::${HINT_MAP[s] ?? 'note'}`);
@@ -510,7 +515,7 @@ function transformDoc(raw, ctx) {
           ? resolveAssetRef(src, ctx.docDir) ?? src
           : src;
         const cap = (caption ?? '').trim();
-        let md = `![${alt.replace(/([\[\]])/g, '\\$1')}](${encodeUrlForMd(url)})`;
+        let md = `![${alt.replace(/([\\\[\]])/g, '\\$1')}](${encodeUrlForMd(url)})`;
         if (cap) md += `\n<figcaption>${cap}</figcaption>`;
         return md;
       },
@@ -525,7 +530,7 @@ function transformDoc(raw, ctx) {
       const url = src.includes('.gitbook/assets/')
         ? resolveAssetRef(src, ctx.docDir) ?? src
         : src;
-      return `![${alt.replace(/([\[\]])/g, '\\$1')}](${encodeUrlForMd(url)})`;
+      return `![${alt.replace(/([\\\[\]])/g, '\\$1')}](${encodeUrlForMd(url)})`;
     });
 
     // markdown image/link targets referencing .gitbook/assets — scan with
