@@ -66,13 +66,12 @@ Conventions:
 Deployment is automated with GitHub Actions:
 
 - **`.github/workflows/deploy.yml`** — on push to `main`, builds and publishes
-  `./build` to GitHub Pages. It is currently in **preview mode**
-  (`DEPLOY_PREVIEW: "true"`): the site is published to
-  `https://obolnetwork.github.io/obol-docs/` with `baseUrl: /obol-docs/` and
-  no `CNAME`, so it can be shared while docs.obol.org still points at GitBook.
-  To go live on docs.obol.org, flip `DEPLOY_PREVIEW` to `"false"` (restores
-  `baseUrl: /` and the `CNAME` from `static-prod/`) and point DNS at GitHub
-  Pages.
+  `./build` to GitHub Pages in **production mode**: `baseUrl: /` for
+  `https://docs.obol.org`, with the `CNAME` shipped from `static-prod/`.
+  DNS for docs.obol.org must point at GitHub Pages for this repo. To publish
+  a shareable preview at `https://obolnetwork.github.io/obol-docs/` instead
+  (`baseUrl: /obol-docs/`, no `CNAME`), set `DEPLOY_PREVIEW: "true"` in the
+  workflow's `env`.
 - **`.github/workflows/test-deploy.yml`** — on every pull request to `main`,
   runs `yarn typecheck` and `yarn build`.
 - **`.github/workflows/release.yml`** — manual "Cut a docs version" workflow;

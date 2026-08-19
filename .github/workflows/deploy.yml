@@ -4,20 +4,23 @@ on:
   push:
     branches: [main]
 
+# The deploy step pushes the built site to the gh-pages branch.
+permissions:
+  contents: write
+
 # Allow one concurrent deployment per branch; a newer push cancels an
 # in-flight run so we always publish the latest commit.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # PREVIEW MODE: publishes to https://obolnetwork.github.io/obol-docs/
-  # (no CNAME, baseUrl /obol-docs/) so the site can be shared while
-  # docs.obol.org still points at GitBook.
-  #
-  # To go to production (docs.obol.org): set DEPLOY_PREVIEW to "false"
-  # and point DNS/GitHub Pages custom domain back at this repo.
-  DEPLOY_PREVIEW: "true"
+# PRODUCTION MODE: builds for https://docs.obol.org at / and ships
+# static-prod/CNAME so GitHub Pages keeps the custom domain. To publish a
+# shareable preview at https://obolnetwork.github.io/obol-docs/ instead,
+# set DEPLOY_PREVIEW to "true" here.
+#
+# env:
+#   DEPLOY_PREVIEW: "true"
 
 jobs:
   deploy:

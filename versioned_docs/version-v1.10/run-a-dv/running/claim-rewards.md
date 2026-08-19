@@ -56,7 +56,7 @@ Once the funds are distributed, go to the [Operator Dashboard](https://launchpad
 This section documents the legacy OWR (Optimistic Withdrawal Recipient) flow for older `0x01` validators. For new clusters with `0x02` validators, please use the [New Claim Rewards Process](#new-claim-rewards-process-0x02-validators) above.
 :::
 
-The method for claiming rewards depends on the cluster's withdrawal configuration, whether it's an [**OWR**](../../learn/intro/obol-splits.md#optimistic-withdrawal-recipient) or an [**Exitable Withdrawal Configuration**](../../learn/intro/obol-splits.md#exitable-withdrawal-recipient). The table below outlines the latest details on how and where to claim rewards.
+The method for claiming rewards depends on the cluster's withdrawal configuration, whether it's an [**OWR**](../../learn/intro/obol-splits.md#optimistic-withdrawal-recipient) or an [**Exitable Withdrawal Configuration**](../../learn/intro/obol-splits.md#obol-validator-managers). The table below outlines the latest details on how and where to claim rewards.
 
 ### Claim Status {#claim-status}
 | Withdrawal Configuration                                                | Subcategory Description                                                                   | Is supported on Launchpad? | Where to claim?                                                                                                                                                                                       |

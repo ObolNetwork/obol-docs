@@ -7,6 +7,10 @@ on:
     types:
       - opened
 
+# The add-to-project step authenticates with GH_ORG_ADMIN_SECRET, so the
+# default GITHUB_TOKEN needs no permissions at all.
+permissions: {}
+
 # This workflow contains a single job called "build"
 jobs:
   build:

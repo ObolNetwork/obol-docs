@@ -42,7 +42,7 @@ Pick `--since` based on what your agent needs to answer:
 - **Anything from the last year** → `--since=365d` (~600 GB).
 - **Recent execution-layer history for a quick indexer** → `--since=prague` (~0.4 TB).
 
-See [Installing Networks](installing-networks.mdx#archive-nodes-and-bounded-history-since) for the full `--since` reference.
+See [Installing Networks](installing-networks.mdx#archive-nodes-and-bounded-history---since) for the full `--since` reference.
 
 While the node syncs (hours to days depending on scope), keep moving. The other steps don't require the archive to be complete.
 

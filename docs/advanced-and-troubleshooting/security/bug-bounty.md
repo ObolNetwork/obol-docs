@@ -145,6 +145,10 @@ The following activities are not authorized under this program:
 
 ## Submission process
 
+:::info
+Before you begin your research, please take the time to review any findings Obol has already published in the repositories in scope. Known issues are often documented directly in the repository, in files such as `README.md`, `KNOWN_ISSUES.md`, and `CLAUDE.md` — for example, the [Obol Splits repository maintains a list of known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md) that Obol is already aware of. Submissions that duplicate these publicly documented findings are not eligible for rewards, so checking them first helps you avoid spending effort on issues that have already been identified.
+:::
+
 Before investing significant time in a proof of concept, you may email [security@obol.tech](mailto:security@obol.tech) with a brief, non-detailed description of the affected component and the class of vulnerability (e.g. "potential role escalation in OVM" or "Charon peer message handling"). We will confirm within 48 hours whether the issue is already known or under active remediation. This check does not establish submission priority — it only avoids duplicate effort.
 
 To report a vulnerability, please contact us at [security@obol.tech](mailto:security@obol.tech) with:
