@@ -16,7 +16,7 @@ Optionally, users can also specify different multiple `deposit-amounts` (default
 **Single public key**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
@@ -24,7 +24,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 **Multiple public keys, multiple withdrawal addresses**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b,0x0100000000000000000000000e941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
@@ -32,7 +32,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 **Multiple public keys, single withdrawal address**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
@@ -44,7 +44,7 @@ After a threshold of operators have submitted partial deposits, a full deposit c
 `validator-public-keys` are the validator public keys for which the new deposit data should be fetched.
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit fetch \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit fetch \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
 ```
 

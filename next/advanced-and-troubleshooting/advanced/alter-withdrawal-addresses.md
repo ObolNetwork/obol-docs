@@ -21,7 +21,7 @@ A threshold of operators must decide which public keys they are changing the wit
 **Single public key**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
 ```
@@ -35,7 +35,7 @@ Optionally, users can also specify multiple different `deposit-amounts` (default
 **Multiple public keys, multiple withdrawal addresses**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,0x1db3439a222c519ab44bb1144fc28167b4fa6ee6"
 ```
@@ -43,7 +43,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 **Multiple public keys, single withdrawal address**
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit sign \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
   --withdrawal-addresses="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
 ```
@@ -53,7 +53,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 After a threshold of operators have submitted partial alternative deposits, a full aggregated deposit message can be fetched from Obol API.
 
 ```sh
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.10.0 deposit fetch \
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit fetch \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
 ```
 

@@ -88,12 +88,12 @@ cd charon-distributed-validator-node
 Use docker to create an ENR
 
 ```sh
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.10.0 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 create enr
 ```
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
 
-![Screenshot: docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon:v1.10.0 create enr.](/img/gitbook/image-35.png)
+![Screenshot: docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon:v1.11.0 create enr.](/img/gitbook/image-35.png)
 
 :::warning
 What you see in the console starting with `enr:-` is the **public key** for your Charon node (known as an ENR). The **private key** is in the file `.charon/charon-enr-private-key`, be sure to back it up securely.

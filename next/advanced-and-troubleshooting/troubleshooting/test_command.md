@@ -16,7 +16,7 @@ If you are using the [CDVN](https://github.com/ObolNetwork/charon-distributed-va
 
 ```sh
 # Run from within the charon-distributed-validator-node/ directory
-docker run --rm -u $(id -u):$(id -g) -v "$(pwd):/opt/charon" obolnetwork/charon:v1.10.0 alpha test peers \
+docker run --rm -u $(id -u):$(id -g) -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 alpha test peers \
   --lock-file="/opt/charon/.charon/cluster-lock.json" \
   --private-key-file="/opt/charon/.charon/charon-enr-private-key"
   # add any other flags here, e.g. --timeout=1h or --keep-alive=30m
