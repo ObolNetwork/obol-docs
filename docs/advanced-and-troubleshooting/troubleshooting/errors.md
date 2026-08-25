@@ -27,7 +27,7 @@ If your logs show a failed duty with a specific reason code, see [Duty Failure R
 
 `cd` to the directory where your private keys are located (ex: `cd /path/to/charon/enr/private/key`)
 
-Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.10.0 enr`. This prints the ENR on your screen.
+Run `docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 enr`. This prints the ENR on your screen.
 
 ### What do I do if lose my `charon-enr-private-key`?
 
