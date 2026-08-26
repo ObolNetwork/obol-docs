@@ -1,0 +1,148 @@
+---
+description: "Reference for the Prometheus metrics Charon exposes, including standard labels, key metrics to watch, and the full metrics table for dashboards and alerting."
+sidebar_label: "Charon Metrics Reference"
+slug: /run-a-dv/running/metrics
+---
+
+# Charon Metrics Reference
+
+Charon exposes a Prometheus-compatible metrics endpoint on its monitoring API, configured with the `--monitoring-address` flag and defaulting to `127.0.0.1:3620`. Scraping this endpoint with Prometheus lets you build dashboards, health checks, and alerts on the distributed validator's real-time behavior, from peer connectivity to duty completion.
+
+If you are running the [**CDVN repository**](https://github.com/ObolNetwork/charon-distributed-validator-node), Prometheus and Grafana are already part of the docker compose setup and scrape this endpoint automatically, so no extra configuration is needed to get started. See [Monitoring Your Node](monitoring.md) for how to use the pre-built dashboards and alerts.
+
+## Standard Labels
+
+All metrics on this page include the following labels, so they are omitted from the tables below.
+
+- `cluster_hash`: The cluster lock hash uniquely identifying the cluster.
+- `cluster_name`: The cluster lock name.
+- `cluster_network`: The cluster network name; Goerli, Mainnet, etc.
+- `cluster_peer`: The name of this node in the cluster. It is determined from the operator's Ethereum Node Record (ENR).
+
+The `cluster_*` labels uniquely identify a specific node's metrics, which is required when storing metrics from multiple nodes or clusters in one Prometheus instance.
+
+## Key Metrics to Watch
+
+The full reference table below covers every metric Charon exposes, but a smaller set is especially useful for day-to-day operations. These are a good starting point for dashboards and alerts.
+
+| Metric | Why It Matters |
+|---|---|
+| `app_monitoring_readyz` | Reports the node's readiness state: `1` if operational, `2` if the beacon node is down, `3` if the beacon node is syncing, or `4` if quorum peers are not connected (otherwise `0`). Drives the `ClusterInUnknownStatus` and `ClusterInsufficientPeers` alerts in [Monitoring Your Node](monitoring.md). |
+| `app_eth2_using_fallback` | Indicates whether the client is using a fallback (`1`) or primary (`0`) beacon node, useful for spotting an unhealthy primary beacon node. |
+| `app_beacon_node_peers` | Peer count of the upstream beacon node; low values can precede sync or attestation issues and relate to the `ClusterBeaconNodeZeroPeers` alert. |
+| `app_log_error_total` | Total count of logged errors by topic, a quick signal for rising error rates before they cause duty failures. |
+| `core_tracker_participation` | Set to `1` if a peer participated successfully for a given duty, or `0` otherwise; useful for spotting an underperforming peer. |
+| `core_tracker_failed_duties_total` | Total number of failed duties by type, the underlying signal behind the `ClusterFailureRate` and `ClusterMissedAttestations` alerts. |
+| `p2p_ping_latency_secs` | Ping latency in seconds per peer, the basis for the `PeerPingLatency` alert. |
+| `p2p_ping_success` | Whether the last ping to a peer was successful (`1`) or not (`0`); can be used as a proxy for connected peers. |
+
+## Full Metrics Reference
+
+The table below is generated from the Charon source code and reflects the metrics defined in the codebase. For the latest, canonical version, see [`docs/metrics.md`](https://github.com/ObolNetwork/charon/blob/main/docs/metrics.md) in the Charon repository.
+
+| Name | Type | Help | Labels |
+|---|---|---|---|
+| `app_beacon_node_peers` | Gauge | Gauge set to the peer count of the upstream beacon node |  |
+| `app_beacon_node_sse_block` | Histogram | Block imported into fork choice delay, supplied by beacon node's SSE endpoint. Values between 0s and 4s for Ethereum mainnet are considered safe | `addr` |
+| `app_beacon_node_sse_block_gossip` | Histogram | Block reception via gossip delay, supplied by beacon node's SSE endpoint. Values between 0s and 4s for Ethereum mainnet are considered safe | `addr` |
+| `app_beacon_node_sse_block_processing_time` | Histogram | Time in seconds between block gossip and head events, indicating block processing time. Lower values indicate better CPU/disk/RAM performance. | `addr` |
+| `app_beacon_node_sse_chain_reorg_depth` | Histogram | Chain reorg depth, supplied by beacon node's SSE endpoint | `addr` |
+| `app_beacon_node_sse_head_delay` | Histogram | Delay in seconds between slot start and head update, supplied by beacon node's SSE endpoint. Values between 8s and 12s for Ethereum mainnet are considered safe. | `addr` |
+| `app_beacon_node_sse_head_slot` | Gauge | Current beacon node head slot, supplied by beacon node's SSE endpoint | `addr` |
+| `app_beacon_node_version` | Gauge | Constant gauge with labels set to the version and beacon_id of the upstream beacon node | `version, beacon_id` |
+| `app_cache_hits_total` | Counter | Total number of times the cache was used | `endpoint` |
+| `app_cache_invalidated_reorg_total` | Counter | Total number of times the cache was invalidated due to a chain reorg | `endpoint` |
+| `app_cache_misses_total` | Counter | Total number of times the cache was missed | `endpoint` |
+| `app_eth2_errors_total` | Counter | Total number of errors returned by eth2 beacon node requests | `endpoint` |
+| `app_eth2_latency_seconds` | Histogram | Latency in seconds for eth2 beacon node requests | `endpoint` |
+| `app_eth2_requests_total` | Counter | Total number of requests sent to eth2 beacon node | `endpoint` |
+| `app_eth2_using_fallback` | Gauge | Indicates if client is using fallback (1) or primary (0) beacon node |  |
+| `app_execution_layer_version` | Gauge | Constant gauge with labels set to the version of the upstream execution layer | `version` |
+| `app_feature_flags` | Gauge | Constant gauge with custom enabled feature flags | `feature_flags` |
+| `app_git_commit` | Gauge | Constant gauge with label set to current git commit hash | `git_hash` |
+| `app_health_checks` | Gauge | Application health checks by name and severity. Set to 1 for failing, 0 for ok. | `severity, name, description` |
+| `app_health_checks_failed_total` | Counter | Total number of times each health check has been observed failing. Allows querying historical failures via increase(). | `severity, name, description` |
+| `app_health_metrics_high_cardinality` | Gauge | Metrics with high cardinality by name. | `name` |
+| `app_log_error_total` | Counter | Total count of logged errors by topic | `topic` |
+| `app_log_loki_dropped_total` | Counter | Total count of dropped log lines due to full buffer |  |
+| `app_log_warn_total` | Counter | Total count of logged warnings by topic | `topic` |
+| `app_monitoring_readyz` | Gauge | Set to 1 if the node is operational and monitoring api `/readyz` endpoint is returning 200s. Else `/readyz` is returning 500s and this metric is either set to 2 if the beacon node is down, 3 if the beacon node is syncing, or 4 if quorum peers are not connected. |  |
+| `app_peer_name` | Gauge | Constant gauge with label set to the name of the cluster peer | `peer_name` |
+| `app_peerinfo_builder_api_enabled` | Gauge | Set to 1 if builder API is enabled on this peer, else 0 if disabled. | `peer` |
+| `app_peerinfo_clock_offset_seconds` | Gauge | Peer clock offset in seconds | `peer` |
+| `app_peerinfo_git_commit` | Gauge | Constant gauge with git_hash label set to peer's git commit hash. | `peer, git_hash` |
+| `app_peerinfo_index` | Gauge | Constant gauge set to the peer index in the cluster definition | `peer` |
+| `app_peerinfo_nickname` | Gauge | Constant gauge with nickname label set to peer's Charon nickname. | `peer, peer_nickname` |
+| `app_peerinfo_start_time_secs` | Gauge | Constant gauge set to the peer start time of the binary in unix seconds | `peer` |
+| `app_peerinfo_version` | Gauge | Constant gauge with version label set to peer's Charon version. | `peer, version` |
+| `app_peerinfo_version_support` | Gauge | Set to 1 if the peer's version is supported by (compatible with) the current version, else 0 if unsupported. | `peer` |
+| `app_start_time_secs` | Gauge | Gauge set to the app start time of the binary in unix seconds |  |
+| `app_validator_stack_params` | Gauge | Parameters for each component of the validator stack in which this Charon instance is deployed into | `component, cli_parameters` |
+| `app_version` | Gauge | Constant gauge with label set to current app version | `version` |
+| `cluster_network` | Gauge | Constant gauge with label set to the current network (chain) | `network` |
+| `cluster_operators` | Gauge | Number of operators in the cluster lock |  |
+| `cluster_threshold` | Gauge | Aggregation threshold in the cluster lock |  |
+| `cluster_validators` | Gauge | Number of validators in the cluster lock |  |
+| `core_bcast_broadcast_delay_seconds` | Histogram | Duty broadcast delay since the expected duty submission in seconds by type | `duty` |
+| `core_bcast_broadcast_total` | Counter | The total count of successfully broadcast duties by type | `duty` |
+| `core_consensus_decided_leader_index` | Gauge | Index of the decided leader by protocol and duty | `protocol, duty` |
+| `core_consensus_decided_rounds` | Gauge | Number of decided rounds by protocol, duty, and timer | `protocol, duty, timer` |
+| `core_consensus_duration_seconds` | Histogram | Duration of the consensus process by protocol, duty, and timer | `protocol, duty, timer` |
+| `core_consensus_error_total` | Counter | Total count of consensus errors by protocol | `protocol` |
+| `core_consensus_timeout_total` | Counter | Total count of consensus timeouts by protocol, duty, and timer | `protocol, duty, timer` |
+| `core_fetcher_proposal_blinded` | Gauge | Whether the fetched proposal was blinded (1) or local (2) |  |
+| `core_fetcher_proposal_local_mismatch_fee_recipient` | Gauge | Counts the number of times a local proposal has a mismatched fee recipient |  |
+| `core_parsigdb_exit_total` | Counter | Total number of partially signed voluntary exits per public key | `pubkey` |
+| `core_parsigdb_store` | Histogram | Latency of partial signatures received since earliest expected time, per duty, per peer index | `duty, peer_idx` |
+| `core_parsigex_set_verification_seconds` | Histogram | Duration to verify all partial signatures in a received set, in seconds | `duty` |
+| `core_scheduler_current_epoch` | Gauge | The current epoch |  |
+| `core_scheduler_current_slot` | Gauge | The current slot |  |
+| `core_scheduler_duty_total` | Counter | The total count of duties scheduled by type | `duty` |
+| `core_scheduler_skipped_slots_total` | Counter | Total number times slots were skipped |  |
+| `core_scheduler_submit_registration_errors_total` | Counter | The total count of failed submit registration requests |  |
+| `core_scheduler_submit_registration_total` | Counter | The total number of submit registration requests |  |
+| `core_scheduler_validator_balance_gwei` | Gauge | Total balance of a validator by public key | `pubkey_full, pubkey` |
+| `core_scheduler_validator_status` | Gauge | Gauge with validator pubkey and status as labels, value=1 is current status, value=0 is previous. | `pubkey_full, pubkey, status` |
+| `core_scheduler_validators_active` | Gauge | Number of active validators |  |
+| `core_sigagg_slot_aggregation_seconds` | Histogram | Total duration to aggregate all validators for a duty in a slot, in seconds | `duty` |
+| `core_tracker_attestation_expect_total` | Counter | Total number of expected attestations for the slot (counts individual attestations, not duties) |  |
+| `core_tracker_attestation_success_total` | Counter | Total number of successful attestations for the slot (counts individual attestations, not duties) |  |
+| `core_tracker_expect_duties_total` | Counter | Total number of expected duties (failed + success) by type | `duty` |
+| `core_tracker_failed_duties_total` | Counter | Total number of failed duties by type | `duty` |
+| `core_tracker_failed_duty_reasons_total` | Counter | Total number of failed duties by type and reason code | `duty, reason` |
+| `core_tracker_inclusion_delay` | Gauge | Cluster's average attestation inclusion delay in slots. Available only when attestation_inclusion feature flag is enabled. |  |
+| `core_tracker_inclusion_missed_total` | Counter | Total number of broadcast duties never included in any block by type | `duty` |
+| `core_tracker_inconsistent_parsigs_total` | Counter | Total number of duties that contained inconsistent partial signed data by duty type | `duty` |
+| `core_tracker_participation` | Gauge | Set to 1 if peer participated successfully for the given duty or else 0 | `duty, peer` |
+| `core_tracker_participation_expected_total` | Counter | Total number of expected participations (fail + success) by peer and duty type | `duty, peer` |
+| `core_tracker_participation_missed_total` | Counter | Total number of missed participations by peer and duty type | `duty, peer` |
+| `core_tracker_participation_success_total` | Counter | Total number of successful participations by peer and duty type | `duty, peer` |
+| `core_tracker_participation_total` | Counter | Total number of successful participations by peer and duty type | `duty, peer` |
+| `core_tracker_success_duties_total` | Counter | Total number of successful duties by type | `duty` |
+| `core_tracker_unexpected_events_total` | Counter | Total number of unexpected events by peer | `peer` |
+| `core_validatorapi_proxy_request_latency_seconds` | Histogram | The validatorapi proxy request latencies in seconds by path | `path` |
+| `core_validatorapi_request_error_total` | Counter | The total number of validatorapi request errors | `endpoint, status_code` |
+| `core_validatorapi_request_latency_seconds` | Histogram | The validatorapi request latencies in seconds by endpoint | `endpoint` |
+| `core_validatorapi_request_total` | Counter | The total number of requests per content-type and endpoint | `endpoint, content_type` |
+| `core_validatorapi_vc_user_agent` | Gauge | Gauge with label set to user agent string of requests made by VC | `user_agent` |
+| `p2p_peer_connection_total` | Counter | Total number of libp2p connections per peer. | `peer` |
+| `p2p_peer_connection_types` | Gauge | Current number of libp2p connections by peer, type (`direct` or `relay`), and protocol (`tcp`, `quic`). Note that peers may have multiple connections. | `peer, type, protocol` |
+| `p2p_peer_network_receive_bytes_total` | Counter | Total number of network bytes received from the peer by protocol and transport. Transport is based on first active connection (accurate in steady state). | `peer, protocol, transport` |
+| `p2p_peer_network_sent_bytes_total` | Counter | Total number of network bytes sent to the peer by protocol and transport. Transport is based on first active connection (accurate in steady state). | `peer, protocol, transport` |
+| `p2p_peer_streams` | Gauge | Current number of libp2p streams by peer, direction (`inbound` or `outbound` or `unknown`), protocol and transport. | `peer, direction, protocol, transport` |
+| `p2p_ping_error_total` | Counter | Total number of ping errors per peer | `peer` |
+| `p2p_ping_latency_secs` | Histogram | Ping latencies in seconds per peer | `peer` |
+| `p2p_ping_success` | Gauge | Whether the last ping was successful (1) or not (0). Can be used as proxy for connected peers | `peer` |
+| `p2p_reachability_status` | Gauge | Current libp2p reachability status of this node as detected by autonat: unknown(0), public(1) or private(2). |  |
+| `p2p_relay_connection_types` | Gauge | Current number of libp2p connections by relay, type (`direct` or `relay`), and protocol (`tcp`, `quic`). Note that peers may have multiple connections. | `peer, type, protocol` |
+| `p2p_relay_connections` | Gauge | Connected relays by name | `peer` |
+| `relay_p2p_active_connections` | Gauge | Current number of active connections by peer and cluster | `peer, peer_cluster` |
+| `relay_p2p_connection_total` | Counter | Total number of new connections by peer and cluster | `peer, peer_cluster` |
+| `relay_p2p_network_receive_bytes_total` | Counter | Total number of network bytes received from the peer and cluster | `peer, peer_cluster` |
+| `relay_p2p_network_sent_bytes_total` | Counter | Total number of network bytes sent to the peer and cluster | `peer, peer_cluster` |
+| `relay_p2p_ping_latency` | Histogram | Ping latency by peer and cluster | `peer, peer_cluster` |
+
+## Next Steps
+
+- See [Monitoring Your Node](monitoring.md) for pre-built Grafana dashboards, alert definitions, and best practices for running your own Prometheus and Grafana server.
+- See [Push Metrics and Logs to Obol](../start/obol-monitoring.mdx) to send these metrics to Obol's hosted monitoring instead of running your own.
