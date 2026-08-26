@@ -1,6 +1,6 @@
 # Introduction to the Obol Stack
 
-The Obol Stack is a local-first agent harness: a Kubernetes cluster on your laptop, a default AI agent ([Hermes](https://github.com/NousResearch/hermes)) with its own Ethereum wallet, dynamically-deployable blockchain networks, a Cloudflare tunnel for public exposure, and an [x402](https://www.x402.org/) payment gateway so agents can charge for what they serve.
+The Obol Stack is a local-first agent harness: a Kubernetes cluster on your laptop, a default AI agent ([Hermes](https://github.com/NousResearch/hermes-agent)) with its own Ethereum wallet, dynamically-deployable blockchain networks, a Cloudflare tunnel for public exposure, and an [x402](https://www.x402.org/) payment gateway so agents can charge for what they serve.
 
 The thesis is simple: **agents should be able to run real infrastructure, build something valuable on top of it, and sell access to it for micropayments — without asking permission and without standing up cloud accounts.**
 
@@ -23,7 +23,7 @@ The cluster runs entirely on your machine via [k3d](https://k3d.io/) (Kubernetes
 * **Sell what your agent builds** — `obol sell demo` deploys a payment-gated HTTP service in one command. Use it as the starting point for selling inference, indexed data, or any HTTP API for $OBOL or USDC micropayments.
 * **Native $OBOL micropayments with sponsored gas on mainnet** — when buyers pay in $OBOL on Ethereum mainnet, the Obol facilitator sponsors the on-chain settlement gas. Buyers sign an [EIP-2612](https://eips.ethereum.org/EIPS/eip-2612) permit off-chain and never need ETH. Sellers receive $OBOL directly to their agent wallet.
 * **Multiple network support** — sync local Ethereum nodes (mainnet, sepolia, hoodi), Aztec sequencers, and more. Built-in eRPC routes to public RPCs when no local node is present.
-* **Public access** — expose only the routes you choose (`/services/<name>/*` and discovery metadata) via a Cloudflare quick tunnel. Internal routes (frontend, eRPC) stay locked to `obol.stack`.
+* **Public access** — when you sell, a Cloudflare tunnel exposes only the routes you choose (`/services/<name>/*` and discovery metadata). The tunnel stays **dormant** after a plain `obol stack up` until the first sell workflow or `obol tunnel restart` / `obol tunnel setup`. Internal routes (frontend, eRPC) stay locked to `obol.stack`.
 * **Unique deployments** — every install gets a uniquely-namespaced deployment, so multiple stacks coexist on one machine.
 
 ## CLI overview
@@ -46,13 +46,13 @@ When you run `obol stack up`, the following services are deployed automatically:
 
 | Service | Namespace | Purpose |
 | --- | --- | --- |
-| **Hermes (default agent)** | `hermes-obol-agent` | AI agent + dashboard, with its own Ethereum signing wallet |
+| **Hermes (default agent)** | `hermes-obol-agent` | AI agent + dashboard, with its own Ethereum signing wallet (skipped if no LLM is configured) |
 | **Traefik** | `traefik` | Gateway API ingress controller |
-| **Cloudflared** | `traefik` | Cloudflare tunnel connector for public routes |
+| **Cloudflared** | `traefik` | Tunnel connector chart — **dormant** until first sell / `obol tunnel restart` / permanent `tunnel setup` |
 | **eRPC** | `erpc` | Unified RPC load balancer (local nodes + public fallbacks) |
-| **Obol Frontend** | `obol-frontend` | Web management dashboard (local-only) |
+| **Obol Frontend** | `obol-frontend` | Web management dashboard (local-only; `Host: obol.stack`) |
 | **Monitoring** | `monitoring` | Prometheus + kube-prometheus-stack |
-| **LiteLLM** | `llm` | OpenAI-compatible LLM gateway (Ollama, Anthropic, OpenAI, custom endpoints) |
+| **LiteLLM** | `llm` | OpenAI-compatible LLM gateway (Ollama, Anthropic, OpenAI, OpenRouter, custom endpoints) |
 | **x402 verifier + ServiceOffer controller** | `x402` | Payment gating + reconciliation of payment-gated services |
 
 ## Use it from Claude Code
@@ -105,7 +105,7 @@ Running full Ethereum nodes requires significant disk space. Mainnet execution c
 +---------------------------------------------------------+
 |  k3d Cluster                                            |
 |  +-- Traefik Gateway (ports 80, 8080, 443, 8443)        |
-|  +-- Cloudflared (public tunnel)                        |
+|  +-- Cloudflared (dormant until sell / tunnel setup)    |
 |  +-- LiteLLM (LLM gateway)                              |
 |  +-- eRPC (RPC load balancer)                           |
 |  +-- Obol Frontend (web dashboard, local-only)          |
@@ -124,7 +124,9 @@ Running full Ethereum nodes requires significant disk space. Mainnet execution c
 
 - [Quickstart](quickstart.mdx) — install the stack, talk to your agent, and run `obol sell demo`.
 - [Build a profitable Obol Stack](build-a-profitable-stack.md) — end-to-end: bounded archive node → index → paid service → specialized agent → listed on marketplaces.
+- [Agents & Skills](agents-and-skills.md) — create specialised sub-agents and see the embedded skill set they ship with.
 - [Selling agent services](selling-services.md) — full orientation on the three `sell` shapes, x402 economics, ERC-8004 registration, and Telegram notifications.
+- [Buying services](buying-services.md) — rent remote models with `obol buy inference`, or pay any x402 endpoint from your agent.
 - [Installing Networks](installing-networks.mdx) — sync Ethereum / Aztec, including bounded archives via `--since`.
 
 ## Need assistance?

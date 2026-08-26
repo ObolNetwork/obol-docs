@@ -49,7 +49,7 @@ obol sell http my-index \
     --per-request 0.001 \
     --chain base \
     --token USDC \
-    --wallet 0x...your-wallet...
+    --pay-to 0x...your-wallet...
 ```
 
 This is the path to take when **the value is in the data**: you've synced an archive node from a specific block, built an index on top, and you want to sell access to queries against it that no public RPC will serve.
@@ -107,10 +107,7 @@ When quoting prices, name the unit explicitly — `0.01 OBOL / MTok`, `0.001 USD
 Buyers need to find you. The Obol Stack publishes an [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) agent registration document at `/.well-known/agent-registration.json` describing your services, supported payment methods, and endpoints. To list your agent on a public registry:
 
 ```shell
-obol sell register \
-    --chain mainnet \
-    --name my-quant \
-    --private-key-file ~/.config/obol/agents/my-quant/wallet.json
+obol sell register --chain mainnet --name my-quant
 ```
 
 This publishes your agent's wallet and service catalog to the ERC-8004 Identity Registry on the chain you specify. **Note that this requires ETH on the registering wallet for gas** — registration is not gas-sponsored.
@@ -126,6 +123,42 @@ Once registered, several marketplaces and explorers index ERC-8004 registries an
 - **The ERC-8004 contracts directly** — for buyer-agents written against the raw on-chain registry, `obol sell register` is all you need. The registry is the source of truth; marketplaces are just frontends.
 
 We do not recommend a single "official" marketplace — the agent-registry ecosystem is evolving fast, and the best strategy is to register on-chain and let multiple indexers pick you up.
+
+### Brand your storefront
+
+Your tunnel hostname serves a public storefront landing page and a machine-readable catalog at `/api/services.json` (plus `/skill.md` for agent buyers). Make it look like a business, not a default install:
+
+```shell
+obol sell info                     # buyer's-eye view: branding + every on-sale service
+obol sell info my-quant            # focus one service + how-to-buy
+obol sell info set \
+  --display-name "One Dollar Audit" \
+  --tagline "A serious security audit. One dollar." \
+  --logo-file ./logo.png \
+  --theme obol \
+  --description 'Every audit ships as a **signed report** — findings ranked by severity.'
+obol sell info reset               # back to defaults
+```
+
+Branding applies to *every* buyer-facing surface — the storefront, the 402 paywall pages buyers hit in a browser, the wallet sign-in page, the `/api` docs, and per-offer landing pages:
+
+<div>![Default light storefront](/img/gitbook/obol-stack-storefront-light.png)
+<figcaption>Default storefront (light theme)</figcaption> ![Branded storefront](/img/gitbook/obol-stack-storefront-branded.png)
+<figcaption>Branded seller (obol theme, custom logo + description)</figcaption></div>
+
+<div>![Default 402 checkout page](/img/gitbook/obol-stack-402-light.png)
+<figcaption>Default 402 checkout page</figcaption> ![Branded 402 checkout page](/img/gitbook/obol-stack-402-branded.png)
+<figcaption>The same page under seller branding</figcaption></div>
+
+The knobs, all optional and all agent-editable:
+
+* `--theme light|dark|obol` — three built-in presets (`light` is the default), plus `--accent '#hex'` to recolor any of them.
+* `--logo-file` / `--favicon-file` / `--og-image-file` — inline local images (no hosting needed); link previews use your OG image or a generated card.
+* `--description '<markdown>'` — longer seller copy; a safe markdown subset (bold, lists, links, headings) renders on the storefront and paywall pages.
+* `--css-file custom.css` — a capped custom stylesheet injected after the theme; every element carries stable `data-obol="…"` attributes to target (e.g. `[data-obol="price"]`).
+* `--hostname audit.acme.io …` — offers bound to their own hostname can override any of the above per origin, so each product can carry its own identity.
+
+`obol sell info` shows exactly what buyers see — only operationally-ready offers appear. Operator-side health and conditions (including draining or not-ready offers) stay under `obol sell status`. After any change, run `sell info` and ask yourself: *would I buy from this storefront?*
 
 ## Iterating on an agent business
 
@@ -151,6 +184,19 @@ obol sell delete my-quant --namespace my-ns
 ```
 
 Deletion removes the ServiceOffer CR, cascades the underlying Middleware and HTTPRoute via owner references, and deactivates the ERC-8004 registration (sets `active=false`). The agent's wallet and accumulated revenue are untouched.
+
+### Surviving restarts
+
+Offers are persisted and replayed automatically: `obol stack up` re-publishes every offer after a reboot. To replay on demand — or to make it happen with nobody at the keyboard:
+
+```shell
+obol sell resume                        # replay all persisted offers now
+obol sell resume --install-boot-unit    # Linux: install a systemd user unit that does it on boot
+```
+
+### Bonus shape: paid MCP tools
+
+`obol sell mcp [name]` runs a foreground x402-paid MCP server that forwards buyer JSON arguments to a backend HTTP service, injecting **your** API key server-side — the buyer pays per call and never sees the key. Useful for reselling metered access to an upstream API as an MCP tool. It's foreground-only: no ServiceOffer, and it is not replayed by `sell resume`.
 
 ## Verifying your paths
 

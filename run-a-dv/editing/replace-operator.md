@@ -43,7 +43,7 @@ All continuing operators and the new operator must run this command. The old ope
 charon alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
 
 # Docker version
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.10.3 alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
 ```
 
 #### For the New Operator
@@ -52,10 +52,10 @@ The new operator being added should run the same command but only needs to provi
 
 ```bash
 # Standard usage
-charon alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --output-dir=output --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
+charon alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
 
 # Docker version
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.10.3 alpha edit replace-operator --old-operator-enr=enr:-HW4...UVM --new-operator-enr=enr:-HW4QB-SH7cQ....2A0g6y0
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
 ```
 
 #### For the Old Operator Being Replaced

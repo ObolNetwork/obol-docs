@@ -4,10 +4,10 @@ This page aims to give guidance on the causes, and potential for troubleshooting
 
 ## Running test commands
 
-Below are sample invocations for each deployment method. Replace placeholder values (e.g. `<PEER_ENRS>`, `<BEACON_ENDPOINT>`) with your actual configuration. For full details on all available flags, refer to the [Test a Cluster](../../run-a-dv/prepare/test-a-cluster.mdx) page.
+Below are sample invocations for each deployment method, using `test peers` as the worked example because it needs access to your `.charon` files (the cluster file and the ENR private key), which is why the Docker examples mount a volume. Other test commands take endpoint flags instead (e.g. `--beacon-endpoints`, `--endpoints`) and generally don't need the volume mount. For each command's flags refer to the [Test a Cluster](../../run-a-dv/prepare/test-a-cluster.mdx) page.
 
 :::info
-Most test commands require a `--lock-file` or `--definition-file` flag to identify your cluster. There is no default value for these flags in test commands, so you must specify them explicitly. If you have completed DKG, use `--lock-file`; if you have only created a cluster definition, use `--definition-file`.
+Only the `peers` command uses your cluster files to identify peers. There is no default value for these flags, so you must specify them explicitly: if you have completed DKG use `--lock-file`; if you have only created a cluster definition use `--definition-file`. For `test all` the equivalents are `--peers-lock-file` and `--peers-definition-file`. The `beacon`, `validator`, `mev` and `infra` commands do not accept these flags: `beacon`, `validator` and `mev` target the endpoints you pass them, while `infra` tests the local machine and internet connection.
 :::
 
 <Tabs>
@@ -16,10 +16,10 @@ If you are using the [CDVN](https://github.com/ObolNetwork/charon-distributed-va
 
 ```sh
 # Run from within the charon-distributed-validator-node/ directory
-docker run --rm -u $(id -u):$(id -g) -v "$(pwd):/opt/charon" obolnetwork/charon:v1.10.3 alpha test <COMMAND> \
+docker run --rm -u $(id -u):$(id -g) -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 alpha test peers \
   --lock-file="/opt/charon/.charon/cluster-lock.json" \
-  --private-key-file="/opt/charon/.charon/charon-enr-private-key" \
-  [FLAGS]
+  --private-key-file="/opt/charon/.charon/charon-enr-private-key"
+  # add any other flags here, e.g. --timeout=1h or --keep-alive=30m
 ```
 </TabItem>
 
@@ -28,9 +28,9 @@ On DappNode, you can run test commands by executing them inside the Charon conta
 
 ```sh
 # Via docker exec (find your container name with `docker ps`)
-docker exec -it DAppNodePackage-hoodi-obol.dnp.dappnode.eth charon alpha test <COMMAND> \
-  --lock-file=".charon/cluster-lock.json" \
-  [FLAGS]
+docker exec -it DAppNodePackage-hoodi-obol.dnp.dappnode.eth charon alpha test peers \
+  --lock-file=".charon/cluster-lock.json"
+  # add any other flags here, e.g. --timeout=1h or --keep-alive=30m
 ```
 
 :::info
@@ -46,9 +46,9 @@ For Kubernetes deployments using the [Obol Helm charts](https://github.com/ObolN
 kubectl get pods -n dv-pod -l app.kubernetes.io/instance=my-dv-pod
 
 # Exec into the pod and run the test
-kubectl exec -it -n dv-pod my-dv-pod-0 -- charon alpha test <COMMAND> \
-  --lock-file=".charon/cluster-lock.json" \
-  [FLAGS]
+kubectl exec -it -n dv-pod my-dv-pod-0 -- charon alpha test peers \
+  --lock-file=".charon/cluster-lock.json"
+  # add any other flags here, e.g. --timeout=1h or --keep-alive=30m
 ```
 </TabItem>
 
@@ -56,9 +56,9 @@ kubectl exec -it -n dv-pod my-dv-pod-0 -- charon alpha test <COMMAND> \
 If you have the Charon binary installed directly, run test commands from the directory containing your `.charon` folder.
 
 ```sh
-charon alpha test <COMMAND> \
-  --lock-file=".charon/cluster-lock.json" \
-  [FLAGS]
+charon alpha test peers \
+  --lock-file=".charon/cluster-lock.json"
+  # add any other flags here, e.g. --timeout=1h or --keep-alive=30m
 ```
 </TabItem>
 </Tabs>
@@ -101,9 +101,10 @@ Same causes as PingMeasure test apply here.
 
 ### Self
 
-#### Libp2pTCPPortOpenTest
+#### Libp2pTCPPortOpen
 
-* There might be another process running on the designated port (tcp/3610 by default).
+* This test only performs a real check when you pass `--p2p-tcp-address` (there is no default). If you omit the flag, the test has no address to dial, so it is effectively skipped but still reports `OK` — do not read that as a successful port check. Always provide `--p2p-tcp-address` when you want the port-open check to actually run.
+* The port specified in `--p2p-tcp-address` might already be in use by another process, or be blocked by a firewall.
 * The process might have died.
 
 ## Beacon
@@ -119,9 +120,9 @@ Same causes as PingMeasure test apply here.
 
 #### Version
 
-* The beacon node version is not compatible with charon.
+* This test fetches and records the beacon node's version string; it does not assess compatibility with charon. A failure means the version endpoint could not be reached or its response could not be parsed.
 
-#### IsSynced
+#### Synced
 
 * Beacon node is not synced to the network.
 
@@ -135,9 +136,9 @@ This is a load test, to enable it add the `--load-test` flag.
 
 Same causes as PingMeasure test apply here.
 
-#### Simulation
+#### Simulate1, Simulate10, Simulate100, Simulate500, Simulate1000
 
-This is a load test, to enable it add the `--load-test` flag.
+These are load tests, enabled by adding the `--load-test` flag. Each test simulates the workload for the number of validators in its name. (Setting `--simulation-custom=<N>` runs an additional simulation for N validators, reported as `Simulate<N>`.)
 
 Same causes as PingMeasure test apply here and additionally:
 
@@ -151,7 +152,7 @@ Same causes as PingMeasure test apply here and additionally:
 
 #### PingMeasure
 
-* Validator client might be too far away (geographically) from the charon client. Generally a low latency between a validator client and its charon client is important for timely signing.
+* Validator client might be too far away (geographically) from the Charon client. Generally a low latency between a validator client and its Charon client is important for timely signing.
 
 #### PingLoad
 
@@ -173,10 +174,7 @@ Same causes as PingMeasure test apply here.
 Same causes as PingMeasure test apply here and additionally:
 
 * MEV relay might be too slow in block production.
-
-#### CreateMultipleBlocks
-
-Same causes as CreateBlock test apply here.
+* Setting `--number-of-payloads` greater than 1 requests that many blocks; the result is still reported under the `CreateBlock` name.
 
 ## Infra
 
@@ -210,8 +208,8 @@ Same causes as CreateBlock test apply here.
 
 #### InternetDownloadSpeed
 
-* Your internet download speed from the nearest test server is too low. Download speed is expected to be at least above 10Mb/s and at best above 50Mb/s.
+* Your internet download speed from the nearest test server is too low. Download speed is expected to be at least above 15Mb/s and at best above 50Mb/s.
 
 #### InternetUploadSpeed
 
-* Your internet upload speed to the nearest test server is too low. Upload speed is expected to be at least above 10Mb/s and at best above 50Mb/s.
+* Your internet upload speed to the nearest test server is too low. Upload speed is expected to be at least above 15Mb/s and at best above 50Mb/s.

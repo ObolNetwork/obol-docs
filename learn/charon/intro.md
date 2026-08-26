@@ -28,7 +28,7 @@ A DV cluster consists of multiple operators each provided with one of the M-of-N
 
 `Fetcher` fetches the unsigned duty data from the beacon node upon receiving an event from `Scheduler`. For attestations, this is the unsigned attestation, for block proposals, this is the unsigned block.
 
-The `Consensus` component listens to events from Fetcher and starts a [QBFT](https://docs.goquorum.consensys.net/configure-and-manage/configure/consensus-protocols/qbft/) consensus game with the other Charon nodes in the cluster for that specific duty and slot. When consensus is reached, the resulting unsigned duty data is stored in the `DutyDB`.
+The `Consensus` component listens to events from Fetcher and starts a [QBFT](https://docs.besu-eth.org/private-networks/how-to/configure/consensus/qbft) consensus game with the other Charon nodes in the cluster for that specific duty and slot. When consensus is reached, the resulting unsigned duty data is stored in the `DutyDB`.
 
 ### **Wait** for the VC to sign
 

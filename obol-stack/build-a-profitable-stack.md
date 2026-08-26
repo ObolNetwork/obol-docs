@@ -63,7 +63,7 @@ obol sell http my-index \
     --per-request 0.001 \
     --chain base \
     --token USDC \
-    --wallet 0x...your-wallet...
+    --pay-to 0x...your-wallet...
 ```
 
 Confirm it reconciles to `Ready`:
@@ -120,10 +120,7 @@ Confirm it's live with `obol tunnel status`. For the full dashboard walkthrough 
 Register your agent on [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) so buyers can find it:
 
 ```shell
-obol sell register \
-    --chain mainnet \
-    --name my-quant \
-    --private-key-file ~/.config/obol/agents/my-quant/wallet.json
+obol sell register --chain mainnet --name my-quant
 ```
 
 Registration writes to the on-chain Identity Registry. From there, multiple marketplaces and explorers index your offer:

@@ -20,7 +20,7 @@ Split an existing Ethereum validator key into multiple key shares for use in an 
 ## Step 1. Prepare the existing keystore files
 
 :::info
-Starting with Charon v1.8.0, you may not need to manually prepare the keystore files as described below. Charon can recursively search for keystore files in the specified directory and attempt to match the corresponding password files. The only case where this does not work is when you specify an exact list of withdrawal addresses; in that case, you must prepare the files manually and ensure the keystore indices match the order of the specified withdrawal addresses.
+Starting with Charon v1.8.0, you may not need to manually prepare the keystore files as described below. Charon can recursively search for keystore files in the specified directory and attempt to match the corresponding password files. The only case where this does not work is when you specify an exact list of withdrawal or fee recipient addresses; in that case, you must prepare the files manually and ensure the keystore indices match the order of the specified addresses.
 :::
 
 Create a folder to hold the encrypted keystores, along with the passwords to decrypt them.
@@ -50,14 +50,15 @@ At the end of this process, you should have a tree like this:
 Run the following docker command to split the keys (for mainnet):
 
 ```shell
-CHARON_VERSION=                # E.g. v1.10.3
+CHARON_VERSION=                # E.g. v1.10.0
 CLUSTER_NAME=                  # The name of the cluster you want to create.
-WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals (this is just for accuracy in your lock file, you can't change a withdrawal address for a validator that has already been deposited)
+WITHDRAWAL_ADDRESS=            # The address you want to use for withdrawals. It is recorded in the lock file and in the re-created deposit data files; it does not change the withdrawal address of a validator that has already been deposited.
 FEE_RECIPIENT_ADDRESS=         # The address you want to use for block reward and MEV payments.
 NODES=                         # The number of nodes in the cluster.
 
 docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:${CHARON_VERSION} create cluster \
    --name="${CLUSTER_NAME}" \
+   --cluster-dir=/opt/charon/cluster \
    --withdrawal-addresses="${WITHDRAWAL_ADDRESS}" \
    --fee-recipient-addresses="${FEE_RECIPIENT_ADDRESS}" \
    --split-existing-keys \
@@ -67,28 +68,33 @@ docker run --rm -v $(pwd):/opt/charon obolnetwork/charon:${CHARON_VERSION} creat
    --publish
 ```
 
-The above command will create `validator_keys` along with `cluster-lock.json` in `./cluster` for each node.
+The above command will create `validator_keys` along with `cluster-lock.json` and `deposit-data-*.json` in `./cluster` for each node.
 
 Command output:
 
 ```shell
 ***************** WARNING: Splitting keys **********************
  Please make sure any existing validator has been shut down for
- at least 2 finalized epochs before starting the Charon cluster,
+ at least 2 finalized epochs before starting the charon cluster,
  otherwise slashing could occur.                               
 ****************************************************************
 
-Created Charon cluster:
+Created charon cluster:
  --split-existing-keys=true
 
-./cluster/
+/opt/charon/cluster/
 ├─ node[0-*]/                   # Directory for each node
 │  ├─ charon-enr-private-key    # Charon networking private key for node authentication
 │  ├─ cluster-lock.json         # Cluster lock defines the cluster lock file which is signed by all nodes
+│  ├─ deposit-data-*.json       # Deposit data files are used to activate a Distributed Validator on the DV Launchpad
 │  ├─ validator_keys            # Validator keystores and password
 │  │  ├─ keystore-*.json        # Validator private share key for duty signing
 │  │  ├─ keystore-*.txt         # Keystore password files for keystore-*.json
 ```
+
+:::warning
+The `deposit-data-*.json` files are re-created and signed with the existing validator private keys, using the withdrawal addresses provided above. For a validator that is already activated, the on-chain withdrawal credentials remain unchanged — do not submit these deposit data files.
+:::
 
 These split keys can now be used to start a Charon cluster.
 

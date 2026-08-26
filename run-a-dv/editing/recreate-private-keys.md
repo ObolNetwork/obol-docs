@@ -9,7 +9,7 @@ You might need to recreate private key shares in several scenarios:
 - **Security concerns**: If you suspect that private key shares may have been compromised
 - **Key rotation**: As part of regular security practices to rotate cryptographic material
 - **Recovery**: After a security incident where you want to refresh all key material
-- **Compliance**: Meeting organisational policies that require periodic key rotation
+- **Compliance**: Meeting organizational policies that require periodic key rotation
 
 :::info
 This operation maintains the same validator public keys, so your validators remain registered on the beacon chain without any changes. Only the underlying private key shares held by operators are refreshed.
@@ -36,7 +36,7 @@ charon alpha edit recreate-private-keys --output-dir=output
 
 # Or, if you prefer running it in Docker
 # (replace 'latest' with the most recent version if needed: https://hub.docker.com/r/obolnetwork/charon/tags)
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.10.3 alpha edit recreate-private-keys --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit recreate-private-keys --output-dir=/opt/charon/output
 ```
 
 This command will:

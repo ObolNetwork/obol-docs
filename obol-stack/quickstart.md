@@ -18,27 +18,34 @@ Verify Docker is running with `docker info` before proceeding.
 ollama pull qwen3.5:4b   # or qwen3.5:9b on a 16 GB+ machine
 ```
 
-If you'd rather route through Anthropic or OpenAI, you can configure that with `obol model setup` after the cluster is up.
+The installer may offer to install Ollama. **If you decline and do not configure a cloud/custom model**, `obol stack up` has nothing to put in LiteLLM and **skips the default Hermes agent**. Fix after install with:
+
+```shell
+obol model setup          # interactive; or e.g. --provider openrouter
+obol agent init
+```
+
+You can also use Anthropic, OpenAI, OpenRouter, Venice, or any OpenAI-compatible endpoint via `obol model setup` after the cluster is up.
 
 ## Step 1: Install the Obol Stack
 
 Run the bootstrap installer:
 
 ```shell
-bash <(curl -s https://stack.obol.org)
+bash <(curl -fsSL https://stack.obol.org)
 ```
 
 The installer will:
 
 1. Validate that Docker is running.
 2. Install the `obol` CLI binary and dependencies (kubectl, helm, k3d, helmfile, k9s).
-3. Configure your PATH and add `obol.stack` to `/etc/hosts`.
+3. Configure your PATH and try to add `obol.stack` to `/etc/hosts`.
 4. Offer to start the cluster immediately.
 
 <Tabs>
 <TabItem value="default-installation" label="Default installation">
 ```shell
-bash <(curl -s https://stack.obol.org)
+bash <(curl -fsSL https://stack.obol.org)
 ```
 
 Files are installed to:
@@ -50,8 +57,10 @@ Files are installed to:
 
 <TabItem value="specific-version" label="Specific version">
 ```shell
-OBOL_RELEASE=v0.9.0 bash <(curl -s https://stack.obol.org)
+OBOL_RELEASE=v0.13.0 bash <(curl -fsSL https://stack.obol.org)
 ```
+
+Use the current tag from the [GitHub releases](https://github.com/ObolNetwork/obol-stack/releases) page when newer than v0.13.0.
 </TabItem>
 
 <TabItem value="development-mode" label="Development mode">
@@ -65,6 +74,21 @@ Development mode uses a local `.workspace/` directory and runs `go run` instead 
 </TabItem>
 </Tabs>
 
+:::warning
+**If `/etc/hosts` cannot be updated** (no sudo, or you cancel the password prompt), the installer still finishes — it does not hard-fail. Add the host, then start the stack yourself:
+
+```shell
+echo "127.0.0.1 obol.stack" | sudo tee -a /etc/hosts
+obol stack init
+obol stack up
+obol agent init   # if Hermes was skipped (no model yet)
+```
+
+`obol stack up` will try hosts again (including agent hostnames such as `obol-agent.obol.stack`). A failed write is a **warning**, not a stop.
+
+For CI/automation without a sudo password prompt, set `OBOL_NONINTERACTIVE=true` (hosts update fails fast unless sudo is already cached or NOPASSWD is configured).
+:::
+
 ## Step 2: Start the stack
 
 ```shell
@@ -72,11 +96,23 @@ obol stack init
 obol stack up
 ```
 
-`obol stack up` does a lot on first run — 2–5 minutes is normal — and ends with a default Hermes agent running in the `hermes-obol-agent` namespace, with its own Ethereum signing wallet.
+`obol stack up` does a lot on first run — 2–5 minutes is normal. When a model is available it deploys a default Hermes agent in the `hermes-obol-agent` namespace with its own Ethereum signing wallet. The **Cloudflare tunnel stays dormant** until the first selling workflow or an explicit `obol tunnel restart` / `obol tunnel setup`.
 
 :::info
 First startup pulls several Docker images. If it stalls, check `obol kubectl get pods -A` to see what's still pending.
 :::
+
+### Open the local UI
+
+```text
+http://obol.stack
+```
+
+Use the **`obol.stack` hostname**, not `localhost`. Traefik routes the frontend (and eRPC) only for `Host: obol.stack`. **`http://localhost:8080` returns 404** even when the stack is healthy.
+
+* Prefer **`:8080`** on macOS when port 80 is unavailable (or after editing `~/.config/obol/k3d.yaml` to drop privileged 80/443 binds).
+* If port 80 is mapped, `http://obol.stack/` works too.
+* Hermes dashboard (separate host): `http://obol-agent.obol.stack` (add `:8080` if that is your ingress).
 
 ## Step 3: Chat with your agent
 
@@ -133,8 +169,11 @@ Once you've watched a demo settle end-to-end, the same machinery lets you sell a
 ```shell
 obol sell inference my-model --model qwen3.5:9b --per-mtok 0.01 --token USDC --chain base
 obol sell http my-api --upstream my-svc --port 8080 --namespace my-ns \
-  --per-request 0.001 --chain base --wallet <your-wallet>
+  --per-request 0.001 --chain base --pay-to <your-wallet>
+obol sell agent my-analyst --price 0.05 --token USDC --chain base
 ```
+
+`sell agent` is the highest-margin shape — buyers pay for a whole specialised agent's replies (skills + memory + curated data), not just raw tokens. See [Agents & Skills](agents-and-skills.md) for building one worth paying for.
 
 The mental model is: **anything in your cluster that exposes a Service can be wrapped in a `ServiceOffer` and gated behind x402**. The goal of v0.9 is to make that loop short enough that you can actually iterate on what's worth selling.
 
@@ -151,7 +190,7 @@ Sellers receive `$OBOL` directly into their agent wallet. Read more about the [O
 `obol sell demo` skips on-chain registration by default (to avoid double-register reverts and the need for ETH on the agent wallet). When you're ready to be discoverable on a public agent registry:
 
 ```shell
-obol sell register --chain mainnet --name my-service --private-key-file <path>
+obol sell register --chain mainnet --name my-service
 ```
 
 This publishes the agent's wallet + service catalog to the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) Identity Registry on the chain you specify.
@@ -192,7 +231,7 @@ obol sell status <name>           # ServiceOffer reconciliation state
 ```
 
 :::info
-`obol stack up` gives you a **temporary** tunnel URL that changes on every restart. When you're ready to sell, give your stack a stable hostname — see [Set up a permanent URL](permanent-url.md).
+A plain `obol stack up` leaves the tunnel **dormant**. Selling (`obol sell demo`, `obol sell http`, …) or `obol tunnel restart` activates a temporary quick-tunnel URL (it can change on restart). For a stable public hostname, use [Set up a permanent URL](permanent-url.md) (`obol tunnel setup --hostname …`).
 :::
 
 ## Stopping and cleaning up
@@ -211,6 +250,8 @@ obol stack purge -f               # remove everything, including data
 
 * [Build a profitable Obol Stack](build-a-profitable-stack.md) — the end-to-end narrative: sync a bounded archive node, build an index, wrap it as a paid service, and turn it into a specialized agent business.
 * [Selling agent services](selling-services.md) — depth on the three `sell` shapes, x402 economics, and getting listed on marketplaces.
+* [Buying services](buying-services.md) — rent a remote model with `obol buy inference`, or pay any x402 endpoint from your agent.
+* [Agents & Skills](agents-and-skills.md) — create specialised sub-agents and see everything your agent can already do.
 * [Installing Networks](installing-networks.mdx) — sync local Ethereum / Aztec nodes (including bounded archives via `--since`).
 * [Installing Apps](installing-apps.md) — deploy any Helm chart.
 * [FAQ](faq.md) — common questions and troubleshooting.

@@ -26,7 +26,7 @@ Test whether the relay is publicly (or privately) accessible. This should return
 
 Ensure the ENR returned by the relay contains the correct public IP and port by decoding it with [ENR viewer](https://enr-viewer.com/).
 
-Configure **ALL** charon nodes in your cluster to use this relay:
+Configure **ALL** Charon nodes in your cluster to use this relay:
 
 * Either by adding a flag: `--p2p-relays=http://replace.with.public.ip.or.hostname:3640/enr`
 * Or by setting the environment variable: `CHARON_P2P_RELAYS=http://replace.with.public.ip.or.hostname:3640/enr`

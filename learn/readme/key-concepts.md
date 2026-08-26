@@ -38,7 +38,7 @@ A consensus client's duty is to run the proof-of-stake consensus layer of Ethere
 
 Examples of Consensus clients include:
 
-* [Prysm](https://docs.prylabs.network/docs/how-prysm-works/beacon-node)
+* [Prysm](https://prysm.offchainlabs.com/docs/learn/dev-concepts/beacon-node/)
 * [Teku](https://docs.teku.consensys.net/en/stable/)
 * [Lighthouse](https://lighthouse-book.sigmaprime.io/api-bn.html)
 * [Nimbus](https://nimbus.guide/)
@@ -63,7 +63,7 @@ A validator client is a piece of code that operates one or more Ethereum validat
 
 Examples of validator clients include:
 
-* [Prysm](https://docs.prylabs.network/docs/how-prysm-works/prysm-validator-client/)
+* [Prysm](https://prysm.offchainlabs.com/docs/learn/dev-concepts/prysm-validator-client/)
 * [Lodestar](https://github.com/ChainSafe/lodestar)
 * [Teku](https://docs.teku.consensys.net/en/stable/)
 * [Lighthouse](https://lighthouse-book.sigmaprime.io/api-vc.html)

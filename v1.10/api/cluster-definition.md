@@ -1,0 +1,9 @@
+# Cluster Definition
+
+<ApiEndpoint method="get" path="/v1/definition/{configHash}" summary="Retrieve a Distributed Validator Cluster proposal" href="/api/#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinition_v1" />
+
+<ApiEndpoint method="put" path="/v1/definition/{configHash}" summary="Accept a proposed Distributed Validator Cluster" href="/api/#tag/Cluster-Definition/operation/DefinitionController_updateClusterDefinition_v1" />
+
+<ApiEndpoint method="get" path="/v1/definition/operator/{address}" summary="Retrieve a list of cluster definitions which the address belongs to." href="/api/#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinitionWithOperator[1]_v1" />
+
+<ApiEndpoint method="post" path="/v1/definition" summary="Propose a new Distributed Validator Cluster" href="/api/#tag/Cluster-Definition/operation/DefinitionController_postClusterDefinition_v1" />

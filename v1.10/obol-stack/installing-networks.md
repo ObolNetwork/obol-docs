@@ -1,0 +1,258 @@
+# Installing networks
+
+The Obol Stack supports installing multiple blockchain networks on your local Kubernetes cluster. Each network installation creates a unique deployment with its own namespace, allowing you to run multiple instances simultaneously.
+
+## Available networks
+
+View all available networks:
+
+```shell
+obol network list
+```
+
+Currently supported networks:
+
+| Network | Description |
+| --- | --- |
+| **ethereum** | Full Ethereum node (execution + consensus clients) |
+| **aztec** | Aztec Layer 2 sequencer node |
+
+## Network installation workflow
+
+Installing a network follows a two-step process:
+
+1. **Install** - Generate configuration and save to disk
+2. **Sync** - Deploy the configuration to the cluster
+
+This separation allows you to review and modify configuration before deployment.
+
+### Install command
+
+```shell
+obol network install <network> [flags]
+```
+
+This creates a deployment directory at `~/.config/obol/networks/<network>/<id>/` containing:
+
+* `values.yaml` - Configuration values (editable)
+* `helmfile.yaml` - Deployment definition
+
+### Sync command
+
+```shell
+# Auto-selects if only one deployment exists
+obol network sync
+
+# By type (auto-selects if only one ethereum deployment)
+obol network sync ethereum
+
+# By full identifier
+obol network sync <network>/<id>
+
+# Sync all deployments at once
+obol network sync --all
+```
+
+This deploys the configuration to your Kubernetes cluster using Helmfile.
+
+### Delete command
+
+```shell
+# Auto-selects if only one deployment exists
+obol network delete
+
+# By type (auto-selects if only one of that type)
+obol network delete ethereum
+
+# By full identifier
+obol network delete <network>/<id>
+```
+
+This removes both the Kubernetes resources and local configuration.
+
+## Ethereum network
+
+Deploy a full Ethereum node with configurable execution and consensus clients.
+
+### Configuration options
+
+| Flag | Description | Options | Default |
+| --- | --- | --- | --- |
+| `--id` | Deployment identifier | Any string | Network name (e.g. `mainnet`), then petname |
+| `--network` | Ethereum network | mainnet, sepolia, hoodi | mainnet |
+| `--execution-client` | Execution layer client | reth, geth, nethermind, besu, erigon, ethereumjs | reth |
+| `--consensus-client` | Consensus layer client | lighthouse, prysm, teku, nimbus, lodestar, grandine | lighthouse |
+| `--mode` | Pruning mode | full, archive | full |
+| `--since` | Lower bound for archive history (requires `--mode=archive`) | fork name, duration, block number, `genesis`/`all` | (interactive picker on TTY; `all` on non-TTY) |
+
+### Examples
+
+<Tabs>
+<TabItem value="hoodi-testnet" label="Hoodi testnet">
+Deploy an Ethereum node on Hoodi testnet with default clients:
+
+```shell
+# Install configuration (ID defaults to "hoodi")
+obol network install ethereum --network=hoodi
+
+# Deploy to cluster
+obol network sync ethereum/hoodi
+```
+</TabItem>
+
+<TabItem value="mainnet-with-specific-clients" label="Mainnet with specific clients">
+Deploy a mainnet node with Geth and Prysm:
+
+```shell
+obol network install ethereum \
+  --id=mainnet-prod \
+  --network=mainnet \
+  --execution-client=geth \
+  --consensus-client=prysm
+
+obol network sync ethereum/mainnet-prod
+```
+</TabItem>
+
+<TabItem value="multiple-deployments" label="Multiple deployments">
+Run mainnet and testnet nodes simultaneously:
+
+```shell
+obol network install ethereum --network=mainnet
+obol network install ethereum --network=hoodi
+
+obol network sync ethereum/mainnet
+obol network sync ethereum/hoodi
+```
+</TabItem>
+</Tabs>
+
+:::warning
+Full Ethereum nodes require significant resources. Mainnet execution clients need 1+ TB of storage and can take days to sync. Consider using testnets for development.
+:::
+
+### Archive nodes and bounded history (`--since`)
+
+Pruned full nodes are sufficient for everyday RPC use, but they cannot serve historical state. If you plan to **index events, run historical `eth_call`, build a block explorer, or back a query service with a specific app's history**, you need an archive node — and you almost certainly do not need it all the way back to genesis.
+
+`--mode=archive` switches reth to archive mode. `--since` bounds the archive at a known starting point, so you only carry the history you actually need.
+
+```shell
+# Archive back to the Cancun hardfork (~800 GB on mainnet)
+obol network install ethereum --network=mainnet --mode=archive --since=cancun
+
+# Archive of the last 365 days (~600 GB)
+obol network install ethereum --network=mainnet --mode=archive --since=365d
+
+# Archive from a specific block forward (e.g. the block at which your DeFi app was deployed)
+obol network install ethereum --network=mainnet --mode=archive --since=22500000
+
+# Full archive from genesis (~4 TB+ on mainnet)
+obol network install ethereum --network=mainnet --mode=archive --since=all
+```
+
+Accepted `--since` values:
+
+| Form | Example | Meaning |
+| --- | --- | --- |
+| EL fork name | `merge`, `shanghai`, `cancun`, `prague`, `osaka` | Prune state before that mainnet hardfork. |
+| Duration | `365d`, `1y`, `6mo` | Keep approximately the last N blocks (~12s slot rate). |
+| Block number | `22500000` | Prune state before that block. |
+| `genesis` / `all` | `all` | Full archive from genesis. |
+
+:::info
+Fork-name presets reference **mainnet** block numbers. On testnets, use a raw block number or a duration.
+:::
+
+When `--mode=archive` is set without `--since` on a TTY, the installer shows an interactive picker. On non-TTY (scripts, CI), the default is `all`. `--since` is currently fine-tuned for **reth**; other execution clients fall back to their chart-default pruning behavior with a warning.
+
+This pairs naturally with [Selling agent services](selling-services.md) — once your archive node has synced from the block at which your target application was deployed, you have a defensible data set that no public RPC will serve, and you can wrap it as a paid endpoint or a specialized agent.
+
+### Check sync status
+
+```shell
+# View pod status
+obol kubectl get pods -n ethereum-<id>
+
+# Check execution client logs
+obol kubectl logs -n ethereum-<id> -l app=execution -f
+
+# Check consensus client logs
+obol kubectl logs -n ethereum-<id> -l app=consensus -f
+```
+
+## Aztec network
+
+Deploy an Aztec Layer 2 sequencer node for the privacy-focused Ethereum rollup.
+
+### Configuration options
+
+| Flag | Description | Options | Default |
+| --- | --- | --- | --- |
+| `--id` | Deployment identifier | Any string | Network name (e.g. `mainnet`), then petname |
+| `--network` | Aztec network | mainnet | mainnet |
+| `--attester-private-key` | Attester private key (hex) | Required | None |
+| `--l1-execution-url` | L1 execution RPC URL | URL | ERPC endpoint |
+| `--l1-consensus-url` | L1 consensus RPC URL | URL | Public endpoint |
+
+### Example
+
+```shell
+obol network install aztec \
+  --attester-private-key=<YOUR_PRIVATE_KEY> \
+  --l1-execution-url=https://geth-prysm-mainnet-1.gcp.obol.tech/ \
+  --l1-consensus-url=https://prysm-geth-mainnet-1.gcp.obol.tech/
+```
+
+Deploy to the cluster:
+
+```shell
+obol network sync aztec/<id>
+```
+
+:::info
+You can use your own Ethereum node endpoints or the in-cluster ERPC endpoint by changing the L1 URL flags.
+:::
+
+### Resource requirements
+
+| Resource | Request | Limit |
+| --- | --- | --- |
+| **CPU** | 4 cores | 8 cores |
+| **Memory** | 16 GB | 32 GB |
+| **Storage** | 1 TB | - |
+
+:::warning
+Ensure your machine has sufficient resources before deploying an Aztec node.
+:::
+
+## Managing deployments
+
+### View deployment status
+
+```shell
+obol kubectl get namespaces | grep -E "ethereum|aztec"
+```
+
+### Modify configuration
+
+```shell
+$EDITOR ~/.config/obol/networks/<network>/<id>/values.yaml
+
+# Re-deploy (auto-selects if only one deployment, otherwise specify)
+obol network sync <network>/<id>
+```
+
+### Delete a deployment
+
+```shell
+# Auto-selects if only one deployment exists
+obol network delete
+
+# Or specify explicitly
+obol network delete <network>/<id>
+```
+
+:::warning
+Deletion is permanent. All blockchain data stored in the deployment will be lost.
+:::

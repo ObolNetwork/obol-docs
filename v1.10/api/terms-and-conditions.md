@@ -1,0 +1,5 @@
+# TermsAndConditions
+
+<ApiEndpoint method="post" path="/v1/termsAndConditions" summary="Saves user's approval latest terms and conditions" href="/api/#tag/Terms-And-Conditions/operation/TermsAndConditionsController_signTermsAndConditions_v1" />
+
+<ApiEndpoint method="get" path="/v1/termsAndConditions/{address}" summary="Verify Signature on Terms and Conditions" href="/api/#tag/Terms-And-Conditions/operation/TermsAndConditionsController_getTermsAndConditionsSigned_v1" />

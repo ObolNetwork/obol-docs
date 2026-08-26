@@ -88,12 +88,12 @@ cd charon-distributed-validator-node
 Use docker to create an ENR
 
 ```sh
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.10.3 create enr
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 create enr
 ```
 
 ### Back up the private key located in `.charon/charon-enr-private-key`
 
-![Screenshot: docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon:v1.10.0 create enr.](/img/gitbook/image-35.png)
+![Screenshot: docker run --rm -v &quot;$(pwd):/opt/charon&quot; obolnetwork/charon:v1.11.0 create enr.](/img/gitbook/image-35.png)
 
 :::warning
 What you see in the console starting with `enr:-` is the **public key** for your Charon node (known as an ENR). The **private key** is in the file `.charon/charon-enr-private-key`, be sure to back it up securely.
@@ -132,7 +132,7 @@ Lastly, share the cluster invite link with the other cluster members.
 
 ### Step 4: Distributed Key Generation (DKG)
 
-All squad members need to open the cluster invitation link, connect their wallet, accept all necessary advisories, and to verify the cluster configuration is correct with a signature. Each squad member will also need to upload and sign an ENR to represent their charon client, so see [steps 1](lido-csm.mdx#step-1-clone-the-repo) and [2](lido-csm.mdx#step-2-create-enr-and-backup-your-private-key) above.
+All squad members need to open the cluster invitation link, connect their wallet, accept all necessary advisories, and to verify the cluster configuration is correct with a signature. Each squad member will also need to upload and sign an ENR to represent their Charon client, so see [steps 1](lido-csm.mdx#step-1-clone-the-repo) and [2](lido-csm.mdx#step-2-create-enr-and-backup-your-private-key) above.
 
 ![Screenshot: All squad members need to open the cluster invitation link, connect their wallet, accept all necessary advisories, and to verify the cluster configuration is correct with a…](/img/gitbook/image-42.png)
 
