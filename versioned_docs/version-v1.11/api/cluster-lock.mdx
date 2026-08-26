@@ -1,0 +1,38 @@
+---
+sidebar_label: "Cluster Lock"
+slug: /api/cluster-lock
+---
+
+import ApiEndpoint from '@site/src/components/ApiEndpoint';
+
+# Cluster Lock
+
+<ApiEndpoint method="get" path="/lock/{lockHash}" summary="Retrieve a Distributed Validator Cluster Lock Object" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLock[0]" />
+
+<ApiEndpoint method="get" path="/lock/search/{network}" summary="Retrieve a list of Distributed Validator Cluster Lock Objects" href="/api/#tag/Cluster-Lock/operation/LockController_searchClusterLocks[0]" />
+
+<ApiEndpoint method="get" path="/v1/lock/search/{network}" summary="Retrieve a list of Distributed Validator Cluster Lock Objects" href="/api/#tag/Cluster-Lock/operation/LockController_searchClusterLocks[1]_v1" />
+
+<ApiEndpoint method="post" path="/lock" summary="Push Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_postClusterLock[0]" />
+
+<ApiEndpoint method="post" path="/v1/lock" summary="Push Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_postClusterLock[1]_v1" />
+
+<ApiEndpoint method="get" path="/lock/{lockHash}/launchpad" summary="Redirect to the launchpad cluster status page" href="/api/#tag/Cluster-Lock/operation/LockController_redirectToClusterStatus[0]" />
+
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/launchpad" summary="Redirect to the launchpad cluster status page" href="/api/#tag/Cluster-Lock/operation/LockController_redirectToClusterStatus[1]_v1" />
+
+<ApiEndpoint method="get" path="/lock/operator/{address}" summary="Retrieve a list of Distributed Validator Clusters for which this address is an operator" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByOperator[1]" />
+
+<ApiEndpoint method="get" path="/v1/lock/operator/{address}" summary="Retrieve a list of Distributed Validator Clusters for which this address is an operator" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByOperator[3]_v1" />
+
+<ApiEndpoint method="get" path="/lock/network/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByNetwork[0]" />
+
+<ApiEndpoint method="get" path="/v1/lock/network/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByNetwork[1]_v1" />
+
+<ApiEndpoint method="get" path="/lock/network/summary/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLockNetworkSummary[0]" />
+
+<ApiEndpoint method="get" path="/v1/lock/network/summary/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLockNetworkSummary[1]_v1" />
+
+<ApiEndpoint method="post" path="/lock/verify" summary="Verify Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_verifyClusterLock[0]" />
+
+<ApiEndpoint method="post" path="/v1/lock/verify" summary="Verify Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_verifyClusterLock[1]_v1" />

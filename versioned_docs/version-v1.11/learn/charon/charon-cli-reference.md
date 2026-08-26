@@ -6,7 +6,7 @@ slug: /learn/charon/charon-cli-reference
 
 # CLI Reference
 
-The following is a reference for Charon version [`v1.10.3`](https://github.com/ObolNetwork/charon/releases/tag/v1.10.3). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+The following is a reference for Charon version [`v1.10.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.10.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
 The following are the top-level commands available to use.
 
@@ -109,7 +109,7 @@ Flags:
       --num-validators int                     The number of distributed validators needed in the cluster.
       --publish                                Publish lock file to obol-api.
       --publish-address string                 The URL to publish the lock file to. (default "https://api.obol.tech/v1")
-      --split-existing-keys                    Split an existing validator's private key into a set of distributed validator private key shares. Does not re-create deposit data for this key.
+      --split-existing-keys                    Split an existing validator's private key into a set of distributed validator private key shares. Deposit data files are re-created using the provided withdrawal addresses; do not submit deposits for validators that are already active.
       --split-keys-dir string                  Directory containing keys to split. Expects keys in keystore-*.json and passwords in keystore-*.txt. Requires --split-existing-keys.
       --target-gas-limit uint                  Preferred target gas limit for transactions. (default 60000000)
       --testnet-chain-id uint                  Chain ID of the custom test network.
@@ -699,7 +699,7 @@ Usage:
 
 Flags:
       --fee-recipient string            [REQUIRED] New fee recipient address to be applied to all specified validators.
-      --gas-limit uint                  Optional gas limit override for builder registrations. If not set, the most recent gas limit from the cluster lock, overrides file or remote API is used.
+      --gas-limit uint                  Optional gas limit override for builder registrations. If not set, the existing gas limit from the cluster lock or overrides file is used.
   -h, --help                            Help for sign
       --lock-file string                Path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
       --overrides-file string           Path to the builder registrations overrides file. (default ".charon/builder_registrations_overrides.json")
@@ -735,11 +735,11 @@ Flags:
 
 ### List current fee recipient details
 
-The `charon feerecipient list` command displays the most recent builder registration for each validator, selecting the entry with the highest timestamp from the cluster lock file, the overrides file, or the remote API.
+The `charon feerecipient list` command displays the most recent builder registration for each validator, selecting the entry with the highest timestamp from either the cluster lock file or the overrides file.
 
 ```markdown
 charon feerecipient list --help
-Displays the most recent builder registration for each validator, selecting the entry with the highest timestamp from the cluster lock file, the overrides file, or the remote API.
+Displays the most recent builder registration for each validator, selecting the entry with the highest timestamp from either the cluster lock file or the overrides file.
 
 Usage:
   charon feerecipient list [flags]
@@ -748,8 +748,6 @@ Flags:
   -h, --help                            Help for list
       --lock-file string                Path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
       --overrides-file string           Path to the builder registrations overrides file. (default ".charon/builder_registrations_overrides.json")
-      --publish-address string          The URL of the remote API. (default "https://api.obol.tech/v1")
-      --publish-timeout duration        Timeout for accessing the remote API. (default 5m0s)
       --validator-public-keys strings   Optional comma-separated list of validator public keys to list builder registrations for.
 ```
 
@@ -856,7 +854,7 @@ Flags:
       --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
       --shutdown-delay duration                Graceful shutdown delay. (default 5s)
       --timeout duration                       Timeout for the command, should be increased if the command times out. (default 1m0s)
-      --unverified                             If charon has no access to the existing validator keys, this flag allows the addition to proceed, but skips hashing and signing the new cluster lock data. charon run must be started with --no-verify flag.
+      --unverified                             If charon has no access to the existing validator keys, this flag allows the addition to proceed, but skips hashing and signing the new cluster lock data. Requires the --keymanager-address flag to import the new validator key shares. charon run must be started with --no-verify flag.
       --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
       --withdrawal-addresses strings           Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
 ```
