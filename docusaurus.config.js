@@ -19,6 +19,19 @@ const legacyRedirects = fs.existsSync(redirectsFile)
   ? JSON.parse(fs.readFileSync(redirectsFile, 'utf8'))
   : [];
 
+// Section landing pages that were empty GitBook folder stubs. The sidebar
+// category now links straight to the section's overview page, so keep the old
+// folder URLs alive for both the released version (root) and /next.
+const sectionRedirects = [
+  ['/learn/charon', '/learn/charon/intro'],
+  ['/run-a-dv/start', '/run-a-dv/start/quickstart_overview'],
+  ['/advanced-and-troubleshooting/security', '/advanced-and-troubleshooting/security/overview'],
+  ['/walkthrough-guides/walkthroughs', '/walkthrough-guides/walkthroughs/walkthrough-guides'],
+].flatMap(([from, to]) => [
+  {from, to},
+  {from: `/next${from}`, to: `/next${to}`},
+]);
+
 // Deployment target.
 // - Production (default): https://docs.obol.org at /
 // - Preview (DEPLOY_PREVIEW=true): https://obolnetwork.github.io/obol-docs/
@@ -114,7 +127,7 @@ const config = {
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['html', 'htm'],
-        redirects: legacyRedirects,
+        redirects: [...legacyRedirects, ...sectionRedirects],
         // GitBook served old versions at /version-vX.Y/... — keep those URLs
         // alive now that the same pages live at /vX.Y/...
         createRedirects(existingPath) {

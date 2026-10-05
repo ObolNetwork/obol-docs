@@ -8,6 +8,16 @@ slug: /learn/charon/charon-cli-reference
 
 The following is a reference for Charon version [`v1.10.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.10.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
 
+## Setting flags with environment variables or a config file
+
+Every Charon flag can be set in three ways. Where the same flag is set more than once, the highest source in this list wins:
+
+1. **Command-line flags**, for example `--beacon-node-endpoints=http://beacon:5052`.
+2. **Environment variables.** The name is `CHARON_` followed by the flag name in upper case, with hyphens replaced by underscores. For example, `--beacon-node-endpoints` becomes `CHARON_BEACON_NODE_ENDPOINTS`. This is how the Docker Compose repos configure Charon from their `.env` files.
+3. **A config file** named `charon.yaml` (or `charon.json` / `charon.toml`) in the directory Charon runs from. Keys are the flag names without the leading dashes, for example `beacon-node-endpoints: http://beacon:5052`.
+
+## Commands
+
 The following are the top-level commands available to use.
 
 ```markdown

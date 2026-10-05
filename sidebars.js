@@ -65,14 +65,9 @@ const sidebars = {
       "label": "Charon",
       "link": {
         "type": "doc",
-        "id": "learn/charon/README"
+        "id": "learn/charon/intro"
       },
       "items": [
-        {
-          "type": "doc",
-          "id": "learn/charon/intro",
-          "label": "Introduction to Charon"
-        },
         {
           "type": "doc",
           "id": "learn/charon/dkg",
@@ -99,8 +94,10 @@ const sidebars = {
       "type": "category",
       "label": "Further Reading",
       "link": {
-        "type": "doc",
-        "id": "learn/further-reading/README"
+        "type": "generated-index",
+        "slug": "/learn/further-reading",
+        "title": "Further Reading",
+        "description": "Background reading on Ethereum and DVT, community testnets, peer scoring, and useful links."
       },
       "items": [
         {
@@ -136,14 +133,9 @@ const sidebars = {
       "label": "Quickstart",
       "link": {
         "type": "doc",
-        "id": "run-a-dv/start/README"
+        "id": "run-a-dv/start/quickstart_overview"
       },
       "items": [
-        {
-          "type": "doc",
-          "id": "run-a-dv/start/quickstart_overview",
-          "label": "Quickstart Overview"
-        },
         {
           "type": "doc",
           "id": "run-a-dv/start/create-a-dv-alone",
@@ -165,8 +157,10 @@ const sidebars = {
       "type": "category",
       "label": "Prepare to Run a DV",
       "link": {
-        "type": "doc",
-        "id": "run-a-dv/prepare/README"
+        "type": "generated-index",
+        "slug": "/run-a-dv/prepare",
+        "title": "Prepare to Run a DV",
+        "description": "Decide how and where to run your distributed validator, follow deployment best practices, and test your setup before going live."
       },
       "items": [
         {
@@ -190,8 +184,10 @@ const sidebars = {
       "type": "category",
       "label": "Running a DV",
       "link": {
-        "type": "doc",
-        "id": "run-a-dv/running/README"
+        "type": "generated-index",
+        "slug": "/run-a-dv/running",
+        "title": "Running a DV",
+        "description": "Day-two operations for a live distributed validator: activation, withdrawals, rewards, updates, monitoring, and exits."
       },
       "items": [
         {
@@ -240,8 +236,10 @@ const sidebars = {
       "type": "category",
       "label": "Edit a Cluster",
       "link": {
-        "type": "doc",
-        "id": "run-a-dv/editing/README"
+        "type": "generated-index",
+        "slug": "/run-a-dv/editing",
+        "title": "Edit a Cluster",
+        "description": "Change an existing cluster: add validators, add, remove, or replace operators, and recreate private key shares."
       },
       "items": [
         {
@@ -275,8 +273,10 @@ const sidebars = {
       "type": "category",
       "label": "Partner Integrations",
       "link": {
-        "type": "doc",
-        "id": "run-a-dv/integrations/README"
+        "type": "generated-index",
+        "slug": "/run-a-dv/integrations",
+        "title": "Partner Integrations",
+        "description": "Run Obol distributed validators with partner protocols and platforms such as EigenLayer, Lido, and DappNode."
       },
       "items": [
         {
@@ -326,8 +326,10 @@ const sidebars = {
       "type": "category",
       "label": "Advanced Guides",
       "link": {
-        "type": "doc",
-        "id": "advanced-and-troubleshooting/advanced/README"
+        "type": "generated-index",
+        "slug": "/advanced-and-troubleshooting/advanced",
+        "title": "Advanced Guides",
+        "description": "Advanced configuration and operational guides for Charon and distributed validator clusters."
       },
       "items": [
         {
@@ -436,8 +438,10 @@ const sidebars = {
       "type": "category",
       "label": "Troubleshooting",
       "link": {
-        "type": "doc",
-        "id": "advanced-and-troubleshooting/troubleshooting/README"
+        "type": "generated-index",
+        "slug": "/advanced-and-troubleshooting/troubleshooting",
+        "title": "Troubleshooting",
+        "description": "Diagnose and resolve common errors, DKG failures, client configuration problems, and failed duties."
       },
       "items": [
         {
@@ -472,14 +476,9 @@ const sidebars = {
       "label": "Security",
       "link": {
         "type": "doc",
-        "id": "advanced-and-troubleshooting/security/README"
+        "id": "advanced-and-troubleshooting/security/overview"
       },
       "items": [
-        {
-          "type": "doc",
-          "id": "advanced-and-troubleshooting/security/overview",
-          "label": "Overview"
-        },
         {
           "type": "doc",
           "id": "advanced-and-troubleshooting/security/risks",
@@ -547,8 +546,10 @@ const sidebars = {
       "type": "category",
       "label": "Community",
       "link": {
-        "type": "doc",
-        "id": "community-and-governance/community/README"
+        "type": "generated-index",
+        "slug": "/community-and-governance/community",
+        "title": "Community",
+        "description": "Programs for the Obol community, including grants, Techne credentials, and the Staking Mastery program."
       },
       "items": [
         {
@@ -572,8 +573,10 @@ const sidebars = {
       "type": "category",
       "label": "Contribution & Feedback",
       "link": {
-        "type": "doc",
-        "id": "community-and-governance/contribution/README"
+        "type": "generated-index",
+        "slug": "/community-and-governance/contribution",
+        "title": "Contribution & Feedback",
+        "description": "File bug reports, contribute to these docs, and share feedback with the Obol team."
       },
       "items": [
         {
@@ -651,24 +654,30 @@ const sidebars = {
     },
     {
       "type": "html",
+      "value": "Agent Skills",
+      "className": "sidebar-section-title",
+      "defaultStyle": true
+    },
+    {
+      "type": "doc",
+      "id": "agent-skills/README",
+      "label": "Overview & Installation"
+    },
+    {
+      "type": "doc",
+      "id": "agent-skills/skills",
+      "label": "Skills Reference"
+    },
+    {
+      "type": "html",
       "value": "Walkthrough Guides",
       "className": "sidebar-section-title",
       "defaultStyle": true
     },
     {
-      "type": "category",
-      "label": "Walkthroughs",
-      "link": {
-        "type": "doc",
-        "id": "walkthrough-guides/walkthroughs/README"
-      },
-      "items": [
-        {
-          "type": "doc",
-          "id": "walkthrough-guides/walkthroughs/walkthrough-guides",
-          "label": "Walkthrough Guides"
-        }
-      ]
+      "type": "doc",
+      "id": "walkthrough-guides/walkthroughs/walkthrough-guides",
+      "label": "Walkthrough Guides"
     },
     {
       "type": "html",
@@ -685,8 +694,10 @@ const sidebars = {
       "type": "category",
       "label": "Enumerations",
       "link": {
-        "type": "doc",
-        "id": "sdk/enumerations/README"
+        "type": "generated-index",
+        "slug": "/sdk/enumerations",
+        "title": "Enumerations",
+        "description": "Enumerations exported by the Obol SDK."
       },
       "items": [
         {
@@ -700,8 +711,10 @@ const sidebars = {
       "type": "category",
       "label": "Classes",
       "link": {
-        "type": "doc",
-        "id": "sdk/classes/README"
+        "type": "generated-index",
+        "slug": "/sdk/classes",
+        "title": "Classes",
+        "description": "Classes exported by the Obol SDK."
       },
       "items": [
         {
@@ -735,8 +748,10 @@ const sidebars = {
       "type": "category",
       "label": "Interfaces",
       "link": {
-        "type": "doc",
-        "id": "sdk/interfaces/README"
+        "type": "generated-index",
+        "slug": "/sdk/interfaces",
+        "title": "Interfaces",
+        "description": "Interfaces exported by the Obol SDK."
       },
       "items": [
         {
@@ -800,8 +815,10 @@ const sidebars = {
       "type": "category",
       "label": "Type-Aliases",
       "link": {
-        "type": "doc",
-        "id": "sdk/type-aliases/README"
+        "type": "generated-index",
+        "slug": "/sdk/type-aliases",
+        "title": "Type Aliases",
+        "description": "Type aliases exported by the Obol SDK."
       },
       "items": [
         {
@@ -960,8 +977,10 @@ const sidebars = {
       "type": "category",
       "label": "Variables",
       "link": {
-        "type": "doc",
-        "id": "sdk/variables/README"
+        "type": "generated-index",
+        "slug": "/sdk/variables",
+        "title": "Variables",
+        "description": "Variables exported by the Obol SDK."
       },
       "items": [
         {
@@ -975,8 +994,10 @@ const sidebars = {
       "type": "category",
       "label": "Functions",
       "link": {
-        "type": "doc",
-        "id": "sdk/functions/README"
+        "type": "generated-index",
+        "slug": "/sdk/functions",
+        "title": "Functions",
+        "description": "Functions exported by the Obol SDK."
       },
       "items": [
         {

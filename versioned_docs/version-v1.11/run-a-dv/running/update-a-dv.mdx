@@ -140,6 +140,14 @@ This will upgrade your Charon and validator client containers to the latest char
 Check the [chart changelog](https://github.com/ObolNetwork/helm-charts/releases) before upgrading to review any breaking changes or new configuration options.
 :::
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Upgrade my DVpod to the latest dv-pod chart release. Review the changelog for breaking changes first and confirm the cluster is healthy afterwards.
+```
+:::
+
 :::danger
 If you run more than one node in a DV Cluster, please take caution upgrading them simultaneously. Particularly if you are updating or changing the validator client used or recreating disks. It is recommended to update nodes on a sequential basis to minimize liveness and safety risks.
 :::

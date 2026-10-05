@@ -5,12 +5,20 @@ slug: /run-a-dv/start/quickstart_overview
 
 # Quickstart Overview
 
-The quickstart guides are aimed at developers and stakers looking to deploy Distributed Validators in a single or multi-operator setup. To contribute to this documentation, head over to our [Github repository](https://github.com/ObolNetwork/obol-gitbook) and file a pull request.
+The quickstart guides are aimed at developers and stakers looking to deploy Distributed Validators in a single or multi-operator setup. To contribute to this documentation, head over to our [GitHub repository](https://github.com/ObolNetwork/obol-docs) and file a pull request.
 
 There are two ways to set up a distributed validator and each comes with its own quickstart, within the "Getting Started" section:
 
 1. Run a DV cluster as a [**group**](./create-a-dv-with-a-group.mdx), where several operators run the nodes that make up the cluster. In this setup, the key shares are created using a distributed key generation process, avoiding the full private keys being stored in full in any one place. This approach can also be used by single operators looking to manage all nodes of a cluster but wanting to create the key shares in a trust-minimized fashion.
 2. Run a DV cluster [**alone**](./create-a-dv-alone.mdx), where a single operator runs all the nodes of the DV. Depending on trust assumptions, there is not necessarily the need to create the key shares via a DKG process. Instead the key shares can be created in a centralized manner, and distributed securely to the nodes.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+I want to run an Obol distributed validator. Help me decide whether to run it alone or with a group, then walk me through the setup.
+```
+:::
 
 ## Cluster as a Service (CaaS)
 

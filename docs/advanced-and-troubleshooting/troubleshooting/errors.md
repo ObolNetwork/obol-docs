@@ -21,6 +21,14 @@ docker compose logs
 
 If your logs show a failed duty with a specific reason code, see [Duty Failure Reasons](duty-failure-reasons.md) for an explanation of every reason Charon's tracker component can report.
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+My Charon node is logging errors. Read its recent logs, work out the root cause, and suggest a fix.
+```
+:::
+
 ## ENRs & Keys
 
 ### How do I get my ENR if I want to generate it again?

@@ -19,6 +19,14 @@ You can add operators to your cluster using the `charon alpha edit add-operators
 The command uses a different set of p2p-relays to `charon run` to avoid conflicts with your running cluster.
 :::
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/add-operators`:
+
+```text
+I need to take part in an add-operators ceremony for my Charon cluster. Ask whether I'm an existing or a new operator, do a dry run first, then walk me through it.
+```
+:::
+
 ## Adding Operators Process
 
 The examples below demonstrate adding new operators to an existing cluster. All existing operators must run this command, along with the new operators being added.
