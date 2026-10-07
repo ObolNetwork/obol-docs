@@ -28,6 +28,14 @@ Before removing operators, it's crucial to understand your cluster's fault toler
 
 For example, if your cluster has 4 operators with a threshold of 3 (f=1), removing 2 operators requires specifying at least 3 participating operators.
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/remove-operators`:
+
+```text
+Help me take part in a remove-operators ceremony for my Charon cluster. Ask whether I'm staying or being removed, check the new threshold with me, and do a dry run first.
+```
+:::
+
 ## Removing Operators Process
 
 ### Standard Removal (Within Fault Tolerance)

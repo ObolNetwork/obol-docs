@@ -89,6 +89,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `core_consensus_decided_rounds` | Gauge | Number of decided rounds by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_consensus_duration_seconds` | Histogram | Duration of the consensus process by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_consensus_error_total` | Counter | Total count of consensus errors by protocol | `protocol` |
+| `core_consensus_insufficient_round_changes_total` | Counter | Total count of consensus instances with insufficient round change messages by protocol, duty, timer, and outcome (decided or timeout) | `protocol, duty, timer, outcome` |
 | `core_consensus_timeout_total` | Counter | Total count of consensus timeouts by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_fetcher_proposal_blinded` | Gauge | Whether the fetched proposal was blinded (1) or local (2) |  |
 | `core_fetcher_proposal_local_mismatch_fee_recipient` | Gauge | Counts the number of times a local proposal has a mismatched fee recipient |  |
@@ -113,6 +114,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `core_tracker_inclusion_delay` | Gauge | Cluster's average attestation inclusion delay in slots. Available only when attestation_inclusion feature flag is enabled. |  |
 | `core_tracker_inclusion_missed_total` | Counter | Total number of broadcast duties never included in any block by type | `duty` |
 | `core_tracker_inconsistent_parsigs_total` | Counter | Total number of duties that contained inconsistent partial signed data by duty type | `duty` |
+| `core_tracker_parsig_cohort_rank_total` | Counter | Total sync committee partial signatures per peer per cohort rank (0=largest cohort), for detecting head disagreement | `duty, peer_idx, rank` |
 | `core_tracker_participation` | Gauge | Set to 1 if peer participated successfully for the given duty or else 0 | `duty, peer` |
 | `core_tracker_participation_expected_total` | Counter | Total number of expected participations (fail + success) by peer and duty type | `duty, peer` |
 | `core_tracker_participation_missed_total` | Counter | Total number of missed participations by peer and duty type | `duty, peer` |
@@ -136,6 +138,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `p2p_reachability_status` | Gauge | Current libp2p reachability status of this node as detected by autonat: unknown(0), public(1) or private(2). |  |
 | `p2p_relay_connection_types` | Gauge | Current number of libp2p connections by relay, type (`direct` or `relay`), and protocol (`tcp`, `quic`). Note that peers may have multiple connections. | `peer, type, protocol` |
 | `p2p_relay_connections` | Gauge | Connected relays by name | `peer` |
+| `p2p_send_duration_seconds` | Histogram | Wall-clock duration of synchronous libp2p Send (one-way) and SendReceive (round-trip) calls, by peer, protocol, and topic. Topic is a sub-protocol label (e.g. qbft_pre_prepare, parsigex_proposer); empty when not set by the caller. | `peer, protocol, topic` |
 | `relay_p2p_active_connections` | Gauge | Current number of active connections by peer and cluster | `peer, peer_cluster` |
 | `relay_p2p_connection_total` | Counter | Total number of new connections by peer and cluster | `peer, peer_cluster` |
 | `relay_p2p_network_receive_bytes_total` | Counter | Total number of network bytes received from the peer and cluster | `peer, peer_cluster` |

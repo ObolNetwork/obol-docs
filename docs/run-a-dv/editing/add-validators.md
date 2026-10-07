@@ -17,6 +17,14 @@ You can add validators to your cluster using the `charon alpha edit add-validato
 The command uses a different set of p2p-relays to `charon run` to avoid conflicts with your running cluster.
 :::
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/add-validators`:
+
+```text
+Add validators to my existing Charon cluster. Do a dry run first and check the withdrawal and fee recipient addresses with me before running it.
+```
+:::
+
 ## Adding Validators Process
 
 The examples below are for adding 10 validators. You can use them with any number of validators you would like to add. Run the following command to collectively generate and add 10 new validators with other node operators (similar to DKG):

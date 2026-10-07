@@ -32,6 +32,14 @@ This operation maintains the same validator public keys, so your validators rema
 The ceremony uses a different p2p relay from your running cluster to avoid conflicts. The default relay address is already configured differently, so no special action is required.
 :::
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/recreate-private-keys`:
+
+```text
+Recreate the private key shares for my Charon cluster while keeping the same validator public keys. Do a dry run first.
+```
+:::
+
 ## Recreating Private Keys Process
 
 All operators must run this command simultaneously. The ceremony will coordinate between all operators to generate new private key shares.

@@ -37,7 +37,7 @@ The schema of the `cluster-definition.json` is defined as:
     "address": "0x123..abfc", //ETH1 address of the creator
     "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
   },
-  "version": "v1.8.0", // Schema version
+  "version": "v1.10.0", // Schema version
   "num_validators": 1, // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3, // Optional threshold required for signature reconstruction
   "dkg_algorithm": "default", // Optional DKG algorithm for key generation
@@ -77,11 +77,28 @@ The schema of the `cluster-definition.json` is defined as:
       "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
     }
   ],
-  "deposit_amounts": [
+  "deposit_amounts": [ // Optional partial deposit amounts in gwei (v1.8.0+)
     "32000000000"
-  ]
+  ],
+  "consensus_protocol": "", // Optional preferred consensus protocol, e.g. "qbft" (v1.9.0+)
+  "target_gas_limit": 36000000, // Preferred target gas limit, defaults to 36000000 (v1.10.0+)
+  "compounding": false // Use 0x02 compounding withdrawal credentials (v1.10.0+)
 }
 ```
+
+#### Cluster definition versions
+
+Charon defaults to schema version `v1.10.0` for new clusters and still reads clusters created with older versions. Recent versions added the following fields:
+
+| Version | Added |
+| --- | --- |
+| `v1.10.0` | `target_gas_limit` (defaults to `36000000` when not set) and `compounding`, which creates validators with `0x02` compounding withdrawal credentials. |
+| `v1.9.0` | `consensus_protocol`, the cluster's preferred [consensus protocol](../../advanced-and-troubleshooting/advanced/consensus-protocols.md). When not set, `qbft` is used. |
+| `v1.8.0` | `deposit_amounts`, a list of [partial deposit](../../advanced-and-troubleshooting/advanced/partial-deposit.md) amounts in gwei that must sum to between 32 and 2048 ETH. When not set, deposits of 1 ETH and 32 ETH are generated. In the lock file, `deposit_data` is replaced by `partial_deposit_data`. |
+| `v1.7.0` | `builder_registration` per distributed validator (pre-generated MEV registrations) and `node_signatures` in the lock file. |
+| `v1.6.0` | `deposit_data` per distributed validator in the lock file, so anyone holding the lock, such as the creator, can activate the validators. |
+| `v1.5.0` | The `validators` list, allowing a different fee recipient and withdrawal address for each validator. |
+| `v1.4.0` | The `creator` structure, recording who created the definition (including non-operators). |
 
 ### Using the DV Launchpad
 

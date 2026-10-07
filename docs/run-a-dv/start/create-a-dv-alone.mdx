@@ -14,6 +14,14 @@ It is possible for a single operator to manage all of the nodes of a DV cluster.
 The private key shares can be created centrally and distributed securely to each node. Alternatively, the private key shares can be created in a lower-trust manner with a [Distributed Key Generation](../../learn/intro/key-concepts.md#distributed-validator-key-generation-ceremony) process, which avoids the validator private key being stored in full anywhere, at any point in its lifecycle. Follow the [group quickstart](create-a-dv-with-a-group.mdx) instead for this latter case.
 :::
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Help me create a distributed validator cluster where I run all of the nodes myself, and check the cluster configuration with me before I deposit.
+```
+:::
+
 ### Pre-requisites {#pre-requisites}
 * A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
 * Ensure you have [git](https://git-scm.com/downloads) installed.
