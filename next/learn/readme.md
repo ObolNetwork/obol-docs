@@ -18,4 +18,4 @@ Whether you’re here to learn about DVT, integrate it into your staking stack, 
 <a class="gb-card" href="mailto:business@obol.tech"><img class="gb-card-img" src="../../img/gitbook/cards/contact_us.png" alt="" loading="lazy" /><h3>Get In Touch</h3><p>Partnerships, integration support, allocator onboarding, or general questions.</p></a>
 </div>
 
-> **Browsing as an AI agent?** Start with [obol.org/llms.txt](https://obol.org/llms.txt) for a terse index of the ecosystem, or [obol.org/llms-full.txt](https://obol.org/llms-full.txt) for a self-contained briefing. The [`ObolNetwork/skills`](https://github.com/ObolNetwork/skills) repo publishes Claude Code skills for running DVs and the Obol Stack.
+> **Browsing as an AI agent?** Start with [obol.org/llms.txt](https://obol.org/llms.txt) for a terse index of the ecosystem, or [obol.org/llms-full.txt](https://obol.org/llms-full.txt) for a self-contained briefing. Using Claude Code? Install the [Obol agent skills](agent-skills/README.md) to let Claude create, test, deploy, and monitor DVs and the Obol Stack for you.

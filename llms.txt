@@ -21,27 +21,22 @@ https://obol.org/llms.txt.
 - [Obol Splits](https://docs.obol.org/next/learn/readme/obol-splits.md)
 - [DV Launchpad](https://docs.obol.org/next/learn/readme/launchpad.md): A dapp to securely create Distributed Validators alone or with a group.
 - [Frequently Asked Questions](https://docs.obol.org/next/learn/readme/frequently-asked-questions.md)
-- [Charon](https://docs.obol.org/next/learn/charon.md)
-- [Introduction to Charon](https://docs.obol.org/next/learn/charon/intro.md): Charon - The Distributed Validator Client
+- [Charon](https://docs.obol.org/next/learn/charon/intro.md): Charon - The Distributed Validator Client
 - [Distributed Key Generation](https://docs.obol.org/next/learn/charon/dkg.md): Generating private keys for a Distributed Validator requires a Distributed Key Generation (DKG) Ceremony.
 - [Cluster Configuration](https://docs.obol.org/next/learn/charon/cluster-configuration.md): Documenting a Distributed Validator Cluster in a standardized file format
 - [Charon Networking](https://docs.obol.org/next/learn/charon/charon-networking.md)
 - [CLI Reference](https://docs.obol.org/next/learn/charon/charon-cli-reference.md): A go-based middleware client for taking part in Distributed Validator clusters.
-- [Further Reading](https://docs.obol.org/next/learn/further-reading.md)
 - [Ethereum and Its Relationship With DVT](https://docs.obol.org/next/learn/further-reading/ethereum_and_dvt.md): Ethereum and its relationship with DVT
 - [Community Testing](https://docs.obol.org/next/learn/further-reading/testnet.md): Community testing efforts
 - [Peer Score](https://docs.obol.org/next/learn/further-reading/peer_score.md): Measuring Individual Performance in Distributed Validators
 - [Useful Links](https://docs.obol.org/next/learn/further-reading/resources.md): A collection of links to products and content relating to Distributed Validators.
-- [Quickstart](https://docs.obol.org/next/run-a-dv/start.md)
-- [Quickstart Overview](https://docs.obol.org/next/run-a-dv/start/quickstart_overview.md)
+- [Quickstart](https://docs.obol.org/next/run-a-dv/start/quickstart_overview.md)
 - [Create a DV Alone](https://docs.obol.org/next/run-a-dv/start/create-a-dv-alone.md)
 - [Create a DV With a Group](https://docs.obol.org/next/run-a-dv/start/create-a-dv-with-a-group.md): This quickstart guide will walk you through creating a Distributed Validator Cluster with a number of other node operators.
 - [Push Metrics and Logs to Obol](https://docs.obol.org/next/run-a-dv/start/obol-monitoring.md): Add credentials to help the Obol Team monitor the health of your cluster
-- [Prepare to Run a DV](https://docs.obol.org/next/run-a-dv/prepare.md)
 - [How and Where To Run DVs](https://docs.obol.org/next/run-a-dv/prepare/how_where_dvs.md): How and where to run DVs
 - [Deployment Best Practices](https://docs.obol.org/next/run-a-dv/prepare/deployment-best-practices.md): DV Deployment best practices, for running an optimal Distributed Validator setup at scale.
 - [Test a Cluster](https://docs.obol.org/next/run-a-dv/prepare/test-a-cluster.md)
-- [Running a DV](https://docs.obol.org/next/run-a-dv/running.md)
 - [Activate a DV](https://docs.obol.org/next/run-a-dv/running/activate-a-dv.md): Learn how to activate your distributed validator cluster using the new deposit flow with support for compounding validators and OVM integration.
 - [Request Withdrawal](https://docs.obol.org/next/run-a-dv/running/request-withdrawal.md): Learn how to request withdrawals from validators with 0x02 withdrawal credentials using OVM, including batching and principal/rewards distinction.
 - [Distribute Rewards](https://docs.obol.org/next/run-a-dv/running/distribute-rewards.md): Learn how distribution works for OVM and splitter contracts, including how principal and rewards are distributed based on principal threshold.
@@ -50,20 +45,17 @@ https://obol.org/llms.txt.
 - [Monitoring Your Node](https://docs.obol.org/next/run-a-dv/running/monitoring.md): Add monitoring credentials to help the Obol Team monitor the health of your cluster
 - [Charon Metrics Reference](https://docs.obol.org/next/run-a-dv/running/metrics.md): Reference for the Prometheus metrics Charon exposes, including standard labels, key metrics to watch, and the full metrics table for dashboards and alerting.
 - [Exit a DV](https://docs.obol.org/next/run-a-dv/running/exit-a-dv.md)
-- [Edit a Cluster](https://docs.obol.org/next/run-a-dv/editing.md)
 - [Adding Validators](https://docs.obol.org/next/run-a-dv/editing/add-validators.md): Add validators to your existing distributed validator cluster using the charon alpha edit add-validators command.
 - [Adding Operators](https://docs.obol.org/next/run-a-dv/editing/add-operators.md): Add operators to your existing distributed validator cluster using the charon alpha edit add-operators command.
 - [Removing Operators](https://docs.obol.org/next/run-a-dv/editing/remove-operators.md): Remove operators from your existing distributed validator cluster using the charon alpha edit remove-operators command.
 - [Replacing Operators](https://docs.obol.org/next/run-a-dv/editing/replace-operator.md): Replace operators in your distributed validator cluster using the edit command or validator consolidation.
 - [Recreating Private Keys](https://docs.obol.org/next/run-a-dv/editing/recreate-private-keys.md): Create new private key shares for your existing distributed validator cluster using the charon alpha edit recreate-private-keys command.
-- [Partner Integrations](https://docs.obol.org/next/run-a-dv/integrations.md)
 - [Create an EigenLayer DV](https://docs.obol.org/next/run-a-dv/integrations/create-an-eigenlayer-dv.md)
 - [Create a Lido CSM DV](https://docs.obol.org/next/run-a-dv/integrations/lido-csm.md): Setup and run a DV within the Lido Community Staking Module
 - [Create a Lido stVault](https://docs.obol.org/next/run-a-dv/integrations/lido-v3-stvault-integration-kit.md)
 - [For Node Operators](https://docs.obol.org/next/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-node-operator.md)
 - [For Capital Allocators](https://docs.obol.org/next/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-capital-allocators.md)
 - [Run a DV on a DappNode](https://docs.obol.org/next/run-a-dv/integrations/dappnode.md)
-- [Advanced Guides](https://docs.obol.org/next/advanced-and-troubleshooting/advanced.md)
 - [Swapping Clients](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/client-swap.md): Swap EL, CL, VC and MEV clients in the stack.
 - [Migrate an Existing Validator](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/quickstart-split.md): Migrate an existing validator by splitting its private key into shares
 - [Create a DV Using the SDK](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.md)
@@ -84,14 +76,12 @@ https://obol.org/llms.txt.
 - [NAT Hole Punching](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/hole-punching.md): Achieve a P2P direct connection under a private IP (NAT hole punching).
 - [Consensus Protocols](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/consensus-protocols.md): How Charon's pluggable consensus layer lets a cluster agree on duty data, and how operators can select a preferred protocol.
 - [Charon Feature Flags](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/feature-flags.md): How Charon's feature flags gate alpha and beta functionality, and how operators can enable, disable, or observe them.
-- [Troubleshooting](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting.md)
 - [Errors & Resolutions](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting/errors.md): Errors & Resolutions
 - [Handling DKG Failure](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting/dkg_failure.md): Handling DKG failure
 - [Client Configuration](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting/client_configurations.md): A reference for extra configuration of Ethereum Clients when running in DVs.
 - [Test Commands](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting/test_command.md): Troubleshoot issues spotted by the test command
 - [Duty Failure Reasons](https://docs.obol.org/next/advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md): Reference for every duty failure reason instrumented by Charon's tracker component, what each one means, and what to do about it.
-- [Security](https://docs.obol.org/next/advanced-and-troubleshooting/security.md)
-- [Overview](https://docs.obol.org/next/advanced-and-troubleshooting/security/overview.md): An overview of Obol's security posture — official domains, completed audits, threat model references, and the bug bounty program.
+- [Security](https://docs.obol.org/next/advanced-and-troubleshooting/security/overview.md): An overview of Obol's security posture — official domains, completed audits, threat model references, and the bug bounty program.
 - [Centralization Risks and Mitigation](https://docs.obol.org/next/advanced-and-troubleshooting/security/risks.md): Outlining potential centralization risks and their mitigations
 - [Obol Bug Bounty Program](https://docs.obol.org/next/advanced-and-troubleshooting/security/bug-bounty.md): Obol's bug bounty program, scope, and reward structure for security researchers reporting vulnerabilities in our distributed validator software.
 - [Smart Contract Audit](https://docs.obol.org/next/advanced-and-troubleshooting/security/smart-contract-audit.md): Public audit reports for the Obol Splits and Obol Validator Manager smart contracts.
@@ -102,11 +92,9 @@ https://obol.org/llms.txt.
 - [The OBOL Token](https://docs.obol.org/next/community-and-governance/obol-token.md)
 - [Token Distribution & Liquidity](https://docs.obol.org/next/community-and-governance/obol-token/token-distribution-and-liquidity.md)
 - [Guide for Unstaking OBOL](https://docs.obol.org/next/community-and-governance/obol-token/guide-for-unstaking-obol.md)
-- [Community](https://docs.obol.org/next/community-and-governance/community.md)
 - [Grants Program](https://docs.obol.org/next/community-and-governance/community/grants-program.md)
 - [Techne](https://docs.obol.org/next/community-and-governance/community/techne.md): Information about the Techne Credential Program.
 - [Staking Mastery Program (Archived)](https://docs.obol.org/next/community-and-governance/community/staking-masters.md): Information about the Staking Mastery Program
-- [Contribution & Feedback](https://docs.obol.org/next/community-and-governance/contribution.md)
 - [Filing a Bug Report](https://docs.obol.org/next/community-and-governance/contribution/bug-report.md): Filing a bug report
 - [Documentation Standards](https://docs.obol.org/next/community-and-governance/contribution/docs.md): Documentation Standards
 - [Feedback](https://docs.obol.org/next/community-and-governance/contribution/feedback.md): Feedback for us
@@ -120,18 +108,16 @@ https://obol.org/llms.txt.
 - [Installing Networks](https://docs.obol.org/next/obol-stack/installing-networks.md): Deploy blockchain networks on your local Obol Stack
 - [Installing Apps](https://docs.obol.org/next/obol-stack/installing-apps.md): Deploy additional applications on your Obol Stack
 - [FAQ](https://docs.obol.org/next/obol-stack/faq.md): Frequently asked questions about the Obol Stack
-- [Walkthroughs](https://docs.obol.org/next/walkthrough-guides/walkthroughs.md)
+- [Obol Agent Skills](https://docs.obol.org/next/agent-skills.md): Install the Obol Claude Code plugin so an AI agent can create, test, deploy, and monitor distributed validators and the Obol Stack for you.
+- [Skills Reference](https://docs.obol.org/next/agent-skills/skills.md): What each skill in the Obol Claude Code plugin does, what it needs, and example prompts to try.
 - [Walkthrough Guides](https://docs.obol.org/next/walkthrough-guides/walkthroughs/walkthrough-guides.md): Walkthrough guides
 - [Intro](https://docs.obol.org/next/sdk/index.md)
-- [Enumerations](https://docs.obol.org/next/sdk/enumerations.md)
 - [FORK_MAPPING](https://docs.obol.org/next/sdk/enumerations/fork_mapping.md)
-- [Classes](https://docs.obol.org/next/sdk/classes.md)
 - [Client](https://docs.obol.org/next/sdk/classes/client.md)
 - [EOA](https://docs.obol.org/next/sdk/classes/eoa.md)
 - [Exit](https://docs.obol.org/next/sdk/classes/exit.md)
 - [Incentives](https://docs.obol.org/next/sdk/classes/incentives.md)
 - [ObolSplits](https://docs.obol.org/next/sdk/classes/obolsplits.md)
-- [Interfaces](https://docs.obol.org/next/sdk/interfaces.md)
 - [ClusterDefinition](https://docs.obol.org/next/sdk/interfaces/clusterdefinition.md)
 - [ExistingExitValidationBlobData](https://docs.obol.org/next/sdk/interfaces/existingexitvalidationblobdata.md)
 - [ExitClusterConfig](https://docs.obol.org/next/sdk/interfaces/exitclusterconfig.md)
@@ -143,7 +129,6 @@ https://obol.org/llms.txt.
 - [ExitValidationPayload](https://docs.obol.org/next/sdk/interfaces/exitvalidationpayload.md)
 - [RewardsSplitPayload](https://docs.obol.org/next/sdk/interfaces/rewardssplitpayload.md)
 - [SignedExitValidationMessage](https://docs.obol.org/next/sdk/interfaces/signedexitvalidationmessage.md)
-- [Type-Aliases](https://docs.obol.org/next/sdk/type-aliases.md)
 - [BuilderRegistration](https://docs.obol.org/next/sdk/type-aliases/builderregistration.md)
 - [BuilderRegistrationMessage](https://docs.obol.org/next/sdk/type-aliases/builderregistrationmessage.md)
 - [ClaimableIncentives](https://docs.obol.org/next/sdk/type-aliases/claimableincentives.md)
@@ -174,9 +159,7 @@ https://obol.org/llms.txt.
 - [SplitRecipient](https://docs.obol.org/next/sdk/type-aliases/splitrecipient.md)
 - [SplitV2Recipient](https://docs.obol.org/next/sdk/type-aliases/splitv2recipient.md)
 - [TotalSplitPayload](https://docs.obol.org/next/sdk/type-aliases/totalsplitpayload.md)
-- [Variables](https://docs.obol.org/next/sdk/variables.md)
 - [CAPELLA_FORK_MAPPING](https://docs.obol.org/next/sdk/variables/capella_fork_mapping.md)
-- [Functions](https://docs.obol.org/next/sdk/functions.md)
 - [clusterConfigOrDefinitionHash](https://docs.obol.org/next/sdk/functions/clusterconfigordefinitionhash.md)
 - [clusterLockHash](https://docs.obol.org/next/sdk/functions/clusterlockhash.md)
 - [validateClusterLock](https://docs.obol.org/next/sdk/functions/validateclusterlock.md)
@@ -209,27 +192,22 @@ https://obol.org/llms.txt.
 - [Obol Splits](https://docs.obol.org/learn/readme/obol-splits.md)
 - [DV Launchpad](https://docs.obol.org/learn/readme/launchpad.md): A dapp to securely create Distributed Validators alone or with a group.
 - [Frequently Asked Questions](https://docs.obol.org/learn/readme/frequently-asked-questions.md)
-- [Charon](https://docs.obol.org/learn/charon.md)
-- [Introduction to Charon](https://docs.obol.org/learn/charon/intro.md): Charon - The Distributed Validator Client
+- [Charon](https://docs.obol.org/learn/charon/intro.md): Charon - The Distributed Validator Client
 - [Distributed Key Generation](https://docs.obol.org/learn/charon/dkg.md): Generating private keys for a Distributed Validator requires a Distributed Key Generation (DKG) Ceremony.
 - [Cluster Configuration](https://docs.obol.org/learn/charon/cluster-configuration.md): Documenting a Distributed Validator Cluster in a standardized file format
 - [Charon Networking](https://docs.obol.org/learn/charon/charon-networking.md)
 - [CLI Reference](https://docs.obol.org/learn/charon/charon-cli-reference.md): A go-based middleware client for taking part in Distributed Validator clusters.
-- [Further Reading](https://docs.obol.org/learn/further-reading.md)
 - [Ethereum and Its Relationship With DVT](https://docs.obol.org/learn/further-reading/ethereum_and_dvt.md): Ethereum and its relationship with DVT
 - [Community Testing](https://docs.obol.org/learn/further-reading/testnet.md): Community testing efforts
 - [Peer Score](https://docs.obol.org/learn/further-reading/peer_score.md): Measuring Individual Performance in Distributed Validators
 - [Useful Links](https://docs.obol.org/learn/further-reading/resources.md): A collection of links to products and content relating to Distributed Validators.
-- [Quickstart](https://docs.obol.org/run-a-dv/start.md)
-- [Quickstart Overview](https://docs.obol.org/run-a-dv/start/quickstart_overview.md)
+- [Quickstart](https://docs.obol.org/run-a-dv/start/quickstart_overview.md)
 - [Create a DV Alone](https://docs.obol.org/run-a-dv/start/create-a-dv-alone.md)
 - [Create a DV With a Group](https://docs.obol.org/run-a-dv/start/create-a-dv-with-a-group.md): This quickstart guide will walk you through creating a Distributed Validator Cluster with a number of other node operators.
 - [Push Metrics and Logs to Obol](https://docs.obol.org/run-a-dv/start/obol-monitoring.md): Add credentials to help the Obol Team monitor the health of your cluster
-- [Prepare to Run a DV](https://docs.obol.org/run-a-dv/prepare.md)
 - [How and Where To Run DVs](https://docs.obol.org/run-a-dv/prepare/how_where_dvs.md): How and where to run DVs
 - [Deployment Best Practices](https://docs.obol.org/run-a-dv/prepare/deployment-best-practices.md): DV Deployment best practices, for running an optimal Distributed Validator setup at scale.
 - [Test a Cluster](https://docs.obol.org/run-a-dv/prepare/test-a-cluster.md)
-- [Running a DV](https://docs.obol.org/run-a-dv/running.md)
 - [Activate a DV](https://docs.obol.org/run-a-dv/running/activate-a-dv.md): Learn how to activate your distributed validator cluster using the new deposit flow with support for compounding validators and OVM integration.
 - [Request Withdrawal](https://docs.obol.org/run-a-dv/running/request-withdrawal.md): Learn how to request withdrawals from validators with 0x02 withdrawal credentials using OVM, including batching and principal/rewards distinction.
 - [Distribute Rewards](https://docs.obol.org/run-a-dv/running/distribute-rewards.md): Learn how distribution works for OVM and splitter contracts, including how principal and rewards are distributed based on principal threshold.
@@ -238,20 +216,17 @@ https://obol.org/llms.txt.
 - [Monitoring Your Node](https://docs.obol.org/run-a-dv/running/monitoring.md): Add monitoring credentials to help the Obol Team monitor the health of your cluster
 - [Charon Metrics Reference](https://docs.obol.org/run-a-dv/running/metrics.md): Reference for the Prometheus metrics Charon exposes, including standard labels, key metrics to watch, and the full metrics table for dashboards and alerting.
 - [Exit a DV](https://docs.obol.org/run-a-dv/running/exit-a-dv.md)
-- [Edit a Cluster](https://docs.obol.org/run-a-dv/editing.md)
 - [Adding Validators](https://docs.obol.org/run-a-dv/editing/add-validators.md): Add validators to your existing distributed validator cluster using the charon alpha edit add-validators command.
 - [Adding Operators](https://docs.obol.org/run-a-dv/editing/add-operators.md): Add operators to your existing distributed validator cluster using the charon alpha edit add-operators command.
 - [Removing Operators](https://docs.obol.org/run-a-dv/editing/remove-operators.md): Remove operators from your existing distributed validator cluster using the charon alpha edit remove-operators command.
 - [Replacing Operators](https://docs.obol.org/run-a-dv/editing/replace-operator.md): Replace operators in your distributed validator cluster using the edit command or validator consolidation.
 - [Recreating Private Keys](https://docs.obol.org/run-a-dv/editing/recreate-private-keys.md): Create new private key shares for your existing distributed validator cluster using the charon alpha edit recreate-private-keys command.
-- [Partner Integrations](https://docs.obol.org/run-a-dv/integrations.md)
 - [Create an EigenLayer DV](https://docs.obol.org/run-a-dv/integrations/create-an-eigenlayer-dv.md)
 - [Create a Lido CSM DV](https://docs.obol.org/run-a-dv/integrations/lido-csm.md): Setup and run a DV within the Lido Community Staking Module
 - [Create a Lido stVault](https://docs.obol.org/run-a-dv/integrations/lido-v3-stvault-integration-kit.md)
 - [For Node Operators](https://docs.obol.org/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-node-operator.md)
 - [For Capital Allocators](https://docs.obol.org/run-a-dv/integrations/lido-v3-stvault-integration-kit/lido-v3-stvault-for-capital-allocators.md)
 - [Run a DV on a DappNode](https://docs.obol.org/run-a-dv/integrations/dappnode.md)
-- [Advanced Guides](https://docs.obol.org/advanced-and-troubleshooting/advanced.md)
 - [Swapping Clients](https://docs.obol.org/advanced-and-troubleshooting/advanced/client-swap.md): Swap EL, CL, VC and MEV clients in the stack.
 - [Migrate an Existing Validator](https://docs.obol.org/advanced-and-troubleshooting/advanced/quickstart-split.md): Migrate an existing validator by splitting its private key into shares
 - [Create a DV Using the SDK](https://docs.obol.org/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.md)
@@ -272,14 +247,12 @@ https://obol.org/llms.txt.
 - [NAT Hole Punching](https://docs.obol.org/advanced-and-troubleshooting/advanced/hole-punching.md): Achieve a P2P direct connection under a private IP (NAT hole punching).
 - [Consensus Protocols](https://docs.obol.org/advanced-and-troubleshooting/advanced/consensus-protocols.md): How Charon's pluggable consensus layer lets a cluster agree on duty data, and how operators can select a preferred protocol.
 - [Charon Feature Flags](https://docs.obol.org/advanced-and-troubleshooting/advanced/feature-flags.md): How Charon's feature flags gate alpha and beta functionality, and how operators can enable, disable, or observe them.
-- [Troubleshooting](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting.md)
 - [Errors & Resolutions](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/errors.md): Errors & Resolutions
 - [Handling DKG Failure](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/dkg_failure.md): Handling DKG failure
 - [Client Configuration](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/client_configurations.md): A reference for extra configuration of Ethereum Clients when running in DVs.
 - [Test Commands](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/test_command.md): Troubleshoot issues spotted by the test command
 - [Duty Failure Reasons](https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md): Reference for every duty failure reason instrumented by Charon's tracker component, what each one means, and what to do about it.
-- [Security](https://docs.obol.org/advanced-and-troubleshooting/security.md)
-- [Overview](https://docs.obol.org/advanced-and-troubleshooting/security/overview.md): An overview of Obol's security posture — official domains, completed audits, threat model references, and the bug bounty program.
+- [Security](https://docs.obol.org/advanced-and-troubleshooting/security/overview.md): An overview of Obol's security posture — official domains, completed audits, threat model references, and the bug bounty program.
 - [Centralization Risks and Mitigation](https://docs.obol.org/advanced-and-troubleshooting/security/risks.md): Outlining potential centralization risks and their mitigations
 - [Obol Bug Bounty Program](https://docs.obol.org/advanced-and-troubleshooting/security/bug-bounty.md): Obol's bug bounty program, scope, and reward structure for security researchers reporting vulnerabilities in our distributed validator software.
 - [Smart Contract Audit](https://docs.obol.org/advanced-and-troubleshooting/security/smart-contract-audit.md): Public audit reports for the Obol Splits and Obol Validator Manager smart contracts.
@@ -290,11 +263,9 @@ https://obol.org/llms.txt.
 - [The OBOL Token](https://docs.obol.org/community-and-governance/obol-token.md)
 - [Token Distribution & Liquidity](https://docs.obol.org/community-and-governance/obol-token/token-distribution-and-liquidity.md)
 - [Guide for Unstaking OBOL](https://docs.obol.org/community-and-governance/obol-token/guide-for-unstaking-obol.md)
-- [Community](https://docs.obol.org/community-and-governance/community.md)
 - [Grants Program](https://docs.obol.org/community-and-governance/community/grants-program.md)
 - [Techne](https://docs.obol.org/community-and-governance/community/techne.md): Information about the Techne Credential Program.
 - [Staking Mastery Program (Archived)](https://docs.obol.org/community-and-governance/community/staking-masters.md): Information about the Staking Mastery Program
-- [Contribution & Feedback](https://docs.obol.org/community-and-governance/contribution.md)
 - [Filing a Bug Report](https://docs.obol.org/community-and-governance/contribution/bug-report.md): Filing a bug report
 - [Documentation Standards](https://docs.obol.org/community-and-governance/contribution/docs.md): Documentation Standards
 - [Feedback](https://docs.obol.org/community-and-governance/contribution/feedback.md): Feedback for us
@@ -308,18 +279,16 @@ https://obol.org/llms.txt.
 - [Installing Networks](https://docs.obol.org/obol-stack/installing-networks.md): Deploy blockchain networks on your local Obol Stack
 - [Installing Apps](https://docs.obol.org/obol-stack/installing-apps.md): Deploy additional applications on your Obol Stack
 - [FAQ](https://docs.obol.org/obol-stack/faq.md): Frequently asked questions about the Obol Stack
-- [Walkthroughs](https://docs.obol.org/walkthrough-guides/walkthroughs.md)
+- [Obol Agent Skills](https://docs.obol.org/agent-skills.md): Install the Obol Claude Code plugin so an AI agent can create, test, deploy, and monitor distributed validators and the Obol Stack for you.
+- [Skills Reference](https://docs.obol.org/agent-skills/skills.md): What each skill in the Obol Claude Code plugin does, what it needs, and example prompts to try.
 - [Walkthrough Guides](https://docs.obol.org/walkthrough-guides/walkthroughs/walkthrough-guides.md): Walkthrough guides
 - [Intro](https://docs.obol.org/sdk/index.md)
-- [Enumerations](https://docs.obol.org/sdk/enumerations.md)
 - [FORK_MAPPING](https://docs.obol.org/sdk/enumerations/fork_mapping.md)
-- [Classes](https://docs.obol.org/sdk/classes.md)
 - [Client](https://docs.obol.org/sdk/classes/client.md)
 - [EOA](https://docs.obol.org/sdk/classes/eoa.md)
 - [Exit](https://docs.obol.org/sdk/classes/exit.md)
 - [Incentives](https://docs.obol.org/sdk/classes/incentives.md)
 - [ObolSplits](https://docs.obol.org/sdk/classes/obolsplits.md)
-- [Interfaces](https://docs.obol.org/sdk/interfaces.md)
 - [ClusterDefinition](https://docs.obol.org/sdk/interfaces/clusterdefinition.md)
 - [ExistingExitValidationBlobData](https://docs.obol.org/sdk/interfaces/existingexitvalidationblobdata.md)
 - [ExitClusterConfig](https://docs.obol.org/sdk/interfaces/exitclusterconfig.md)
@@ -331,7 +300,6 @@ https://obol.org/llms.txt.
 - [ExitValidationPayload](https://docs.obol.org/sdk/interfaces/exitvalidationpayload.md)
 - [RewardsSplitPayload](https://docs.obol.org/sdk/interfaces/rewardssplitpayload.md)
 - [SignedExitValidationMessage](https://docs.obol.org/sdk/interfaces/signedexitvalidationmessage.md)
-- [Type-Aliases](https://docs.obol.org/sdk/type-aliases.md)
 - [BuilderRegistration](https://docs.obol.org/sdk/type-aliases/builderregistration.md)
 - [BuilderRegistrationMessage](https://docs.obol.org/sdk/type-aliases/builderregistrationmessage.md)
 - [ClaimableIncentives](https://docs.obol.org/sdk/type-aliases/claimableincentives.md)
@@ -362,9 +330,7 @@ https://obol.org/llms.txt.
 - [SplitRecipient](https://docs.obol.org/sdk/type-aliases/splitrecipient.md)
 - [SplitV2Recipient](https://docs.obol.org/sdk/type-aliases/splitv2recipient.md)
 - [TotalSplitPayload](https://docs.obol.org/sdk/type-aliases/totalsplitpayload.md)
-- [Variables](https://docs.obol.org/sdk/variables.md)
 - [CAPELLA_FORK_MAPPING](https://docs.obol.org/sdk/variables/capella_fork_mapping.md)
-- [Functions](https://docs.obol.org/sdk/functions.md)
 - [clusterConfigOrDefinitionHash](https://docs.obol.org/sdk/functions/clusterconfigordefinitionhash.md)
 - [clusterLockHash](https://docs.obol.org/sdk/functions/clusterlockhash.md)
 - [validateClusterLock](https://docs.obol.org/sdk/functions/validateclusterlock.md)

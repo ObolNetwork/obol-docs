@@ -22,7 +22,7 @@ Whether you’re here to learn about DVT, integrate it into your staking stack, 
 <a class="gb-card" href="mailto:business@obol.tech"><img class="gb-card-img" src="../../img/gitbook/cards/contact_us.png" alt="" loading="lazy" /><h3>Get In Touch</h3><p>Partnerships, integration support, allocator onboarding, or general questions.</p></a>
 </div>
 
-> **Browsing as an AI agent?** Start with [obol.org/llms.txt](https://obol.org/llms.txt) for a terse index of the ecosystem, or [obol.org/llms-full.txt](https://obol.org/llms-full.txt) for a self-contained briefing. The [`ObolNetwork/skills`](https://github.com/ObolNetwork/skills) repo publishes Claude Code skills for running DVs and the Obol Stack.
+> **Browsing as an AI agent?** Start with [obol.org/llms.txt](https://obol.org/llms.txt) for a terse index of the ecosystem, or [obol.org/llms-full.txt](https://obol.org/llms-full.txt) for a self-contained briefing. Using Claude Code? Install the [Obol agent skills](agent-skills/README.md) to let Claude create, test, deploy, and monitor DVs and the Obol Stack for you.
 
 
 ---
@@ -899,15 +899,6 @@ Diagnose some common errors and view their resolutions [here](../../advanced-and
 
 # Charon
 
-URL: https://docs.obol.org/learn/charon
-
-# Charon
-
-
----
-
-# Introduction to Charon
-
 URL: https://docs.obol.org/learn/charon/intro
 
 # Introduction to Charon
@@ -1089,7 +1080,7 @@ The schema of the `cluster-definition.json` is defined as:
     "address": "0x123..abfc", //ETH1 address of the creator
     "config_signature": "0x123654...abcedf" // EIP712 Signature of config_hash using creator privkey
   },
-  "version": "v1.8.0", // Schema version
+  "version": "v1.10.0", // Schema version
   "num_validators": 1, // Number of distributed validators to be created in cluster-lock.json
   "threshold": 3, // Optional threshold required for signature reconstruction
   "dkg_algorithm": "default", // Optional DKG algorithm for key generation
@@ -1129,11 +1120,28 @@ The schema of the `cluster-definition.json` is defined as:
       "withdrawal_address": "0x123..abfc" // ETH1 withdrawal address of validator
     }
   ],
-  "deposit_amounts": [
+  "deposit_amounts": [ // Optional partial deposit amounts in gwei (v1.8.0+)
     "32000000000"
-  ]
+  ],
+  "consensus_protocol": "", // Optional preferred consensus protocol, e.g. "qbft" (v1.9.0+)
+  "target_gas_limit": 36000000, // Preferred target gas limit, defaults to 36000000 (v1.10.0+)
+  "compounding": false // Use 0x02 compounding withdrawal credentials (v1.10.0+)
 }
 ```
+
+#### Cluster definition versions
+
+Charon defaults to schema version `v1.10.0` for new clusters and still reads clusters created with older versions. Recent versions added the following fields:
+
+| Version | Added |
+| --- | --- |
+| `v1.10.0` | `target_gas_limit` (defaults to `36000000` when not set) and `compounding`, which creates validators with `0x02` compounding withdrawal credentials. |
+| `v1.9.0` | `consensus_protocol`, the cluster's preferred [consensus protocol](../../advanced-and-troubleshooting/advanced/consensus-protocols.md). When not set, `qbft` is used. |
+| `v1.8.0` | `deposit_amounts`, a list of [partial deposit](../../advanced-and-troubleshooting/advanced/partial-deposit.md) amounts in gwei that must sum to between 32 and 2048 ETH. When not set, deposits of 1 ETH and 32 ETH are generated. In the lock file, `deposit_data` is replaced by `partial_deposit_data`. |
+| `v1.7.0` | `builder_registration` per distributed validator (pre-generated MEV registrations) and `node_signatures` in the lock file. |
+| `v1.6.0` | `deposit_data` per distributed validator in the lock file, so anyone holding the lock, such as the creator, can activate the validators. |
+| `v1.5.0` | The `validators` list, allowing a different fee recipient and withdrawal address for each validator. |
+| `v1.4.0` | The `creator` structure, recording who created the definition (including non-operators). |
 
 ### Using the DV Launchpad
 
@@ -1344,6 +1352,16 @@ URL: https://docs.obol.org/learn/charon/charon-cli-reference
 # CLI Reference
 
 The following is a reference for Charon version [`v1.10.0`](https://github.com/ObolNetwork/charon/releases/tag/v1.10.0). Find the latest release on [our Github](https://github.com/ObolNetwork/charon/releases).
+
+## Setting flags with environment variables or a config file
+
+Every Charon flag can be set in three ways. Where the same flag is set more than once, the highest source in this list wins:
+
+1. **Command-line flags**, for example `--beacon-node-endpoints=http://beacon:5052`.
+2. **Environment variables.** The name is `CHARON_` followed by the flag name in upper case, with hyphens replaced by underscores. For example, `--beacon-node-endpoints` becomes `CHARON_BEACON_NODE_ENDPOINTS`. This is how the Docker Compose repos configure Charon from their `.env` files.
+3. **A config file** named `charon.yaml` (or `charon.json` / `charon.toml`) in the directory Charon runs from. Keys are the flag names without the leading dashes, for example `beacon-node-endpoints: http://beacon:5052`.
+
+## Commands
 
 The following are the top-level commands available to use.
 
@@ -2564,15 +2582,6 @@ Flags:
 
 ---
 
-# Further Reading
-
-URL: https://docs.obol.org/learn/further-reading
-
-# Further Reading
-
-
----
-
 # Ethereum and Its Relationship With DVT
 
 URL: https://docs.obol.org/learn/further-reading/ethereum_and_dvt
@@ -2936,25 +2945,24 @@ The following is a curated list of the best internal and external resources for 
 
 # Quickstart
 
-URL: https://docs.obol.org/run-a-dv/start
-
-# start
-
-
----
-
-# Quickstart Overview
-
 URL: https://docs.obol.org/run-a-dv/start/quickstart_overview
 
 # Quickstart Overview
 
-The quickstart guides are aimed at developers and stakers looking to deploy Distributed Validators in a single or multi-operator setup. To contribute to this documentation, head over to our [Github repository](https://github.com/ObolNetwork/obol-gitbook) and file a pull request.
+The quickstart guides are aimed at developers and stakers looking to deploy Distributed Validators in a single or multi-operator setup. To contribute to this documentation, head over to our [GitHub repository](https://github.com/ObolNetwork/obol-docs) and file a pull request.
 
 There are two ways to set up a distributed validator and each comes with its own quickstart, within the "Getting Started" section:
 
 1. Run a DV cluster as a [**group**](./create-a-dv-with-a-group.mdx), where several operators run the nodes that make up the cluster. In this setup, the key shares are created using a distributed key generation process, avoiding the full private keys being stored in full in any one place. This approach can also be used by single operators looking to manage all nodes of a cluster but wanting to create the key shares in a trust-minimized fashion.
 2. Run a DV cluster [**alone**](./create-a-dv-alone.mdx), where a single operator runs all the nodes of the DV. Depending on trust assumptions, there is not necessarily the need to create the key shares via a DKG process. Instead the key shares can be created in a centralized manner, and distributed securely to the nodes.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+I want to run an Obol distributed validator. Help me decide whether to run it alone or with a group, then walk me through the setup.
+```
+:::
 
 ## Cluster as a Service (CaaS)
 
@@ -2980,6 +2988,14 @@ URL: https://docs.obol.org/run-a-dv/start/create-a-dv-alone
 It is possible for a single operator to manage all of the nodes of a DV cluster. The nodes can be run on a single machine, which is only suitable for testing, or the nodes can be run on multiple machines, which is expected for a production setup.
 
 The private key shares can be created centrally and distributed securely to each node. Alternatively, the private key shares can be created in a lower-trust manner with a [Distributed Key Generation](../../learn/intro/key-concepts.md#distributed-validator-key-generation-ceremony) process, which avoids the validator private key being stored in full anywhere, at any point in its lifecycle. Follow the [group quickstart](create-a-dv-with-a-group.mdx) instead for this latter case.
+:::
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Help me create a distributed validator cluster where I run all of the nodes myself, and check the cluster configuration with me before I deposit.
+```
 :::
 
 ### Pre-requisites {#pre-requisites}
@@ -3176,6 +3192,14 @@ cp .env.sample .env
 URL: https://docs.obol.org/run-a-dv/start/create-a-dv-with-a-group
 
 # Create a DV With a Group
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+I'm setting up a distributed validator cluster with other operators on Hoodi. Walk me through creating the cluster invitation and running the DKG ceremony together.
+```
+:::
 
 ### Pre-requisites {#pre-requisites}
 * A basic [knowledge](https://docs.ethstaker.cc/ethstaker-knowledge-base/) of Ethereum nodes and validators.
@@ -4147,15 +4171,6 @@ CHARON_LOKI_ADDRESSES="URL here"
 
 ---
 
-# Prepare to Run a DV
-
-URL: https://docs.obol.org/run-a-dv/prepare
-
-# prepare
-
-
----
-
 # How and Where To Run DVs
 
 URL: https://docs.obol.org/run-a-dv/prepare/how_where_dvs
@@ -4351,6 +4366,14 @@ URL: https://docs.obol.org/run-a-dv/prepare/test-a-cluster
 # Test a Cluster
 
 Charon test commands are designed to help you evaluate the performance and readiness of your candidate cluster. It allows you to test your connection to other Charon peers, the performance of your beacon node(s), the readiness of your validator client, the performance of the MEV relays you will be using and the infrastructure on which you will run the cluster. It prints a performance report to the standard output (which can be omitted with the `--quiet` flag). Pass `--output-json <path>` to also save the report as machine-readable JSON at that path. Because `--quiet` suppresses the stdout report, it must be combined with `--output-json` — using `--quiet` alone is rejected.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Run the Charon test suites against my node, starting with the infra test, and explain any Poor or Fail results.
+```
+:::
 
 :::tip
 Adding the `--publish` flag to the below commands, and running the command from the directory containing your `.charon` folder, will submit the test results to the [Obol API](../../api/what-is-this-api.md). Publishing your performance reports grows the staking node dataset, and allows Obol and Ethereum development teams to make data-driven choices regarding the required specs for validating Ethereum. We hope you will consider opting in.
@@ -5445,15 +5468,6 @@ kubectl exec -it -n dv-pod my-dv-pod-0 -- charon alpha test infra
 
 ---
 
-# Running a DV
-
-URL: https://docs.obol.org/run-a-dv/running
-
-# running
-
-
----
-
 # Activate a DV
 
 URL: https://docs.obol.org/run-a-dv/running/activate-a-dv
@@ -6003,6 +6017,14 @@ This will upgrade your Charon and validator client containers to the latest char
 Check the [chart changelog](https://github.com/ObolNetwork/helm-charts/releases) before upgrading to review any breaking changes or new configuration options.
 :::
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Upgrade my DVpod to the latest dv-pod chart release. Review the changelog for breaking changes first and confirm the cluster is healthy afterwards.
+```
+:::
+
 :::danger
 If you run more than one node in a DV Cluster, please take caution upgrading them simultaneously. Particularly if you are updating or changing the validator client used or recreating disks. It is recommended to update nodes on a sequential basis to minimize liveness and safety risks.
 :::
@@ -6019,6 +6041,14 @@ URL: https://docs.obol.org/run-a-dv/running/monitoring
 # Monitoring Your Node
 
 This comprehensive guide will assist you in effectively monitoring your Charon clusters and setting up alerts by running your own Prometheus and Grafana server. If you want to use Obol’s [public dashboard](https://grafana.monitoring.gcp.obol.tech/d/d895e47a-3c2d-46b7-9b15-8f31202681af/clusters-aggregate-view?orgId=6) instead of running your servers, refer to [this section](../start/obol-monitoring.mdx) in Obol docs that teaches you how to push Prometheus metrics to Obol.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Check the health of my Obol cluster "<cluster name>" over the last few hours and tell me which peers are struggling and why.
+```
+:::
 
 To explain quickly, Prometheus generates the metrics and Grafana visualizes them. To learn more about Prometheus and Grafana, visit [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/). If you are using [**CDVN repository**](https://github.com/ObolNetwork/charon-distributed-validator-node) or [**CDVC repository**](https://github.com/ObolNetwork/charon-distributed-validator-cluster), then Prometheus and Grafana are part of docker compose file and will be installed when you run `docker compose up`. For a complete list of the metrics Charon exposes, see the [Charon Metrics Reference](metrics.md).
 
@@ -6192,6 +6222,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `core_consensus_decided_rounds` | Gauge | Number of decided rounds by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_consensus_duration_seconds` | Histogram | Duration of the consensus process by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_consensus_error_total` | Counter | Total count of consensus errors by protocol | `protocol` |
+| `core_consensus_insufficient_round_changes_total` | Counter | Total count of consensus instances with insufficient round change messages by protocol, duty, timer, and outcome (decided or timeout) | `protocol, duty, timer, outcome` |
 | `core_consensus_timeout_total` | Counter | Total count of consensus timeouts by protocol, duty, and timer | `protocol, duty, timer` |
 | `core_fetcher_proposal_blinded` | Gauge | Whether the fetched proposal was blinded (1) or local (2) |  |
 | `core_fetcher_proposal_local_mismatch_fee_recipient` | Gauge | Counts the number of times a local proposal has a mismatched fee recipient |  |
@@ -6216,6 +6247,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `core_tracker_inclusion_delay` | Gauge | Cluster's average attestation inclusion delay in slots. Available only when attestation_inclusion feature flag is enabled. |  |
 | `core_tracker_inclusion_missed_total` | Counter | Total number of broadcast duties never included in any block by type | `duty` |
 | `core_tracker_inconsistent_parsigs_total` | Counter | Total number of duties that contained inconsistent partial signed data by duty type | `duty` |
+| `core_tracker_parsig_cohort_rank_total` | Counter | Total sync committee partial signatures per peer per cohort rank (0=largest cohort), for detecting head disagreement | `duty, peer_idx, rank` |
 | `core_tracker_participation` | Gauge | Set to 1 if peer participated successfully for the given duty or else 0 | `duty, peer` |
 | `core_tracker_participation_expected_total` | Counter | Total number of expected participations (fail + success) by peer and duty type | `duty, peer` |
 | `core_tracker_participation_missed_total` | Counter | Total number of missed participations by peer and duty type | `duty, peer` |
@@ -6239,6 +6271,7 @@ The table below is generated from the Charon source code and reflects the metric
 | `p2p_reachability_status` | Gauge | Current libp2p reachability status of this node as detected by autonat: unknown(0), public(1) or private(2). |  |
 | `p2p_relay_connection_types` | Gauge | Current number of libp2p connections by relay, type (`direct` or `relay`), and protocol (`tcp`, `quic`). Note that peers may have multiple connections. | `peer, type, protocol` |
 | `p2p_relay_connections` | Gauge | Connected relays by name | `peer` |
+| `p2p_send_duration_seconds` | Histogram | Wall-clock duration of synchronous libp2p Send (one-way) and SendReceive (round-trip) calls, by peer, protocol, and topic. Topic is a sub-protocol label (e.g. qbft_pre_prepare, parsigex_proposer); empty when not set by the caller. | `peer, protocol, topic` |
 | `relay_p2p_active_connections` | Gauge | Current number of active connections by peer and cluster | `peer, peer_cluster` |
 | `relay_p2p_connection_total` | Counter | Total number of new connections by peer and cluster | `peer, peer_cluster` |
 | `relay_p2p_network_receive_bytes_total` | Counter | Total number of network bytes received from the peer and cluster | `peer, peer_cluster` |
@@ -7262,15 +7295,6 @@ Up until this epoch (while "in the queue") your validator is expected to be onli
 
 ---
 
-# Edit a Cluster
-
-URL: https://docs.obol.org/run-a-dv/editing
-
-# editing
-
-
----
-
 # Adding Validators
 
 URL: https://docs.obol.org/run-a-dv/editing/add-validators
@@ -7286,6 +7310,14 @@ You can add validators to your cluster using the `charon alpha edit add-validato
 
 :::info
 The command uses a different set of p2p-relays to `charon run` to avoid conflicts with your running cluster.
+:::
+
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/add-validators`:
+
+```text
+Add validators to my existing Charon cluster. Do a dry run first and check the withdrawal and fee recipient addresses with me before running it.
+```
 :::
 
 ## Adding Validators Process
@@ -7363,6 +7395,14 @@ You can add operators to your cluster using the `charon alpha edit add-operators
 
 :::info
 The command uses a different set of p2p-relays to `charon run` to avoid conflicts with your running cluster.
+:::
+
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/add-operators`:
+
+```text
+I need to take part in an add-operators ceremony for my Charon cluster. Ask whether I'm an existing or a new operator, do a dry run first, then walk me through it.
+```
 :::
 
 ## Adding Operators Process
@@ -7470,6 +7510,14 @@ Before removing operators, it's crucial to understand your cluster's fault toler
 - If you're removing **more operators than the fault tolerance**, you must use the `--participating-operator-enrs` flag to specify which operators will participate in the ceremony.
 
 For example, if your cluster has 4 operators with a threshold of 3 (f=1), removing 2 operators requires specifying at least 3 participating operators.
+
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/remove-operators`:
+
+```text
+Help me take part in a remove-operators ceremony for my Charon cluster. Ask whether I'm staying or being removed, check the new threshold with me, and do a dry run first.
+```
+:::
 
 ## Removing Operators Process
 
@@ -7609,6 +7657,14 @@ The replace-operator ceremony performs a one-for-one swap:
 - All validator public keys remain unchanged
 
 This is more convenient than `remove-operators` followed by `add-operators`, as it maintains the cluster size and threshold in a single atomic operation.
+
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/replace-operator`:
+
+```text
+Help me take part in a replace-operator ceremony for my Charon cluster. Ask whether I'm a continuing operator or the new operator, and do a dry run first.
+```
+:::
 
 ### Running the Replace Command
 
@@ -7825,6 +7881,14 @@ This operation maintains the same validator public keys, so your validators rema
 The ceremony uses a different p2p relay from your running cluster to avoid conflicts. The default relay address is already configured differently, so no special action is required.
 :::
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/recreate-private-keys`:
+
+```text
+Recreate the private key shares for my Charon cluster while keeping the same validator public keys. Do a dry run first.
+```
+:::
+
 ## Recreating Private Keys Process
 
 All operators must run this command simultaneously. The ceremony will coordinate between all operators to generate new private key shares.
@@ -7911,15 +7975,6 @@ docker compose logs -f charon
 - All operators must participate in the ceremony; there is no option for partial participation.
 - All operators must have their current validator private key shares available for the ceremony to succeed.
 - The transition period requires coordination to minimize validator downtime.
-
-
----
-
-# Partner Integrations
-
-URL: https://docs.obol.org/run-a-dv/integrations
-
-# integrations
 
 
 ---
@@ -9383,15 +9438,6 @@ In the Config tab, there is a field called "Charons to monitor by Obol (optional
 
 ---
 
-# Advanced Guides
-
-URL: https://docs.obol.org/advanced-and-troubleshooting/advanced
-
-# advanced
-
-
----
-
 # Swapping Clients
 
 URL: https://docs.obol.org/advanced-and-troubleshooting/advanced/client-swap
@@ -10400,7 +10446,7 @@ console.log("Ownership transferred to SAFE:", SAFE_ADDRESS);
 
 ### Handling Deposits
 
-The capital allocator can now deposit the validators that point to this withdrawal address. The validator keys are held by the [provisioned DV cluster](../../run-a-dv/start/) operators and the deposit data was created during cluster creation. 
+The capital allocator can now deposit the validators that point to this withdrawal address. The validator keys are held by the [provisioned DV cluster](../../run-a-dv/start/quickstart_overview.md) operators and the deposit data was created during cluster creation. 
 
 This step would normally be through a wallet and web interface. This example using raw private keys is for demo purposes only.
 
@@ -11965,6 +12011,18 @@ In both cases, specify the protocol family name only, for example, `abft`, rathe
 Setting a preferred protocol expresses a preference, not a guarantee. The cluster only switches to a protocol once a majority of nodes support it, as determined by the Priority protocol.
 :::
 
+## Round Timers
+
+Consensus runs in rounds. If a round does not reach a decision before its timer expires, the nodes move to the next round with a new leader. Charon has three round timers, selected with [feature flags](feature-flags.md). Every node in a cluster should use the same timer, otherwise nodes disagree about when rounds start and end.
+
+| Timer | How to select it | Behaviour |
+| --- | --- | --- |
+| Eager double linear | Default (`eager_double_linear`, enabled) | Rounds start at an absolute time derived from the slot start, so every node's rounds line up. Round durations grow linearly (1s, 2s, 3s, …), and a round's timeout is doubled once a leader is active, rather than resetting the timer. This stops leaders drifting out of sync with the rest of the cluster. |
+| Increasing | `--feature-set-disable=eager_double_linear` | The original timer. Round 1 lasts 750ms, and each later round lasts 250ms longer than the one before. |
+| Linear | `--feature-set-enable=linear` | Applies **only to proposer duties**. All other duties still use the eager double linear timer, or the increasing timer if that is disabled. The first round is long (1s) because fetching the block happens inside it. Later rounds are short and grow by 200ms each, so a slow leader is skipped quickly. Takes precedence over `eager_double_linear` for proposals, so you don't need to disable it. |
+
+The `timer` label on the consensus metrics below shows which timer decided, or timed out, each consensus instance.
+
 ## Observability
 
 The following consensus metrics are exposed by Charon:
@@ -11973,6 +12031,7 @@ The following consensus metrics are exposed by Charon:
 - `core_consensus_decided_leader_index`.
 - `core_consensus_duration_seconds`.
 - `core_consensus_error_total`.
+- `core_consensus_insufficient_round_changes_total`.
 - `core_consensus_timeout_total`.
 
 Each of these metrics carries a `protocol` label, which lets operators distinguish consensus activity between different protocols running on the same cluster. A cluster may currently run at most two consensus protocols at the same time, for example, QBFT v2.0 for the Priority protocol and another protocol for duty consensus, so the `protocol` label may take multiple distinct values. Some protocols may also export their own protocol-specific metrics, prefixed with the protocol's name.
@@ -12067,15 +12126,6 @@ Charon exposes the `app_feature_flags` Prometheus metric, a constant gauge label
 
 ---
 
-# Troubleshooting
-
-URL: https://docs.obol.org/advanced-and-troubleshooting/troubleshooting
-
-# troubleshooting
-
-
----
-
 # Errors & Resolutions
 
 URL: https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/errors
@@ -12096,6 +12146,14 @@ docker compose logs
 ```
 
 If your logs show a failed duty with a specific reason code, see [Duty Failure Reasons](duty-failure-reasons.md) for an explanation of every reason Charon's tracker component can report.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+My Charon node is logging errors. Read its recent logs, work out the root cause, and suggest a fix.
+```
+:::
 
 ## ENRs & Keys
 
@@ -12634,6 +12692,14 @@ URL: https://docs.obol.org/advanced-and-troubleshooting/troubleshooting/test_com
 
 This page aims to give guidance on the causes, and potential for troubleshooting or improvement, of failed tests or low test scores from the [Charon Test commands](../../run-a-dv/prepare/test-a-cluster.mdx).
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+My Charon test results came back with low scores. Re-run the tests inside my Charon container and help me fix whatever is failing.
+```
+:::
+
 ## Running test commands
 
 Below are sample invocations for each deployment method, using `test peers` as the worked example because it needs access to your `.charon` files (the cluster file and the ENR private key), which is why the Docker examples mount a volume. Other test commands take endpoint flags instead (e.g. `--beacon-endpoints`, `--endpoints`) and generally don't need the volume mount. For each command's flags refer to the [Test a Cluster](../../run-a-dv/prepare/test-a-cluster.mdx) page.
@@ -12859,6 +12925,14 @@ When a Charon node fails to complete a validator duty, the tracker component rec
 
 This page explains each failure reason and what it means for your cluster. For guidance on troubleshooting specific error messages, see [Errors & Resolutions](errors.md).
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code (the `obol-monitoring` skill needs your cluster to [push metrics to Obol](../../run-a-dv/start/obol-monitoring.mdx); for a DVpod on Kubernetes, the `dvpod-monitoring` skill queries the pod's metrics directly):
+
+```text
+Triage my Obol cluster "<cluster name>" on mainnet. Tell me which duty failure reasons are firing and how to fix them.
+```
+:::
+
 ## Beacon Node Communication Failures
 
 These reasons indicate a problem communicating with the beacon node, either broadcasting a duty to it or fetching data from it.
@@ -13066,15 +13140,6 @@ An unknown error occurred.
 ---
 
 # Security
-
-URL: https://docs.obol.org/advanced-and-troubleshooting/security
-
-# security
-
-
----
-
-# Overview
 
 URL: https://docs.obol.org/advanced-and-troubleshooting/security/overview
 
@@ -14593,15 +14658,6 @@ Until then, you can always unstake using the steps above.
 
 ---
 
-# Community
-
-URL: https://docs.obol.org/community-and-governance/community
-
-# community
-
-
----
-
 # Grants Program
 
 URL: https://docs.obol.org/community-and-governance/community/grants-program
@@ -14788,15 +14844,6 @@ We're empowering the next generation of masters, the Ethereum Staking Masters.
 3. **Lead:** Selected Staking Masters will lead a project of their choosing for the length of their cohort, with support and recognition from DV Labs.
 
 Apply now at [squadstaking.com/mastery](https://squadstaking.com/mastery)!
-
-
----
-
-# Contribution & Feedback
-
-URL: https://docs.obol.org/community-and-governance/contribution
-
-# contribution
 
 
 ---
@@ -15144,7 +15191,7 @@ The Obol Stack is a local-first agent harness: a Kubernetes cluster on your lapt
 The thesis is simple: **agents should be able to run real infrastructure, build something valuable on top of it, and sell access to it for micropayments — without asking permission and without standing up cloud accounts.**
 
 :::info
-The Obol Stack is alpha software. For production validator deployments, use the [Run a DV](../run-a-dv/start/) docs and dedicated infrastructure.
+The Obol Stack is alpha software. For production validator deployments, use the [Run a DV](../run-a-dv/start/quickstart_overview.md) docs and dedicated infrastructure.
 :::
 
 ## What's in the box
@@ -15203,7 +15250,7 @@ The Obol team publishes a Claude Code plugin with skills for installing, operati
 /plugin install obol@obol
 ```
 
-Once installed, Claude Code can drive `obol stack up`, set up the agent, troubleshoot pods, and walk you through `obol sell demo`. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
+Once installed, Claude Code can drive `obol stack up`, set up the agent, troubleshoot pods, and walk you through `obol sell demo`. See [Agent Skills](../agent-skills/README.md) for every skill in the plugin. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
 
 ## System requirements
 
@@ -15282,6 +15329,14 @@ URL: https://docs.obol.org/obol-stack/quickstart
 # Quickstart
 
 This guide walks you through installing the Obol Stack, chatting with your default agent, and selling your first payment-gated service.
+
+:::tip[Let Claude do this]
+With the [Obol agent skills](../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Install the Obol Stack on this machine, get my default agent running, and help me sell my first payment-gated service.
+```
+:::
 
 ## Prerequisites
 
@@ -15485,7 +15540,7 @@ The Obol team publishes a Claude Code plugin with skills for installing, operati
 /plugin install obol@obol
 ```
 
-The `run-obol-stack` skill teaches Claude how to drive the CLI end-to-end — bring-up, debugging stuck pods, deploying services, registering on ERC-8004, and pointing buyers at your tunnel URL. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
+The `run-obol-stack` skill teaches Claude how to drive the CLI end-to-end — bring-up, debugging stuck pods, deploying services, registering on ERC-8004, and pointing buyers at your tunnel URL. See [Agent Skills](../agent-skills/README.md) for the full list. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
 
 ## Step 6: Deploy a blockchain network (optional)
 
@@ -16625,7 +16680,7 @@ The Obol Stack is a local Kubernetes-based environment for running AI agents alo
 
 ### Is the Obol Stack suitable for production?
 
-It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it would be wise to only use it with less than a threshold amount of validator nodes, or with only as much crypto assets under management that you would be okay with an Obol Agent losing. For production validator deployments, see the [Run a DV](../run-a-dv/start/) docs for the latest mainnet guides.
+It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it would be wise to only use it with less than a threshold amount of validator nodes, or with only as much crypto assets under management that you would be okay with an Obol Agent losing. For production validator deployments, see the [Run a DV](../run-a-dv/start/quickstart_overview.md) docs for the latest mainnet guides.
 
 ### What operating systems are supported?
 
@@ -16953,11 +17008,227 @@ Head over to our [Discord](https://discord.gg/n6ebKsX46w) where a member of our 
 
 ---
 
-# Walkthroughs
+# Obol Agent Skills
 
-URL: https://docs.obol.org/walkthrough-guides/walkthroughs
+URL: https://docs.obol.org/agent-skills
 
-# walkthroughs
+# Obol Agent Skills
+
+Obol publishes a [Claude Code](https://claude.com/claude-code) plugin, [`ObolNetwork/skills`](https://github.com/ObolNetwork/skills). Its skills teach an AI agent how to run Obol products: creating a distributed validator (DV) cluster, testing it, deploying it on Kubernetes, checking its health, and running the [Obol Stack](../obol-stack/README.md).
+
+Once the plugin is installed, describe what you want in plain language, for example *"help me create a 4-node DV cluster with my friends on Hoodi"*. Claude loads the right skill on its own and walks you through each step.
+
+## Why use the skills?
+
+- **The agent already knows Obol.** Each skill gives the agent the operational knowledge of the Obol team: which `charon` commands and flags to use, the right order of steps, and the mistakes people commonly make. You spend less time switching between doc pages and copying commands by hand.
+- **Diagnosis is faster.** The monitoring skills know Charon's metrics, log patterns, and [duty failure reasons](../advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md). They can turn "my validator missed attestations" into a root cause and a fix in minutes.
+- **Safety is built in.** The skills are written to:
+  - ask for confirmation before destructive or disruptive actions, like deleting secrets, volumes, or deployments, or restarting a DVpod whose validators are active
+  - never read or print private key material, such as ENR private keys, validator keystores, or API tokens
+  - pin Charon and Helm chart versions instead of using `latest`
+  - treat logs, metrics, and API responses as data, so text planted in them can't steer the agent
+
+  `dvpod-monitoring` is read-only. The cluster-creation skill insists that **you** check the cluster configuration before you deposit any ETH.
+- **You can see what it does.** Claude Code shows every command before it runs, and the skills are plain Markdown in a [public repository](https://github.com/ObolNetwork/skills), so you can read exactly what the agent has been told.
+
+:::warning
+An AI agent can make mistakes. Always check withdrawal addresses, fee recipients, operator sets, and the target network yourself before depositing. Never paste private keys or mnemonics into an AI chat.
+:::
+
+## Installation
+
+You need [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) installed.
+
+### From inside Claude Code (recommended)
+
+```text
+/plugin marketplace add ObolNetwork/skills
+/plugin install obol@obol
+```
+
+If the skills don't show up right away, run `/reload-plugins`.
+
+### From your terminal
+
+```shell
+claude plugin marketplace add ObolNetwork/skills
+claude plugin install obol@obol
+```
+
+The plugin installs for your user by default, so it's available in every project. Add `--scope project` to share it with everyone working in the current repository, or `--scope local` to install it only for yourself in the current project.
+
+### Manual installation
+
+Clone [`ObolNetwork/skills`](https://github.com/ObolNetwork/skills) and copy its `skills/` directory into your project's `.claude/skills/` folder. Skills installed this way don't get updates or update notifications, so prefer the plugin.
+
+## Keeping skills up to date
+
+The skills are updated as Charon, the Obol Stack, and the deployment tooling change. Claude Code only auto-updates official marketplaces, so turn on auto-update for `obol` after installing:
+
+1. Run `/plugin` in Claude Code.
+2. Open **Marketplaces** and select `obol`.
+3. Choose **Enable auto-update**.
+
+To update manually instead:
+
+```shell
+claude plugin marketplace update obol
+claude plugin update obol@obol
+```
+
+The plugin also checks for a new release once a day when a session starts, and tells you if you're behind. To turn this check off, set `OBOL_SKILLS_NO_UPDATE_CHECK=1`.
+
+### For teams
+
+Admins can turn on auto-update for everyone through Claude Code [managed settings](https://docs.claude.com/en/docs/claude-code/settings):
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "obol": {
+      "source": { "source": "github", "repo": "ObolNetwork/skills" },
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+## Configuration
+
+Most skills need no setup beyond the tools they drive: Docker for Charon, `kubectl` and `helm` for DVpods, and so on. The [skills reference](skills.md) lists each skill's prerequisites.
+
+The `obol-monitoring` skill queries **Obol's hosted Grafana only**. It needs a Grafana API token, which the Obol team can provide, set as `OBOL_GRAFANA_API_TOKEN`. Your cluster must also [push metrics and logs to Obol](../run-a-dv/start/obol-monitoring.mdx). A token from a self-hosted Grafana won't work. For a DVpod, use the `dvpod-monitoring` skill instead. For a local Docker Compose setup, use the Grafana dashboards that ship with it.
+
+```shell
+# Add to ~/.bashrc or ~/.zshrc
+export OBOL_GRAFANA_API_TOKEN="glsa_..."
+```
+
+## Using the skills
+
+You usually don't need to name a skill. Claude chooses one based on what you ask. To call a skill directly, use its slash command, for example `/obol:test-a-dv-cluster`. Type `/` in Claude Code to see the list.
+
+Look for tips like this one throughout the docs. Each has a prompt you can paste straight into Claude Code:
+
+:::tip[Let Claude do this]
+With the Obol skills installed, paste this into Claude Code:
+
+```text
+Check whether my machine is a healthy host for a Charon node before I join a cluster.
+```
+:::
+
+See the [skills reference](skills.md) for what each skill covers.
+
+
+---
+
+# Skills Reference
+
+URL: https://docs.obol.org/agent-skills/skills
+
+# Skills Reference
+
+The [Obol plugin](README.md) contains the skills below. Claude picks the right one from your request. You can also call one directly with `/obol:<skill-name>`.
+
+| Skill | Use it to | Runs against |
+| --- | --- | --- |
+| [`create-cluster-invitation`](#create-cluster-invitation) | Create a DV cluster invitation and coordinate the DKG | Docker (`charon` image) or the Obol SDK |
+| [`test-a-dv-cluster`](#test-a-dv-cluster) | Run `charon alpha test` suites against a node or cluster | A running Charon, or Docker |
+| [`dvpod`](#dvpod) | Deploy, upgrade, back up, and troubleshoot a DV on Kubernetes | `kubectl` + `helm` |
+| [`dvpod-monitoring`](#dvpod-monitoring) | Query the metrics and logs of a deployed DVpod (read-only) | `kubectl` + `helm` |
+| [`obol-monitoring`](#obol-monitoring) | Triage cluster health and duty failures in Obol's hosted Grafana | Python 3, Grafana API token |
+| [`run-obol-stack`](#run-obol-stack) | Install, operate, and sell services from the Obol Stack | Docker |
+
+## `create-cluster-invitation`
+
+This skill walks a cluster creator through making the `cluster-definition.json` that other operators accept, and then through the [DKG ceremony](../learn/charon/dkg.md) that produces the key shares and `cluster-lock.json`. It works for solo operators, groups of friends, squads, and institutional or Lido Simple DVT clusters. It also covers the choice between inviting operators by Ethereum address (they accept on the [Launchpad](https://launchpad.obol.org)) and inviting them by ENR (they accept on the CLI). It explains what it means to use an [OVM or splits contract](../learn/intro/obol-splits.md) as the withdrawal address.
+
+The skill uses the `charon` Docker image by default. It turns to the [Obol SDK](../sdk/index.md) only when you need to integrate programmatically. It pins the Charon version and keeps key material out of git repositories and cloud-synced folders. Before any deposit, it walks you through checking the cluster-lock, the withdrawal and fee recipient addresses, and the deposit data.
+
+**Needs:** Docker. Have the operator addresses or ENRs, the withdrawal and fee recipient addresses, and the target network ready.
+
+**Try:**
+
+```text
+Help me create a 4-operator DV cluster on Hoodi with my friends, inviting them by Ethereum address.
+```
+
+Related docs: [Create a DV With a Group](../run-a-dv/start/create-a-dv-with-a-group.mdx), [Create a DV Alone](../run-a-dv/start/create-a-dv-alone.mdx).
+
+## `test-a-dv-cluster`
+
+This skill runs the [`charon alpha test`](../advanced-and-troubleshooting/troubleshooting/test_command.mdx) suites (`infra`, `peers`, `beacon`, `validator`, `mev`, `all`) and picks the right suite for where you are. A solo operator waiting on cluster-mates starts with `infra`, while the full suite is the final check before activation. Where it can, it runs the tests inside your running Charon container with `--publish`, so the signed results are tied to your node's real ENR. It reads `Poor` and `Fail` results back to you along with Charon's own suggestions.
+
+**Needs:** a running Charon (Docker Compose or Kubernetes), or Docker for a one-off `infra` run.
+
+**Try:**
+
+```text
+Run the Charon test suites against my node and tell me if anything needs fixing before activation.
+```
+
+Related docs: [Test a Cluster](../run-a-dv/prepare/test-a-cluster.mdx).
+
+## `dvpod`
+
+This skill deploys and manages a DVpod, which runs a distributed validator on Kubernetes using the [`dv-pod` Helm chart](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod). It handles the following actions:
+
+- `deploy`: create a new cluster or join an existing one
+- `status` and `logs`
+- `troubleshoot`
+- `upgrade`
+- `enr`: retrieve your node's ENR
+- `backup` and `recover`
+- `destroy`
+
+It also sets up monitoring, either by remote-writing metrics to Obol, through a `ServiceMonitor`, or by shipping logs to Loki. It pins chart versions. It always asks before deleting a release, a secret, or a persistent volume, before upgrading a release whose validators are active, and before restoring keys during `recover`. It never reads private keys out of Kubernetes secrets.
+
+**Needs:** a Kubernetes cluster, `kubectl`, `helm`, and a reachable beacon node endpoint.
+
+**Try:**
+
+```text
+Deploy a DVpod on my Kubernetes cluster to join an existing Obol cluster on mainnet.
+```
+
+## `dvpod-monitoring`
+
+This skill investigates a running DVpod. It checks health, Charon errors, peer connectivity, duty performance, and beacon node behaviour. It queries the bundled Prometheus, Charon's `/metrics` endpoint, `kubectl logs`, or Loki, depending on what is set up. It is strictly read-only and passes any change over to `dvpod`.
+
+**Needs:** `kubectl` and `helm` access to a deployed DVpod.
+
+**Try:**
+
+```text
+Give me a health snapshot of my DVpod and explain any Charon errors from the last hour.
+```
+
+## `obol-monitoring`
+
+This skill diagnoses clusters through Obol's hosted Grafana, using Prometheus metrics and Loki logs. It runs a first-pass cluster triage, analyses failed duties slot by slot to rebuild a consensus timeline, and gives a fleet overview across many clusters. It maps [failure reasons](../advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md) to concrete fixes.
+
+**Needs:** Python 3.6 or later and `OBOL_GRAFANA_API_TOKEN` (see [Configuration](README.md#configuration)). Your cluster must [push metrics and logs to Obol](../run-a-dv/start/obol-monitoring.mdx). The skill doesn't work with a self-hosted Grafana.
+
+**Try:**
+
+```text
+Triage my Obol cluster "<cluster name>" on mainnet and explain why attestations are failing.
+```
+
+## `run-obol-stack`
+
+This skill helps you install, boot, and operate the [Obol Stack](../obol-stack/README.md). It covers prerequisites, `obol stack up`, model setup, syncing networks, and Cloudflare tunnels. It then helps you turn your agent into a paid service with x402 payments and ERC-8004 registration. Once your agent is live in the Stack's dashboard, the agents inside the Stack take over with their own [built-in skills](../obol-stack/agents-and-skills.md).
+
+**Needs:** Docker. Ollama, an Anthropic API key, or an OpenAI API key for model inference.
+
+**Try:**
+
+```text
+Install the Obol Stack on this machine and help me sell my first paid agent service.
+```
+
+Related docs: [Obol Stack Quickstart](../obol-stack/quickstart.mdx), [Build a Profitable Obol Stack](../obol-stack/build-a-profitable-stack.md).
 
 
 ---
@@ -17168,15 +17439,6 @@ webpack: (config, { isServer, webpack }) => {
 
 ---
 
-# Enumerations
-
-URL: https://docs.obol.org/sdk/enumerations
-
-# Enumerations
-
-
----
-
 # FORK_MAPPING
 
 URL: https://docs.obol.org/sdk/enumerations/fork_mapping
@@ -17197,15 +17459,6 @@ Permitted ChainID's
 | <a id="0x01017000"></a> `0x01017000` | `17000` | Holesky. | [types.ts:24](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L24) |
 | <a id="0x90000069"></a> `0x90000069` | `11155111` | Sepolia. | [types.ts:27](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L27) |
 | <a id="0x10000910"></a> `0x10000910` | `560048` | Hoodi Chain. | [types.ts:30](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L30) |
-
-
----
-
-# Classes
-
-URL: https://docs.obol.org/sdk/classes
-
-# Classes
 
 
 ---
@@ -18258,15 +18511,6 @@ console.log('Deposits completed:', result.txHashes);
 
 ---
 
-# Interfaces
-
-URL: https://docs.obol.org/sdk/interfaces
-
-# Interfaces
-
-
----
-
 # ClusterDefinition
 
 URL: https://docs.obol.org/sdk/interfaces/clusterdefinition
@@ -18514,15 +18758,6 @@ Represents a signed exit message for exit validation.
 | ------ | ------ | ------ | ------ |
 | <a id="message"></a> `message` | [`ExitValidationMessage`](ExitValidationMessage.md) | The exit message containing epoch and validator index. | [types.ts:467](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L467) |
 | <a id="signature"></a> `signature` | `string` | BLS signature of the exit message. | [types.ts:470](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L470) |
-
-
----
-
-# Type-Aliases
-
-URL: https://docs.obol.org/sdk/type-aliases
-
-# Type-Aliases
 
 
 ---
@@ -19186,15 +19421,6 @@ Split Proxy Params
 
 ---
 
-# Variables
-
-URL: https://docs.obol.org/sdk/variables
-
-# Variables
-
-
----
-
 # CAPELLA_FORK_MAPPING
 
 URL: https://docs.obol.org/sdk/variables/capella_fork_mapping
@@ -19207,15 +19433,6 @@ Defined in: [constants.ts:292](https://github.com/ObolNetwork/obol-sdk/blob/5137
 
 Maps base fork versions to their corresponding Capella fork versions.
 Example: Mainnet Capella fork version.
-
-
----
-
-# Functions
-
-URL: https://docs.obol.org/sdk/functions
-
-# Functions
 
 
 ---

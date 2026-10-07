@@ -2,6 +2,14 @@
 
 This page aims to give guidance on the causes, and potential for troubleshooting or improvement, of failed tests or low test scores from the [Charon Test commands](../../run-a-dv/prepare/test-a-cluster.mdx).
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+My Charon test results came back with low scores. Re-run the tests inside my Charon container and help me fix whatever is failing.
+```
+:::
+
 ## Running test commands
 
 Below are sample invocations for each deployment method, using `test peers` as the worked example because it needs access to your `.charon` files (the cluster file and the ENR private key), which is why the Docker examples mount a volume. Other test commands take endpoint flags instead (e.g. `--beacon-endpoints`, `--endpoints`) and generally don't need the volume mount. For each command's flags refer to the [Test a Cluster](../../run-a-dv/prepare/test-a-cluster.mdx) page.

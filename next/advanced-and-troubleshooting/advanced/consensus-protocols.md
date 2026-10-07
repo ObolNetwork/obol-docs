@@ -63,6 +63,18 @@ In both cases, specify the protocol family name only, for example, `abft`, rathe
 Setting a preferred protocol expresses a preference, not a guarantee. The cluster only switches to a protocol once a majority of nodes support it, as determined by the Priority protocol.
 :::
 
+## Round Timers
+
+Consensus runs in rounds. If a round does not reach a decision before its timer expires, the nodes move to the next round with a new leader. Charon has three round timers, selected with [feature flags](feature-flags.md). Every node in a cluster should use the same timer, otherwise nodes disagree about when rounds start and end.
+
+| Timer | How to select it | Behaviour |
+| --- | --- | --- |
+| Eager double linear | Default (`eager_double_linear`, enabled) | Rounds start at an absolute time derived from the slot start, so every node's rounds line up. Round durations grow linearly (1s, 2s, 3s, …), and a round's timeout is doubled once a leader is active, rather than resetting the timer. This stops leaders drifting out of sync with the rest of the cluster. |
+| Increasing | `--feature-set-disable=eager_double_linear` | The original timer. Round 1 lasts 750ms, and each later round lasts 250ms longer than the one before. |
+| Linear | `--feature-set-enable=linear` | Applies **only to proposer duties**. All other duties still use the eager double linear timer, or the increasing timer if that is disabled. The first round is long (1s) because fetching the block happens inside it. Later rounds are short and grow by 200ms each, so a slow leader is skipped quickly. Takes precedence over `eager_double_linear` for proposals, so you don't need to disable it. |
+
+The `timer` label on the consensus metrics below shows which timer decided, or timed out, each consensus instance.
+
 ## Observability
 
 The following consensus metrics are exposed by Charon:
@@ -71,6 +83,7 @@ The following consensus metrics are exposed by Charon:
 - `core_consensus_decided_leader_index`.
 - `core_consensus_duration_seconds`.
 - `core_consensus_error_total`.
+- `core_consensus_insufficient_round_changes_total`.
 - `core_consensus_timeout_total`.
 
 Each of these metrics carries a `protocol` label, which lets operators distinguish consensus activity between different protocols running on the same cluster. A cluster may currently run at most two consensus protocols at the same time, for example, QBFT v2.0 for the Priority protocol and another protocol for duty consensus, so the `protocol` label may take multiple distinct values. Some protocols may also export their own protocol-specific metrics, prefixed with the protocol's name.

@@ -5,7 +5,7 @@ The Obol Stack is a local-first agent harness: a Kubernetes cluster on your lapt
 The thesis is simple: **agents should be able to run real infrastructure, build something valuable on top of it, and sell access to it for micropayments — without asking permission and without standing up cloud accounts.**
 
 :::info
-The Obol Stack is alpha software. For production validator deployments, use the [Run a DV](../run-a-dv/start/) docs and dedicated infrastructure.
+The Obol Stack is alpha software. For production validator deployments, use the [Run a DV](../run-a-dv/start/quickstart_overview.md) docs and dedicated infrastructure.
 :::
 
 ## What's in the box
@@ -64,7 +64,7 @@ The Obol team publishes a Claude Code plugin with skills for installing, operati
 /plugin install obol@obol
 ```
 
-Once installed, Claude Code can drive `obol stack up`, set up the agent, troubleshoot pods, and walk you through `obol sell demo`. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
+Once installed, Claude Code can drive `obol stack up`, set up the agent, troubleshoot pods, and walk you through `obol sell demo`. See [Agent Skills](../agent-skills/README.md) for every skill in the plugin. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
 
 ## System requirements
 

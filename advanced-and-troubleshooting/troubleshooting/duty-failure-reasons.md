@@ -4,6 +4,14 @@ When a Charon node fails to complete a validator duty, the tracker component rec
 
 This page explains each failure reason and what it means for your cluster. For guidance on troubleshooting specific error messages, see [Errors & Resolutions](errors.md).
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code (the `obol-monitoring` skill needs your cluster to [push metrics to Obol](../../run-a-dv/start/obol-monitoring.mdx); for a DVpod on Kubernetes, the `dvpod-monitoring` skill queries the pod's metrics directly):
+
+```text
+Triage my Obol cluster "<cluster name>" on mainnet. Tell me which duty failure reasons are firing and how to fix them.
+```
+:::
+
 ## Beacon Node Communication Failures
 
 These reasons indicate a problem communicating with the beacon node, either broadcasting a duty to it or fetching data from it.

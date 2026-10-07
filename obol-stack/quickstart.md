@@ -2,6 +2,14 @@
 
 This guide walks you through installing the Obol Stack, chatting with your default agent, and selling your first payment-gated service.
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Install the Obol Stack on this machine, get my default agent running, and help me sell my first payment-gated service.
+```
+:::
+
 ## Prerequisites
 
 * Docker installed and running on your machine.
@@ -204,7 +212,7 @@ The Obol team publishes a Claude Code plugin with skills for installing, operati
 /plugin install obol@obol
 ```
 
-The `run-obol-stack` skill teaches Claude how to drive the CLI end-to-end — bring-up, debugging stuck pods, deploying services, registering on ERC-8004, and pointing buyers at your tunnel URL. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
+The `run-obol-stack` skill teaches Claude how to drive the CLI end-to-end — bring-up, debugging stuck pods, deploying services, registering on ERC-8004, and pointing buyers at your tunnel URL. See [Agent Skills](../agent-skills/README.md) for the full list. Source: [github.com/ObolNetwork/skills](https://github.com/ObolNetwork/skills).
 
 ## Step 6: Deploy a blockchain network (optional)
 

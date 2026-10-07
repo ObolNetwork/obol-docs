@@ -8,7 +8,7 @@ The Obol Stack is a local Kubernetes-based environment for running AI agents alo
 
 ### Is the Obol Stack suitable for production?
 
-It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it would be wise to only use it with less than a threshold amount of validator nodes, or with only as much crypto assets under management that you would be okay with an Obol Agent losing. For production validator deployments, see the [Run a DV](../run-a-dv/start/) docs for the latest mainnet guides.
+It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it would be wise to only use it with less than a threshold amount of validator nodes, or with only as much crypto assets under management that you would be okay with an Obol Agent losing. For production validator deployments, see the [Run a DV](../run-a-dv/start/quickstart_overview.md) docs for the latest mainnet guides.
 
 ### What operating systems are supported?
 

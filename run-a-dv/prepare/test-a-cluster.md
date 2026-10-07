@@ -2,6 +2,14 @@
 
 Charon test commands are designed to help you evaluate the performance and readiness of your candidate cluster. It allows you to test your connection to other Charon peers, the performance of your beacon node(s), the readiness of your validator client, the performance of the MEV relays you will be using and the infrastructure on which you will run the cluster. It prints a performance report to the standard output (which can be omitted with the `--quiet` flag). Pass `--output-json <path>` to also save the report as machine-readable JSON at that path. Because `--quiet` suppresses the stdout report, it must be combined with `--output-json` — using `--quiet` alone is rejected.
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Run the Charon test suites against my node, starting with the infra test, and explain any Poor or Fail results.
+```
+:::
+
 :::tip
 Adding the `--publish` flag to the below commands, and running the command from the directory containing your `.charon` folder, will submit the test results to the [Obol API](../../api/what-is-this-api.md). Publishing your performance reports grows the staking node dataset, and allows Obol and Ethereum development teams to make data-driven choices regarding the required specs for validating Ethereum. We hope you will consider opting in.
 :::

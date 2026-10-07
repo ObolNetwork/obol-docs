@@ -32,6 +32,14 @@ The replace-operator ceremony performs a one-for-one swap:
 
 This is more convenient than `remove-operators` followed by `add-operators`, as it maintains the cluster size and threshold in a single atomic operation.
 
+:::tip[Let Claude do this]
+Running the [CDVN repo](https://github.com/ObolNetwork/charon-distributed-validator-node)? It includes Claude Code skills that script this whole ceremony: exporting the anti-slashing database, running the edit command, backing up your old `.charon` directory, swapping in the new artifacts, and restarting the stack. Open Claude Code in your `charon-distributed-validator-node` directory and paste this, or run `/replace-operator`:
+
+```text
+Help me take part in a replace-operator ceremony for my Charon cluster. Ask whether I'm a continuing operator or the new operator, and do a dry run first.
+```
+:::
+
 ### Running the Replace Command
 
 All continuing operators and the new operator must run this command. The old operator being replaced should NOT run the command.

@@ -2,6 +2,14 @@
 
 This comprehensive guide will assist you in effectively monitoring your Charon clusters and setting up alerts by running your own Prometheus and Grafana server. If you want to use Obol’s [public dashboard](https://grafana.monitoring.gcp.obol.tech/d/d895e47a-3c2d-46b7-9b15-8f31202681af/clusters-aggregate-view?orgId=6) instead of running your servers, refer to [this section](../start/obol-monitoring.mdx) in Obol docs that teaches you how to push Prometheus metrics to Obol.
 
+:::tip[Let Claude do this]
+With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
+
+```text
+Check the health of my Obol cluster "<cluster name>" over the last few hours and tell me which peers are struggling and why.
+```
+:::
+
 To explain quickly, Prometheus generates the metrics and Grafana visualizes them. To learn more about Prometheus and Grafana, visit [here](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/). If you are using [**CDVN repository**](https://github.com/ObolNetwork/charon-distributed-validator-node) or [**CDVC repository**](https://github.com/ObolNetwork/charon-distributed-validator-cluster), then Prometheus and Grafana are part of docker compose file and will be installed when you run `docker compose up`. For a complete list of the metrics Charon exposes, see the [Charon Metrics Reference](metrics.md).
 
 The local Grafana server will have a few pre-built dashboards:
