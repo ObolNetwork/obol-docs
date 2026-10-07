@@ -58,7 +58,7 @@ Back up first, then re-run the installer and upgrade the running stack:
 
 ```shell
 obol stack export --file ~/obol-stack-backup.tar.gz   # full backup before upgrading
-bash <(curl -s https://stack.obol.org)                # update the obol CLI
+curl -fsSL https://stack.obol.org | bash              # update the obol CLI
 obol upgrade                                          # pinned tools, then CRDs, then charts
 ```
 

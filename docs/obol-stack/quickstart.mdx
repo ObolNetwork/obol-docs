@@ -49,7 +49,7 @@ You can also use Anthropic, OpenAI, OpenRouter, Venice, or any OpenAI-compatible
 Run the bootstrap installer:
 
 ```shell
-bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org | bash
 ```
 
 The installer will:
@@ -62,7 +62,7 @@ The installer will:
 <Tabs>
 <TabItem value="default-installation" label="Default installation">
 ```shell
-bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org | bash
 ```
 
 Files are installed to:
@@ -74,7 +74,7 @@ Files are installed to:
 
 <TabItem value="specific-version" label="Specific version">
 ```shell
-OBOL_RELEASE=v0.15.0 bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org/v0.15.0 | bash
 ```
 
 Use the current tag from the [GitHub releases](https://github.com/ObolNetwork/obol-stack/releases) page when newer than v0.15.0.
