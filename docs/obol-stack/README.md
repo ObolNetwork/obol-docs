@@ -18,7 +18,7 @@ The Obol Stack is alpha software. For production validator deployments, use the 
 
 Obol Stack is a two-part system:
 
-1. **`obolup.sh`** — bootstrap installer that lays down pinned dependencies (`kubectl`, `helm`, `k3d`, `helmfile`, `k9s`) and the `obol` CLI.
+1. **`obolup.sh`** — bootstrap installer that lays down the `obol` CLI and its pinned dependencies (`kubectl`, `helm`, `k3d`, `helmfile`, `k9s`, `helm-diff`). After that, `obol` manages its own toolchain: missing or outdated tools are installed automatically on `obol stack init` / `obol stack up`, `obol update` shows their status, and `obol upgrade --tools-only` updates them.
 2. **`obol` CLI** — Go binary that drives everything: cluster lifecycle, the agent, networks, payment-gated services, and the tunnel.
 
 The cluster runs entirely on your machine via [k3d](https://k3d.io/) (Kubernetes in Docker).
@@ -37,14 +37,17 @@ The cluster runs entirely on your machine via [k3d](https://k3d.io/) (Kubernetes
 | Command | Description |
 | --- | --- |
 | `obol stack init / up / down / purge` | Cluster lifecycle |
-| `obol agent init / new / setup / sync / list / delete` | Manage agent instances (default runtime: Hermes) |
+| `obol stack export / import` | Full backup archive and one-step restore |
+| `obol agent init / new / update / setup / sync / list / delete / wallet` | Manage agent instances (runtime: Hermes) |
 | `obol hermes chat / skills / config / ...` | Pass-through to the in-cluster Hermes CLI |
 | `obol model setup / status` | Configure LLM providers (Ollama, Anthropic, OpenAI, custom) |
 | `obol network list / install / sync / delete` | Manage blockchain networks |
 | `obol sell demo / inference / http / list / status / register` | Create payment-gated services and register on ERC-8004 |
 | `obol app install / sync / list / delete` | Install arbitrary Helm charts |
 | `obol tunnel status / setup / restart` | Manage the Cloudflare tunnel (`setup` creates a permanent URL) |
-| `obol kubectl / helm / helmfile / k9s` | Kubernetes tool passthroughs (auto-configured `KUBECONFIG`) |
+| `obol kubectl / helm / helmfile / k9s` | Run the real tool against the stack (an exported `KUBECONFIG` is ignored; pass `--kubeconfig` to target another cluster) |
+| `obol env` | Print shell exports so plain `kubectl` / `helm` / `k9s` target the stack: `eval "$(obol env)"` |
+| `obol update / upgrade` | Check for, then apply, chart and pinned-tool updates |
 
 ## Default infrastructure
 
@@ -99,14 +102,14 @@ Running full Ethereum nodes requires significant disk space. Mainnet execution c
 |                      Obol Stack                         |
 +---------------------------------------------------------+
 |  obol CLI                                               |
-|  +-- stack     (init, up, down, purge)                  |
-|  +-- agent     (init, new, setup, sync, list, delete)   |
+|  +-- stack     (init, up, down, purge, export, import)  |
+|  +-- agent     (init, new, update, sync, list, wallet)  |
 |  +-- hermes    (passthrough — chat, skills, config)     |
 |  +-- model     (setup, status)                          |
 |  +-- network   (list, install, sync, delete)            |
 |  +-- sell      (demo, inference, http, register, ...)   |
 |  +-- app       (install, sync, list, delete)            |
-|  +-- tunnel    (status, login, provision)               |
+|  +-- tunnel    (status, setup, restart, hostname, logs) |
 |  +-- kubectl / helm / helmfile / k9s                    |
 +---------------------------------------------------------+
 |  k3d Cluster                                            |

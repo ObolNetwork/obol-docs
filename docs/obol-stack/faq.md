@@ -54,13 +54,17 @@ sudo systemctl start docker
 
 ### How do I update the Obol Stack?
 
-Re-run the installer:
+Back up first, then re-run the installer and upgrade the running stack:
 
 ```shell
-bash <(curl -s https://stack.obol.org)
+obol stack export --file ~/obol-stack-backup.tar.gz   # full backup before upgrading
+curl -fsSL https://stack.obol.org | bash              # update the obol CLI
+obol upgrade                                          # pinned tools, then CRDs, then charts
 ```
 
-The installer will update the CLI binary while preserving your configuration and data. Apply chart updates inside the running cluster with `obol upgrade`.
+The installer updates the CLI binary while preserving your configuration and data. `obol upgrade` installs any missing or outdated pinned tools (kubectl, helm, k3d, helmfile, k9s, helm-diff), applies chart CRDs first (Helm never upgrades CRDs by itself), then upgrades the charts in the running cluster. `obol update` shows what's out of date without changing anything, and `obol upgrade --tools-only` updates only the tools (no cluster needed). Tools you point `obol` at with `OBOL_<TOOL>` or that it finds on your `PATH` are never modified.
+
+A Homebrew package is planned for a stable release; for now, use the installer above.
 
 ### How do I uninstall the Obol Stack?
 
@@ -119,7 +123,7 @@ No. After a plain `obol stack up`, the tunnel is **dormant**. It activates on th
 
 [Hermes](https://github.com/NousResearch/hermes-agent) is the default Obol Agent runtime. `obol stack up` provisions a default Hermes instance in the `hermes-obol-agent` namespace (when a model is available), with its own Ethereum signing wallet and a built-in skill library.
 
-OpenClaw remains supported as an optional alternate runtime — `obol agent new --runtime openclaw` if you want one.
+OpenClaw (`obol openclaw …`, `--runtime openclaw`) is deprecated and will be removed in v0.16. See [Agents & Skills](agents-and-skills.md) to move an OpenClaw wallet to Hermes.
 
 ### How do I chat with the agent?
 
@@ -132,8 +136,10 @@ That command passes through to the in-cluster Hermes CLI and gives you an intera
 ```shell
 obol hermes skills list           # see installed skills
 obol hermes config show           # inspect config
-obol hermes --help                # full Hermes CLI surface
+obol hermes -- --help             # full Hermes CLI surface
 ```
+
+To talk to an agent other than the default, put `--agent <name>` first (`obol hermes --agent research chat`) or set `OBOL_AGENT=<name>`.
 
 ### How do I get my agent to message me on Telegram / Discord / Slack?
 
@@ -152,9 +158,9 @@ obol model setup
 Or set up a specific provider:
 
 ```shell
-obol model setup ollama
-obol model setup anthropic
-obol model setup openai
+obol model setup --provider ollama
+obol model setup --provider anthropic
+obol model setup --provider openai
 obol model setup custom --name my-vllm --endpoint http://192.168.1.10:8000/v1 --model qwen36
 ```
 
@@ -172,7 +178,7 @@ obol agent wallet list             # list wallets across all instances
 Back it up — losing it means losing the agent's on-chain identity:
 
 ```shell
-obol agent wallet backup -o ~/obol-wallet-backup.json --passphrase "..."
+obol agent wallet backup --file ~/obol-wallet-backup.json --passphrase "..."
 ```
 
 ## Selling services
@@ -238,18 +244,23 @@ obol stack up
 
 ### Can I use my existing kubectl configuration?
 
-The Obol Stack uses an isolated kubeconfig at `~/.config/obol/kubeconfig.yaml`. To use it with your standard `kubectl`:
+The Obol Stack uses an isolated kubeconfig at `~/.config/obol/kubeconfig.yaml` and never writes to `~/.kube/config`. The simplest option is the passthrough: `obol kubectl get nodes` (likewise `obol helm`, `obol helmfile`, `obol k9s`). These run the real tool with the same flags and exit codes, and always target the stack, even if you've exported `KUBECONFIG`; pass `--kubeconfig` to target another cluster. Commands that don't need a cluster, such as `obol helm template` or `obol kubectl version --client`, work before `obol stack up`.
+
+To use your standard `kubectl`, `helm` and `k9s` (with their own completion and plugins) against the stack, load the stack environment into your shell:
 
 ```shell
-export KUBECONFIG=~/.config/obol/kubeconfig.yaml
+eval "$(obol env)"          # bash/zsh; fish: obol env --shell fish | source
 kubectl get nodes
+eval "$(obol env --unset)"  # undo
 ```
-
-Or use the bundled passthrough: `obol kubectl get nodes`.
 
 ### How do I persist data across cluster restarts?
 
 Data is automatically persisted. `obol stack down` stops the cluster but keeps data in `~/.local/share/obol/`. Only `obol stack purge -f` deletes persistent data.
+
+If the cluster itself is deleted and recreated, `obol stack up` restores it from your config directory: models, local networks, RPC upstreams, x402 pricing, ERC-8004 identity, agents, storefront branding, apps, and sell offers.
+
+To move a stack to another machine, or to keep a backup, run `obol stack export --file ~/obol-stack-backup.tar.gz` while the stack is running, and restore it with `obol stack import ~/obol-stack-backup.tar.gz`. The archive contains keystore passwords and API keys; store it like a secret.
 
 ## Networks
 

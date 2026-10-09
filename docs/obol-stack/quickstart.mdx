@@ -49,20 +49,20 @@ You can also use Anthropic, OpenAI, OpenRouter, Venice, or any OpenAI-compatible
 Run the bootstrap installer:
 
 ```shell
-bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org | bash
 ```
 
 The installer will:
 
 1. Validate that Docker is running.
-2. Install the `obol` CLI binary and dependencies (kubectl, helm, k3d, helmfile, k9s).
+2. Install the `obol` CLI binary and its pinned dependencies (kubectl, helm, k3d, helmfile, k9s, helm-diff). From then on `obol` manages these tools itself and installs any that are missing on `obol stack init` / `obol stack up`.
 3. Configure your PATH and try to add `obol.stack` to `/etc/hosts`.
 4. Offer to start the cluster immediately.
 
 <Tabs>
 <TabItem value="default-installation" label="Default installation">
 ```shell
-bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org | bash
 ```
 
 Files are installed to:
@@ -74,10 +74,10 @@ Files are installed to:
 
 <TabItem value="specific-version" label="Specific version">
 ```shell
-OBOL_RELEASE=v0.13.0 bash <(curl -fsSL https://stack.obol.org)
+curl -fsSL https://stack.obol.org/v0.15.0 | bash
 ```
 
-Use the current tag from the [GitHub releases](https://github.com/ObolNetwork/obol-stack/releases) page when newer than v0.13.0.
+Use the current tag from the [GitHub releases](https://github.com/ObolNetwork/obol-stack/releases) page when newer than v0.15.0.
 </TabItem>
 
 <TabItem value="development-mode" label="Development mode">
@@ -119,6 +119,16 @@ obol stack up
 First startup pulls several Docker images. If it stalls, check `obol kubectl get pods -A` to see what's still pending.
 :::
 
+On the first `stack up`, the CLI opens the dashboard in your browser. Commands that create something (an agent, an offer) print a link to it in the dashboard. To never open a browser, pass `--no-open` or set `OBOL_NO_BROWSER=1`; links are still printed. The browser is never opened over SSH, in CI, or with `-o json`.
+
+`obol kubectl`, `obol helm`, `obol helmfile` and `obol k9s` run the real tools against the stack, with the same flags and exit codes. They always target the stack, even if you've exported `KUBECONFIG` (pass `--kubeconfig` to target another cluster), and nothing is written to `~/.kube/config`. To use plain `kubectl` / `helm` / `k9s` instead, load the stack environment into your shell:
+
+```shell
+eval "$(obol env)"          # bash/zsh; fish: obol env --shell fish | source
+kubectl get pods -A
+eval "$(obol env --unset)"  # undo
+```
+
 ### Open the local UI
 
 ```text
@@ -146,8 +156,10 @@ A few useful pass-through commands:
 ```shell
 obol hermes skills list           # see the agent's installed skills
 obol hermes config show           # inspect the runtime config
-obol hermes --help                # full Hermes CLI surface
+obol hermes -- --help             # full Hermes CLI surface
 ```
+
+`obol hermes` targets the default agent. To reach another agent, put `--agent <name>` first (`obol hermes --agent research chat`) or set `OBOL_AGENT=research`; everything else is passed to Hermes unchanged.
 
 :::tip
 Want the agent to message you on Telegram, Discord, or Slack? Run `obol hermes setup` and follow the prompts to wire up a chat-app integration. Hermes will then notify you when long-running work finishes. The full Telegram bot flow (which involves talking to `@BotFather` and `@userinfobot` first) is covered in [Build a profitable Obol Stack](build-a-profitable-stack.md#step-7-tell-your-agent-to-ping-you-on-telegram).
@@ -157,7 +169,7 @@ The agent has its own Ethereum wallet — back it up before you put anything on 
 
 ```shell
 obol agent wallet address         # print the agent's wallet address
-obol agent wallet backup -o ~/obol-wallet-backup.json --passphrase "..."
+obol agent wallet backup --file ~/obol-wallet-backup.json --passphrase "..."
 ```
 
 ## Step 4: Sell your first service (`obol sell demo`)
@@ -256,11 +268,16 @@ A plain `obol stack up` leaves the tunnel **dormant**. Selling (`obol sell demo`
 ```shell
 obol stack down                   # stop the cluster (preserves data)
 obol stack up                     # restart
+obol stack export --file ~/obol-stack-backup.tar.gz   # full backup archive
 obol stack purge -f               # remove everything, including data
 ```
 
+`obol stack up` rebuilds the stack from your config directory: models, local networks, RPC upstreams, x402 pricing, ERC-8004 identity, agents, storefront branding, apps, and sell offers are replayed in order, so they survive a cluster being deleted and recreated. Chain data in `~/.local/share/obol/` is kept unless you purge with `-f`.
+
+`obol stack export` captures agents, wallets, config and offers in one archive; restore it on a clean machine with `obol stack import ~/obol-stack-backup.tar.gz`, which brings the stack up for you. The archive contains keystore passwords and provider API keys, so store it like a secret.
+
 :::warning
-`obol stack purge -f` is irreversible. It removes all cluster data and configuration — including any agent wallets that aren't backed up outside `~/.config/obol/`.
+`obol stack purge -f` is irreversible. It removes all cluster data and configuration — including any agent wallets that aren't backed up outside `~/.config/obol/`. `purge` offers to run a full `obol stack export` first; accept it unless you already have a recent backup.
 :::
 
 ## Next steps
