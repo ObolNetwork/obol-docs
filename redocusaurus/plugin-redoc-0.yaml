@@ -2161,64 +2161,6 @@ paths:
       summary: Retrieve a list operators on a given network
       tags:
         - Address
-  /v1/address/migrateable-validators/{network}/{withdrawalAddress}:
-    get:
-      description: This endpoint is used fetch eligible validators for migration .
-      operationId: AddressController_getMigrateableValidators_v1
-      parameters:
-        - name: network
-          required: true
-          in: path
-          description: The network to retrieve active validators on
-          examples:
-            mainnet:
-              summary: Ethereum Mainnet
-              value: mainnet
-            hoodi:
-              summary: Hoodi Test Network
-              value: hoodi
-            sepolia:
-              summary: Sepolia Test Network
-              value: sepolia
-          schema:
-            type: string
-        - name: withdrawalAddress
-          required: true
-          in: path
-          description: Withdrawal address of source validators.
-          schema:
-            type: string
-        - name: limit
-          required: true
-          in: query
-          description: The number of validators to return.
-          schema:
-            type: integer
-            default: 50
-        - name: offset
-          required: true
-          in: query
-          description: >-
-            The number of items to skip before starting to collect the result
-            set
-          schema:
-            type: integer
-            default: 0
-      responses:
-        '200':
-          description: A list of source validators the withdrawal address can migrate
-          content:
-            application/json:
-              schema:
-                anyOf:
-                  - $ref: '#/components/schemas/MigrateableValidatorsResponse'
-        '400':
-          description: Beaconchain error
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve migrateable validators for withdrawal address
-      tags:
-        - Address
   /v1/owr/{network}/{address}:
     get:
       description: This endpoint is used to retrieve information on the tranches of an OWR.
@@ -2895,40 +2837,6 @@ paths:
       summary: Get positions for an address
       tags:
         - Positions
-  /eth-apr:
-    get:
-      description: >-
-        Proxies Beaconcha.in ethstore/latest to avoid CORS. Returns mainnet
-        network APR.
-      operationId: EthAprController_getEthApr[0]
-      parameters: []
-      responses:
-        '200':
-          description: ETH APR data from Beaconcha.in
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EthAprResponse'
-      summary: Get network ETH APR
-      tags:
-        - System
-  /v1/eth-apr:
-    get:
-      description: >-
-        Proxies Beaconcha.in ethstore/latest to avoid CORS. Returns mainnet
-        network APR.
-      operationId: EthAprController_getEthApr[1]_v1
-      parameters: []
-      responses:
-        '200':
-          description: ETH APR data from Beaconcha.in
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EthAprResponse'
-      summary: Get network ETH APR
-      tags:
-        - System
 info:
   title: Obol API
   description: >-
@@ -3728,18 +3636,6 @@ components:
         - operators
         - total_count
         - total_pages
-    MigrateableValidatorsResponse:
-      type: object
-      properties:
-        validators:
-          type: array
-          items:
-            type: string
-        hasMore:
-          type: boolean
-      required:
-        - validators
-        - hasMore
     OWRResponse:
       type: object
       properties:
@@ -4214,14 +4110,3 @@ components:
             $ref: '#/components/schemas/PositionCluster'
       required:
         - positions
-    EthAprResponse:
-      type: object
-      properties:
-        apr:
-          type: number
-          description: >-
-            Network-wide ETH staking APR as a decimal (e.g. 0.029 = 2.9%).
-            Sourced from Beaconcha.in ethstore/latest.
-          example: 0.029
-      required:
-        - apr
