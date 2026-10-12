@@ -45,12 +45,17 @@ Unaccepted invites expire after 90 days; older invites are hidden from the dashb
 
 An operator can be part of multiple clusters. Clusters, and cluster invites, are shown on the operator page; the clusters table lists each cluster's **Configured Validators**. Clicking on a cluster takes you to the cluster page. Here you can see the status of the cluster, the operators, and validators associated with the cluster.
 
-| Cluster status    | Meaning                                                                  |
-| ----------------- | ------------------------------------------------------------------------ |
-| Active            | The cluster's validators are active on the beacon chain.                 |
-| Awaiting Deposits | No validator key of this cluster is on the beacon chain yet.             |
-| Exited            | The cluster's validators have exited.                                    |
-| Unknown           | The Launchpad couldn't load the cluster's validator status.              |
+| Cluster status          | Meaning                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| Incomplete Definition   | Not every operator has accepted the cluster invite yet.                                 |
+| Awaiting Key Generation | Every operator has accepted; the DKG ceremony hasn't completed (or wasn't published).    |
+| Awaiting Deposits       | No validator in the cluster is on the beacon chain yet, or its deposit is still pending. |
+| Activating              | Validators are deposited and queued for activation.                                     |
+| Active                  | At least one validator is active.                                                       |
+| Exiting                 | Validators are exiting.                                                                 |
+| Exiting Slashed         | A validator was slashed and is being exited.                                            |
+| Exited                  | The cluster's validators have exited (and may have been withdrawn).                    |
+| Unknown                 | The Launchpad couldn't load the validators' status; try again later.                    |
 
 ![Screenshot showing a cluster&#x27;s detail view on the DV Launchpad.](/img/gitbook/image-18-1.png)
 
