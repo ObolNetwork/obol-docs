@@ -17,7 +17,7 @@ Once a deposit has been processed for a validator pubkey, its withdrawal credent
 On occasion it can be useful to be able to change the withdrawal address specified for an already created but unused distributed validator. For example if they are unneeded extra capacity, or if the withdrawal address to be used was not known at cluster creation time and a trusted placeholder address was used instead. The `charon deposit` commands allow you to sign alternative deposit messages for **inactive validators** with the help of the Obol [API](../../api/what-is-this-api.md).
 
 :::info
-If you want to change the withdrawal address of a running validator, consider a validator [consolidation](../../run-a-dv/editing/replace-operator.md#method-2-validator-consolidation) instead.
+If you want to change the withdrawal address of a running validator, consider a validator [consolidation](../../run-a-dv/editing/replace-operator.md#method-2-validator-consolidation) instead. Note that the Launchpad migrate page used in that guide is currently unavailable, so the consolidation request has to be sent from the withdrawal address with other tooling.
 :::
 
 ## Sign an alternative deposit message
