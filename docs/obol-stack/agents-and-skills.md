@@ -14,10 +14,10 @@ slug: /obol-stack/agents-and-skills
 Back up the agent's wallet before you put anything on it. Losing the keystore loses the agent's on-chain identity and funds.
 
 ```shell
-obol agent wallet backup -o ~/obol-wallet-backup.json --passphrase "..."
+obol agent wallet backup --file ~/obol-wallet-backup.json --passphrase "..."
 ```
 
-Store the backup **outside** `~/.config/obol/` — `obol stack purge -f` deletes that directory.
+Store the backup **outside** `~/.config/obol/` — `obol stack purge -f` deletes that directory. For a full backup (every agent's wallet, memory, offers and config), use `obol stack export --file ~/obol-stack-backup.tar.gz` while the stack is running; it contains keystore passwords and API keys, so store it like a secret.
 :::
 
 ## Creating sub-agents
@@ -35,20 +35,27 @@ obol agent new research \
 * `--objective` becomes the agent's identity — spend real effort on it: scope, output format, refusal policy, tone. One sharp paragraph beats a page of vibes.
 * `--skills` should be **narrow**. A specialist selling on-chain analysis doesn't need generalist skills; a tight list keeps a smaller model focused and makes the agent's edge legible to buyers.
 * `--create-wallet` gives the sub-agent its own wallet. Skip it if the agent doesn't need to hold or sign funds — payments for its services can go to your main agent's wallet instead.
+* `--model` is optional. Without it, the agent is pinned to the cluster's top-ranked model at creation time (see `obol model prefer`). Change it later with `obol agent update research --model <name>`.
 
 Manage the fleet:
 
 ```shell
 obol agent list                    # all agents
 obol agent auth research           # bearer token for a specific agent
+obol agent update research --skills +gas,-indexing  # change model, skills, or objective
 obol agent sync                    # re-render agent deployments after config changes
 obol agent delete research         # remove one
 ```
 
 An agent created this way can be put on sale in one command — `obol sell agent research --price 0.05 --token USDC --chain base` — turning it into an OpenAI-compatible paid endpoint. See [Selling Agent Services](selling-services.md).
 
-:::info
-OpenClaw remains supported as an alternate runtime: `obol agent new --runtime openclaw`, then `obol openclaw dashboard`.
+:::warning
+OpenClaw (`obol openclaw …`, `--runtime openclaw`) is deprecated and will be removed in v0.16. Hermes is the only supported runtime going forward. To move an OpenClaw agent's wallet to Hermes, back up the Hermes wallet first, then:
+
+```shell
+obol agent wallet backup --runtime openclaw <instance> --file w.json
+obol agent wallet restore --runtime hermes --input w.json --force
+```
 :::
 
 ## Embedded skills
@@ -66,7 +73,6 @@ Every agent ships with Obol's embedded skills — self-contained playbooks (inst
 | `buy-x402` | Buy from any x402 endpoint — probe pricing, pre-sign payments, auto-refill, check balances |
 | `discovery` | Find agents registered on the ERC-8004 Identity Registry across chains |
 | `swap` | Treasury moves — swap USDC/ETH/OBOL on Base and mainnet via Uniswap V3, with quotes and slippage guards |
-| `autoresearch` / `autoresearch-coordinator` / `autoresearch-worker` | Run, coordinate, or sell GPU time for autonomous LLM optimization experiments |
 
 ### Ethereum
 
@@ -76,6 +82,8 @@ Every agent ships with Obol's embedded skills — self-contained playbooks (inst
 | `ethereum-local-wallet` | Sign and send transactions via the per-agent remote signer |
 | `addresses` | Verified contract addresses — payment rails first, then DeFi, tokens, bridges, registries |
 | `building-blocks` | DeFi protocol composability — Uniswap, Aave, Aerodrome, Pendle |
+| `bridging` | Move assets between Ethereum L1 and L2s — canonical bridges and fast routes, quoted before moving |
+| `inspect` | Decode calldata and vet contracts before signing or paying |
 | `concepts` | The onchain mental model — state machines, incentives, why nothing is automatic |
 | `gas` | Real transaction costs today, mainnet vs L2 |
 | `indexing` | Reading historical onchain data at scale — The Graph, Dune, Ponder, event-first design |
@@ -90,6 +98,8 @@ Every agent ships with Obol's embedded skills — self-contained playbooks (inst
 | ----- | ----------------------------- |
 | `obol-stack` | Kubernetes diagnostics from inside the cluster — pods, logs, events |
 | `distributed-validators` | Obol DVT cluster monitoring via the Obol API |
+
+The autoresearch skills are no longer embedded in the Stack; they moved to the Obol skills plugin.
 
 The list evolves — ask your agent, or run:
 

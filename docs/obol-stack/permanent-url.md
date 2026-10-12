@@ -13,12 +13,9 @@ Once you're ready to attract buyers, give your stack a **permanent URL** on a ho
 :::info
 **Prerequisite — a Cloudflare account with a domain.** You need a [Cloudflare](https://dash.cloudflare.com) account (the free plan is fine) with a domain that lives as a **zone** in that account — either bought through Cloudflare Registrar or transferred/added in. The hostname you expose has to live on that domain.
 
-**No domain yet?** You have two options, whichever is easier:
+**No domain yet?** Buy a domain via [Cloudflare Registrar](https://dash.cloudflare.com/?to=/:account/registrar) or add an existing one as a zone in the Cloudflare dashboard, then come back here. **Registering a domain is billable**, so your Cloudflare account needs a saved payment method.
 
-- **In the Cloudflare dashboard** (recommended if you're more comfortable there) — buy a domain via [Registrar](https://dash.cloudflare.com/?to=/:account/registrar) or add an existing one as a zone, then come back here.
-- **From the CLI** (optional convenience) — `obol domain search <keyword>`, `obol domain check <name>`, and `obol domain register <name>` wrap Cloudflare Registrar so you never leave the terminal. `obol domain list` shows domains you already own.
-
-Either way, **registering a domain is billable**, so your Cloudflare account needs a saved payment method. The CLI path also needs a scoped Cloudflare **API token** (Account → Domain permission) — note this is a *different* credential from the tunnel connector token below.
+The `obol domain` commands (a CLI wrapper around Cloudflare Registrar) are deprecated and will be removed in v0.16; use the Cloudflare dashboard instead.
 :::
 
 ## 1. Create the tunnel and copy its token
@@ -71,9 +68,13 @@ You should see a **permanent** mode, your hostname, and a connected connector. Y
 With a stable URL in place, register on-chain so buyers can discover you — see [Build a Profitable Obol Stack](build-a-profitable-stack.md#step-6-get-listed) and [Selling Agent Services](selling-services.md).
 :::
 
-## Alternative: browser login (no dashboard)
+## Alternative: browser login (deprecated)
 
-If you'd rather not use the dashboard, Obol can authenticate a locally-managed tunnel through a browser login instead. This needs the [`cloudflared`](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/) binary installed on your machine:
+:::warning
+The browser-login path (`obol tunnel setup --management local`, and `obol tunnel login`) is deprecated and will be removed in v0.16. Use the connector token flow above.
+:::
+
+Obol can still authenticate a locally-managed tunnel through a browser login instead of the dashboard. This needs the [`cloudflared`](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/) binary installed on your machine:
 
 ```shell
 obol tunnel setup --hostname stack.example.com --management local
