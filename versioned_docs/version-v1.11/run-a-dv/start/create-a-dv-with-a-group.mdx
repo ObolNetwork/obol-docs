@@ -225,7 +225,7 @@ For Step 2 of the quickstart:
 <TabItem value="creator" label="Creator">
 **Collect addresses, configure the cluster, share the invitation**
 
-Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages through MetaMask with this address. _(Broader wallet support will be added in future.)_ With these addresses in hand, go through the cluster creation flow.
+Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages with this address from a wallet supported by the Launchpad: an injected browser wallet (such as MetaMask) or any wallet that connects via WalletConnect. With these addresses in hand, go through the cluster creation flow.
 
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
@@ -239,9 +239,7 @@ The following are the steps for creating a cluster.
 2.  Connect your wallet
 
     ![Screenshot: Connect your wallet.](/img/gitbook/image-75.png)
-3.  Select `Create a Cluster with a group` then `Get Started`.
-
-    ![Screenshot: Select Create a Cluster with a group then Get Started.](/img/gitbook/image-76.png)
+3. Click **+ New** in the navigation bar and choose **Group**, then click `Get Started`.
 4. Follow the flow and accept the advisories.
 5. Configure the Cluster
    1. Input the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster). The threshold will update automatically, it shows the number of nodes that need to be functioning for the validator(s) to stay active.
@@ -258,7 +256,7 @@ The following are the steps for creating a cluster.
       - **Split Everything**: Deploys an OVM contract as withdrawal address, with principal and fee recipient addresses both as splitter contracts. In this case both principal and rewards are distributed. It just requires Owner address as input which is again recommended to be a SAFE wallet.
       - **Lido CSM**: Deploys the clusters with Lido's withdrawal vault as withdrawal address and execution vault as fee recipient. Read more about the process to register CSM cluster [here](../integrations/lido-csm.mdx).
       - **Custom**: Enter the `Principal address` which should receive the principal 32 ETH and the accrued consensus layer rewards when the validator is exited. This can optionally be set to the contract address of a multisig / splitter contract. Enter the `Fee Recipient address` to which the execution layer rewards will go. This can be the same as the principal address, or it can be a different address. This can optionally be set to the contract address of a multisig / splitter contract.
-7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your MetaMask wallet. These are:
+7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your wallet. These are:
    1. The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.
    2. The `operator_config_hash`. This is your acceptance of the terms and conditions to participate as a node operator.
    3. Your `ENR`. Signing your ENR authorizes the corresponding private key to act on your behalf in the cluster.
