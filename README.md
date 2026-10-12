@@ -23,7 +23,7 @@ yarn typecheck   # run tsc against the site config and components
 
 ## Versions and URL scheme
 
-- **The latest release** (first entry in `versions.json`, currently v1.10) is
+- **The latest release** (first entry in `versions.json`, currently v1.11) is
   served at the **site root** (`/learn/...`, `/run-a-dv/...`) so URLs match
   the links already indexed and shared for docs.obol.org.
 - **next** — the in-development docs in `docs/`, served under **`/next/...`**
