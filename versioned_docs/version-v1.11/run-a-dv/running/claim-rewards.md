@@ -46,7 +46,7 @@ If you are using OVM, distribute the ETH that has been withdrawn from the valida
 
 ### 3. Claim
 
-Once the funds are distributed, go to the [Operator Dashboard](https://launchpad.obol.org/) to claim the rewards.
+Once the funds are distributed, go to the [Operator Dashboard](https://launchpad.obol.org/cluster/list) to claim the rewards.
 
 ---
 
@@ -64,7 +64,7 @@ The method for claiming rewards depends on the cluster's withdrawal configuratio
 | 1. Claim principal + rewards without splits - Exit and get rewards      | To claim principal or rewards without splits, users currently have to exit the validator. | ✅                          | Cluster details page in the Operator Dashboard. For example, [here](https://hoodi.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
 | 2. Splits only rewards using OWR - ETH                                  | For all clusters with ETH rewards. Requires two steps: (1) Distribute on cluster details page, (2) Claim on operator page. | ✅                          | Step 1: Cluster details page - Click **Distribute** button for each OWR. Step 2: Operator page - Claim your share. For example, [here](https://hoodi.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
 | 3. Split principal + rewards - ETH                                      | For clusters configured to split both principal and rewards.                              | ✅                          | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
-| 4. Splits non-ETH rewards using any withdrawal config - wstETH or weETH | For Lido and EtherFi clusters earning rewards in protocol-specific tokens.                | In Progress ➡️             | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
+| 4. Splits non-ETH rewards using any withdrawal config - wstETH          | For Lido clusters earning rewards in protocol-specific tokens.                            | In Progress ➡️             | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
 | 5. Lido CSM rewards - wstETH                                            | For all Lido CSM clusters earning wstETH rewards.                                         | In Progress ➡️             | Similar to row number 3, use the Splits UI. More details can be found at the bottom of [this page](../integrations/lido-csm.mdx).                                                  |
 
 ### Claim Flow {#claim-flow}
