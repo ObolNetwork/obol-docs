@@ -24,11 +24,13 @@ The Ethereum Pectra upgrade enables validators with `0x02` Compounding Withdrawa
 
 This new flow supports deposits to validators with any standard withdrawal address, including **EOA (Externally Owned Account)** addresses, and streamlines the activation and top-up process.
 
+This flow lives on your cluster's **Cluster Details** page. To get there, open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) (**Operator Dashboard** in the Launchpad navigation panel) and click your cluster, or go directly to `https://launchpad.obol.org/cluster/details?lockHash=<lock hash>` (use the `hoodi.` subdomain for Hoodi).
+
 ### A. Critical Distinction (OVM Users MUST Use This Flow)
 
 | Withdrawal Address Type      | Recommended Flow                                          | Reason                                                                                                                                                                                           |
 | ---------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **OVM (Obol Vault Manager)** | **MANDATORY:** Deposit via the Cluster Details Page flow. | This ensures the OVM smart contract correctly tracks the deposited amount as principal stake and manages subsequent reward accounting. Bypassing the OVM requires manual accounting adjustments. |
+| **OVM (Obol Validator Manager)** | **MANDATORY:** Deposit via the Cluster Details Page flow. | This ensures the OVM smart contract correctly tracks the deposited amount as principal stake and manages subsequent reward accounting. Bypassing the OVM requires manual accounting adjustments. |
 | **EOA (Standard Wallet)**    | RECOMMENDED: Deposit via the Cluster Details Page flow.   | Allows direct deposit without needing to manually upload a deposit data file. Also supports top-ups.                                                                                             |
 
 :::danger
@@ -90,15 +92,15 @@ When a user bypasses deposits via OVM and deposits directly, the amount of princ
 
 ![Screenshot of the OVM principal adjustment interface in the activation flow.](/img/gitbook/OVMDeposit5.png)
 
-## 4. Legacy Deposit Flow (To be Deprecated)
+## 4. Legacy Deposit Flow {#4-legacy-deposit-flow-to-be-deprecated}
 
-The Legacy Flow is the pre-Pectra experience and should be avoided, especially by OVM users.
+The Legacy Flow (**+ New → Deposit** in the Launchpad) is the pre-Pectra experience, where you upload a `deposit-data.json` file. For OVM clusters, the recommended flow is the Cluster Details page described above.
 
 * This flow is best suited for activating older `0x01` (BLS) validators.
 * It **does not support top-ups** with arbitrary amounts into compounding (`0x02`) validators.
 * The user must select the number of validators first, and the total deposit amount is calculated after (Amount \* Number of Validators).
 * It lacks the integrated Recommended Allocation strategy - it is manually governed by the user.
-* If one of the withdrawal addresses is OVM, a warning is displayed with strong suggestions to use the new deposit flow in the cluster page to avoid accounting issues of principal and rewards inside the OVM. Legacy flow will bypass deposits via OVM and directly to validators. As a result, the user will have to manually adjust principal and rewards after. Read more about [how to adjust the principal inside the OVM](activate-a-dv.md#d-how-to-adjust-principal-inside-the-ovm).
+* If a validator's withdrawal address is an OVM, the legacy flow sends that validator's deposit through the OVM, one transaction per validator (**Deposit All** is not offered), so the OVM still records the principal. The connected wallet needs the OVM's `DEPOSIT_ROLE`. Deposits made outside the Launchpad (for example with the ethereum.org Staking Launchpad) bypass the OVM, and you will have to [adjust the principal inside the OVM](activate-a-dv.md#d-how-to-adjust-principal-inside-the-ovm) manually.
 
 ### Legacy Deposit Tools
 

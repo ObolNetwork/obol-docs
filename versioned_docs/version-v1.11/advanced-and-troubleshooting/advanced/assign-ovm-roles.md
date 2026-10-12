@@ -1,12 +1,12 @@
 ---
-description: "Learn how to assign permissions within the Obol Vault Manager (OVM) smart contract using the efficient bitwise role system."
+description: "Learn how to assign permissions within the Obol Validator Manager (OVM) smart contract using the efficient bitwise role system."
 sidebar_label: "Assign OVM Roles"
 slug: /advanced-and-troubleshooting/advanced/assign-ovm-roles
 ---
 
 # How to Assign Roles to Addresses in OVM
 
-This guide explains how to assign permissions within the Obol Vault Manager (OVM) smart contract using its bitwise role system and outlines key security recommendations.
+This guide explains how to assign permissions within the Obol Validator Manager (OVM) smart contract using its bitwise role system and outlines key security recommendations.
 
 ---
 
