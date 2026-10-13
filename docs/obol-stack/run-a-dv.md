@@ -76,13 +76,13 @@ obol helm upgrade --install dv-pod-hoodi obol/dv-pod --version 0.22.0 \
   --namespace dv-pod --create-namespace \
   -f ./dv-pod-chart/dv-pod/values-examples/obol-stack.yaml \
   --set network=hoodi \
-  --set 'charon.beaconNodeEndpoints[0]=http://ethereum-beacon.ethereum-hoodi.svc.cluster.local:5052' \
   --set charon.operatorAddress=<YOUR_OPERATOR_ADDRESS> \
   --set charon.builderApi=false \
   --timeout=10m
 ```
 
 * `network` must match your node's network. The DKG sidecar only looks for cluster invites on this network.
+* The beacon node defaults to the Stack's node for `network` (`ethereum-hoodi` here): the first `obol network install ethereum --network <network>` is named after the network. If `obol network list` shows your node under another id, add `--set 'charon.beaconNodeEndpoints[0]=http://ethereum-beacon.ethereum-<id>.svc.cluster.local:5052'`.
 * A release name containing `dv-pod` keeps the resource names short: the pod is `dv-pod-hoodi-0`, and the ConfigMaps are `dv-pod-hoodi-enr` and `dv-pod-hoodi-dkg-status`.
 
 The chart generates this node's ENR private key (in the Secret `dv-pod-hoodi-enr-key`) and publishes the public ENR to a ConfigMap. Read it with:
