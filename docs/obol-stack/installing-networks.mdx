@@ -19,7 +19,7 @@ List your installed deployments, the network types you can install, and any remo
 obol network list
 ```
 
-From Obol Stack v0.16, `obol network list` shows each installed deployment with its network, execution and consensus clients, mode, and whether it runs MEV-boost.
+From Obol Stack v0.16, `obol network list` shows each installed deployment with its network, execution and consensus clients, and mode.
 
 Currently supported networks:
 
@@ -95,8 +95,6 @@ Deploy a full Ethereum node with configurable execution and consensus clients.
 | `--consensus-client` | Consensus layer client | lighthouse, prysm, teku, nimbus, lodestar, grandine | lighthouse |
 | `--mode` | Pruning mode | full, archive | full |
 | `--since` | Lower bound for archive history (requires `--mode=archive`) | fork name, duration, block number, `genesis`/`all` | (interactive picker on TTY; `all` on non-TTY) |
-| `--mev` | Run MEV-boost next to the beacon node (v0.16+) | flag | off |
-| `--mev-relays` | Relays for MEV-boost, comma-separated `https://0x<relay-pubkey>@<relay-host>` (v0.16+) | relay URLs | Vetted defaults for mainnet, hoodi and sepolia |
 
 ### Examples
 
@@ -144,20 +142,9 @@ obol network sync ethereum/hoodi
 Full Ethereum nodes require significant resources. Mainnet execution clients need 1+ TB of storage and can take days to sync. Consider using testnets for development.
 :::
 
-### MEV-boost (`--mev`)
+### MEV
 
-To propose MEV blocks from validators that use this node, such as an [Obol DV pod](run-a-dv.md), install it with `--mev` (Obol Stack v0.16+):
-
-```shell
-# Vetted default relays for mainnet, hoodi and sepolia
-obol network install ethereum --network=hoodi --mev
-
-# Or choose the relays yourself
-obol network install ethereum --network=mainnet --mev \
-  --mev-relays 'https://0x<relay-pubkey>@<relay-host>,https://0x<relay-pubkey>@<relay-host>'
-```
-
-This runs `mev-boost` in the node's namespace and points the consensus client's builder API at it. The validator side still has to turn on builder registrations: for a DV pod, that's `charon.builderApi=true`. The builder endpoint (`http://mev-boost.ethereum-<id>.svc.cluster.local:18550`) and relays are recorded in the `ethereum-<id>-metadata` ConfigMap. Re-installing without `--mev` and syncing removes `mev-boost` again.
+The Obol Stack doesn't run MEV-boost. Until the Gloas fork the beacon node builds blocks locally; from Gloas, builder bids arrive in-protocol over the p2p network, so relays and MEV-boost no longer apply. Validators that use this node, such as an [Obol DV pod](run-a-dv.md), keep builder proposals off (`charon.builderApi=false`).
 
 ### Archive nodes and bounded history (`--since`)
 
@@ -206,7 +193,7 @@ obol network status ethereum/<id>       # one node
 obol -o json network status ethereum/<id>
 ```
 
-For each Ethereum deployment it prints the pods, the execution client's sync state, head block, peers and version, the beacon node's sync distance, peers and version, MEV-boost health if enabled, and a one-line verdict such as `synced`, `syncing` (with progress), `el_offline` or `unreachable`. Wait for `synced` before you point validators at the node.
+For each Ethereum deployment it prints the pods, the execution client's sync state, head block, peers and version, the beacon node's sync distance, peers and version, and a one-line verdict such as `synced`, `syncing` (with progress), `el_offline` or `unreachable`. Wait for `synced` before you point validators at the node.
 
 The node's APIs aren't published on `obol.stack`; they are only reachable inside the cluster, at `http://ethereum-execution.ethereum-<id>.svc.cluster.local:8545` and `http://ethereum-beacon.ethereum-<id>.svc.cluster.local:5052`. To query them from your machine, port-forward:
 

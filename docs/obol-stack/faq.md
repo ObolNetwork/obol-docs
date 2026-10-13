@@ -273,7 +273,7 @@ To move a stack to another machine, or to keep a backup, run `obol stack export 
 The deployment ID is displayed when you run `obol network install`. You can also list deployments:
 
 ```shell
-obol network list            # v0.16+: installed deployments with clients, mode and MEV
+obol network list            # v0.16+: installed deployments with clients and mode
 ls ~/.config/obol/networks/
 ```
 

@@ -35,7 +35,7 @@ obol network sync ethereum/hoodi
 
 The deployment ID defaults to the network name (`hoodi` here), so the node runs in namespace `ethereum-hoodi`. Charon reaches its beacon API at `http://ethereum-beacon.ethereum-hoodi.svc.cluster.local:5052`. Use [`--execution-client` and `--consensus-client`](installing-networks.mdx#configuration-options) to pick clients. On mainnet, prefer minority clients.
 
-Add `--mev` to the install command only if your whole cluster has agreed to use MEV-boost. It runs `mev-boost` next to the beacon node and connects the beacon node's builder API to it. Your dv-pod then needs `charon.builderApi=true`. Without `--mev`, keep `charon.builderApi=false`.
+The Stack doesn't run MEV-boost (see [MEV](installing-networks.mdx#mev)), so your dv-pod keeps `charon.builderApi=false`, and your cluster must agree to run without MEV.
 
 Wait for the node to sync before you install the dv-pod:
 
@@ -43,7 +43,7 @@ Wait for the node to sync before you install the dv-pod:
 obol network status ethereum/hoodi
 ```
 
-This shows the execution and consensus clients' sync state, peers and versions, mev-boost health if enabled, and a one-line verdict. Continue when it says `synced`. Hoodi usually takes a few hours, and mainnet can take days. `obol network list` shows your installed nodes, including whether they run MEV-boost.
+This shows the execution and consensus clients' sync state, peers and versions, and a one-line verdict. Continue when it says `synced`. Hoodi usually takes a few hours, and mainnet can take days. `obol network list` shows your installed nodes.
 
 :::info
 On a testnet you can install the dv-pod before the node finishes syncing: the chart falls back to the public [publicnode.com](https://publicnode.com) beacon API for the network while yours catches up (`charon.publicnodeFallback`, on by default). Never let mainnet duties depend on that fallback.
