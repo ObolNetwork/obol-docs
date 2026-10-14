@@ -15,7 +15,7 @@ The Obol-SDK is in a beta state and should be used with caution. Ensure you vali
 This is a walkthrough of creating a distributed validator cluster pointing to an [EigenLayer](https://eigenlayer.xyz/) [EigenPod](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod-and-set-withdrawal-credentials/), using the [DV Launchpad](../../learn/intro/launchpad.md) and other applications.
 
 ### Pre-requisites {#pre-requisites}
-* The Ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets.)
+* The Ethereum addresses or ENS names for the node operators in the cluster. (The DV Launchpad supports injected browser wallets and WalletConnect.)
 * If creating more than one validator, the ability to use the [obol-sdk](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx) is required.
 
 ### Create a SAFE to own the EigenPod {#create-a-safe-to-own-the-eigenpod}
@@ -36,7 +36,7 @@ With these contracts deployed, you can now create the DV cluster invitation to s
 
 <Tabs>
 <TabItem value="dv-launchpad" label="DV Launchpad">
-* Use the "Create a cluster with a group" [flow](../start/create-a-dv-with-a-group.mdx) on the [DV Launchpad](../../learn/intro/launchpad.md).
+* Use the **+ New → Group** [flow](../start/create-a-dv-with-a-group.mdx) on the [DV Launchpad](../../learn/intro/launchpad.md).
 * Choose a cluster name and invite your operator's addresses.
 * When setting the withdrawal credentials, select "Custom".
 * For "Withdrawal Address", set the EigenPod contract address.

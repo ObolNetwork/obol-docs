@@ -99,6 +99,8 @@ Every agent ships with Obol's embedded skills — self-contained playbooks (inst
 | `obol-stack` | Kubernetes diagnostics from inside the cluster — pods, logs, events |
 | `distributed-validators` | Obol DVT cluster monitoring via the Obol API |
 
+From Obol Stack v0.16, `distributed-validators` is no longer embedded. Add it, and `dv-steward` to watch a DV node running in this Stack, with `obol agent skills add distributed-validators dv-steward`. See [Run Your Part of a DV](run-a-dv.md#let-hermes-watch-your-node).
+
 The autoresearch skills are no longer embedded in the Stack; they moved to the Obol skills plugin.
 
 The list evolves — ask your agent, or run:

@@ -13,11 +13,13 @@ The Obol Stack supports installing multiple blockchain networks on your local Ku
 
 ## Available networks
 
-View all available networks:
+List your installed deployments, the network types you can install, and any remote RPCs:
 
 ```shell
 obol network list
 ```
+
+From Obol Stack v0.16, `obol network list` shows each installed deployment with its network, execution and consensus clients, and mode.
 
 Currently supported networks:
 
@@ -89,7 +91,7 @@ Deploy a full Ethereum node with configurable execution and consensus clients.
 | --- | --- | --- | --- |
 | `--id` | Deployment identifier | Any string | Network name (e.g. `mainnet`), then petname |
 | `--network` | Ethereum network | mainnet, sepolia, hoodi | mainnet |
-| `--execution-client` | Execution layer client | reth, geth, nethermind, besu, erigon, ethereumjs | reth |
+| `--execution-client` | Execution layer client | reth, geth, nethermind, besu, erigon | reth |
 | `--consensus-client` | Consensus layer client | lighthouse, prysm, teku, nimbus, lodestar, grandine | lighthouse |
 | `--mode` | Pruning mode | full, archive | full |
 | `--since` | Lower bound for archive history (requires `--mode=archive`) | fork name, duration, block number, `genesis`/`all` | (interactive picker on TTY; `all` on non-TTY) |
@@ -140,6 +142,10 @@ obol network sync ethereum/hoodi
 Full Ethereum nodes require significant resources. Mainnet execution clients need 1+ TB of storage and can take days to sync. Consider using testnets for development.
 :::
 
+### MEV
+
+The Obol Stack doesn't run MEV-boost. Until the Gloas fork the beacon node builds blocks locally; from Gloas, builder bids arrive in-protocol over the p2p network, so relays and MEV-boost no longer apply. Validators that use this node, such as an [Obol DV pod](run-a-dv.md), keep builder proposals off (`charon.builderApi=false`).
+
 ### Archive nodes and bounded history (`--since`)
 
 Pruned full nodes are sufficient for everyday RPC use, but they cannot serve historical state. If you plan to **index events, run historical `eth_call`, build a block explorer, or back a query service with a specific app's history**, you need an archive node — and you almost certainly do not need it all the way back to genesis.
@@ -178,6 +184,26 @@ When `--mode=archive` is set without `--since` on a TTY, the installer shows an 
 This pairs naturally with [Selling agent services](selling-services.md) — once your archive node has synced from the block at which your target application was deployed, you have a defensible data set that no public RPC will serve, and you can wrap it as a paid endpoint or a specialized agent.
 
 ### Check sync status
+
+From Obol Stack v0.16, `obol network status` shows each node's sync state:
+
+```shell
+obol network status                     # the RPC gateway and every installed node
+obol network status ethereum/<id>       # one node
+obol -o json network status ethereum/<id>
+```
+
+For each Ethereum deployment it prints the pods, the execution client's sync state, head block, peers and version, the beacon node's sync distance, peers and version, and a one-line verdict such as `synced`, `syncing` (with progress), `el_offline` or `unreachable`. Wait for `synced` before you point validators at the node.
+
+The node's APIs aren't published on `obol.stack`; they are only reachable inside the cluster, at `http://ethereum-execution.ethereum-<id>.svc.cluster.local:8545` and `http://ethereum-beacon.ethereum-<id>.svc.cluster.local:5052`. To query them from your machine, port-forward:
+
+```shell
+obol kubectl -n ethereum-<id> port-forward svc/ethereum-execution 8545:8545 &
+curl -s http://127.0.0.1:8545 -X POST -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
+```
+
+To look at the pods and logs directly:
 
 ```shell
 # View pod status
@@ -240,6 +266,8 @@ Ensure your machine has sufficient resources before deploying an Aztec node.
 ### View deployment status
 
 ```shell
+obol network list                       # installed deployments (v0.16+)
+obol network status                     # live sync status (v0.16+)
 obol kubectl get namespaces | grep -E "ethereum|aztec"
 ```
 

@@ -26,10 +26,10 @@ I'm setting up a distributed validator cluster with other operators on Hoodi. Wa
   * Ensure you have [git](https://git-scm.com/downloads) installed.
   * Ensure you have [docker](https://docs.docker.com/engine/install/) installed.
   * Make sure `docker` is running before executing the commands below.
-  * If you are taking part using **Helm**:
-    * Ensure you have [kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured to communicate with your Kubernetes cluster.
-    * Ensure you have [Helm](https://helm.sh/docs/intro/install/) (v3+) installed.
-    * Ensure you have access to a running Kubernetes cluster.
+* If you are taking part using **Helm**:
+  * Ensure you have [kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured to communicate with your Kubernetes cluster.
+  * Ensure you have [Helm](https://helm.sh/docs/intro/install/) (v3+) installed.
+  * Ensure you have access to a running Kubernetes cluster and a synced beacon node for the network you'll validate on.
 
 ### Step 1: Get your ENR {#step-1-get-your-enr}
 <Tabs>
@@ -173,44 +173,56 @@ For Step 2 of the quickstart:
 </TabItem>
 
 <TabItem value="helm" label="Helm">
-In order to prepare for a distributed key generation ceremony, you need to create an ENR for your Charon client. When deploying with Helm, the chart can automatically generate an ENR and store it as a Kubernetes secret.
+The [`dv-pod` Helm chart](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod) generates an ENR for your node, waits until your cluster is ready on the Launchpad, and then runs the DKG for you. These steps are for chart version 0.22.0 or later. Running your node in the [Obol Stack](../../obol-stack/run-a-dv.md)? Follow that page instead.
 
-**1. Add the Obol Helm repository:**
+**1. Add the Obol Helm repository and choose a chart version:**
 
 ```sh
 helm repo add obol https://obolnetwork.github.io/helm-charts
 helm repo update
+helm search repo obol/dv-pod --versions | head
 ```
 
-**2. Install the chart with your operator address:**
+Pass the version you choose with `--version` on every `helm install` and `helm upgrade`, so you never pick up a new chart by accident. The commands below use `0.22.0`.
+
+**2. Install the chart with your network and operator address:**
 
 ```sh
-helm install my-dv-pod obol/dv-pod \
-  --set='charon.operatorAddress=<YOUR_OPERATOR_ADDRESS>' \
-  --set='charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>'
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.22.0 \
+  --namespace dv-pod --create-namespace \
+  --set mode=launchpad \
+  --set network=hoodi \
+  --set charon.operatorAddress=<YOUR_OPERATOR_ADDRESS> \
+  --set 'charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>'
 ```
 
-The chart will automatically generate an ENR private key and store it as a Kubernetes secret. The DKG sidecar init container will then poll the Obol API for cluster invites associated with your operator address.
+* `network` (`mainnet`, `hoodi` or `sepolia`; the chart defaults to `mainnet`) must be right at install time. The DKG sidecar only looks for cluster invites on this network.
+* `charon.operatorAddress` is the Ethereum address you connect to the Launchpad with.
+* `charon.beaconNodeEndpoints` must point at a synced beacon node on the same network.
 
-**3. Retrieve your ENR to share with the cluster creator:**
+The chart generates an ENR private key and stores it in the Secret `my-dv-pod-enr-key`, in the release namespace. It writes the public ENR to the ConfigMap `my-dv-pod-enr`. The pod then waits in its `dkg-sidecar` init container until a cluster that contains this ENR is ready. After the install, Helm prints the exact names and the next commands. Run `helm get notes my-dv-pod -n dv-pod` to see them again.
+
+**3. Get this pod's ENR:**
 
 ```sh
-kubectl get secret -l app.kubernetes.io/name=dv-pod -o jsonpath='{.items[0].data.enr}' | base64 -d
+kubectl get configmap my-dv-pod-enr -n dv-pod -o jsonpath='{.data.enr}'
 ```
+
+You'll paste this ENR on the Launchpad in Step 2. Use the ENR of **this pod**, not one you generated somewhere else: the sidecar only accepts a cluster definition that contains this pod's ENR.
 
 :::warning
-The ENR secret **must** be created in the same namespace where the Helm chart is installed. If the secret exists in a different namespace, the ENR job will regenerate a new key, potentially overriding your intended configuration.
+The ENR private key is your node's identity in the cluster, and it can't change once the cluster exists. Back up the ENR Secret (`kubectl get secret my-dv-pod-enr-key -n dv-pod -o yaml`) and store it somewhere safe. The chart never overwrites an existing key, and the Secret stays in place after `helm uninstall`. The chart only looks for the Secret in the release namespace.
 :::
 
 :::info
-If you already have an ENR private key (e.g., generated via docker), you can provide it to the chart instead of auto-generating:
+If you already have an ENR private key (for example, from `charon create enr`), create a Secret from it in the release namespace and point the chart at it:
 
 ```sh
-kubectl create secret generic charon-enr-private-key \
+kubectl create secret generic my-dv-pod-enr-key -n dv-pod \
   --from-file=charon-enr-private-key=.charon/charon-enr-private-key
 ```
 
-The chart will detect this existing secret and use it rather than generating a new one.
+Then add `--set charon.enr.existingSecret.name=my-dv-pod-enr-key` to the install command. The chart works out the public ENR from the key and writes it to the `my-dv-pod-enr` ConfigMap.
 :::
 
 For Step 2 of the quickstart:
@@ -225,7 +237,7 @@ For Step 2 of the quickstart:
 <TabItem value="creator" label="Creator">
 **Collect addresses, configure the cluster, share the invitation**
 
-Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages through MetaMask with this address. _(Broader wallet support will be added in future.)_ With these addresses in hand, go through the cluster creation flow.
+Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages with this address from a wallet supported by the Launchpad: an injected browser wallet (such as MetaMask) or any wallet that connects via WalletConnect. With these addresses in hand, go through the cluster creation flow.
 
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
@@ -239,9 +251,7 @@ The following are the steps for creating a cluster.
 2.  Connect your wallet
 
     ![Screenshot: Connect your wallet.](/img/gitbook/image-75.png)
-3.  Select `Create a Cluster with a group` then `Get Started`.
-
-    ![Screenshot: Select Create a Cluster with a group then Get Started.](/img/gitbook/image-76.png)
+3. Click **+ New** in the navigation bar and choose **Group**, then click `Get Started`.
 4. Follow the flow and accept the advisories.
 5. Configure the Cluster
    1. Input the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster). The threshold will update automatically, it shows the number of nodes that need to be functioning for the validator(s) to stay active.
@@ -258,7 +268,7 @@ The following are the steps for creating a cluster.
       - **Split Everything**: Deploys an OVM contract as withdrawal address, with principal and fee recipient addresses both as splitter contracts. In this case both principal and rewards are distributed. It just requires Owner address as input which is again recommended to be a SAFE wallet.
       - **Lido CSM**: Deploys the clusters with Lido's withdrawal vault as withdrawal address and execution vault as fee recipient. Read more about the process to register CSM cluster [here](../integrations/lido-csm.mdx).
       - **Custom**: Enter the `Principal address` which should receive the principal 32 ETH and the accrued consensus layer rewards when the validator is exited. This can optionally be set to the contract address of a multisig / splitter contract. Enter the `Fee Recipient address` to which the execution layer rewards will go. This can be the same as the principal address, or it can be a different address. This can optionally be set to the contract address of a multisig / splitter contract.
-7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your MetaMask wallet. These are:
+7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your wallet. These are:
    1. The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.
    2. The `operator_config_hash`. This is your acceptance of the terms and conditions to participate as a node operator.
    3. Your `ENR`. Signing your ENR authorizes the corresponding private key to act on your behalf in the cluster.
@@ -445,62 +455,76 @@ Sedge does not currently support taking part in a DKG. Follow the instructions f
 </TabItem>
 
 <TabItem value="helm" label="Helm">
-If you installed the Helm chart in Step 1 with the `charon.operatorAddress` parameter, the DKG sidecar will handle the ceremony automatically.
+If you installed the chart in Step 1, the pod runs the ceremony for you. Keep it running until the DKG is done.
 
-**Automatic DKG (recommended):**
+**Launchpad invite (`mode=launchpad`):**
 
-The DKG sidecar init container continuously polls the Obol API for cluster invites associated with your operator address. Once all operators in the cluster have signed their approvals on the Launchpad, the sidecar will:
+The `dkg-sidecar` init container polls the Obol API for cluster invites to your operator address on the chart's `network`. It waits until it finds a definition that contains this pod's ENR and that every operator has signed on the Launchpad. Then the `charon-dkg` init container runs the ceremony and writes the cluster-lock and your validator key shares to the pod's persistent volume. Charon starts once the lock is in place.
 
-1. Detect the cluster invite
-2. Run the DKG ceremony automatically
-3. Store the generated artifacts (cluster-lock, validator keys) in the persistent volume
+The sidecar doesn't sign anything. You accept the cluster and sign with your operator wallet on the Launchpad yourself.
 
-You can monitor the DKG progress by checking the pod logs:
+**Cluster definition from the CLI (`mode=definition`):**
+
+If the creator made the cluster definition with `charon create dkg --publish` (the **CDVN** tab in Step 2) using your pod's ENR, point the same release at the definition's config hash instead:
 
 ```sh
-kubectl logs my-dv-pod-0 -c dkg-sidecar -f
+helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod --reuse-values \
+  --set mode=definition \
+  --set dkg.definition.configHash=0x<CONFIG_HASH>
 ```
+
+The pod keeps its ENR across the upgrade. The chart can also take the definition from an HTTPS URL (`dkg.definition.url`) or from a ConfigMap holding `cluster-definition.json` (`dkg.definition.configMap`).
+
+**Watch the DKG:**
+
+The sidecar records progress in the `my-dv-pod-dkg-status` ConfigMap:
+
+```sh
+kubectl get configmap my-dv-pod-dkg-status -n dv-pod \
+  -o jsonpath='{.data.phase}{"\n"}{.data.message}{"\n"}{.data.signatures}{"\n"}'
+```
+
+The phase moves from `WaitingForInvite` to `WaitingForSignatures` (with a `signatures` count such as `3/4`), then `DefinitionReady` and `Complete`. `Failed` comes with a `message` explaining why. For more detail, follow the init container logs:
+
+```sh
+kubectl get pod my-dv-pod-0 -n dv-pod                        # Init:N/M until the DKG is done
+kubectl logs my-dv-pod-0 -n dv-pod -c dkg-sidecar -f         # waiting for the invite and signatures
+kubectl logs my-dv-pod-0 -n dv-pod -c charon-dkg -f          # the ceremony itself
+```
+
+:::warning
+Charon's DKG only connects to peers on the same minor version, so every operator must run the same Charon minor (for example, all `v1.11.x`). The chart runs the DKG with the same Charon image it uses for `charon run`. Check which Charon version each operator runs before the ceremony, especially in clusters that mix Helm with Docker Compose setups.
+:::
 
 :::info
-If you want the sidecar to target a specific cluster definition, you can set the `targetConfigHash` parameter:
-
-```sh
-helm upgrade my-dv-pod obol/dv-pod \
-  --reuse-values \
-  --set='charon.dkgSidecar.targetConfigHash=0x...'
-```
+If you have invites to more than one cluster, pin the one to join with `--set charon.dkgSidecar.targetConfigHash=0x<CONFIG_HASH>`.
 :::
 
 **Pre-existing artifacts:**
 
-If you have already completed the DKG ceremony outside of Helm (e.g., via docker), you can provide the artifacts directly:
+If you have already completed the DKG ceremony outside of Helm (e.g., via docker), you can provide the artifacts directly. The ENR Secret must hold the private key whose ENR is in the cluster-lock:
 
 ```sh
-# Create a secret with the validator keystores
-kubectl create secret generic validator-keys \
+kubectl create secret generic my-dv-pod-enr-key -n dv-pod \
+  --from-file=charon-enr-private-key=.charon/charon-enr-private-key
+kubectl create secret generic validator-keys -n dv-pod \
   --from-file=.charon/validator_keys/keystore-0.json \
   --from-file=.charon/validator_keys/keystore-0.txt
-
-# Create a ConfigMap with the cluster lock file
-kubectl create configmap cluster-lock \
+kubectl create configmap cluster-lock -n dv-pod \
   --from-file=.charon/cluster-lock.json
 
-# Install or upgrade the chart with the pre-existing artifacts
-helm upgrade --install my-dv-pod obol/dv-pod \
-  --set='configMaps.clusterLock=cluster-lock' \
-  --set='validatorClient.keystores.secretName=validator-keys' \
-  --set='charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>'
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.22.0 \
+  --namespace dv-pod --create-namespace \
+  --set mode=lock \
+  --set network=hoodi \
+  --set charon.enr.existingSecret.name=my-dv-pod-enr-key \
+  --set configMaps.clusterLock=cluster-lock \
+  --set validatorClient.keystores.secretName=validator-keys \
+  --set 'charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>'
 ```
 
 :::info
-For large cluster-lock files (>1MB), use the lock hash instead of a ConfigMap:
-
-```sh
-LOCK_HASH=$(jq -r '.lock_hash' .charon/cluster-lock.json)
-helm upgrade my-dv-pod obol/dv-pod \
-  --reuse-values \
-  --set="charon.lockHash=$LOCK_HASH"
-```
+For large cluster-lock files (>1MB), use `--set mode=lockHash --set charon.lockHash=$(jq -r '.lock_hash' .charon/cluster-lock.json)` instead of `mode=lock` and `configMaps.clusterLock`. The sidecar then fetches the lock from the Obol API.
 :::
 </TabItem>
 </Tabs>
@@ -737,8 +761,17 @@ Use an Ansible playbook to start your node. [See the repo here](https://github.c
 If you installed the Helm chart in Step 1 and the DKG completed automatically in Step 3, your Distributed Validator node is already running. You can verify its status with:
 
 ```sh
-kubectl get pods
-kubectl logs my-dv-pod-0 -c charon -f
+kubectl get pod my-dv-pod-0 -n dv-pod                  # READY once Charon's /readyz passes
+kubectl logs my-dv-pod-0 -n dv-pod -c dv-pod -f        # Charon (the container is named after the chart)
+kubectl logs my-dv-pod-0 -n dv-pod -c validator-client -f
+```
+
+**Back up `charon-data`:**
+
+The DKG output (`cluster-lock.json`, `deposit-data*.json` and your key shares in `validator_keys/`) lives on the pod's `charon-data-my-dv-pod-0` volume. Copy it off the cluster and store it encrypted before you activate any validators:
+
+```sh
+kubectl cp dv-pod/my-dv-pod-0:/charon-data ./my-dv-pod-charon-data -c dv-pod
 ```
 
 **Key configuration options:**
@@ -746,13 +779,14 @@ kubectl logs my-dv-pod-0 -c charon -f
 You can customize your deployment by upgrading the release with additional parameters:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
   --reuse-values \
-  --set='network=mainnet' \
   --set='charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>' \
   --set='charon.builderApi=true' \
   --set='validatorClient.type=lighthouse'
 ```
+
+Set `charon.builderApi=true` only if your beacon node is connected to MEV-boost and your cluster agreed to use MEV. Don't change `network` on an existing release.
 
 The chart supports five validator client types: `lighthouse` (default), `teku`, `nimbus`, `lodestar`, and `prysm`.
 
@@ -761,7 +795,7 @@ The chart supports five validator client types: `lighthouse` (default), `teku`, 
 If you prefer to run your own validator client outside the chart, disable the integrated one and point your external client at the Charon validator API:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
   --reuse-values \
   --set='validatorClient.enabled=false'
 ```
@@ -777,7 +811,7 @@ http://<RELEASE_NAME>.<NAMESPACE>.svc.cluster.local:3600
 Enable Prometheus service monitoring:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
   --reuse-values \
   --set='serviceMonitor.enabled=true'
 ```
@@ -785,14 +819,14 @@ helm upgrade my-dv-pod obol/dv-pod \
 **Uninstalling:**
 
 ```sh
-helm uninstall my-dv-pod
+helm uninstall my-dv-pod -n dv-pod
 ```
 
 :::danger
-Uninstalling the Helm release will remove all Kubernetes components. Ensure you have backed up your validator keys and cluster artifacts before uninstalling.
+Uninstalling the Helm release removes the pod and its configuration. The `charon-data` volume and the ENR Secret are kept, but make sure you have backed up your validator keys and cluster artifacts before uninstalling. Only delete the volume and the Secret once you no longer need this node's keys.
 :::
 
-If you encounter issues, consult the [Helm chart documentation](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod) or open an [issue](https://github.com/ObolNetwork/helm-charts/issues).
+If you encounter issues, consult the [Helm chart documentation](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod) and its [troubleshooting guide](https://github.com/ObolNetwork/helm-charts/blob/main/charts/dv-pod/TROUBLESHOOT.md), or open an [issue](https://github.com/ObolNetwork/helm-charts/issues).
 </TabItem>
 
 <TabItem value="k8s" label="K8s">

@@ -126,25 +126,42 @@ To resolve this error, you can either:
 
 ```sh
 helm repo update obol
+helm search repo obol/dv-pod --versions | head   # available chart versions
+helm list -n dv-pod                               # the chart version you run now
 ```
 
 #### Upgrade the release
 
+Pin the chart version you're moving to:
+
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --reuse-values
+helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod --reuse-values
 ```
 
-This will upgrade your Charon and validator client containers to the latest chart version while preserving your existing configuration values.
+This upgrades your Charon and validator client containers to that chart version while keeping your existing configuration values. Without `--version`, Helm installs whatever chart is newest in the repository.
 
 :::info
 Check the [chart changelog](https://github.com/ObolNetwork/helm-charts/releases) before upgrading to review any breaking changes or new configuration options.
+:::
+
+:::warning[Upgrading from a chart older than 0.22.0]
+Chart 0.22.0 reworks how the pod starts. Read the chart's [upgrade notes](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod#upgrading-from-chart--022) first. In short:
+
+* The pod gets new init containers (`dkg-sidecar`, `charon-dkg`, `dkg-report`) that run on **every** start, including on nodes that already have a cluster-lock, where they finish straight away. The upgrade restarts the pod, and it can't start until it can pull the `obolnetwork/charon-dkg-sidecar` image version that the chart uses. Check that image is published before you upgrade.
+* Your node keeps its identity. The chart reuses the ENR Secret the release already mounts, and it never generates a new key on upgrade. New installs get a per-release Secret, `<release>-enr-key`.
+* Existing releases keep `mode: auto`, which works out the same behaviour as before from your values.
+* The values schema is now strict: unknown keys are rejected. Remove typos, and keys the chart never had, from your values.
+* `charon.builderApi` and `charon.directConnectionEnabled` are booleans, and `"false"` now really turns them off.
+* A readiness probe (`/readyz`) is on, and volumes are kept when the StatefulSet is deleted or scaled down.
+
+After the upgrade, check that the pod is `Running` and Charon is ready (`kubectl get pod my-dv-pod-0 -n dv-pod`).
 :::
 
 :::tip[Let Claude do this]
 With the [Obol agent skills](../../agent-skills/README.md) installed, paste this into Claude Code:
 
 ```text
-Upgrade my DVpod to the latest dv-pod chart release. Review the changelog for breaking changes first and confirm the cluster is healthy afterwards.
+Upgrade my DVpod to the latest dv-pod chart release, pinned with --version. Review the changelog for breaking changes first and confirm the cluster is healthy afterwards.
 ```
 :::
 

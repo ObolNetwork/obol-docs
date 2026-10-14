@@ -644,6 +644,11 @@ const sidebars = {
     },
     {
       "type": "doc",
+      "id": "obol-stack/run-a-dv",
+      "label": "Run Your Part of a DV"
+    },
+    {
+      "type": "doc",
       "id": "obol-stack/installing-apps",
       "label": "Installing Apps"
     },
