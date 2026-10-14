@@ -178,6 +178,10 @@ This guide assumes you are starting with a source cluster with four existing ope
 
 ### 3. Initiate the Consolidation
 
+:::warning
+The Launchpad migrate page described below is currently unavailable, and the **Migrate** button is not shown in the Launchpad. Until it returns, use [Method 1: Edit Command](#method-1-edit-command-replace-operator) to replace operators, or send the consolidation request from the withdrawal address with other tooling.
+:::
+
 - **Access the Migration Tool:** Navigate to the Obol Launchpad migration page by using a URL such as `https://hoodi.launchpad.obol.org/migrate/?withdrawalAddress=your_withdrawal_address`. Alternatively, click the **Migrate** button on a target validator's page within the target cluster dashboard. This **Migrate** button is only clickable for validators where the connected address is the withdrawal address. Make sure the correct address is connected.
 
 ![Launchpad migrate action](/img/gitbook/operator-rotation-migrate.png)

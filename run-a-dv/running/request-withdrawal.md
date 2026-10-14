@@ -9,7 +9,7 @@ The following steps guide you through how to request a withdrawal from your vali
 
 ## Step-by-Step Withdrawal Process
 
-1. On the cluster details page, go to the validators table. In the actions column, click on the withdraw icon. If the withdrawal address is an OVM, the connected address must have the `WITHDRAWAL_ROLE` to request a withdrawal. If the withdrawal address is an EOA, make sure you are connected with the correct EOA. **Read more about how to assign roles** [**here**](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md)**.**
+1. On the cluster details page, go to the validators table. (To reach the cluster details page, open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) and click your cluster, or go to `/cluster/details?lockHash=<lock hash>` on the Launchpad for your network.) In the actions column, click on the withdraw icon. If the withdrawal address is an OVM, the connected address must have the `WITHDRAWAL_ROLE` to request a withdrawal. If the withdrawal address is an EOA, make sure you are connected with the correct EOA. **Read more about how to assign roles** [**here**](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md)**.**
 
 ![Screenshot of the withdrawal button in the cluster validators table on the DV Launchpad.](/img/gitbook/OVMWithdrawalButton.png)
 

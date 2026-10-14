@@ -23,7 +23,7 @@ Help me create a distributed validator cluster where I run all of the nodes myse
 ### Step 1: Create the key shares locally {#step-1-create-the-key-shares-locally}
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
-Go to the [DV Launchpad](../../learn/intro/launchpad.md) and select `Create a distributed validator alone`. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
+Go to the [DV Launchpad](../../learn/intro/launchpad.md), click **+ New** in the navigation bar and choose **Solo**. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
 Before you run the command, clone the [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster.git) and `cd` into the directory.
 
 ```sh
@@ -33,7 +33,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.gi
 # Change directory
 cd charon-distributed-validator-cluster/
 
-# Run the command provided in the DV Launchpad "Create a cluster alone" flow
+# Run the command provided in the DV Launchpad "+ New → Solo" flow
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 create cluster --definition-file=...
 
 ```
@@ -121,7 +121,7 @@ Right now, the `charon create cluster` command [used earlier to create the priva
 
 This is necessary for the folder to be found by the default `charon run` command. Optionally, it is possible to override `charon run`'s default file locations by using `charon run --private-key-file="node0/charon-enr-private-key" --lock-file="node0/cluster-lock.json"` for each instance of Charon you start (substituting `node0` for each node number in your cluster as needed).
 
-👉 Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [helm chart](https://github.com/ObolNetwork/helm-charts) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
+👉 Use the single node [docker compose](https://github.com/ObolNetwork/charon-distributed-validator-node), the kubernetes [manifests](https://github.com/ObolNetwork/charon-k8s-distributed-validator-node), or the [`dv-pod` Helm chart](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod#import-an-existing-cluster-mode-lock) (`mode=lock`, which imports a `node*/` folder) example repos to get your nodes up and connected after loading the `.charon` folder artifacts into them appropriately.
 
 Output from create cluster:
 

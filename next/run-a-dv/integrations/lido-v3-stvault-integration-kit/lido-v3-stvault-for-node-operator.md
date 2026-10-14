@@ -489,7 +489,7 @@ If the split contract is configured correctly with Obol’s share of validator r
 Process:
 
 1. Connect the **recipient wallet / Safe** that's entitled to the reward on the [DV Launchpad](https://launchpad.obol.org/).
-2. Click the "Dashboard" button.
+2. Open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) (**Operator Dashboard** in the navigation panel).
 3. Claim any available Obol incentives.
 
 :::info

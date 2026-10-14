@@ -12,6 +12,8 @@ Run the Charon test suites against my node, starting with the infra test, and ex
 
 :::tip
 Adding the `--publish` flag to the below commands, and running the command from the directory containing your `.charon` folder, will submit the test results to the [Obol API](../../api/what-is-this-api.md). Publishing your performance reports grows the staking node dataset, and allows Obol and Ethereum development teams to make data-driven choices regarding the required specs for validating Ethereum. We hope you will consider opting in.
+
+Published results can be viewed on the Launchpad at `https://<network>.launchpad.obol.org/test-results?enr=<ENR>` (for example `https://hoodi.launchpad.obol.org/test-results?enr=enr:-...`; mainnet has no subdomain: `https://launchpad.obol.org/test-results?enr=<ENR>`). Only results submitted with `--publish` appear there.
 :::
 
 <Tabs>

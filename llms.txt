@@ -72,7 +72,7 @@ https://obol.org/llms.txt.
 - [Set a Nickname](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/nicknames.md): Add a nickname to your Charon node
 - [Self-Host a Relay](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/self-relay.md): Self-host a relay
 - [Advanced Docker Configs](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/adv-docker-configs.md): Use advanced docker-compose features to have more flexibility and power to change the default configuration.
-- [Assign OVM Roles](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/assign-ovm-roles.md): Learn how to assign permissions within the Obol Vault Manager (OVM) smart contract using the efficient bitwise role system.
+- [Assign OVM Roles](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/assign-ovm-roles.md): Learn how to assign permissions within the Obol Validator Manager (OVM) smart contract using the efficient bitwise role system.
 - [NAT Hole Punching](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/hole-punching.md): Achieve a P2P direct connection under a private IP (NAT hole punching).
 - [Consensus Protocols](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/consensus-protocols.md): How Charon's pluggable consensus layer lets a cluster agree on duty data, and how operators can select a preferred protocol.
 - [Charon Feature Flags](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/feature-flags.md): How Charon's feature flags gate alpha and beta functionality, and how operators can enable, disable, or observe them.
@@ -106,6 +106,7 @@ https://obol.org/llms.txt.
 - [Buying Services](https://docs.obol.org/next/obol-stack/buying-services.md): Rent a remote model with obol buy inference, or pay any x402 endpoint straight from your agent
 - [Set up a Permanent URL](https://docs.obol.org/next/obol-stack/permanent-url.md): Give your stack a permanent public URL with a Cloudflare tunnel, so buyers can reliably reach the services you sell.
 - [Installing Networks](https://docs.obol.org/next/obol-stack/installing-networks.md): Deploy blockchain networks on your local Obol Stack
+- [Run Your Part of a DV](https://docs.obol.org/next/obol-stack/run-a-dv.md): Run your share of an Obol distributed validator in the Obol Stack: a local Ethereum node, the dv-pod Helm chart, DKG, monitoring, and the Hermes agent watching it.
 - [Installing Apps](https://docs.obol.org/next/obol-stack/installing-apps.md): Deploy additional applications on your Obol Stack
 - [FAQ](https://docs.obol.org/next/obol-stack/faq.md): Frequently asked questions about the Obol Stack
 - [Obol Agent Skills](https://docs.obol.org/next/agent-skills.md): Install the Obol Claude Code plugin so an AI agent can create, test, deploy, and monitor distributed validators and the Obol Stack for you.
@@ -243,7 +244,7 @@ https://obol.org/llms.txt.
 - [Set a Nickname](https://docs.obol.org/advanced-and-troubleshooting/advanced/nicknames.md): Add a nickname to your Charon node
 - [Self-Host a Relay](https://docs.obol.org/advanced-and-troubleshooting/advanced/self-relay.md): Self-host a relay
 - [Advanced Docker Configs](https://docs.obol.org/advanced-and-troubleshooting/advanced/adv-docker-configs.md): Use advanced docker-compose features to have more flexibility and power to change the default configuration.
-- [Assign OVM Roles](https://docs.obol.org/advanced-and-troubleshooting/advanced/assign-ovm-roles.md): Learn how to assign permissions within the Obol Vault Manager (OVM) smart contract using the efficient bitwise role system.
+- [Assign OVM Roles](https://docs.obol.org/advanced-and-troubleshooting/advanced/assign-ovm-roles.md): Learn how to assign permissions within the Obol Validator Manager (OVM) smart contract using the efficient bitwise role system.
 - [NAT Hole Punching](https://docs.obol.org/advanced-and-troubleshooting/advanced/hole-punching.md): Achieve a P2P direct connection under a private IP (NAT hole punching).
 - [Consensus Protocols](https://docs.obol.org/advanced-and-troubleshooting/advanced/consensus-protocols.md): How Charon's pluggable consensus layer lets a cluster agree on duty data, and how operators can select a preferred protocol.
 - [Charon Feature Flags](https://docs.obol.org/advanced-and-troubleshooting/advanced/feature-flags.md): How Charon's feature flags gate alpha and beta functionality, and how operators can enable, disable, or observe them.

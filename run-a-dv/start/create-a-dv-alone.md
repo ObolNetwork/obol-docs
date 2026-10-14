@@ -23,7 +23,7 @@ Help me create a distributed validator cluster where I run all of the nodes myse
 ### Step 1: Create the key shares locally {#step-1-create-the-key-shares-locally}
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
-Go to the [DV Launchpad](../../learn/intro/launchpad.md) and select `Create a distributed validator alone`. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
+Go to the [DV Launchpad](../../learn/intro/launchpad.md), click **+ New** in the navigation bar and choose **Solo**. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
 Before you run the command, clone the [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster.git) and `cd` into the directory.
 
 ```sh
@@ -33,7 +33,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.gi
 # Change directory
 cd charon-distributed-validator-cluster/
 
-# Run the command provided in the DV Launchpad "Create a cluster alone" flow
+# Run the command provided in the DV Launchpad "+ New → Solo" flow
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 create cluster --definition-file=...
 
 ```

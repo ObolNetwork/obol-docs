@@ -33,7 +33,7 @@ Post-Pectra fork, withdrawal addresses of validators can trigger an EL (Executio
 
 ### How to Trigger an EL Exit
 
-In the Launchpad, you can initiate an EL exit using the Exit validator button in the actions column of the validators table. To trigger an EL exit, you must meet one of the following conditions:
+In the Launchpad, you can initiate an EL exit from your cluster's **Cluster Details** page (open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) and click your cluster, or go to `/cluster/details?lockHash=<lock hash>` on the Launchpad for your network). Use the exit icon (tooltip **Exit validators**) in the actions column of the validators table. To trigger an EL exit, you must meet one of the following conditions:
 
 * **Connected with the withdrawal address:** If the withdrawal address is an EOA (Externally Owned Account), you must be connected with that EOA wallet.
 * **Have WITHDRAWAL\_ROLE:** If the withdrawal address of the validator is an OVM, you must have `WITHDRAWAL_ROLE` in that OVM. Read more about how to assign roles [here](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md).
@@ -42,7 +42,7 @@ In the Launchpad, you can initiate an EL exit using the Exit validator button in
 
 ### Step-by-Step Process
 
-1. **Initiate Exit:** Upon clicking the Exit validator button, you can multi-select the active validators you would like to exit. In the example below, there is only one active validator, so only one can be selected for the exit.
+1. **Initiate Exit:** Upon clicking the exit icon, the **Exit Validators** dialog opens and you can multi-select the active validators you would like to exit. In the example below, there is only one active validator, so only one can be selected for the exit.
 
 ![Screenshot of the multi-select validator exit interface on the DV Launchpad.](/img/gitbook/Screenshot-2026-02-11-at-16.59.40.png)
 

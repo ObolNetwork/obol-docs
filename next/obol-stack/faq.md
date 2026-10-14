@@ -10,6 +10,10 @@ The Obol Stack is a local Kubernetes-based environment for running AI agents alo
 
 It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it would be wise to only use it with less than a threshold amount of validator nodes, or with only as much crypto assets under management that you would be okay with an Obol Agent losing. For production validator deployments, see the [Run a DV](../run-a-dv/start/quickstart_overview.md) docs for the latest mainnet guides.
 
+### Can I run a distributed validator in the Obol Stack?
+
+Yes, your part of one. From Obol Stack v0.16, sync a local Ethereum node with `obol network`, install the `dv-pod` Helm chart against it, join your cluster through the Launchpad or a cluster definition, and let the Hermes agent watch the node and alert you. See [Run Your Part of a DV](run-a-dv.md). Start on Hoodi, and on mainnet keep less than a threshold of your cluster's nodes in Stacks.
+
 ### What operating systems are supported?
 
 * **macOS** (Darwin) — Intel and Apple Silicon
@@ -263,8 +267,13 @@ To move a stack to another machine, or to keep a backup, run `obol stack export 
 The deployment ID is displayed when you run `obol network install`. You can also list deployments:
 
 ```shell
+obol network list            # v0.16+: installed deployments with clients and mode
 ls ~/.config/obol/networks/
 ```
+
+### Is my Ethereum node synced?
+
+From Obol Stack v0.16, run `obol network status ethereum/<id>`. It checks the execution and consensus clients and prints a verdict such as `synced` or `syncing`. See [Check sync status](installing-networks.mdx#check-sync-status).
 
 ### Can I run multiple instances of the same network?
 

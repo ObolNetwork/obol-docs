@@ -747,30 +747,50 @@ The vast majority of users that created validators to date have used the [~~**Et
 
 To facilitate the generation of distributed validator keys among remote users with high-trust, the Obol Network developed and maintains a website that enables a group of users to come together and create these threshold keys: **The DV Launchpad**.
 
-![Screenshot of the DV Launchpad homepage.](/img/gitbook/image-16-1-1.png)
-
 ## Getting started
 
 For more information on running Charon in a UI-friendly way through the DV Launchpad, take a look at our [Quickstart Guides](../../run-a-dv/start/quickstart_overview.md).
+
+The Launchpad home page is the [Explorer](#use-the-explorer). The navigation panel links to **Explorer**, **Operator Dashboard**, **Positions** and **Test Results**. To create something new, click **+ New** and choose:
+
+* **Solo**: create a distributed validator where you run all the nodes ([guide](../../run-a-dv/start/create-a-dv-alone.mdx)).
+* **Group**: create a cluster invitation for a group of operators ([guide](../../run-a-dv/start/create-a-dv-with-a-group.mdx)).
+* **Deposit**: upload a `deposit-data.json` file to activate validators ([legacy deposit flow](../../run-a-dv/running/activate-a-dv.md#4-legacy-deposit-flow-to-be-deprecated)).
+
+Wallets connect through RainbowKit: injected browser wallets (such as MetaMask) and wallets that support WalletConnect.
 
 ## DV Launchpad Links
 
 | Ethereum Network | Launchpad                              |
 | ---------------- | -------------------------------------- |
 | Mainnet          | https://launchpad.obol.org             |
-| Gnosis Chain     | https://gnosischain.launchpad.obol.org |
 | Hoodi            | https://hoodi.launchpad.obol.org       |
-| Sepolia          | https://sepolia.launchpad.obol.org     |
+
+Launchpads for Gnosis Chain and Sepolia are not currently available.
 
 ## Operator Dashboard
 
-Clicking on "dashboard" on the top-right of the launchpad brings you to the operator view, where you can view information about the DV operator corresponding to the wallet address currently connected to the launchpad. It is also possible to view information about another operator, by substituting another wallet address in the URL, or using the explorer, described below.
+Clicking **Operator Dashboard** in the navigation panel (or opening `/cluster/list`) brings you to the operator view for the wallet address currently connected to the launchpad. It shows your **Clusters** (cluster locks), **Active Validators** and pending invites. It is also possible to view information about another operator, by substituting another wallet address in the URL (`/operator/<address>`), or using the explorer, described below.
+
+Unaccepted invites expire after 90 days; older invites are hidden from the dashboard.
 
 ![Screenshot of the operator dashboard on the DV Launchpad.](/img/gitbook/image-17-1.png)
 
 ## View a Cluster
 
-An operator can be part of multiple clusters. Clusters, and cluster invites, are shown on the operator page. Clicking on a cluster takes you to the cluster page. Here you can see the status of the cluster, the operators, and validators associated with the cluster.
+An operator can be part of multiple clusters. Clusters, and cluster invites, are shown on the operator page; the clusters table lists each cluster's **Configured Validators**. Clicking on a cluster takes you to the cluster page. Here you can see the status of the cluster, the operators, and validators associated with the cluster.
+
+| Cluster status          | Meaning                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| Incomplete Definition   | Not every operator has accepted the cluster invite yet.                                 |
+| Awaiting Key Generation | Every operator has accepted; the DKG ceremony hasn't completed (or wasn't published).    |
+| Awaiting Deposits       | No validator in the cluster is on the beacon chain yet, or its deposit is still pending. |
+| Activating              | Validators are deposited and queued for activation.                                     |
+| Active                  | At least one validator is active.                                                       |
+| Exiting                 | Validators are exiting.                                                                 |
+| Exiting Slashed         | A validator was slashed and is being exited.                                            |
+| Exited                  | The cluster's validators have exited (and may have been withdrawn).                    |
+| Unknown                 | The Launchpad couldn't load the validators' status; try again later.                    |
 
 ![Screenshot showing a cluster&#x27;s detail view on the DV Launchpad.](/img/gitbook/image-18-1.png)
 
@@ -780,9 +800,27 @@ An operator can be part of multiple clusters. Clusters, and cluster invites, are
 
 ## Use the Explorer
 
-Clicking "explore" on the top-right of the launchpad brings you to the explorer view. It shows information about every DV cluster and operator being tracked by Obol. You can search for a cluster or operator by name, or filter based on badge or protocol type.
+The Explorer is the Launchpad home page (**Explorer** in the navigation panel). It shows information about every DV cluster and operator being tracked by Obol, in **Operators** and **Clusters** tabs. You can search for a cluster or operator by name, and filter:
+
+* **Operators** by Techne credential (**Silver**, **Bronze**) or by **Lido Badge**.
+* **Clusters** by **Lido Cluster**.
+
+The selected tab, page, sort order and filters are kept in the URL, so a filtered view can be bookmarked or shared.
 
 ![Screenshot of the DV Launchpad cluster explorer.](/img/gitbook/image-19-1.png)
+
+## Useful links
+
+Replace `launchpad.obol.org` with `hoodi.launchpad.obol.org` for Hoodi.
+
+| Page                      | URL                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| Explorer                  | `https://launchpad.obol.org/?tab=operators` or `/?tab=clusters`, with optional `page`, `sort`, `dir`, `techne`, `badges` and `pool` parameters |
+| Operator Dashboard        | `https://launchpad.obol.org/cluster/list` (redirects to your connected address)          |
+| Any operator              | `https://launchpad.obol.org/operator/<address>`                                          |
+| Cluster details           | `https://launchpad.obol.org/cluster/details?lockHash=<lock hash>`                        |
+| Positions                 | `https://launchpad.obol.org/positions`                                                   |
+| Test results              | `https://launchpad.obol.org/test-results?enr=<ENR>` (only results published with `--publish`, see [Test a Cluster](../../run-a-dv/prepare/test-a-cluster.mdx)) |
 
 
 ---
@@ -3007,7 +3045,7 @@ Help me create a distributed validator cluster where I run all of the nodes myse
 ### Step 1: Create the key shares locally {#step-1-create-the-key-shares-locally}
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
-Go to the [DV Launchpad](../../learn/intro/launchpad.md) and select `Create a distributed validator alone`. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
+Go to the [DV Launchpad](../../learn/intro/launchpad.md), click **+ New** in the navigation bar and choose **Solo**. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
 Before you run the command, clone the [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster.git) and `cd` into the directory.
 
 ```sh
@@ -3017,7 +3055,7 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.gi
 # Change directory
 cd charon-distributed-validator-cluster/
 
-# Run the command provided in the DV Launchpad "Create a cluster alone" flow
+# Run the command provided in the DV Launchpad "+ New → Solo" flow
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 create cluster --definition-file=...
 
 ```
@@ -3409,7 +3447,7 @@ For Step 2 of the quickstart:
 <TabItem value="creator" label="Creator">
 **Collect addresses, configure the cluster, share the invitation**
 
-Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages through MetaMask with this address. _(Broader wallet support will be added in future.)_ With these addresses in hand, go through the cluster creation flow.
+Before starting the cluster creation process, you will need to collect an Ethereum address for each operator in the cluster. They will need to be able to sign messages with this address from a wallet supported by the Launchpad: an injected browser wallet (such as MetaMask) or any wallet that connects via WalletConnect. With these addresses in hand, go through the cluster creation flow.
 
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
@@ -3423,9 +3461,7 @@ The following are the steps for creating a cluster.
 2.  Connect your wallet
 
     ![Screenshot: Connect your wallet.](/img/gitbook/image-75.png)
-3.  Select `Create a Cluster with a group` then `Get Started`.
-
-    ![Screenshot: Select Create a Cluster with a group then Get Started.](/img/gitbook/image-76.png)
+3. Click **+ New** in the navigation bar and choose **Group**, then click `Get Started`.
 4. Follow the flow and accept the advisories.
 5. Configure the Cluster
    1. Input the `Cluster Name` & `Cluster Size` (i.e. number of operators in the cluster). The threshold will update automatically, it shows the number of nodes that need to be functioning for the validator(s) to stay active.
@@ -3442,7 +3478,7 @@ The following are the steps for creating a cluster.
       - **Split Everything**: Deploys an OVM contract as withdrawal address, with principal and fee recipient addresses both as splitter contracts. In this case both principal and rewards are distributed. It just requires Owner address as input which is again recommended to be a SAFE wallet.
       - **Lido CSM**: Deploys the clusters with Lido's withdrawal vault as withdrawal address and execution vault as fee recipient. Read more about the process to register CSM cluster [here](../integrations/lido-csm.mdx).
       - **Custom**: Enter the `Principal address` which should receive the principal 32 ETH and the accrued consensus layer rewards when the validator is exited. This can optionally be set to the contract address of a multisig / splitter contract. Enter the `Fee Recipient address` to which the execution layer rewards will go. This can be the same as the principal address, or it can be a different address. This can optionally be set to the contract address of a multisig / splitter contract.
-7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your MetaMask wallet. These are:
+7. Click `Create Cluster Configuration`. Review that all the details are correct, and press `Confirm and Sign` You will be prompted to sign two or three transactions with your wallet. These are:
    1. The `config_hash`. This is a hashed representation of the details of this cluster, to ensure everyone is agreeing to an identical setup.
    2. The `operator_config_hash`. This is your acceptance of the terms and conditions to participate as a node operator.
    3. Your `ENR`. Signing your ENR authorizes the corresponding private key to act on your behalf in the cluster.
@@ -4377,6 +4413,8 @@ Run the Charon test suites against my node, starting with the infra test, and ex
 
 :::tip
 Adding the `--publish` flag to the below commands, and running the command from the directory containing your `.charon` folder, will submit the test results to the [Obol API](../../api/what-is-this-api.md). Publishing your performance reports grows the staking node dataset, and allows Obol and Ethereum development teams to make data-driven choices regarding the required specs for validating Ethereum. We hope you will consider opting in.
+
+Published results can be viewed on the Launchpad at `https://<network>.launchpad.obol.org/test-results?enr=<ENR>` (for example `https://hoodi.launchpad.obol.org/test-results?enr=enr:-...`; mainnet has no subdomain: `https://launchpad.obol.org/test-results?enr=<ENR>`). Only results submitted with `--publish` appear there.
 :::
 
 <Tabs>
@@ -5492,11 +5530,13 @@ The Ethereum Pectra upgrade enables validators with `0x02` Compounding Withdrawa
 
 This new flow supports deposits to validators with any standard withdrawal address, including **EOA (Externally Owned Account)** addresses, and streamlines the activation and top-up process.
 
+This flow lives on your cluster's **Cluster Details** page. To get there, open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) (**Operator Dashboard** in the Launchpad navigation panel) and click your cluster, or go directly to `https://launchpad.obol.org/cluster/details?lockHash=<lock hash>` (use the `hoodi.` subdomain for Hoodi).
+
 ### A. Critical Distinction (OVM Users MUST Use This Flow)
 
 | Withdrawal Address Type      | Recommended Flow                                          | Reason                                                                                                                                                                                           |
 | ---------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **OVM (Obol Vault Manager)** | **MANDATORY:** Deposit via the Cluster Details Page flow. | This ensures the OVM smart contract correctly tracks the deposited amount as principal stake and manages subsequent reward accounting. Bypassing the OVM requires manual accounting adjustments. |
+| **OVM (Obol Validator Manager)** | **MANDATORY:** Deposit via the Cluster Details Page flow. | This ensures the OVM smart contract correctly tracks the deposited amount as principal stake and manages subsequent reward accounting. Bypassing the OVM requires manual accounting adjustments. |
 | **EOA (Standard Wallet)**    | RECOMMENDED: Deposit via the Cluster Details Page flow.   | Allows direct deposit without needing to manually upload a deposit data file. Also supports top-ups.                                                                                             |
 
 :::danger
@@ -5558,15 +5598,15 @@ When a user bypasses deposits via OVM and deposits directly, the amount of princ
 
 ![Screenshot of the OVM principal adjustment interface in the activation flow.](/img/gitbook/OVMDeposit5.png)
 
-## 4. Legacy Deposit Flow (To be Deprecated)
+## 4. Legacy Deposit Flow {#4-legacy-deposit-flow-to-be-deprecated}
 
-The Legacy Flow is the pre-Pectra experience and should be avoided, especially by OVM users.
+The Legacy Flow (**+ New → Deposit** in the Launchpad) is the pre-Pectra experience, where you upload a `deposit-data.json` file. For OVM clusters, the recommended flow is the Cluster Details page described above.
 
 * This flow is best suited for activating older `0x01` (BLS) validators.
 * It **does not support top-ups** with arbitrary amounts into compounding (`0x02`) validators.
 * The user must select the number of validators first, and the total deposit amount is calculated after (Amount \* Number of Validators).
 * It lacks the integrated Recommended Allocation strategy - it is manually governed by the user.
-* If one of the withdrawal addresses is OVM, a warning is displayed with strong suggestions to use the new deposit flow in the cluster page to avoid accounting issues of principal and rewards inside the OVM. Legacy flow will bypass deposits via OVM and directly to validators. As a result, the user will have to manually adjust principal and rewards after. Read more about [how to adjust the principal inside the OVM](activate-a-dv.md#d-how-to-adjust-principal-inside-the-ovm).
+* If a validator's withdrawal address is an OVM, the legacy flow sends that validator's deposit through the OVM, one transaction per validator (**Deposit All** is not offered), so the OVM still records the principal. The connected wallet needs the OVM's `DEPOSIT_ROLE`. Deposits made outside the Launchpad (for example with the ethereum.org Staking Launchpad) bypass the OVM, and you will have to [adjust the principal inside the OVM](activate-a-dv.md#d-how-to-adjust-principal-inside-the-ovm) manually.
 
 ### Legacy Deposit Tools
 
@@ -5597,7 +5637,7 @@ The following steps guide you through how to request a withdrawal from your vali
 
 ## Step-by-Step Withdrawal Process
 
-1. On the cluster details page, go to the validators table. In the actions column, click on the withdraw icon. If the withdrawal address is an OVM, the connected address must have the `WITHDRAWAL_ROLE` to request a withdrawal. If the withdrawal address is an EOA, make sure you are connected with the correct EOA. **Read more about how to assign roles** [**here**](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md)**.**
+1. On the cluster details page, go to the validators table. (To reach the cluster details page, open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) and click your cluster, or go to `/cluster/details?lockHash=<lock hash>` on the Launchpad for your network.) In the actions column, click on the withdraw icon. If the withdrawal address is an OVM, the connected address must have the `WITHDRAWAL_ROLE` to request a withdrawal. If the withdrawal address is an EOA, make sure you are connected with the correct EOA. **Read more about how to assign roles** [**here**](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md)**.**
 
 ![Screenshot of the withdrawal button in the cluster validators table on the DV Launchpad.](/img/gitbook/OVMWithdrawalButton.png)
 
@@ -5822,7 +5862,7 @@ If you are using OVM, distribute the ETH that has been withdrawn from the valida
 
 ### 3. Claim
 
-Once the funds are distributed, go to the [Operator Dashboard](https://launchpad.obol.org/) to claim the rewards.
+Once the funds are distributed, go to the [Operator Dashboard](https://launchpad.obol.org/cluster/list) to claim the rewards.
 
 ---
 
@@ -5840,7 +5880,7 @@ The method for claiming rewards depends on the cluster's withdrawal configuratio
 | 1. Claim principal + rewards without splits - Exit and get rewards      | To claim principal or rewards without splits, users currently have to exit the validator. | ✅                          | Cluster details page in the Operator Dashboard. For example, [here](https://hoodi.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
 | 2. Splits only rewards using OWR - ETH                                  | For all clusters with ETH rewards. Requires two steps: (1) Distribute on cluster details page, (2) Claim on operator page. | ✅                          | Step 1: Cluster details page - Click **Distribute** button for each OWR. Step 2: Operator page - Claim your share. For example, [here](https://hoodi.launchpad.obol.org/cluster/details/?lockHash=0x42833298f3c767b866615814dd9f86ce35ed2f89bf3d397d5f353a0ad5a38013). |
 | 3. Split principal + rewards - ETH                                      | For clusters configured to split both principal and rewards.                              | ✅                          | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
-| 4. Splits non-ETH rewards using any withdrawal config - wstETH or weETH | For Lido and EtherFi clusters earning rewards in protocol-specific tokens.                | In Progress ➡️             | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
+| 4. Splits non-ETH rewards using any withdrawal config - wstETH          | For Lido clusters earning rewards in protocol-specific tokens.                            | In Progress ➡️             | Operators currently need to use the UI provided by Splits.org. For example, a [Lido Split](https://app.splits.org/accounts/0x845aF36663a9908D9E46101e3CC658FbCEB783a8/?chainId=1).                    |
 | 5. Lido CSM rewards - wstETH                                            | For all Lido CSM clusters earning wstETH rewards.                                         | In Progress ➡️             | Similar to row number 3, use the Splits UI. More details can be found at the bottom of [this page](../integrations/lido-csm.mdx).                                                  |
 
 ### Claim Flow {#claim-flow}
@@ -6325,7 +6365,7 @@ Post-Pectra fork, withdrawal addresses of validators can trigger an EL (Executio
 
 ### How to Trigger an EL Exit
 
-In the Launchpad, you can initiate an EL exit using the Exit validator button in the actions column of the validators table. To trigger an EL exit, you must meet one of the following conditions:
+In the Launchpad, you can initiate an EL exit from your cluster's **Cluster Details** page (open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) and click your cluster, or go to `/cluster/details?lockHash=<lock hash>` on the Launchpad for your network). Use the exit icon (tooltip **Exit validators**) in the actions column of the validators table. To trigger an EL exit, you must meet one of the following conditions:
 
 * **Connected with the withdrawal address:** If the withdrawal address is an EOA (Externally Owned Account), you must be connected with that EOA wallet.
 * **Have WITHDRAWAL\_ROLE:** If the withdrawal address of the validator is an OVM, you must have `WITHDRAWAL_ROLE` in that OVM. Read more about how to assign roles [here](../../advanced-and-troubleshooting/advanced/assign-ovm-roles.md).
@@ -6334,7 +6374,7 @@ In the Launchpad, you can initiate an EL exit using the Exit validator button in
 
 ### Step-by-Step Process
 
-1. **Initiate Exit:** Upon clicking the Exit validator button, you can multi-select the active validators you would like to exit. In the example below, there is only one active validator, so only one can be selected for the exit.
+1. **Initiate Exit:** Upon clicking the exit icon, the **Exit Validators** dialog opens and you can multi-select the active validators you would like to exit. In the example below, there is only one active validator, so only one can be selected for the exit.
 
 ![Screenshot of the multi-select validator exit interface on the DV Launchpad.](/img/gitbook/Screenshot-2026-02-11-at-16.59.40.png)
 
@@ -7804,6 +7844,10 @@ This guide assumes you are starting with a source cluster with four existing ope
 
 ### 3. Initiate the Consolidation
 
+:::warning
+The Launchpad migrate page described below is currently unavailable, and the **Migrate** button is not shown in the Launchpad. Until it returns, use [Method 1: Edit Command](#method-1-edit-command-replace-operator) to replace operators, or send the consolidation request from the withdrawal address with other tooling.
+:::
+
 - **Access the Migration Tool:** Navigate to the Obol Launchpad migration page by using a URL such as `https://hoodi.launchpad.obol.org/migrate/?withdrawalAddress=your_withdrawal_address`. Alternatively, click the **Migrate** button on a target validator's page within the target cluster dashboard. This **Migrate** button is only clickable for validators where the connected address is the withdrawal address. Make sure the correct address is connected.
 
 ![Launchpad migrate action](/img/gitbook/operator-rotation-migrate.png)
@@ -7992,7 +8036,7 @@ The Obol-SDK is in a beta state and should be used with caution. Ensure you vali
 This is a walkthrough of creating a distributed validator cluster pointing to an [EigenLayer](https://eigenlayer.xyz/) [EigenPod](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod-and-set-withdrawal-credentials/), using the [DV Launchpad](../../learn/intro/launchpad.md) and other applications.
 
 ### Pre-requisites {#pre-requisites}
-* The Ethereum addresses or ENS names for the node operators in the cluster. (Currently the DV Launchpad only supports Metamask or equivalent injected web3 browser wallets.)
+* The Ethereum addresses or ENS names for the node operators in the cluster. (The DV Launchpad supports injected browser wallets and WalletConnect.)
 * If creating more than one validator, the ability to use the [obol-sdk](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx) is required.
 
 ### Create a SAFE to own the EigenPod {#create-a-safe-to-own-the-eigenpod}
@@ -8013,7 +8057,7 @@ With these contracts deployed, you can now create the DV cluster invitation to s
 
 <Tabs>
 <TabItem value="dv-launchpad" label="DV Launchpad">
-* Use the "Create a cluster with a group" [flow](../start/create-a-dv-with-a-group.mdx) on the [DV Launchpad](../../learn/intro/launchpad.md).
+* Use the **+ New → Group** [flow](../start/create-a-dv-with-a-group.mdx) on the [DV Launchpad](../../learn/intro/launchpad.md).
 * Choose a cluster name and invite your operator's addresses.
 * When setting the withdrawal credentials, select "Custom".
 * For "Withdrawal Address", set the EigenPod contract address.
@@ -8145,9 +8189,7 @@ What you see in the console starting with `enr:-` is the **public key** for your
 
 Obol has integrated the CSM details into the DV Launchpad. Choosing the "Lido CSM" withdrawal configuration allows you to create validator keys with Lido's required withdrawal and fee recipient addresses.
 
-To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects their wallet and chooses **Create a cluster with a group**.
-
-![Screenshot: To start, the squad leader opens the DV Launchpad, then connects their wallet and chooses Create a cluster with a group.](/img/gitbook/image-36.png)
+To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), connects their wallet, clicks **+ New** in the navigation bar and chooses **Group**.
 
 Then click **Get Started**.
 
@@ -8936,7 +8978,7 @@ If the split contract is configured correctly with Obol’s share of validator r
 Process:
 
 1. Connect the **recipient wallet / Safe** that's entitled to the reward on the [DV Launchpad](https://launchpad.obol.org/).
-2. Click the "Dashboard" button.
+2. Open the [Operator Dashboard](https://launchpad.obol.org/cluster/list) (**Operator Dashboard** in the navigation panel).
 3. Claim any available Obol incentives.
 
 :::info
@@ -11406,7 +11448,7 @@ Once a deposit has been processed for a validator pubkey, its withdrawal credent
 On occasion it can be useful to be able to change the withdrawal address specified for an already created but unused distributed validator. For example if they are unneeded extra capacity, or if the withdrawal address to be used was not known at cluster creation time and a trusted placeholder address was used instead. The `charon deposit` commands allow you to sign alternative deposit messages for **inactive validators** with the help of the Obol [API](../../api/what-is-this-api.md).
 
 :::info
-If you want to change the withdrawal address of a running validator, consider a validator [consolidation](../../run-a-dv/editing/replace-operator.md#method-2-validator-consolidation) instead.
+If you want to change the withdrawal address of a running validator, consider a validator [consolidation](../../run-a-dv/editing/replace-operator.md#method-2-validator-consolidation) instead. Note that the Launchpad migrate page used in that guide is currently unavailable, so the consolidation request has to be sent from the withdrawal address with other tooling.
 :::
 
 ## Sign an alternative deposit message
@@ -11725,7 +11767,7 @@ URL: https://docs.obol.org/advanced-and-troubleshooting/advanced/assign-ovm-role
 
 # How to Assign Roles to Addresses in OVM
 
-This guide explains how to assign permissions within the Obol Vault Manager (OVM) smart contract using its bitwise role system and outlines key security recommendations.
+This guide explains how to assign permissions within the Obol Validator Manager (OVM) smart contract using its bitwise role system and outlines key security recommendations.
 
 ---
 
@@ -19569,9 +19611,9 @@ URL: https://docs.obol.org/api/what-is-this-api
 
 ### What is this API?
 
-This API is for creating and managing [Distributed Validators](https://docs.obol.tech/docs/int/key-concepts#distributed-validator). This API works in tandem with Obol's [Distributed Validator Launchpad](https://launchpad.obol.org), a dApp designed to allow people to authenticate their counterparties and agree to the terms of a Distributed Validator Cluster. This API can also be used via the [Obol-SDK](../sdk/index.md).
+This API is for creating and managing [Distributed Validators](../learn/intro/key-concepts.md#distributed-validator). This API works in tandem with Obol's [Distributed Validator Launchpad](https://launchpad.obol.org), a dApp designed to allow people to authenticate their counterparties and agree to the terms of a Distributed Validator Cluster. This API can also be used via the [Obol-SDK](../sdk/index.md).
 
-Read more about Obol and how to use the [launchpad](https://launchpad.obol.org) on our [docs site](https://docs.obol.tech/).
+Read more about Obol and [how to use the Launchpad](../learn/intro/launchpad.md) in these docs.
 
 For enquiries: DV Labs: [support@dvlabs.tech](mailto:support@obol.tech)
 

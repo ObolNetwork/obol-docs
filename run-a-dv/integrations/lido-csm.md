@@ -103,9 +103,7 @@ What you see in the console starting with `enr:-` is the **public key** for your
 
 Obol has integrated the CSM details into the DV Launchpad. Choosing the "Lido CSM" withdrawal configuration allows you to create validator keys with Lido's required withdrawal and fee recipient addresses.
 
-To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), then connects their wallet and chooses **Create a cluster with a group**.
-
-![Screenshot: To start, the squad leader opens the DV Launchpad, then connects their wallet and chooses Create a cluster with a group.](/img/gitbook/image-36.png)
+To start, the squad leader opens the [DV Launchpad](https://launchpad.obol.org), connects their wallet, clicks **+ New** in the navigation bar and chooses **Group**.
 
 Then click **Get Started**.
 
