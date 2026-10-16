@@ -18,14 +18,14 @@ This is a walkthrough of using the [Obol SDK](https://www.npmjs.com/package/@obo
 5. Deposited 32 ETH per validator to activate them.
 
 :::info
-This guide needs `@obolnetwork/obol-sdk` v2.15 or later. Earlier versions do not have `preflightCreate`, `preflightAccept`, `resumeFrom`, `hasAcceptedTerms`, `getAcceptanceSummary`, `waitFor`, `getDepositData`, `checkExistingDeposits`, the `beaconUrl` deposit check or the typed errors used below. The full API is in the [SDK reference](../../sdk/index.md).
+This guide needs `@obolnetwork/obol-sdk` v2.15 or later. Earlier versions do not have `hasAcceptedTerms`, `getDepositData`, deposit verification (with `kind: 'topUp'` for top-ups) or the typed errors used below. The full API is in the [SDK reference](../../sdk/index.md).
 :::
 
 ### Pre-requisites {#pre-requisites}
 * [Node.js](https://nodejs.org/en) 20 or later.
 * A private key for the cluster creator with Hoodi ETH: some for gas, plus 32 ETH per validator if the same key makes the deposits. Use a throwaway testnet key, never a key that holds mainnet funds.
 * The Ethereum addresses of the four node operators. Each operator needs a Charon ENR (see [Get your ENR](../../run-a-dv/start/create-a-dv-with-a-group.mdx#step-1-get-your-enr)) and their own key with a little Hoodi ETH if they accept the invite with the SDK.
-* Optional: a Hoodi execution RPC URL and beacon node URL. The examples fall back to the public `publicnode.com` endpoints.
+* Optional: a Hoodi execution RPC URL. The examples fall back to the public `publicnode.com` endpoint.
 
 ### Install the package {#install-the-package}
 Create a project and install the SDK, `ethers` and [`tsx`](https://tsx.is/) to run the TypeScript files directly:
@@ -50,19 +50,15 @@ yarn add --dev tsx typescript @types/node
 </TabItem>
 </Tabs>
 
-If you use [viem](https://viem.sh/) instead of ethers, also install `viem`. The SDK's viem adapter is an optional peer dependency.
-
 ### Instantiate the client {#instantiate-the-client}
 Every script below imports its client from a shared `client.ts`. The `Client` constructor takes:
 
 * A config object with the `chainId`: `560048` for Hoodi or `1` for Mainnet. Gnosis (`100`) and Sepolia (`11155111`) are accepted for cluster definitions and locks only, without splitter contracts. Other chain IDs throw `UnsupportedChainError`.
-* A signer, which is needed for anything that signs or sends a transaction. Any ethers v6 `Signer` works. For viem, wrap the `WalletClient` with `walletClientToSigner` from `@obolnetwork/obol-sdk/viem`.
+* A signer, which is needed for anything that signs or sends a transaction. Any ethers v6 `Signer` works.
 * Optionally, a provider for on-chain reads. It defaults to the signer's provider.
 
-Read-only calls such as `getClusterDefinition`, `getClusterLock` and `waitFor` work without a signer: `new Client({ chainId: 560048 })`.
+Read-only calls such as `getClusterDefinition`, `getClusterLock` and `getDepositData` work without a signer: `new Client({ chainId: 560048 })`.
 
-<Tabs>
-<TabItem value="ethers" label="ethers">
 ```ts title="client.ts"
 import { Client } from '@obolnetwork/obol-sdk';
 import { JsonRpcProvider, Wallet } from 'ethers';
@@ -85,48 +81,6 @@ export const signer = new Wallet(requireEnv('PRIVATE_KEY'), provider);
 
 export const client = new Client({ chainId: HOODI_CHAIN_ID }, signer);
 ```
-</TabItem>
-
-<TabItem value="viem" label="viem">
-```ts title="client.ts"
-import { Client } from '@obolnetwork/obol-sdk';
-import {
-  publicClientToProvider,
-  walletClientToSigner,
-} from '@obolnetwork/obol-sdk/viem';
-import { createPublicClient, createWalletClient, http } from 'viem';
-import { privateKeyToAccount } from 'viem/accounts';
-import { hoodi } from 'viem/chains';
-
-export const HOODI_CHAIN_ID = 560048;
-
-export function requireEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Set the ${name} environment variable`);
-  }
-  return value;
-}
-
-const transport = http(
-  process.env.RPC_HOODI ?? 'https://ethereum-hoodi-rpc.publicnode.com',
-);
-const account = privateKeyToAccount(requireEnv('PRIVATE_KEY') as `0x${string}`);
-
-const walletClient = createWalletClient({ account, chain: hoodi, transport });
-const publicClient = createPublicClient({ chain: hoodi, transport });
-
-export const signer = walletClientToSigner(walletClient);
-
-export const client = new Client(
-  { chainId: HOODI_CHAIN_ID },
-  signer,
-  publicClientToProvider(publicClient),
-);
-```
-In a browser app using wagmi, pass the connected wallet's `WalletClient` to `walletClientToSigner` instead of creating one from a private key.
-</TabItem>
-</Tabs>
 
 Before it sends a transaction or signs chain-bound data, the SDK checks that the signer's provider is on the client's chain and throws `ChainMismatchError` if it is not.
 
@@ -185,9 +139,7 @@ A cluster definition lists the operators' addresses and, for each validator, a w
 * `client.splits.createValidatorManagerAndRewardsSplit` deploys an [OVM](ovm-predeploy.mdx) as the withdrawal address and a split contract as the fee recipient. The principal goes to `principalRecipient` and rewards are split between `rewardSplitRecipients`. Their allocations must add up to 99%, because the SDK adds 1% for Obol's [Retroactive Funding](../../learn/intro/obol-collective.md). `OVMOwnerAddress` can request withdrawals and [assign OVM roles](assign-ovm-roles.md). Deploying sends transactions, so the creator pays the gas.
 * `client.splits.createValidatorManagerAndTotalSplit` also splits the principal, between `principalSplitRecipients`.
 
-`preflightCreate(payload)` runs the creation checks without signing anything and returns `{ ok, issues }`. It checks the payload schema, the operator addresses (format, checksum, duplicates, count), the threshold, the withdrawal and fee recipients, the signer's chain and whether the terms are accepted. Each issue has a `code`, `message`, `hint` and `severity`. Only `error` issues make `ok` false; `warning` and `info` issues are advisory.
-
-`createClusterDefinition` runs the same checks again, signs the payload and returns the definition's `config_hash`, which identifies the cluster from now on. The threshold is set to two thirds of the operators, rounded up. If a check fails, it throws `PreflightFailedError`, which lists the `issues`.
+`createClusterDefinition` validates the payload before signing anything: the operator addresses (format, duplicates, at least four), the withdrawal and fee recipients, and the signer's chain. A failed check throws `PayloadValidationError` or `ChainMismatchError`. It then signs the payload and returns the definition's `config_hash`, which identifies the cluster from now on. The threshold is set to two thirds of the operators, rounded up.
 
 ```ts title="create.ts"
 import type { ClusterPayload } from '@obolnetwork/obol-sdk';
@@ -247,25 +199,8 @@ async function main(): Promise<void> {
     })),
   };
 
-  // Read-only checks: payload, operator addresses, recipients, chain, terms.
-  const preflight = await client.preflightCreate(payload);
-  for (const issue of preflight.issues) {
-    console.log(
-      `[${issue.severity ?? 'error'}] ${issue.code}: ${issue.message} (${issue.hint})`,
-    );
-  }
-  if (!preflight.ok) {
-    console.log('Fix the errors above before creating the cluster.');
-    return;
-  }
-
-  // Set RESUME_FROM to the config hash of an earlier attempt to reuse it
-  // instead of creating a second cluster.
-  const resumeFrom = process.env.RESUME_FROM;
-  const configHash = await client.createClusterDefinition(
-    payload,
-    resumeFrom ? { resumeFrom } : {},
-  );
+  // Validates the payload, signs it and posts the definition to the Obol API.
+  const configHash = await client.createClusterDefinition(payload);
 
   console.log(`Config hash: ${configHash}`);
   console.log(
@@ -282,19 +217,7 @@ PRIVATE_KEY=0x... npx tsx create.ts
 
 Note the printed config hash, and the OVM address if you deployed one: you need it to deposit.
 
-#### If creation fails part-way {#if-creation-fails-part-way}
-Your own script may do more after `createClusterDefinition`. For example, the creator may also accept the definition as an operator. If one of those later steps fails, do not create the cluster again: that would make a second definition with a new config hash. Re-run with the earlier config hash instead (`RESUME_FROM=0x... npx tsx create.ts`). `create.ts` passes it as `resumeFrom`:
-
-```ts
-// excerpt from create.ts
-const resumeFrom = process.env.RESUME_FROM;
-const configHash = await client.createClusterDefinition(
-  payload,
-  resumeFrom ? { resumeFrom } : {},
-);
-```
-
-If that definition was created by this signer from the same payload, the SDK returns its `config_hash` and signs and sends nothing. Otherwise it throws `ResumeMismatchError`, which lists the fields that differ. Re-running is safe for the OVM step as well: an OVM and split that are already deployed are reused, not deployed again.
+If a later step of your own script fails after `createClusterDefinition` returned, do not create the cluster again: that makes a second definition with a new config hash. Continue with the config hash you already have. Re-running the OVM step is safe: an OVM and split that are already deployed are reused, not deployed again.
 
 ### Invite the Operators to complete the DKG {#invite-the-operators-to-complete-the-dkg}
 Share the config hash, or the invite link, with the four operators. Each operator accepts the definition with their own address and ENR, in either of two ways:
@@ -302,7 +225,7 @@ Share the config hash, or the invite link, with the four operators. Each operato
 * **DV Launchpad:** open `https://hoodi.launchpad.obol.org/dv?configHash=<CONFIG_HASH>` and follow the [run a DV with others](../../run-a-dv/start/create-a-dv-with-a-group.mdx) flow.
 * **SDK:** run the script below with their own `client.ts` and `PRIVATE_KEY`.
 
-`preflightAccept(configHash, { enr })` runs the acceptance checks without signing. It verifies the definition, the network, that the signer is an operator, the ENR (it must decode, and must not already be used) and the terms, and reports whether this operator has already accepted. `getAcceptanceSummary` then fetches the definition and verifies it locally: it recomputes the config hash and checks the network. It then returns the terms the operator is agreeing to. Show the operators and the withdrawal and fee recipient addresses to the operator before they accept, because the validators' principal and rewards go to those addresses. `acceptClusterDefinition` runs the same verification, checks that the signer is one of the operators (`NotAnOperatorError` otherwise), and signs the config hash and the ENR. Running it again with the same ENR does nothing.
+`getClusterDefinition` fetches the definition, so you can show the operators and the withdrawal and fee recipient addresses to the operator before they accept: the validators' principal and rewards go to those addresses. `acceptClusterDefinition` then verifies the definition locally (it recomputes the config hash and checks the network, throwing `DefinitionVerificationError` otherwise), checks that the signer is one of the operators (`NotAnOperatorError` otherwise), and signs the config hash and the ENR. Running it again with the same ENR does nothing.
 
 ```ts title="accept.ts"
 import { stdin, stdout } from 'node:process';
@@ -316,26 +239,18 @@ async function main(): Promise<void> {
 
   await client.acceptObolLatestTermsAndConditions({ ifNotAccepted: true });
 
-  // Read-only checks: definition, network, operator membership, ENR, terms.
-  const preflight = await client.preflightAccept(configHash, { enr });
-  for (const issue of preflight.issues) {
-    console.log(
-      `[${issue.severity ?? 'error'}] ${issue.code}: ${issue.message} (${issue.hint})`,
-    );
-  }
-  if (!preflight.ok) {
-    console.log('Fix the errors above before accepting.');
-    return;
-  }
-
-  // Fetches the definition and verifies its config hash and network locally.
-  const summary = await client.getAcceptanceSummary(configHash);
-  console.log(`Cluster: ${summary.name}`);
-  console.log(`Operators: ${summary.operators.join(', ')}`);
-  console.log(`Threshold: ${summary.threshold} of ${summary.operators.length}`);
-  console.log(`Validators: ${summary.num_validators}`);
-  console.log(`Withdrawal addresses: ${summary.withdrawal_addresses.join(', ')}`);
-  console.log(`Fee recipients: ${summary.fee_recipient_addresses.join(', ')}`);
+  const definition = await client.getClusterDefinition(configHash);
+  const unique = (values: string[]): string => [...new Set(values)].join(', ');
+  console.log(`Cluster: ${definition.name}`);
+  console.log(`Operators: ${definition.operators.map(o => o.address).join(', ')}`);
+  console.log(`Threshold: ${definition.threshold} of ${definition.operators.length}`);
+  console.log(`Validators: ${definition.num_validators}`);
+  console.log(
+    `Withdrawal addresses: ${unique(definition.validators.map(v => v.withdrawal_address))}`,
+  );
+  console.log(
+    `Fee recipients: ${unique(definition.validators.map(v => v.fee_recipient_address))}`,
+  );
 
   const rl = createInterface({ input: stdin, output: stdout });
   const answer = await rl.question('Accept this cluster definition? (yes/no) ');
@@ -345,7 +260,8 @@ async function main(): Promise<void> {
     return;
   }
 
-  // Signs the config hash and your ENR. Safe to re-run with the same ENR.
+  // Verifies the definition, then signs the config hash and your ENR. Safe to
+  // re-run with the same ENR.
   await client.acceptClusterDefinition({ enr }, configHash);
   console.log('Accepted. Wait for the other operators, then run the DKG.');
 }
@@ -368,37 +284,32 @@ docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 dkg \
 Operators who accepted on the Launchpad can copy the same command from its DKG step instead. After the DKG, each operator has a `cluster-lock.json` and their `validator_keys/` in `.charon`. Back these up and [start the cluster](../../run-a-dv/start/create-a-dv-with-a-group.mdx).
 
 ### Retrieve the created Distributed Validators using the SDK {#retrieve-the-created-distributed-validators-using-the-sdk}
-The creator, or anyone else, can follow the cluster's progress without a signer. `waitFor` polls the Obol API with backoff until the cluster reaches a step:
+The creator, or anyone else, can check the cluster's progress without a signer. Each operator that has accepted has a `config_signature` in the definition, and once the DKG has completed, `getClusterLock(configHash)` returns the published lock; until then it throws `NotFoundError`.
 
-* `definition_ready`: every operator has accepted, so the DKG can run.
-* `lock_published`: the DKG has completed and a cluster lock was published. It resolves with the `lockHash` and the `lock`.
-
-`onProgress` is called with every state, and `timeoutMs` makes it throw `ClusterProgressTimeoutError` instead of waiting forever. To handle each state yourself, iterate `client.watchCluster(configHash)` with `for await`.
-
-```ts title="wait.ts"
+```ts title="status.ts"
+import { NotFoundError } from '@obolnetwork/obol-sdk';
 import { client, requireEnv } from './client';
 import { reportError } from './errors';
 
 async function main(): Promise<void> {
   const configHash = requireEnv('CONFIG_HASH');
 
-  await client.waitFor(configHash, 'definition_ready', {
-    onProgress: progress => {
-      if (progress.step === 'awaiting_signatures') {
-        console.log(
-          `${progress.signed}/${progress.total} operators accepted; waiting for ${progress.pending.join(', ')}`,
-        );
-      }
-    },
-  });
-  console.log('Every operator has accepted. The operators can now run the DKG.');
+  const definition = await client.getClusterDefinition(configHash);
+  const accepted = definition.operators.filter(o => o.config_signature).length;
+  console.log(`${accepted}/${definition.operators.length} operators accepted`);
 
-  const { lockHash, lock } = await client.waitFor(configHash, 'lock_published', {
-    timeoutMs: 24 * 60 * 60 * 1000, // give up after a day
-  });
-  console.log(`Lock hash: ${lockHash}`);
-  for (const validator of lock.distributed_validators) {
-    console.log(`Validator: ${validator.distributed_public_key}`);
+  try {
+    const lock = await client.getClusterLock(configHash);
+    console.log(`Lock hash: ${lock.lock_hash}`);
+    for (const validator of lock.distributed_validators) {
+      console.log(`Validator: ${validator.distributed_public_key}`);
+    }
+  } catch (err) {
+    if (err instanceof NotFoundError) {
+      console.log('No lock yet: the DKG has not completed.');
+      return;
+    }
+    throw err;
   }
 }
 
@@ -406,17 +317,16 @@ main().catch(reportError);
 ```
 
 ```sh
-PRIVATE_KEY=0x... CONFIG_HASH=0x... npx tsx wait.ts
+PRIVATE_KEY=0x... CONFIG_HASH=0x... npx tsx status.ts
 ```
 
-You can also fetch a published lock at any time with `client.getClusterLock(configHash)` or `client.getClusterLockByHash(lockHash)`. To check a lock file without the API or Charon, use the standalone `validateClusterLock(lock)` export.
+You can also fetch a lock by its hash with `client.getClusterLockByHash(lockHash)`. To check a lock file without the API or Charon, use the standalone `validateClusterLock(lock)` export.
 
 ### Activate the DVs using the deposit contract {#activate-the-dvs-using-the-deposit-contract}
 To activate the validators, deposit 32 ETH for each one. Do not build deposit transactions by hand from the lock:
 
 * `getDepositData(lockHash)` fetches the lock and validates it first (operator signatures, lock hash, every deposit signature). It checks that the lock is for the client's chain and returns the deposits with amounts in wei. This can take up to a minute for locks with hundreds of validators. A lock can hold several deposit amounts per validator (for example 1 ETH and 32 ETH); passing `amount` picks one.
-* `checkExistingDeposits(deposits, { beaconUrl })` asks a beacon node about each validator. It returns `new`, `top_up` if the validator already exists, or `conflict` if a pending deposit uses different withdrawal credentials. The result is advisory: it cannot see deposits that are not on chain yet.
-* `client.eoa.deposit` sends the deposits in batches through the batch deposit contract. `client.splits.deposit` deposits through the cluster's OVM, and checks that the withdrawal credentials point at it. Both verify each deposit before sending ETH: deposit data root, BLS signature for the chain, and an amount between 1 and 32 ETH (up to 2048 ETH for compounding validators). With `beaconUrl` they also repeat the beacon node check and refuse conflicting deposits with `DepositConflictError`. Pass `expectedWithdrawalAddress` to `eoa.deposit` to check the withdrawal credentials as well.
+* `client.eoa.deposit` sends the deposits in batches through the batch deposit contract. `client.splits.deposit` deposits through the cluster's OVM, and checks that the withdrawal credentials point at it. Both verify each deposit before sending ETH: deposit data root, BLS signature for the chain, and an amount between 1 and 32 ETH (up to 2048 ETH for compounding validators). Pass `expectedWithdrawalAddress` to `eoa.deposit` to check the withdrawal credentials as well.
 
 ```ts title="deposit.ts"
 import { parseEther } from 'ethers';
@@ -427,8 +337,6 @@ async function main(): Promise<void> {
   const lockHash = requireEnv('LOCK_HASH');
   // Set OVM_ADDRESS if the cluster's withdrawal address is an OVM.
   const ovmAddress = process.env.OVM_ADDRESS;
-  const beaconUrl =
-    process.env.BEACON_URL ?? 'https://ethereum-hoodi-beacon-api.publicnode.com';
 
   // Validates the lock (signatures, lock hash, deposit signatures) and
   // returns one 32 ETH deposit per validator, amounts in wei.
@@ -439,20 +347,10 @@ async function main(): Promise<void> {
     throw new Error('The lock has no 32 ETH deposit data');
   }
 
-  // Ask a beacon node whether these validators already exist or have pending deposits.
-  const checks = await client.checkExistingDeposits(deposits, { beaconUrl });
-  for (const check of checks) {
-    console.log(`${check.pubkey}: ${check.status} (${check.message})`);
-  }
-  if (checks.some(check => check.status !== 'new')) {
-    console.log('Some validators already have deposits. Review them before depositing.');
-    return;
-  }
-
-  // Both methods re-run the beacon node check and verify every deposit before sending ETH.
+  // Both methods verify every deposit before sending ETH.
   const { txHashes } = ovmAddress
-    ? await client.splits.deposit({ ovmAddress, deposits, beaconUrl })
-    : await client.eoa.deposit({ deposits, beaconUrl });
+    ? await client.splits.deposit({ ovmAddress, deposits })
+    : await client.eoa.deposit({ deposits });
   console.log(`Deposit transactions: ${txHashes.join(', ')}`);
 }
 
@@ -465,7 +363,7 @@ PRIVATE_KEY=0x... LOCK_HASH=0x... OVM_ADDRESS=0x... npx tsx deposit.ts
 
 Leave out `OVM_ADDRESS` if you set `USE_OVM = false`.
 
-**Top-ups:** a deposit to a validator that already exists has no valid deposit signature for the SDK to check, and may use all-zero withdrawal credentials. Pass `beaconUrl` (preferred): the SDK asks the beacon node which deposits are top-ups and skips the signature check only for those. If you can't use a beacon node, pass `skipSignatureVerification: true` instead. Without either option, a deposit with an all-zero signature is refused with code `DEPOSIT_LOOKS_LIKE_TOP_UP`.
+**Top-ups:** a deposit to a validator that already exists has no valid deposit signature for the SDK to check, and may use all-zero withdrawal credentials. Pass `kind: 'topUp'` to assert that every deposit tops up an existing validator: the SDK then skips the signature check, accepts the expected or all-zero withdrawal credentials, and allows up to 2048 ETH per deposit. A top-up to a validator that does not exist yet is lost, so check the validators on a beacon node first. Without `kind: 'topUp'`, a deposit with an all-zero signature is refused with code `DEPOSIT_LOOKS_LIKE_TOP_UP`.
 
 This guide targets Hoodi. Gnosis and Sepolia remain usable for cluster definitions and locks, but splits and OVMs are not available on them. The depositing key needs 32 ETH per validator plus gas. Once the deposits are processed, the validators enter the activation queue. Follow their status on the cluster's page in the [DV Launchpad](../../learn/intro/launchpad.md) at `https://hoodi.launchpad.obol.org/cluster/details?lockHash=<LOCK_HASH>`, and see [Activate a DV](../../run-a-dv/running/activate-a-dv.md) for what happens next.
 
@@ -480,18 +378,14 @@ The SDK throws typed errors, so you can tell an API rejection from a failed loca
 | `ChainMismatchError` | `CHAIN_MISMATCH` | The signer's provider is on a different chain than the client. |
 | `DefinitionVerificationError` | `DEFINITION_VERIFICATION_FAILED` | The definition fetched from the API does not match its config hash or the client's network. Do not accept it. |
 | `NotAnOperatorError` | `NOT_AN_OPERATOR` | The signer is not one of the definition's operators. |
-| `DepositConflictError` | `DEPOSIT_CONFLICT` | A validator has a pending deposit with different withdrawal credentials. |
-| `ClusterProgressTimeoutError` | `CLUSTER_PROGRESS_TIMEOUT` | `waitFor` reached its `timeoutMs`. |
 | `TransactionSubmissionError` | `TX_FAILED_AFTER_SEND` | A deposit, withdrawal or claim failed after a transaction was broadcast. `txHashes` and `pendingTxHash` say what was sent. A `pendingStatus` of `reverted` means nothing moved and a retry is safe; `unconfirmed` means it may still be mined, so check it first. Pass `{ onSent }` to get each hash as soon as it is broadcast. |
-| `PreflightFailedError` | `PREFLIGHT_FAILED` | `createClusterDefinition` or `acceptClusterDefinition` failed a pre-flight check, for example because the terms are not accepted. See `issues`. |
-| `ResumeMismatchError` | `RESUME_MISMATCH` | The `resumeFrom` definition has another creator or does not match the payload. See `fields`. |
 | `PayloadValidationError` | `PAYLOAD_INVALID` | A payload failed schema validation, for example split allocations that do not add up or duplicate operator addresses. See `errors`. |
 | `InvalidArgumentError` | `INVALID_ARGUMENT` | A hash or address argument is malformed. |
-| `ObolSdkError` | `DEPOSIT_LOOKS_LIKE_TOP_UP` | A deposit has an all-zero signature, but neither `beaconUrl` nor `skipSignatureVerification` was given. |
+| `ObolSdkError` | `DEPOSIT_LOOKS_LIKE_TOP_UP` | A deposit has an all-zero signature, but `kind: 'topUp'` was not given. |
 
 Other errors: `RequestTimeoutError` when an API request takes longer than `timeoutMs` (30 seconds by default, set it in the `Client` config), `SignerRequiredError` when a write method is called on a client without a signer, and `UnsupportedChainError` for an unsupported `chainId`.
 
 ### Usage Examples {#usage-examples}
 * Working TypeScript and JavaScript examples are in [obol-sdk-examples](https://github.com/ObolNetwork/obol-sdk-examples).
 * Every method and type is listed in the [SDK reference](../../sdk/index.md).
-* To run on Mainnet, use `chainId: 1`, a Mainnet RPC and beacon node, and `https://launchpad.obol.org` in place of `https://hoodi.launchpad.obol.org`.
+* To run on Mainnet, use `chainId: 1`, a Mainnet RPC, and `https://launchpad.obol.org` in place of `https://hoodi.launchpad.obol.org`.
