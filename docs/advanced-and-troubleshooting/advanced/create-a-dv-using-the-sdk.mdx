@@ -473,7 +473,7 @@ This guide targets Hoodi. Gnosis and Sepolia remain usable for cluster definitio
 The SDK throws typed errors, so you can tell an API rejection from a failed local check. `reportError` in `errors.ts` above handles both:
 
 * **`ObolApiError`**: the Obol API returned an error. It carries `status`, `method`, `endpoint`, the response `body` and, where the SDK has one, a `hint`. The subclasses are `ValidationError` (400/422), `UnauthorizedError` (401/403), `NotFoundError` (404), `ConflictError` (409, for example a definition that already exists) and `RateLimitError` (429).
-* **`ObolSdkError`**: a check the SDK runs locally failed before anything was signed or sent. It carries a stable `code` and a `hint`:
+* **`ObolSdkError`**: a check the SDK runs locally failed, in all cases but `TransactionSubmissionError` before anything was signed or sent. It carries a stable `code` and a `hint`:
 
 | Error | `code` | When |
 |-------|--------|------|
@@ -482,6 +482,7 @@ The SDK throws typed errors, so you can tell an API rejection from a failed loca
 | `NotAnOperatorError` | `NOT_AN_OPERATOR` | The signer is not one of the definition's operators. |
 | `DepositConflictError` | `DEPOSIT_CONFLICT` | A validator has a pending deposit with different withdrawal credentials. |
 | `ClusterProgressTimeoutError` | `CLUSTER_PROGRESS_TIMEOUT` | `waitFor` reached its `timeoutMs`. |
+| `TransactionSubmissionError` | `TX_FAILED_AFTER_SEND` | A deposit, withdrawal or claim failed after a transaction was broadcast. `txHashes` and `pendingTxHash` say what was sent; check them before retrying. Pass `{ onSent }` to get each hash as soon as it is broadcast. |
 | `PreflightFailedError` | `PREFLIGHT_FAILED` | `createClusterDefinition` or `acceptClusterDefinition` failed a pre-flight check, for example because the terms are not accepted. See `issues`. |
 | `ResumeMismatchError` | `RESUME_MISMATCH` | The `resumeFrom` definition has another creator or does not match the payload. See `fields`. |
 | `PayloadValidationError` | `PAYLOAD_INVALID` | A payload failed schema validation, for example split allocations that do not add up or duplicate operator addresses. See `errors`. |
