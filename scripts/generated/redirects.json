@@ -436,10 +436,6 @@
     "to": "/run-a-dv/start/quickstart_overview"
   },
   {
-    "from": "/sdk",
-    "to": "/sdk/index"
-  },
-  {
     "from": "/sdk/classes/Client",
     "to": "/sdk/classes/client"
   },
