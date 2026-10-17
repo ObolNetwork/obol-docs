@@ -376,10 +376,6 @@
     "to": "/learn/readme/obol-vs-others"
   },
   {
-    "from": "/next/sdk",
-    "to": "/next/sdk/index"
-  },
-  {
     "from": "/run/integrations/Dappnode",
     "to": "/run-a-dv/integrations/dappnode"
   },
