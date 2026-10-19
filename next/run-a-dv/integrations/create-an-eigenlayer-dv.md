@@ -1,14 +1,10 @@
 # Create an EigenLayer DV
 
-:::warning
-The Obol-SDK is in a beta state and should be used with caution. Ensure you validate all important data.
-:::
-
 This is a walkthrough of creating a distributed validator cluster pointing to an [EigenLayer](https://eigenlayer.xyz/) [EigenPod](https://docs.eigenlayer.xyz/eigenlayer/restaking-guides/restaking-user-guide/native-restaking/create-eigenpod-and-set-withdrawal-credentials/), using the [DV Launchpad](../../learn/intro/launchpad.md) and other applications.
 
 ### Pre-requisites {#pre-requisites}
 * The Ethereum addresses or ENS names for the node operators in the cluster. (The DV Launchpad supports injected browser wallets and WalletConnect.)
-* If creating more than one validator, the ability to use the [obol-sdk](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx) is required.
+* Optional: the [Obol SDK](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx), if you want to create the cluster invite from code instead of the DV Launchpad.
 
 ### Create a SAFE to own the EigenPod {#create-a-safe-to-own-the-eigenpod}
 Deploy a [SAFE](https://app.safe.global/) with the addresses of the node operators as signers. A reasonable signing threshold is the same as a cluster (>2/3rds) but use good judgement if a different threshold or signer set suits your use case. The principal ether for these validators will be returned to this address.
@@ -37,10 +33,8 @@ With these contracts deployed, you can now create the DV cluster invitation to s
 </TabItem>
 
 <TabItem value="sdk" label="SDK">
-* If you are creating a cluster with more than one validator, you will need to craft the cluster invitation with the [SDK](https://www.npmjs.com/package/@obolnetwork/obol-sdk).
-* Follow the [Create a cluster using the SDK](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx) guide.
-* For `withdrawal_address`, set the EigenPod contract address.
-* For `fee_recipient_address`, set the Split contract address.
+* Follow the [Create a DV Using the SDK](../../advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.mdx) guide, without deploying an OVM.
+* In each validator passed to `createClusterDefinition`, set `withdrawal_address` to the EigenPod contract address and `fee_recipient_address` to the Split contract address.
 * Continue the process of creating the cluster as per the guide, share the invitation link with the operators and have them complete the Distributed Key Generation ceremony.
 </TabItem>
 </Tabs>

@@ -58,7 +58,7 @@ https://obol.org/llms.txt.
 - [Run a DV on a DappNode](https://docs.obol.org/next/run-a-dv/integrations/dappnode.md)
 - [Swapping Clients](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/client-swap.md): Swap EL, CL, VC and MEV clients in the stack.
 - [Migrate an Existing Validator](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/quickstart-split.md): Migrate an existing validator by splitting its private key into shares
-- [Create a DV Using the SDK](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.md)
+- [Create a DV Using the SDK](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/create-a-dv-using-the-sdk.md): Create, accept and activate a distributed validator cluster on Hoodi from TypeScript with the Obol SDK
 - [Pre-Create a DV with an OVM](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/ovm-predeploy.md): Assign pre-created validators to customers on demand
 - [Enable MEV](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/enable-mev.md)
 - [Change Fee Recipient](https://docs.obol.org/next/advanced-and-troubleshooting/advanced/change-fee-recipient.md): Change the fee recipient address for validators in a distributed validator cluster.
