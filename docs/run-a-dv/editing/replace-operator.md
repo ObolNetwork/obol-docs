@@ -8,12 +8,12 @@ slug: /run-a-dv/editing/replace-operator
 
 There are two methods for changing the operators in a distributed validator cluster:
 
-1. **Edit command** (`charon alpha edit replace-operator`) — Best for swapping a single operator in an existing cluster. This is an in-place, atomic operation that preserves all validators and cluster configuration.
+1. **Edit command** (`charon edit replace-operator`) — Best for swapping a single operator in an existing cluster. This is an in-place, atomic operation that preserves all validators and cluster configuration.
 2. **Validator consolidation** — Best when making majority operator changes or merging multiple clusters. This method creates a new target cluster and transfers stake from the source via Pectra consolidation.
 
 ## Method 1: Edit Command (Replace Operator)
 
-You can replace an operator in your cluster using the `charon alpha edit replace-operator` command. This operation keeps all validators intact while swapping one operator for another in the cluster.
+You can replace an operator in your cluster using the `charon edit replace-operator` command. This operation keeps all validators intact while swapping one operator for another in the cluster.
 
 ### Prerequisites
 
@@ -54,10 +54,10 @@ All continuing operators and the new operator must run this command. The old ope
 
 ```bash
 # Standard usage
-charon alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
+charon edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
 
 # Docker version
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK...
 ```
 
 #### For the New Operator
@@ -66,10 +66,10 @@ The new operator being added should run the same command but only needs to provi
 
 ```bash
 # Standard usage
-charon alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
+charon edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
 
 # Docker version
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit replace-operator --old-operator-enr=enr:-JG4QH... --new-operator-enr=enr:-JG4QK... --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
 ```
 
 #### For the Old Operator Being Replaced
