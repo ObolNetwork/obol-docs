@@ -31,7 +31,7 @@ Eligible submissions must concern software and services developed by Obol, speci
 - The **OBOL token** contract (`0x0B010000b7624eb9B3DfBC279673C76E9D29D5F7`) governing the Obol Collective.
 - Legacy **Obol Splits** contracts (OWR — Optimistic Withdrawal Recipient — and 0xSplits-based contracts deployed before the OVM). These remain in scope for live deployments but findings against deprecated code paths only are lower priority.
 - Obol-operated public relay infrastructure.
-- Charon's cluster lifecycle commands, including the DKG ceremony.
+- Charon's cluster lifecycle commands, including the DKG ceremony and the `charon edit` commands (add/remove/replace operators, add validators, recreate private keys).
 
 Submissions related to the following are considered out of scope:
 
@@ -43,7 +43,7 @@ Submissions related to the following are considered out of scope:
 - The [obol.org](https://obol.org) static website and Obol's internal corporate infrastructure.
 - The operational security of node operators running Obol software (operators are responsible for their own host security).
 - The Obol Stack and its in-cluster components (Hermes, OpenClaw, x402 facilitator, Cloudflared, eRPC, etc.). The Obol Stack is pre-release software and is currently out of scope. It will be added to the program when it reaches a stable, publicly supported release.
-- Experimental `charon alpha` commands (`charon alpha edit` and related subcommands). These are pre-release features and are not yet in scope for this bounty.
+- Experimental `charon alpha` commands (such as `charon alpha test`). These are pre-release features and are not yet in scope for this bounty.
 
 ## How we prioritize
 
