@@ -162,7 +162,7 @@ Changing `amountOfPrincipalStake` moves value between the principal recipient an
   /// Emitted when the beneficiary address is updated
   event BeneficiaryUpdated(address indexed newBeneficiary);
 
-  /// Emitted when the amount of principal stake is updated (by deposit() or setAmountOfPrincipalStake())
+  /// Emitted when the amount of principal stake is updated (by deposit(), setAmountOfPrincipalStake() or distributeFunds() when it pays out principal)
   event PrincipalStakeAmountUpdated(uint256 newPrincipalStakeAmount, uint256 oldPrincipalStakeAmount);
 ```
 
