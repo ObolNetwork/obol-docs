@@ -1,6 +1,6 @@
 # Recreating Private Keys
 
-You can recreate the private key shares for your cluster using the `charon edit recreate-private-keys` command. This operation creates new private key shares to replace the existing validator private keys while retaining the same operator identities and validator public keys.
+You can recreate the private key shares for your cluster using the `charon alpha edit recreate-private-keys` command. This operation creates new private key shares to replace the existing validator private keys while retaining the same operator identities and validator public keys.
 
 ## When to Use This Feature
 
@@ -40,11 +40,11 @@ All operators must run this command simultaneously. The ceremony will coordinate
 
 ```bash
 # If you prefer running a pre-built charon binary
-charon edit recreate-private-keys --output-dir=output
+charon alpha edit recreate-private-keys --output-dir=output
 
 # Or, if you prefer running it in Docker
 # (replace 'latest' with the most recent version if needed: https://hub.docker.com/r/obolnetwork/charon/tags)
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit recreate-private-keys --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit recreate-private-keys --output-dir=/opt/charon/output
 ```
 
 This command will:

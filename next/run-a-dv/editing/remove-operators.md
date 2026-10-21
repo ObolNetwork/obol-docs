@@ -1,6 +1,6 @@
 # Removing Operators
 
-You can remove operators from your cluster using the `charon edit remove-operators` command. This operation leaves all validators intact while removing specified operators from the cluster.
+You can remove operators from your cluster using the `charon alpha edit remove-operators` command. This operation leaves all validators intact while removing specified operators from the cluster.
 
 ## Prerequisites
 
@@ -38,10 +38,10 @@ If you're removing operators within the fault tolerance, all remaining operators
 
 ```bash
 # For remaining operators
-charon edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --output-dir=output
+charon alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --output-dir=output
 
 # Docker version
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --output-dir=/opt/charon/output
 ```
 
 ### Advanced Removal (Exceeding Fault Tolerance)
@@ -50,10 +50,10 @@ If you're removing more operators than the fault tolerance allows, you must spec
 
 ```bash
 # For participating operators (both remaining and being removed)
-charon edit remove-operators --operator-enrs-to-remove=enr:-JG4QH...,enr:-JG4QK... --participating-operator-enrs=enr:-JG4QL...,enr:-JG4QM...,enr:-JG4QN... --output-dir=output
+charon alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH...,enr:-JG4QK... --participating-operator-enrs=enr:-JG4QL...,enr:-JG4QM...,enr:-JG4QN... --output-dir=output
 
 # Docker version
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit remove-operators --operator-enrs-to-remove=enr:-JG4QH...,enr:-JG4QK... --participating-operator-enrs=enr:-JG4QL...,enr:-JG4QM...,enr:-JG4QN... --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH...,enr:-JG4QK... --participating-operator-enrs=enr:-JG4QL...,enr:-JG4QM...,enr:-JG4QN... --output-dir=/opt/charon/output
 ```
 
 :::info
@@ -69,7 +69,7 @@ Operators being removed have two options:
 
 ```bash
 # For removed operators who are participating in the ceremony
-charon edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --participating-operator-enrs=enr:-JG4QH...,enr:-JG4QK...,enr:-JG4QL... --private-key-file=.charon/charon-enr-private-key --lock-file=.charon/cluster-lock.json --validator-keys-dir=.charon/validator_keys --output-dir=output
+charon alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --participating-operator-enrs=enr:-JG4QH...,enr:-JG4QK...,enr:-JG4QL... --private-key-file=.charon/charon-enr-private-key --lock-file=.charon/cluster-lock.json --validator-keys-dir=.charon/validator_keys --output-dir=output
 ```
 
 ## Customizing the Threshold
@@ -77,7 +77,7 @@ charon edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --participa
 By default, the new threshold is calculated as `ceil(n * 2 / 3)`, where `n` is the new number of operators. You can override this with the `--new-threshold` flag:
 
 ```bash
-charon edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --new-threshold=3 --output-dir=output
+charon alpha edit remove-operators --operator-enrs-to-remove=enr:-JG4QH... --new-threshold=3 --output-dir=output
 ```
 
 :::danger

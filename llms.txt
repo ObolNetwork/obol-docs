@@ -45,11 +45,11 @@ https://obol.org/llms.txt.
 - [Monitoring Your Node](https://docs.obol.org/next/run-a-dv/running/monitoring.md): Add monitoring credentials to help the Obol Team monitor the health of your cluster
 - [Charon Metrics Reference](https://docs.obol.org/next/run-a-dv/running/metrics.md): Reference for the Prometheus metrics Charon exposes, including standard labels, key metrics to watch, and the full metrics table for dashboards and alerting.
 - [Exit a DV](https://docs.obol.org/next/run-a-dv/running/exit-a-dv.md)
-- [Adding Validators](https://docs.obol.org/next/run-a-dv/editing/add-validators.md): Add validators to your existing distributed validator cluster using the charon edit add-validators command.
-- [Adding Operators](https://docs.obol.org/next/run-a-dv/editing/add-operators.md): Add operators to your existing distributed validator cluster using the charon edit add-operators command.
-- [Removing Operators](https://docs.obol.org/next/run-a-dv/editing/remove-operators.md): Remove operators from your existing distributed validator cluster using the charon edit remove-operators command.
+- [Adding Validators](https://docs.obol.org/next/run-a-dv/editing/add-validators.md): Add validators to your existing distributed validator cluster using the charon alpha edit add-validators command.
+- [Adding Operators](https://docs.obol.org/next/run-a-dv/editing/add-operators.md): Add operators to your existing distributed validator cluster using the charon alpha edit add-operators command.
+- [Removing Operators](https://docs.obol.org/next/run-a-dv/editing/remove-operators.md): Remove operators from your existing distributed validator cluster using the charon alpha edit remove-operators command.
 - [Replacing Operators](https://docs.obol.org/next/run-a-dv/editing/replace-operator.md): Replace operators in your distributed validator cluster using the edit command or validator consolidation.
-- [Recreating Private Keys](https://docs.obol.org/next/run-a-dv/editing/recreate-private-keys.md): Create new private key shares for your existing distributed validator cluster using the charon edit recreate-private-keys command.
+- [Recreating Private Keys](https://docs.obol.org/next/run-a-dv/editing/recreate-private-keys.md): Create new private key shares for your existing distributed validator cluster using the charon alpha edit recreate-private-keys command.
 - [Create an EigenLayer DV](https://docs.obol.org/next/run-a-dv/integrations/create-an-eigenlayer-dv.md)
 - [Create a Lido CSM DV](https://docs.obol.org/next/run-a-dv/integrations/lido-csm.md): Setup and run a DV within the Lido Community Staking Module
 - [Create a Lido stVault](https://docs.obol.org/next/run-a-dv/integrations/lido-v3-stvault-integration-kit.md)
