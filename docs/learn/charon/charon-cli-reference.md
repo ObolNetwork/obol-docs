@@ -34,7 +34,6 @@ Available Commands:
   create       Create artifacts for a distributed validator cluster
   deposit      Sign and fetch a new partial deposit.
   dkg          Participate in a Distributed Key Generation ceremony
-  edit         Subcommands provide functionality to modify existing cluster configurations
   enr          Print the ENR that identifies this client
   exit         Exit a distributed validator.
   feerecipient Manage the preferred fee recipient addresses for the cluster.
@@ -762,222 +761,6 @@ Flags:
       --validator-public-keys strings   Optional comma-separated list of validator public keys to list builder registrations for.
 ```
 
-## The `edit` command
-
-The `charon edit` commands allow you to modify existing distributed validator cluster configurations.
-
-```markdown
-charon edit --help
-Subcommands allow users to modify existing distributed validator cluster configurations, such as adding, removing or replacing operators.
-
-Usage:
-  charon edit [command]
-
-Available Commands:
-  add-operators         Add new operators to an existing distributed validator cluster
-  add-validators        Add new validators to an existing distributed validator cluster
-  recreate-private-keys Create new private key shares to replace existing validator private key shares
-  remove-operators      Remove operators from an existing distributed validator cluster
-  replace-operator      Replace an operator in an existing distributed validator cluster
-
-Flags:
-  -h, --help   Help for edit
-
-Use "charon edit [command] --help" for more information about a command.
-```
-
-### Add validators to a cluster
-
-The `charon edit add-validators` command allows you to generate new validators and add them to an existing cluster. This process is very similar to the `charon dkg` ceremony, which requires all node operators to participate, because under the hood it runs the same DKG protocol with additional actions and verifications.
-
-```markdown
-charon edit add-validators --help
-Generates and appends new validator keys to an existing distributed validator cluster.
-
-Usage:
-  charon edit add-validators [flags]
-
-Flags:
-      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
-      --fee-recipient-addresses strings        Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
-  -h, --help                                   Help for add-validators
-      --keymanager-address string              The keymanager URL to import validator keyshares.
-      --keymanager-auth-token string           Authentication bearer token to interact with keymanager API. Don't include the "Bearer" symbol, only include the api-token.
-      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string                       Log color; auto, force, disable. (default "auto")
-      --log-format string                      Log format; console, logfmt or json (default "console")
-      --log-level string                       Log level; debug, info, warn or error (default "info")
-      --log-output-path string                 Path in which to write on-disk logs.
-      --no-verify                              Disables cluster definition and lock file verification.
-      --num-validators int                     The number of new validators to generate and add to the existing cluster. (default 1)
-      --output-dir string                      The destination folder for the new (combined) cluster data. Must be empty. (default "distributed_validator")
-      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
-      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish                                Publish the created cluster to a remote API.
-      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
-      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
-      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
-      --timeout duration                       Timeout for the command, should be increased if the command times out. (default 1m0s)
-      --unverified                             If charon has no access to the existing validator keys, this flag allows the addition to proceed, but skips hashing and signing the new cluster lock data. Requires the --keymanager-address flag to import the new validator key shares. charon run must be started with --no-verify flag.
-      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-      --withdrawal-addresses strings           Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
-```
-
-### Add operators to a cluster
-
-The `charon edit add-operators` command adds new operators to an existing distributed validator cluster while keeping all validator public keys unchanged. All existing operators and new operators must participate in this ceremony.
-
-```markdown
-charon edit add-operators --help
-Adds new operators to an existing distributed validator cluster, keeping validator public keys unchanged.
-
-Usage:
-  charon edit add-operators [flags]
-
-Flags:
-      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
-  -h, --help                                   Help for add-operators
-      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string                       Log color; auto, force, disable. (default "auto")
-      --log-format string                      Log format; console, logfmt or json (default "console")
-      --log-level string                       Log level; debug, info, warn or error (default "info")
-      --log-output-path string                 Path in which to write on-disk logs.
-      --new-operator-enrs strings              Comma-separated list of the new operators to be added (Charon ENR addresses).
-      --no-verify                              Disables cluster definition and lock file verification.
-      --output-dir string                      The destination folder for the new cluster data. Must be empty. (default "distributed_validator")
-      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
-      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish                                Publish the created cluster to a remote API.
-      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
-      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
-      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
-      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
-      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-```
-
-### Remove operators from a cluster
-
-The `charon edit remove-operators` command removes operators from an existing distributed validator cluster while leaving all validators intact. Remaining operators must participate in this ceremony.
-
-```markdown
-charon edit remove-operators --help
-Removes operators from an existing distributed validator cluster, leaving all validators intact.
-
-Usage:
-  charon edit remove-operators [flags]
-
-Flags:
-      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
-  -h, --help                                   Help for remove-operators
-      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string                       Log color; auto, force, disable. (default "auto")
-      --log-format string                      Log format; console, logfmt or json (default "console")
-      --log-level string                       Log level; debug, info, warn or error (default "info")
-      --log-output-path string                 Path in which to write on-disk logs.
-      --new-threshold int                      Optional override of the new threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security. All operators must use the same value.
-      --no-verify                              Disables cluster definition and lock file verification.
-      --operator-enrs-to-remove strings        Comma-separated list of operators to be removed (Charon ENR addresses).
-      --output-dir string                      The destination folder for the new cluster data. Must be empty. Optional for removed operators. (default "distributed_validator")
-      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
-      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --participating-operator-enrs strings    Comma-separated list of operator ENRs participating in the ceremony. Required if --operator-enrs-to-remove specifies more operators to remove than the fault tolerance of the current cluster.
-      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish                                Publish the created cluster to a remote API.
-      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
-      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
-      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
-      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
-      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-```
-
-### Replace an operator in a cluster
-
-The `charon edit replace-operator` command replaces an operator in an existing distributed validator cluster, keeping validator public keys unchanged.
-
-```markdown
-charon edit replace-operator --help
-Replaces an operator in an existing distributed validator cluster, keeping validator public keys unchanged.
-
-Usage:
-  charon edit replace-operator [flags]
-
-Flags:
-      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
-  -h, --help                                   Help for replace-operator
-      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string                       Log color; auto, force, disable. (default "auto")
-      --log-format string                      Log format; console, logfmt or json (default "console")
-      --log-level string                       Log level; debug, info, warn or error (default "info")
-      --log-output-path string                 Path in which to write on-disk logs.
-      --new-operator-enr string                The new operator to be added (Charon ENR address).
-      --no-verify                              Disables cluster definition and lock file verification.
-      --old-operator-enr string                The old operator to be replaced (Charon ENR address).
-      --output-dir string                      The destination folder for the new cluster data. Must be empty. (default "distributed_validator")
-      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
-      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish                                Publish the created cluster to a remote API.
-      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
-      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
-      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
-      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
-      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-```
-
-### Recreate private key shares
-
-The `charon edit recreate-private-keys` command creates new private key shares to replace the existing validator private keys while retaining the same operator identities and validator public keys. All operators must participate in this ceremony.
-
-```markdown
-charon edit recreate-private-keys --help
-Creates new private key shares to replace the existing validator private keys while retaining the same operator identities.
-
-Usage:
-  charon edit recreate-private-keys [flags]
-
-Flags:
-      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
-  -h, --help                                   Help for recreate-private-keys
-      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
-      --log-color string                       Log color; auto, force, disable. (default "auto")
-      --log-format string                      Log format; console, logfmt or json (default "console")
-      --log-level string                       Log level; debug, info, warn or error (default "info")
-      --log-output-path string                 Path in which to write on-disk logs.
-      --no-verify                              Disables cluster definition and lock file verification.
-      --output-dir string                      The destination folder for the new cluster artifacts. Must be empty. (default "distributed_validator")
-      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
-      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
-      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
-      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
-      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
-      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
-      --publish                                Publish the created cluster to a remote API.
-      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
-      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
-      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
-      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
-      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
-```
-
 ## Host a relay
 
 Relays run a libp2p [circuit relay](https://docs.libp2p.io/concepts/nat/circuit-relay/) server that allows Charon clusters to perform peer discovery and for Charon clients behind strict NAT gateways to be communicated with. If you want to self-host a relay for your cluster(s) the following command will start one.
@@ -1019,6 +802,222 @@ You can also consider adding [alternative public relays](../../advanced-and-trou
 ## Experimental commands
 
 These commands are subject to breaking changes until they are moved outside of the `alpha` subcommand in a future release.
+
+### Edit cluster configuration
+
+The `charon alpha edit` commands allow you to modify existing distributed validator cluster configurations.
+
+```markdown
+charon alpha edit --help
+Subcommands allow users to modify existing distributed validator cluster configurations, such as adding, removing or replacing operators.
+
+Usage:
+  charon alpha edit [command]
+
+Available Commands:
+  add-operators         Add new operators to an existing distributed validator cluster
+  add-validators        Add new validators to an existing distributed validator cluster
+  recreate-private-keys Create new private key shares to replace existing validator private key shares
+  remove-operators      Remove operators from an existing distributed validator cluster
+  replace-operator      Replace an operator in an existing distributed validator cluster
+
+Flags:
+  -h, --help   Help for edit
+
+Use "charon alpha edit [command] --help" for more information about a command.
+```
+
+#### Add validators to a cluster
+
+The `charon alpha edit add-validators` command allows you to generate new validators and add them to an existing cluster. This process is very similar to the `charon dkg` ceremony, which requires all node operators to participate, because under the hood it runs the same DKG protocol with additional actions and verifications.
+
+```markdown
+charon alpha edit add-validators --help
+Generates and appends new validator keys to an existing distributed validator cluster.
+
+Usage:
+  charon alpha edit add-validators [flags]
+
+Flags:
+      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
+      --fee-recipient-addresses strings        Comma separated list of Ethereum addresses of the fee recipient for each validator. Either provide a single fee recipient address or fee recipient addresses for each validator.
+  -h, --help                                   Help for add-validators
+      --keymanager-address string              The keymanager URL to import validator keyshares.
+      --keymanager-auth-token string           Authentication bearer token to interact with keymanager API. Don't include the "Bearer" symbol, only include the api-token.
+      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                       Log color; auto, force, disable. (default "auto")
+      --log-format string                      Log format; console, logfmt or json (default "console")
+      --log-level string                       Log level; debug, info, warn or error (default "info")
+      --log-output-path string                 Path in which to write on-disk logs.
+      --no-verify                              Disables cluster definition and lock file verification.
+      --num-validators int                     The number of new validators to generate and add to the existing cluster. (default 1)
+      --output-dir string                      The destination folder for the new (combined) cluster data. Must be empty. (default "distributed_validator")
+      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
+      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish                                Publish the created cluster to a remote API.
+      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
+      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
+      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
+      --timeout duration                       Timeout for the command, should be increased if the command times out. (default 1m0s)
+      --unverified                             If charon has no access to the existing validator keys, this flag allows the addition to proceed, but skips hashing and signing the new cluster lock data. Requires the --keymanager-address flag to import the new validator key shares. charon run must be started with --no-verify flag.
+      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+      --withdrawal-addresses strings           Comma separated list of Ethereum addresses to receive the returned stake and accrued rewards for each validator. Either provide a single withdrawal address or withdrawal addresses for each validator.
+```
+
+#### Add operators to a cluster
+
+The `charon alpha edit add-operators` command adds new operators to an existing distributed validator cluster while keeping all validator public keys unchanged. All existing operators and new operators must participate in this ceremony.
+
+```markdown
+charon alpha edit add-operators --help
+Adds new operators to an existing distributed validator cluster, keeping validator public keys unchanged.
+
+Usage:
+  charon alpha edit add-operators [flags]
+
+Flags:
+      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
+  -h, --help                                   Help for add-operators
+      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                       Log color; auto, force, disable. (default "auto")
+      --log-format string                      Log format; console, logfmt or json (default "console")
+      --log-level string                       Log level; debug, info, warn or error (default "info")
+      --log-output-path string                 Path in which to write on-disk logs.
+      --new-operator-enrs strings              Comma-separated list of the new operators to be added (Charon ENR addresses).
+      --no-verify                              Disables cluster definition and lock file verification.
+      --output-dir string                      The destination folder for the new cluster data. Must be empty. (default "distributed_validator")
+      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
+      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish                                Publish the created cluster to a remote API.
+      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
+      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
+      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
+      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
+      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+```
+
+#### Remove operators from a cluster
+
+The `charon alpha edit remove-operators` command removes operators from an existing distributed validator cluster while leaving all validators intact. Remaining operators must participate in this ceremony.
+
+```markdown
+charon alpha edit remove-operators --help
+Removes operators from an existing distributed validator cluster, leaving all validators intact.
+
+Usage:
+  charon alpha edit remove-operators [flags]
+
+Flags:
+      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
+  -h, --help                                   Help for remove-operators
+      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                       Log color; auto, force, disable. (default "auto")
+      --log-format string                      Log format; console, logfmt or json (default "console")
+      --log-level string                       Log level; debug, info, warn or error (default "info")
+      --log-output-path string                 Path in which to write on-disk logs.
+      --new-threshold int                      Optional override of the new threshold required for signature reconstruction. Defaults to ceil(n*2/3) if zero. Warning, non-default values decrease security. All operators must use the same value.
+      --no-verify                              Disables cluster definition and lock file verification.
+      --operator-enrs-to-remove strings        Comma-separated list of operators to be removed (Charon ENR addresses).
+      --output-dir string                      The destination folder for the new cluster data. Must be empty. Optional for removed operators. (default "distributed_validator")
+      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
+      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --participating-operator-enrs strings    Comma-separated list of operator ENRs participating in the ceremony. Required if --operator-enrs-to-remove specifies more operators to remove than the fault tolerance of the current cluster.
+      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish                                Publish the created cluster to a remote API.
+      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
+      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
+      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
+      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
+      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+```
+
+#### Replace an operator in a cluster
+
+The `charon alpha edit replace-operator` command replaces an operator in an existing distributed validator cluster, keeping validator public keys unchanged.
+
+```markdown
+charon alpha edit replace-operator --help
+Replaces an operator in an existing distributed validator cluster, keeping validator public keys unchanged.
+
+Usage:
+  charon alpha edit replace-operator [flags]
+
+Flags:
+      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
+  -h, --help                                   Help for replace-operator
+      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                       Log color; auto, force, disable. (default "auto")
+      --log-format string                      Log format; console, logfmt or json (default "console")
+      --log-level string                       Log level; debug, info, warn or error (default "info")
+      --log-output-path string                 Path in which to write on-disk logs.
+      --new-operator-enr string                The new operator to be added (Charon ENR address).
+      --no-verify                              Disables cluster definition and lock file verification.
+      --old-operator-enr string                The old operator to be replaced (Charon ENR address).
+      --output-dir string                      The destination folder for the new cluster data. Must be empty. (default "distributed_validator")
+      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
+      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish                                Publish the created cluster to a remote API.
+      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
+      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
+      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
+      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
+      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+```
+
+#### Recreate private key shares
+
+The `charon alpha edit recreate-private-keys` command creates new private key shares to replace the existing validator private keys while retaining the same operator identities and validator public keys. All operators must participate in this ceremony.
+
+```markdown
+charon alpha edit recreate-private-keys --help
+Creates new private key shares to replace the existing validator private keys while retaining the same operator identities.
+
+Usage:
+  charon alpha edit recreate-private-keys [flags]
+
+Flags:
+      --execution-client-rpc-endpoint string   Optional address of an execution engine JSON-RPC API. Used to validate smart contract signatures for Node Operators in the cluster.
+  -h, --help                                   Help for recreate-private-keys
+      --lock-file string                       The path to the cluster lock file defining the distributed validator cluster. (default ".charon/cluster-lock.json")
+      --log-color string                       Log color; auto, force, disable. (default "auto")
+      --log-format string                      Log format; console, logfmt or json (default "console")
+      --log-level string                       Log level; debug, info, warn or error (default "info")
+      --log-output-path string                 Path in which to write on-disk logs.
+      --no-verify                              Disables cluster definition and lock file verification.
+      --output-dir string                      The destination folder for the new cluster artifacts. Must be empty. (default "distributed_validator")
+      --p2p-disable-reuseport                  Disables TCP port reuse for outgoing libp2p connections.
+      --p2p-external-hostname string           The DNS hostname advertised by libp2p. This may be used to advertise an external DNS.
+      --p2p-external-ip string                 The IP address advertised by libp2p. This may be used to advertise an external IP.
+      --p2p-relays strings                     Comma-separated list of libp2p relay URLs or multiaddrs. (default [https://4.relay.obol.dev])
+      --p2p-tcp-address strings                Comma-separated list of listening TCP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --p2p-udp-address strings                Comma-separated list of listening UDP addresses (ip and port) for libP2P traffic. Empty default doesn't bind to local port therefore only supports outgoing connections.
+      --private-key-file string                The path to the charon enr private key file.  (default ".charon/charon-enr-private-key")
+      --publish                                Publish the created cluster to a remote API.
+      --publish-address string                 The URL to publish the cluster to. (default "https://api.obol.tech/v1")
+      --publish-timeout duration               Timeout for publishing a cluster, consider increasing if the cluster contains more than 200 validators. (default 1m0s)
+      --shutdown-delay duration                Graceful shutdown delay. (default 5s)
+      --timeout duration                       Timeout for the protocol, should be increased if protocol times out. (default 1m0s)
+      --validator-keys-dir string              Path to the directory containing the validator private key share files and passwords. (default ".charon/validator_keys")
+```
 
 ### Test your candidate distributed validator cluster
 

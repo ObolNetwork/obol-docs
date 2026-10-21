@@ -1,12 +1,12 @@
 ---
-description: "Add operators to your existing distributed validator cluster using the charon edit add-operators command."
+description: "Add operators to your existing distributed validator cluster using the charon alpha edit add-operators command."
 sidebar_label: "Adding Operators"
 slug: /run-a-dv/editing/add-operators
 ---
 
 # Adding Operators
 
-You can add operators to your cluster using the `charon edit add-operators` command. This operation keeps all distributed validator public keys unchanged while adding new operators to the cluster.
+You can add operators to your cluster using the `charon alpha edit add-operators` command. This operation keeps all distributed validator public keys unchanged while adding new operators to the cluster.
 
 ## Prerequisites
 
@@ -35,11 +35,11 @@ The examples below demonstrate adding new operators to an existing cluster. All 
 
 ```bash
 # If you prefer running a pre-built charon binary
-charon edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=output
+charon alpha edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=output
 
 # Or, if you prefer running it in Docker
 # (replace 'latest' with the most recent version if needed: https://hub.docker.com/r/obolnetwork/charon/tags)
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.11.0 alpha edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=/opt/charon/output
 ```
 
 ### For New Operators
@@ -48,10 +48,10 @@ New operators being added should run the same command but only need to provide t
 
 ```bash
 # If you prefer running a pre-built charon binary
-charon edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=output --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
+charon alpha edit add-operators --new-operator-enrs=enr:-JG4QH... --output-dir=output --lock-file=cluster-lock.json --private-key-file=charon-enr-private-key
 
 # Or, if you prefer running it in Docker
-docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.12.0 edit add-operators --new-operator-enrs=enr:-JG4QH... --private-key-file=/opt/charon/charon-enr-private-key --lock-file=/opt/charon/cluster-lock.json --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v1.11.0 alpha edit add-operators --new-operator-enrs=enr:-JG4QH... --private-key-file=/opt/charon/charon-enr-private-key --lock-file=/opt/charon/cluster-lock.json --output-dir=/opt/charon/output
 ```
 
 :::info
