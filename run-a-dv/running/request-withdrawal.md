@@ -101,7 +101,7 @@ The decision is based on a comparison between the **Projected OVM Balance** and 
 
 Where:
 
-* **B\_ovm:** Current OVM Balance (ETH already in the contract).
+* **B\_ovm:** Current OVM Balance (ETH already in the contract, minus any amount already allocated to pull withdrawals, `fundsPendingWithdrawal`).
 * **W\_pending:** Pending Withdrawals (ETH from previous successful transactions that are known to be en route to the OVM).
 * **W\_current:** Currently Withdrawing amount (the value the user is inputting).
 * **Tp:** Principal Threshold (a fixed ETH value).

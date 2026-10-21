@@ -74,7 +74,7 @@ The security of the cluster relies entirely on the assignment and control of the
 - **Cluster Creation Timing:** It is recommended to **grant final roles before sharing cluster invites** with external invitees. This ensures the security model is locked down before the cluster scales.
 - **Renounce Ownership (Conditional):** If the cluster's roles are intended to be fixed forever (e.g., in a fully immutable system), you can **renounce ownership** after setting the final roles. However, if any role needs to be modifiable later (like changing the fee recipient), the owner must retain the ability to execute `grantRoles`.
 
-![Screenshot of the DV Launchpad showing the OVM ownership and role-renouncement options.](/img/gitbook/AssignOVMRoles4.png)
+![Screenshot of the renounceOwnership method on the OVM's Etherscan Write Contract tab.](/img/gitbook/AssignOVMRoles4.png)
 
 ## 5. Miscellaneous: How does Bitwise Logic Work?
 
