@@ -35,7 +35,7 @@ charon edit add-validators --num-validators 10 --withdrawal-addresses=0x<your_wi
 
 # Or, if you prefer running it in Docker
 # (replace 'latest' with the most recent version if needed: https://hub.docker.com/r/obolnetwork/charon/tags)
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit add-validators --num-validators 10 --withdrawal-addresses=0x<your_withdrawal_address> --fee-recipient-addresses=0x<your_fee_recipient_address> --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v2.0.0 edit add-validators --num-validators 10 --withdrawal-addresses=0x<your_withdrawal_address> --fee-recipient-addresses=0x<your_fee_recipient_address> --output-dir=/opt/charon/output
 ```
 
 This command will create a new cluster configuration that includes both existing and new validators. It will also generate the necessary keys for the new validators and deposit data files. The new configuration will be saved in the `output` directory.

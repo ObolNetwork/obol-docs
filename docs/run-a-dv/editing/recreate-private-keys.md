@@ -50,7 +50,7 @@ charon edit recreate-private-keys --output-dir=output
 
 # Or, if you prefer running it in Docker
 # (replace 'latest' with the most recent version if needed: https://hub.docker.com/r/obolnetwork/charon/tags)
-docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v1.12.0 edit recreate-private-keys --output-dir=/opt/charon/output
+docker run --rm -v "$(pwd):/opt/charon" -w "/opt/charon" obolnetwork/charon:v2.0.0 edit recreate-private-keys --output-dir=/opt/charon/output
 ```
 
 This command will:
