@@ -29,6 +29,8 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 :::info
 `validator-public-keys` are the distributed validator public keys for which the alternative deposit data should be signed (find them in your cluster_lock.json file in the `distributed_validator_public_keys` mapping or on the DV Launchpad). `withdrawal-addresses` are the new withdrawal address(es) for which the new deposit data should be signed. There should either be the same amount as `validator-public-keys` specified, or a single address that will be used for all public keys specified. 
 
+Each address is converted to `0x01` withdrawal credentials, or `0x02` if the cluster was created with compounding enabled. Mixed-case addresses must match their [EIP-55](https://eips.ethereum.org/EIPS/eip-55) checksum; all-lowercase or all-uppercase addresses are also accepted. Full 32-byte withdrawal credentials (`0x01` or `0x02` followed by 11 zero bytes and the address) are accepted too, as long as the prefix matches the cluster's compounding setting.
+
 Optionally, users can also specify multiple different `deposit-amounts` (defaults to only `32`) to be prepared.
 :::
 
