@@ -16,7 +16,7 @@ Changing the signed deposit data post- cluster creation and pre- validator activ
 First a partial deposit data signature from the current Charon node should be signed and broadcasted to Obol API.
 
 `validator-public-keys` are the validator public keys for which the new deposit data should be signed.
-`withdrawal-addresses` are the new addresses for which the new deposit data should be signed. They should either be the same amount as `validator-public-keys` or a single one, that will be used for all keys.
+`withdrawal-addresses` are the new addresses for which the new deposit data should be signed. They should either be the same amount as `validator-public-keys` or a single one, that will be used for all keys. Addresses are converted to `0x01` withdrawal credentials (`0x02` for compounding clusters); mixed-case addresses must match their EIP-55 checksum. Full 32-byte withdrawal credentials are also accepted.
 Optionally, users can also specify different multiple `deposit-amounts` (defaults to only `32`).
 
 **Single public key**
@@ -24,7 +24,7 @@ Optionally, users can also specify different multiple `deposit-amounts` (default
 ```sh
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
-  --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b"
+  --withdrawal-addresses="0x0d941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
 
 **Multiple public keys, multiple withdrawal addresses**
@@ -32,7 +32,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 ```sh
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
-  --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b,0x0100000000000000000000000e941218c10b055f0907fe1bbe486ccdaa7e332b"
+  --withdrawal-addresses="0x0d941218c10b055f0907fe1bbe486ccdaa7e332b,0x0e941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
 
 **Multiple public keys, single withdrawal address**
@@ -40,7 +40,7 @@ docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon
 ```sh
 docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 deposit sign \
   --validator-public-keys="0xb9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da,0xc9171b84a09da7ff983a36e1c6e873e1537e97ad31aa868185d62c68e255baad8c1cfb83f508460ed96572d2a8e9e9da" \
-  --withdrawal-addresses="0x0100000000000000000000000d941218c10b055f0907fe1bbe486ccdaa7e332b"
+  --withdrawal-addresses="0x0d941218c10b055f0907fe1bbe486ccdaa7e332b"
 ```
 
 ## Fetch full deposit data
