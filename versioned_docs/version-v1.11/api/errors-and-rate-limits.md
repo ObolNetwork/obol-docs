@@ -58,4 +58,4 @@ This lets Obol tell your traffic apart from anonymous scrapers and reach you if 
 
 ## Pagination {#pagination}
 
-Endpoints that take `page` and `limit` query parameters return at most 100 items per page. A `limit` outside the range 1 to 100 is clamped to that range.
+Most endpoints that take `page` and `limit` query parameters return at most 100 items per page, and treat a `limit` outside the range 1 to 100 as the nearest end of that range. A few endpoints check `limit` strictly instead: they reject a value that isn't a positive whole number, or is above 1000, with `400 Bad Request`. Some of these, such as the detailed TVS endpoint, return up to 1000 items per page.
