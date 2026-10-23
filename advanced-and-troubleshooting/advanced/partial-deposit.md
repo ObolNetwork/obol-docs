@@ -13,6 +13,10 @@ First a partial deposit data signature from the current Charon node should be si
 `withdrawal-addresses` are the new addresses for which the new deposit data should be signed. They should either be the same amount as `validator-public-keys` or a single one, that will be used for all keys.
 Optionally, users can also specify different multiple `deposit-amounts` (defaults to only `32`).
 
+:::warning
+In charon v1.11 and earlier, `--withdrawal-addresses` takes the full 32-byte withdrawal credentials, not a bare address. Prefix the address with `0x01` and 11 zero bytes (`0x010000000000000000000000` followed by the 40 hex characters of the address), or `0x02…` for a cluster created with compounding enabled. Passing a bare 20-byte address produces deposit data that cannot be used.
+:::
+
 **Single public key**
 
 ```sh
