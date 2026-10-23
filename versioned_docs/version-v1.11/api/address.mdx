@@ -11,7 +11,11 @@ import ApiEndpoint from '@site/src/components/ApiEndpoint';
 
 <ApiEndpoint method="get" path="/v1/address/badges/{address}" summary="Retrieve badges for an address" href="/api/#tag/Address/operation/AddressController_getAddressBadgess_v1" />
 
-<ApiEndpoint method="get" path="/v1/address/incentives/{address}" href="/api/" />
+<ApiEndpoint method="get" path="/v1/address/incentives/{network}/{address}" summary="Retrieve obol incentives of an address" href="/api/#tag/Address/operation/AddressController_getAddressIncentives_v1" />
+
+<ApiEndpoint method="get" path="/v1/address/incentives/historical/{network}/{address}" summary="Retrieve the historical incentives of an address" href="/api/#tag/Address/operation/AddressController_getHistoricalAddressContributions_v1" />
+
+The historical incentives endpoint takes an optional `date` query parameter. Without it, the API returns the incentives for the current day (UTC).
 
 <ApiEndpoint method="get" path="/v1/address/network/{network}" summary="Retrieve operators on a given network" href="/api/#tag/Address/operation/AddressController_getOperatorsByNetwork_v1" />
 

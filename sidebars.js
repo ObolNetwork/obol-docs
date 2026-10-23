@@ -1040,6 +1040,11 @@ const sidebars = {
     },
     {
       "type": "doc",
+      "id": "api/errors-and-rate-limits",
+      "label": "Errors & Rate Limits"
+    },
+    {
+      "type": "doc",
       "id": "api/system",
       "label": "System"
     },

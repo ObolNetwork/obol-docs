@@ -285,6 +285,10 @@ network connection problems.
 partial signatures failed. This indicates inconsistent signed data. This indicates
 a bug in Charon as it is unexpected.
 
+### `cluster lock not published to Obol API` or `cluster lock is not found`
+
+`charon exit sign` (or `lido-dv-exit`, which logs `Cluster lock not published to Obol API, partial exits cannot be stored until it is`) could not store a partial exit because the cluster lock hasn't been published to the Obol API. No partial exits are stored until it is. Publish the lock by POSTing `cluster-lock.json` to the API, then run `charon exit sign` again (`lido-dv-exit` retries on its own); see [Publish the cluster lock first](../../run-a-dv/running/exit-a-dv.mdx#publish-the-cluster-lock).
+
 ### `Existing private key lock file found, another charon instance may be running on your machine`
 
 When you turn on the `--private-key-file-lock` option in Charon, it
