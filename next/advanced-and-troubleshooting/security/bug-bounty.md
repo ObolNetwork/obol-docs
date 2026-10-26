@@ -63,7 +63,7 @@ In practice, this means:
 
 Rewards are issued based on the severity and impact of the disclosed vulnerability, determined at the discretion of Obol Labs. Reward ceilings are guidelines; the exact payout reflects exploitability, blast radius, and the quality of the report.
 
-### Critical Vulnerabilities: Up to $50,000
+### Critical Vulnerabilities: Up to $25,000
 
 A Critical finding gives an **external attacker** a path to large-scale loss of delegator funds or systemic harm across many clusters. High impact, high likelihood.
 
@@ -77,7 +77,7 @@ Eligible impacts:
 - Remote code execution in Charon, exploitable from a peer or relay connection, without prior compromise of the host.
 - A vulnerability in the OBOL token contract that allows unauthorized minting, burning, or transfer of tokens at scale.
 
-### High Vulnerabilities: Up to $5,000
+### High Vulnerabilities: Up to $2,500
 
 A High finding lets an **external attacker** take down a cluster's liveness, exfiltrate operator key material, or compromise infrastructure that many clusters share. High impact, medium likelihood; or medium impact, high likelihood.
 
@@ -94,7 +94,7 @@ Eligible impacts:
 - A vulnerability in the OVM role assignment (bitwise permission system) that allows escalation to a higher-privileged role without the owner's consent, without enabling immediate fund theft.
 
 
-### Medium Vulnerabilities: Up to $1,000
+### Medium Vulnerabilities: Up to $500
 
 A Medium finding requires either an **insider** (a malicious cluster member) or a constrained external position to cause cluster-level damage. These are real, but the BFT and slashing economics of a DV mean the attacker is usually harming themselves alongside their victims. High impact, low likelihood; medium impact, medium likelihood; low impact, high likelihood.
 
@@ -110,7 +110,7 @@ Eligible impacts:
 - An open-redirect or similar phishing aid on Obol-operated domains.
 - Manipulation of OBOL token governance (e.g. vote inflation, delegation hijacking) that does not directly steal tokens.
 
-### Low Vulnerabilities: Up to $250
+### Low Vulnerabilities: Up to $125
 
 Low-severity findings have minimal impact on the integrity of a DV cluster or the security of Obol's smart contracts. Low impact, medium likelihood; medium impact, low likelihood.
 
