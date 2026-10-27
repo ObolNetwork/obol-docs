@@ -19,18 +19,10 @@ Posting partial exits for a lock that isn't published returns `404` with the mes
 * The exit status endpoint is paginated with `page` and `limit`; `limit` is clamped to 1–100.
 * See [Errors & Rate Limits](errors-and-rate-limits.md) for the error format and how to handle `429` responses.
 
-<ApiEndpoint method="get" path="/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExit[0]" />
+<ApiEndpoint method="get" path="/v1/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api#tag/DV-Exit/operation/ExitController_getClusterExit[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExit[1]_v1" />
+<ApiEndpoint method="get" path="/v1/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api#tag/DV-Exit/operation/ExitController_getClusterExitStatus[1]_v1" />
 
-<ApiEndpoint method="get" path="/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatus[0]" />
+<ApiEndpoint method="get" path="/v1/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatus[1]_v1" />
-
-<ApiEndpoint method="get" path="/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[0]" />
-
-<ApiEndpoint method="get" path="/v1/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[1]_v1" />
-
-<ApiEndpoint method="post" path="/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api/#tag/DV-Exit/operation/ExitController_postPartialExit[0]" />
-
-<ApiEndpoint method="post" path="/v1/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api/#tag/DV-Exit/operation/ExitController_postPartialExit[1]_v1" />
+<ApiEndpoint method="post" path="/v1/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api#tag/DV-Exit/operation/ExitController_postPartialExit[1]_v1" />

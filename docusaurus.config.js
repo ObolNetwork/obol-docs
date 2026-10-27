@@ -205,7 +205,7 @@ const config = {
             // never depend on the live API. Refresh with:
             //   node scripts/update-api-spec.mjs
             spec: 'static/openapi/obol-api.json',
-            route: '/api/',
+            route: '/api',
             layout: {
               title: 'Obol API Reference',
               description:
@@ -275,7 +275,7 @@ const config = {
             label: 'SDK',
           },
           {
-            to: '/api/',
+            to: '/api',
             position: 'left',
             label: 'API',
           },
@@ -326,7 +326,7 @@ const config = {
           {
             title: 'Build',
             items: [
-              {label: 'API Reference', to: '/api/'},
+              {label: 'API Reference', to: '/api'},
               {label: 'SDK', to: '/sdk/index'},
               {label: 'Charon CLI', to: '/learn/charon/charon-cli-reference'},
               {label: 'GitHub', href: 'https://github.com/ObolNetwork'},
