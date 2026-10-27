@@ -1050,11 +1050,6 @@ const sidebars = {
     },
     {
       "type": "doc",
-      "id": "api/metrics",
-      "label": "Metrics"
-    },
-    {
-      "type": "doc",
       "id": "api/cluster-definition",
       "label": "Cluster Definition"
     },
@@ -1087,6 +1082,16 @@ const sidebars = {
       "type": "doc",
       "id": "api/deposit-data",
       "label": "Deposit Data"
+    },
+    {
+      "type": "doc",
+      "id": "api/ovm",
+      "label": "OVM"
+    },
+    {
+      "type": "doc",
+      "id": "api/validators",
+      "label": "Validators"
     },
     {
       "type": "doc",

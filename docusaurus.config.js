@@ -27,6 +27,8 @@ const sectionRedirects = [
   ['/run-a-dv/start', '/run-a-dv/start/quickstart_overview'],
   ['/advanced-and-troubleshooting/security', '/advanced-and-troubleshooting/security/overview'],
   ['/walkthrough-guides/walkthroughs', '/walkthrough-guides/walkthroughs/walkthrough-guides'],
+  // /metrics is scraped in-cluster only and no longer in the public API spec.
+  ['/api/metrics', '/api/system'],
 ].flatMap(([from, to]) => [
   {from, to},
   {from: `/next${from}`, to: `/next${to}`},
