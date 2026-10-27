@@ -41,7 +41,7 @@ Alongside those, each node (henceforth ‘operator’) holds an SECP256K1 identi
 
 Exfiltration of said private key could lead to possible impersonation from an outside attacker, possibly leading to intra-cluster peering issues, eclipse attack risks, and degraded validator performance.
 
-Charon client communication is handled via BFT consensus, which is able to tolerate a given number of misbehaving nodes up to a certain threshold: once this threshold is reached, the cluster is not able to continue with its lifecycle and loses liveness guarantees (the validator goes offline). If more than two-thirds of nodes in a cluster are malicious, a cluster also loses safety guarantees (enough bad actors could collude to come to consensus on something slashable).
+Charon client communication is handled via BFT consensus, which is able to tolerate a given number of misbehaving nodes up to a certain threshold: once this threshold is reached, the cluster is not able to continue with its lifecycle and loses liveness guarantees (the validator goes offline). If a threshold of nodes (⌈2n/3⌉ of n) is malicious, a cluster also loses safety guarantees (enough bad actors could collude to come to consensus on, and sign, something slashable).
 
 Identity private key theft and the subsequent execution of a rogue cluster node is equivalent in the context of BFT consensus to a misbehaving node, hence the cluster can survive and continue with its duties up to what’s specified by the cluster’s BFT protocol’s parameters.
 
@@ -64,7 +64,7 @@ A distributed validator cluster can be started in two ways:
 1. An existing Ethereum validator private key is split by the private key holder, and distributed in a trusted manner among the operators.
 2. The operators participate in a distributed key generation (DKG) process, to create private key shares that collectively can be used to sign validation duties as an Ethereum distributed validator. The full private key for the cluster never exists in one place during or after the DKG.
 
-In case 1, one of the node operators K has direct access to the Ethereum validator key and is tasked with the generation of other operator’s identity keys and key shards.
+In case 1, one of the node operators K has direct access to the Ethereum validator key and is tasked with the generation of other operator’s identity keys and key shards. This is also the trust model of single-party flows such as `charon create cluster` and solo cluster creation on the DV Launchpad: the party creating the cluster generates every key and must be trusted by everyone running a node.
 
 It is clear that in this case the entirety of the sensitive material set is as secure as K’s environment; if K is compromised or malicious, the distributed validator could be slashed.
 
@@ -84,9 +84,11 @@ Nodes are connected by means of either relay nodes, or directly to one another.
 
 Each node operator is at risk of being impeded by other nodes or by the relay operator in the execution of their duties.
 
-Nodes need to expose a set of TCP ports to be able to work, and the mere fact of doing that opens up the opportunity for rogue parties to execute DDoS attacks.
+Nodes need to expose a set of TCP (and, with QUIC enabled, UDP) ports to be able to work, and the mere fact of doing that opens up the opportunity for rogue parties to execute DDoS attacks. Charon only accepts p2p connections from the cluster's own peers and its configured relays, so this kind of resource exhaustion requires one of those positions, or knowledge of the node's address to attack it at the network level.
 
 Another attack surface for the cluster exists in rogue nodes purposefully filling the various inter-state databases with meaningless data, or more generally submitting bogus information to the other parties to slow down the processing or, in the case of a sybil attack, bring the cluster to a halt.
+
+A rogue node operator also controls what their own node proposes when it leads a consensus round, including block contents and the fee recipient of a proposal it builds. Charon warns, rather than refusing to sign, when a proposal's fee recipient does not match the cluster's configuration, because the alternative is a missed proposal.
 
 The likelihood of this scenario is medium, because there’s no active threat hunting part: there’s no need for the rogue node operator to penetrate and compromise other nodes to disturb the cluster’s lifecycle.
 
@@ -105,7 +107,7 @@ An outside attacker could also find and use vulnerabilities in the underlying cr
 
 A malicious beacon node (BN) could prevent the distributed validator from operating its validation duties, and could plausibly increase the likelihood of slashing by serving Charon illegitimate information.
 
-If the amount of nodes configured with the malicious BN are equal to the byzantine threshold for the Charon BFT consensus protocol, the validation process can potentially halt since the BFT parameter threshold is reached - most of the nodes are byzantine - the system will reach consensus on a set of data that isn’t valid.
+In each consensus round the leading node proposes data fetched from its own beacon node, and by default the other nodes sign the value the cluster decides on rather than re-checking it against their own beacon node. A malicious BN behind the leader of a round can therefore get bad (for example, wrong-head) data signed for that duty. Validator clients' slashing protection still applies to every signature. The alpha `chain_split_halt` feature makes nodes compare the leader's attestation data with their own beacon node and refuse to sign on a mismatch. If more than the fault tolerance of nodes use unreachable or malicious BNs, the cluster can also halt.
 
 We deem the likelihood of this scenario to be medium depending on the trust model associated with the BNs deployment (cloud, self-hosted, SaaS product): node operators should always host or at least trust their own beacon nodes.
 
@@ -121,7 +123,7 @@ A malicious relay owned by a OA could lead to:
 * Impeding node communication, potentially impacting the BFT consensus protocol liveness (not security) and distributed validator duties
 * DKG process disruption leading to frustration and potential abandonment by node operators: could lead to the usage of a standard Ethereum validator setup, which implies weaker security overall
 
-We note that BFT consensus liveness disruption can only happen if the number of nodes using the malicious relay for communication is equal to the byzantine nodes amount defined in the consensus parameters.
+We note that BFT consensus liveness disruption can only happen if the number of nodes using the malicious relay for communication is greater than the cluster's fault tolerance. Because a configured relay is allowed to connect to the nodes that use it, a malicious relay operator should be treated like a rogue participant for liveness purposes: it can disrupt communication and the DKG, but it cannot produce operator signatures, key shares or valid cluster messages.
 
 This risk can be mitigated by configuring nodes with multiple relay URLs from only [trusted entities](../advanced/self-relay.md).
 
@@ -134,7 +136,7 @@ Charon operates with two runtime files:
 * A lock file used to address operator’s nodes, define the Ethereum validator public keys and the public key shares associated with it
 * A cluster definition file used to define the operator’s addresses and identities during the DKG process
 
-The lock file is signed and validated by all the nodes participating in the cluster: assuming good security practices on the node operator side, and no bugs in Charon or its dependencies’ implementations, this scenario is unlikely.
+The lock file is signed and validated by all the nodes participating in the cluster: assuming good security practices on the node operator side, and no bugs in Charon or its dependencies’ implementations, this scenario is unlikely. Lock formats from before v1.7 carry fewer signatures; Charon still loads them so existing clusters keep running, but new clusters are created at v1.10 or later. A lock file is only as trustworthy as the process that produced it: operators should run the lock their own DKG produced, and check that its lock hash matches what the other operators have.
 
 If one or more node operators are using less than ideal security practices an OA could rewire the Charon CLI flags to include the `--no-verify` flags, which disables lock file signature and hash verification (usually intended only for development purposes).
 
