@@ -54,13 +54,15 @@ In practice, this means:
 - A vulnerability that lets an **outside attacker** slash, partition, or destabilize a DV is rewarded above a comparable-impact finding that requires a **threshold of operators to collude** against themselves.
 - Direct vulnerabilities in Obol smart contracts (where capital lives) are rewarded above operational vulnerabilities of equivalent impact severity.
 - Findings that survive careful review by a security-aware operator (e.g. a malicious cluster invite that passes inspection) are rewarded above findings that require the victim to opt into known-unsafe behavior (e.g. running with `--no-verify`).
+- A cluster's leader or proposer choosing block contents or the fee recipient is a **cluster-member action**, not an external attack, and is assessed under the insider rules above. Charon warns rather than rejects on a fee-recipient mismatch by design.
 
 ## Program Rules
 
 - Submitted bugs must not have been previously disclosed publicly.
 - Only first reports of vulnerabilities will be considered for rewards; previously reported or known vulnerabilities are ineligible.
 - The severity of the vulnerability, as assessed by our team, determines the reward amount.
-- Submissions must include a reproducible proof of concept.
+- Submissions must include a reproducible proof of concept that runs against a tagged release: for example a Go test or patch for Charon, a Foundry fork test for smart contracts, or a script against a local devnet. Reports without one may be closed without a detailed response.
+- Submissions must state which [known issue](#known-issues-and-common-non-qualifying-reports) is closest to the finding and why it differs.
 - The Obol security team reserves the right to determine the eligibility and reward for each submission.
 - Program terms may be updated at Obol's discretion.
 - Valid bugs may be disclosed to partner protocols within the Obol ecosystem to enhance overall security.
@@ -79,7 +81,7 @@ Eligible impacts:
 - An external attacker can exfiltrate enough BLS validator key shares from a threshold of operators in a cluster to reconstruct a validator's full private key.
 - A vulnerability in the OVM allows an attacker to bypass role-based access controls (WITHDRAWAL_ROLE, CONSOLIDATION_ROLE, DEPOSIT_ROLE) to trigger unauthorized EIP-7002 voluntary exits or EIP-7251 consolidations, or to redirect principal or rewards to an address they control.
 - A vulnerability in Obol Splits, the OVM, or legacy OWR contracts allows direct theft of delegator or operator funds at rest or in flight.
-- A vulnerability in the DV Launchpad or its dependencies allows an attacker to craft a cluster invite that passes careful operator review while diverting deposits or substituting withdrawal credentials.
+- A vulnerability in the DV Launchpad or its dependencies allows an attacker to craft a cluster invite that passes careful operator review while diverting deposits or substituting withdrawal credentials. The documented operator-signature trust model (definitions signed by their creator, solo-created definitions, operators approving a definition they were shown) is not by itself a finding; the invite has to defeat that review.
 - Remote code execution in Charon, exploitable from a peer or relay connection, without prior compromise of the host.
 - A vulnerability in the OBOL token contract that allows unauthorized minting, burning, or transfer of tokens at scale.
 
@@ -89,12 +91,12 @@ A High finding lets an **external attacker** take down a cluster's liveness, exf
 
 Eligible impacts:
 
-- An external attacker can partition a cluster and keep it offline indefinitely, even after operators take reasonable recovery steps.
+- An external attacker can partition a cluster and keep it offline indefinitely, even after operators take reasonable recovery steps. To count as external, the attacker must be able to reach the node without being one of the cluster's peers or one of its configured relays; resource exhaustion that needs either position is Medium at most.
 - An external attacker can exfiltrate Charon ENR (SECP256K1 identity) private keys from a node without compromising the host operating system.
 - An external attacker can destroy validator funds (e.g. force exit-with-loss) but cannot steal them.
 - An external attacker compromises Obol-operated public relay infrastructure in a way that reveals cluster topologies, disrupts peer discovery across many clusters, or facilitates partitioning attacks against the clusters relying on it.
 - An attacker exfiltrates pre-signed exit messages held by the Obol API and uses them to forcibly exit validators against the delegator's wishes (see [Centralization Risks](risks.md)).
-- An attacker subverts the DKG ceremony such that the post-ceremony cluster is no longer controlled by its legitimate operators.
+- An attacker subverts the DKG ceremony such that the post-ceremony cluster is no longer controlled by its legitimate operators. Relying on the documented operator-signature trust model (creator-signed or solo-created definitions, operators approving a definition) is not by itself a subversion.
 - Retrieval of sensitive operational secrets from a running Obol-operated service: BLS or ENR keys, database credentials, signing keys for the public API, etc.
 - Authenticated, state-modifying actions on the DV Launchpad or the Obol API performed on behalf of another user without their interaction (changing cluster definitions, redirecting withdrawals, manipulating pre-signed exits, etc.).
 - A vulnerability in the OVM role assignment (bitwise permission system) that allows escalation to a higher-privileged role without the owner's consent, without enabling immediate fund theft.
@@ -107,12 +109,12 @@ A Medium finding requires either an **insider** (a malicious cluster member) or 
 Eligible impacts:
 
 - A cluster member can exfiltrate K1 (identity) or BLS key material from another member of the same cluster.
-- A cluster member can DoS enough peers in their own cluster to take the validator offline, beyond what is possible by simply going offline themselves.
+- A cluster member can DoS enough peers in their own cluster to take the validator offline, beyond what is possible by simply going offline themselves. Resource exhaustion that requires a cluster-member or relay-operator position (e.g. oversized p2p messages from a peer or from a relay the cluster is configured to use) is rated Medium at most.
 - A cluster member can bias the protocol to control a disproportionate share of block proposal opportunities or other duty assignment.
 - A DV Launchpad user can be steered into interacting with a smart contract that is not part of the normal launchpad flow.
 - A vulnerability in the OVM or legacy Obol Splits contracts prevents normal operation without permanent loss of funds (e.g. temporary freeze, denial of withdrawal or consolidation under specific state).
 - Block-stuffing-style or unbounded-gas vulnerabilities in any Obol smart contract.
-- Charon cluster lock-file tampering accepted by a victim operator who is *not* running with `--no-verify`.
+- Charon cluster lock-file tampering accepted by a victim operator who is *not* running with `--no-verify`. This excludes legacy lock and definition formats (schema versions before v1.10.0), which are retained only so existing clusters keep running and lack some signatures by design. It also excludes cases that need the operator to run a lock file they did not produce in their own DKG or Launchpad flow.
 - An open-redirect or similar phishing aid on Obol-operated domains.
 - Manipulation of OBOL token governance (e.g. vote inflation, delegation hijacking) that does not directly steal tokens.
 
@@ -143,6 +145,25 @@ The following activities are not authorized under this program:
 - Automated testing of services that generates significant traffic.
 - Public disclosure of an unpatched vulnerability under an embargoed bounty.
 
+## Known issues and common non-qualifying reports
+
+Each in-scope repository documents the issues Obol already knows about. Read the relevant list before submitting:
+
+- [Charon known issues](https://github.com/ObolNetwork/charon/blob/main/KNOWN_ISSUES.md)
+- [Obol SDK known issues](https://github.com/ObolNetwork/obol-sdk/blob/main/KNOWN_ISSUES.md)
+- [Obol API known issues](https://github.com/ObolNetwork/obol-api/blob/main/KNOWN_ISSUES.md)
+- [Obol Splits known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md)
+
+Most duplicate reports we receive fall into one of these classes:
+
+- **Legacy lock versions**: missing signatures or weaker checks in lock and definition formats before v1.10.0.
+- **Fee-recipient warn-only**: Charon warning, rather than rejecting, when a proposal's fee recipient does not match the cluster's.
+- **Peer and relay resource exhaustion**: memory, CPU or bandwidth exhaustion that requires being a cluster peer or a configured relay.
+- **Operator-signature trust model on definitions**: creator-signed or solo-created definitions, and operators approving a definition they were shown.
+- **Split-address prediction in the SDK**: predicting or pre-computing split contract addresses.
+
+Later duplicates of a known issue are not separately eligible and receive no reward.
+
 ## Submission process
 
 :::info
@@ -155,7 +176,8 @@ To report a vulnerability, please contact us at [security@obol.tech](mailto:secu
 
 - A detailed description of the vulnerability and its potential impact.
 - Steps to reproduce the issue.
-- Any relevant proof-of-concept code, screenshots, or documentation.
+- A proof of concept that reproduces the issue against a tagged release, plus any relevant screenshots or documentation.
+- The closest [known issue](#known-issues-and-common-non-qualifying-reports) and why your finding differs.
 - Your contact information.
 
 Incomplete reports may not be eligible for rewards.
