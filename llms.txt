@@ -166,8 +166,8 @@ https://obol.org/llms.txt.
 - [validateClusterLock](https://docs.obol.org/next/sdk/functions/validateclusterlock.md)
 - [verifyDepositData](https://docs.obol.org/next/sdk/functions/verifydepositdata.md)
 - [What is this API?](https://docs.obol.org/next/api/what-is-this-api.md): Download OpenAPI specifications: https://api.obol.tech/docs-json
+- [Errors & Rate Limits](https://docs.obol.org/next/api/errors-and-rate-limits.md): Error responses, status codes, rate limits and client etiquette for the Obol API.
 - [System](https://docs.obol.org/next/api/system.md): System related endpoints.
-- [Metrics](https://docs.obol.org/next/api/metrics.md): MetricsController_metrics
 - [Cluster Definition](https://docs.obol.org/next/api/cluster-definition.md)
 - [Cluster Lock](https://docs.obol.org/next/api/cluster-lock.md)
 - [State](https://docs.obol.org/next/api/state.md)
@@ -175,6 +175,8 @@ https://obol.org/llms.txt.
 - [DV Migrate](https://docs.obol.org/next/api/dv-migrate.md): DV Migrate related endpoints.
 - [Cluster Effectiveness](https://docs.obol.org/next/api/cluster-effectiveness.md)
 - [Deposit Data](https://docs.obol.org/next/api/deposit-data.md): Deposit Data related endpoints.
+- [OVM](https://docs.obol.org/next/api/ovm.md)
+- [Validators](https://docs.obol.org/next/api/validators.md)
 - [Terms And Conditions](https://docs.obol.org/next/api/terms-and-conditions.md)
 - [Techne Credentials](https://docs.obol.org/next/api/techne-credentials.md)
 - [Address](https://docs.obol.org/next/api/address.md)
@@ -337,8 +339,8 @@ https://obol.org/llms.txt.
 - [validateClusterLock](https://docs.obol.org/sdk/functions/validateclusterlock.md)
 - [verifyDepositData](https://docs.obol.org/sdk/functions/verifydepositdata.md)
 - [What is this API?](https://docs.obol.org/api/what-is-this-api.md): Download OpenAPI specifications: https://api.obol.tech/docs-json
+- [Errors & Rate Limits](https://docs.obol.org/api/errors-and-rate-limits.md): Error responses, status codes, rate limits and client etiquette for the Obol API.
 - [System](https://docs.obol.org/api/system.md): System related endpoints.
-- [Metrics](https://docs.obol.org/api/metrics.md): MetricsController_metrics
 - [Cluster Definition](https://docs.obol.org/api/cluster-definition.md)
 - [Cluster Lock](https://docs.obol.org/api/cluster-lock.md)
 - [State](https://docs.obol.org/api/state.md)
@@ -346,6 +348,8 @@ https://obol.org/llms.txt.
 - [DV Migrate](https://docs.obol.org/api/dv-migrate.md): DV Migrate related endpoints.
 - [Cluster Effectiveness](https://docs.obol.org/api/cluster-effectiveness.md)
 - [Deposit Data](https://docs.obol.org/api/deposit-data.md): Deposit Data related endpoints.
+- [OVM](https://docs.obol.org/api/ovm.md)
+- [Validators](https://docs.obol.org/api/validators.md)
 - [Terms And Conditions](https://docs.obol.org/api/terms-and-conditions.md)
 - [Techne Credentials](https://docs.obol.org/api/techne-credentials.md)
 - [Address](https://docs.obol.org/api/address.md)

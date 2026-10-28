@@ -1,22 +1,5 @@
 openapi: 3.0.0
 paths:
-  /:
-    get:
-      description: >-
-        Hitting the root of the domain redirects to /docs and a swagger
-        deployment.
-      operationId: AppController_redirect
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-      summary: Redirect to the API docs
-      tags:
-        - System
   /v1/_health:
     get:
       description: This endpoint reports the API and its dependencies health.
@@ -130,19 +113,6 @@ paths:
       summary: Check the API health
       tags:
         - System
-  /metrics:
-    get:
-      operationId: MetricsController_metrics
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags:
-        - Metrics
   /v1/definition/{configHash}:
     get:
       description: >-
@@ -173,8 +143,16 @@ paths:
                   - $ref: '#/components/schemas/ClusterDefinitionResponse'
         '404':
           description: Cluster definition not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a Distributed Validator Cluster proposal
       tags:
         - Cluster Definition
@@ -185,7 +163,9 @@ paths:
         version of [Obol's terms and conditions](https://obol.tech/terms.pdf).
         These operators must submit a public key (in ENR form) to serve as their
         identity during the DKG, along with EIP712 signatures indicating their
-        acceptance of the terms of this DKG.
+        acceptance of the terms of this DKG. Once a cluster lock has been posted
+        for the definition, it can no longer be changed and this endpoint
+        returns 409.
       operationId: DefinitionController_updateClusterDefinition_v1
       parameters:
         - name: authorization
@@ -216,17 +196,39 @@ paths:
                   - $ref: '#/components/schemas/ClusterDefinitionResponse'
         '400':
           description: Invalid payload data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: |-
             Missing t&c signature
 
             Authorization header is missing or incorrect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Data not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '409':
-          description: Duplicate entry
+          description: >-
+            Duplicate entry or operator data, or a cluster lock already exists
+            for this cluster definition (it can no longer be changed)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Accept a proposed Distributed Validator Cluster
@@ -265,7 +267,11 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ClusterDefinitionPagedResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a list of cluster definitions which the address belongs to.
       tags:
         - Cluster Definition
@@ -302,7 +308,11 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ClusterDefinitionPagedResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a list of cluster definitions which the address belongs to.
       tags:
         - Cluster Definition
@@ -342,46 +352,36 @@ paths:
                   - $ref: '#/components/schemas/ClusterDefinitionResponse'
         '400':
           description: Invalid definition data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: |-
             Missing t&c signature
 
             Authorization header is missing or incorrect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '409':
           description: Duplicate entry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Propose a new Distributed Validator Cluster
       tags:
         - Cluster Definition
-  /lock/{lockHash}:
-    get:
-      description: This endpoint is used to retrieve a cluster lock object.
-      operationId: LockController_getClusterLock[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The `lock_hash` calculated for a cluster lock.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The cluster lock object
-          content:
-            application/json:
-              schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockResponse'
-        '404':
-          description: Cluster not found
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve a Distributed Validator Cluster Lock Object
-      tags:
-        - Cluster Lock
   /v1/lock/{lockHash}:
     get:
       description: This endpoint is used to retrieve a cluster lock object.
@@ -393,6 +393,16 @@ paths:
           description: The `lock_hash` calculated for a cluster lock.
           schema:
             type: string
+        - name: validators
+          required: false
+          in: query
+          description: >-
+            Set to `false` to omit `distributed_validators` and receive a
+            `validator_count` field instead. Intended for lazy-loading very
+            large clusters via `GET /lock/{lockHash}/validators`.
+          schema:
+            type: boolean
+            default: true
       responses:
         '200':
           description: The cluster lock object
@@ -401,77 +411,118 @@ paths:
               schema:
                 anyOf:
                   - $ref: '#/components/schemas/ClusterLockResponse'
+                  - $ref: '#/components/schemas/ClusterLockShellResponse'
+        '304':
+          description: 'Not modified: `If-None-Match` matched the `ETag`'
         '404':
           description: Cluster not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a Distributed Validator Cluster Lock Object
       tags:
         - Cluster Lock
-  /lock/search/{network}:
+  /v1/lock/{lockHash}/validators:
     get:
       description: >-
-        This endpoint is used to search for Cluster Lock Objects that match a
-        substring of their `lock_hash`.
-      operationId: LockController_searchClusterLocks[0]
+        Returns a slice of the `distributed_validators` array for a cluster
+        lock. Use together with `GET /lock/{lockHash}?validators=false` to
+        lazy-load very large clusters.
+      operationId: LockController_getClusterLockValidators[1]_v1
       parameters:
-        - name: network
+        - name: lockHash
           required: true
           in: path
-          description: The network to retrieve clusters on
-          examples:
-            mainnet:
-              summary: Ethereum Mainnet
-              value: mainnet
-            hoodi:
-              summary: Hoodi Test Network
-              value: hoodi
-            sepolia:
-              summary: Sepolia Test Network
-              value: sepolia
-          schema:
-            type: string
-        - name: partialLockHash
-          required: true
-          in: query
-          description: A substring of the `lock_hash` calculated for a cluster lock.
-          schema:
-            type: string
-        - name: partialClusterName
-          required: true
-          in: query
-          description: A substring of the cluster name.
+          description: The `lock_hash` calculated for a cluster lock.
           schema:
             type: string
         - name: page
-          required: true
+          required: false
           in: query
           description: The page number to retrieve.
           schema:
             type: integer
             default: 0
         - name: limit
-          required: true
+          required: false
           in: query
-          description: The number of cluster lock objects to return.
+          description: The number of validators to return per page (max 1000).
           schema:
             type: integer
             default: 100
       responses:
         '200':
-          description: >-
-            A list of Distributed Validator Clusters which the lock hash
-            matches.
+          description: One page of the cluster lock's distributed validators
           content:
             application/json:
               schema:
                 anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
+                  - $ref: '#/components/schemas/ClusterLockValidatorsPagedResponse'
+        '304':
+          description: 'Not modified: `If-None-Match` matched the `ETag`'
+        '400':
+          description: Invalid pagination parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Cluster not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Retrieve a list of Distributed Validator Cluster Lock Objects
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve one page of a cluster lock's distributed validators
+      tags:
+        - Cluster Lock
+  /v1/lock/{lockHash}/revisions:
+    get:
+      description: >-
+        Returns locked revisions that share the same definition UUID and
+        fork_version as the given lock, ordered by definition Mongo _id
+        (insertion order). Diffs between revisions are not included; clients
+        should compute them from lock details if needed.
+      operationId: LockController_getClusterLockRevisions[1]_v1
+      parameters:
+        - name: lockHash
+          required: true
+          in: path
+          description: The `lock_hash` of the cluster lock currently being viewed.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cluster lock revisions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterLockRevisionsResponse'
+        '404':
+          description: Cluster not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve lock revisions for a cluster
       tags:
         - Cluster Lock
   /v1/lock/search/{network}:
@@ -535,44 +586,32 @@ paths:
                   - $ref: '#/components/schemas/ClusterLockPagedResponse'
         '404':
           description: Cluster not found
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve a list of Distributed Validator Cluster Lock Objects
-      tags:
-        - Cluster Lock
-  /lock/configHash/{configHash}:
-    get:
-      description: >-
-        This endpoint is used to retrieve a cluster lock object by the hash of
-        the configuration used to create it.
-      operationId: LockController_getLockByConfigHash[0]
-      parameters:
-        - name: configHash
-          required: true
-          in: path
-          description: The `config_hash` calculated for a cluster configuration.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The cluster lock object
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockResponse'
-        '404':
-          description: Cluster not found
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Retrieve a Distributed Validator Cluster Lock Object
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve a list of Distributed Validator Cluster Lock Objects
       tags:
         - Cluster Lock
   /v1/lock/configHash/{configHash}:
     get:
       description: >-
         This endpoint is used to retrieve a cluster lock object by the hash of
-        the configuration used to create it.
+        the configuration used to create it. Several cluster locks can share a
+        `config_hash` (for example when the DKG is run again with the same
+        configuration); this endpoint returns the most recently created one, so
+        the answer only changes when another lock is posted for the
+        `config_hash`. Its `is_current` / `superseded_by` fields say whether it
+        is the lock Obol monitoring sees running (an older lock whose Charon
+        nodes report more recently can be current instead). Use `GET
+        /lock/{lockHash}` to retrieve a specific lock. Responses may be cached
+        for a short time.
       operationId: LockController_getLockByConfigHash[1]_v1
       parameters:
         - name: configHash
@@ -583,40 +622,27 @@ paths:
             type: string
       responses:
         '200':
-          description: The cluster lock object
+          description: The most recently created cluster lock for this config_hash
           content:
             application/json:
               schema:
                 anyOf:
                   - $ref: '#/components/schemas/ClusterLockResponse'
+        '304':
+          description: 'Not modified: `If-None-Match` matched the `ETag`'
         '404':
           description: Cluster not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a Distributed Validator Cluster Lock Object
-      tags:
-        - Cluster Lock
-  /lock/{lockHash}/launchpad:
-    get:
-      description: >-
-        This endpoint is used to redirect users to the created cluster status
-        page after DKG is completed.
-      operationId: LockController_redirectToClusterStatus[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The `lock_hash` calculated for a Distributed Validator Cluster.
-          schema:
-            type: string
-      responses:
-        '302':
-          description: Serves a redirect to the launchpad cluster status page
-        '404':
-          description: Cluster lock not found
-        '500':
-          description: An unknown error occurred
-      summary: Redirect to the launchpad cluster status page
       tags:
         - Cluster Lock
   /v1/lock/{lockHash}/launchpad:
@@ -637,18 +663,26 @@ paths:
           description: Serves a redirect to the launchpad cluster status page
         '404':
           description: Cluster lock not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Redirect to the launchpad cluster status page
       tags:
         - Cluster Lock
-  /lock/{lockHash}/peer-scores:
+  /v1/lock/{lockHash}/network-percentile:
     get:
       description: >-
-        This endpoint returns the average peer_score for each operator address
-        in a cluster lock within a specified date range. Results are sorted by
-        peer_score in descending order.
-      operationId: LockController_getAveragePeerScores[0]
+        Returns cluster network performance percentile vs sampled baseline (30d
+        cluster avg) from ClickHouse cluster_effectiveness_percentiles. Metrics
+        are null when no snapshot exists.
+      operationId: LockController_getClusterNetworkPercentile[1]_v1
       parameters:
         - name: lockHash
           required: true
@@ -656,77 +690,64 @@ paths:
           description: The `lock_hash` calculated for a cluster lock.
           schema:
             type: string
-        - name: startDate
-          required: false
-          in: query
-          description: >-
-            Start date for the range (ISO 8601 format). If not provided,
-            defaults to endDate - 7 days.
-          schema:
-            example: '2026-01-21T00:00:00.000Z'
-            type: string
-        - name: endDate
-          required: false
-          in: query
-          description: >-
-            End date for the range (ISO 8601 format). If not provided, defaults
-            to the latest available date.
-          schema:
-            example: '2026-01-28T00:00:00.000Z'
-            type: string
       responses:
         '200':
-          description: Array of operator addresses with their average peer scores
+          description: Cluster network performance percentile for the lock
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    operator_address:
-                      type: string
-                      example: '0x7a82E643B0c8AE619f71d9667559180c33c92277'
-                    avg_peer_score:
-                      type: number
-                      example: 99.89
-                    peer_name:
-                      type: string
-                      example: puzzled-pen
-                      nullable: true
-                      description: >-
-                        Peer name shown when the peer score row has no operator
-                        address.
-                    peer_nickname:
-                      type: string
-                      example: Alice node
-                      nullable: true
-                      description: Operator-configured peer nickname, when available.
-                    last_updated:
-                      type: string
-                      format: date-time
-                      example: '2026-02-10T00:00:00.000Z'
-                      description: >-
-                        Latest peer_score date included in this averaged rank
-                        row.
+                type: object
+                properties:
+                  lock_hash:
+                    type: string
+                    example: '0xabcdef1234567890abcdef1234567890abcdef12'
+                  avg_effectiveness:
+                    type: number
+                    nullable: true
+                    example: 0.985
+                    description: 30d average cluster effectiveness
+                  effectiveness_percentile:
+                    type: number
+                    nullable: true
+                    example: 72.5
+                    description: >-
+                      0–100 network percentile vs sampled baseline; higher is
+                      better
+                  active_validators_count:
+                    type: number
+                    nullable: true
+                    example: 4
+                  date:
+                    type: string
+                    nullable: true
+                    example: '2026-08-01'
+                    description: Snapshot date for the percentile row
         '400':
-          description: |-
-            Network error - unable to determine network from fork_version
-
-            Invalid date format
+          description: Network error - unable to determine network from fork_version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Cluster lock not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Get average peer scores for operators in a cluster
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get cluster network performance percentile
       tags:
         - Cluster Lock
   /v1/lock/{lockHash}/peer-scores:
     get:
       description: >-
-        This endpoint returns the average peer_score for each operator address
-        in a cluster lock within a specified date range. Results are sorted by
-        peer_score in descending order.
+        Returns average peer_score (and nicknames) for operators in a cluster,
+        sorted by peer_score descending.
       operationId: LockController_getAveragePeerScores[1]_v1
       parameters:
         - name: lockHash
@@ -793,99 +814,157 @@ paths:
             Network error - unable to determine network from fork_version
 
             Invalid date format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Cluster lock not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get average peer scores for operators in a cluster
       tags:
         - Cluster Lock
-  /lock/operator:
+  /v1/lock/{lockHash}/peer-info:
     get:
       description: >-
-        This endpoint fetches a number of Distributed Validator Clusters for
-        which the address provided is a node operator.
-      operationId: LockController_getClusterLocksByOperator[0]
+        Returns current-state peer rows from Mongo peer_info keyed by lock_hash
+        (identity fields by default). Does not require the lock to exist in
+        clusterlocks; returns an empty array when no peer_info rows match.
+        Client-only stubs with null lock_hash are included when their
+        cluster_hash matches the lock hash prefix. Pass client-details=true to
+        include BN/VC/EL/Charon versions. Optional filters: node-index,
+        operator-address. Note: until the data-pipelines peer_key/stub merge fix
+        is deployed, the same Charon peer name may appear twice (a thin client
+        stub with null node_index and a full identity row).
+      operationId: LockController_getPeerInfo[1]_v1
       parameters:
-        - name: address
+        - name: lockHash
           required: true
           in: path
-          description: The operator address.
+          description: >-
+            Lock hash used to look up peer_info rows (and stub cluster_hash
+            prefix).
           schema:
             type: string
-        - name: page
-          required: true
+        - name: client-details
+          required: false
           in: query
-          description: The page number to retrieve.
+          description: >-
+            When true, include nested client_details (beacon, validator,
+            execution, charon).
           schema:
-            type: integer
-            default: 0
-        - name: limit
-          required: true
+            example: 'true'
+            type: string
+        - name: node-index
+          required: false
           in: query
-          description: The number of cluster lock objects to return.
+          description: Filter to a single peer by node index (integer or numeric string).
           schema:
-            type: integer
-            default: 100
+            example: '0'
+            type: string
+        - name: operator-address
+          required: false
+          in: query
+          description: Filter to a single peer by operator address (any EIP-55 casing).
+          schema:
+            example: '0x7a82E643B0c8AE619f71d9667559180c33c92277'
+            type: string
       responses:
         '200':
-          description: >-
-            A list of Distributed Validator Clusters which the operator is a
-            member of.
+          description: Array of peers for the lock
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
-        '500':
-          description: An unknown error occurred
-      summary: >-
-        Retrieve a list of Distributed Validator Clusters for which this address
-        is an operator
-      tags:
-        - Cluster Lock
-  /lock/operator/{address}:
-    get:
-      description: >-
-        This endpoint fetches a number of Distributed Validator Clusters for
-        which the address provided is a node operator.
-      operationId: LockController_getClusterLocksByOperator[1]
-      parameters:
-        - name: address
-          required: true
-          in: path
-          description: The operator address.
-          schema:
-            type: string
-        - name: page
-          required: true
-          in: query
-          description: The page number to retrieve.
-          schema:
-            type: integer
-            default: 0
-        - name: limit
-          required: true
-          in: query
-          description: The number of cluster lock objects to return.
-          schema:
-            type: integer
-            default: 100
-      responses:
-        '200':
-          description: >-
-            A list of Distributed Validator Clusters which the operator is a
-            member of.
+                type: array
+                items:
+                  type: object
+                  properties:
+                    peer:
+                      type: string
+                      nullable: true
+                      example: affectionate-fish
+                    peer_nickname:
+                      type: string
+                      nullable: true
+                      example: DSRV
+                    node_index:
+                      type: integer
+                      nullable: true
+                      example: 0
+                    operator_address:
+                      type: string
+                      nullable: true
+                      example: '0x7a82E643B0c8AE619f71d9667559180c33c92277'
+                    peer_info_last_updated_at:
+                      type: string
+                      format: date
+                      nullable: true
+                      example: '2026-08-03'
+                    last_checked_at:
+                      type: string
+                      format: date-time
+                      nullable: true
+                    client_details:
+                      type: object
+                      nullable: true
+                      description: Present only when client-details=true
+                      properties:
+                        beacon_client:
+                          type: string
+                          nullable: true
+                        beacon_client_last_updated_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        validator_client:
+                          type: string
+                          nullable: true
+                        validator_client_last_updated_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        execution_client:
+                          type: string
+                          nullable: true
+                        execution_client_last_updated_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        charon_version:
+                          type: string
+                          nullable: true
+                        charon_version_last_updated_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+        '400':
+          description: Invalid client-details, node-index, or operator-address
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Filter matched no peer (node-index and/or operator-address)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: >-
-        Retrieve a list of Distributed Validator Clusters for which this address
-        is an operator
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get current peer info for a cluster lock
       tags:
         - Cluster Lock
   /v1/lock/operator:
@@ -919,14 +998,19 @@ paths:
         '200':
           description: >-
             A list of Distributed Validator Clusters which the operator is a
-            member of.
+            member of. Each cluster carries `validator_status_counts` when its
+            beacon node is reachable.
           content:
             application/json:
               schema:
                 anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
+                  - $ref: '#/components/schemas/ClusterLockOperatorPagedResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: >-
         Retrieve a list of Distributed Validator Clusters for which this address
         is an operator
@@ -963,96 +1047,22 @@ paths:
         '200':
           description: >-
             A list of Distributed Validator Clusters which the operator is a
-            member of.
+            member of. Each cluster carries `validator_status_counts` when its
+            beacon node is reachable.
           content:
             application/json:
               schema:
                 anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
+                  - $ref: '#/components/schemas/ClusterLockOperatorPagedResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: >-
         Retrieve a list of Distributed Validator Clusters for which this address
         is an operator
-      tags:
-        - Cluster Lock
-  /lock/network/{network}:
-    get:
-      description: >-
-        This endpoint fetches a number of cluster lock objects for a given
-        network.
-      operationId: LockController_getClusterLocksByNetwork[0]
-      parameters:
-        - name: network
-          required: true
-          in: path
-          description: The network to retrieve clusters on
-          examples:
-            mainnet:
-              summary: Ethereum Mainnet
-              value: mainnet
-            hoodi:
-              summary: Hoodi Test Network
-              value: hoodi
-            sepolia:
-              summary: Sepolia Test Network
-              value: sepolia
-          schema:
-            type: string
-        - name: page
-          required: true
-          in: query
-          description: The page number to retrieve.
-          schema:
-            type: integer
-            default: 0
-        - name: limit
-          required: true
-          in: query
-          description: The number of cluster lock objects to return.
-          schema:
-            type: integer
-            default: 100
-        - name: sortBy
-          required: false
-          in: query
-          description: numerical field to sort by
-          schema:
-            type: string
-            default: avg_effectiveness
-        - name: sortOrder
-          required: false
-          in: query
-          description: order of sorting the field
-          schema:
-            type: string
-            default: desc
-        - name: pool
-          required: false
-          in: query
-          description: cluster type or pool
-          schema:
-            type: string
-        - name: details
-          required: true
-          in: query
-          description: The flag to populate cluster definition information.
-          schema:
-            type: string
-            default: 'false'
-      responses:
-        '200':
-          description: A paged list of Distributed Validator Clusters on this network
-          content:
-            application/json:
-              schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockPagedResponse'
-        '400':
-          description: Network not spported
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve a list of Distributed Validator Clusters for a given network
       tags:
         - Cluster Lock
   /v1/lock/network/{network}:
@@ -1129,43 +1139,16 @@ paths:
                   - $ref: '#/components/schemas/ClusterLockPagedResponse'
         '400':
           description: Network not spported
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve a list of Distributed Validator Clusters for a given network
-      tags:
-        - Cluster Lock
-  /lock/network/summary/{network}:
-    get:
-      description: >-
-        This endpoint fetches a nsummary of the lock files stored for a given
-        network
-      operationId: LockController_getClusterLockNetworkSummary[0]
-      parameters:
-        - name: network
-          required: true
-          in: path
-          description: The network to retrieve clusters on
-          examples:
-            mainnet:
-              summary: Ethereum Mainnet
-              value: mainnet
-            hoodi:
-              summary: Hoodi Test Network
-              value: hoodi
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A summary of the Distributed Validator locks for a given network
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockNetworkSummaryResponse'
-        '400':
-          description: Network not spported
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a list of Distributed Validator Clusters for a given network
       tags:
         - Cluster Lock
@@ -1199,60 +1182,43 @@ paths:
                   - $ref: '#/components/schemas/ClusterLockNetworkSummaryResponse'
         '400':
           description: Network not spported
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve a list of Distributed Validator Clusters for a given network
-      tags:
-        - Cluster Lock
-  /lock:
-    post:
-      description: >-
-        This endpoint saves cluster lock objects that describe the created
-        Distributed Validator Cluster. If the lock_hash is already stored, the
-        existing lock is returned (idempotent; no re-validation) with the same
-        201 response.
-      operationId: LockController_postClusterLock[0]
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ClusterLockDto'
-      responses:
-        '201':
-          description: >-
-            The cluster lock object (new publish or idempotent retry for an
-            existing lock_hash).
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterLockResponse'
-        '400':
-          description: Invalid lock data
-        '404':
-          description: The cluster definition corresponding to this lock file was not found
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-        '503':
-          description: >-
-            Too many lock validations in progress on this instance. Retry with
-            backoff.
-        '504':
-          description: >-
-            Lock validation exceeded the time limit (typically very large
-            locks).
-      summary: Push Distributed Validator Cluster Lock Data
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve a list of Distributed Validator Clusters for a given network
       tags:
         - Cluster Lock
   /v1/lock:
     post:
       description: >-
         This endpoint saves cluster lock objects that describe the created
-        Distributed Validator Cluster. If the lock_hash is already stored, the
-        existing lock is returned (idempotent; no re-validation) with the same
-        201 response.
+        Distributed Validator Cluster. The lock is stored with its own
+        cluster_definition (the one covered by lock_hash), which is what lock
+        reads return. If the lock_hash is already stored with its definition,
+        the existing lock is returned (idempotent; no re-validation) with the
+        same 201 response. If it is stored without one (saved by an earlier API
+        version, `definition_stored: false`), the posted file is validated and
+        its definition stored. The posted `cluster_definition.config_hash` must
+        be the hash of the posted definition, and when a definition record
+        exists for it the lock must have the same operator and creator addresses
+        and configuration (400 otherwise). Several locks can share a config_hash
+        (the DKG run again, or the same validator keys re-split to other nodes):
+        each is stored. For definitions whose operators do not sign their ENRs
+        (solo flow, `charon create cluster`), a further lock must re-split the
+        validator keys of a stored lock (409 otherwise). `GET
+        /lock/configHash/{configHash}` returns the most recently created of
+        them. The current lock for a config_hash and its validators
+        (`is_current`, `superseded_by`, positions and counts) is the one whose
+        Charon nodes reported most recently, else the most recently created. The
+        cluster definition record (GET /definition/{configHash}) is never
+        changed by this endpoint.
       operationId: LockController_postClusterLock[1]_v1
       parameters: []
       requestBody:
@@ -1272,51 +1238,54 @@ paths:
                 anyOf:
                   - $ref: '#/components/schemas/ClusterLockResponse'
         '400':
-          description: Invalid lock data
+          description: >-
+            Invalid lock data, a config_hash that does not match the posted
+            definition, or a definition that does not match the stored
+            definition record for its config_hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: The cluster definition corresponding to this lock file was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: >-
+            The lock file does not match the stored lock with this lock_hash;
+            or, for a definition whose operators do not sign their ENRs, a lock
+            with other validator keys is already stored; or another lock for
+            this config_hash is stored and the API cannot store a second one yet
+            (retry later).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '503':
           description: >-
             Too many lock validations in progress on this instance. Retry with
             backoff.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '504':
           description: >-
             Lock validation exceeded the time limit (typically very large
             locks).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Push Distributed Validator Cluster Lock Data
-      tags:
-        - Cluster Lock
-  /lock/verify:
-    post:
-      description: >-
-        This endpoint verifies cluster lock data including BLS public keys and
-        signatures created during the DKG phase.
-      operationId: LockController_verifyClusterLock[0]
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ClusterLockDto'
-      responses:
-        '200':
-          description: Lock data is valid
-        '400':
-          description: Invalid lock data
-        '500':
-          description: An unknown error occurred
-        '503':
-          description: >-
-            Too many lock validations in progress on this instance. Retry with
-            backoff.
-        '504':
-          description: >-
-            Lock validation exceeded the time limit (typically very large
-            locks).
-      summary: Verify Distributed Validator Cluster Lock Data
       tags:
         - Cluster Lock
   /v1/lock/verify:
@@ -1337,16 +1306,32 @@ paths:
           description: Lock data is valid
         '400':
           description: Invalid lock data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '503':
           description: >-
             Too many lock validations in progress on this instance. Retry with
             backoff.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '504':
           description: >-
             Lock validation exceeded the time limit (typically very large
             locks).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Verify Distributed Validator Cluster Lock Data
       tags:
         - Cluster Lock
@@ -1378,41 +1363,25 @@ paths:
                     balance: '32'
         '400':
           description: Bad request received
-        '404':
-          description: Lock Hash not found
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve the Validator states for a cluster
-      tags:
-        - State
-  /exp/exit/status/summary/{lockHash}:
-    get:
-      description: >-
-        It shows data of operators who have signed and the count of validators
-        ready to exit
-      operationId: ExitController_getClusterExitStatusSummary[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lock hash.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The exit summary data
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterExitStatusSummaryResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Data is not found
+          description: Lock Hash not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Retrieve validators exit status summary
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve the Validator states for a cluster
       tags:
-        - DV Exit
+        - State
   /v1/exp/exit/status/summary/{lockHash}:
     get:
       description: >-
@@ -1436,57 +1405,17 @@ paths:
                   - $ref: '#/components/schemas/ClusterExitStatusSummaryResponse'
         '404':
           description: Data is not found
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve validators exit status summary
-      tags:
-        - DV Exit
-  /exp/exit/status/{lockHash}:
-    get:
-      description: It shows data of operators who have signed and who have not
-      operationId: ExitController_getClusterExitStatus[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lockHash.
-          schema:
-            type: string
-        - name: page
-          required: false
-          in: query
-          schema:
-            type: number
-        - name: limit
-          required: false
-          in: query
-          schema:
-            type: number
-        - name: operatorAddress
-          required: true
-          in: query
-          description: The operatorAddress.
-          schema:
-            type: string
-        - name: validatorPubkey
-          required: true
-          in: query
-          description: The `pubkey` in a cluster lock.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The exit status data
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ClusterExitStatusResponse'
-        '404':
-          description: Data is not found
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Retrieve validators exit status
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve validators exit status summary
       tags:
         - DV Exit
   /v1/exp/exit/status/{lockHash}:
@@ -1532,49 +1461,17 @@ paths:
                   - $ref: '#/components/schemas/ClusterExitStatusResponse'
         '404':
           description: Data is not found
-        '500':
-          description: An unknown error occurred
-      summary: Retrieve validators exit status
-      tags:
-        - DV Exit
-  /exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}:
-    get:
-      description: This endpoint is used to retrieve validator exit message
-      operationId: ExitController_getClusterExit[0]
-      parameters:
-        - name: validatorPubkey
-          required: true
-          in: path
-          description: The `distributed_public_key` in a cluster lock.
-          schema:
-            type: string
-        - name: shareIdx
-          required: true
-          in: path
-          description: Represents the cluster operatorIndex+1.
-          schema: {}
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lockHash.
-          schema: {}
-      responses:
-        '200':
-          description: The DV signed exit message
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ExitBlob'
-        '401':
-          description: Authorization header is missing or incorrect
-        '404':
-          description: Data is not found
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      security:
-        - bearer: []
-      summary: Retrieve Distributed Validator threshold aggregated signed exit msg
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Retrieve validators exit status
       tags:
         - DV Exit
   /v1/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}:
@@ -1582,21 +1479,24 @@ paths:
       description: This endpoint is used to retrieve validator exit message
       operationId: ExitController_getClusterExit[1]_v1
       parameters:
+        - name: lockHash
+          required: true
+          in: path
+          description: The cluster lockHash.
+          schema:
+            type: string
         - name: validatorPubkey
           required: true
           in: path
-          description: The `distributed_public_key` in a cluster lock.
+          description: >-
+            A `distributed_public_key` of the cluster lock (any hex case). 404
+            when it is not a validator of `lockHash`.
           schema:
             type: string
         - name: shareIdx
           required: true
           in: path
           description: Represents the cluster operatorIndex+1.
-          schema: {}
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lockHash.
           schema: {}
       responses:
         '200':
@@ -1608,49 +1508,42 @@ paths:
                   - $ref: '#/components/schemas/ExitBlob'
         '401':
           description: Authorization header is missing or incorrect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Data is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve Distributed Validator threshold aggregated signed exit msg
       tags:
         - DV Exit
-  /exp/partial_exits/{lockHash}:
-    post:
-      description: This endpoint saves partial signed exit messages.
-      operationId: ExitController_postPartialExit[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The `lockHash` of the cluster which the validator belongs to
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExitDto'
-      responses:
-        '201':
-          description: success message
-        '400':
-          description: Bad request received
-        '404':
-          description: Data or validator not found
-        '409':
-          description: Duplicate entry
-        '500':
-          description: An unknown error occurred
-      summary: Push Distributed Validator partial signed exit message
-      tags:
-        - DV Exit
   /v1/exp/partial_exits/{lockHash}:
     post:
-      description: This endpoint saves partial signed exit messages.
+      description: >-
+        This endpoint saves partial signed exit messages. Every
+        `partial_exits[].public_key` must be a `distributed_public_key` of the
+        lock (matched case-insensitively). `epoch` and `validator_index` are
+        uint64 decimal strings.
+
+
+        The API keeps exactly one exit per validator pubkey: the first accepted
+        partial exit fixes its `epoch` and `validator_index`, and later partial
+        exits for that pubkey from any operator must use the same values or are
+        rejected with 400. To change the epoch, every operator must first delete
+        their partial exit. A pubkey whose exit is stored under a different lock
+        hash is rejected with 409.
       operationId: ExitController_postPartialExit[1]_v1
       parameters:
         - name: lockHash
@@ -1669,13 +1562,31 @@ paths:
         '201':
           description: success message
         '400':
-          description: Bad request received
+          description: Invalid request format, signature, share index, or cluster data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Data or validator not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '409':
-          description: Duplicate entry
+          description: >-
+            Duplicate entry, or an exit for this validator pubkey is stored
+            under a different lock hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Push Distributed Validator partial signed exit message
       tags:
         - DV Exit
@@ -1702,8 +1613,16 @@ paths:
                   - $ref: '#/components/schemas/ClusterEffectivenessResponse'
         '404':
           description: Data not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a Distributed Validator Cluster Effectiveness Object
       tags:
         - Cluster Effectiveness
@@ -1731,10 +1650,22 @@ paths:
           description: success message
         '400':
           description: Invalid terms and conditions hash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Signature verification failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Saves user's approval latest terms and conditions
@@ -1765,8 +1696,16 @@ paths:
                   - $ref: '#/components/schemas/TermsAndConditions'
         '400':
           description: The Address provided is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Verify Signature on Terms and Conditions
       tags:
         - Terms And Conditions
@@ -1789,7 +1728,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/TechneResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve Base techne credential metadata
@@ -1814,7 +1757,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/TechneResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve Bronze techne credential metadata
@@ -1839,7 +1786,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/TechneResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve Silver techne credential metadata
@@ -1864,7 +1815,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/TechneResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve Gold techne credential metadata
@@ -1893,8 +1848,16 @@ paths:
                   - $ref: '#/components/schemas/AddressTechneResponse'
         '400':
           description: The Address provided is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve obol techne credentials of an address
       tags:
         - Address
@@ -1919,8 +1882,16 @@ paths:
                   - $ref: '#/components/schemas/AddressBadgeResponse'
         '400':
           description: The Address provided is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve badges for an address
       tags:
         - Address
@@ -1958,8 +1929,16 @@ paths:
                   - $ref: '#/components/schemas/AddressIncentivesResponse'
         '400':
           description: The Address provided is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve obol incentives of an address
       tags:
         - Address
@@ -1990,10 +1969,12 @@ paths:
           schema:
             type: string
         - name: date
-          required: true
+          required: false
           in: query
+          description: The UTC day to retrieve incentives for. Defaults to today.
           schema:
             format: date-time
+            example: '2026-10-01'
             type: string
       responses:
         '200':
@@ -2005,8 +1986,16 @@ paths:
                   - $ref: '#/components/schemas/AddressIncentivesResponse'
         '400':
           description: The Address provided is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve the historical incentives of an address
       tags:
         - Address
@@ -2062,7 +2051,11 @@ paths:
         - name: techne
           required: false
           in: query
-          description: techne to filter by
+          description: >-
+            techne to filter by, e.g. `techne[silver]=true` (a flat
+            `techne=silver` list is also accepted)
+          style: deepObject
+          explode: true
           schema:
             type: object
             properties:
@@ -2073,7 +2066,11 @@ paths:
         - name: badges
           required: false
           in: query
-          description: badges to filter by
+          description: >-
+            badges to filter by, e.g. `badges[lido]=true` (a flat `badges=lido`
+            list is also accepted)
+          style: deepObject
+          explode: true
           schema:
             type: object
             properties:
@@ -2098,8 +2095,16 @@ paths:
                   - $ref: '#/components/schemas/OperatorsPagedResponse'
         '400':
           description: Network not spported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve operators on a given network
       tags:
         - Address
@@ -2156,8 +2161,16 @@ paths:
                   - $ref: '#/components/schemas/OperatorsPagedResponse'
         '404':
           description: Operators not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve a list operators on a given network
       tags:
         - Address
@@ -2186,7 +2199,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/OWRResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - bearer: []
       summary: Retrieve OWR tranch information
@@ -2249,8 +2266,16 @@ paths:
                   - $ref: '#/components/schemas/MigrationStateResponse'
         '404':
           description: Data is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve validators migrate status
       tags:
         - DV Migrate
@@ -2261,8 +2286,10 @@ paths:
         --publish`: **`enr`**, **`sig`**, and **`data`**. Authentication is
         **not** a Bearer token: `TestEnrGuard` verifies that `sig` is a valid
         secp256k1 ECDSA signature (base64, as emitted by Go `json.Marshal` on
-        the signature bytes) over the SSZ hash of `JSON.stringify(data)` for the
-        public key embedded in `enr`. Only `Content-Type: application/json` is
+        the signature bytes) over the SSZ hash of `data` serialised as Go
+        `json.Marshal` does (`&`, `<`, `>`, U+2028 and U+2029 escaped as
+        `\uXXXX`; plain `JSON.stringify(data)` is also accepted) for the public
+        key embedded in `enr`. Only `Content-Type: application/json` is
         required.
       operationId: TestController_postTestResult_v1
       parameters: []
@@ -2277,14 +2304,30 @@ paths:
           description: Test result data stored successfully
         '400':
           description: Invalid test result data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Signature verification failed for the supplied `enr` and `sig`
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '403':
           description: >-
             Returned when `enr` or `sig` is missing from the body (guard rejects
             the request before verification)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Store test result data
       tags:
         - Test
@@ -2310,45 +2353,19 @@ paths:
                   $ref: '#/components/schemas/TestResultDto'
         '404':
           description: No test results found for this ENR
-        '500':
-          description: An unknown error occurred
-      summary: Get test results by ENR
-      tags:
-        - Test
-  /deposit_data/{lockHash}/{pubkey}:
-    get:
-      description: >-
-        This endpoint returns all partial deposit data grouped by amount for a
-        specific validator
-      operationId: DepositController_getDeposits[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lock hash
-          schema:
-            type: string
-        - name: pubkey
-          required: true
-          in: path
-          description: The validator public key (distributed_public_key)
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The deposit data
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/DepositDataResponse'
-        '404':
-          description: Data is not found
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Retrieve partial deposit data for a validator
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get test results by ENR
       tags:
-        - Deposit Data
+        - Test
   /v1/deposit_data/{lockHash}/{pubkey}:
     get:
       description: >-
@@ -2378,48 +2395,17 @@ paths:
                   - $ref: '#/components/schemas/DepositDataResponse'
         '404':
           description: Data is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Retrieve partial deposit data for a validator
-      tags:
-        - Deposit Data
-  /deposit_data/partial_deposits/{lockHash}/{share_index}:
-    post:
-      description: This endpoint saves partial deposit data signed by an operator
-      operationId: DepositController_submitPartialDeposits[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The lock hash of the cluster
-          schema:
-            type: string
-        - name: share_index
-          required: true
-          in: path
-          description: The share index (operator index + 1)
-          schema:
-            type: number
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DepositDto'
-      responses:
-        '201':
-          description: Deposit data saved successfully
-        '400':
-          description: >-
-            Invalid request format | Conflicting withdrawal address. Delete the
-            existing deposits first. | Validator is already initialised.
-        '401':
-          description: Invalid deposit signature
-        '404':
-          description: Data or validator not found
-        '500':
-          description: An unknown error occurred
-      summary: Push partial deposit data
       tags:
         - Deposit Data
   /v1/deposit_data/partial_deposits/{lockHash}/{share_index}:
@@ -2452,60 +2438,31 @@ paths:
           description: >-
             Invalid request format | Conflicting withdrawal address. Delete the
             existing deposits first. | Validator is already initialised.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Invalid deposit signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Data or validator not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Push partial deposit data
       tags:
         - Deposit Data
-  /fee_recipient/partial/{lockHash}/{shareIdx}:
-    post:
-      description: >-
-        Stores partial BLS-signed builder registration messages for a given
-        cluster operator. Partials are grouped into builder registrations by
-        message content (fee_recipient, gas_limit, timestamp). The timestamp
-        must be greater than or equal to the highest timestamp any operator has
-        submitted for each pubkey. Equal timestamps are allowed so operators can
-        join an existing registration group.
-      operationId: FeeRecipientController_postPartialFeeRecipients[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lock hash.
-          schema:
-            example: 0x1234abcd...
-            type: string
-        - name: shareIdx
-          required: true
-          in: path
-          description: The operator share index (1-based).
-          schema:
-            example: 1
-            type: number
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FeeRecipientDto'
-      responses:
-        '201':
-          description: Partial registrations saved successfully.
-        '400':
-          description: >-
-            Invalid request body, signature verification failed, invalid share
-            index, or duplicate pubkey in request.
-        '404':
-          description: Lock not found.
-        '500':
-          description: An unknown error occurred.
-      summary: Submit partial fee recipient registrations
-      tags:
-        - Fee Recipient
   /v1/fee_recipient/partial/{lockHash}/{shareIdx}:
     post:
       description: >-
@@ -2544,49 +2501,23 @@ paths:
           description: >-
             Invalid request body, signature verification failed, invalid share
             index, or duplicate pubkey in request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
           description: Lock not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred.
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Submit partial fee recipient registrations
-      tags:
-        - Fee Recipient
-  /fee_recipient/{lockHash}:
-    post:
-      description: >-
-        Returns builder registration status for validators in a cluster. For
-        each validator, returns at most two registrations: the latest one that
-        reached quorum (quorum: true) and the latest one still collecting
-        signatures (quorum: false). Validators with no registration data are
-        omitted. Optionally pass an array of pubkeys in the request body to
-        filter results.
-      operationId: FeeRecipientController_getPartialFeeRecipients[0]
-      parameters:
-        - name: lockHash
-          required: true
-          in: path
-          description: The cluster lock hash.
-          schema:
-            example: 0x1234abcd...
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/FetchQueryDto'
-      responses:
-        '200':
-          description: >-
-            Per validator: at most 2 builder registrations (latest with quorum:
-            true, latest with quorum: false). Each registration includes the
-            signed message, partial signatures, and a quorum boolean. Pubkeys
-            returned without 0x prefix.
-        '404':
-          description: Lock not found or no partial registrations found.
-        '500':
-          description: An unknown error occurred.
-      summary: Fetch partial fee recipient registrations
       tags:
         - Fee Recipient
   /v1/fee_recipient/{lockHash}:
@@ -2620,78 +2551,27 @@ paths:
             true, latest with quorum: false). Each registration includes the
             signed message, partial signatures, and a quorum boolean. Pubkeys
             returned without 0x prefix.
-        '404':
-          description: Lock not found or no partial registrations found.
-        '500':
-          description: An unknown error occurred.
-      summary: Fetch partial fee recipient registrations
-      tags:
-        - Fee Recipient
-  /tvs/{network}:
-    get:
-      description: >-
-        Returns either summary (total balance) or detailed (validator-level) TVS
-        data for a specific timestamp. All returned data (balances, counts,
-        totals) corresponds to the timestamp shown in the response. Each network
-        has one data snapshot per day.
-      operationId: TVSController_getTVS[0]
-      parameters:
-        - name: network
-          required: true
-          in: path
-          description: Network name (e.g., mainnet, hoodi)
-          schema:
-            example: mainnet
-            type: string
-        - name: limit
-          required: false
-          in: query
-          description: Number of results per page (only applies when details=true).
-          schema:
-            type: integer
-            default: 100
-            maximum: 1000
-        - name: page
-          required: false
-          in: query
-          description: Page number (only applies when details=true)
-          schema:
-            type: integer
-            default: 0
-        - name: details
-          required: false
-          in: query
-          description: If true, returns detailed validator-level data
-          schema:
-            type: string
-            default: 'false'
-        - name: timestamp
-          required: false
-          in: query
-          description: >-
-            ISO 8601 timestamp or date (YYYY-MM-DD). If date-only format is
-            used, returns data for that day regardless of exact time. If not
-            provided, returns the latest available data.
-          schema:
-            example: '2025-10-02'
-      responses:
-        '200':
-          description: TVS data retrieved successfully
+        '400':
+          description: Invalid request body.
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/TVSSummaryResponse'
-                  - $ref: '#/components/schemas/TVSDetailedResponse'
-        '400':
-          description: Invalid parameters
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: No data found for the specified network/timestamp
+          description: Lock not found or no partial registrations found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Get Total Value Staked Of Obol for a network
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Fetch partial fee recipient registrations
       tags:
-        - tvs
+        - Fee Recipient
   /v1/tvs/{network}:
     get:
       description: >-
@@ -2750,53 +2630,25 @@ paths:
                   - $ref: '#/components/schemas/TVSDetailedResponse'
         '400':
           description: Invalid parameters
-        '404':
-          description: No data found for the specified network/timestamp
-        '500':
-          description: An unknown error occurred
-      summary: Get Total Value Staked Of Obol for a network
-      tags:
-        - tvs
-  /positions/{network}/{address}:
-    post:
-      description: >-
-        Returns all DV clusters where the address (or any additional address)
-        appears as withdrawal_address or fee_recipient. Also checks Lido
-        protocol_fee_splitters.
-      operationId: PositionsController_getPositions[0]
-      parameters:
-        - name: network
-          required: true
-          in: path
-          description: Network name (mainnet, hoodi, etc.)
-          schema:
-            type: string
-        - name: address
-          required: true
-          in: path
-          description: The address to look up positions for
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PositionsRequestDto'
-      responses:
-        '200':
-          description: Positions found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PositionsResponse'
-        '400':
-          description: Invalid network
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: No data found for the specified network/timestamp
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
-      summary: Get positions for an address
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get Total Value Staked Of Obol for a network
       tags:
-        - Positions
+        - tvs
   /v1/positions/{network}/{address}:
     post:
       description: >-
@@ -2814,7 +2666,7 @@ paths:
         - name: address
           required: true
           in: path
-          description: The address to look up positions for
+          description: The address to look up positions for (0x + 40 hex)
           schema:
             type: string
       requestBody:
@@ -2831,12 +2683,164 @@ paths:
               schema:
                 $ref: '#/components/schemas/PositionsResponse'
         '400':
-          description: Invalid network
+          description: Invalid network, address or additionalAddresses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
-          description: An unknown error occurred
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       summary: Get positions for an address
       tags:
         - Positions
+  /v1/validators/{network}/deposit-status:
+    post:
+      description: >-
+        What our beacon node's head state holds for each pubkey: the validator
+        registry entry (status, balances, activation and exit epochs), every
+        deposit in the pending deposit queue (EIP-6110), each with its own
+        withdrawal credentials, and the total queued in the pending partial
+        withdrawal queue (EIP-7002). Returns one entry per distinct requested
+        pubkey, in request order, including pubkeys with status `new`. Accepts
+        up to 1000 pubkeys per request (96 hex characters, 0x prefix optional,
+        case-insensitive). Amounts are wei decimal strings. Queued deposit
+        signatures are verified in the background, each queue entry once; a
+        queue-only pubkey whose deposits are not all verified yet has
+        `signaturesPending: true` (retry for the complete answer). Any upstream
+        failure fails the whole request so a partial answer can never read as
+        `new`. Entries are cached per pubkey for one slot.
+      operationId: ValidatorDepositStatusController_getDepositStatus_v1
+      parameters:
+        - name: network
+          required: true
+          in: path
+          description: The network to query validators on
+          examples:
+            mainnet:
+              summary: Ethereum Mainnet
+              value: mainnet
+            hoodi:
+              summary: Hoodi Test Network
+              value: hoodi
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositStatusRequestDto'
+      responses:
+        '200':
+          description: Deposit status per requested pubkey
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatorDepositStatusResponse'
+        '400':
+          description: Unsupported network or malformed pubkeys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limited (either this API or the upstream)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: Beacon node request failed or returned a malformed answer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get the deposit status of a batch of validator pubkeys
+      tags:
+        - Validators
+  /v1/ovm/{network}/{address}:
+    get:
+      description: >-
+        Provenance (CreateObolValidatorManager from the network OVM factory),
+        state (one Multicall3 read), role holders (RolesUpdated candidates,
+        rolesOf at the same block), the 0xSplits v2 params of its recipients
+        (verified against splitHash) and the validators whose credentials point
+        at it. Every chain read is made at `blockNumber`. Amounts are wei
+        decimal strings; addresses checksummed. Validators come from the goteth
+        registry snapshot in ClickHouse (daily), the beacon registry past it and
+        the pending deposit queue, with current status from the head state.
+        Roles, splits and validators are only read for a verified Obol OVM
+        (provenance `obol`); for any other contract they are null and only
+        provenance and state are returned. Sections that could not be read are
+        null and explained in `notes`. An address without code is 200 with
+        provenance `notObol`. Complete answers, and answers for `notObol`
+        addresses, are cached for one slot; answers with a section that could
+        not be read are not cached.
+      operationId: OvmController_getOvm_v1
+      parameters:
+        - name: network
+          required: true
+          in: path
+          description: The network of the OVM
+          examples:
+            mainnet:
+              summary: Ethereum Mainnet
+              value: mainnet
+            hoodi:
+              summary: Hoodi Test Network
+              value: hoodi
+          schema:
+            type: string
+        - name: address
+          required: true
+          in: path
+          description: The OVM address
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The OVM
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OvmResponse'
+        '400':
+          description: Unsupported network or malformed address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limited (either this API or the upstream)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '502':
+          description: The execution RPC request failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      summary: Get an ObolValidatorManager (OVM) in one call
+      tags:
+        - OVM
 info:
   title: Obol API
   description: >-
@@ -2844,21 +2848,39 @@ info:
 
 
     This API is for creating and managing [Distributed
-    Validators](https://docs.obol.tech/docs/int/key-concepts#distributed-validator).
-    This API works in tandem with Obol's [Distributed Validator
-    Launchpad](https://hoodi.launchpad.obol.org), a dapp designed to allow
-    people to authenticate their counterparties and agree to the terms of a
-    Distributed Validator Cluster. This API will be made more easy for code-only
-    interaction in the coming quarters with the release of the Obol-SDK. 
+    Validators](https://docs.obol.org/learn/intro/key-concepts). It works in
+    tandem with Obol's [Distributed Validator
+    Launchpad](https://launchpad.obol.org), a dapp for authenticating
+    counterparties and agreeing on the terms of a Distributed Validator Cluster.
+    For code-only use, the [Obol SDK](https://docs.obol.org/sdk) wraps it with
+    types. Endpoints are listed under `/v1`; older clients may still call most
+    of them without the prefix.
 
 
-    Read more about Obol and how to use the
-    [launchpad](https://hoodi.launchpad.obol.org) on our [docs
-    site](https://docs.obol.tech/). 
+    ## Errors, request ids and rate limits
+
+
+    - Every error has a JSON body: `{ "statusCode": 404, "message": "Cluster not
+    found" }`. Validation errors carry a list of messages and an `error` reason.
+    A 500 always says `Internal server error`.
+
+    - Every response carries an `X-Request-Id` header (Cloudflare's Ray ID for
+    requests through Cloudflare). Quote it when reporting a problem.
+
+    - Busy public reads may be rate limited per IP: a 429 carries `Retry-After`
+    in seconds.
+
+    - See [Errors and rate
+    limits](https://docs.obol.org/api/errors-and-rate-limits) for details.
+
+
+    Read more about Obol and the
+    [launchpad](https://docs.obol.org/learn/intro/launchpad) on our [docs
+    site](https://docs.obol.org).
 
 
     For enquiries:
-  version: v1.0.0-local
+  version: v1.0.0-719f87476148d9c4bae7cc5dc1d351fd60f3cdb8
   contact:
     name: Obol Labs
     url: https://obol.tech
@@ -3196,12 +3218,171 @@ components:
           type: array
           items:
             type: string
+        definition_stored:
+          type: boolean
+          example: true
+          description: >-
+            true: cluster_definition is the exact definition this lock was
+            created with (covered by lock_hash). false: this lock was stored
+            without its exact cluster definition; lock_hash cannot be
+            re-verified until the lock file is posted again.
+        is_current:
+          type: boolean
+          example: true
+          description: >-
+            true: this is the current lock for its validators and config_hash.
+            Several locks can share validator keys or a config_hash (re-split or
+            DKG re-run); the current one is the lock whose Charon nodes reported
+            most recently to Obol monitoring, or, when none of them has
+            reported, the most recently created. It can change when another lock
+            is posted for the same keys or when a sibling starts or stops
+            reporting. GET /lock/configHash/{configHash} does not use this rule:
+            it returns the most recently created lock, which can be is_current
+            false.
+        superseded_by:
+          type: string
+          example: null
+          nullable: true
+          description: >-
+            lock_hash of the current lock that shares validator keys or the
+            config_hash with this one, when this lock is not current; null when
+            it is current.
       required:
         - cluster_definition
         - distributed_validators
         - signature_aggregate
         - lock_hash
         - node_signatures
+        - definition_stored
+        - is_current
+        - superseded_by
+    ClusterLockShellResponse:
+      type: object
+      properties:
+        cluster_definition:
+          description: >-
+            Cluster definition data that was used in dkg to generate cluster
+            lock.
+          allOf:
+            - $ref: '#/components/schemas/ClusterDefinitionResponse'
+        signature_aggregate:
+          type: string
+          example: '0x85650c30ec29a3703934bf50a28da102975deda77e758579ea3dfe4136abf752'
+        lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        node_signatures:
+          type: array
+          items:
+            type: string
+        validator_count:
+          type: number
+          example: 10000
+          description: Number of distributed validators in this cluster lock.
+        definition_stored:
+          type: boolean
+          example: true
+          description: >-
+            true: cluster_definition is the exact definition this lock was
+            created with (covered by lock_hash). false: this lock was stored
+            without its exact cluster definition; lock_hash cannot be
+            re-verified until the lock file is posted again.
+        is_current:
+          type: boolean
+          example: true
+          description: >-
+            true: this is the current lock for its validators and config_hash.
+            Several locks can share validator keys or a config_hash (re-split or
+            DKG re-run); the current one is the lock whose Charon nodes reported
+            most recently to Obol monitoring, or, when none of them has
+            reported, the most recently created. It can change when another lock
+            is posted for the same keys or when a sibling starts or stops
+            reporting. GET /lock/configHash/{configHash} does not use this rule:
+            it returns the most recently created lock, which can be is_current
+            false.
+        superseded_by:
+          type: string
+          example: null
+          nullable: true
+          description: >-
+            lock_hash of the current lock that shares validator keys or the
+            config_hash with this one, when this lock is not current; null when
+            it is current.
+      required:
+        - cluster_definition
+        - signature_aggregate
+        - lock_hash
+        - node_signatures
+        - validator_count
+        - definition_stored
+        - is_current
+        - superseded_by
+    ClusterLockValidatorsPagedResponse:
+      type: object
+      properties:
+        lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        total_count:
+          type: number
+          example: 10000
+        page:
+          type: number
+          example: 0
+        limit:
+          type: number
+          example: 100
+        distributed_validators:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributedValidator'
+      required:
+        - lock_hash
+        - total_count
+        - page
+        - limit
+        - distributed_validators
+    ClusterLockRevision:
+      type: object
+      properties:
+        lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        name:
+          type: string
+          example: My Obol Cluster
+        definition_timestamp:
+          type: string
+          example: '2022-07-19T18:19:58+02:00'
+        config_hash:
+          type: string
+          example: '0x2204ba6c238ed2d6a8ff951d4513db993c8d6f8860468391342649bf735a87d7'
+      required:
+        - lock_hash
+        - name
+        - definition_timestamp
+        - config_hash
+    ClusterLockRevisionsResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 0194FDC2-FA2F-FCC0-41D3-FF12045B73C8
+        current_lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        latest_lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        revisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterLockRevision'
+      required:
+        - uuid
+        - current_lock_hash
+        - latest_lock_hash
+        - revisions
     ClusterLockPagedResponse:
       type: object
       properties:
@@ -3212,12 +3393,175 @@ components:
         total_active_stake_eth:
           type: number
           example: 128.5
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
         total_active_stake_usd:
           type: number
           example: 128.5
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
         unique_validators_count:
           type: number
           example: 10
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
+        total_count:
+          type: number
+          example: 2
+        total_pages:
+          type: number
+          example: 4
+      required:
+        - cluster_locks
+        - total_count
+        - total_pages
+    ValidatorStatusCountsResponse:
+      type: object
+      properties:
+        active:
+          type: number
+          example: 3
+          description: Status active_ongoing.
+        exiting:
+          type: number
+          example: 0
+          description: Status active_exiting or active_slashed.
+        exited:
+          type: number
+          example: 1
+          description: >-
+            Status exited_unslashed, exited_slashed, withdrawal_possible or
+            withdrawal_done.
+        pending:
+          type: number
+          example: 1
+          description: >-
+            Status pending_initialized or pending_queued, or not yet in the
+            validator registry but in the pending deposit queue.
+        not_deposited:
+          type: number
+          example: 0
+          description: Neither in the validator registry nor in the pending deposit queue.
+        total:
+          type: number
+          example: 5
+          description: Number of distributed validators in the cluster lock.
+        active_balance_eth:
+          type: string
+          example: '96.012345678'
+          description: >-
+            Sum of the current balances of active and exiting validators, in
+            ETH.
+      required:
+        - active
+        - exiting
+        - exited
+        - pending
+        - not_deposited
+        - total
+        - active_balance_eth
+    OperatorClusterLockResponse:
+      type: object
+      properties:
+        cluster_definition:
+          description: >-
+            Cluster definition data that was used in dkg to generate cluster
+            lock.
+          allOf:
+            - $ref: '#/components/schemas/ClusterDefinitionResponse'
+        distributed_validators:
+          type: array
+          items:
+            $ref: '#/components/schemas/DistributedValidator'
+        signature_aggregate:
+          type: string
+          example: '0x85650c30ec29a3703934bf50a28da102975deda77e758579ea3dfe4136abf752'
+        lock_hash:
+          type: string
+          example: '0xd2880980169ee4a0000f23feb8fad9a6c70f38312956fe67aa89e118f5b0e048'
+        node_signatures:
+          type: array
+          items:
+            type: string
+        definition_stored:
+          type: boolean
+          example: true
+          description: >-
+            true: cluster_definition is the exact definition this lock was
+            created with (covered by lock_hash). false: this lock was stored
+            without its exact cluster definition; lock_hash cannot be
+            re-verified until the lock file is posted again.
+        is_current:
+          type: boolean
+          example: true
+          description: >-
+            true: this is the current lock for its validators and config_hash.
+            Several locks can share validator keys or a config_hash (re-split or
+            DKG re-run); the current one is the lock whose Charon nodes reported
+            most recently to Obol monitoring, or, when none of them has
+            reported, the most recently created. It can change when another lock
+            is posted for the same keys or when a sibling starts or stops
+            reporting. GET /lock/configHash/{configHash} does not use this rule:
+            it returns the most recently created lock, which can be is_current
+            false.
+        superseded_by:
+          type: string
+          example: null
+          nullable: true
+          description: >-
+            lock_hash of the current lock that shares validator keys or the
+            config_hash with this one, when this lock is not current; null when
+            it is current.
+        validator_status_counts:
+          description: >-
+            Counts of this cluster's validators by beacon-chain status. Omitted
+            when the cluster's network is unsupported or its beacon node is
+            unavailable.
+          allOf:
+            - $ref: '#/components/schemas/ValidatorStatusCountsResponse'
+      required:
+        - cluster_definition
+        - distributed_validators
+        - signature_aggregate
+        - lock_hash
+        - node_signatures
+        - definition_stored
+        - is_current
+        - superseded_by
+    ClusterLockOperatorPagedResponse:
+      type: object
+      properties:
+        cluster_locks:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatorClusterLockResponse'
+        total_active_stake_eth:
+          type: number
+          example: 128.5
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
+        total_active_stake_usd:
+          type: number
+          example: 128.5
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
+        unique_validators_count:
+          type: number
+          example: 10
+          nullable: true
+          description: >-
+            Null when the operator has locks but no recent metrics snapshot is
+            available.
         total_count:
           type: number
           example: 2
@@ -3379,30 +3723,77 @@ components:
         index:
           type: string
           example: '12345'
+          nullable: true
+          description: >-
+            Validator index. Null while the validator is only in the pending
+            deposit queue (status pending_deposit).
         status:
           type: string
           example: active_ongoing
+          description: >-
+            Beacon API validator status (pending_initialized, pending_queued,
+            active_ongoing, active_exiting, active_slashed, exited_unslashed,
+            exited_slashed, withdrawal_possible, withdrawal_done), or
+            pending_deposit when the pubkey is not yet in the validator registry
+            but has a deposit in the pending deposit queue (EIP-6110). Pubkeys
+            in neither are omitted from the response.
         balance:
           type: string
           example: '32'
+          nullable: true
+          description: Balance in ETH. Null for status pending_deposit.
         effective_balance:
           type: string
           example: '32'
+          nullable: true
+          description: Effective balance in ETH. Null for status pending_deposit.
         withdrawal_credentials:
           type: string
           example: '0x01000000000000000000000086b8145c98e5bd25ba722645b15ed65f024a87ec'
+          nullable: true
+          description: >-
+            Withdrawal credentials. For status pending_deposit, those of the
+            first queued deposit with a valid signature, which the validator
+            will be created with (the beacon chain drops queued deposits with an
+            invalid signature for a pubkey not yet in the registry). Null for
+            status pending_deposit when no queued deposit has a valid signature,
+            or while the signatures up to the first valid one are not checked
+            yet (checked in the background, usually within a slot; retry).
         pending_partial_withdrawals:
           type: string
           example: '3'
+          nullable: true
+          description: >-
+            Queued partial withdrawals in ETH. Null for status pending_deposit
+            or when the queue is unavailable.
         pending_partial_deposits:
           type: string
           example: '3'
+          nullable: true
+          description: >-
+            Sum of queued deposits for this pubkey in ETH (top-ups, or for
+            status pending_deposit the initial deposit). If the queue cannot be
+            read the request fails with 502.
         is_not_within_committee:
           type: boolean
           example: true
+          nullable: true
           description: >-
             Indicates if validator has been active for at least 256 epochs and
-            is not within the committee period
+            is not within the committee period. Null when unknown, including for
+            status pending_deposit.
+        credentials_conflict:
+          type: boolean
+          example: false
+          description: >-
+            True when the pubkey is only in the pending deposit queue (status
+            pending_deposit) and its queued deposits with valid signatures carry
+            different withdrawal credentials: someone able to sign for the key
+            signed a deposit for other credentials. Only the first valid one
+            applies. Always false for a validator already in the registry. Null
+            while the API has not yet checked every queued deposit signature for
+            the pubkey (checked in the background, usually within a slot).
+          nullable: true
       required:
         - index
         - status
@@ -3412,6 +3803,7 @@ components:
         - pending_partial_withdrawals
         - pending_partial_deposits
         - is_not_within_committee
+        - credentials_conflict
     ClusterExitStatusSummaryResponse:
       type: object
       properties:
@@ -3441,9 +3833,11 @@ components:
         epoch:
           type: string
           example: '162304'
+          description: uint64 as a decimal string
         validator_index:
           type: string
           example: '42'
+          description: uint64 as a decimal string
       required:
         - epoch
         - validator_index
@@ -3454,7 +3848,9 @@ components:
           $ref: '#/components/schemas/ExitMessageDto'
         signature:
           type: string
-          example: ''
+          pattern: ^0x[0-9a-fA-F]{192}$
+          example: >-
+            0xa8f503b58ad5e41153a6b125078adc4d0d448c0ce1878a910aaebd52f3458cb01b3f64bda575c76a59ca057c42be30ad163f5e6cbe32b4fbfd2e127d9f6663a16fe90e97f1429fa6c98eaf77470c0d025fbc843becc5343b822a33ea1f425b83
       required:
         - message
         - signature
@@ -3463,7 +3859,7 @@ components:
       properties:
         public_key:
           type: string
-          pattern: ^(0x|0h)?[0-9A-F]+$
+          pattern: ^0x[0-9a-fA-F]{96}$
           example: >-
             0x8b69c67720c909423d7edc5d3a7554e1d1e50f6d7d5f8d18548d68daf424e536afba8b31fbd15df1970ba4af4a7d944c
         signed_exit_message:
@@ -3481,10 +3877,13 @@ components:
             $ref: '#/components/schemas/ExitBlobDto'
         share_idx:
           type: number
+          minimum: 1
           example: 42
         signature:
           type: string
-          example: ''
+          pattern: ^0x[0-9a-fA-F]{130}$
+          example: >-
+            0x9fd33d13a49d1103fd96dc7f7361cbc1f901d392b3c9a531b110daafe3def58f2699da5b28a6282da1c8fb87bfa8102b8e1bb0151c6ae1643857c80e355c7d4f01
       required:
         - partial_exits
         - share_idx
@@ -3699,6 +4098,9 @@ components:
           example: A
         targets:
           type: object
+          additionalProperties:
+            type: array
+            items: true
           description: Targets with test results
           example: {}
     TestCategoriesDto:
@@ -3806,7 +4208,7 @@ components:
       properties:
         pubkey:
           type: string
-          pattern: ^(0x|0h)?[0-9A-F]+$
+          pattern: ^0x[0-9a-fA-F]{96}$
           example: >-
             0x8b69c67720c909423d7edc5d3a7554e1d1e50f6d7d5f8d18548d68daf424e536afba8b31fbd15df1970ba4af4a7d944c
           description: Public key of the validator (should be in lock file)
@@ -3816,11 +4218,12 @@ components:
           description: Withdrawal credentials (0x01 or 0x02)
         amount:
           type: string
-          pattern: ^\d+$
+          pattern: ^[1-9]\d*$
           example: '32000000000'
           description: Amount in Gwei as string (between 1 and 2048 ETH)
         signature:
           type: string
+          pattern: ^0x[0-9a-fA-F]{192}$
           example: 0x1234...
           description: BLS signature over (pubkey, withdrawal_credentials, amount)
       required:
@@ -4006,6 +4409,7 @@ components:
           description: >-
             Additional addresses to search (e.g. split addresses from
             getRelatedSplits, DeFi wrapper WA)
+          maxItems: 100
           type: array
           items:
             type: string
@@ -4085,15 +4489,23 @@ components:
             $ref: '#/components/schemas/PositionValidator'
         total_balance_eth:
           type: number
-          description: Sum of balance_eth for matched validators (latest snapshot)
+          description: >-
+            Sum of balance_eth for matched validators (latest snapshot). Null
+            when no recent snapshot is available.
+          nullable: true
         avg_effectiveness:
           type: number
-          description: Average effectiveness for matched validators (latest snapshot)
+          description: >-
+            Average effectiveness for matched validators (latest snapshot). Null
+            when no recent snapshot is available.
+          nullable: true
         cluster_apr:
           type: number
           description: >-
             Average APR of affiliated validators (from validator_apy in
-            clusterinformationdetailedv3)
+            clusterinformationdetailedv3). Null when no recent snapshot is
+            available.
+          nullable: true
       required:
         - lock_hash
         - cluster_name
@@ -4110,3 +4522,570 @@ components:
             $ref: '#/components/schemas/PositionCluster'
       required:
         - positions
+    DepositStatusRequestDto:
+      type: object
+      properties:
+        pubkeys:
+          minItems: 1
+          description: >-
+            Validator BLS pubkeys (96 hex chars, 0x prefix optional). Max 1000
+            per request.
+          example:
+            - >-
+              0x8021d0a2e39c261e29b0aa47a56e21df8a3a11b6bce1bfa621d403c95d3fbe0da4bd1c2a3af0a1b6bd9e0c4a5c2f0e11
+          type: array
+          items:
+            type: string
+      required:
+        - pubkeys
+    PendingDepositDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Deposit amount in wei (decimal string)
+          example: '32000000000000000000'
+        withdrawalCredentials:
+          type: string
+          description: Withdrawal credentials of this deposit
+          example: '0x010000000000000000000000abc0000000000000000000000000000000000000'
+        signatureValid:
+          type: boolean
+          description: >-
+            Whether the deposit's BLS signature (DepositMessage in the deposit
+            domain, the network's genesis fork version) is valid. For a pubkey
+            not yet in the registry, the beacon chain drops queued deposits with
+            an invalid signature until the first valid one creates the
+            validator. Null when not checked: the pubkey is already in the
+            registry, so the deposit is a top-up and its signature does not
+            matter; or the background check has not reached it yet
+            (signaturesPending).
+          nullable: true
+          example: true
+      required:
+        - amount
+        - withdrawalCredentials
+        - signatureValid
+    ValidatorDepositStatusDto:
+      type: object
+      properties:
+        pubkey:
+          type: string
+          description: 0x-prefixed lowercase validator BLS pubkey
+          example: >-
+            0x8021d0a2e39c261e29b0aa47a56e21df8a3a11b6bce1bfa621d403c95d3fbe0da4bd1c2a3af0a1b6bd9e0c4a5c2f0e11
+        status:
+          type: string
+          description: >-
+            new: not in the validator registry and nothing queued. queued: only
+            in the pending deposit queue, or registry status pending_initialized
+            / pending_queued. active: registry status active_*. exited: registry
+            status exited_* or withdrawal_*.
+          enum:
+            - new
+            - queued
+            - active
+            - exited
+          example: active
+        beaconStatus:
+          type: string
+          description: >-
+            Raw beacon API status (pending_initialized, pending_queued,
+            active_ongoing, active_exiting, active_slashed, exited_unslashed,
+            exited_slashed, withdrawal_possible, withdrawal_done), or
+            pending_deposit when the pubkey is only in the pending deposit queue
+            (EIP-6110). Null for status new.
+          nullable: true
+          example: active_ongoing
+        index:
+          type: string
+          description: Validator index. Null unless the pubkey is in the registry.
+          nullable: true
+          example: '123456'
+        balance:
+          type: string
+          description: >-
+            Balance in wei (decimal string). Null unless the pubkey is in the
+            registry.
+          nullable: true
+          example: '32000123456000000000'
+        effectiveBalance:
+          type: string
+          description: >-
+            Effective balance in wei (decimal string). Null unless the pubkey is
+            in the registry.
+          nullable: true
+          example: '32000000000000000000'
+        activationEpoch:
+          type: string
+          description: >-
+            Epoch at which the validator was (or will be) activated, as a
+            decimal string. Null unless the pubkey is in the registry, and while
+            no activation epoch is assigned yet (FAR_FUTURE_EPOCH, e.g.
+            pending_initialized).
+          nullable: true
+          example: '12345'
+        exitEpoch:
+          type: string
+          description: >-
+            Epoch at which the validator exits (or exited), as a decimal string.
+            Null unless the pubkey is in the registry, and while no exit is
+            initiated (FAR_FUTURE_EPOCH).
+          nullable: true
+          example: '67890'
+        pendingPartialWithdrawals:
+          type: string
+          description: >-
+            Sum of the validator's entries in the beacon chain's pending partial
+            withdrawal queue (EIP-7002), in wei (decimal string). "0" when none,
+            and for a pubkey not in the registry.
+          example: '0'
+        withdrawalCredentials:
+          type: string
+          description: >-
+            The registry entry's withdrawal credentials; for a pubkey only in
+            the queue, those of its first queued deposit with a valid signature
+            (the validator is created with them; queued deposits with an invalid
+            signature are dropped). Null for status new, for a queue-only pubkey
+            with no validly signed queued deposit, and while the deposits up to
+            the first valid one are not verified yet (signaturesPending).
+          nullable: true
+          example: '0x010000000000000000000000abc0000000000000000000000000000000000000'
+        credentialsConflict:
+          type: boolean
+          description: >-
+            True when the pubkey is only in the queue and its queued deposits
+            with valid signatures carry different withdrawal credentials:
+            someone able to sign for the key signed a deposit for other
+            credentials. Only the first valid one applies. Always false for a
+            pubkey in the registry (its credentials are fixed) or with nothing
+            queued. Null while signaturesPending.
+          nullable: true
+          example: false
+        signaturesPending:
+          type: boolean
+          description: >-
+            True when the pubkey is only in the queue and some of its queued
+            deposit signatures have not been verified yet. Signatures are
+            verified in the background, each queue entry once, usually within a
+            slot; until then those deposits have signatureValid null,
+            credentialsConflict is null, and withdrawalCredentials is null
+            unless already decided by a verified first valid deposit. Retry for
+            the complete answer. Always false for registered and new pubkeys.
+          example: false
+        pendingDeposits:
+          description: >-
+            Every deposit queued for this pubkey (initial deposits and top-ups),
+            in queue order, each with its own withdrawal credentials and
+            signature check. Empty when nothing is queued.
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingDepositDto'
+      required:
+        - pubkey
+        - status
+        - beaconStatus
+        - index
+        - balance
+        - effectiveBalance
+        - activationEpoch
+        - exitEpoch
+        - pendingPartialWithdrawals
+        - withdrawalCredentials
+        - credentialsConflict
+        - signaturesPending
+        - pendingDeposits
+    ValidatorDepositStatusResponse:
+      type: object
+      properties:
+        validators:
+          description: >-
+            One entry per distinct requested pubkey (case-insensitive), in
+            request order.
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidatorDepositStatusDto'
+      required:
+        - validators
+    OvmProvenance:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - obol
+            - notObol
+            - unknown
+          example: obol
+          description: >-
+            `obol` iff the network OVM factory emitted
+            CreateObolValidatorManager for this address; `notObol` if it did not
+            (or the address has no contract code); `unknown` if it could not be
+            checked.
+        factoryAddress:
+          type: string
+          example: '0x5754C8665B7e7BF15E83fCdF6d9636684B782b12'
+          description: The OVM factory of this network
+        creationTxHash:
+          type: string
+          example: '0x176d60d40d1825d817941d59811a25c94b98c55a1c7763dccc9635ad6601c0a7'
+          nullable: true
+          description: Transaction that created the OVM (status `obol` only)
+        creationBlock:
+          type: number
+          example: 3807521
+          nullable: true
+          description: Block the OVM was created in (status `obol` only)
+        reason:
+          type: string
+          example: CreateObolValidatorManager event found
+          description: Why the status was given
+      required:
+        - status
+        - factoryAddress
+        - creationTxHash
+        - creationBlock
+        - reason
+    OvmPullBalances:
+      type: object
+      properties:
+        principalRecipient:
+          type: string
+          example: '0'
+          description: wei
+        rewardRecipient:
+          type: string
+          example: '0'
+          description: wei
+      required:
+        - principalRecipient
+        - rewardRecipient
+    OvmRoleHolder:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x8a3bE1b1F4e2b6C5bC0dC5Bf1d1e6A1a8D1d5E2F'
+        roles:
+          type: string
+          example: '33'
+          description: >-
+            `rolesOf(address)` at `blockNumber` (bit mask), as a decimal string:
+            the owner can set any of the 256 bits, beyond what a JSON number
+            holds exactly
+        roleNames:
+          example:
+            - WITHDRAWAL
+            - DEPOSIT
+          description: >-
+            Names of the set bits: WITHDRAWAL 0x01, CONSOLIDATION 0x02,
+            SET_BENEFICIARY 0x04, RECOVER_FUNDS 0x08, SET_REWARD 0x10, DEPOSIT
+            0x20
+          type: array
+          items:
+            type: string
+        isOwner:
+          type: boolean
+          example: false
+          description: Whether this holder is the owner (always the first entry)
+        publicForwarder:
+          type: boolean
+          example: false
+          description: >-
+            True when the holder is a public call forwarder (Multicall3
+            0xcA11bde05977b3631167028862bE2a173976CA11, or, where they have
+            code, Multicall2 0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696 and
+            Multicall 0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441): anyone can
+            call role-gated functions through it, so the role is effectively
+            public.
+        grantedAtBlock:
+          type: number
+          example: 3807530
+          nullable: true
+          description: >-
+            Block of the most recent RolesUpdated log for this holder at or
+            before `blockNumber` (each log sets the full role mask, so this is
+            when its current roles were set). null when no RolesUpdated log
+            names the holder (an owner without roles).
+        grantedAtTimestamp:
+          type: number
+          example: 1760000000
+          nullable: true
+          description: >-
+            Unix timestamp (seconds) of `grantedAtBlock`; null when
+            `grantedAtBlock` is null or the block header could not be read.
+      required:
+        - address
+        - roles
+        - roleNames
+        - isOwner
+        - publicForwarder
+        - grantedAtBlock
+        - grantedAtTimestamp
+    OvmSplit:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x1c5F4E4e2f1D5ab6E1bB0A9c7A4B4D5e6F7a8B9C'
+        kind:
+          type: string
+          enum:
+            - principal
+            - reward
+          example: reward
+          description: Which OVM recipient this split is
+        splitHash:
+          type: string
+          example: '0x9f5a0c0d4c5ea9f4b1c0b1a7a1e2c3d4e5f60718293a4b5c6d7e8f9012345678'
+          description: '`splitHash()` at `blockNumber`; the params hash to it'
+        recipients:
+          example:
+            - '0x1111111111111111111111111111111111111111'
+          type: array
+          items:
+            type: string
+        allocations:
+          example:
+            - '1000000'
+          type: array
+          items:
+            type: string
+        totalAllocation:
+          type: string
+          example: '1000000'
+        distributionIncentive:
+          type: number
+          example: 0
+        source:
+          type: string
+          enum:
+            - SplitUpdated
+            - SplitCreated
+          example: SplitCreated
+          description: The log the params were read from
+      required:
+        - address
+        - kind
+        - splitHash
+        - recipients
+        - allocations
+        - totalAllocation
+        - distributionIncentive
+        - source
+    OvmValidator:
+      type: object
+      properties:
+        pubkey:
+          type: string
+          example: >-
+            0xabababababababababababababababababababababababababababababababababababababababababababababababab
+        index:
+          type: number
+          example: 123456
+          nullable: true
+        status:
+          type: string
+          enum:
+            - new
+            - queued
+            - active
+            - exited
+          example: active
+          description: >-
+            `new` (in a lock for this OVM, no deposit seen), `queued` (in the
+            pending deposit queue or pending activation), `active`, `exited`
+            (exited or withdrawable/withdrawn)
+        beaconStatus:
+          type: string
+          example: active_ongoing
+          nullable: true
+          description: >-
+            Beacon API status; `pending_deposit` when only in the deposit queue;
+            null for `new`
+        balance:
+          type: string
+          example: '32001234567000000000'
+          nullable: true
+          description: wei
+        effectiveBalance:
+          type: string
+          example: '32000000000000000000'
+          nullable: true
+          description: wei
+        withdrawalCredentials:
+          type: string
+          example: '0x0200000000000000000000008019384ddf091154d6cffa8e7f09542b39e2273f'
+          description: >-
+            Registry credentials; for a queued validator the credentials it will
+            be created with; for `new` the credentials in its lock
+        lockHash:
+          type: string
+          example: '0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd'
+          nullable: true
+          description: >-
+            Lock hash, when the validator is in a lock whose withdrawal address
+            is this OVM
+        clusterName:
+          type: string
+          example: My Obol Cluster
+          nullable: true
+          description: >-
+            Name in that lock's cluster definition; null when `lockHash` is null
+            or the definition has no name
+      required:
+        - pubkey
+        - index
+        - status
+        - beaconStatus
+        - balance
+        - effectiveBalance
+        - withdrawalCredentials
+        - lockHash
+        - clusterName
+    OvmResponse:
+      type: object
+      properties:
+        address:
+          type: string
+          example: '0x8019384Ddf091154D6cfFA8E7f09542B39E2273f'
+        network:
+          type: string
+          example: hoodi
+        blockNumber:
+          type: number
+          example: 3854924
+          description: Block every chain read (state, roles, splits) was made at
+        provenance:
+          $ref: '#/components/schemas/OvmProvenance'
+        owner:
+          type: string
+          nullable: true
+        principalRecipient:
+          type: string
+          nullable: true
+        rewardRecipient:
+          type: string
+          nullable: true
+        principalThreshold:
+          type: string
+          example: '16000000000000000000'
+          nullable: true
+          description: wei (the contract stores gwei)
+        amountOfPrincipalStake:
+          type: string
+          example: '64000000000000000000'
+          nullable: true
+          description: >-
+            wei. A routing counter raised by OVM.deposit, not a measure of
+            stake: compare with `principalOnBeaconChain`.
+        fundsPendingWithdrawal:
+          type: string
+          example: '0'
+          nullable: true
+        balance:
+          type: string
+          example: '1250000000000000000'
+          nullable: true
+          description: OVM ETH balance, wei
+        version:
+          type: string
+          example: v1.0.0
+          nullable: true
+          description: '`version()`, null if the contract has none'
+        pullBalances:
+          nullable: true
+          description: '`getPullBalance` of both recipients at `blockNumber`'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OvmPullBalances'
+        roles:
+          nullable: true
+          description: >-
+            Owner first (with its roles, possibly 0), then every other
+            RolesUpdated candidate with roles at `blockNumber`. null if the role
+            events or rolesOf could not be read, and for an address whose
+            provenance is not `obol`.
+          type: array
+          items:
+            $ref: '#/components/schemas/OvmRoleHolder'
+        splits:
+          nullable: true
+          description: >-
+            The recipients that are 0xSplits v2 PullSplits, with params whose
+            hash equals their `splitHash()`. null if they could not be checked,
+            and for an address whose provenance is not `obol`.
+          type: array
+          items:
+            $ref: '#/components/schemas/OvmSplit'
+        validators:
+          nullable: true
+          description: >-
+            Validators whose credentials (or queued deposit credentials) point
+            at this OVM, plus undeposited validators of locks for it. null if
+            the beacon node could not be read, and for an address whose
+            provenance is not `obol`.
+          type: array
+          items:
+            $ref: '#/components/schemas/OvmValidator'
+        principalOnBeaconChain:
+          type: string
+          example: null
+          nullable: true
+          description: >-
+            wei. The principal this OVM is responsible for: the sum of processed
+            beacon-chain deposits credited to validators whose withdrawal
+            credentials point at this OVM (by the validator's current
+            credentials), adjusted for consolidations into/out of those
+            validators, minus principal already paid out by the OVM (sum of
+            DistributeFunds.principalPayout). null until processed deposits are
+            indexed (see `notes`).
+        notes:
+          example:
+            - 'principalOnBeaconChain is null: processed deposits are not indexed'
+          description: Anything partial or unavailable in this answer
+          type: array
+          items:
+            type: string
+      required:
+        - address
+        - network
+        - blockNumber
+        - provenance
+        - owner
+        - principalRecipient
+        - rewardRecipient
+        - principalThreshold
+        - amountOfPrincipalStake
+        - fundsPendingWithdrawal
+        - balance
+        - version
+        - pullBalances
+        - roles
+        - splits
+        - validators
+        - principalOnBeaconChain
+        - notes
+    ErrorResponse:
+      type: object
+      required:
+        - statusCode
+        - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: >-
+            What went wrong; a list for request validation errors. Always
+            "Internal server error" for a 500.
+          example: Cluster not found
+        error:
+          type: string
+          description: HTTP reason phrase, on most 4xx responses.
+          example: Not Found

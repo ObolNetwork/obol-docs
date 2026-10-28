@@ -76,6 +76,37 @@ For more information on distribution, see the [Distribution guide](distribute-re
 
 The following sections describe the traditional method of exiting validators using validator keys, which requires coordination between operators in the cluster.
 
+### Publish the cluster lock first {#publish-the-cluster-lock}
+
+:::warning
+The hosted exit flow (`charon exit sign`, and `lido-dv-exit` for pre-signed exits) sends partial exit signatures to the Obol API. **The API only stores partial exits for clusters whose cluster lock is published to it.** If the lock isn't published, no partial exits are stored: the Launchpad shows no exit progress and no full exit can ever be fetched, even though every operator ran the command.
+:::
+
+The lock is published when the DKG is run with `charon dkg --publish`, as the Launchpad instructions do. If your cluster was created without `--publish`, check whether the API has your lock, using the `lock_hash` value from your `.charon/cluster-lock.json`:
+
+```shell
+curl -s -o /dev/null -w "%{http_code}\n" https://api.obol.tech/v1/lock/<LOCK_HASH>
+```
+
+`200` means the lock is published. `404` means it isn't; publish it from the folder that contains `cluster-lock.json`:
+
+```shell
+curl -X POST -H "Content-Type: application/json" -d @cluster-lock.json https://api.obol.tech/v1/lock
+```
+
+If you set a custom `--publish-address` (or Obol API URL), use that API instead of `https://api.obol.tech/v1` in both commands. Only one operator needs to publish the lock.
+
+When the lock isn't published, you will see one of these errors:
+
+* **`charon exit sign`** fails with an `http POST failed` error with status `404` and a body containing `cluster lock is not found: <lock hash> is not published to this API`. Newer Charon versions also say `cluster lock not published to Obol API`.
+* **`lido-dv-exit`** logs, once, at error level:
+
+  ```text
+  Cluster lock not published to Obol API, partial exits cannot be stored until it is. Publish it by POSTing cluster-lock.json to <obol_api_url>/lock
+  ```
+
+  It then retries only about once an hour (every 256 slots, plus some jitter). After you publish the lock, the next attempt succeeds; restart `lido-dv-exit` to retry straight away. Older versions of `lido-dv-exit` log a generic error and keep retrying instead.
+
 Choose the correct combination of:
 
 1. **Network** : Mainnet or Hoodi

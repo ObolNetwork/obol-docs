@@ -1742,6 +1742,8 @@ The default `publish-address` for this command sends signed exit messages to Obo
 
 This command submits partial exit signatures to the remote API for aggregation. The required flags are `--beacon-node-url` and `--validator-public-key` of the validator you wish to exit. An exit message can only be signed for a validator that is fully deposited and assigned a validator index.
 
+The Obol API only stores partial exits for clusters whose cluster lock has been published to it (for example with `charon dkg --publish`). If it hasn't, `charon exit sign` fails with a `404` saying the cluster lock is not published; see [Publish the cluster lock first](../../run-a-dv/running/exit-a-dv.mdx#publish-the-cluster-lock).
+
 ```markdown
 charon exit sign --help
 Sign a partial exit message for a distributed validator and submit it to a remote API for aggregation.
@@ -6448,6 +6450,37 @@ For more information on distribution, see the [Distribution guide](distribute-re
 ## Exit via Validator Keys (Traditional Method)
 
 The following sections describe the traditional method of exiting validators using validator keys, which requires coordination between operators in the cluster.
+
+### Publish the cluster lock first {#publish-the-cluster-lock}
+
+:::warning
+The hosted exit flow (`charon exit sign`, and `lido-dv-exit` for pre-signed exits) sends partial exit signatures to the Obol API. **The API only stores partial exits for clusters whose cluster lock is published to it.** If the lock isn't published, no partial exits are stored: the Launchpad shows no exit progress and no full exit can ever be fetched, even though every operator ran the command.
+:::
+
+The lock is published when the DKG is run with `charon dkg --publish`, as the Launchpad instructions do. If your cluster was created without `--publish`, check whether the API has your lock, using the `lock_hash` value from your `.charon/cluster-lock.json`:
+
+```shell
+curl -s -o /dev/null -w "%{http_code}\n" https://api.obol.tech/v1/lock/<LOCK_HASH>
+```
+
+`200` means the lock is published. `404` means it isn't; publish it from the folder that contains `cluster-lock.json`:
+
+```shell
+curl -X POST -H "Content-Type: application/json" -d @cluster-lock.json https://api.obol.tech/v1/lock
+```
+
+If you set a custom `--publish-address` (or Obol API URL), use that API instead of `https://api.obol.tech/v1` in both commands. Only one operator needs to publish the lock.
+
+When the lock isn't published, you will see one of these errors:
+
+* **`charon exit sign`** fails with an `http POST failed` error with status `404` and a body containing `cluster lock is not found: <lock hash> is not published to this API`. Newer Charon versions also say `cluster lock not published to Obol API`.
+* **`lido-dv-exit`** logs, once, at error level:
+
+  ```text
+  Cluster lock not published to Obol API, partial exits cannot be stored until it is. Publish it by POSTing cluster-lock.json to <obol_api_url>/lock
+  ```
+
+  It then retries only about once an hour (every 256 slots, plus some jitter). After you publish the lock, the next attempt succeeds; restart `lido-dv-exit` to retry straight away. Older versions of `lido-dv-exit` log a generic error and keep retrying instead.
 
 Choose the correct combination of:
 
@@ -12501,6 +12534,10 @@ network connection problems.
 `msgSigAgg` indicates that BLS threshold aggregation of sufficient
 partial signatures failed. This indicates inconsistent signed data. This indicates
 a bug in Charon as it is unexpected.
+
+### `cluster lock not published to Obol API` or `cluster lock is not found`
+
+`charon exit sign` (or `lido-dv-exit`, which logs `Cluster lock not published to Obol API, partial exits cannot be stored until it is`) could not store a partial exit because the cluster lock hasn't been published to the Obol API. No partial exits are stored until it is. Publish the lock by POSTing `cluster-lock.json` to the API, then run `charon exit sign` again (`lido-dv-exit` retries on its own); see [Publish the cluster lock first](../../run-a-dv/running/exit-a-dv.mdx#publish-the-cluster-lock).
 
 ### `Existing private key lock file found, another charon instance may be running on your machine`
 
@@ -19664,7 +19701,72 @@ This API is for creating and managing [Distributed Validators](../learn/intro/ke
 
 Read more about Obol and [how to use the Launchpad](../learn/intro/launchpad.md) in these docs.
 
+If you are building a client or integration, read [Errors & Rate Limits](errors-and-rate-limits.md) for the error response format, how to handle `429` responses, and the `User-Agent` your client should send.
+
 For enquiries: DV Labs: [support@dvlabs.tech](mailto:support@obol.tech)
+
+
+---
+
+# Errors & Rate Limits
+
+URL: https://docs.obol.org/api/errors-and-rate-limits
+
+# Errors & Rate Limits
+
+This page describes how the Obol API reports errors and what it expects from clients that call it. The [API reference](pathname:///api/) lists the status codes each endpoint can return.
+
+## Error responses {#error-responses}
+
+Every error response has a JSON body with at least a `statusCode` and a `message`:
+
+```json
+{
+  "statusCode": 404,
+  "message": "Data is not found"
+}
+```
+
+* `statusCode` repeats the HTTP status code.
+* `message` is a human-readable description. Request validation failures can return `message` as an array of strings, one per problem.
+* Some responses carry extra fields, such as `error` with the status name (`"Not Found"`).
+
+Branch on the HTTP status code rather than on the `message` text, which is meant for people and may be reworded.
+
+### Status codes {#status-codes}
+
+| Status | Meaning | What to do |
+|--------|---------|------------|
+| `400` | The request is invalid, for example a malformed address, an unsupported network or a body that fails validation. | Fix the request; retrying it unchanged will fail again. |
+| `401`, `403` | A required signature or authorization is missing or doesn't verify. | Check what you signed and who signed it. |
+| `404` | The resource doesn't exist on this API, for example a cluster lock that has not been published. | Check the identifier, and that the resource was published to the API you are calling. |
+| `409` | The request conflicts with data the API already holds, for example publishing something that already exists. | Fetch the existing resource instead of creating it again. |
+| `429` | Too many requests from your client. | Wait for the `Retry-After` period, then retry. See [Rate limits](#rate-limits). |
+| `500` | An unexpected error in the API. The body is always `{"statusCode": 500, "message": "Internal server error"}`; details are not exposed. | Retry later with backoff. If it persists, contact support with the time of the request and the endpoint. |
+| `502`, `503`, `504` | An upstream dependency, such as a beacon node, is unavailable or the API is temporarily over capacity. The `message` describes the problem. | Retry later with backoff. |
+
+## Rate limits {#rate-limits}
+
+Requests may be rate limited. When a client sends too many requests, the API answers `429 Too Many Requests` with a `Retry-After` header giving the number of seconds to wait.
+
+* Honour `Retry-After` before retrying. Without it, back off exponentially.
+* Limits apply per client and can change at any time, so don't hard-code them. Design your client to cope with a `429` on any request.
+* Don't poll faster than the data changes. Cluster state changes at most once per slot (12 seconds), and exit status responses can be a few seconds old.
+* Page through large lists sequentially rather than in parallel.
+
+## Identify your client {#user-agent}
+
+Send a descriptive `User-Agent` header that names your tool, its version and, ideally, a way to contact you, for example:
+
+```text
+User-Agent: my-cluster-monitor/1.4.0 (+https://example.com/contact)
+```
+
+This lets Obol tell your traffic apart from anonymous scrapers and reach you if your client misbehaves. Charon and `lido-dv-exit` already send their own `User-Agent`.
+
+## Pagination {#pagination}
+
+Most endpoints that take `page` and `limit` query parameters return at most 100 items per page, and treat a `limit` outside the range 1 to 100 as the nearest end of that range. A few endpoints check `limit` strictly instead: they reject a value that isn't a positive whole number, or is above 1000, with `400 Bad Request`. Some of these, such as the detailed TVS endpoint, return up to 1000 items per page.
 
 
 ---
@@ -19675,20 +19777,7 @@ URL: https://docs.obol.org/api/system
 
 # System
 
-<ApiEndpoint method="get" path="/" summary="Redirect to the API docs" href="/api/#tag/System/operation/AppController_redirect" />
-
-<ApiEndpoint method="get" path="/v1/_health" summary="Check the API health" href="/api/#tag/System/operation/HealthController_check_v1" />
-
-
----
-
-# Metrics
-
-URL: https://docs.obol.org/api/metrics
-
-# Metrics
-
-<ApiEndpoint method="get" path="/metrics" summary="" href="/api/#tag/Metrics/operation/MetricsController_metrics" />
+<ApiEndpoint method="get" path="/v1/_health" summary="Check the API health" href="/api#tag/System/operation/HealthController_check_v1" />
 
 
 ---
@@ -19699,13 +19788,13 @@ URL: https://docs.obol.org/api/cluster-definition
 
 # Cluster Definition
 
-<ApiEndpoint method="get" path="/v1/definition/{configHash}" summary="Retrieve a Distributed Validator Cluster proposal" href="/api/#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinition_v1" />
+<ApiEndpoint method="get" path="/v1/definition/{configHash}" summary="Retrieve a Distributed Validator Cluster proposal" href="/api#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinition_v1" />
 
-<ApiEndpoint method="put" path="/v1/definition/{configHash}" summary="Accept a proposed Distributed Validator Cluster" href="/api/#tag/Cluster-Definition/operation/DefinitionController_updateClusterDefinition_v1" />
+<ApiEndpoint method="put" path="/v1/definition/{configHash}" summary="Accept a proposed Distributed Validator Cluster" href="/api#tag/Cluster-Definition/operation/DefinitionController_updateClusterDefinition_v1" />
 
-<ApiEndpoint method="get" path="/v1/definition/operator/{address}" summary="Retrieve a list of cluster definitions which the address belongs to." href="/api/#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinitionWithOperator[1]_v1" />
+<ApiEndpoint method="get" path="/v1/definition/operator/{address}" summary="Retrieve a list of cluster definitions which the address belongs to." href="/api#tag/Cluster-Definition/operation/DefinitionController_getClusterDefinitionWithOperator[1]_v1" />
 
-<ApiEndpoint method="post" path="/v1/definition" summary="Propose a new Distributed Validator Cluster" href="/api/#tag/Cluster-Definition/operation/DefinitionController_postClusterDefinition_v1" />
+<ApiEndpoint method="post" path="/v1/definition" summary="Propose a new Distributed Validator Cluster" href="/api#tag/Cluster-Definition/operation/DefinitionController_postClusterDefinition_v1" />
 
 
 ---
@@ -19716,35 +19805,29 @@ URL: https://docs.obol.org/api/cluster-lock
 
 # Cluster Lock
 
-<ApiEndpoint method="get" path="/lock/{lockHash}" summary="Retrieve a Distributed Validator Cluster Lock Object" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLock[0]" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}" summary="Retrieve a Distributed Validator Cluster Lock Object" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLock[1]_v1" />
 
-<ApiEndpoint method="get" path="/lock/search/{network}" summary="Retrieve a list of Distributed Validator Cluster Lock Objects" href="/api/#tag/Cluster-Lock/operation/LockController_searchClusterLocks[0]" />
+<ApiEndpoint method="get" path="/v1/lock/search/{network}" summary="Retrieve a list of Distributed Validator Cluster Lock Objects" href="/api#tag/Cluster-Lock/operation/LockController_searchClusterLocks[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/lock/search/{network}" summary="Retrieve a list of Distributed Validator Cluster Lock Objects" href="/api/#tag/Cluster-Lock/operation/LockController_searchClusterLocks[1]_v1" />
+<ApiEndpoint method="post" path="/v1/lock" summary="Push Distributed Validator Cluster Lock Data" href="/api#tag/Cluster-Lock/operation/LockController_postClusterLock[1]_v1" />
 
-<ApiEndpoint method="post" path="/lock" summary="Push Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_postClusterLock[0]" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/launchpad" summary="Redirect to the launchpad cluster status page" href="/api#tag/Cluster-Lock/operation/LockController_redirectToClusterStatus[1]_v1" />
 
-<ApiEndpoint method="post" path="/v1/lock" summary="Push Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_postClusterLock[1]_v1" />
+<ApiEndpoint method="get" path="/v1/lock/operator/{address}" summary="Retrieve a list of Distributed Validator Clusters for which this address is an operator" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLocksByOperator[3]_v1" />
 
-<ApiEndpoint method="get" path="/lock/{lockHash}/launchpad" summary="Redirect to the launchpad cluster status page" href="/api/#tag/Cluster-Lock/operation/LockController_redirectToClusterStatus[0]" />
+<ApiEndpoint method="get" path="/v1/lock/network/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLocksByNetwork[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/lock/{lockHash}/launchpad" summary="Redirect to the launchpad cluster status page" href="/api/#tag/Cluster-Lock/operation/LockController_redirectToClusterStatus[1]_v1" />
+<ApiEndpoint method="get" path="/v1/lock/network/summary/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLockNetworkSummary[1]_v1" />
 
-<ApiEndpoint method="get" path="/lock/operator/{address}" summary="Retrieve a list of Distributed Validator Clusters for which this address is an operator" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByOperator[1]" />
+<ApiEndpoint method="post" path="/v1/lock/verify" summary="Verify Distributed Validator Cluster Lock Data" href="/api#tag/Cluster-Lock/operation/LockController_verifyClusterLock[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/lock/operator/{address}" summary="Retrieve a list of Distributed Validator Clusters for which this address is an operator" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByOperator[3]_v1" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/validators" summary="Retrieve one page of a cluster lock's distributed validators" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLockValidators[1]_v1" />
 
-<ApiEndpoint method="get" path="/lock/network/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByNetwork[0]" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/revisions" summary="Retrieve lock revisions for a cluster" href="/api#tag/Cluster-Lock/operation/LockController_getClusterLockRevisions[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/lock/network/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLocksByNetwork[1]_v1" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/peer-info" summary="Get current peer info for a cluster lock" href="/api#tag/Cluster-Lock/operation/LockController_getPeerInfo[1]_v1" />
 
-<ApiEndpoint method="get" path="/lock/network/summary/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLockNetworkSummary[0]" />
-
-<ApiEndpoint method="get" path="/v1/lock/network/summary/{network}" summary="Retrieve a list of Distributed Validator Clusters for a given network" href="/api/#tag/Cluster-Lock/operation/LockController_getClusterLockNetworkSummary[1]_v1" />
-
-<ApiEndpoint method="post" path="/lock/verify" summary="Verify Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_verifyClusterLock[0]" />
-
-<ApiEndpoint method="post" path="/v1/lock/verify" summary="Verify Distributed Validator Cluster Lock Data" href="/api/#tag/Cluster-Lock/operation/LockController_verifyClusterLock[1]_v1" />
+<ApiEndpoint method="get" path="/v1/lock/{lockHash}/network-percentile" summary="Get cluster network performance percentile" href="/api#tag/Cluster-Lock/operation/LockController_getClusterNetworkPercentile[1]_v1" />
 
 
 ---
@@ -19755,7 +19838,7 @@ URL: https://docs.obol.org/api/state
 
 # State
 
-<ApiEndpoint method="get" path="/v1/state/{lockHash}" summary="Retrieve the Validator states for a cluster" href="/api/#tag/State/operation/StateController_getDistributedValidatorStatesByLockHash_v1" />
+<ApiEndpoint method="get" path="/v1/state/{lockHash}" summary="Retrieve the Validator states for a cluster" href="/api#tag/State/operation/StateController_getDistributedValidatorStatesByLockHash_v1" />
 
 
 ---
@@ -19766,21 +19849,25 @@ URL: https://docs.obol.org/api/dv-exit
 
 # DV Exit
 
-<ApiEndpoint method="get" path="/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExit[0]" />
+These endpoints store and serve the partial exit signatures that [`charon exit`](../run-a-dv/running/exit-a-dv.mdx) and `lido-dv-exit` submit.
 
-<ApiEndpoint method="get" path="/v1/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExit[1]_v1" />
+:::warning[The cluster lock must be published first]
+The API only stores partial exits for clusters whose cluster lock has been published to it. `charon dkg --publish` publishes the lock; otherwise publish it by POSTing `cluster-lock.json` to `/v1/lock` (see [Publish the cluster lock first](../run-a-dv/running/exit-a-dv.mdx#publish-the-cluster-lock)).
 
-<ApiEndpoint method="get" path="/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatus[0]" />
+Posting partial exits for a lock that isn't published returns `404` with the message `cluster lock is not found: <lockHash> is not published to this API`, and nothing is stored.
+:::
 
-<ApiEndpoint method="get" path="/v1/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatus[1]_v1" />
+* The exit status endpoints return `404` for a lock hash the API doesn't know.
+* The exit status endpoint is paginated with `page` and `limit`; `limit` is clamped to 1–100.
+* See [Errors & Rate Limits](errors-and-rate-limits.md) for the error format and how to handle `429` responses.
 
-<ApiEndpoint method="get" path="/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[0]" />
+<ApiEndpoint method="get" path="/v1/exp/exit/{lockHash}/{shareIdx}/{validatorPubkey}" summary="Retrieve Distributed Validator threshold aggregated signed exit msg" href="/api#tag/DV-Exit/operation/ExitController_getClusterExit[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api/#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[1]_v1" />
+<ApiEndpoint method="get" path="/v1/exp/exit/status/{lockHash}" summary="Retrieve validators exit status" href="/api#tag/DV-Exit/operation/ExitController_getClusterExitStatus[1]_v1" />
 
-<ApiEndpoint method="post" path="/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api/#tag/DV-Exit/operation/ExitController_postPartialExit[0]" />
+<ApiEndpoint method="get" path="/v1/exp/exit/status/summary/{lockHash}" summary="Retrieve validators exit status summary" href="/api#tag/DV-Exit/operation/ExitController_getClusterExitStatusSummary[1]_v1" />
 
-<ApiEndpoint method="post" path="/v1/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api/#tag/DV-Exit/operation/ExitController_postPartialExit[1]_v1" />
+<ApiEndpoint method="post" path="/v1/exp/partial_exits/{lockHash}" summary="Push Distributed Validator partial signed exit message" href="/api#tag/DV-Exit/operation/ExitController_postPartialExit[1]_v1" />
 
 
 ---
@@ -19791,7 +19878,7 @@ URL: https://docs.obol.org/api/dv-migrate
 
 # DV Migrate
 
-<ApiEndpoint method="get" path="/v1/migrate/{network}" summary="Retrieve validators migrate status" href="/api/#tag/DV-Migrate/operation/MigrateController_getValidatorsMigrateStatus_v1" />
+<ApiEndpoint method="get" path="/v1/migrate/{network}" summary="Retrieve validators migrate status" href="/api#tag/DV-Migrate/operation/MigrateController_getValidatorsMigrateStatus_v1" />
 
 
 ---
@@ -19802,7 +19889,7 @@ URL: https://docs.obol.org/api/cluster-effectiveness
 
 # Effectiveness
 
-<ApiEndpoint method="get" path="/v1/effectiveness/{lockHash}" summary="Retrieve a Distributed Validator Cluster Effectiveness Object" href="/api/#tag/Cluster-Effectiveness/operation/EffectivenessController_getClusterLock_v1" />
+<ApiEndpoint method="get" path="/v1/effectiveness/{lockHash}" summary="Retrieve a Distributed Validator Cluster Effectiveness Object" href="/api#tag/Cluster-Effectiveness/operation/EffectivenessController_getClusterLock_v1" />
 
 
 ---
@@ -19813,13 +19900,31 @@ URL: https://docs.obol.org/api/deposit-data
 
 # Deposit Data
 
-<ApiEndpoint method="get" path="/deposit_data/{lockHash}/{pubkey}" summary="Retrieve partial deposit data for a validator" href="/api/#tag/Deposit-Data/operation/DepositController_getDeposits[0]" />
+<ApiEndpoint method="get" path="/v1/deposit_data/{lockHash}/{pubkey}" summary="Retrieve partial deposit data for a validator" href="/api#tag/Deposit-Data/operation/DepositController_getDeposits[1]_v1" />
 
-<ApiEndpoint method="get" path="/v1/deposit_data/{lockHash}/{pubkey}" summary="Retrieve partial deposit data for a validator" href="/api/#tag/Deposit-Data/operation/DepositController_getDeposits[1]_v1" />
+<ApiEndpoint method="post" path="/v1/deposit_data/partial_deposits/{lockHash}/{share_index}" summary="Push partial deposit data" href="/api#tag/Deposit-Data/operation/DepositController_submitPartialDeposits[1]_v1" />
 
-<ApiEndpoint method="post" path="/deposit_data/partial_deposits/{lockHash}/{share_index}" summary="Push partial deposit data" href="/api/#tag/Deposit-Data/operation/DepositController_submitPartialDeposits[0]" />
 
-<ApiEndpoint method="post" path="/v1/deposit_data/partial_deposits/{lockHash}/{share_index}" summary="Push partial deposit data" href="/api/#tag/Deposit-Data/operation/DepositController_submitPartialDeposits[1]_v1" />
+---
+
+# OVM
+
+URL: https://docs.obol.org/api/ovm
+
+# OVM
+
+<ApiEndpoint method="get" path="/v1/ovm/{network}/{address}" summary="Get an ObolValidatorManager (OVM) in one call" href="/api#tag/OVM/operation/OvmController_getOvm_v1" />
+
+
+---
+
+# Validators
+
+URL: https://docs.obol.org/api/validators
+
+# Validators
+
+<ApiEndpoint method="post" path="/v1/validators/{network}/deposit-status" summary="Get the deposit status of a batch of validator pubkeys" href="/api#tag/Validators/operation/ValidatorDepositStatusController_getDepositStatus_v1" />
 
 
 ---
@@ -19830,9 +19935,9 @@ URL: https://docs.obol.org/api/terms-and-conditions
 
 # TermsAndConditions
 
-<ApiEndpoint method="post" path="/v1/termsAndConditions" summary="Saves user's approval latest terms and conditions" href="/api/#tag/Terms-And-Conditions/operation/TermsAndConditionsController_signTermsAndConditions_v1" />
+<ApiEndpoint method="post" path="/v1/termsAndConditions" summary="Saves user's approval latest terms and conditions" href="/api#tag/Terms-And-Conditions/operation/TermsAndConditionsController_signTermsAndConditions_v1" />
 
-<ApiEndpoint method="get" path="/v1/termsAndConditions/{address}" summary="Verify Signature on Terms and Conditions" href="/api/#tag/Terms-And-Conditions/operation/TermsAndConditionsController_getTermsAndConditionsSigned_v1" />
+<ApiEndpoint method="get" path="/v1/termsAndConditions/{address}" summary="Verify Signature on Terms and Conditions" href="/api#tag/Terms-And-Conditions/operation/TermsAndConditionsController_getTermsAndConditionsSigned_v1" />
 
 
 ---
@@ -19843,13 +19948,13 @@ URL: https://docs.obol.org/api/techne-credentials
 
 # Techne Credentials
 
-<ApiEndpoint method="get" path="/v1/techne/base/{index}" summary="Retrieve Base techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getBaseCred_v1" />
+<ApiEndpoint method="get" path="/v1/techne/base/{index}" summary="Retrieve Base techne credential metadata" href="/api#tag/Techne-Credentials/operation/TechneController_getBaseCred_v1" />
 
-<ApiEndpoint method="get" path="/v1/techne/bronze/{index}" summary="Retrieve Bronze techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getBronzeCred_v1" />
+<ApiEndpoint method="get" path="/v1/techne/bronze/{index}" summary="Retrieve Bronze techne credential metadata" href="/api#tag/Techne-Credentials/operation/TechneController_getBronzeCred_v1" />
 
-<ApiEndpoint method="get" path="/v1/techne/silver/{index}" summary="Retrieve Silver techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getSilverCred_v1" />
+<ApiEndpoint method="get" path="/v1/techne/silver/{index}" summary="Retrieve Silver techne credential metadata" href="/api#tag/Techne-Credentials/operation/TechneController_getSilverCred_v1" />
 
-<ApiEndpoint method="get" path="/v1/techne/gold/{index}" summary="Retrieve Gold techne credential metadata" href="/api/#tag/Techne-Credentials/operation/TechneController_getGoldCred_v1" />
+<ApiEndpoint method="get" path="/v1/techne/gold/{index}" summary="Retrieve Gold techne credential metadata" href="/api#tag/Techne-Credentials/operation/TechneController_getGoldCred_v1" />
 
 
 ---
@@ -19860,15 +19965,19 @@ URL: https://docs.obol.org/api/address
 
 # Address
 
-<ApiEndpoint method="get" path="/v1/address/techne/{address}" summary="Retrieve obol techne credentials of an address" href="/api/#tag/Address/operation/AddressController_getAddressTechneCredentials_v1" />
+<ApiEndpoint method="get" path="/v1/address/techne/{address}" summary="Retrieve obol techne credentials of an address" href="/api#tag/Address/operation/AddressController_getAddressTechneCredentials_v1" />
 
-<ApiEndpoint method="get" path="/v1/address/badges/{address}" summary="Retrieve badges for an address" href="/api/#tag/Address/operation/AddressController_getAddressBadgess_v1" />
+<ApiEndpoint method="get" path="/v1/address/badges/{address}" summary="Retrieve badges for an address" href="/api#tag/Address/operation/AddressController_getAddressBadgess_v1" />
 
-<ApiEndpoint method="get" path="/v1/address/incentives/{address}" href="/api/" />
+<ApiEndpoint method="get" path="/v1/address/incentives/{network}/{address}" summary="Retrieve obol incentives of an address" href="/api#tag/Address/operation/AddressController_getAddressIncentives_v1" />
 
-<ApiEndpoint method="get" path="/v1/address/network/{network}" summary="Retrieve operators on a given network" href="/api/#tag/Address/operation/AddressController_getOperatorsByNetwork_v1" />
+<ApiEndpoint method="get" path="/v1/address/incentives/historical/{network}/{address}" summary="Retrieve the historical incentives of an address" href="/api#tag/Address/operation/AddressController_getHistoricalAddressContributions_v1" />
 
-<ApiEndpoint method="get" path="/v1/address/search/{network}" summary="Retrieve a list operators on a given network" href="/api/#tag/Address/operation/AddressController_searchOperators_v1" />
+The historical incentives endpoint takes an optional `date` query parameter. Without it, the API returns the incentives for the current day (UTC).
+
+<ApiEndpoint method="get" path="/v1/address/network/{network}" summary="Retrieve operators on a given network" href="/api#tag/Address/operation/AddressController_getOperatorsByNetwork_v1" />
+
+<ApiEndpoint method="get" path="/v1/address/search/{network}" summary="Retrieve a list operators on a given network" href="/api#tag/Address/operation/AddressController_searchOperators_v1" />
 
 
 ---
@@ -19879,7 +19988,7 @@ URL: https://docs.obol.org/api/owr-information
 
 # OWR
 
-<ApiEndpoint method="get" path="/v1/owr/{network}/{address}" summary="Retrieve OWR tranch information" href="/api/#tag/OWR-Information/operation/OWRController_get_v1" />
+<ApiEndpoint method="get" path="/v1/owr/{network}/{address}" summary="Retrieve OWR tranch information" href="/api#tag/OWR-Information/operation/OWRController_get_v1" />
 
 
 ---
@@ -19890,9 +19999,9 @@ URL: https://docs.obol.org/api/test
 
 # Test
 
-<ApiEndpoint method="post" path="/v1/test" summary="Store test result data" href="/api/#tag/Test/operation/TestController_postTestResult_v1" />
+<ApiEndpoint method="post" path="/v1/test" summary="Store test result data" href="/api#tag/Test/operation/TestController_postTestResult_v1" />
 
-<ApiEndpoint method="get" path="/v1/test/enr/{enr}" summary="Get test results by ENR" href="/api/#tag/Test/operation/TestController_getTestResultByEnr_v1" />
+<ApiEndpoint method="get" path="/v1/test/enr/{enr}" summary="Get test results by ENR" href="/api#tag/Test/operation/TestController_getTestResultByEnr_v1" />
 
 
 ---
@@ -19903,7 +20012,5 @@ URL: https://docs.obol.org/api/tvs
 
 # TVS
 
-<ApiEndpoint method="get" path="/tvs/{network}" summary="Get Total Value Staked Of Obol for a network" href="/api/#tag/tvs/operation/TVSController_getTVS[0]" />
-
-<ApiEndpoint method="get" path="/v1/tvs/{network}" summary="Get Total Value Staked Of Obol for a network" href="/api/#tag/tvs/operation/TVSController_getTVS[1]_v1" />
+<ApiEndpoint method="get" path="/v1/tvs/{network}" summary="Get Total Value Staked Of Obol for a network" href="/api#tag/tvs/operation/TVSController_getTVS[1]_v1" />
 

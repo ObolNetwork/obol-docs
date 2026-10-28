@@ -312,6 +312,8 @@ The default `publish-address` for this command sends signed exit messages to Obo
 
 This command submits partial exit signatures to the remote API for aggregation. The required flags are `--beacon-node-url` and `--validator-public-key` of the validator you wish to exit. An exit message can only be signed for a validator that is fully deposited and assigned a validator index.
 
+The Obol API only stores partial exits for clusters whose cluster lock has been published to it (for example with `charon dkg --publish`). If it hasn't, `charon exit sign` fails with a `404` saying the cluster lock is not published; see [Publish the cluster lock first](../../run-a-dv/running/exit-a-dv.mdx#publish-the-cluster-lock).
+
 ```markdown
 charon exit sign --help
 Sign a partial exit message for a distributed validator and submit it to a remote API for aggregation.
