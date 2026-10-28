@@ -1040,13 +1040,13 @@ const sidebars = {
     },
     {
       "type": "doc",
-      "id": "api/system",
-      "label": "System"
+      "id": "api/errors-and-rate-limits",
+      "label": "Errors & Rate Limits"
     },
     {
       "type": "doc",
-      "id": "api/metrics",
-      "label": "Metrics"
+      "id": "api/system",
+      "label": "System"
     },
     {
       "type": "doc",
@@ -1082,6 +1082,16 @@ const sidebars = {
       "type": "doc",
       "id": "api/deposit-data",
       "label": "Deposit Data"
+    },
+    {
+      "type": "doc",
+      "id": "api/ovm",
+      "label": "OVM"
+    },
+    {
+      "type": "doc",
+      "id": "api/validators",
+      "label": "Validators"
     },
     {
       "type": "doc",
