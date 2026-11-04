@@ -55,7 +55,17 @@ Get a Prometheus monitoring credential from the Obol core team, it will look lik
 obol20tnt8UC...
 ```
 
-Then, either add `--set centralMonitoring.enabled=true --set-string centralMonitoring.token='YOUR_TOKEN_HERE'` to your `helm install` command, or if using a Values.yaml file, update `centralMonitoring.enabled` to `true`, and `centralMonitoring.token` to the monitoring credential you have been given, and then install/upgrade the chart.
+With chart 0.22.1 or later, store the credential in a Kubernetes Secret and point the chart at it. That keeps it out of your Helm values, which are stored in the release and printed by `helm get values`. Save the credential alone in a file, then:
+
+```shell
+kubectl create secret generic obol-monitoring -n <namespace> --from-file=token=<file>
+helm upgrade <release> obol/dv-pod -n <namespace> --reuse-values \
+  --set centralMonitoring.enabled=true --set centralMonitoring.existingSecret=obol-monitoring
+```
+
+In the Obol Stack, follow [Show your node on the Launchpad](../../obol-stack/run-a-dv.md#show-your-node-on-the-launchpad).
+
+On older charts, set the credential as a value instead: add `--set centralMonitoring.enabled=true --set-string centralMonitoring.token='YOUR_TOKEN_HERE'` to your `helm install` command, or set `centralMonitoring.enabled` to `true` and `centralMonitoring.token` to your credential in your values file.
 
 ```yaml
 # -- Central Monitoring

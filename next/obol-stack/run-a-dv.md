@@ -184,7 +184,60 @@ obol kubectl -n monitoring port-forward svc/monitoring-kube-prometheus-prometheu
 
 Then open `http://localhost:9090` and try queries such as `app_monitoring_readyz{namespace="dv-pod"}` (1 means Charon is ready), `p2p_ping_success{namespace="dv-pod"}` (peer reachability) or `increase(core_tracker_failed_duties_total{namespace="dv-pod"}[1h])`. See [Monitoring](../run-a-dv/running/monitoring.md) for what the metrics mean, and `obol network status` for the Ethereum node.
 
-To also see your node in Obol's hosted dashboards, [push metrics and logs to Obol](../run-a-dv/start/obol-monitoring.mdx).
+## Show your node on the Launchpad
+
+Two optional settings make your node show up properly on the Launchpad cluster page and in Obol's hosted dashboards: a nickname and Obol monitoring. Each one is a `helm upgrade` that restarts the pod. Set them at install, or, once validators are active, when the rest of the cluster can cover a short restart.
+
+### Nickname
+
+`charon.nickname` (up to 32 characters) is how your node appears on the Launchpad, in Obol's dashboards and in the other operators' logs. It is public.
+
+* Running for an organisation? Use its name, for example `DV Labs`. A recognisable name builds trust with the other operators and with stakers.
+* Running privately? Use a pseudonym that doesn't reveal your name, your machine's hostname or your wallet address, for example your stack id plus the network (`obol doctor` prints `stack <id> running`).
+
+### Obol monitoring
+
+With a monitoring credential from the Obol team (it looks like `obol20tnt8UC...`), the chart runs a small Prometheus that sends Charon's metrics to Obol. That powers the performance view on the Launchpad and Obol's hosted dashboards. This needs `dv-pod` chart **0.22.1** or later.
+
+Keep the credential out of your Helm values and command lines. Values are stored in the Helm release, and `helm get values` prints them. Put it in a file instead, and load the file into a Kubernetes Secret:
+
+1. Create a private file and paste the credential into it, with nothing else:
+
+   ```shell
+   f=~/.config/obol/obol-monitoring-credential
+   (umask 077 && mkdir -p "$(dirname "$f")" && touch "$f")
+   open -e "$f"    # macOS; or any editor. Paste, save, close.
+   ```
+
+2. Load it into a Secret in the dv-pod's namespace:
+
+   ```shell
+   obol kubectl create secret generic obol-monitoring -n dv-pod --from-file=token="$f" \
+     --dry-run=client -o yaml | obol kubectl apply -f -
+   ```
+
+3. Point the release at the Secret, and set your nickname:
+
+   ```shell
+   obol helm repo update
+   obol helm upgrade dv-pod-hoodi obol/dv-pod --version 0.22.1 -n dv-pod --reuse-values \
+     --set centralMonitoring.enabled=true \
+     --set centralMonitoring.existingSecret=obol-monitoring \
+     --set charon.nickname="DV Labs" \
+     --timeout=10m
+   ```
+
+4. Check that Obol accepts the credential: the logs of the new Prometheus pod should show no `401` or `403` errors.
+
+   ```shell
+   obol kubectl logs deploy/dv-pod-hoodi-prometheus -n dv-pod --tail=50
+   ```
+
+   If they do, fix the file and rerun step 2. Prometheus reads the credential again on every send, so it needs no restart.
+
+Once the Secret exists you can delete the file. To change the credential later, repeat steps 1 and 2. If you use Claude Code with the Obol skills, it follows this flow: it creates the file for you to paste into, and never reads it.
+
+To also send logs, see [push metrics and logs to Obol](../run-a-dv/start/obol-monitoring.mdx).
 
 ## Let Hermes watch your node
 
