@@ -491,6 +491,11 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "advanced-and-troubleshooting/security/known-issues",
+          "label": "API and Launchpad Known Issues"
+        },
+        {
+          "type": "doc",
           "id": "advanced-and-troubleshooting/security/smart-contract-audit",
           "label": "Smart Contract Audit"
         },
