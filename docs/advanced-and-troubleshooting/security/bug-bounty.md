@@ -61,7 +61,7 @@ In practice, this means:
 - Submitted bugs must not have been previously disclosed publicly.
 - Only first reports of vulnerabilities will be considered for rewards; previously reported or known vulnerabilities are ineligible.
 - The severity of the vulnerability, as assessed by our team, determines the reward amount.
-- Submissions must include a reproducible proof of concept that runs against a tagged release: for example a Go test or patch for Charon, a Foundry fork test for smart contracts, or a script against a local devnet. Reports without one may be closed without a detailed response.
+- Submissions must include a reproducible proof of concept: for example a Go test or patch against a tagged Charon release, a Foundry fork test for smart contracts, or a script against a local devnet. For the DV Launchpad and the Obol API, whose source is not public, provide the exact requests or steps that reproduce the issue on Hoodi, under the [Hoodi Launchpad exception](#hoodi-launchpad-exception). Reports without one may be closed without a detailed response.
 - Submissions must state which [known issue](#known-issues-and-common-non-qualifying-reports) is closest to the finding and why it differs.
 - The Obol security team reserves the right to determine the eligibility and reward for each submission.
 - Program terms may be updated at Obol's discretion.
@@ -137,7 +137,7 @@ Rewards may be issued as cash, merchandise, or other forms of recognition, at Ob
 
 The following activities are not authorized under this program:
 
-- Any testing on mainnet or public testnet deployed code; all testing must be done on local forks. For network-specific testing, Hoodi is the preferred testnet.
+- Any testing on mainnet or public testnet deployed code; all testing must be done on local forks. For network-specific testing, Hoodi is the preferred testnet. The only exception is the [Hoodi DV Launchpad](#hoodi-launchpad-exception) below.
 - Any testing involving pricing oracles or third-party smart contracts.
 - Phishing or other social engineering attacks against Obol employees, contractors, partners, or community members.
 - Any testing against third-party systems, applications, browser extensions, or websites (including SSO providers and advertising networks).
@@ -145,13 +145,21 @@ The following activities are not authorized under this program:
 - Automated testing of services that generates significant traffic.
 - Public disclosure of an unpatched vulnerability under an embargoed bounty.
 
+### Hoodi Launchpad exception
+
+The DV Launchpad and the Obol API cannot be run locally, so you may test them through the [Hoodi DV Launchpad](https://hoodi.launchpad.obol.org) and the Hoodi network endpoints of the Obol API, provided that you:
+
+- Use only wallets, operator identities and clusters that you control.
+- Do not access, modify or delete data belonging to other users, and stop and report as soon as you see any.
+- Keep traffic low and manual; automated scanning and DoS remain prohibited.
+- Do not test the mainnet Launchpad or mainnet API endpoints.
+
 ## Known issues and common non-qualifying reports
 
-Each in-scope repository documents the issues Obol already knows about. Read the relevant list before submitting:
+Each in-scope public repository documents the issues Obol already knows about. Read the relevant list before submitting:
 
 - [Charon known issues](https://github.com/ObolNetwork/charon/blob/main/KNOWN_ISSUES.md)
 - [Obol SDK known issues](https://github.com/ObolNetwork/obol-sdk/blob/main/KNOWN_ISSUES.md)
-- [Obol API known issues](https://github.com/ObolNetwork/obol-api/blob/main/KNOWN_ISSUES.md)
 - [Obol Splits known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md)
 
 Most duplicate reports we receive fall into one of these classes:
@@ -167,7 +175,7 @@ Later duplicates of a known issue are not separately eligible and receive no rew
 ## Submission process
 
 :::info
-Before you begin your research, please take the time to review any findings Obol has already published in the repositories in scope. Known issues are often documented directly in the repository, in files such as `README.md`, `KNOWN_ISSUES.md`, and `CLAUDE.md` — for example, the [Obol Splits repository maintains a list of known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md) that Obol is already aware of. Submissions that duplicate these publicly documented findings are not eligible for rewards, so checking them first helps you avoid spending effort on issues that have already been identified.
+Before you begin your research, please take the time to review any findings Obol has already published in the public repositories in scope. Known issues are often documented directly in the repository, in files such as `README.md`, `KNOWN_ISSUES.md`, and `CLAUDE.md` — for example, the [Obol Splits repository maintains a list of known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md) that Obol is already aware of. Submissions that duplicate these publicly documented findings are not eligible for rewards, so checking them first helps you avoid spending effort on issues that have already been identified.
 :::
 
 Before investing significant time in a proof of concept, you may email [security@obol.tech](mailto:security@obol.tech) with a brief, non-detailed description of the affected component and the class of vulnerability (e.g. "potential role escalation in OVM" or "Charon peer message handling"). We will confirm within 48 hours whether the issue is already known or under active remediation. This check does not establish submission priority — it only avoids duplicate effort.
@@ -176,7 +184,7 @@ To report a vulnerability, please contact us at [security@obol.tech](mailto:secu
 
 - A detailed description of the vulnerability and its potential impact.
 - Steps to reproduce the issue.
-- A proof of concept that reproduces the issue against a tagged release, plus any relevant screenshots or documentation.
+- A proof of concept that reproduces the issue (against a tagged release, where the component is open source), plus any relevant screenshots or documentation.
 - The closest [known issue](#known-issues-and-common-non-qualifying-reports) and why your finding differs.
 - Your contact information.
 
