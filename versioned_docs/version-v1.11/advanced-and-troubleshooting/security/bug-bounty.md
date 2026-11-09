@@ -156,11 +156,12 @@ The DV Launchpad and the Obol API cannot be run locally, so you may test them th
 
 ## Known issues and common non-qualifying reports
 
-Each in-scope public repository documents the issues Obol already knows about. Read the relevant list before submitting:
+Each in-scope public repository documents the issues Obol already knows about. The Obol API and the DV Launchpad are not public, so their list is on this site. Read the relevant list before submitting:
 
 - [Charon known issues](https://github.com/ObolNetwork/charon/blob/main/KNOWN_ISSUES.md)
 - [Obol SDK known issues](https://github.com/ObolNetwork/obol-sdk/blob/main/KNOWN_ISSUES.md)
 - [Obol Splits known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md)
+- [Obol API and DV Launchpad known issues](known-issues.md)
 
 Most duplicate reports we receive fall into one of these classes:
 
@@ -175,10 +176,10 @@ Later duplicates of a known issue are not separately eligible and receive no rew
 ## Submission process
 
 :::info
-Before you begin your research, please take the time to review any findings Obol has already published in the public repositories in scope. Known issues are often documented directly in the repository, in files such as `README.md`, `KNOWN_ISSUES.md`, and `CLAUDE.md` — for example, the [Obol Splits repository maintains a list of known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md) that Obol is already aware of. Submissions that duplicate these publicly documented findings are not eligible for rewards, so checking them first helps you avoid spending effort on issues that have already been identified.
+Before you begin your research, please take the time to review any findings Obol has already published in the public repositories in scope and on the [Obol API and DV Launchpad known issues](known-issues.md) page. Known issues are often documented directly in the repository, in files such as `README.md`, `KNOWN_ISSUES.md`, and `CLAUDE.md` — for example, the [Obol Splits repository maintains a list of known issues](https://github.com/ObolNetwork/obol-splits/blob/main/KNOWN_ISSUES.md) that Obol is already aware of. Submissions that duplicate these publicly documented findings are not eligible for rewards, so checking them first helps you avoid spending effort on issues that have already been identified.
 :::
 
-Before investing significant time in a proof of concept, you may email [security@obol.tech](mailto:security@obol.tech) with a brief, non-detailed description of the affected component and the class of vulnerability (e.g. "potential role escalation in OVM" or "Charon peer message handling"). We will confirm within 48 hours whether the issue is already known or under active remediation. This check does not establish submission priority — it only avoids duplicate effort.
+We do not answer questions sent before a report, such as whether an issue is already known or whether the program is active. Check the known issues lists, then send a complete report.
 
 To report a vulnerability, please contact us at [security@obol.tech](mailto:security@obol.tech) with:
 
