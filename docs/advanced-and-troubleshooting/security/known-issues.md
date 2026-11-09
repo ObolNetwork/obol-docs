@@ -39,6 +39,10 @@ Many of these findings concern what the API does on behalf of a cluster's own pa
 * **Fetching an exit deletes partial exits:** it does not. `GET /v1/exit/{lockHash}/{shareIdx}/{validatorPubkey}` is read-only. A partial exit is removed only by `DELETE`, and an operator can delete only their own share.
 * **Signed exits never expire:** this is how the consensus protocol treats voluntary exits. Once a threshold of operators has signed an exit, they have authorized it, and anyone can broadcast the aggregated message. The API serves it only to the cluster's own operators.
 
+### Terms and Conditions
+
+* **Terms and conditions signature has no chain ID:** The EIP-712 signature that accepts Obol's terms and conditions uses a domain with only `name` and `version`, and no `chainId`. This is deliberate: the terms are the same on every network, so one acceptance by an address covers all of them. The Obol API stores one acceptance per address and terms version, and re-submitting an accepted one changes nothing. The `fork_version` sent with it only selects the chain on which a contract wallet (ERC-1271) signature is checked. The API does not serve the signature back: `GET /v1/termsAndConditions/{address}` returns only whether the address has accepted. Replaying the signature, on another network or by another party, can only record an acceptance its signer already gave.
+
 ## DV Launchpad
 
 The DV Launchpad is a client of the Obol API and of the chain. The API trust model above applies to the clusters, deposits and exits it shows.
