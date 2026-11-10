@@ -92,9 +92,13 @@ Deploy a full Ethereum node with configurable execution and consensus clients.
 | `--id` | Deployment identifier | Any string | Network name (e.g. `mainnet`), then petname |
 | `--network` | Ethereum network | mainnet, sepolia, hoodi | mainnet |
 | `--execution-client` | Execution layer client | reth, geth, nethermind, besu, erigon | reth |
-| `--consensus-client` | Consensus layer client | lighthouse, prysm, teku, nimbus, lodestar, grandine | lighthouse |
+| `--consensus-client` | Consensus layer client | lighthouse, prysm, teku, nimbus, lodestar, grandine, silver¹ | lighthouse |
 | `--mode` | Pruning mode | full, archive | full |
 | `--since` | Lower bound for archive history (requires `--mode=archive`) | fork name, duration, block number, `genesis`/`all` | (interactive picker on TTY; `all` on non-TTY) |
+| `--execution-memory` | Memory limit for the execution client | a size, e.g. `16Gi` | sized per network, mode and client |
+| `--consensus-memory` | Memory limit for the consensus client | a size, e.g. `8Gi` | sized per network and client |
+
+¹ [Silver](https://github.com/gattaca-com/silver) is in alpha and its image runs on x86-64 (amd64) machines only, not Apple Silicon. Try it on a testnet first. It needs Obol Stack v0.18.0 or later.
 
 ### Examples
 
@@ -141,6 +145,26 @@ obol network sync ethereum/hoodi
 :::warning
 Full Ethereum nodes require significant resources. Mainnet execution clients need 1+ TB of storage and can take days to sync. Consider using testnets for development.
 :::
+
+### Memory
+
+From v0.18.0, each client gets a memory request (what the cluster reserves for it) and a memory limit (where it is restarted). Both are sized per network, mode and client, so you normally set nothing. Each client is also told its limit, so it keeps its own caches and heap under it:
+- Geth, Erigon and Prysm get `GOMEMLIMIT`.
+- Teku, Besu and Lodestar get heap sizes.
+- Nethermind gets its memory hint.
+- reth gets its cache size.
+
+Hoodi's beacon nodes get the same limits as mainnet's, because Hoodi has as many validators as mainnet. No limit is larger than the cluster itself.
+
+`--execution-memory` and `--consensus-memory` set a client's **limit**. Before v0.18.0 they set the request. To change one later, edit `executionMemory` / `consensusMemory` in the deployment's `values.yaml` and run `obol network sync`. Sync warns when a value is below the default limit, since the client may then be restarted for running out of memory.
+
+`obol network install` and `obol network sync` warn when the cluster's memory requests won't fit. If that happens:
+- **Stop a node you don't need:** `obol network stop ethereum/<id>`.
+- **Or lower a client's memory**, accepting that it may be restarted more often.
+
+After upgrading the Obol Stack, run `obol network sync` for each node. Its clients restart once to pick up new requests, limits and versions; their data is kept.
+
+The cluster itself has a memory cap; see [Quickstart](./quickstart.mdx#memory).
 
 ### MEV
 

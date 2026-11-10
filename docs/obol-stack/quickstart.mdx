@@ -129,6 +129,16 @@ kubectl get pods -A
 eval "$(obol env --unset)"  # undo
 ```
 
+### Memory
+
+From v0.18.0, `obol stack init` caps the cluster's memory, and `obol stack up` turns swap off for it. If the stack's pods outgrow the cap, one of them is restarted, and the rest of your machine keeps running.
+- **Default cap:** the memory Docker can use, minus 4–8 GiB left for your operating system and other work. Machines with less than 12 GiB get no cap.
+- **Choose a cap:** `obol stack init --node-memory 20g`, or set `OBOL_NODE_MEMORY`. `--node-memory off` sets no cap.
+- **Existing clusters:** a cluster created before v0.18.0 gets the default cap on its next `obol stack up`, unless it already has one. Kubernetes keeps scheduling against the memory the cluster was created with until you recreate it.
+- **Changing it later:** `docker update --memory <size> --memory-swap <size> <k3d server container>`.
+
+The cap applies to the default k3d backend. The k3s backend runs directly on your machine.
+
 ### Open the local UI
 
 ```text
