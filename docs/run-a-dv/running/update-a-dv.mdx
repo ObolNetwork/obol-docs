@@ -28,6 +28,12 @@ git pull
 docker compose up -d --build
 ```
 
+:::info[Engine API secret]
+Older releases shipped the same Engine API (JWT) secret, `jwt/jwt.hex`, to every operator. Current releases generate one per node, in a Docker volume. You don't need to do anything beyond the steps above: `docker compose up -d` creates the new secret and recreates the execution and consensus clients so that both use it, which restarts them once. Recreate both with the same command. If you only start one of them, it cannot authenticate to the other until that one is recreated too.
+
+If `git pull` stops because you changed `jwt/jwt.hex`, run `git checkout jwt/jwt.hex` and pull again. If one of the two clients runs outside this repo and you need to keep your own secret, copy `jwt/jwt.hex` aside first and put it back after the pull. The stack then uses your secret instead of generating one.
+:::
+
 :::danger
 If you run more than one node in a DV Cluster, please take caution upgrading them simultaneously. Particularly if you are updating or changing the validator client used or recreating disks. It is recommended to update nodes on a sequential basis to minimize liveness and safety risks.
 :::
@@ -81,6 +87,12 @@ git pull
 ```sh
 docker compose up -d --build
 ```
+
+:::info[Engine API secret]
+Older releases shipped the same Engine API (JWT) secret, `jwt/jwt.hex`, to every operator. Current releases generate one per node, in a Docker volume. You don't need to do anything beyond the steps above: `docker compose up -d` creates the new secret and recreates the execution and consensus clients so that both use it, which restarts them once. Recreate both with the same command. If you only start one of them, it cannot authenticate to the other until that one is recreated too.
+
+If `git pull` stops because you changed `jwt/jwt.hex`, run `git checkout jwt/jwt.hex` and pull again. If one of the two clients runs outside this repo and you need to keep your own secret, copy `jwt/jwt.hex` aside first and put it back after the pull. The stack then uses your secret instead of generating one.
+:::
 
 :::danger
 If you run more than one node in a DV Cluster, please take caution upgrading them simultaneously. Particularly if you are updating or changing the validator client used or recreating disks. It is recommended to update nodes on a sequential basis to minimize liveness and safety risks.
