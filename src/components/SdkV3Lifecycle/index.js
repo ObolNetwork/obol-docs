@@ -23,7 +23,7 @@ export default function SdkV3Lifecycle({data, offSdk = {}}) {
   // Register the stage ids so links to /lifecycle#<stage> pass the anchor check.
   data.stages.forEach((stage) => brokenLinks.collectAnchor(stage.id));
   // Links in the data are relative to docs/sdk-v3/ (this page's folder).
-  const base = pathname.replace(/[^/]*$/, '');
+  const base = pathname.slice(0, pathname.lastIndexOf('/') + 1);
   return (
     <ol className="sdk-flow">
       {data.stages.map((stage) => (

@@ -59,7 +59,7 @@ export function loadSource(sdkDir, entries) {
       const optional =
         !!(pDecl && (pDecl.questionToken || pDecl.initializer)) ||
         !!(p.flags & ts.SymbolFlags.Optional);
-      const rest = !!(pDecl && pDecl.dotDotDotToken);
+      const rest = !!pDecl?.dotDotDotToken;
       return {
         name: p.getName(),
         optional,
@@ -114,7 +114,7 @@ export function loadSource(sdkDir, entries) {
     const pDecl = declOf(p);
     const pType = checker.getTypeOfSymbolAtLocation(p, pDecl ?? node);
     let type;
-    if (pDecl && pDecl.type && inSdk(pDecl)) type = pDecl.type.getText();
+    if (pDecl?.type && inSdk(pDecl)) type = pDecl.type.getText();
     else type = typeStr(pType, node);
     if (pDecl?.questionToken && type.endsWith(' | undefined')) type = type.slice(0, -12);
     return {
@@ -124,7 +124,7 @@ export function loadSource(sdkDir, entries) {
       type,
       doc: docs(p).text,
       tags: docs(p).tags,
-      declaredIn: pDecl && pDecl.parent && ts.isInterfaceDeclaration(pDecl.parent) ? pDecl.parent.name.text : null,
+      declaredIn: pDecl?.parent && ts.isInterfaceDeclaration(pDecl.parent) ? pDecl.parent.name.text : null,
     };
   }
 
@@ -214,7 +214,7 @@ export function loadSource(sdkDir, entries) {
         signatures: sigs,
         file: relFile(pDecl),
         line: lineOf(pDecl),
-        objectMember: pType.getProperties().length > 0 && !sigs.length ? true : false,
+        objectMember: pType.getProperties().length > 0 && !sigs.length,
       };
     });
   }

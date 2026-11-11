@@ -216,8 +216,11 @@ table.sdk-matrix td { color: var(--ifm-color-primary); font-size: 0.9rem; }
   border-radius: 0.75rem;
   padding: 0.85rem 0.95rem 0.8rem;
   background: var(--sdk-card-bg);
-  margin: 0 !important;
 }
+/* Two classes, to rank above Infima's `.markdown li + li` (a top margin on
+   every list item after the first). */
+.sdk-flow > .sdk-flow__stage,
+.sdk-flow__stage .sdk-flow__methods > li { margin: 0; }
 .sdk-flow__n {
   display: inline-flex;
   width: 1.6rem;
@@ -243,7 +246,7 @@ table.sdk-matrix td { color: var(--ifm-color-primary); font-size: 0.9rem; }
 }
 .sdk-flow__blurb { font-size: 0.82rem; opacity: 0.85; margin: 0.45rem 0 0.6rem; }
 .sdk-flow__methods { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.2rem; }
-.sdk-flow__methods li { margin: 0 !important; font-size: 0.8rem; }
+.sdk-flow__methods li { font-size: 0.8rem; }
 .sdk-flow__methods a { font-family: var(--ifm-font-family-monospace); overflow-wrap: anywhere; }
 .sdk-flow__kind {
   display: inline-block;

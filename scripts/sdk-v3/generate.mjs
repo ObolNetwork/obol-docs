@@ -11,10 +11,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { execFileSync } from 'node:child_process';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { loadSource } from './lib/source.mjs';
-import { loadSpec, tagOf, codeTokens } from './lib/spec.mjs';
+import { loadSpec, tagOf, codeTokens, headingOf, isTableStart, tableEnd } from './lib/spec.mjs';
 import { PAGES, STAGES } from './namespaces.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -62,8 +61,53 @@ async function loadRuntime() {
 }
 
 // ---------------------------------------------------------------- helpers
-const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const cell = s => String(s ?? '').replace(/\r?\n+/g, ' ').replace(/\|/g, '\\|').trim();
+const esc = s => String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+const cell = s => String(s ?? '').replace(/\r?\n+/g, ' ').replaceAll('|', String.raw`\|`).trim();
+/** `text` up to its first `(`: `prepareDeposit(input)` -> `prepareDeposit`. */
+const beforeParen = text => {
+  const i = text.indexOf('(');
+  return i < 0 ? text : text.slice(0, i);
+};
+/** `text` without the newlines at its end. */
+const stripTrailingNewlines = text => {
+  let end = text.length;
+  while (end > 0 && text[end - 1] === '\n') end--;
+  return text.slice(0, end);
+};
+
+/**
+ * What `{@link X}` or `{@link X | label}` shows, given the text between
+ * `{@link` and `}`: the label when there is one, else the target. Null when
+ * the tag is not in one of those two forms.
+ */
+function linkTagLabel(inner) {
+  const target = /^\s+([^\s|]+)/.exec(inner);
+  if (!target) return null;
+  const rest = inner.slice(target[0].length).trimStart();
+  if (rest === '') return target[1];
+  if (!rest.startsWith('|') || rest.length === 1) return null;
+  const label = rest.slice(1);
+  return label.trimStart() || label.at(-1);
+}
+
+/** Turns every `{@link X}` / `{@link X | label}` into a code span, in one pass. */
+function replaceLinkTags(text) {
+  const OPEN = '{@link';
+  let out = '';
+  let pos = 0;
+  let start = text.indexOf(OPEN);
+  while (start >= 0) {
+    const end = text.indexOf('}', start);
+    if (end < 0) break;
+    const label = linkTagLabel(text.slice(start + OPEN.length, end));
+    if (label !== null) {
+      out += text.slice(pos, start) + '`' + label + '`';
+      pos = end + 1;
+    }
+    start = text.indexOf(OPEN, label === null ? start + OPEN.length : pos);
+  }
+  return out + text.slice(pos);
+}
 
 /**
  * Makes imported prose (TSDoc, spec) safe for CommonMark pages: escapes `<`
@@ -71,7 +115,7 @@ const cell = s => String(s ?? '').replace(/\r?\n+/g, ' ').replace(/\|/g, '\\|').
  */
 function prose(text) {
   if (!text) return '';
-  let s = text.replace(/\{@link\s+([^}\s|]+)(?:\s*\|\s*([^}]+))?\s*\}/g, (_, a, b) => '`' + (b ?? a) + '`');
+  const s = replaceLinkTags(text);
   const out = [];
   let inFence = false;
   for (const line of s.split('\n')) {
@@ -159,12 +203,16 @@ function moduleSymbol(ns, iface) {
   return sym && src.checker.getExportsOfModule(sym).find(s => s.getName() === iface);
 }
 
+/** The first backticked name of a table cell, without a call's parentheses. */
+const firstCodeName = c => {
+  const token = codeTokens(c)[0];
+  return token && beforeParen(token);
+};
 const renamesRc12 = new Map(); // new qualified -> old
 for (const t of spec.migrationTables) {
   if (t.headings.some(h => /Renames/.test(h)) && t.headings.some(h => /rc\.11 to rc\.12/.test(h))) {
     for (const r of t.rows) {
-      const oldName = codeTokens(r[0])[0]?.replace(/\(.*$/, '');
-      const newName = codeTokens(r[1])[0]?.replace(/\(.*$/, '');
+      const [oldName, newName] = [r[0], r[1]].map(firstCodeName);
       if (oldName && newName) renamesRc12.set(newName, oldName);
     }
   }
@@ -184,6 +232,13 @@ for (const page of PAGES) {
     }
     if (homeType(name, d, page.typesFile)) page.types.push({ ...d, ns: null });
   }
+}
+/** A bound member's TSDoc: its own, else its `typeof fn` target's, else the namespace export's. */
+function memberDoc(mem, fn) {
+  if (mem.doc.text) return { doc: mem.doc.text, docSource: 'member' };
+  if (mem.typeofDoc?.text) return { doc: mem.typeofDoc.text, docSource: 'function' };
+  if (fn?.doc?.text) return { doc: fn.doc.text, docSource: 'namespace export' };
+  return { doc: '', docSource: null };
 }
 for (const page of PAGES) {
   page.file = `reference/${page.id}.md`;
@@ -211,15 +266,14 @@ for (const page of PAGES) {
         kind: mem.kind,
         signatures: mem.signatures,
         constType: mem.typeNode,
-        doc: mem.doc.text || mem.typeofDoc?.text || (fn?.doc?.text ?? ''),
-        docSource: mem.doc.text ? 'member' : mem.typeofDoc?.text ? 'function' : fn?.doc?.text ? 'namespace export' : null,
+        ...memberDoc(mem, fn),
         tags: [...(mem.doc.tags ?? []), ...(mem.typeofDoc?.tags ?? []), ...(fn?.doc?.tags ?? [])],
         pure: !!fn && fn.kind === 'function',
         file: mem.file,
         line: mem.line,
       });
     }
-    for (const [key, extra] of Object.entries(page.extraModules ?? {})) {
+    for (const extra of Object.values(page.extraModules ?? {})) {
       const sym = src.checker.getExportsOfModule(nsSymbols[extra.namespace]).find(s => s.getName() === extra.module);
       for (const mem of sym ? src.moduleMembers(sym) : []) {
         push({
@@ -280,7 +334,6 @@ for (const page of PAGES) {
       let doc = d.doc.text;
       // `send` is exported as send(ctx, prepared, options); document the bound obol.send.
       if (name === 'send') {
-        const client = rootExports.get('ObolClient');
         const mem = src.moduleMembers(src.resolve(src.checker.getExportsOfModule(src.checker.getSymbolAtLocation(src.program.getSourceFile(path.join(sdkDir, 'src/index.ts')))).find(s => s.getName() === 'ObolClient')));
         const bound = mem.find(m => m.name === 'send');
         if (bound) {
@@ -288,7 +341,6 @@ for (const page of PAGES) {
           access = 'obol.send';
           doc = [d.doc.text, bound.doc.text].filter(Boolean).join('\n\n');
         }
-        void client;
       }
       push({
         page,
@@ -340,10 +392,11 @@ function specSectionFor(m) {
       if (h) return { heading: h, ...opSections.get(h), own: heading === `${m.qualified}` };
     }
   }
-  const candidates = [m.qualified, `${page.namespace}.${m.name}`, m.name];
+  const candidates = new Set([m.qualified, `${page.namespace}.${m.name}`, m.name]);
   for (const [heading, s] of opSections) {
-    const parts = heading.split(/\s*\/\s*/).map(p => p.replace(/\s*\(.*$/, '').trim());
-    if (parts.some(p => candidates.includes(p))) return { heading, ...s, own: parts.length === 1 };
+    // "cluster.create / cluster.accept (signing)" names two operations.
+    const parts = heading.split('/').map(p => beforeParen(p).trim());
+    if (parts.some(p => candidates.has(p))) return { heading, ...s, own: parts.length === 1 };
   }
   return null;
 }
@@ -356,27 +409,36 @@ for (const m of methods) {
 // --- codes per method from spec/errors.md
 const errorInfo = new Map(); // code -> { section, meaning, thrownBy, should, legacy, since }
 const findingInfo = new Map();
+/** The methods a backticked token of a "Thrown by" cell names (`ovm.*`, `prepareDeposit(…)`, `obol.send`). */
+function tokenMethods(token, contextNs) {
+  const t = beforeParen(token).replace(/^obol\./, '');
+  if (t.endsWith('.*')) {
+    const ns = t.slice(0, -2);
+    return methods.filter(m => m.page.namespace === ns);
+  }
+  const qualified = t.includes('.');
+  const last = t.split('.').pop();
+  const list = methodIndex.get(t) ?? (qualified ? methodIndex.get(last) : null) ?? [];
+  return list.filter(m => !qualified || !contextNs || m.qualified === t || m.qualified.endsWith('.' + last));
+}
+// Wording of a "Thrown by" cell that names a group of methods instead of one.
+const THROWN_BY_PHRASES = [
+  [/ovm writes/, m => m.page.id === 'ovm' && m.name.startsWith('prepare')],
+  [/role-gated writes/, m => m.page.id === 'ovm' && /prepare(Grant|Revoke|Renounce|Set|Sweep|Recover|WithdrawPull)/.test(m.name)],
+  [/writes that read status/, m => ['prepareDeposit', 'prepareWithdraw', 'prepareConsolidate', 'prepareEoaWithdraw'].includes(m.name)],
+  [/reads inside/, m => m.name.startsWith('prepare')],
+  [/`api` operations/, m => m.tag === 'api' || m.tag === 'api (+ wallet)'],
+  [/every signing operation/, m => ['cluster.create', 'cluster.accept', 'terms.accept'].includes(m.qualified)],
+];
 function resolveTokens(text, contextNs) {
   const hits = new Set();
-  for (const tok of codeTokens(text)) {
-    const t = tok.replace(/\(.*$/, '').replace(/^obol\./, '');
-    if (/\.\*$/.test(t)) {
-      const ns = t.slice(0, -2);
-      for (const m of methods) if (m.page.namespace === ns) hits.add(m);
-      continue;
-    }
-    const list = methodIndex.get(t) ?? (t.includes('.') ? methodIndex.get(t.split('.').pop()) : null);
-    if (list) for (const m of list) if (!t.includes('.') || m.qualified === t || m.qualified.endsWith('.' + t.split('.').pop()) || !contextNs) hits.add(m);
-  }
+  const addWhere = matches => {
+    for (const m of methods) if (matches(m)) hits.add(m);
+  };
+  for (const tok of codeTokens(text)) for (const m of tokenMethods(tok, contextNs)) hits.add(m);
   const lower = text.toLowerCase();
-  const all = pred => methods.filter(pred).forEach(m => hits.add(m));
-  if (/ovm writes/.test(lower)) all(m => m.page.id === 'ovm' && m.name.startsWith('prepare'));
-  if (/role-gated writes/.test(lower)) all(m => m.page.id === 'ovm' && /prepare(Grant|Revoke|Renounce|Set|Sweep|Recover|WithdrawPull)/.test(m.name));
-  if (/writes that read status/.test(lower)) all(m => ['prepareDeposit', 'prepareWithdraw', 'prepareConsolidate', 'prepareEoaWithdraw'].includes(m.name));
-  if (/reads inside/.test(lower)) all(m => m.name.startsWith('prepare'));
-  if (/`api` operations/.test(lower)) all(m => m.tag === 'api' || m.tag === 'api (+ wallet)');
-  if (/every signing operation/.test(lower)) all(m => ['cluster.create', 'cluster.accept', 'terms.accept'].includes(m.qualified));
-  if (/^`?wait`?$|`wait`/.test(text)) all(m => m.name === 'send');
+  for (const [phrase, matches] of THROWN_BY_PHRASES) if (phrase.test(lower)) addWhere(matches);
+  if (/^`?wait`?$|`wait`/.test(text)) addWhere(m => m.name === 'send');
   return hits;
 }
 const SECTION_TITLES = new Map();
@@ -384,7 +446,7 @@ for (const t of spec.errorTables) {
   const head = t.header.map(h => h.toLowerCase());
   const iCode = head.indexOf('code');
   if (iCode < 0) continue;
-  const section = t.headings[t.headings.length - 1];
+  const section = t.headings.at(-1);
   const top = t.headings[1] ?? t.headings[0];
   const iMeaning = head.indexOf('meaning');
   const iBy = head.findIndex(h => h === 'thrown by' || h === 'emitted by');
@@ -429,16 +491,28 @@ const errorSectionIntro = new Map();
   const lines = spec.errorsMd.split('\n');
   let cur = null;
   for (const line of lines) {
-    const h = /^###\s+(.*)$/.exec(line);
-    if (h) {
-      cur = h[1].trim();
+    const h = headingOf(line);
+    if (h?.level === 3) {
+      cur = h.text;
       errorSectionIntro.set(cur, []);
       continue;
     }
     if (/^##\s/.test(line)) cur = null;
-    if (cur && !/^\|/.test(line)) errorSectionIntro.get(cur).push(line);
+    if (cur && !line.startsWith('|')) errorSectionIntro.get(cur).push(line);
   }
   for (const [k, v] of errorSectionIntro) errorSectionIntro.set(k, v.join('\n').trim());
+}
+
+/**
+ * In "`DEPOSIT_CONFLICT` by `prepareDeposit`", the operation named after the
+ * code (`rest` is the text that follows the code), or null.
+ */
+function attributedOperation(rest) {
+  let s = (rest.startsWith('`') ? rest.slice(1) : rest).trimStart();
+  if (s.startsWith(')')) s = s.slice(1).trimStart();
+  const word = ['by', 'from', 'in'].find(w => s.startsWith(w));
+  if (!word) return null;
+  return /^\s+`([\w.]+)`/.exec(s.slice(word.length))?.[1] ?? null;
 }
 
 const GROUP_CODES = { PAYLOAD_INVALID: 'G1', UNSUPPORTED_CHAIN: 'G2', CHAIN_MISMATCH: 'G3', WALLET_REQUIRED: 'G3', API_DISABLED: 'G4' };
@@ -461,8 +535,8 @@ for (const m of methods) {
       const c = match[2];
       if (match[1] || f.has(c) || FINDING_CODES.has(c) || c.startsWith('API_')) continue; // findings; API_* are G4
       // "`DEPOSIT_CONFLICT` by `prepareDeposit`": a code another operation throws.
-      const after = /^`?\s*\)?\s*(?:by|from|in)\s+`([\w.]+)`/.exec(m.spec.body.slice(match.index + match[0].length));
-      if (after && after[1].split('.').pop() !== m.name) continue;
+      const other = attributedOperation(m.spec.body.slice(match.index + match[0].length));
+      if (other && other.split('.').pop() !== m.name) continue;
       if (ERROR_CODES.has(c) && !throws.has(c)) throws.set(c, 'operations.md');
     }
   }
@@ -488,17 +562,17 @@ for (const f of fs.existsSync(examplesDir) ? fs.readdirSync(examplesDir) : []) {
   const prelude = (/^\/\/ #region imports\n([\s\S]*?)^\/\/ #endregion/m.exec(text) ?? [])[1] ?? '';
   for (const r of text.matchAll(/^[ \t]*\/\/ #region ([\w.]+)\n([\s\S]*?)^[ \t]*\/\/ #endregion/gm)) {
     if (r[1] === 'imports') continue;
-    const raw = r[2].replace(/\n+$/, '');
+    const raw = stripTrailingNewlines(r[2]);
     const indent = Math.min(...raw.split('\n').filter(l => l.trim()).map(l => /^ */.exec(l)[0].length));
     const body = raw.split('\n').map(l => l.slice(indent)).join('\n');
     // Keep only the imports the snippet uses, so each example stands alone.
     const used = prelude
       .split('\n')
-      .filter(l => /^import/.test(l))
+      .filter(l => l.startsWith('import'))
       .map(l => {
         const mm = /^import (type )?\{([^}]*)\} from (.*)$/.exec(l);
         if (!mm) return null;
-        const names = mm[2].split(',').map(s => s.trim()).filter(Boolean).filter(n => new RegExp(`\\b${n.replace(/^type /, '')}\\b`).test(body));
+        const names = mm[2].split(',').map(s => s.trim()).filter(Boolean).filter(n => new RegExp(String.raw`\b${n.replace(/^type /, '')}\b`).test(body));
         return names.length ? `import ${mm[1] ?? ''}{ ${names.join(', ')} } from ${mm[3]}` : null;
       })
       .filter(Boolean);
@@ -507,7 +581,6 @@ for (const f of fs.existsSync(examplesDir) ? fs.readdirSync(examplesDir) : []) {
 }
 
 // ---------------------------------------------------------------- rendering
-const pageDepth = file => file.split('/').length - 1; // from docs/sdk-v3
 // Route of a generated file relative to docs/sdk-v3 (index files are their folder).
 const route = f => '/' + f.replace(/\.mdx?$/, '').replace(/(^|\/)index$/, '');
 function rel(fromFile, toFile, anchor) {
@@ -525,6 +598,11 @@ function mdRel(fromFile, toFile, anchor) {
   if (!r.startsWith('.')) r = './' + r;
   return anchor ? `${r}#${anchor}` : r;
 }
+/** Markdown table rows from arrays of cells. */
+const mdRows = rows => rows.map(r => `| ${r.join(' | ')} |`).join('\n');
+/** A two-column table without a header: label, value. */
+const kvTable = rows => `| | |\n|---|---|\n${mdRows(rows.map(r => [r[0], cell(r[1])]))}\n`;
+const optMark = x => (x.optional ? '?' : '');
 
 /** A type expression as HTML code with the SDK's types linked. */
 function typeHtml(text, fromFile) {
@@ -532,20 +610,23 @@ function typeHtml(text, fromFile) {
   let html = '';
   for (let i = 0; i < parts.length; i++) {
     const p = parts[i];
-    if (i % 2 === 1 && typeHome.has(p) && parts[i - 1]?.slice(-1) !== '.' && parts[i - 1]?.slice(-1) !== "'") {
+    // Identifiers are the odd parts; `a.Name` and `'Name'` are not type names.
+    const before = parts[i - 1] ?? '';
+    if (i % 2 === 1 && typeHome.has(p) && !before.endsWith('.') && !before.endsWith("'")) {
       const h = typeHome.get(p);
       html += `<a href="${rel(fromFile, h.page, h.id)}">${esc(p)}</a>`;
     } else html += esc(p);
   }
   // A <span>, not <code>: the site renders a <code> with element children (the
   // links) as a code block.
-  return `<span class="sdk-type">${html.replace(/\|/g, '&#124;').replace(/\n\s*/g, ' ')}</span>`;
+  return `<span class="sdk-type">${html.replaceAll('|', '&#124;').replace(/\n\s*/g, ' ')}</span>`;
 }
 
 function codeChip(code, fromFile, mode = 'error') {
   if (mode === 'error' && ERROR_CODES.has(code) && errorInfo.has(code)) {
     const since = errorInfo.get(code).since;
-    return `<a class="sdk-chip sdk-chip--error" href="${rel(fromFile, 'errors.md', code)}">${code}${since ? `<span class="sdk-chip__since">${since}</span>` : ''}</a>`;
+    const sinceHtml = since ? `<span class="sdk-chip__since">${since}</span>` : '';
+    return `<a class="sdk-chip sdk-chip--error" href="${rel(fromFile, 'errors.md', code)}">${code}${sinceHtml}</a>`;
   }
   if (FINDING_CODES.has(code)) {
     const sev = FINDINGS[code].severity;
@@ -560,31 +641,88 @@ function methodAnchor(m) {
 function methodLink(m, fromFile, label) {
   return `[\`${label ?? m.access}\`](${mdRel(fromFile, m.page.file, methodAnchor(m))})`;
 }
+/** `ns.name` of a method, with `legacyNs` as the namespace of the legacy group. */
+function displayName(m, legacyNs) {
+  if (m.group === 'legacy') return `${legacyNs}.${m.name}`;
+  return m.page.namespace ? `${m.page.namespace}.${m.name}` : m.name;
+}
+const warningCount = m => m.findings.filter(c => FINDINGS[c]?.severity === 'warning').length;
 
+/**
+ * The Markdown link `[text](href)` that starts at the `[` at `i`: `end` is the
+ * index after it, or -1 when there is none; then no `[` before `retryFrom`
+ * starts a link either, so the scan stays linear.
+ */
+function linkAt(text, i) {
+  const close = text.indexOf(']', i + 1);
+  if (close < 0) return { end: -1, retryFrom: text.length };
+  if (text[close + 1] !== '(') return { end: -1, retryFrom: close };
+  const paren = text.indexOf(')', close + 2);
+  return paren < 0 ? { end: -1, retryFrom: text.length } : { end: paren + 1, retryFrom: i };
+}
+/** The index after the one-line code span that starts at the backtick at `i`, or -1. */
+function codeSpanEnd(text, i) {
+  let j = i + 1;
+  while (j < text.length && text[j] !== '`' && text[j] !== '\n') j++;
+  return j > i + 1 && text[j] === '`' ? j + 1 : -1;
+}
+/** [start, end) of every one-line code span of `text` that is not inside a Markdown link. */
+function* codeSpans(text) {
+  let i = 0;
+  let noLinkBefore = 0;
+  while (i < text.length) {
+    let end = -1;
+    if (text[i] === '`') {
+      end = codeSpanEnd(text, i);
+      if (end > 0) yield [i, end];
+    } else if (text[i] === '[' && i >= noLinkBefore) {
+      const link = linkAt(text, i);
+      end = link.end;
+      noLinkBefore = link.retryFrom;
+    }
+    i = end > 0 ? end : i + 1;
+  }
+}
+/** Replaces each code span outside a link with `replace(code)`, unless that is null. */
+function mapCodeSpans(text, replace) {
+  let out = '';
+  let pos = 0;
+  for (const [start, end] of codeSpans(text)) {
+    const replacement = replace(text.slice(start + 1, end - 1));
+    if (replacement === null) continue;
+    out += text.slice(pos, start) + replacement;
+    pos = end;
+  }
+  return out + text.slice(pos);
+}
+
+/** The one method a code span names (`cluster.create`, `obol.send(...)`, a root function), or null. */
+function methodNamed(code) {
+  const t = code.replace(/^obol\./, '').replace(/^experimental\.(?=legacy\.)/, '');
+  const mm = /^([A-Za-z]+(?:\.[A-Za-z]+)?)(\(.*\))?$/.exec(t);
+  if (!mm) return null;
+  const name = mm[1];
+  const target = (methodIndex.get(name) ?? []).filter(x => x.qualified === name || x.aliases?.includes(name) || (!name.includes('.') && x.page.module == null));
+  return target.length === 1 ? target[0] : null;
+}
+/** Where a code span links to: an error code, a finding code, a method or a type; else null. */
+function codeSpanHref(code, fromFile, selfMethod) {
+  if (ERROR_CODES.has(code) && errorInfo.has(code) && fromFile !== 'errors.md#self') return mdRel(fromFile, 'errors.md', code);
+  if (FINDING_CODES.has(code)) return mdRel(fromFile, 'warnings.md', code);
+  const target = methodNamed(code);
+  if (target && target !== selfMethod) return mdRel(fromFile, target.page.file, methodAnchor(target));
+  const h = typeHome.get(code);
+  return h ? mdRel(fromFile, h.page, h.id) : null;
+}
 /** Links inline code spans that name an error / finding code or a method. */
 function linkify(text, fromFile, selfMethod) {
+  const linkSpan = code => {
+    const href = codeSpanHref(code, fromFile, selfMethod);
+    return href === null ? null : `[\`${code}\`](${href})`;
+  };
   return prose(text)
     .split(/(```[\s\S]*?```)/)
-    .map((chunk, ci) =>
-      ci % 2
-        ? chunk
-        : chunk.replace(/(\[[^\]]*\]\([^)]*\))|`([^`\n]+)`/g, (whole, link, code) => {
-            if (link || !code) return whole;
-            if (ERROR_CODES.has(code) && errorInfo.has(code) && fromFile !== 'errors.md#self') return `[\`${code}\`](${mdRel(fromFile, 'errors.md', code)})`;
-            if (FINDING_CODES.has(code)) return `[\`${code}\`](${mdRel(fromFile, 'warnings.md', code)})`;
-            const t = code.replace(/^obol\./, '').replace(/^experimental\.(?=legacy\.)/, '');
-            const mm = /^([A-Za-z]+(?:\.[A-Za-z]+)?)(\(.*\))?$/.exec(t);
-            if (mm) {
-              const target = (methodIndex.get(mm[1]) ?? []).filter(x => x.qualified === mm[1] || x.aliases?.includes(mm[1]) || (!mm[1].includes('.') && (x.page.module == null)));
-              if (target.length === 1 && target[0] !== selfMethod) return `[\`${code}\`](${mdRel(fromFile, target[0].page.file, methodAnchor(target[0]))})`;
-            }
-            if (typeHome.has(code)) {
-              const h = typeHome.get(code);
-              return `[\`${code}\`](${mdRel(fromFile, h.page, h.id)})`;
-            }
-            return whole;
-          }),
-    )
+    .map((chunk, ci) => (ci % 2 ? chunk : mapCodeSpans(chunk, linkSpan)))
     .join('');
 }
 
@@ -616,7 +754,7 @@ function stageBadge(stageId, fromFile) {
 const GROUPS = [
   ['legacy', 'experimental.legacy', m => m.group === 'legacy'], // heading id: #legacy
   ['reads', 'Reads', m => /^(get|status|watch|preflight|isClaimed|hasAccepted)/.test(m.name) && m.bound],
-  ['transactions', 'Transactions', m => m.kinds?.length > 0 || /^preview/.test(m.name)],
+  ['transactions', 'Transactions', m => m.kinds?.length > 0 || m.name.startsWith('preview')],
   ['checks', 'Checks', m => /^(verify|isValid|assert)/.test(m.name)],
   ['signing', 'Signing and API writes', m => ['create', 'accept'].includes(m.name) && m.bound],
   ['simulate', 'Simulation', m => m.name === 'simulate'],
@@ -630,33 +768,47 @@ const groupOf = m => {
 };
 
 async function renderSignature(m) {
-  const blocks = [];
-  for (const s of m.signatures) {
-    const tp = s.typeParams.length ? `<${s.typeParams.join(', ')}>` : '';
-    const params = s.params.map(p => `${p.rest ? '...' : ''}${p.name}${p.optional ? '?' : ''}: ${p.type}`).join(', ');
-    let code = `declare function ${m.name}${tp}(${params}): ${s.returns};`;
-    code = (await prettierSig(code)).trim();
-    const prefix = m.access.slice(0, -m.name.length);
-    code = code.replace(/^declare function /, prefix).replace(/;$/, '');
-    blocks.push(code);
-  }
+  const prefix = m.access.slice(0, -m.name.length);
+  const blocks = await Promise.all(
+    m.signatures.map(async s => {
+      const tp = s.typeParams.length ? `<${s.typeParams.join(', ')}>` : '';
+      const params = s.params.map(p => `${p.rest ? '...' : ''}${p.name}${optMark(p)}: ${p.type}`).join(', ');
+      const code = await prettierSig(`declare function ${m.name}${tp}(${params}): ${s.returns};`);
+      return code.trim().replace(/^declare function /, prefix).replace(/;$/, '');
+    }),
+  );
   return blocks.length ? '```ts sdk-signature\n' + blocks.join('\n\n') + '\n```\n' : '';
 }
 
+// Signatures and type declarations go through prettier, which is async: format
+// them all up front so the page renderers below are plain synchronous code.
+const signatureBlock = new Map(await Promise.all(methods.map(async m => [m, await renderSignature(m)])));
+const allTypes = [...PAGES, corePage].flatMap(p => p.types);
+const declarationBlock = new Map(
+  await Promise.all(
+    allTypes
+      .filter(t => t.declaration && t.declaration.length < 2400)
+      .map(async t => [t, '```ts sdk-signature\n' + (await prettierSig(t.declaration)).trim() + '\n```\n']),
+  ),
+);
+
+/** The row of one field of an object parameter. */
+function paramFieldRow(p, f, file) {
+  const inherited = f.declaredIn && f.declaredIn !== p.type.replace(/<.*/, '');
+  const from = inherited ? ` <span class="sdk-from">from ${typeHtml(f.declaredIn, file)}</span>` : '';
+  return [`<code>${esc(p.name)}.${esc(f.name)}${optMark(f)}</code>`, typeHtml(f.type, file), cell(linkify(f.doc, file)) + from];
+}
 function paramTable(m, file) {
   const s = m.signatures[0];
-  if (!s || !s.params.length) return '';
+  if (!s?.params.length) return '';
   const rows = [];
   for (const p of s.params) {
-    const pname = `${p.rest ? '...' : ''}${p.name}${p.optional ? '?' : ''}`;
+    const pname = `${p.rest ? '...' : ''}${p.name}${optMark(p)}`;
     rows.push([`<code>${esc(pname)}</code>`, typeHtml(p.type, file), cell(linkify(p.doc, file))]);
-    if (p.fields && (s.params.length === 1 || p.fields.length <= 25)) {
-      for (const f of p.fields) {
-        rows.push([`<code>${esc(p.name)}.${esc(f.name)}${f.optional ? '?' : ''}</code>`, typeHtml(f.type, file), cell(linkify(f.doc, file)) + (f.declaredIn && f.declaredIn !== p.type.replace(/<.*/, '') ? ` <span class="sdk-from">from ${typeHtml(f.declaredIn, file)}</span>` : '')]);
-      }
-    }
+    const showFields = p.fields && (s.params.length === 1 || p.fields.length <= 25);
+    if (showFields) rows.push(...p.fields.map(f => paramFieldRow(p, f, file)));
   }
-  return `| Parameter | Type | Description |\n|---|---|---|\n${rows.map(r => `| ${r.join(' | ')} |`).join('\n')}\n`;
+  return `| Parameter | Type | Description |\n|---|---|---|\n${mdRows(rows)}\n`;
 }
 
 function returnsLine(m, file) {
@@ -667,85 +819,126 @@ function returnsLine(m, file) {
   if (rtag?.text) line += ` ${linkify(rtag.text, file)}`;
   if (m.kinds.length) {
     const k = m.kinds[0];
-    line += `: a \`Prepared\` of kind \`'${k}'\`, preview ${typeHtml(`PreviewByKind['${k}']`, file)}. Send it with [\`obol.send\`](${mdRel(file, 'reference/send.md', 'send')}) or your wallet layer.`;
-  } else if (/^preview/.test(m.name)) {
+    const preview = typeHtml(`PreviewByKind['${k}']`, file);
+    line += `: a \`Prepared\` of kind \`'${k}'\`, preview ${preview}. Send it with [\`obol.send\`](${mdRel(file, 'reference/send.md', 'send')}) or your wallet layer.`;
+  } else if (m.name.startsWith('preview')) {
     line += ': `{ preview, checks, blockNumber }`, never a transaction.';
   }
   return line + '\n';
 }
 
-async function renderMethod(m, file) {
-  const out = [];
-  const anchor = methodAnchor(m);
-  const title = m.group === 'legacy' ? `experimental.legacy.${m.name}` : m.page.namespace ? `${m.page.namespace}.${m.name}` : m.name;
-  out.push(`### ${title} {#${anchor}}\n`);
+function methodBadges(m, file) {
   const badges = [];
   if (m.tag) badges.push(`<span class="sdk-badge sdk-badge--tag" title="Where it reads from (spec tag)">${esc(m.tag)}</span>`);
   if (m.bound === false) badges.push(`<span class="sdk-badge sdk-badge--pure" title="Exported from the namespace, not bound on the client">namespace only</span>`);
   if (m.throws.length) badges.push(`<span class="sdk-badge sdk-badge--throws">throws ${m.throws.length}</span>`);
-  const warns = m.findings.filter(c => FINDINGS[c]?.severity === 'warning');
-  if (warns.length) badges.push(`<span class="sdk-badge sdk-badge--warning">${warns.length} warning${warns.length > 1 ? 's' : ''}</span>`);
+  const warns = warningCount(m);
+  if (warns) badges.push(`<span class="sdk-badge sdk-badge--warning">${warns} warning${warns > 1 ? 's' : ''}</span>`);
   const renamed = renamesRc12.get(m.qualified) ?? renamesRc12.get(m.name);
   if (renamed) badges.push(`<span class="sdk-badge sdk-badge--since" title="Renamed in 3.0.0-rc.12">rc.12: was ${esc(renamed)}</span>`);
   const stage = m.page.stages?.[m.name];
   if (stage) badges.push(stageBadge(stage, file));
-  if (badges.length) out.push(`<div class="sdk-badges">${badges.join(' ')}</div>\n`);
+  return badges.length ? [`<div class="sdk-badges">${badges.join(' ')}</div>\n`] : [];
+}
 
-  const access = m.kind === 'constant' ? m.access : `${m.access}()`;
+/** TSDoc summary, remarks and deprecation of a method. */
+function methodDoc(m, file) {
+  const out = [];
   if (m.doc) out.push(linkify(m.doc, file, m) + '\n');
   else {
+    const access = m.kind === 'constant' ? m.access : `${m.access}()`;
     report.noDoc.push(m.qualified);
     out.push(`<p class="sdk-nodoc">No TSDoc on <code>${esc(access)}</code> yet; the behaviour below is the spec's.</p>\n`);
   }
   for (const t of m.tags.filter(t => t.name === 'remarks')) out.push(linkify(t.text, file, m) + '\n');
   const dep = m.tags.find(t => t.name === 'deprecated');
   if (dep) out.push(`:::warning[Deprecated]\n\n${linkify(dep.text || 'Deprecated.', file, m)}\n\n:::\n`);
-  if (m.kind === 'constant') {
-    out.push('```ts sdk-signature\n' + `${m.access}: ${m.constType}` + '\n```\n');
-  } else {
-    out.push(await renderSignature(m));
-    const pt = paramTable(m, file);
-    if (pt) out.push(pt);
-    out.push(returnsLine(m, file));
-  }
+  return out;
+}
+
+/** Signature, parameters and return value (or the type of a constant). */
+function methodShape(m, file) {
+  if (m.kind === 'constant') return ['```ts sdk-signature\n' + `${m.access}: ${m.constType}` + '\n```\n'];
+  const pt = paramTable(m, file);
+  return [signatureBlock.get(m), ...(pt ? [pt] : []), returnsLine(m, file)];
+}
+
+/** The codes a method throws and the findings it reports. */
+function methodCodes(m, file) {
+  const out = [];
   if (m.throws.length) {
-    out.push(`**Throws** <span class="sdk-muted">(per spec)</span> ${m.throws.map(c => codeChip(c, file)).join(' ')} <span class="sdk-muted">plus the [checks every operation runs](${mdRel(file, 'errors.md', 'checks-every-operation-runs')})</span>\n`);
+    const chips = m.throws.map(c => codeChip(c, file)).join(' ');
+    out.push(`**Throws** <span class="sdk-muted">(per spec)</span> ${chips} <span class="sdk-muted">plus the [checks every operation runs](${mdRel(file, 'errors.md', 'checks-every-operation-runs')})</span>\n`);
   }
   if (m.findings.length) {
     const label = m.kinds.length || m.name === 'simulate' ? 'Can report' : 'Reports';
     out.push(`**${label}** ${m.findings.map(c => codeChip(c, file, 'finding')).join(' ')}\n`);
   }
-  const exKey = m.group === 'legacy' ? `legacy.${m.name}` : m.page.namespace ? `${m.page.namespace}.${m.name}` : m.name;
+  return out;
+}
+
+/** The example of a method: its region in examples/, else its TSDoc `@example`. */
+function methodExample(m) {
+  const exKey = displayName(m, 'legacy');
   const tsdocExample = m.tags.find(t => t.name === 'example')?.text;
   if (examples.has(exKey)) {
     report.examples.with++;
-    out.push('**Example**\n\n```ts\n' + examples.get(exKey) + '\n```\n');
-  } else if (tsdocExample) {
-    report.examples.with++;
-    out.push('**Example**\n\n' + (tsdocExample.includes('```') ? tsdocExample : '```ts\n' + tsdocExample + '\n```') + '\n');
-  } else if (m.kind === 'function') report.examples.without.push(exKey);
-  if (m.spec) {
-    // spec/ code blocks are notation, not samples: tag them so the sample check skips them.
-    const body = linkify(fixSdkLinks(m.spec.body, 'spec', 'spec/operations.md'), file, m)
-      .replace(/^(#{1,4})\s/gm, '#### ')
-      .replace(/^```(ts|typescript)\s*$/gm, '```ts sdk-spec');
-    const shared = m.spec.own ? '' : ' (shared section)';
-    out.push(`<details class="sdk-spec">\n<summary>Specification: ${esc(m.spec.heading)}${shared}</summary>\n\n${body}\n\n<p class="sdk-muted">From <a href="${GH}/spec/operations.md">spec/operations.md</a>.</p>\n\n</details>\n`);
+    return ['**Example**\n\n```ts\n' + examples.get(exKey) + '\n```\n'];
   }
-  const ghAnchor = h => h.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/ /g, '-');
+  if (tsdocExample) {
+    report.examples.with++;
+    return ['**Example**\n\n' + (tsdocExample.includes('```') ? tsdocExample : '```ts\n' + tsdocExample + '\n```') + '\n'];
+  }
+  if (m.kind === 'function') report.examples.without.push(exKey);
+  return [];
+}
+
+/** The method's section of spec/operations.md, folded. */
+function methodSpec(m, file) {
+  if (!m.spec) return [];
+  // spec/ code blocks are notation, not samples: tag them so the sample check skips them.
+  const body = linkify(fixSdkLinks(m.spec.body, 'spec', 'spec/operations.md'), file, m)
+    .replace(/^(#{1,4})\s/gm, '#### ')
+    .replace(/^```(ts|typescript)\s*$/gm, '```ts sdk-spec');
+  const shared = m.spec.own ? '' : ' (shared section)';
+  return [`<details class="sdk-spec">\n<summary>Specification: ${esc(m.spec.heading)}${shared}</summary>\n\n${body}\n\n<p class="sdk-muted">From <a href="${GH}/spec/operations.md">spec/operations.md</a>.</p>\n\n</details>\n`];
+}
+
+const ghAnchor = h => h.toLowerCase().replace(/[^a-z0-9 -]/g, '').replaceAll(' ', '-');
+/** A `@see` tag as a "See also" entry, or null when it names the section already linked. */
+function seeTagEntry(t, m) {
+  const sp = /spec\s*\/\s*operations\.md\s+"([^"]+)"/.exec(t.text);
+  if (!sp) return esc(t.text.replaceAll('`', ''));
+  if (sp[1] === m.spec?.heading) return null; // the same section, linked above
+  return `[spec: ${sp[1]}](${GH}/spec/operations.md#${ghAnchor(sp[1])})`;
+}
+/** A "See also" entry as HTML: a Markdown link becomes an anchor, other text stays. */
+const seeEntryHtml = s => s.replace(/^\[(.*)\]\((.*)\)$/, (_, text, href) => `<a href="${href}">${text.replaceAll('`', '')}</a>`);
+function methodSeeAlso(m) {
   const see = [];
   if (m.spec) see.push(`[spec/operations.md](${GH}/spec/operations.md#${ghAnchor(m.spec.heading)})`);
   for (const t of m.tags.filter(t => t.name === 'see')) {
-    const sp = /spec\s*\/\s*operations\.md\s+"([^"]+)"/.exec(t.text);
-    if (sp && m.spec && sp[1] === m.spec.heading) continue; // the same section, linked above
-    if (sp) see.push(`[spec: ${sp[1]}](${GH}/spec/operations.md#${ghAnchor(sp[1])})`);
-    else see.push(esc(t.text.replace(/`/g, '')));
+    const entry = seeTagEntry(t, m);
+    if (entry !== null) see.push(entry);
   }
-  const schemaName = `${m.group === 'legacy' ? 'legacy' : m.page.namespace ?? ''}.${m.name}`;
+  const schemaNs = m.group === 'legacy' ? 'legacy' : m.page.namespace ?? '';
+  const schemaName = `${schemaNs}.${m.name}`;
   if (fs.existsSync(path.join(sdkDir, 'spec/schemas', `${schemaName}.json`))) see.push(`[input JSON Schema](${GH}/spec/schemas/${schemaName}.json)`);
   see.push(`[source](${GH}/${m.file}#L${m.line})`);
-  out.push(`<p class="sdk-see">See also: ${see.map(s => s.replace(/^\[(.*)\]\((.*)\)$/, (_, a, b) => `<a href="${b.startsWith('http') ? b : b}">${a.replace(/`/g, '')}</a>`)).join(' · ')}</p>\n`);
-  return out.join('\n');
+  return `<p class="sdk-see">See also: ${see.map(seeEntryHtml).join(' · ')}</p>\n`;
+}
+
+function renderMethod(m, file) {
+  return [
+    `### ${displayName(m, 'experimental.legacy')} {#${methodAnchor(m)}}\n`,
+    ...methodBadges(m, file),
+    ...methodDoc(m, file),
+    ...methodShape(m, file),
+    ...methodCodes(m, file),
+    ...methodExample(m),
+    ...methodSpec(m, file),
+    methodSeeAlso(m),
+  ].join('\n');
 }
 
 function frontmatter(o) {
@@ -753,29 +946,72 @@ function frontmatter(o) {
 }
 const GENERATED = `<!-- GENERATED by scripts/sdk-v3/generate.mjs from @obolnetwork/obol-sdk ${VERSION}. Do not edit; re-run scripts/generate-sdk-v3-reference.sh. -->\n\n`;
 
-async function renderPage(page, position) {
+/** The strip under a namespace page's intro: access, import path, lifecycle stage, types. */
+function pageFacts(page, file) {
+  const fact = (k, html) => `<span class="sdk-fact"><span class="sdk-fact__k">${k}</span> ${html}</span>`;
+  const facts = [fact('Access', `<code>${esc(page.access)}</code>`), fact('Import', `<code>${esc(page.subpath)}</code>`)];
+  if (page.lifecycle === 'all') facts.push(fact('Lifecycle', `<a class="sdk-badge sdk-badge--stage" href="${rel(file, 'lifecycle.mdx')}">every stage</a>`));
+  else if (page.lifecycle) facts.push(fact('Lifecycle', stageBadge(page.lifecycle, file)));
+  if (page.types.length) facts.push(fact('Types', `<a href="${rel(file, page.typesFile)}">${page.types.length} on the types page</a>`));
+  return `<div class="sdk-facts">${facts.join('')}</div>\n`;
+}
+
+/** The method / first sentence table at the top of a namespace page. */
+function summaryTable(page, file) {
+  const rows = page.methods.map(m => {
+    const first = (m.doc || '').split(/\n\n|(?<=\.)\s/)[0].replaceAll('\n', ' ');
+    const sum = first ? cell(linkify(first, file, m)) : '<span class="sdk-muted">no TSDoc</span>';
+    const prefix = m.group === 'legacy' ? 'legacy.' : '';
+    return `| [\`${prefix}${m.name}\`](#${methodAnchor(m)}) | ${sum} |`;
+  });
+  return '| Method | Summary |\n|---|---|\n' + rows.join('\n') + '\n';
+}
+
+/** The per-module entry points: createObolContext + create<Module>Module. */
+function moduleEntryPoints(file) {
+  const rows = [];
+  for (const p of PAGES.filter(p => p.module && p.namespace)) {
+    const factories = [p.namespace, ...Object.values(p.extraModules ?? {}).map(e => e.namespace)]
+      .flatMap(ns => [...(nsExports[ns] ?? new Map()).keys()].filter(n => /^create[A-Z]\w*Module$/.test(n)).map(n => [ns, n]));
+    for (const [ns, n] of factories) {
+      const entry = ns === 'legacy' ? '@obolnetwork/obol-sdk/experimental' : p.subpath;
+      rows.push(`| <code id="${n}">${n}</code> | \`${entry}\` | [${p.title}](${mdRel(file, p.file)}) |`);
+    }
+  }
+  return [
+    '## Module entry points {#module-entry-points}\n',
+    'Each module is its own entry point. Bind one module to a context instead of building the whole client, so a page loads only that module\'s code (an `ovm` reads-only import has no BLS or SSZ code):\n',
+    examples.get('createObolContext') ? '```ts\n' + examples.get('createObolContext') + '\n```\n' : '',
+    '| Factory | Entry | Bound methods |\n|---|---|---|\n' + rows.join('\n') + '\n',
+  ];
+}
+
+function pageSeeAlso(page, file) {
+  const links = page.seeAlso.map(id => {
+    const p = PAGES.find(x => x.id === id);
+    return p ? `- [${p.title}](${mdRel(file, p.file)})` : '';
+  });
+  const types = page.types.length ? `\n- [Types used on this page](${mdRel(file, page.typesFile)})` : '';
+  return ['## See also {#see-also}\n', links.join('\n') + types + `\n- [Error codes](${mdRel(file, 'errors.md')}) · [Warnings and findings](${mdRel(file, 'warnings.md')})\n`];
+}
+
+function renderPage(page, position) {
   const file = page.file;
-  const out = [];
-  out.push(frontmatter({
-    title: page.title,
-    sidebar_label: page.sidebarLabel ?? page.title,
-    sidebar_position: position,
-    slug: `/sdk/v3/reference/${page.id}`,
-    description: page.purpose.replace(/`/g, '').slice(0, 300),
-    toc_max_heading_level: 3,
-  }));
-  out.push(GENERATED);
-  out.push(`# ${page.title}\n\n`);
-  out.push(banner('../'));
-  out.push(linkify(page.purpose, file) + '\n');
-  const facts = [];
-  facts.push(`<span class="sdk-fact"><span class="sdk-fact__k">Access</span> <code>${esc(page.access)}</code></span>`);
-  facts.push(`<span class="sdk-fact"><span class="sdk-fact__k">Import</span> <code>${esc(page.subpath)}</code></span>`);
-  if (page.lifecycle && page.lifecycle !== 'all') facts.push(`<span class="sdk-fact"><span class="sdk-fact__k">Lifecycle</span> ${stageBadge(page.lifecycle, file)}</span>`);
-  else if (page.lifecycle === 'all') facts.push(`<span class="sdk-fact"><span class="sdk-fact__k">Lifecycle</span> <a class="sdk-badge sdk-badge--stage" href="${rel(file, 'lifecycle.mdx')}">every stage</a></span>`);
-  if (page.types.length) facts.push(`<span class="sdk-fact"><span class="sdk-fact__k">Types</span> <a href="${rel(file, page.typesFile)}">${page.types.length} on the types page</a></span>`);
-  out.push(`<div class="sdk-facts">${facts.join('')}</div>\n`);
-  // Summary table.
+  const out = [
+    frontmatter({
+      title: page.title,
+      sidebar_label: page.sidebarLabel ?? page.title,
+      sidebar_position: position,
+      slug: `/sdk/v3/reference/${page.id}`,
+      description: page.purpose.replaceAll('`', '').slice(0, 300),
+      toc_max_heading_level: 3,
+    }),
+    GENERATED,
+    `# ${page.title}\n\n`,
+    banner('../'),
+    linkify(page.purpose, file) + '\n',
+    pageFacts(page, file),
+  ];
   const groups = new Map();
   for (const m of page.methods) {
     const g = groupOf(m);
@@ -783,78 +1019,56 @@ async function renderPage(page, position) {
     groups.get(g[0]).items.push(m);
   }
   const ordered = (page.groupOrder ?? ['reads', 'signing', 'transactions', 'checks', 'simulate', 'legacy', 'helpers', 'constants']).filter(k => groups.has(k));
-  out.push('| Method | Summary |\n|---|---|\n' + page.methods.map(m => {
-    const first = (m.doc || '').split(/\n\n|(?<=\.)\s/)[0].replace(/\n/g, ' ');
-    const sum = first ? cell(linkify(first, file, m)) : '<span class="sdk-muted">no TSDoc</span>';
-    return `| [\`${m.group === 'legacy' ? 'legacy.' : ''}${m.name}\`](#${methodAnchor(m)}) | ${sum} |`;
-  }).join('\n') + '\n');
+  out.push(summaryTable(page, file));
   for (const k of ordered) {
     const g = groups.get(k);
-    out.push(`## ${g.title} {#${k === 'legacy' ? 'legacy' : `group-${k}`}}\n`);
-    for (const m of g.items) out.push(await renderMethod(m, file));
+    const id = k === 'legacy' ? 'legacy' : `group-${k}`;
+    out.push(`## ${g.title} {#${id}}\n`, ...g.items.map(m => renderMethod(m, file)));
   }
-  if (page.id === 'client') {
-    // The per-module entry points: createObolContext + create<Module>Module.
-    const rows = [];
-    for (const p of PAGES.filter(p => p.module && p.namespace)) {
-      const factories = [p.namespace, ...Object.values(p.extraModules ?? {}).map(e => e.namespace)]
-        .flatMap(ns => [...(nsExports[ns] ?? new Map()).keys()].filter(n => /^create[A-Z]\w*Module$/.test(n)).map(n => [ns, n]));
-      for (const [ns, n] of factories) rows.push(`| <code id="${n}">${n}</code> | \`${ns === 'legacy' ? '@obolnetwork/obol-sdk/experimental' : p.subpath}\` | [${p.title}](${mdRel(file, p.file)}) |`);
-    }
-    out.push('## Module entry points {#module-entry-points}\n');
-    out.push('Each module is its own entry point. Bind one module to a context instead of building the whole client, so a page loads only that module\'s code (an `ovm` reads-only import has no BLS or SSZ code):\n');
-    out.push((examples.get('createObolContext') ? '```ts\n' + examples.get('createObolContext') + '\n```\n' : ''));
-    out.push('| Factory | Entry | Bound methods |\n|---|---|---|\n' + rows.join('\n') + '\n');
-  }
-  if (page.seeAlso?.length) {
-    out.push('## See also {#see-also}\n');
-    out.push(page.seeAlso.map(id => {
-      const p = PAGES.find(x => x.id === id);
-      return p ? `- [${p.title}](${mdRel(file, p.file)})` : '';
-    }).join('\n') + (page.types.length ? `\n- [Types used on this page](${mdRel(file, page.typesFile)})` : '') + `\n- [Error codes](${mdRel(file, 'errors.md')}) · [Warnings and findings](${mdRel(file, 'warnings.md')})\n`);
-  }
+  if (page.id === 'client') out.push(...moduleEntryPoints(file));
+  if (page.seeAlso?.length) out.push(...pageSeeAlso(page, file));
   return out.join('\n');
 }
 
-async function renderTypesPage(page, position) {
-  const file = page.typesFile;
-  const out = [];
-  const title = page.id === 'core' ? 'Shared types and errors' : `${page.title} types`;
-  out.push(frontmatter({ title, sidebar_label: page.id === 'core' ? 'Shared types' : (page.sidebarLabel ?? page.title), sidebar_position: position, slug: `/sdk/v3/reference/types/${page.id}`, toc_max_heading_level: 3 }));
-  out.push(GENERATED);
-  out.push(`# ${title}\n\n`);
-  out.push(banner('../../'));
-  if (page.id !== 'core') out.push(`Types exported by ${page.namespace ? `the \`${page.namespace}\` namespace (\`import { ${page.namespace} } from '@obolnetwork/obol-sdk'\`, then \`${page.namespace}.TypeName\`) and the \`${page.subpath}\` entry` : `\`${page.subpath}\``}. Methods: [${page.title}](${mdRel(file, page.file)}).\n`);
-  else out.push('Types exported from the package root that more than one module uses, and the error classes. Error codes: [Errors](../../errors.md).\n');
-  out.push('| Type | Kind | Summary |\n|---|---|---|\n' + page.types.map(t => `| [\`${t.name}\`](#${t.name}) | ${t.kind} | ${cell(linkify((t.doc.text || '').split(/\n\n/)[0], file))} |`).join('\n') + '\n');
-  for (const t of page.types) {
-    out.push(`### ${t.name} {#${t.name}}\n`);
-    const qual = t.ns ? `${t.ns}.${t.name}` : t.name;
-    out.push(`<div class="sdk-badges"><span class="sdk-badge sdk-badge--tag">${t.kind}</span> <code class="sdk-qual">${esc(qual)}</code></div>\n`);
-    if (t.doc.text) out.push(linkify(t.doc.text, file) + '\n');
-    if (t.declaration && t.declaration.length < 2400) {
-      const code = (await prettierSig(t.declaration)).trim();
-      out.push('```ts sdk-signature\n' + code + '\n```\n');
-    }
-    if (t.fields?.length) {
-      out.push(`| Field | Type | Description |\n|---|---|---|\n${t.fields.map(f => `| <code>${f.readonly ? 'readonly ' : ''}${esc(f.name)}${f.optional ? '?' : ''}</code> | ${typeHtml(f.type, file)} | ${cell(linkify(f.doc, file))} |`).join('\n')}\n`);
-    }
-    out.push(`<p class="sdk-see"><a href="${GH}/${t.file}#L${t.line}">source</a></p>\n`);
+/** The intro line of a types page: where its types are exported from. */
+function typesIntro(page, file) {
+  if (page.id === 'core') return 'Types exported from the package root that more than one module uses, and the error classes. Error codes: [Errors](../../errors.md).\n';
+  const ns = page.namespace;
+  const where = ns ? `the \`${ns}\` namespace (\`import { ${ns} } from '@obolnetwork/obol-sdk'\`, then \`${ns}.TypeName\`) and the \`${page.subpath}\` entry` : `\`${page.subpath}\``;
+  return `Types exported by ${where}. Methods: [${page.title}](${mdRel(file, page.file)}).\n`;
+}
+
+function renderType(t, file) {
+  const qual = t.ns ? `${t.ns}.${t.name}` : t.name;
+  const out = [`### ${t.name} {#${t.name}}\n`, `<div class="sdk-badges"><span class="sdk-badge sdk-badge--tag">${t.kind}</span> <code class="sdk-qual">${esc(qual)}</code></div>\n`];
+  if (t.doc.text) out.push(linkify(t.doc.text, file) + '\n');
+  if (declarationBlock.has(t)) out.push(declarationBlock.get(t));
+  if (t.fields?.length) {
+    const rows = t.fields.map(f => [`<code>${f.readonly ? 'readonly ' : ''}${esc(f.name)}${optMark(f)}</code>`, typeHtml(f.type, file), cell(linkify(f.doc, file))]);
+    out.push(`| Field | Type | Description |\n|---|---|---|\n${mdRows(rows)}\n`);
   }
-  return out.join('\n');
+  out.push(`<p class="sdk-see"><a href="${GH}/${t.file}#L${t.line}">source</a></p>\n`);
+  return out;
+}
+
+function renderTypesPage(page, position) {
+  const file = page.typesFile;
+  const core = page.id === 'core';
+  const title = core ? 'Shared types and errors' : `${page.title} types`;
+  const summary = page.types.map(t => `| [\`${t.name}\`](#${t.name}) | ${t.kind} | ${cell(linkify((t.doc.text || '').split(/\n\n/)[0], file))} |`);
+  return [
+    frontmatter({ title, sidebar_label: core ? 'Shared types' : (page.sidebarLabel ?? page.title), sidebar_position: position, slug: `/sdk/v3/reference/types/${page.id}`, toc_max_heading_level: 3 }),
+    GENERATED,
+    `# ${title}\n\n`,
+    banner('../../'),
+    typesIntro(page, file),
+    '| Type | Kind | Summary |\n|---|---|---|\n' + summary.join('\n') + '\n',
+    ...page.types.flatMap(t => renderType(t, file)),
+  ].join('\n');
 }
 
 // --- errors page
-async function renderErrors() {
-  const file = 'errors.md';
-  const out = [];
-  out.push(frontmatter({ title: 'Error codes', sidebar_label: 'Error codes', sidebar_position: 4, slug: '/sdk/v3/errors', description: 'Every ObolError code of @obolnetwork/obol-sdk v3: meaning, which operations throw it, what the caller should do, and its details fields.', toc_max_heading_level: 3 }));
-  out.push(GENERATED);
-  out.push('# Error codes\n\n');
-  out.push(banner());
-  const intro = spec.errorsMd.split(/\n## Errors\n/)[0].replace(/^# .*\n/, '');
-  out.push(linkify(fixSdkLinks(intro, 'spec', 'spec/errors.md'), file) + '\n');
-  out.push(`\`\`\`ts
+const ERRORS_SAMPLE = `\`\`\`ts
 import { isObolError } from '@obolnetwork/obol-sdk';
 
 declare const run: () => Promise<unknown>;
@@ -868,7 +1082,45 @@ try {
   } else throw error;
 }
 \`\`\`
-`);
+`;
+
+/** Who throws an error code: the methods found for it, with the spec's wording when that names a group. */
+function thrownByCell(e, ms, file) {
+  if (!ms.length) return linkify(e.thrownBy, file);
+  const namesGroup = e.thrownBy && /G\d|every|`api`|signing|writes/.test(e.thrownBy);
+  return ms.map(m => methodLink(m, file)).join(', ') + (namesGroup ? ` (spec: ${linkify(e.thrownBy, file)})` : '');
+}
+
+function renderError(e, file, detailsByCode) {
+  const out = [`### ${e.code} {#${e.code}}\n`];
+  const b = [];
+  if (e.since) b.push(`<span class="sdk-badge sdk-badge--since">since ${e.since}</span>`);
+  if (GROUP_CODES[e.code]) b.push(`<span class="sdk-badge sdk-badge--tag">${GROUP_CODES[e.code]}: every operation</span>`);
+  if (b.length) out.push(`<div class="sdk-badges">${b.join(' ')}</div>\n`);
+  out.push(linkify(e.meaning, file) + '\n');
+  const rows = [];
+  const ms = codeMethods.get(e.code) ?? [];
+  if (e.thrownBy || ms.length) rows.push(['Thrown by', thrownByCell(e, ms, file)]);
+  if (e.apiTable) rows.push(['Thrown by', 'any operation that calls the Obol API (G4)']);
+  if (e.should) rows.push(['Caller should', linkify(e.should, file)]);
+  const det = detailsByCode.get(e.code);
+  if (det) rows.push(['`details`', typeHtml(det, file)]);
+  if (e.legacy) rows.push([e.legacyLabel === '2.15' ? 'In 2.x' : `In ${e.legacyLabel}`, linkify(e.legacy, file)]);
+  out.push(kvTable(rows));
+  return out;
+}
+
+function renderErrors() {
+  const file = 'errors.md';
+  const intro = spec.errorsMd.split(/\n## Errors\n/)[0].replace(/^# .*\n/, '');
+  const out = [
+    frontmatter({ title: 'Error codes', sidebar_label: 'Error codes', sidebar_position: 4, slug: '/sdk/v3/errors', description: 'Every ObolError code of @obolnetwork/obol-sdk v3: meaning, which operations throw it, what the caller should do, and its details fields.', toc_max_heading_level: 3 }),
+    GENERATED,
+    '# Error codes\n\n',
+    banner(),
+    linkify(fixSdkLinks(intro, 'spec', 'spec/errors.md'), file) + '\n',
+    ERRORS_SAMPLE,
+  ];
   // G rules
   const g = /### Checks every operation runs\n([\s\S]*?)\n## /.exec(spec.operationsMd);
   if (g) out.push('## Checks every operation runs {#checks-every-operation-runs}\n\n' + linkify(fixSdkLinks(g[1].trim(), 'spec', 'spec/operations.md'), file) + '\n');
@@ -880,88 +1132,86 @@ try {
   // Summary index.
   out.push('## All codes {#all-codes}\n');
   for (const [section, list] of bySection) {
-    out.push(`**${section}**: ${list.map(e => `<a class="sdk-chip sdk-chip--error" href="#${e.code}">${e.code}</a>`).join(' ')}\n`);
+    const chips = list.map(e => `<a class="sdk-chip sdk-chip--error" href="#${e.code}">${e.code}</a>`);
+    out.push(`**${section}**: ${chips.join(' ')}\n`);
   }
   const detailsIface = rootExports.get('ObolErrorDetails');
   const detailsByCode = new Map((detailsIface?.fields ?? []).map(f => [f.name, f.type]));
   for (const [section, list] of bySection) {
     const slug = 'section-' + section.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
     out.push(`## ${section} {#${slug}}\n`);
-    const intro = errorSectionIntro.get(section);
-    if (intro) out.push(linkify(fixSdkLinks(intro, 'spec', 'spec/errors.md'), file) + '\n');
-    for (const e of list) {
-      out.push(`### ${e.code} {#${e.code}}\n`);
-      const b = [];
-      if (e.since) b.push(`<span class="sdk-badge sdk-badge--since">since ${e.since}</span>`);
-      if (GROUP_CODES[e.code]) b.push(`<span class="sdk-badge sdk-badge--tag">${GROUP_CODES[e.code]}: every operation</span>`);
-      if (b.length) out.push(`<div class="sdk-badges">${b.join(' ')}</div>\n`);
-      out.push(linkify(e.meaning, file) + '\n');
-      const rows = [];
-      const ms = codeMethods.get(e.code) ?? [];
-      if (e.thrownBy || ms.length) rows.push(['Thrown by', ms.length ? ms.map(m => methodLink(m, file)).join(', ') + (e.thrownBy && /G\d|every|`api`|signing|writes/.test(e.thrownBy) ? ` (spec: ${linkify(e.thrownBy, file)})` : '') : linkify(e.thrownBy, file)]);
-      if (e.apiTable) rows.push(['Thrown by', 'any operation that calls the Obol API (G4)']);
-      if (e.should) rows.push(['Caller should', linkify(e.should, file)]);
-      const det = detailsByCode.get(e.code);
-      if (det) rows.push(['`details`', typeHtml(det, file)]);
-      if (e.legacy) rows.push([e.legacyLabel === '2.15' ? 'In 2.x' : `In ${e.legacyLabel}`, linkify(e.legacy, file)]);
-      out.push(`| | |\n|---|---|\n${rows.map(r => `| ${r[0]} | ${cell(r[1])} |`).join('\n')}\n`);
-    }
+    const sectionIntro = errorSectionIntro.get(section);
+    if (sectionIntro) out.push(linkify(fixSdkLinks(sectionIntro, 'spec', 'spec/errors.md'), file) + '\n');
+    out.push(...list.flatMap(e => renderError(e, file, detailsByCode)));
   }
-  const tail = /\n(All exit errors were[\s\S]*?)\n### Sending/.exec(spec.errorsMd);
-  void tail;
-  out.push('## The error classes {#classes}\n');
-  out.push(`[\`ObolError\`](${mdRel(file, typeHome.get('ObolError')?.page ?? 'reference/types/core.md', 'ObolError')}) has \`code\`, \`message\` (not normative), \`hint\`, \`details\` and \`cause\`; [\`ObolApiError\`](${mdRel(file, typeHome.get('ObolApiError')?.page ?? 'reference/types/core.md', 'ObolApiError')}) adds the HTTP fields. Prefer [\`isObolError\`](${mdRel(file, 'reference/checks.md', 'isObolError')}) to \`instanceof\`: it recognises an error from any copy of the SDK.\n`);
+  const classPage = name => typeHome.get(name)?.page ?? 'reference/types/core.md';
+  out.push(
+    '## The error classes {#classes}\n',
+    `[\`ObolError\`](${mdRel(file, classPage('ObolError'), 'ObolError')}) has \`code\`, \`message\` (not normative), \`hint\`, \`details\` and \`cause\`; [\`ObolApiError\`](${mdRel(file, classPage('ObolApiError'), 'ObolApiError')}) adds the HTTP fields. Prefer [\`isObolError\`](${mdRel(file, 'reference/checks.md', 'isObolError')}) to \`instanceof\`: it recognises an error from any copy of the SDK.\n`,
+  );
   return out.join('\n');
 }
 
 // --- warnings / findings page
-async function renderWarnings() {
+const FINDING_GROUP_TITLES = { risk: 'Risks: the transaction may not do what you intend', unchecked: 'Unchecked: a safety check could not run', note: 'Notes: for the record (info)', claim: 'Incentive claim issues' };
+const FINDING_GROUP_INTROS = { risk: '', unchecked: `These are the codes in \`UNCHECKED_WARNING_CODES\`: nothing is known to be wrong, and nothing was shown to be right.`, note: '`info` findings never need acknowledging.', claim: 'Issues of `incentives.preflight` and `INCENTIVES_PREFLIGHT_FAILED.details.issues`; never on a `Prepared`.' };
+
+/** Matrix: code × `Prepared` kind. */
+function findingsMatrix() {
+  const kindsWith = Object.keys(BY_KIND).filter(k => BY_KIND[k].length);
+  const codes = Object.keys(FINDINGS).filter(c => FINDINGS[c].group !== 'claim');
+  const head = kindsWith.map(k => `<th><span>${k}</span></th>`).join('');
+  const body = codes.map(c => {
+    const cells = kindsWith.map(k => `<td>${BY_KIND[k].includes(c) ? '●' : ''}</td>`).join('');
+    return `<tr><th><a href="#${c}" class="sdk-chip sdk-chip--${FINDINGS[c].severity}">${c}</a></th>${cells}</tr>`;
+  });
+  return `<div class="sdk-matrix-wrap"><table class="sdk-matrix"><thead><tr><th>Code</th>${head}</tr></thead><tbody>${body.join('')}</tbody></table></div>\n`;
+}
+
+function renderFinding(code, f, file, keyDocs) {
+  const out = [`### ${code} {#${code}}\n`];
+  const b = [`<span class="sdk-badge sdk-badge--${f.severity}">${f.severity}</span>`];
+  if (UNCHECKED.has(code)) b.push('<span class="sdk-badge sdk-badge--tag">UNCHECKED_WARNING_CODES</span>');
+  const fi = findingInfo.get(code);
+  if (fi?.since) b.push(`<span class="sdk-badge sdk-badge--since">since ${fi.since}</span>`);
+  if (ERROR_CODES.has(code)) b.push(`<a class="sdk-badge sdk-badge--throws" href="${rel(file, 'errors.md', code)}">also an error code</a>`);
+  out.push(`<div class="sdk-badges">${b.join(' ')}</div>\n`, `**${linkify(f.meaning, file)}**\n`);
+  if (keyDocs[code] && keyDocs[code] !== f.meaning) out.push(linkify(keyDocs[code].replace(/^[A-Z][a-z]+\.\s/, ''), file) + '\n');
+  const rows = [[f.severity === 'warning' ? 'Before you acknowledge' : 'What to do', linkify(f.guidance, file)]];
+  const ms = codeMethods.get(code) ?? [];
+  if (ms.length) rows.push(['Reported by', ms.map(m => methodLink(m, file)).join(', ')]);
+  const ks = Object.entries(BY_KIND).filter(([, cs]) => cs.includes(code)).map(([k]) => k);
+  if (ks.length) rows.push(['`Prepared` kinds', ks.map(k => `\`${k}\``).join(', ')]);
+  if (fi?.should) rows.push(['Caller should', linkify(fi.should, file)]);
+  out.push(kvTable(rows));
+  return out;
+}
+
+function renderWarnings() {
   const file = 'warnings.md';
   const keyDocs = src.constantKeyDocs('src/findings.ts', 'FINDINGS');
-  const out = [];
-  out.push(frontmatter({ title: 'Warnings and findings', sidebar_label: 'Warnings & findings', sidebar_position: 5, slug: '/sdk/v3/warnings', description: 'Every finding code a prepared transaction or simulation can carry, its severity, what it means and what acknowledging it accepts.', toc_max_heading_level: 3 }));
-  out.push(GENERATED);
-  out.push('# Warnings and findings\n\n');
-  out.push(banner());
+  const out = [
+    frontmatter({ title: 'Warnings and findings', sidebar_label: 'Warnings & findings', sidebar_position: 5, slug: '/sdk/v3/warnings', description: 'Every finding code a prepared transaction or simulation can carry, its severity, what it means and what acknowledging it accepts.', toc_max_heading_level: 3 }),
+    GENERATED,
+    '# Warnings and findings\n\n',
+    banner(),
+  ];
   const ack = /### Acknowledging warnings\n([\s\S]*?)\n\*\*1\./.exec(spec.readmeMd);
   if (ack) out.push(linkify(fixSdkLinks(ack[1].trim(), '', 'README.md'), file) + '\n');
   out.push(`The helpers are on [send and acknowledgements](${mdRel(file, 'reference/send.md')}); how an agent should use them: [For AI agents](${mdRel(file, 'for-agents.md')}).\n`);
   const patterns = /(\*\*1\. A confirmation dialog[\s\S]*?)\nEvery warning `send` can refuse/.exec(spec.readmeMd);
   if (patterns) out.push('## Three ways to acknowledge {#patterns}\n\nFrom the SDK README.\n\n' + linkify(fixSdkLinks(patterns[1].trim(), '', 'README.md'), file) + '\n');
-  const groupTitles = { risk: 'Risks: the transaction may not do what you intend', unchecked: 'Unchecked: a safety check could not run', note: 'Notes: for the record (info)', claim: 'Incentive claim issues' };
-  const groupDesc = { risk: '', unchecked: `These are the codes in \`UNCHECKED_WARNING_CODES\`: nothing is known to be wrong, and nothing was shown to be right.`, note: '`info` findings never need acknowledging.', claim: 'Issues of `incentives.preflight` and `INCENTIVES_PREFLIGHT_FAILED.details.issues`; never on a `Prepared`.' };
-  const kindsOf = code => Object.entries(BY_KIND).filter(([, cs]) => cs.includes(code)).map(([k]) => k);
-  // Matrix: code × kind.
-  const kinds = Object.keys(BY_KIND);
-  out.push('## Which transaction can carry which warning {#matrix}\n');
-  out.push('Rows are the codes `send` can refuse (severity `warning`) and the `info` notes; columns are the `Prepared` kinds (`FINDING_CODES_BY_KIND`). Simulation codes come from `experimental.simulate` on any kind.\n');
-  const kindsWith = kinds.filter(k => BY_KIND[k].length);
-  const codes = Object.keys(FINDINGS).filter(c => FINDINGS[c].group !== 'claim');
-  out.push(`<div class="sdk-matrix-wrap"><table class="sdk-matrix"><thead><tr><th>Code</th>${kindsWith.map(k => `<th><span>${k}</span></th>`).join('')}</tr></thead><tbody>${codes.map(c => `<tr><th><a href="#${c}" class="sdk-chip sdk-chip--${FINDINGS[c].severity}">${c}</a></th>${kindsWith.map(k => `<td>${BY_KIND[k].includes(c) ? '●' : ''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>\n`);
+  out.push(
+    '## Which transaction can carry which warning {#matrix}\n',
+    'Rows are the codes `send` can refuse (severity `warning`) and the `info` notes; columns are the `Prepared` kinds (`FINDING_CODES_BY_KIND`). Simulation codes come from `experimental.simulate` on any kind.\n',
+    findingsMatrix(),
+  );
   for (const group of ['risk', 'unchecked', 'note', 'claim']) {
     const list = Object.entries(FINDINGS).filter(([, f]) => f.group === group);
     if (!list.length) continue;
-    out.push(`## ${groupTitles[group]} {#group-${group}}\n`);
-    if (groupDesc[group]) out.push(linkify(groupDesc[group], file) + '\n');
-    for (const [code, f] of list) {
-      out.push(`### ${code} {#${code}}\n`);
-      const b = [`<span class="sdk-badge sdk-badge--${f.severity}">${f.severity}</span>`];
-      if (UNCHECKED.has(code)) b.push('<span class="sdk-badge sdk-badge--tag">UNCHECKED_WARNING_CODES</span>');
-      const fi = findingInfo.get(code);
-      if (fi?.since) b.push(`<span class="sdk-badge sdk-badge--since">since ${fi.since}</span>`);
-      if (ERROR_CODES.has(code)) b.push(`<a class="sdk-badge sdk-badge--throws" href="${rel(file, 'errors.md', code)}">also an error code</a>`);
-      out.push(`<div class="sdk-badges">${b.join(' ')}</div>\n`);
-      out.push(`**${linkify(f.meaning, file)}**\n`);
-      if (keyDocs[code] && keyDocs[code] !== f.meaning) out.push(linkify(keyDocs[code].replace(/^[A-Z][a-z]+\.\s/, ''), file) + '\n');
-      const rows = [];
-      rows.push([f.severity === 'warning' ? 'Before you acknowledge' : 'What to do', linkify(f.guidance, file)]);
-      const ms = codeMethods.get(code) ?? [];
-      if (ms.length) rows.push(['Reported by', ms.map(m => methodLink(m, file)).join(', ')]);
-      const ks = kindsOf(code);
-      if (ks.length) rows.push(['`Prepared` kinds', ks.map(k => `\`${k}\``).join(', ')]);
-      if (fi?.should) rows.push(['Caller should', linkify(fi.should, file)]);
-      out.push(`| | |\n|---|---|\n${rows.map(r => `| ${r[0]} | ${cell(r[1])} |`).join('\n')}\n`);
-    }
+    out.push(`## ${FINDING_GROUP_TITLES[group]} {#group-${group}}\n`);
+    if (FINDING_GROUP_INTROS[group]) out.push(linkify(FINDING_GROUP_INTROS[group], file) + '\n');
+    out.push(...list.flatMap(([code, f]) => renderFinding(code, f, file, keyDocs)));
   }
   return out.join('\n');
 }
@@ -969,15 +1219,16 @@ async function renderWarnings() {
 // --- migration page
 function renderMigration() {
   const file = 'migration.md';
-  const out = [];
-  out.push(frontmatter({ title: '2.x to 3.x', sidebar_label: '2.x → 3.x map', sidebar_position: 6, slug: '/sdk/v3/migration', description: 'Every 2.x method and export of @obolnetwork/obol-sdk and its v3 replacement, plus the rc.12 renames.', toc_max_heading_level: 2 }));
-  out.push(GENERATED);
-  out.push('# 2.x to 3.x\n\n');
-  out.push(banner());
+  const out = [
+    frontmatter({ title: '2.x to 3.x', sidebar_label: '2.x → 3.x map', sidebar_position: 6, slug: '/sdk/v3/migration', description: 'Every 2.x method and export of @obolnetwork/obol-sdk and its v3 replacement, plus the rc.12 renames.', toc_max_heading_level: 2 }),
+    GENERATED,
+    '# 2.x to 3.x\n\n',
+    banner(),
+  ];
   const changes = /### What changes everywhere\n([\s\S]*?)\n### /.exec(spec.migrationMd);
   if (changes) out.push('## What changes everywhere {#everywhere}\n\n' + linkify(fixSdkLinks(changes[1].trim(), '', 'MIGRATION.md'), file) + '\n');
   const pick = re => spec.migrationTables.find(t => t.headings.some(h => re.test(h)));
-  const tbl = (t, heads) => `| ${heads.join(' | ')} |\n|${heads.map(() => '---').join('|')}|\n` + t.rows.map(r => `| ${r.map(c => cell(linkify(fixSdkLinks(c, '', 'MIGRATION.md'), file))).join(' | ')} |`).join('\n') + '\n';
+  const tbl = (t, heads) => `| ${heads.join(' | ')} |\n|${heads.map(() => '---').join('|')}|\n` + mdRows(t.rows.map(r => r.map(c => cell(linkify(fixSdkLinks(c, '', 'MIGRATION.md'), file))))) + '\n';
   const methodsT = pick(/^Every 2\.x method$/);
   if (methodsT) out.push('## Every 2.x method {#methods}\n\n' + tbl(methodsT, ['2.x', '3.x']));
   const exportsT = pick(/^Every other 2\.x export$/);
@@ -991,22 +1242,37 @@ function renderMigration() {
 // --- reference index
 function renderRefIndex() {
   const file = 'reference/index.md';
-  const out = [];
-  out.push(frontmatter({ title: 'API reference', sidebar_label: 'Overview', sidebar_position: 0, slug: '/sdk/v3/reference', description: 'Every namespace and method of @obolnetwork/obol-sdk v3, generated from the source.' }));
-  out.push(GENERATED);
-  out.push('# API reference\n\n');
-  out.push(banner('../'));
-  out.push('Generated from the SDK source (signatures, TSDoc, types) and its spec (checks, error codes, findings). Grouped as the client exposes it: `obol.<namespace>.<method>`.\n');
-  out.push('| Namespace | Lifecycle | What it is for |\n|---|---|---|\n' + PAGES.map(p => `| [${p.title}](${mdRel(file, p.file)}) | ${p.lifecycle === 'all' ? 'every stage' : STAGE_BY_ID[p.lifecycle]?.title ?? ''} | ${cell(linkify(p.purpose.split(/(?<=\.)\s/)[0], file))} |`).join('\n') + '\n');
-  out.push('## Every operation {#all}\n');
-  out.push('| Operation | Tag | Returns | Throws | Warnings |\n|---|---|---|---|---|\n' + methods.filter(m => m.kind === 'function').map(m => `| ${methodLink(m, file)} | ${m.tag ? `\`${m.tag}\`` : ''} | ${m.signatures[0] ? typeHtml(m.signatures[0].returns, file) : ''} | ${m.throws.length || ''} | ${m.findings.filter(c => FINDINGS[c]?.severity === 'warning').length || ''} |`).join('\n') + '\n');
-  return out.join('\n');
+  const stageOf = p => (p.lifecycle === 'all' ? 'every stage' : STAGE_BY_ID[p.lifecycle]?.title ?? '');
+  const namespaces = PAGES.map(p => [`[${p.title}](${mdRel(file, p.file)})`, stageOf(p), cell(linkify(p.purpose.split(/(?<=\.)\s/)[0], file))]);
+  const operations = methods
+    .filter(m => m.kind === 'function')
+    .map(m => {
+      const tag = m.tag ? `\`${m.tag}\`` : '';
+      const returns = m.signatures[0] ? typeHtml(m.signatures[0].returns, file) : '';
+      return [methodLink(m, file), tag, returns, m.throws.length || '', warningCount(m) || ''];
+    });
+  return [
+    frontmatter({ title: 'API reference', sidebar_label: 'Overview', sidebar_position: 0, slug: '/sdk/v3/reference', description: 'Every namespace and method of @obolnetwork/obol-sdk v3, generated from the source.' }),
+    GENERATED,
+    '# API reference\n\n',
+    banner('../'),
+    'Generated from the SDK source (signatures, TSDoc, types) and its spec (checks, error codes, findings). Grouped as the client exposes it: `obol.<namespace>.<method>`.\n',
+    '| Namespace | Lifecycle | What it is for |\n|---|---|---|\n' + mdRows(namespaces) + '\n',
+    '## Every operation {#all}\n',
+    '| Operation | Tag | Returns | Throws | Warnings |\n|---|---|---|---|---|\n' + mdRows(operations) + '\n',
+  ].join('\n');
 }
 
 // ---------------------------------------------------------------- write
 fs.rmSync(refDir, { recursive: true, force: true });
 fs.mkdirSync(path.join(refDir, 'types'), { recursive: true });
 fs.mkdirSync(genDir, { recursive: true });
+/** The modifier class of a table's wrapper, from its header row. */
+function tableClass(header) {
+  // Parameter and field tables keep names on one line on wide screens.
+  if (/^\| (Parameter|Field) \|/.test(header)) return ' sdk-table--fields';
+  return header === '| | |' ? ' sdk-table--kv' : '';
+}
 // Wraps every Markdown table in <div class="sdk-table"> so it scrolls on its
 // own at phone width instead of widening the page (the site sets tables to
 // display: table).
@@ -1014,33 +1280,30 @@ function wrapTables(md) {
   const lines = md.split('\n');
   const out = [];
   let inFence = false;
-  for (let i = 0; i < lines.length; i++) {
+  let i = 0;
+  while (i < lines.length) {
     const l = lines[i];
     if (/^\s*```/.test(l)) inFence = !inFence;
-    if (!inFence && /^\|/.test(l) && /^\|[\s:|-]+\|?\s*$/.test(lines[i + 1] ?? '')) {
-      // Parameter and field tables keep names on one line on wide screens.
-      const fields = /^\| (Parameter|Field) \|/.test(l) ? ' sdk-table--fields' : /^\| \| \|$/.test(l) ? ' sdk-table--kv' : '';
-      out.push(`<div class="sdk-table${fields}">`, '');
-      while (i < lines.length && /^\|/.test(lines[i])) out.push(lines[i++]);
-      out.push('', '</div>', '');
-      i--;
+    if (inFence || !isTableStart(lines, i)) {
+      out.push(l);
+      i++;
       continue;
     }
-    out.push(l);
+    const end = tableEnd(lines, i);
+    out.push(`<div class="sdk-table${tableClass(l)}">`, '', ...lines.slice(i, end), '', '</div>', '');
+    i = end;
   }
   return out.join('\n');
 }
 const write = (f, s) => fs.writeFileSync(path.join(outDir, f), wrapTables(s).replace(/\n{3,}/g, '\n\n'));
 write('reference/index.md', renderRefIndex());
-let pos = 1;
-for (const page of PAGES) {
-  write(page.file, await renderPage(page, pos));
-  if (page.types.length) write(page.typesFile, await renderTypesPage(page, pos));
-  pos++;
+for (const [i, page] of PAGES.entries()) {
+  write(page.file, renderPage(page, i + 1));
+  if (page.types.length) write(page.typesFile, renderTypesPage(page, i + 1));
 }
-write(corePage.typesFile, await renderTypesPage(corePage, 0));
-write('errors.md', await renderErrors());
-write('warnings.md', await renderWarnings());
+write(corePage.typesFile, renderTypesPage(corePage, 0));
+write('errors.md', renderErrors());
+write('warnings.md', renderWarnings());
 write('migration.md', renderMigration());
 
 // Partials the hand-written pages import, cut from the SDK README so they
@@ -1059,12 +1322,18 @@ write('migration.md', renderMigration());
 }
 
 // Lifecycle data for the hand-written lifecycle page.
+function lifecycleKind(name) {
+  if (name.startsWith('prepare')) return 'tx';
+  if (/^(verify|isValid|assert)/.test(name)) return 'check';
+  if (['create', 'accept'].includes(name)) return 'sign';
+  return name.startsWith('create') ? 'client' : 'read';
+}
 const lifecycle = STAGES.map((s, i) => ({
   ...s,
   n: i + 1,
   methods: methods
     .filter(m => m.page.stages?.[m.name] === s.id)
-    .map(m => ({ label: m.access.replace(/^obol\./, ''), href: `reference/${m.page.id}#${methodAnchor(m)}`, kind: /^prepare/.test(m.name) ? 'tx' : /^(verify|isValid|assert)/.test(m.name) ? 'check' : ['create', 'accept'].includes(m.name) ? 'sign' : /^create/.test(m.name) ? 'client' : 'read', warnings: m.findings.filter(c => FINDINGS[c]?.severity === 'warning').length })),
+    .map(m => ({ label: m.access.replace(/^obol\./, ''), href: `reference/${m.page.id}#${methodAnchor(m)}`, kind: lifecycleKind(m.name), warnings: warningCount(m) })),
 }));
 fs.writeFileSync(path.join(genDir, 'lifecycle.json'), JSON.stringify({ version: VERSION, stages: lifecycle }, null, 2) + '\n');
 fs.writeFileSync(path.join(genDir, 'meta.json'), JSON.stringify({ version: VERSION, findings: Object.keys(FINDINGS).length, errors: errorInfo.size, operations: methods.filter(m => m.kind === 'function').length, label: previewLabel }, null, 2) + '\n');
@@ -1116,5 +1385,3 @@ if (report.missingSpec.length) console.log('[sdk-v3] no spec/operations.md secti
 if (report.unplacedExports.length) console.log('[sdk-v3] root exports on no page:', report.unplacedExports.join(', '));
 if (report.unmatchedThrownBy.length) console.log('[sdk-v3] errors.md "Thrown by" naming no known method:', report.unmatchedThrownBy.join(' | '));
 console.log(`[sdk-v3] full report: ${path.join(os.tmpdir(), 'sdk-v3-docs-report.json')}`);
-void execFileSync;
-void pageDepth;

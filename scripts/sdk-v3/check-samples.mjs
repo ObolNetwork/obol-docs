@@ -31,40 +31,41 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'sdk-v3-samples-'));
 fs.symlinkSync(path.join(sdkDir, 'node_modules'), path.join(tmp, 'node_modules'), 'dir');
 fs.copyFileSync(path.join(here, 'examples/_prelude.d.ts'), path.join(tmp, 'prelude.d.ts'));
 
-const blocks = []; // { file, origin, line }
-let skipped = { tsx: 0, other: 0, signature: 0, spec: 0 };
+const blocks = []; // { file, origin }
+const skipped = { tsx: 0, other: 0, signature: 0, spec: 0 };
+/**
+ * Why a fenced block is not type-checked, from its info string (`ts sdk-signature`):
+ * a key of `skipped`, `'none'` for a block without a language (not counted),
+ * or null for a sample to check.
+ */
+function skipReason(info) {
+  const [lang, ...meta] = info.trim().split(/\s+/);
+  if (meta.includes('sdk-signature')) return 'signature';
+  if (meta.includes('sdk-spec')) return 'spec';
+  if (lang === 'tsx') return 'tsx';
+  if (lang === 'ts' || lang === 'typescript') return null;
+  return lang ? 'other' : 'none';
+}
+/** Writes every TypeScript sample of one Markdown file to the temp directory. */
+function collectBlocks(file) {
+  const text = fs.readFileSync(file, 'utf8');
+  for (const m of text.matchAll(/^```([^\n]*)\n([\s\S]*?)^```/gm)) {
+    const reason = skipReason(m[1]);
+    if (reason === null) {
+      const line = text.slice(0, m.index).split('\n').length;
+      const name = `block-${String(blocks.length).padStart(3, '0')}.ts`;
+      fs.writeFileSync(path.join(tmp, name), `${m[2]}\nexport {};\n`);
+      blocks.push({ file: name, origin: `${path.relative(siteDir, file)}:${line}` });
+    } else if (reason !== 'none') {
+      skipped[reason]++;
+    }
+  }
+}
 const walk = dir => {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) walk(p);
-    else if (/\.mdx?$/.test(e.name)) {
-      const text = fs.readFileSync(p, 'utf8');
-      const re = /^```([^\n]*)\n([\s\S]*?)^```/gm;
-      let m;
-      while ((m = re.exec(text))) {
-        const [lang, ...meta] = m[1].trim().split(/\s+/);
-        if (meta.includes('sdk-signature')) {
-          skipped.signature++;
-          continue;
-        }
-        if (meta.includes('sdk-spec')) {
-          skipped.spec++;
-          continue;
-        }
-        if (lang === 'tsx') {
-          skipped.tsx++;
-          continue;
-        }
-        if (lang !== 'ts' && lang !== 'typescript') {
-          if (lang) skipped.other++;
-          continue;
-        }
-        const line = text.slice(0, m.index).split('\n').length;
-        const name = `block-${String(blocks.length).padStart(3, '0')}.ts`;
-        fs.writeFileSync(path.join(tmp, name), `${m[2]}\nexport {};\n`);
-        blocks.push({ file: name, origin: `${path.relative(siteDir, p)}:${line}` });
-      }
-    }
+    else if (/\.mdx?$/.test(e.name)) collectBlocks(p);
   }
 };
 walk(path.join(siteDir, 'docs/sdk-v3'));
@@ -94,7 +95,7 @@ const options = {
 };
 const roots = [path.join(tmp, 'prelude.d.ts'), ...blocks.map(b => path.join(tmp, b.file))];
 const program = ts.createProgram({ rootNames: roots, options });
-const diags = ts.getPreEmitDiagnostics(program).filter(d => d.file && d.file.fileName.startsWith(tmp) && !d.file.fileName.includes('node_modules'));
+const diags = ts.getPreEmitDiagnostics(program).filter(d => d.file?.fileName.startsWith(tmp) && !d.file.fileName.includes('node_modules'));
 const byFile = new Map();
 for (const d of diags) {
   const f = path.basename(d.file.fileName);
