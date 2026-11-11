@@ -5,112 +5,172 @@ slug: /sdk/classes/eoa
 
 # EOA
 
-Defined in: [eoa/eoa.ts:26](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/eoa/eoa.ts#L26)
+Defined in: [eoa/eoa.ts:54](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/eoa/eoa.ts#L54)
 
-**`Internal`**
+Manages Externally Owned Account (EOA) operations: validator withdrawals
+and batch deposits via on-chain contracts.
 
-EOA can be used for managing EOA (Externally Owned Account) operations like withdrawals.
+Do not instantiate directly; access via `client.eoa`.
 
- Access it through Client.eoa.
+Available methods:
+- [EOA.requestWithdrawal](#requestwithdrawal) – request validator withdrawal
+- [EOA.deposit](#deposit) – batch-deposit validators for gas efficiency
+
+All methods send on-chain transactions and require a signer with ETH for gas.
 
 ## Example
 
-```ts
-const obolClient = new Client(config);
-await obolClient.eoa.requestWithdrawal(EOAWithdrawalPayload);
+```typescript
+const client = new Client({ chainId: 1 }, signer, provider);
+
+// Request withdrawal
+const { txHash } = await client.eoa.requestWithdrawal({
+  pubkey: "0xValidatorPubkey...",
+  allocation: 32,
+});
+
+// Batch deposit
+const { txHashes } = await client.eoa.deposit({
+  deposits: [{ pubkey: "0x...", withdrawal_credentials: "0x...", ... }],
+});
 ```
 
 ## Methods
 
 ### requestWithdrawal()
 
-> **requestWithdrawal**(`payload`): `Promise`\<\{ `txHash`: `string` \| `null`; \}\>
+> **requestWithdrawal**(`payload`, `options?`): `Promise`\<\{ `txHash`: `string` \| `null`; \}\>
 
-Defined in: [eoa/eoa.ts:65](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/eoa/eoa.ts#L65)
+Defined in: [eoa/eoa.ts:101](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/eoa/eoa.ts#L101)
 
-Requests withdrawal from an EOA contract.
+Requests withdrawal of validator funds via the EOA withdrawal contract.
 
-This method allows requesting withdrawal of validator funds.
-The withdrawal request includes validator public key and corresponding withdrawal amount.
+Sends an on-chain transaction. Requires both a signer and a provider.
+
+The fee is checked against the current fee read from the EIP-7002
+withdrawal request contract. If `requiredFee` is omitted, exactly the
+current fee is sent: the EIP-7002 contract keeps any excess, and if the
+fee rises before the transaction is mined it reverts (costing only gas).
+If `requiredFee` is given, it must cover the current fee and be at most
+max(10x the current fee, 1 gwei); otherwise the call throws.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`EOAWithdrawalPayload`](../type-aliases/EOAWithdrawalPayload.md) | Data needed to request withdrawal |
+| `payload` | [`EOAWithdrawalPayload`](../type-aliases/EOAWithdrawalPayload.md) | Withdrawal data including validator `pubkey`, `allocation` (in ETH), and optional `requiredFee` (in wei). |
+| `options?` | [`WriteOptions`](../type-aliases/WriteOptions.md) | Optional `onSent` callback, called with each transaction hash as soon as it is broadcast. |
 
 #### Returns
 
 `Promise`\<\{ `txHash`: `string` \| `null`; \}\>
 
-Transaction hash of the withdrawal request
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
+The transaction hash, or `null` if no transaction was needed.
 
 #### Throws
 
-Will throw an error if the signer is not provided or the request fails
+If no signer was provided.
 
-An example of how to use requestWithdrawal:
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the chain has no EOA withdrawal contract.
+
+#### Throws
+
+If `requiredFee` is below the current fee or far above it.
+
+#### Throws
+
+If the call fails after a transaction
+  was broadcast (`txHashes`, `pendingTxHash` and `cause` say what was sent).
+
+#### Example
+
 ```typescript
-const result = await client.eoa.requestWithdrawal({
-  pubkey: '0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456',
-  allocation: 32, // 32 ETH
-  requiredFee: '1' // in wei
+const { txHash } = await client.eoa.requestWithdrawal({
+  pubkey: "0xValidatorPubkey...",
+  allocation: 32,
 });
-console.log('Withdrawal requested:', result.txHash);
 ```
 
 ***
 
 ### deposit()
 
-> **deposit**(`payload`): `Promise`\<\{ `txHashes`: `string`[]; \}\>
+> **deposit**(`payload`, `options?`): `Promise`\<\{ `txHashes`: `string`[]; \}\>
 
-Defined in: [eoa/eoa.ts:132](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/eoa/eoa.ts#L132)
+Defined in: [eoa/eoa.ts:195](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/eoa/eoa.ts#L195)
 
-Deposits to batch deposit contract.
+Batch-deposits validators to the beacon chain via the Pier Two batch
+deposit contract for gas efficiency.
 
-This method allows depositing multiple validators to the Ethereum beacon chain
-using the Pier Two batch deposit contract for gas efficiency.
-Each deposit includes validator public key, withdrawal credentials, signature, and amount.
+Due to EVM gas limits, it is recommended to deposit at most 500
+validators per call.
+
+Before sending, each deposit is checked: `amount` (wei) is a whole number
+of gwei between 1 ETH and 32 ETH (2048 ETH for 0x02 credentials),
+`deposit_data_root` matches the deposit fields, the BLS signature is valid
+for this chain, and, if `expectedWithdrawalAddress` is given, the
+withdrawal credentials point at it. For top-ups to validators that
+already exist on the beacon chain, pass `kind: 'topUp'`: the signature is
+not checked, the withdrawal credentials may be all zero instead of the
+expected ones, and up to 2048 ETH is allowed per deposit. Without it, a
+deposit with an all-zero signature is refused (`DEPOSIT_LOOKS_LIKE_TOP_UP`).
+The output of [Client.getDepositData](Client.md#getdepositdata) can be passed as `deposits`.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`EOADepositPayload`](../type-aliases/EOADepositPayload.md) | Data needed to deposit to batch contract |
+| `payload` | [`EOADepositPayload`](../type-aliases/EOADepositPayload.md) | Deposit data including an array of validator deposit objects. |
+| `options?` | [`WriteOptions`](../type-aliases/WriteOptions.md) | Optional `onSent` callback, called with each transaction hash as soon as it is broadcast. |
 
 #### Returns
 
 `Promise`\<\{ `txHashes`: `string`[]; \}\>
 
-Array of transaction hashes for all batches
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
-
-**⚠️ Gas Limit:** Due to EVM constraints, it is recommended to deposit in batches of up to 500 at a time.
+An array of transaction hashes, one per batch.
 
 #### Throws
 
-Will throw an error if the signer is not provided, contract is not configured, or the deposit fails
+If no signer was provided.
 
-An example of how to use deposit:
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the chain has no batch deposit contract.
+
+#### Throws
+
+If the payload is invalid.
+
+#### Throws
+
+If any deposit fails the checks above.
+
+#### Throws
+
+If the call fails after a transaction
+  was broadcast (`txHashes`, `pendingTxHash` and `cause` say what was sent).
+
+#### Example
+
 ```typescript
-const result = await client.eoa.deposit({
+const { txHashes } = await client.eoa.deposit({
   deposits: [{
-    pubkey: '0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456',
-    withdrawal_credentials: '0x1234567890123456789012345678901234567890',
-    deposit_data_root: '0x1234567890123456789012345678901234567890123456789012345678901234',
-    signature: '0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456',
-    amount: '32000000000000000000' // 32 ETH in wei
-  }]
+    pubkey: "0x...",
+    withdrawal_credentials: "0x...",
+    deposit_data_root: "0x...",
+    signature: "0x...",
+    amount: "32000000000000000000",
+  }],
+  expectedWithdrawalAddress: "0xWithdrawalAddress...",
 });
-console.log('Deposits completed:', result.txHashes);
 ```

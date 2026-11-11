@@ -60,6 +60,10 @@ Conventions:
 - Images live in `static/img/`.
 - The API reference at `/api` renders `static/openapi/obol-api.json`; refresh
   it with `node scripts/update-api-spec.mjs`.
+- The SDK reference at `/sdk` (`docs/sdk/`, its copy in the latest
+  `versioned_docs/` version, and the SDK sidebar categories) is generated from
+  an obol-sdk checkout; refresh it with
+  `node scripts/update-sdk-reference.mjs <path-to-obol-sdk>`.
 
 ## Deployment: preview vs production
 

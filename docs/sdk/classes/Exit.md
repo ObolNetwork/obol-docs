@@ -5,39 +5,39 @@ slug: /sdk/classes/exit
 
 # Exit
 
-Defined in: [exits/exit.ts:85](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L85)
+Defined in: [exits/exit.ts:92](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L92)
 
-Exit validation and verification class for Obol distributed validators.
+Validates and verifies voluntary exit signatures for Obol distributed validators.
 
-This class provides functionality to validate and verify voluntary exit signatures
-for distributed validators in an Obol cluster. It handles both partial exit signatures
-from individual operators and payload signatures that authorize exit operations.
+Do not instantiate directly; access via `client.exit`.
 
-The class supports:
-- Verification of BLS signatures for partial exit messages
-- Verification of ECDSA signatures for exit payload authorization
-- Validation of exit blobs against cluster configuration
-- Duplicate detection and epoch validation
+Available methods:
+- [Exit.verifyPartialExitSignature](#verifypartialexitsignature) – verify a BLS partial exit signature
+- [Exit.verifyExitPayloadSignature](#verifyexitpayloadsignature) – verify an ECDSA exit payload signature
+- [Exit.validateExitBlobs](#validateexitblobs) – validate exit blobs against cluster config
+- [Exit.recombineExitBlobs](#recombineexitblobs) – aggregate partial signatures into a full exit blob, verified against the validator public key
+
+All methods are read-only (no on-chain transactions). No signer is required.
 
 ## Example
 
 ```typescript
-const exit = new Exit(1, provider); // Mainnet with provider
+const client = new Client({ chainId: 1 }, signer, provider);
 
 // Verify a partial exit signature
-const isValid = await exit.verifyPartialExitSignature(
+const isValid = await client.exit.verifyPartialExitSignature(
   publicShareKey,
   signedExitMessage,
   forkVersion,
-  genesisValidatorsRoot
+  genesisValidatorsRoot,
 );
 
 // Validate exit blobs for a cluster
-const validBlobs = await exit.validateExitBlobs(
+const validBlobs = await client.exit.validateExitBlobs(
   clusterConfig,
   exitsPayload,
   beaconNodeApiUrl,
-  existingBlobData
+  existingBlobData,
 );
 ```
 
@@ -47,7 +47,7 @@ const validBlobs = await exit.validateExitBlobs(
 
 > **new Exit**(`chainId`, `provider`): `Exit`
 
-Defined in: [exits/exit.ts:104](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L104)
+Defined in: [exits/exit.ts:108](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L108)
 
 Creates a new Exit instance for validator exit operations.
 
@@ -56,7 +56,7 @@ Creates a new Exit instance for validator exit operations.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `chainId` | `number` | The Ethereum chain ID (e.g., 1 for mainnet, 5 for goerli) |
-| `provider` | [`ProviderType`](../type-aliases/ProviderType.md) \| `null` \| `undefined` | Optional Ethereum provider for blockchain interactions |
+| `provider` | `Provider` \| `null` \| `undefined` | Optional Ethereum provider for blockchain interactions |
 
 #### Returns
 
@@ -65,11 +65,8 @@ Creates a new Exit instance for validator exit operations.
 #### Example
 
 ```typescript
-// For mainnet with a provider
-const exit = new Exit(1, provider);
-
-// For goerli testnet without provider
-const exit = new Exit(5, null);
+const client = new Client({ chainId: 1 }, signer, provider);
+const exit = client.exit; // Access via client, do not instantiate directly
 ```
 
 ## Methods
@@ -78,7 +75,7 @@ const exit = new Exit(5, null);
 
 > **verifyPartialExitSignature**(`publicShareKey`, `signedExitMessage`, `forkVersion`, `genesisValidatorsRootString`): `Promise`\<`boolean`\>
 
-Defined in: [exits/exit.ts:192](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L192)
+Defined in: [exits/exit.ts:193](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L193)
 
 Verifies a partial exit signature from a distributed validator operator.
 
@@ -107,6 +104,10 @@ When unable to determine the Capella fork version for the given network
 
 #### Throws
 
+When `epoch` or `validator_index` is not a decimal uint64 string
+
+#### Throws
+
 When BLS library initialization or verification fails
 
 #### Example
@@ -129,7 +130,7 @@ const isValid = await exit.verifyPartialExitSignature(
 
 > **verifyExitPayloadSignature**(`enrString`, `exitsPayload`): `Promise`\<`boolean`\>
 
-Defined in: [exits/exit.ts:256](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L256)
+Defined in: [exits/exit.ts:276](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L276)
 
 Verifies the exit payload signature using the operator's ENR.
 
@@ -149,6 +150,7 @@ operator's public key extracted from their ENR (Ethereum Node Record).
 `Promise`\<`boolean`\>
 
 Promise resolving to true if the payload signature is valid, false otherwise
+  (including high-s signatures and public keys that are not valid secp256k1 points)
 
 #### Throws
 
@@ -156,11 +158,7 @@ When the ENR string is invalid or cannot be decoded
 
 #### Throws
 
-When the signature format is invalid (must be 130 hex characters)
-
-#### Throws
-
-When signature verification encounters an error
+When the signature is not 64 or 65 bytes of hex (`r || s`, optionally followed by the recovery id)
 
 #### Example
 
@@ -181,7 +179,7 @@ const isValid = await exit.verifyExitPayloadSignature(
 
 > **validateExitBlobs**(`clusterConfig`, `exitsPayload`, `beaconNodeApiUrl`, `existingBlobData`): `Promise`\<[`ExitValidationBlob`](../interfaces/ExitValidationBlob.md)[]\>
 
-Defined in: [exits/exit.ts:533](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L533)
+Defined in: [exits/exit.ts:548](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L548)
 
 Validates exit blobs against cluster configuration and existing data.
 
@@ -240,6 +238,10 @@ When validator index mismatches with existing data
 
 When signature mismatches for the same epoch and operator
 
+#### Throws
+
+When an `epoch` or `validator_index` is not a decimal uint64 string
+
 #### Example
 
 ```typescript
@@ -269,41 +271,93 @@ const validExitBlobs = await exit.validateExitBlobs(
 
 ### recombineExitBlobs()
 
-> **recombineExitBlobs**(`exitBlob`): `Promise`\<`FullExitBlob`\>
+> **recombineExitBlobs**(`exitBlob`, `options?`): `Promise`\<`FullExitBlob`\>
 
-Defined in: [exits/exit.ts:585](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/exits/exit.ts#L585)
+Defined in: [exits/exit.ts:651](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/exits/exit.ts#L651)
 
-Recombines exit blobs into a single exit blob.
+Recombines the partial exit signatures of a validator into its signed
+voluntary exit, and verifies it.
 
-This method aggregates partial exit signatures from multiple operators into a single exit blob.
-It ensures that the signatures are properly ordered and aggregated according to the operator indices.
+The partial signatures are threshold-aggregated as Charon's
+`tbls.ThresholdAggregate` does: each one is weighted by its Lagrange
+coefficient at x=0, where the share index of the signature keyed by
+operator index `i` (0-based) is `i + 1`.
+
+**The returned signature is always verified** against `exitBlob.public_key`
+for the exit message, in the voluntary exit domain of the client's chain
+(`chainId`; Capella fork version and genesis validators root from
+[EXIT\_NETWORKS](../variables/EXIT_NETWORKS.md), no beacon node needed). If it does not verify (fewer
+than the cluster's threshold of partials, an invalid partial, another
+network, another epoch or validator index) the method throws
+[ExitRecombineError](ExitRecombineError.md) and returns nothing. There is no way to skip
+this check.
+
+`options` add to that:
+- `clusterConfig`: each partial is first verified against its operator's
+  public share and invalid ones are left out (and named in the error), at
+  least `definition.threshold` valid partials are required, and the first
+  `threshold` valid partials by share index are aggregated. Its
+  `definition.fork_version` must be the client chain's.
+- `genesisValidatorsRoot` or `beaconNodeApiUrl` (at most one): on a chain
+  in [EXIT\_NETWORKS](../variables/EXIT_NETWORKS.md) the root is only compared with the chain's (a
+  mismatch throws). On a chain without an entry (possible only when `Exit`
+  is constructed directly), one of them and `clusterConfig` are required:
+  they supply the exit domain.
+
+For a set of valid partials the result is the same with and without
+`options`, and the same as before 2.16.0.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `exitBlob` | [`ExistingExitValidationBlobData`](../interfaces/ExistingExitValidationBlobData.md) | The existing exit blob data containing partial exit signatures |
+| `exitBlob` | [`ExistingExitValidationBlobData`](../interfaces/ExistingExitValidationBlobData.md) | The stored exit: validator public key, epoch, validator index and the partial exit signatures keyed by 0-based operator index |
+| `options` | [`RecombineExitBlobsOptions`](../interfaces/RecombineExitBlobsOptions.md) | Optional cluster (per-partial verification, threshold) and genesis validators root source |
 
 #### Returns
 
 `Promise`\<`FullExitBlob`\>
 
-Promise resolving to a single exit blob with aggregated signatures
+Promise resolving to the exit blob with the aggregated, verified
+  signature. `epoch` and `validator_index` are returned in canonical
+  decimal form (leading zeros removed)
 
 #### Throws
 
-When no valid signatures are found for aggregation
+`EXIT_PARTIAL_SIGNATURE_INVALID` when the
+  aggregate does not verify against the validator public key, or a partial
+  is not a valid signature encoding (without `clusterConfig`);
+  `EXIT_NOT_ENOUGH_SHARES` when fewer than `threshold` partials verify
+  (with `clusterConfig`)
 
 #### Throws
 
-When signature length is invalid
+`public_key` is not 48 bytes of hex;
+  `epoch` or `validator_index` is not a decimal uint64; `options` are
+  inconsistent (both root sources, a malformed root, a threshold that is
+  not a positive integer, a validator not in `clusterConfig`, a
+  `fork_version` or genesis validators root that is not the client
+  chain's)
 
 #### Throws
 
-When signature parsing fails
+The client's chain has no entry in
+  [EXIT\_NETWORKS](../variables/EXIT_NETWORKS.md) and `options` do not supply the exit domain
+
+#### Throws
+
+No partial signatures; a partial signature that is not 96
+  bytes of hex; a share index key that is not a non-negative integer or is
+  duplicated; the beacon node did not return a genesis validators root
 
 #### Example
 
 ```typescript
-const aggregatedExitBlob = await exit.recombineExitBlobs(existingBlobData);
+// Verified against the validator public key on the client's chain
+const exitBlob = await client.exit.recombineExitBlobs(existingBlobData);
+
+// Also checks each partial against its public share and the threshold
+const exitBlob = await client.exit.recombineExitBlobs(existingBlobData, {
+  clusterConfig, // e.g. the ExitClusterConfig passed to validateExitBlobs
+});
 ```

@@ -5,19 +5,35 @@ slug: /sdk/classes/obolsplits
 
 # ObolSplits
 
-Defined in: [splits/splits.ts:42](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/splits/splits.ts#L42)
+Defined in: [splits/splits.ts:70](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/splits/splits.ts#L70)
 
-**`Internal`**
+Deploys and manages Obol Validator Manager (OVM) and SplitV2 contracts
+for automated reward and principal splitting among cluster participants.
 
-ObolSplits can be used for creating and managing Obol splits.
+Do not instantiate directly; access via `client.splits`.
 
- Access it through Client.splits.
+Available methods:
+- [ObolSplits.createValidatorManagerAndRewardsSplit](#createvalidatormanagerandrewardssplit) – rewards-only split (single principal recipient)
+- [ObolSplits.createValidatorManagerAndTotalSplit](#createvalidatormanagerandtotalsplit) – total split (principal also split)
+- [ObolSplits.requestWithdrawal](#requestwithdrawal) – request withdrawal from an OVM contract
+- [ObolSplits.deposit](#deposit) – deposit to an OVM contract
+
+All write methods send on-chain transactions and require a signer with ETH for gas.
 
 ## Example
 
-```ts
-const obolClient = new Client(config);
-await obolClient.splits.createValidatorManagerAndRewardsSplit(OVMRewardsSplitPayload);
+```typescript
+const client = new Client({ chainId: 560048 }, signer);
+
+const { withdrawal_address, fee_recipient_address } =
+  await client.splits.createValidatorManagerAndRewardsSplit({
+    rewardSplitRecipients: [
+      { address: "0xOp1...", percentAllocation: 50 },
+      { address: "0xOp2...", percentAllocation: 49 },
+    ],
+    principalRecipient: "0xPrincipal...",
+    OVMOwnerAddress: "0xOwner...",
+  });
 ```
 
 ## Methods
@@ -26,38 +42,53 @@ await obolClient.splits.createValidatorManagerAndRewardsSplit(OVMRewardsSplitPay
 
 > **createValidatorManagerAndRewardsSplit**(`payload`): `Promise`\<[`ClusterValidator`](../type-aliases/ClusterValidator.md)\>
 
-Defined in: [splits/splits.ts:76](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/splits/splits.ts#L76)
+Defined in: [splits/splits.ts:113](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/splits/splits.ts#L113)
 
-Creates an Obol OVM and Pull split configuration for rewards-only scenario.
+Deploys an OVM and SplitV2 contract for a **rewards-only** split scenario.
 
-This method deploys OVM and SplitV2 contracts for managing validator rewards only.
-Principal is handled by a single address, while rewards are split among recipients.
+Principal goes to a single address; only validator rewards are split among
+the configured recipients. Automatically appends the Obol RAF recipient.
+
+- Sends one or more on-chain transactions (irreversible).
+- Only supported on chains with OVM factory contracts (Mainnet, Hoodi).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`OVMRewardsSplitPayload`](../type-aliases/OVMRewardsSplitPayload.md) | Data needed to deploy OVM and SplitV2 |
+| `payload` | [`OVMRewardsSplitPayload`](../type-aliases/OVMRewardsSplitPayload.md) | Configuration for the OVM and SplitV2 deployment. |
 
 #### Returns
 
 `Promise`\<[`ClusterValidator`](../type-aliases/ClusterValidator.md)\>
 
-OVM address as withdrawal address and splitter as fee recipient
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
-
-**📌 Note:** The Obol Validator Manager (OVM) feature is only enabled on Hoodi on launchpad.
+The OVM address as `withdrawal_address` and splitter as `fee_recipient_address`.
 
 #### Throws
 
-Will throw an error if the splitter configuration is not supported or deployment fails
+If no signer was provided.
 
-An example of how to use createValidatorManagerAndRewardsSplit:
-[createValidatorManagerAndRewardsSplit](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L333)
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the chain does not support splitters.
+
+#### Example
+
+```typescript
+const { withdrawal_address, fee_recipient_address } =
+  await client.splits.createValidatorManagerAndRewardsSplit({
+    rewardSplitRecipients: [
+      { address: "0xOp1...", percentAllocation: 50 },
+      { address: "0xOp2...", percentAllocation: 49 },
+    ],
+    principalRecipient: "0xPrincipal...",
+    OVMOwnerAddress: "0xOwner...",
+  });
+```
 
 ***
 
@@ -65,129 +96,187 @@ An example of how to use createValidatorManagerAndRewardsSplit:
 
 > **createValidatorManagerAndTotalSplit**(`payload`): `Promise`\<[`ClusterValidator`](../type-aliases/ClusterValidator.md)\>
 
-Defined in: [splits/splits.ts:244](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/splits/splits.ts#L244)
+Defined in: [splits/splits.ts:304](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/splits/splits.ts#L304)
 
-Creates an Obol OVM and Total split configuration for total split scenario.
+Deploys an OVM and SplitV2 contract for a **total split** scenario.
 
-This method deploys OVM and SplitV2 contracts for managing both validator rewards and principal.
-Both rewards and principal are split among recipients, with rewards including RAF recipient.
+Both principal and rewards are split among recipients via separate SplitV2
+contracts. Automatically appends the Obol RAF recipient to rewards.
+
+- Sends one or more on-chain transactions (irreversible).
+- Only supported on chains with OVM factory contracts (Mainnet, Hoodi).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`OVMTotalSplitPayload`](../type-aliases/OVMTotalSplitPayload.md) | Data needed to deploy OVM and SplitV2 |
+| `payload` | [`OVMTotalSplitPayload`](../type-aliases/OVMTotalSplitPayload.md) | Configuration for the OVM and SplitV2 deployment. |
 
 #### Returns
 
 `Promise`\<[`ClusterValidator`](../type-aliases/ClusterValidator.md)\>
 
-OVM address as withdrawal address and splitter as fee recipient
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
-
-**📌 Note:** The Obol Validator Manager (OVM) feature is only enabled on Hoodi on launchpad.
+The OVM address as `withdrawal_address` and rewards splitter as `fee_recipient_address`.
 
 #### Throws
 
-Will throw an error if the splitter configuration is not supported or deployment fails
+If no signer was provided.
 
-An example of how to use createValidatorManagerAndTotalSplit:
-[createValidatorManagerAndTotalSplit](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#340)
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the chain does not support splitters.
+
+#### Example
+
+```typescript
+const { withdrawal_address, fee_recipient_address } =
+  await client.splits.createValidatorManagerAndTotalSplit({
+    rewardSplitRecipients: [
+      { address: "0xOp1...", percentAllocation: 50 },
+      { address: "0xOp2...", percentAllocation: 49 },
+    ],
+    principalSplitRecipients: [
+      { address: "0xOp1...", percentAllocation: 50 },
+      { address: "0xOp2...", percentAllocation: 50 },
+    ],
+    OVMOwnerAddress: "0xOwner...",
+  });
+```
 
 ***
 
 ### requestWithdrawal()
 
-> **requestWithdrawal**(`payload`): `Promise`\<\{ `txHash`: `string`; \}\>
+> **requestWithdrawal**(`payload`, `options?`): `Promise`\<\{ `txHash`: `string`; \}\>
 
-Defined in: [splits/splits.ts:442](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/splits/splits.ts#L442)
+Defined in: [splits/splits.ts:527](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/splits/splits.ts#L527)
 
-Requests withdrawal from an OVM contract.
+Requests withdrawal of validator funds from an OVM contract.
 
-This method allows requesting withdrawal of validator funds from an OVM contract.
-The withdrawal request includes OVM address, validator public keys and corresponding withdrawal amounts.
+Sends an on-chain transaction to the OVM contract requesting withdrawal
+for the specified validator public keys and amounts.
+
+The fee is checked against the current fee read from the EIP-7002
+withdrawal request contract (using the client provider, or the signer's
+provider). If `withdrawalFees` is omitted, twice the current fee per
+request is sent. If it is given, it must cover the current fee and be at
+most max(10x the current fee, 1 gwei) per request. The OVM refunds the
+unused part of the fees to `excessFeeRecipient`, which defaults to the
+signer's address.
+
+`amounts` are in gwei, as the OVM contract takes them.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`OVMRequestWithdrawalPayload`](../type-aliases/OVMRequestWithdrawalPayload.md) | Data needed to request withdrawal |
+| `payload` | [`OVMRequestWithdrawalPayload`](../type-aliases/OVMRequestWithdrawalPayload.md) | Withdrawal request data including OVM address, validator public keys, amounts (gwei), and optional total fees (wei) and `excessFeeRecipient`. |
+| `options?` | [`WriteOptions`](../type-aliases/WriteOptions.md) | Optional `onSent` callback, called with each transaction hash as soon as it is broadcast. |
 
 #### Returns
 
 `Promise`\<\{ `txHash`: `string`; \}\>
 
-Transaction hash of the withdrawal request
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
+The transaction hash of the withdrawal request.
 
 #### Throws
 
-Will throw an error if the signer is not provided, OVM address is invalid, or the request fails
+If no signer was provided.
 
-An example of how to use requestWithdrawal:
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If no provider is available or `withdrawalFees` is out of range.
+
+#### Throws
+
+If the call fails after a transaction
+  was broadcast (`txHashes`, `pendingTxHash` and `cause` say what was sent).
+
+#### Example
+
 ```typescript
-const result = await client.splits.requestWithdrawal({
-  ovmAddress: '0x1234567890123456789012345678901234567890',
-  pubKeys: ['0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456'],
-  amounts: ['32000000000'], // 32 ETH in gwei
-  withdrawalFees: '1000000000000000' // Total fees in wei
+const { txHash } = await client.splits.requestWithdrawal({
+  ovmAddress: "0xOVM...",
+  pubKeys: ["0xValidatorPubkey..."],
+  amounts: ["32000000000"],
 });
-console.log('Withdrawal requested:', result.txHash);
 ```
 
 ***
 
 ### deposit()
 
-> **deposit**(`payload`): `Promise`\<\{ `txHashes`: `string`[]; \}\>
+> **deposit**(`payload`, `options?`): `Promise`\<\{ `txHashes`: `string`[]; \}\>
 
-Defined in: [splits/splits.ts:492](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/splits/splits.ts#L492)
+Defined in: [splits/splits.ts:608](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/splits/splits.ts#L608)
 
-Deposits to OVM contract by sending individual transactions for each deposit.
+Deposits validators to an OVM contract. Each deposit is sent as a separate
+on-chain transaction.
 
-This method allows depositing to an OVM contract. Each deposit is sent as a separate transaction
-Each deposit includes validator public key, withdrawal credentials, signature, deposit data root, and amount.
+Before sending, each deposit is checked: withdrawal credentials are 0x01
+or 0x02 credentials for `ovmAddress`, `amount` (wei) is a whole number of
+gwei between 1 ETH and 32 ETH (2048 ETH for 0x02 credentials),
+`deposit_data_root` matches the deposit fields, and the BLS signature is
+valid for this chain. For top-ups to validators that already exist on the
+beacon chain, pass `kind: 'topUp'`: the signature is not checked, the
+withdrawal credentials may be all zero instead of the expected ones, and
+up to 2048 ETH is allowed per deposit. Without it, a deposit with an
+all-zero signature is refused (`DEPOSIT_LOOKS_LIKE_TOP_UP`).
+The output of [Client.getDepositData](Client.md#getdepositdata) can be passed as `deposits`.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `payload` | [`OVMDepositPayload`](../type-aliases/OVMDepositPayload.md) | Data needed to deposit to OVM |
+| `payload` | [`OVMDepositPayload`](../type-aliases/OVMDepositPayload.md) | Deposit data including the OVM address and an array of validator deposit objects (pubkey, withdrawal_credentials, signature, deposit_data_root, amount). |
+| `options?` | [`WriteOptions`](../type-aliases/WriteOptions.md) | Optional `onSent` callback, called with each transaction hash as soon as it is broadcast. |
 
 #### Returns
 
 `Promise`\<\{ `txHashes`: `string`[]; \}\>
 
-Array of transaction hashes, one for each deposit
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
+An array of transaction hashes, one per deposit.
 
 #### Throws
 
-Will throw an error if the signer is not provided, OVM address is invalid, or the deposit fails
+If no signer was provided.
 
-An example of how to use deposit:
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the payload is invalid.
+
+#### Throws
+
+If any deposit fails the checks above.
+
+#### Throws
+
+If the call fails after a transaction
+  was broadcast (`txHashes`, `pendingTxHash` and `cause` say what was sent).
+
+#### Example
+
 ```typescript
-const result = await client.splits.deposit({
-  ovmAddress: '0x1234567890123456789012345678901234567890',
+const { txHashes } = await client.splits.deposit({
+  ovmAddress: "0xOVM...",
   deposits: [{
-    pubkey: '0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456',
-    withdrawal_credentials: '0x1234567890123456789012345678901234567890',
-    signature: '0x123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456',
-    deposit_data_root: '0x1234567890123456789012345678901234567890123456789012345678901234',
-    amount: '32000000000000000000' // 32 ETH in wei
-  }]
+    pubkey: "0x...",
+    withdrawal_credentials: "0x...",
+    signature: "0x...",
+    deposit_data_root: "0x...",
+    amount: "32000000000000000000",
+  }],
 });
-console.log('Deposits completed:', result.txHashes);
 ```
