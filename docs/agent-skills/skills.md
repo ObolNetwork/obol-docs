@@ -15,9 +15,9 @@ The [Obol plugin](README.md) contains the skills below. Claude picks the right o
 | [`test-a-dv-cluster`](#test-a-dv-cluster) | Run `charon alpha test` suites against a node or cluster | A running Charon, or Docker |
 | [`dvpod`](#dvpod) | Deploy, upgrade, back up, and troubleshoot a DV on Kubernetes | `kubectl` + `helm` |
 | [`dvpod-monitoring`](#dvpod-monitoring) | Query the metrics and logs of a deployed DVpod (read-only) | `kubectl` + `helm` |
-| [`obol-monitoring`](#obol-monitoring) | Triage cluster health and duty failures in Obol's hosted Grafana | Python 3, Grafana API token |
+| [`obol-monitoring`](#obol-monitoring) | Diagnose clusters, nodes and the fleet in Obol's hosted Grafana: missed duties, offline peers, slot timelines, the biggest clusters' easy wins | Python 3, Grafana API token |
 | [`run-obol-stack`](#run-obol-stack) | Install, operate, and sell services from the Obol Stack, and run your part of a DV in it | Docker |
-| [`distributed-validators`](#distributed-validators) | Check DV cluster health, validator performance, operators and exits via the Obol API (read-only) | `curl` |
+| [`distributed-validators`](#distributed-validators) | Look up clusters, validator effectiveness, exits, operators and who runs a peer in the Obol API (read-only) | The bundled Obol MCP server, or `curl` |
 | [`dv-steward`](#dv-steward) | Let the Obol Stack's Hermes agent watch the Stack's own DV node and alert you (read-only) | An Obol Stack agent |
 
 ## `create-cluster-invitation`
@@ -62,7 +62,7 @@ This skill deploys and manages a DVpod, which runs a distributed validator on Ku
 - `backup` and `recover`
 - `destroy`
 
-It also sets up monitoring, either by remote-writing metrics to Obol, through a `ServiceMonitor`, or by shipping logs to Loki. It pins chart versions, sets the network at install, and reads your node's ENR and DKG progress from the chart's ConfigMaps. In the [Obol Stack](../obol-stack/run-a-dv.md) it installs with `obol helm` from the chart's Obol Stack values file, after the local node has synced. It always asks before deleting a release, a secret, or a persistent volume, before upgrading a release whose validators are active, and before restoring keys during `recover`. It never reads private keys out of Kubernetes secrets.
+It also sets up monitoring, either by remote-writing metrics to Obol, through a `ServiceMonitor`, or by shipping logs to Loki. It pins chart versions, sets the network at install, and reads your node's ENR and DKG progress from the chart's ConfigMaps. In the [Obol Stack](../obol-stack/run-a-dv.md) it installs with `obol helm` from the chart's Obol Stack values file, after the local node has synced. It backs up `charon-data` from the validator client container, since from chart 0.23 the Charon container can't see the key shares. It always asks before deleting a release, a secret, or a persistent volume, before upgrading a release whose validators are active, and before restoring keys during `recover`. It never reads private keys out of Kubernetes secrets.
 
 **Needs:** a Kubernetes cluster, `kubectl`, `helm`, and a reachable beacon node endpoint.
 
@@ -86,7 +86,13 @@ Give me a health snapshot of my DVpod and explain any Charon errors from the las
 
 ## `obol-monitoring`
 
-This skill diagnoses clusters through Obol's hosted Grafana, using Prometheus metrics and Loki logs. It runs a first-pass cluster triage, analyses failed duties slot by slot to rebuild a consensus timeline, and gives a fleet overview across many clusters. It maps [failure reasons](../advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md) to concrete fixes.
+This skill diagnoses clusters through Obol's hosted Grafana, using Prometheus metrics and Loki logs. It maps [failure reasons](../advanced-and-troubleshooting/troubleshooting/duty-failure-reasons.md) to concrete fixes, and it can:
+
+- run a first-pass triage of a cluster. This classes every peer as healthy, not sending metrics, degraded or offline, from what the other peers see, so a node that has been down for weeks stands out even though it sends nothing. It also gives the cluster's remaining fault tolerance, and which node reported each failure.
+- rebuild a slot's consensus timeline from the logs to explain one failed duty.
+- give a fleet overview: client and Charon version spread, the largest clusters by active stake, and the worst performers.
+
+It names nodes by their operator nickname. For a peer that has been offline too long to have one in the metrics, it looks the operator up in the Obol API.
 
 **Needs:** Python 3.6 or later and `OBOL_GRAFANA_API_TOKEN` (see [Configuration](README.md#configuration)). Your cluster must [push metrics and logs to Obol](../run-a-dv/start/obol-monitoring.mdx). The skill doesn't work with a self-hosted Grafana.
 
@@ -94,6 +100,10 @@ This skill diagnoses clusters through Obol's hosted Grafana, using Prometheus me
 
 ```text
 Triage my Obol cluster "<cluster name>" on mainnet and explain why attestations are failing.
+```
+
+```text
+Do a performance check of our biggest clusters by active stake and list the easy wins.
 ```
 
 ## `run-obol-stack`
@@ -112,11 +122,11 @@ Related docs: [Obol Stack Quickstart](../obol-stack/quickstart.mdx), [Build a Pr
 
 ## `distributed-validators`
 
-This skill reads public data about DV clusters from the Obol API: cluster configuration, validator effectiveness and beacon chain states, operator details, and exit progress. It looks clusters up by lock hash, config hash or operator address, and it can't create clusters or submit exits.
+This skill reads public data about DV clusters from the Obol API: cluster configuration, validator effectiveness and beacon chain states, operator details, exit progress, and who runs each Charon peer. It looks clusters up by lock hash, config hash, name or operator address, and it can't create clusters or submit exits. In Claude Code it uses the [bundled Obol MCP server](README.md#the-bundled-obol-mcp-server), falling back to `curl`.
 
 It works as a Claude Code skill, and you can also add it to an Obol Stack agent with `obol agent skills add distributed-validators` (Obol Stack v0.16 and later).
 
-**Needs:** `curl`. No API key.
+**Needs:** no API key. [`uv`](https://docs.astral.sh/uv/) for the bundled MCP server, otherwise `curl`.
 
 **Try:**
 

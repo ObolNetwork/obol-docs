@@ -188,7 +188,7 @@ Pass the version you choose with `--version` on every `helm install` and `helm u
 **2. Install the chart with your network and operator address:**
 
 ```sh
-helm upgrade --install my-dv-pod obol/dv-pod --version 0.22.0 \
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.23.0 \
   --namespace dv-pod --create-namespace \
   --set mode=launchpad \
   --set network=hoodi \
@@ -468,7 +468,7 @@ The sidecar doesn't sign anything. You accept the cluster and sign with your ope
 If the creator made the cluster definition with `charon create dkg --publish` (the **CDVN** tab in Step 2) using your pod's ENR, point the same release at the definition's config hash instead:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod --reuse-values \
+helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod --reset-then-reuse-values \
   --set mode=definition \
   --set dkg.definition.configHash=0x<CONFIG_HASH>
 ```
@@ -513,7 +513,7 @@ kubectl create secret generic validator-keys -n dv-pod \
 kubectl create configmap cluster-lock -n dv-pod \
   --from-file=.charon/cluster-lock.json
 
-helm upgrade --install my-dv-pod obol/dv-pod --version 0.22.0 \
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.23.0 \
   --namespace dv-pod --create-namespace \
   --set mode=lock \
   --set network=hoodi \
@@ -768,19 +768,22 @@ kubectl logs my-dv-pod-0 -n dv-pod -c validator-client -f
 
 **Back up `charon-data`:**
 
-The DKG output (`cluster-lock.json`, `deposit-data*.json` and your key shares in `validator_keys/`) lives on the pod's `charon-data-my-dv-pod-0` volume. Copy it off the cluster and store it encrypted before you activate any validators:
+The DKG output (`cluster-lock.json`, `deposit-data*.json` and your key shares in `validator_keys/`) lives on the pod's `charon-data-my-dv-pod-0` volume. Copy it off the cluster and store it encrypted before you activate any validators. Copy from the `validator-client` container: since chart 0.23 the Charon container (`dv-pod`) sees an empty `validator_keys/`, so a copy from it has no key shares.
 
 ```sh
-kubectl cp dv-pod/my-dv-pod-0:/charon-data ./my-dv-pod-charon-data -c dv-pod
+kubectl cp dv-pod/my-dv-pod-0:/charon-data ./my-dv-pod-charon-data -c validator-client
+ls my-dv-pod-charon-data/validator_keys   # must list keystore-*.json; if empty, the backup has no key shares
 ```
+
+With the Prysm validator client (its image has no `tar`, which `kubectl cp` needs) or `validatorClient.enabled: false`, use the short-lived pod in the chart README's [Backing up charon-data](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod#backing-up-charon-data) section. On charts before 0.23, copy with `-c dv-pod` instead.
 
 **Key configuration options:**
 
 You can customize your deployment by upgrading the release with additional parameters:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
-  --reuse-values \
+helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+  --reset-then-reuse-values \
   --set='charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>' \
   --set='charon.builderApi=true' \
   --set='validatorClient.type=lighthouse'
@@ -795,8 +798,8 @@ The chart supports five validator client types: `lighthouse` (default), `teku`, 
 If you prefer to run your own validator client outside the chart, disable the integrated one and point your external client at the Charon validator API:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
-  --reuse-values \
+helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+  --reset-then-reuse-values \
   --set='validatorClient.enabled=false'
 ```
 
@@ -811,8 +814,8 @@ http://<RELEASE_NAME>.<NAMESPACE>.svc.cluster.local:3600
 Enable Prometheus service monitoring:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod \
-  --reuse-values \
+helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+  --reset-then-reuse-values \
   --set='serviceMonitor.enabled=true'
 ```
 

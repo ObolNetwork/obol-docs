@@ -97,6 +97,12 @@ The `obol-monitoring` skill queries **Obol's hosted Grafana only**. It needs a G
 export OBOL_GRAFANA_API_TOKEN="glsa_..."
 ```
 
+### The bundled Obol MCP server
+
+The plugin also starts the [Obol MCP server](https://github.com/ObolNetwork/obol-mcp) (`uvx obol-mcp`). It gives Claude read-only tools for the public [Obol API](https://api.obol.tech): cluster locks and definitions, validator effectiveness and beacon states, exit progress, operators, badges and staked positions. It checks every identifier before sending a request, rate limits, and trims large responses, so Claude prefers it over raw `curl`. No API key is needed.
+
+It needs [`uv`](https://docs.astral.sh/uv/). Without it the server shows as failed in `/mcp`, and the skills fall back to `curl`. `distributed-validators` is built on these tools, `create-cluster-invitation` uses them to check a cluster before a deposit, and `obol-monitoring` uses them for questions about who runs a cluster, next to Grafana's view of how it behaves.
+
 ## Using the skills
 
 You usually don't need to name a skill. Claude chooses one based on what you ask. To call a skill directly, use its slash command, for example `/obol:test-a-dv-cluster`. Type `/` in Claude Code to see the list.
