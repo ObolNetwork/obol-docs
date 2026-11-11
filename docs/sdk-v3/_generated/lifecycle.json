@@ -1,0 +1,327 @@
+{
+  "version": "3.0.0-rc.12",
+  "stages": [
+    {
+      "id": "setup",
+      "title": "Set up the client",
+      "blurb": "Pick the chain, pass viem clients, accept the terms once per address.",
+      "n": 1,
+      "methods": [
+        {
+          "label": "createObolClient",
+          "href": "reference/client#createObolClient",
+          "kind": "client",
+          "warnings": 0
+        },
+        {
+          "label": "createObolContext",
+          "href": "reference/client#createObolContext",
+          "kind": "client",
+          "warnings": 0
+        },
+        {
+          "label": "terms.hasAccepted",
+          "href": "reference/terms#hasAccepted",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "terms.accept",
+          "href": "reference/terms#accept",
+          "kind": "sign",
+          "warnings": 0
+        }
+      ]
+    },
+    {
+      "id": "rewards",
+      "title": "Withdrawal and reward contracts",
+      "blurb": "Deploy an OVM (with splits) first: its address is the withdrawal address the cluster definition commits to.",
+      "n": 2,
+      "methods": [
+        {
+          "label": "setup.prepareCreateOvm",
+          "href": "reference/setup#prepareCreateOvm",
+          "kind": "tx",
+          "warnings": 0
+        },
+        {
+          "label": "setup.prepareOvmWithSplits",
+          "href": "reference/setup#prepareOvmWithSplits",
+          "kind": "tx",
+          "warnings": 0
+        },
+        {
+          "label": "setup.ovmFromReceipt",
+          "href": "reference/setup#ovmFromReceipt",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "splits.predictSplit",
+          "href": "reference/splits#predictSplit",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "splits.prepareCreateSplit",
+          "href": "reference/splits#prepareCreateSplit",
+          "kind": "tx",
+          "warnings": 0
+        }
+      ]
+    },
+    {
+      "id": "create",
+      "title": "Create and join the cluster",
+      "blurb": "Creator prepares and posts the definition; each operator accepts with its ENR.",
+      "n": 3,
+      "methods": [
+        {
+          "label": "cluster.prepareDefinition",
+          "href": "reference/cluster#prepareDefinition",
+          "kind": "tx",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.create",
+          "href": "reference/cluster#create",
+          "kind": "sign",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.accept",
+          "href": "reference/cluster#accept",
+          "kind": "sign",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.get",
+          "href": "reference/cluster#get",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.watch",
+          "href": "reference/cluster#watch",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.verifyDefinition",
+          "href": "reference/cluster#verifyDefinition",
+          "kind": "check",
+          "warnings": 0
+        }
+      ]
+    },
+    {
+      "id": "dkg",
+      "title": "DKG and lock",
+      "blurb": "Operators run the DKG with Charon (outside the SDK); the lock is published and verified.",
+      "n": 4,
+      "methods": [
+        {
+          "label": "cluster.getLock",
+          "href": "reference/cluster#getLock",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.verifyLock",
+          "href": "reference/cluster#verifyLock",
+          "kind": "check",
+          "warnings": 0
+        },
+        {
+          "label": "cluster.isValidLock",
+          "href": "reference/cluster#isValidLock",
+          "kind": "check",
+          "warnings": 0
+        }
+      ]
+    },
+    {
+      "id": "deposit",
+      "title": "Deposit",
+      "blurb": "Verified deposit data from the lock, status from the API or a beacon node, then deposit via the OVM.",
+      "n": 5,
+      "methods": [
+        {
+          "label": "deposits.fromLock",
+          "href": "reference/deposits#fromLock",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "deposits.assertDepositData",
+          "href": "reference/deposits#assertDepositData",
+          "kind": "check",
+          "warnings": 0
+        },
+        {
+          "label": "deposits.status",
+          "href": "reference/deposits#status",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "deposits.prepareDeposit",
+          "href": "reference/deposits#prepareDeposit",
+          "kind": "tx",
+          "warnings": 6
+        }
+      ]
+    },
+    {
+      "id": "operate",
+      "title": "Operate",
+      "blurb": "Read OVM state, roles and validators; manage roles and ownership.",
+      "n": 6,
+      "methods": [
+        {
+          "label": "ovm.getProvenance",
+          "href": "reference/ovm#getProvenance",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "ovm.getState",
+          "href": "reference/ovm#getState",
+          "kind": "read",
+          "warnings": 2
+        },
+        {
+          "label": "ovm.getRoleHolders",
+          "href": "reference/ovm#getRoleHolders",
+          "kind": "read",
+          "warnings": 1
+        },
+        {
+          "label": "ovm.getValidators",
+          "href": "reference/ovm#getValidators",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "ovm.prepareGrantRoles",
+          "href": "reference/ovm#prepareGrantRoles",
+          "kind": "tx",
+          "warnings": 3
+        },
+        {
+          "label": "ovm.prepareTransfer",
+          "href": "reference/ovm#prepareTransfer",
+          "kind": "tx",
+          "warnings": 2
+        }
+      ]
+    },
+    {
+      "id": "exit",
+      "title": "Exit, withdraw, consolidate",
+      "blurb": "EIP-7002 withdrawals and exits, EIP-7251 consolidations, and Charon partial-exit aggregation.",
+      "n": 7,
+      "methods": [
+        {
+          "label": "ovm.prepareWithdraw",
+          "href": "reference/ovm#prepareWithdraw",
+          "kind": "tx",
+          "warnings": 3
+        },
+        {
+          "label": "ovm.prepareConsolidate",
+          "href": "reference/ovm#prepareConsolidate",
+          "kind": "tx",
+          "warnings": 3
+        },
+        {
+          "label": "exits.assertPartialExit",
+          "href": "reference/exits#assertPartialExit",
+          "kind": "check",
+          "warnings": 0
+        },
+        {
+          "label": "exits.aggregate",
+          "href": "reference/exits#aggregate",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "withdrawals.prepareEoaWithdraw",
+          "href": "reference/withdrawals#prepareEoaWithdraw",
+          "kind": "tx",
+          "warnings": 2
+        }
+      ]
+    },
+    {
+      "id": "distribute",
+      "title": "Distribute and claim",
+      "blurb": "Pay out what the OVM and its splits hold; claim Obol incentives.",
+      "n": 8,
+      "methods": [
+        {
+          "label": "ovm.prepareDistribute",
+          "href": "reference/ovm#prepareDistribute",
+          "kind": "tx",
+          "warnings": 1
+        },
+        {
+          "label": "ovm.previewDistribute",
+          "href": "reference/ovm#previewDistribute",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "splits.getSplit",
+          "href": "reference/splits#getSplit",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "splits.prepareDistributeAll",
+          "href": "reference/splits#prepareDistributeAll",
+          "kind": "tx",
+          "warnings": 1
+        },
+        {
+          "label": "splits.previewDistributeAll",
+          "href": "reference/splits#previewDistributeAll",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "splits.distributionFromReceipt",
+          "href": "reference/splits#distributionFromReceipt",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "incentives.get",
+          "href": "reference/incentives#get",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "incentives.isClaimed",
+          "href": "reference/incentives#isClaimed",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "incentives.preflight",
+          "href": "reference/incentives#preflight",
+          "kind": "read",
+          "warnings": 0
+        },
+        {
+          "label": "incentives.prepareClaim",
+          "href": "reference/incentives#prepareClaim",
+          "kind": "tx",
+          "warnings": 0
+        }
+      ]
+    }
+  ]
+}

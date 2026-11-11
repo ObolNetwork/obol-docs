@@ -1,0 +1,114 @@
+---
+title: Obol SDK v3 at a glance
+slug: /sdk/v3
+description: The mental model of @obolnetwork/obol-sdk v3 (release candidate) — create a client, prepare a checked transaction, simulate it, send it with acknowledgements — and the naming rule that tells you how each operation fails.
+---
+
+import Naming from './_generated/naming.md';
+import meta from './_generated/meta.json';
+
+# Obol SDK v3 at a glance
+
+:::caution[v3 release candidate, unreleased]
+
+This section documents <code>@obolnetwork/obol-sdk@{meta.version}</code>, a release candidate generated from the v3 source. Names and shapes may still change before 3.0.0. For the released SDK see the [2.x reference](../sdk/index.md).
+
+:::
+
+Version 3 is a rewrite of the Obol SDK on [viem](https://viem.sh). It replaces the 2.x `Client` (ethers) entirely: you pass your own viem clients, every write is a checked transaction you send yourself, and every failure has a stable code. The [reference](./reference/index.md) covers its {meta.operations} operations; the [error codes](./errors.md) ({meta.errors}) and [findings](./warnings.md) ({meta.findings}) have their own pages.
+
+## The mental model {#model}
+
+<div className="sdk-steps">
+  <div className="sdk-step">
+    <div className="sdk-step__k">1 · Bind</div>
+    <p className="sdk-step__t">createObolClient</p>
+    <p className="sdk-step__d">One chain, your viem <code>publicClient</code>, an optional <code>walletClient</code>, the Obol API or <code>api: false</code>.</p>
+  </div>
+  <div className="sdk-step">
+    <div className="sdk-step__k">2 · Prepare</div>
+    <p className="sdk-step__t">prepareX(input)</p>
+    <p className="sdk-step__d"><code>obol.&lt;module&gt;.prepare*</code> runs every check, reads the chain and API, throws for an error, returns a <code>Prepared</code>: <code>request</code>, <code>checks</code>, <code>preview</code>. Sends nothing.</p>
+  </div>
+  <div className="sdk-step">
+    <div className="sdk-step__k">3 · Simulate (optional)</div>
+    <p className="sdk-step__t">simulate(tx)</p>
+    <p className="sdk-step__d"><code>obol.experimental.simulate</code> runs the request on the node: balance changes, events, a plain-language summary, and a comparison with the preview.</p>
+  </div>
+  <div className="sdk-step">
+    <div className="sdk-step__k">4 · Send</div>
+    <p className="sdk-step__t">send(tx, options)</p>
+    <p className="sdk-step__d"><code>obol.send</code> refuses while a <code>warning</code> finding is not acknowledged by code; returns the hash at once and <code>wait()</code> for the receipt.</p>
+  </div>
+</div>
+
+```ts
+import { createObolClient } from '@obolnetwork/obol-sdk';
+import { createPublicClient, createWalletClient, custom, http, parseEther } from 'viem';
+import { hoodi } from 'viem/chains';
+
+declare const configHash: string; // a cluster whose lock is published
+declare const ovmAddress: string; // its withdrawal address: an OVM
+
+const obol = createObolClient({
+  chain: hoodi, // mainnet or Hoodi; Gnosis and Sepolia for cluster files only
+  publicClient: createPublicClient({ chain: hoodi, transport: http() }),
+  walletClient: createWalletClient({ chain: hoodi, transport: custom(window.ethereum!) }),
+});
+
+// Read and verify: fromLock verifies the lock before it returns deposits.
+const lock = await obol.cluster.getLock({ configHash });
+const { deposits } = await obol.deposits.fromLock(lock, { amount: parseEther('32') });
+
+// Prepare: credentials, signatures, OVM provenance and roles, and that the validators do not exist yet.
+const prepared = await obol.deposits.prepareDeposit({ deposits, via: { ovm: ovmAddress } });
+
+for (const tx of prepared) {
+  // Throws FINDINGS_NOT_ACKNOWLEDGED if tx.checks has a warning nobody acknowledged.
+  const sent = await obol.send(tx);
+  await sent.wait();
+}
+```
+
+Writes split in two because the SDK is not the only thing that sends: a page hands `tx.request` to wagmi, a Safe app or a relayer, and the checks and preview still apply. Without a `walletClient` the client still reads, verifies and prepares (pass `from` to operations that check the sender's role; without it they throw `PAYLOAD_INVALID`); the signing operations (`cluster.create`, `cluster.accept`, `terms.accept`) and `send` throw `WALLET_REQUIRED`.
+
+## Names say how an operation fails {#naming}
+
+<Naming />
+
+## Warnings must be acknowledged, by code {#acknowledge}
+
+An error stops `prepare*`. A **finding** does not: it lands in `tx.checks` with a `severity`. An `info` finding is for the record. A `warning` means the transaction may not do what you intend (a top-up of someone else's validator, a consolidation into another withdrawal address) or that a safety check could not run, and `send` refuses the transaction until its code is in `acknowledge`. Most transactions carry none.
+
+- `warningsOf(tx, sim?)`: the warnings to show (`code`, `message`, `hint`, `subject`, `details`).
+- `warningCodes(tx, sim?)`: their codes, for `acknowledge`, once they were shown and accepted.
+- `findingsToAcknowledge(tx, { acknowledge, simulation })`: the warnings still open, for gating your own wallet layer.
+
+There is deliberately no `acknowledge: true` or `'all'`. Every code, its meaning and what acknowledging it accepts: [Warnings and findings](./warnings.md). The helpers are on [send and acknowledgements](./reference/send.md); the three patterns from the SDK README (a confirmation dialog, a scripted policy, an AI agent) are on [Warnings and findings](./warnings.md#patterns).
+
+## Errors are values you can switch on {#errors}
+
+Every failure is an `ObolError` (an `ObolApiError` for API answers) with a stable `code`, a `hint` and typed `details`. Test with `isObolError(error, 'CODE')`, which narrows `details` and recognises errors from any copy of the SDK; `instanceof` does not. Inputs are strict: an unknown key is `PAYLOAD_INVALID`, so a misspelt option never silently turns a check off. [All error codes](./errors.md).
+
+## What the SDK trusts {#trust}
+
+- **Your clients and wallet.** The SDK has no RPC endpoints of its own: chain reads go through the viem clients you pass, and transactions are built for your wallet to sign.
+- **The Obol API you configure** (`api.baseUrl` is limited to Obol hosts, because EIP-712 signatures are sent to it as bearer tokens; `api: false` makes the client chain-only). Where the SDK acts on API data it checks it first: `cluster.accept` verifies the fetched definition, `cluster.verifyLock` trusts nothing, `incentives.prepareClaim` checks the proof on chain, and `deposits.prepareDeposit` accepts an OVM as Obol-made only from the chain.
+- **A beacon node you pass** (`beaconUrl`), after checking it serves the client's chain and is in sync.
+- **The addresses you give it.** Recipients, owners and role holders are your choice.
+
+The full trust model and the findings already reviewed are in the SDK's [KNOWN_ISSUES.md](https://github.com/ObolNetwork/obol-sdk/blob/feat/sdk-v3-package/KNOWN_ISSUES.md).
+
+## Units and conventions {#conventions}
+
+- ETH amounts are `bigint` wei everywhere (`parseEther('32')`); outputs never mix in gwei or ETH strings.
+- Split shares are integer parts per million (`1_000_000` = 100%); `splits.percent('33.3333')` converts.
+- Inputs take hex and addresses as plain strings; outputs are lowercase `Hex` and checksummed `Address`.
+- A `Prepared` is a snapshot at `blockNumber`: `isStale(tx, head, maxAgeBlocks)` says when to prepare again.
+
+## Where next {#next}
+
+- [Lifecycle map](./lifecycle.mdx): every stage of a cluster, from withdrawal contracts to distribution, and the operations for each.
+- [API reference](./reference/index.md): every namespace and method, generated from the source.
+- [2.x → 3.x map](./migration.md): each 2.x method and its replacement.
+- [For AI agents](./for-agents.md): how an agent should prepare, simulate and send.
