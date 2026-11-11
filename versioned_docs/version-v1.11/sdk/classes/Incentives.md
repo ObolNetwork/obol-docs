@@ -5,59 +5,137 @@ slug: /sdk/classes/incentives
 
 # Incentives
 
-Defined in: [incentives/incentives.ts:24](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/incentives/incentives.ts#L24)
+Defined in: [incentives/incentives.ts:64](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/incentives/incentives.ts#L64)
 
-**`Internal`**
+Manages Obol incentive rewards – querying eligibility and claiming from
+on-chain Merkle Distributor contracts.
 
-Incentives can be used for fetching and claiming Obol incentives.
-
- Access it through Client.incentives.
+Do not instantiate directly; access via `client.incentives`.
 
 ## Example
 
-```ts
-const obolClient = new Client(config);
-await obolClient.incentives.claimIncentives(address);
+```typescript
+const client = new Client({ chainId: 560048 }, signer);
+
+// Check claimable incentives
+const data = await client.incentives.getIncentivesByAddress("0xOperator...");
+
+// Check if already claimed
+const claimed = await client.incentives.isClaimed(data.contract_address, data.index);
+
+// Read-only checks before claiming (claimIncentives also runs them)
+const { ok, issues } = await client.incentives.preflightClaim("0xOperator...");
+
+// Claim (sends on-chain transaction)
+const { txHash } = await client.incentives.claimIncentives("0xOperator...");
 ```
 
 ## Methods
 
 ### claimIncentives()
 
-> **claimIncentives**(`address`): `Promise`\<[`ClaimIncentivesResponse`](../type-aliases/ClaimIncentivesResponse.md)\>
+> **claimIncentives**(`address`, `options?`): `Promise`\<[`ClaimIncentivesResponse`](../type-aliases/ClaimIncentivesResponse.md)\>
 
-Defined in: [incentives/incentives.ts:65](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/incentives/incentives.ts#L65)
+Defined in: [incentives/incentives.ts:123](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/incentives/incentives.ts#L123)
 
-Claims Obol incentives from a Merkle Distributor contract using an address.
+Claims Obol incentives from a Merkle Distributor contract for the given address.
 
-This method automatically fetches incentive data and verifies whether the incentives have already been claimed.
-If `txHash` is `null`, it indicates that the incentives were already claimed.
+Automatically fetches incentive data, runs [Incentives.preflightClaim](#preflightclaim)'s
+checks, and submits the on-chain claim transaction. Returns `{ txHash: null }`
+if incentives were already claimed (idempotent).
 
-Note: This method is not yet enabled and will throw an error if called.
+The claim may be sent for any address: the signer pays gas and the tokens are
+transferred to `address`.
+
+A contract-wallet signer (a Safe over WalletConnect) is supported: the
+SDK waits for the Safe's `ExecutionSuccess` (up to 30 minutes) and returns
+the executed transaction hash; `onSent` reports the Safe's own hash with
+`contractWallet: true`.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `address` | `string` | The address to claim incentives for |
+| `address` | `string` | The operator's Ethereum address to claim incentives for. |
+| `options?` | [`WriteOptions`](../type-aliases/WriteOptions.md) | Optional `onSent` callback, called with each transaction hash as soon as it is broadcast. |
 
 #### Returns
 
 `Promise`\<[`ClaimIncentivesResponse`](../type-aliases/ClaimIncentivesResponse.md)\>
 
-The transaction hash or already claimed status
-
-#### Remarks
-
-**⚠️ Important:**  If you're storing the private key in an `.env` file, ensure it is securely managed
-and not pushed to version control.
+The transaction hash, or `{ txHash: null }` if already claimed.
 
 #### Throws
 
-Will throw an error if the incentives data is not found or the claim fails
+If no signer was provided.
 
-An example of how to use claimIncentives:
-[obolClient](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L281)
+#### Throws
+
+If the signer is connected to a different chain.
+
+#### Throws
+
+If the address has no incentives
+  (`NO_INCENTIVES`) or a pre-flight check fails (the message lists the
+  issue codes; `issues` holds the details).
+
+#### Throws
+
+If the call fails after a transaction
+  was broadcast (`txHashes`, `pendingTxHash` and `cause` say what was sent).
+
+#### Example
+
+```typescript
+const { txHash } = await client.incentives.claimIncentives("0xOperator...");
+if (txHash) {
+  console.log("Claimed:", txHash);
+} else {
+  console.log("Already claimed");
+}
+```
+
+***
+
+### preflightClaim()
+
+> **preflightClaim**(`address`): `Promise`\<[`PreflightResult`](../type-aliases/PreflightResult.md)\>
+
+Defined in: [incentives/incentives.ts:217](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/incentives/incentives.ts#L217)
+
+Runs read-only checks on the incentives for an address before claiming.
+No signer or transaction is needed, but a provider is.
+
+Checks that:
+- the API data is for `address`;
+- the contract is a known Obol `MerkleDistributorWithDeadline` and pays out
+  the OBOL token for this chain;
+- the Merkle proof matches the contract's `merkleRoot`;
+- the index is not already claimed and the claim window is open.
+
+Problems are returned as issues rather than thrown: `NO_INCENTIVES` when
+the address has none, `INCENTIVES_NOT_FOUND` for a 404 from the API and
+`INCENTIVES_FETCH_FAILED` for other API or network errors. Errors
+reaching the provider are thrown.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `address` | `string` | The Ethereum address the incentives are claimed for. |
+
+#### Returns
+
+`Promise`\<[`PreflightResult`](../type-aliases/PreflightResult.md)\>
+
+`{ ok, issues }`, where each issue has a `code`, `message` and `hint`.
+
+#### Example
+
+```typescript
+const { ok, issues } = await client.incentives.preflightClaim("0xOperator...");
+if (!ok) console.log(issues.map(i => i.code));
+```
 
 ***
 
@@ -65,25 +143,39 @@ An example of how to use claimIncentives:
 
 > **isClaimed**(`contractAddress`, `index`): `Promise`\<`boolean`\>
 
-Defined in: [incentives/incentives.ts:124](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/incentives/incentives.ts#L124)
+Defined in: [incentives/incentives.ts:273](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/incentives/incentives.ts#L273)
 
-Read isClaimed.
+Checks whether incentives have already been claimed for a given operator index.
+
+Read-only on-chain call – no transaction sent.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `contractAddress` | `string` | Address of the Merkle Distributor Contract |
-| `index` | `number` | operator index in merkle tree |
+| `contractAddress` | `string` | Address of the Merkle Distributor contract. |
+| `index` | `number` | The operator's index in the Merkle tree (from [Incentives.getIncentivesByAddress](#getincentivesbyaddress)). |
 
 #### Returns
 
 `Promise`\<`boolean`\>
 
-true if incentives are already claime
+`true` if the incentives at that index have already been claimed.
 
-An example of how to use isClaimed:
-[obolClient](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L266)
+#### Throws
+
+If `contractAddress` is not an address
+  (e.g. the empty address returned for an address without incentives) or
+  `index` is not a non-negative integer.
+
+#### Example
+
+```typescript
+const claimed = await client.incentives.isClaimed(
+  "0xMerkleDistributor...",
+  42,
+);
+```
 
 ***
 
@@ -91,23 +183,38 @@ An example of how to use isClaimed:
 
 > **getIncentivesByAddress**(`address`): `Promise`\<[`ClaimableIncentives`](../type-aliases/ClaimableIncentives.md)\>
 
-Defined in: [incentives/incentives.ts:143](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/incentives/incentives.ts#L143)
+Defined in: [incentives/incentives.ts:310](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/incentives/incentives.ts#L310)
+
+Fetches claimable incentive data for an operator address from the Obol API.
+
+The returned data includes the Merkle proof, amount, and contract address
+needed to claim on-chain. This is a read-only API call.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `address` | `string` | Operator address |
+| `address` | `string` | The operator's Ethereum address. |
 
 #### Returns
 
 `Promise`\<[`ClaimableIncentives`](../type-aliases/ClaimableIncentives.md)\>
 
-The matched incentives from DB
+Claimable incentive data including amount, Merkle proof, and
+  contract address. For an address without incentives the API returns
+  an empty `contract_address` and `index` -1.
 
 #### Throws
 
-On not found if address not found.
+If no incentives are found for the given address (404).
 
-An example of how to use getIncentivesByAddress:
-[obolClient](https://github.com/ObolNetwork/obol-sdk-examples/blob/main/TS-Example/index.ts#L250)
+#### Throws
+
+If `address` is not a 0x-prefixed 20-byte address.
+
+#### Example
+
+```typescript
+const incentives = await client.incentives.getIncentivesByAddress("0xOperator...");
+console.log(incentives.amount, incentives.contract_address);
+```

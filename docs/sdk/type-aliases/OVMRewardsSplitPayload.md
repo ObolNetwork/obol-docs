@@ -7,12 +7,13 @@ slug: /sdk/type-aliases/ovmrewardssplitpayload
 
 > **OVMRewardsSplitPayload** = [`OVMBaseSplitPayload`](OVMBaseSplitPayload.md) & `object`
 
-Defined in: [types.ts:227](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L227)
+Defined in: [types.ts:246](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L246)
 
-OVM and SplitV2 Params for rewards-only split
+Input payload for [ObolSplits.createValidatorManagerAndRewardsSplit](../classes/ObolSplits.md#createvalidatormanagerandrewardssplit).
+Principal goes to a single address; rewards are split among recipients.
 
 ## Type Declaration
 
 | Name | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| `principalRecipient` | `string` | Principal recipient address (single address for rewards-only split). | [types.ts:229](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L229) |
+| `principalRecipient` | `string` | Principal recipient address (single address for rewards-only split). | [types.ts:248](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L248) |

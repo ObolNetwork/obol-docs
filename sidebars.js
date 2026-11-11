@@ -729,8 +729,38 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
+          "id": "sdk/classes/ChainMismatchError",
+          "label": "ChainMismatchError"
+        },
+        {
+          "type": "doc",
           "id": "sdk/classes/Client",
           "label": "Client"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ClusterLockValidationBusyError",
+          "label": "ClusterLockValidationBusyError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ClusterLockValidationTimeoutError",
+          "label": "ClusterLockValidationTimeoutError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ConflictError",
+          "label": "ConflictError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/DefinitionVerificationError",
+          "label": "DefinitionVerificationError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ENR",
+          "label": "ENR"
         },
         {
           "type": "doc",
@@ -744,13 +774,93 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/classes/ExitRecombineError",
+          "label": "ExitRecombineError"
+        },
+        {
+          "type": "doc",
           "id": "sdk/classes/Incentives",
           "label": "Incentives"
         },
         {
           "type": "doc",
+          "id": "sdk/classes/IncentivesPreflightError",
+          "label": "IncentivesPreflightError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/InvalidArgumentError",
+          "label": "InvalidArgumentError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/InvalidBaseUrlError",
+          "label": "InvalidBaseUrlError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/NotAnOperatorError",
+          "label": "NotAnOperatorError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/NotFoundError",
+          "label": "NotFoundError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ObolApiError",
+          "label": "ObolApiError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ObolSdkError",
+          "label": "ObolSdkError"
+        },
+        {
+          "type": "doc",
           "id": "sdk/classes/ObolSplits",
           "label": "ObolSplits"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/PayloadValidationError",
+          "label": "PayloadValidationError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/RateLimitError",
+          "label": "RateLimitError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/RequestTimeoutError",
+          "label": "RequestTimeoutError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/SignerRequiredError",
+          "label": "SignerRequiredError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/TransactionSubmissionError",
+          "label": "TransactionSubmissionError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/UnauthorizedError",
+          "label": "UnauthorizedError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/UnsupportedChainError",
+          "label": "UnsupportedChainError"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/classes/ValidationError",
+          "label": "ValidationError"
         }
       ]
     },
@@ -791,6 +901,11 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/interfaces/ExitNetwork",
+          "label": "ExitNetwork"
+        },
+        {
+          "type": "doc",
           "id": "sdk/interfaces/ExitOperator",
           "label": "ExitOperator"
         },
@@ -808,6 +923,16 @@ const sidebars = {
           "type": "doc",
           "id": "sdk/interfaces/ExitValidationPayload",
           "label": "ExitValidationPayload"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/interfaces/ObolApiErrorInit",
+          "label": "ObolApiErrorInit"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/interfaces/RecombineExitBlobsOptions",
+          "label": "RecombineExitBlobsOptions"
         },
         {
           "type": "doc",
@@ -831,6 +956,11 @@ const sidebars = {
         "description": "Type aliases exported by the Obol SDK."
       },
       "items": [
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/BlsSignatureCheck",
+          "label": "BlsSignatureCheck"
+        },
         {
           "type": "doc",
           "id": "sdk/type-aliases/BuilderRegistration",
@@ -883,6 +1013,11 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/type-aliases/DepositKind",
+          "label": "DepositKind"
+        },
+        {
+          "type": "doc",
           "id": "sdk/type-aliases/DistributedValidator",
           "label": "DistributedValidator"
         },
@@ -903,8 +1038,23 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/type-aliases/ExitRecombineErrorCode",
+          "label": "ExitRecombineErrorCode"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/GetDepositDataOptions",
+          "label": "GetDepositDataOptions"
+        },
+        {
+          "type": "doc",
           "id": "sdk/type-aliases/HttpRequestFunc",
           "label": "HttpRequestFunc"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/LockDepositData",
+          "label": "LockDepositData"
         },
         {
           "type": "doc",
@@ -953,6 +1103,16 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/type-aliases/PreflightIssue",
+          "label": "PreflightIssue"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/PreflightResult",
+          "label": "PreflightResult"
+        },
+        {
+          "type": "doc",
           "id": "sdk/type-aliases/ProviderType",
           "label": "ProviderType"
         },
@@ -980,6 +1140,21 @@ const sidebars = {
           "type": "doc",
           "id": "sdk/type-aliases/TotalSplitPayload",
           "label": "TotalSplitPayload"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/TransactionSentInfo",
+          "label": "TransactionSentInfo"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/ValidatorDeposit",
+          "label": "ValidatorDeposit"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/type-aliases/WriteOptions",
+          "label": "WriteOptions"
         }
       ]
     },
@@ -995,8 +1170,63 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
+          "id": "sdk/variables/ALLOWED_OBOL_API_BASE_URLS",
+          "label": "ALLOWED_OBOL_API_BASE_URLS"
+        },
+        {
+          "type": "doc",
           "id": "sdk/variables/CAPELLA_FORK_MAPPING",
           "label": "CAPELLA_FORK_MAPPING"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/CONFLICT_ERROR_MSG",
+          "label": "CONFLICT_ERROR_MSG"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/DEFAULT_REQUEST_TIMEOUT_MS",
+          "label": "DEFAULT_REQUEST_TIMEOUT_MS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/EXIT_NETWORKS",
+          "label": "EXIT_NETWORKS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/MERKLE_DISTRIBUTOR_RUNTIME",
+          "label": "MERKLE_DISTRIBUTOR_RUNTIME"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/MIN_SUPPORTED_CLUSTER_VERSION",
+          "label": "MIN_SUPPORTED_CLUSTER_VERSION"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/OBOL_TOKEN_ADDRESS",
+          "label": "OBOL_TOKEN_ADDRESS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/SUPPORTED_CHAIN_IDS",
+          "label": "SUPPORTED_CHAIN_IDS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/SUPPORTED_DEFINITION_VERSIONS",
+          "label": "SUPPORTED_DEFINITION_VERSIONS"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/TERMS_ACCEPTED_MSG",
+          "label": "TERMS_ACCEPTED_MSG"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/variables/WITHDRAWAL_REQUEST_CONTRACT_ADDRESS",
+          "label": "WITHDRAWAL_REQUEST_CONTRACT_ADDRESS"
         }
       ]
     },
@@ -1012,6 +1242,11 @@ const sidebars = {
       "items": [
         {
           "type": "doc",
+          "id": "sdk/functions/builderBlsCheck",
+          "label": "builderBlsCheck"
+        },
+        {
+          "type": "doc",
           "id": "sdk/functions/clusterConfigOrDefinitionHash",
           "label": "clusterConfigOrDefinitionHash"
         },
@@ -1022,8 +1257,38 @@ const sidebars = {
         },
         {
           "type": "doc",
+          "id": "sdk/functions/depositBlsCheck",
+          "label": "depositBlsCheck"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/functions/getWithdrawalRequestFee",
+          "label": "getWithdrawalRequestFee"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/functions/hasUniqueDistributedKeys",
+          "label": "hasUniqueDistributedKeys"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/functions/isSupportedClusterVersion",
+          "label": "isSupportedClusterVersion"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/functions/resolveWithdrawalFee",
+          "label": "resolveWithdrawalFee"
+        },
+        {
+          "type": "doc",
           "id": "sdk/functions/validateClusterLock",
           "label": "validateClusterLock"
+        },
+        {
+          "type": "doc",
+          "id": "sdk/functions/validateDepositDataStructure",
+          "label": "validateDepositDataStructure"
         },
         {
           "type": "doc",
