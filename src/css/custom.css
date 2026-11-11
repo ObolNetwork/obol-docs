@@ -3,6 +3,9 @@
  * Brand: deep-sea teal ink + mint signal accents.
  */
 
+/* SDK v3 reference (docs/sdk-v3): sdk-* classes only. */
+@import './sdk-v3.css';
+
 :root {
   /* Obol palette */
   --obol-ink: #111f22;

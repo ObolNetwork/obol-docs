@@ -1,0 +1,35 @@
+---
+title: Lifecycle map
+slug: /sdk/v3/lifecycle
+description: The life of an Obol distributed validator cluster, stage by stage, with the SDK v3 operations for each — from withdrawal contracts to DKG, deposit, exits and distribution.
+---
+
+import SdkV3Lifecycle from '@site/src/components/SdkV3Lifecycle';
+import lifecycle from './_generated/lifecycle.json';
+import States from './_generated/lifecycles.md';
+
+# Lifecycle map
+
+:::caution[v3 release candidate, unreleased]
+
+<code>@obolnetwork/obol-sdk@{lifecycle.version}</code>. Names may still change before 3.0.0. For the released SDK see the [2.x reference](../sdk/index.md).
+
+:::
+
+A cluster's life, in the order it happens, with the operations for each stage. **prepare** operations return a transaction to [send](./reference/send.md); **sign** operations sign with the wallet and post to the Obol API; **check** operations verify untrusted input; ⚠ counts the warning codes a transaction can carry, which `send` asks you to [acknowledge](./warnings.md).
+
+<SdkV3Lifecycle
+  data={lifecycle}
+  offSdk={{
+    rewards: 'Order matters: the OVM address is the withdrawal address each validator in the definition commits to.',
+    dkg: 'The DKG itself runs in Charon (charon dkg); the SDK sees only the lock it publishes.',
+  }}
+/>
+
+Some operations serve every stage: [`obol.send`](./reference/send.md#send) and the acknowledgement helpers, [`obol.experimental.simulate`](./reference/experimental.md#simulate), and the [standalone checks](./reference/checks.md) a server runs on what users send it.
+
+## States {#states}
+
+What the SDK can observe at each step, and what is safe to retry. From the SDK's `spec/lifecycles.md`.
+
+<States />
