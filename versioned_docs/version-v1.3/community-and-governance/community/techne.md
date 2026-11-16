@@ -88,7 +88,7 @@ Additional Resources
 
 > [Quickstart Guide](https://docs.obol.tech/docs/start/quickstart_overview)
 >
-> [Support Channel on Discord](https://discord.gg/obolnetwork)
+> [Support Channel on Discord](https://discord.obol.org)
 >
 > [Get Started Monitoring your Node](https://docs.obol.tech/docs/advanced/monitoring)
 
@@ -100,7 +100,7 @@ _Obol Network does not assume responsibility for any financial losses that may b
 
 **It looks like there is no wave active right now, how can I earn a Techne Credential?**
 
-There are curerntly no active waves for earning Base or Bronze, but we plan to offer another wave in January of 2025. Currently, you still do have the ability to earn Silver. Please head to the [Obol Discord](https://discord.gg/obol) to learn more about earning a Silver Techne Credential.
+There are curerntly no active waves for earning Base or Bronze, but we plan to offer another wave in January of 2025. Currently, you still do have the ability to earn Silver. Please head to the [Obol Discord](https://discord.obol.org) to learn more about earning a Silver Techne Credential.
 
 **It has been 24 hours since I filled out the form to receive my Holesky ETH, but I haven't received anything yet. Is this normal?**
 
@@ -116,4 +116,4 @@ Yes, those running a DV on mainnet have the opportunity to earn the Silver Techn
 
 **I don’t have the Base Credential but I have enough Holesky ETH to run 50 validators, can I aim for the Bronze Techne?**
 
-Yes, you can. Please send a message on [Discord](https://discord.gg/obol) in the #techne-applicants channel explaining your desire to run for Bronze using your own Holesky ETH.
+Yes, you can. Please send a message on [Discord](https://discord.obol.org) in the #techne-applicants channel explaining your desire to run for Bronze using your own Holesky ETH.
