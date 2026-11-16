@@ -147,10 +147,10 @@ helm list -n dv-pod                               # the chart version you run no
 Pin the chart version you're moving to:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.22.0 -n dv-pod --reuse-values
+helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod --reset-then-reuse-values
 ```
 
-This upgrades your Charon and validator client containers to that chart version while keeping your existing configuration values. Without `--version`, Helm installs whatever chart is newest in the repository.
+This upgrades your Charon and validator client containers to that chart version while keeping your existing configuration values. `--reset-then-reuse-values` (Helm 3.14 or later) also applies the new chart's defaults; plain `--reuse-values` keeps the old release's defaults too, which can leave out new settings such as 0.23's security context. Without `--version`, Helm installs whatever chart is newest in the repository.
 
 :::info
 Check the [chart changelog](https://github.com/ObolNetwork/helm-charts/releases) before upgrading to review any breaking changes or new configuration options.
@@ -167,6 +167,15 @@ Chart 0.22.0 reworks how the pod starts. Read the chart's [upgrade notes](https:
 * A readiness probe (`/readyz`) is on, and volumes are kept when the StatefulSet is deleted or scaled down.
 
 After the upgrade, check that the pod is `Running` and Charon is ready (`kubectl get pod my-dv-pod-0 -n dv-pod`).
+:::
+
+:::warning[Upgrading from a chart older than 0.23.0]
+Chart 0.23.0 hides your key shares from the Charon container, which never reads them. Read the chart's [upgrade notes](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod#upgrading-from-chart--023) first. In short:
+
+* Back up `charon-data` from the `validator-client` container (`kubectl cp … -c validator-client`). A copy from the Charon container (`-c dv-pod`) now has an empty `validator_keys/`.
+* Charon commands that need the key shares, such as `charon exit sign` and `charon edit`, no longer work through `kubectl exec -c dv-pod`. Run them with a local Charon of the same version against a backup copy of `charon-data`.
+* The Charon container now runs as a non-root user with a default seccomp profile, and every container has a memory limit. Upgrade with `--reset-then-reuse-values` so these defaults apply. If you override `containerSecurityContext`, keep Charon non-root and without `CAP_SYS_ADMIN`.
+* The rolling update only replaces a pod that is ready. Afterwards, check that `kubectl exec my-dv-pod-0 -n dv-pod -c dv-pod -- ls -A /charon-data/validator_keys` prints nothing. If it lists files, delete the pod (`kubectl delete pod my-dv-pod-0 -n dv-pod`) so it restarts on the new spec.
 :::
 
 :::tip[Let Claude do this]

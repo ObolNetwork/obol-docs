@@ -58,7 +58,7 @@ Add the Obol chart repository and download the chart's Obol Stack values file, p
 ```shell
 obol helm repo add obol https://obolnetwork.github.io/helm-charts
 obol helm repo update
-obol helm pull obol/dv-pod --version 0.22.0 --untar --untardir ./dv-pod-chart
+obol helm pull obol/dv-pod --version 0.23.0 --untar --untardir ./dv-pod-chart
 ```
 
 `./dv-pod-chart/dv-pod/values-examples/obol-stack.yaml` sets the Stack defaults:
@@ -72,7 +72,7 @@ obol helm pull obol/dv-pod --version 0.22.0 --untar --untardir ./dv-pod-chart
 Install it, and set everything that's specific to you on the command line:
 
 ```shell
-obol helm upgrade --install dv-pod-hoodi obol/dv-pod --version 0.22.0 \
+obol helm upgrade --install dv-pod-hoodi obol/dv-pod --version 0.23.0 \
   --namespace dv-pod --create-namespace \
   -f ./dv-pod-chart/dv-pod/values-examples/obol-stack.yaml \
   --set network=hoodi \
@@ -119,7 +119,7 @@ If your group makes the definition with `charon create dkg` instead (see [Create
 3. Point your release at it. The pod keeps its ENR across the upgrade:
 
    ```shell
-   obol helm upgrade dv-pod-hoodi obol/dv-pod --version 0.22.0 -n dv-pod --reuse-values \
+   obol helm upgrade dv-pod-hoodi obol/dv-pod --version 0.23.0 -n dv-pod --reset-then-reuse-values \
      --set mode=definition \
      --set dkg.definition.configHash=0x<CONFIG_HASH> \
      --timeout=10m
@@ -157,12 +157,15 @@ If the DKG keeps retrying, check that every operator is online and runs the same
 
 ## Step 5: Back up and verify
 
-After the DKG, the pod's `charon-data` volume holds `cluster-lock.json`, `deposit-data*.json` and your key shares in `validator_keys/`. Copy it off the Stack and store it encrypted before you deposit:
+After the DKG, the pod's `charon-data` volume holds `cluster-lock.json`, `deposit-data*.json` and your key shares in `validator_keys/`. Copy it off the Stack and store it encrypted before you deposit. Copy from the `validator-client` container: since chart 0.23 the Charon container (`dv-pod`) sees an empty `validator_keys/`, so a copy from it has no key shares.
 
 ```shell
-obol kubectl cp dv-pod/dv-pod-hoodi-0:/charon-data ./dv-pod-hoodi-charon-data -c dv-pod
+obol kubectl cp dv-pod/dv-pod-hoodi-0:/charon-data ./dv-pod-hoodi-charon-data -c validator-client
+ls dv-pod-hoodi-charon-data/validator_keys   # must list keystore-*.json; if empty, the backup has no key shares
 tar czf dv-pod-hoodi-charon-data.tgz dv-pod-hoodi-charon-data && rm -rf dv-pod-hoodi-charon-data
 ```
+
+With the Prysm validator client (its image has no `tar`, which `kubectl cp` needs) or `validatorClient.enabled: false`, use the short-lived pod in the chart README's [Backing up charon-data](https://github.com/ObolNetwork/helm-charts/tree/main/charts/dv-pod#backing-up-charon-data) section. On charts before 0.23, copy with `-c dv-pod` instead.
 
 `obol stack export` doesn't replace this backup. The volume and the ENR Secret survive `helm uninstall`, but not `obol stack purge`.
 
@@ -226,7 +229,7 @@ Keep the credential out of your Helm values and command lines. Values are stored
 
    ```shell
    obol helm repo update
-   obol helm upgrade dv-pod-hoodi obol/dv-pod --version 0.22.1 -n dv-pod --reuse-values \
+   obol helm upgrade dv-pod-hoodi obol/dv-pod --version 0.23.0 -n dv-pod --reset-then-reuse-values \
      --set centralMonitoring.enabled=true \
      --set centralMonitoring.existingSecret=obol-monitoring \
      --set charon.nickname="DV Labs" \
@@ -293,7 +296,7 @@ Upgrade with a pinned chart version, and keep your values:
 
 ```shell
 obol helm repo update
-obol helm upgrade dv-pod-hoodi obol/dv-pod --version <NEW_VERSION> -n dv-pod --reuse-values
+obol helm upgrade dv-pod-hoodi obol/dv-pod --version <NEW_VERSION> -n dv-pod --reset-then-reuse-values
 ```
 
 Read [Update a DV](../run-a-dv/running/update-a-dv.mdx) first. Once validators are active, don't upgrade or restart more than one node of the cluster at a time.

@@ -68,7 +68,7 @@ With chart 0.22.1 or later, store the credential in a Kubernetes Secret and poin
 
 ```shell
 kubectl create secret generic obol-monitoring -n <namespace> --from-file=token=<file>
-helm upgrade <release> obol/dv-pod -n <namespace> --reuse-values \
+helm upgrade <release> obol/dv-pod -n <namespace> --reset-then-reuse-values \
   --set centralMonitoring.enabled=true --set centralMonitoring.existingSecret=obol-monitoring
 ```
 
