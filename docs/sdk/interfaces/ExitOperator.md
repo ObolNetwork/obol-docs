@@ -5,7 +5,7 @@ slug: /sdk/interfaces/exitoperator
 
 # ExitOperator
 
-Defined in: [types.ts:410](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L410)
+Defined in: [types.ts:494](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L494)
 
 Represents the structure of an Ethereum operator for exit validation, primarily their ENR.
 
@@ -13,4 +13,4 @@ Represents the structure of an Ethereum operator for exit validation, primarily 
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="enr"></a> `enr` | `string` | The operator's Ethereum Node Record (ENR). | [types.ts:412](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L412) |
+| <a id="enr"></a> `enr` | `string` | The operator's Ethereum Node Record (ENR). | [types.ts:496](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L496) |

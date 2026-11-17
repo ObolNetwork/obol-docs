@@ -7,7 +7,7 @@ slug: /sdk/type-aliases/ovmargs
 
 > **OVMArgs** = `object`
 
-Defined in: [types.ts:566](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L566)
+Defined in: [types.ts:684](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L684)
 
 OVM Arguments for contract creation
 
@@ -15,7 +15,7 @@ OVM Arguments for contract creation
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="ovmowneraddress"></a> `OVMOwnerAddress` | `string` | Owner address for the OVM contract. | [types.ts:568](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L568) |
-| <a id="principalrecipient"></a> `principalRecipient` | `string` | Principal recipient address. | [types.ts:571](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L571) |
-| <a id="rewardrecipient"></a> `rewardRecipient` | `string` | Rewards recipient of the cluster. | [types.ts:574](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L574) |
-| <a id="principalthreshold"></a> `principalThreshold` | `number` | Principal threshold in ETH for OVM contract. | [types.ts:577](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L577) |
+| <a id="ovmowneraddress"></a> `OVMOwnerAddress` | `string` | Owner address for the OVM contract. | [types.ts:686](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L686) |
+| <a id="principalrecipient"></a> `principalRecipient` | `string` | Principal recipient address. | [types.ts:689](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L689) |
+| <a id="rewardrecipient"></a> `rewardRecipient` | `string` | Rewards recipient of the cluster. | [types.ts:692](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L692) |
+| <a id="principalthreshold"></a> `principalThreshold` | `number` | Principal threshold in ETH for OVM contract. | [types.ts:695](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L695) |

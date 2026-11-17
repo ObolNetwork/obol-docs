@@ -5,8 +5,14 @@ slug: /sdk/type-aliases/operatorpayload
 
 # OperatorPayload
 
-> **OperatorPayload** = `Partial`\<[`ClusterOperator`](ClusterOperator.md)\> & `Required`\<`Pick`\<[`ClusterOperator`](ClusterOperator.md), `"enr"` \| `"version"`\>\>
+> **OperatorPayload** = `Partial`\<[`ClusterOperator`](ClusterOperator.md)\> & `Required`\<`Pick`\<[`ClusterOperator`](ClusterOperator.md), `"enr"`\>\>
 
-Defined in: [types.ts:68](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L68)
+Defined in: [types.ts:70](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L70)
 
-A partial view of `ClusterOperator` with `enr` and `version` as required properties.
+Payload an operator provides when joining a cluster via
+[Client.acceptClusterDefinition](../classes/Client.md#acceptclusterdefinition).
+
+Requires at minimum `enr` (Ethereum Node Record). `version` is optional:
+when omitted it is taken from the cluster definition; when given it must
+match the definition's version.
+Other `ClusterOperator` fields are optional overrides.

@@ -7,7 +7,7 @@ slug: /sdk/functions/clusterconfigordefinitionhash
 
 > **clusterConfigOrDefinitionHash**(`cluster`, `configOnly`): `string`
 
-Defined in: [verification/common.ts:64](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/verification/common.ts#L64)
+Defined in: [verification/common.ts:74](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/verification/common.ts#L74)
 
 ## Parameters
 

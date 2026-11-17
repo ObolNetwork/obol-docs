@@ -7,7 +7,7 @@ slug: /sdk/variables/capella_fork_mapping
 
 > `const` **CAPELLA\_FORK\_MAPPING**: `Record`\<`string`, `string`\>
 
-Defined in: [constants.ts:292](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/constants.ts#L292)
+Defined in: [constants.ts:331](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/constants.ts#L331)
 
 Maps base fork versions to their corresponding Capella fork versions.
 Example: Mainnet Capella fork version.

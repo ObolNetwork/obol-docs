@@ -7,12 +7,13 @@ slug: /sdk/type-aliases/ovmtotalsplitpayload
 
 > **OVMTotalSplitPayload** = [`OVMBaseSplitPayload`](OVMBaseSplitPayload.md) & `object`
 
-Defined in: [types.ts:235](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L235)
+Defined in: [types.ts:255](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L255)
 
-OVM and SplitV2 Params for total split scenario
+Input payload for [ObolSplits.createValidatorManagerAndTotalSplit](../classes/ObolSplits.md#createvalidatormanagerandtotalsplit).
+Both principal and rewards are split among recipients.
 
 ## Type Declaration
 
 | Name | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| `principalSplitRecipients` | [`SplitV2Recipient`](SplitV2Recipient.md)[] | Principal recipients addresses and splits (array for total split scenario). | [types.ts:237](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L237) |
+| `principalSplitRecipients` | [`SplitV2Recipient`](SplitV2Recipient.md)[] | Principal recipients addresses and splits (array for total split scenario). | [types.ts:257](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L257) |

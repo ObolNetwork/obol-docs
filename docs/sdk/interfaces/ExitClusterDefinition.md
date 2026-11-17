@@ -5,7 +5,7 @@ slug: /sdk/interfaces/exitclusterdefinition
 
 # ExitClusterDefinition
 
-Defined in: [types.ts:418](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L418)
+Defined in: [types.ts:502](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L502)
 
 Represents the core definition of a cluster relevant for exit validation.
 
@@ -13,6 +13,6 @@ Represents the core definition of a cluster relevant for exit validation.
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="operators"></a> `operators` | [`ExitOperator`](ExitOperator.md)[] | The cluster nodes operators with their ENRs. | [types.ts:420](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L420) |
-| <a id="fork_version"></a> `fork_version` | `string` | The cluster fork version. | [types.ts:423](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L423) |
-| <a id="threshold"></a> `threshold` | `number` | The distributed validator threshold. | [types.ts:426](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L426) |
+| <a id="operators"></a> `operators` | [`ExitOperator`](ExitOperator.md)[] | The cluster nodes operators with their ENRs. | [types.ts:504](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L504) |
+| <a id="fork_version"></a> `fork_version` | `string` | The cluster fork version. | [types.ts:507](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L507) |
+| <a id="threshold"></a> `threshold` | `number` | The distributed validator threshold. | [types.ts:510](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L510) |

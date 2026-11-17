@@ -7,7 +7,7 @@ slug: /sdk/type-aliases/splitv2recipient
 
 > **SplitV2Recipient** = `object`
 
-Defined in: [types.ts:248](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L248)
+Defined in: [types.ts:270](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L270)
 
 SplitV2 Recipient structure
 
@@ -15,5 +15,5 @@ SplitV2 Recipient structure
 
 | Property | Type | Description | Defined in |
 | ------ | ------ | ------ | ------ |
-| <a id="address"></a> `address` | `string` | Recipient address. | [types.ts:250](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L250) |
-| <a id="percentallocation"></a> `percentAllocation` | `number` | Percentage allocation (0-100 with up to 4 decimals). | [types.ts:253](https://github.com/ObolNetwork/obol-sdk/blob/5137bd5c4ded55a50234f19135ea3a5bfeab4d47/src/types.ts#L253) |
+| <a id="address"></a> `address` | `string` | Recipient address. | [types.ts:272](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L272) |
+| <a id="percentallocation"></a> `percentAllocation` | `number` | Percentage allocation (0-100 with up to 4 decimals). | [types.ts:275](https://github.com/ObolNetwork/obol-sdk/blob/cf0106cb36847b1c3a84065e90778e6a094e3577/src/types.ts#L275) |

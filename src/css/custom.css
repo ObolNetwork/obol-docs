@@ -227,6 +227,13 @@ a.gb-card:hover {
   width: 100%;
   font-size: 0.9rem;
 }
+/* Generated SDK reference (docs/sdk): its tables have up to seven columns of
+   unbreakable identifiers, so they scroll on their own (the Infima default)
+   instead of widening the page. */
+html[class*='docs-doc-id-sdk/'] .markdown table {
+  display: block;
+  overflow-x: auto;
+}
 
 /* version badge/banner polish */
 .theme-doc-version-banner {
