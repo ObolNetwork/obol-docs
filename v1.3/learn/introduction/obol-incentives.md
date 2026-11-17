@@ -142,7 +142,7 @@ Distributed Validators improve performance, lower risks and increase rewards. Le
 
 ### How can I get support if I have issues?
 
-* Join the Obol Discord community: [discord.gg/obol](https://discord.gg/obol).
+* Join the Obol Discord community: [discord.obol.org](https://discord.obol.org).
 * If you are staking with a partner, reach out to them directly.
 
 ***
