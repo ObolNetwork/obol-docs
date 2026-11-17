@@ -52,6 +52,6 @@ The Obol governance documentation is organized into the following sections:
 * [raf](raf/README.md "mention") – information for delegates participating in the Retroactive Funding Program (RAF)
 * [grants-program](grants-program/README.md "mention") – the Obol funding mechanism for contributors and ecosystem support, led by the Obol Association
 
-_These sections evolve as the governance process matures. For any feedback, ideas, or questions, we invite you to join the discussion on the_ [_Forum_](https://community.obol.org/) _or reach out via_ [_Discord_](https://discord.gg/obol)_._
+_These sections evolve as the governance process matures. For any feedback, ideas, or questions, we invite you to join the discussion on the_ [_Forum_](https://community.obol.org/) _or reach out via_ [_Discord_](https://discord.obol.org)_._
 
 **Together, we are building governance for the long term.**

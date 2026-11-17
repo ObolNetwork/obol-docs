@@ -128,7 +128,7 @@ Currently, OBOL does not accrue protocol revenue. However, the DAO may vote in t
 
 <summary><strong>How can I stay up to date on OBOL news?</strong></summary>
 
-Join our [Discord](https://discord.gg/obol), follow [@ObolNetwork](https://x.com/Obol_Collective), and check our [Forum](https://community.obol.org) for governance and integration updates.
+Join our [Discord](https://discord.obol.org), follow [@ObolNetwork](https://x.com/Obol_Collective), and check our [Forum](https://community.obol.org) for governance and integration updates.
 
 </details>
 

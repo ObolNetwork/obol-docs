@@ -336,7 +336,7 @@ const config = {
             title: 'Collective',
             items: [
               {label: 'Obol.org', href: 'https://obol.org'},
-              {label: 'Discord', href: 'https://discord.gg/obol'},
+              {label: 'Discord', href: 'https://discord.obol.org'},
               {label: 'X / Twitter', href: 'https://x.com/Obol_Collective'},
               {label: 'Blog', href: 'https://blog.obol.org'},
             ],
