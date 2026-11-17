@@ -22,3 +22,6 @@ yarn-error.log*
 
 .idea/*
 .vscode/
+
+# SDK v3 reference preview build (scripts/generate-sdk-v3-reference.sh --build)
+/build-sdk-v3
