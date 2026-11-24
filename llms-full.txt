@@ -3088,7 +3088,8 @@ Help me create a distributed validator cluster where I run all of the nodes myse
 ### Step 1: Create the key shares locally {#step-1-create-the-key-shares-locally}
 <Tabs>
 <TabItem value="launchpad" label="Launchpad">
-Go to the [DV Launchpad](../../learn/intro/launchpad.md), click **+ New** in the navigation bar and choose **Solo**. Follow the steps to configure your DV cluster. The Launchpad will give you a docker command to create your cluster.\
+Go to the [DV Launchpad](../../learn/intro/launchpad.md), click **+ New** in the navigation bar and choose **Solo**. Follow the steps to configure your DV cluster, then click **Confirm**. The Launchpad gives you one docker command that carries your whole configuration: it creates the cluster's keys and publishes the cluster to the Launchpad in the same step. Nothing is published before you run it.
+
 Before you run the command, clone the [CDVC repo](https://github.com/ObolNetwork/charon-distributed-validator-cluster.git) and `cd` into the directory.
 
 ```sh
@@ -3098,10 +3099,27 @@ git clone https://github.com/ObolNetwork/charon-distributed-validator-cluster.gi
 # Change directory
 cd charon-distributed-validator-cluster/
 
-# Run the command provided in the DV Launchpad "+ New → Solo" flow
-docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 create cluster --definition-file=...
+# Run the command provided in the DV Launchpad "+ New → Solo" flow, which looks like:
+docker run -u $(id -u):$(id -g) --rm -v "$(pwd)/:/opt/charon" obolnetwork/charon:v1.11.0 create cluster --name="..." --nodes="..." --num-validators="..." --withdrawal-addresses="..." --fee-recipient-addresses="..." --compounding="..." --network=... --cluster-dir="cluster" --publish
+```
+
+When it finishes, charon prints a link to your cluster's page on the Launchpad:
 
 ```
+You can find your newly-created cluster dashboard here: https://api.obol.tech/lock/0x…/launchpad
+```
+
+Keep this link. Paste it into the **Cluster link** field on the Launchpad's last step to go to your cluster's deposit page, or open it directly later.
+
+:::warning
+If charon logs `Couldn't publish lock file to Obol API` instead, your cluster was still created, but it isn't on the Launchpad yet. **Don't run the command again**: that creates a different cluster with different keys. Publish the cluster you have with:
+
+```sh
+curl -sf -X POST -H "Content-Type: application/json" \
+  --data @cluster/node0/cluster-lock.json \
+  "https://api.obol.tech/v1/lock"
+```
+:::
 
 After the `create cluster` command is run, you should have multiple subfolders within the newly created `./cluster/` folder, one for each node created.
 
@@ -3109,6 +3127,10 @@ After the `create cluster` command is run, you should have multiple subfolders w
 
 :::info
 Make sure your backup is secure and private, someone with access to these files could get the validators slashed.
+:::
+
+:::note
+Keep a copy of `cluster/node0/cluster-lock.json` on the machine you deposit from. Nobody but you can vouch for a cluster created with `charon create cluster`, so before an activation deposit the Launchpad asks you to select this file to confirm the cluster is yours.
 :::
 </TabItem>
 
@@ -3140,7 +3162,9 @@ Run the below command to create the validator private key shares and cluster art
 ```
 
 :::tip
-If you would like your cluster to appear on the [DV Launchpad](../../learn/intro/launchpad.md), add the `--publish` flag to the command.
+If you would like your cluster to appear on the [DV Launchpad](../../learn/intro/launchpad.md), add the `--publish` flag to the command. charon then prints a link to the cluster's Launchpad page. If it logs `Couldn't publish lock file to Obol API`, don't re-run the command (that creates a different cluster); post `cluster/node0/cluster-lock.json` to `https://api.obol.tech/v1/lock` instead, as in the Launchpad tab.
+
+To deposit through the Launchpad, keep `cluster/node0/cluster-lock.json` at hand: you select it on the deposit step to confirm the cluster is yours.
 :::
 
 After the `create cluster` command is run, you should have multiple subfolders within the newly created `./cluster/` folder, one for each node created.
