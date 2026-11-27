@@ -18,7 +18,7 @@ It is not yet advised. The Obol Stack works on mainnet, as do DV pods, but it wo
 
 ### Can I run a distributed validator in the Obol Stack?
 
-Yes, your part of one. From Obol Stack v0.16, sync a local Ethereum node with `obol network`, install the `dv-pod` Helm chart against it, join your cluster through the Launchpad or a cluster definition, and let the Hermes agent watch the node and alert you. See [Run Your Part of a DV](run-a-dv.md). Start on Hoodi, and on mainnet keep less than a threshold of your cluster's nodes in Stacks.
+Yes, your part of one. From Obol Stack v0.16, sync a local Ethereum node with `obol network`, install the `dv-pod` Helm chart against it (with `obol app` from v0.19), join your cluster through the Launchpad or a cluster definition, and let the Hermes agent watch the node and alert you. See [Run Your Part of a DV](run-a-dv.md). Start on Hoodi, and on mainnet keep less than a threshold of your cluster's nodes in Stacks.
 
 ### What operating systems are supported?
 
