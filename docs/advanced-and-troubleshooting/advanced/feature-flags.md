@@ -52,9 +52,9 @@ This table reflects Charon `v1.10.0-dev` (commit [`094953a`](https://github.com/
 |---|---|---|---|
 | `eager_double_linear` | Stable | Enabled | Uses an eager double-linear round timer for consensus rounds. |
 | `consensus_participate` | Stable | Enabled | Lets a node participate in an ongoing consensus round while it is still waiting for unsigned duty data from its beacon node. |
-| `proposal_timeout` | Stable | Enabled | Uses a longer, 1.5-second first consensus round timeout for proposal duties. |
+| `proposal_timeout` | Stable | Enabled | Uses a longer, 1.5-second first consensus round timeout for proposal duties before the Gloas fork. From the fork, proposal duties use the [Gloas proposer timer](consensus-protocols.md#gloas-proposer-timer) instead. |
 | `fetch_only_commidx_0` | Stable | Enabled | Queries the beacon node for attestation data only for committee index 0. |
-| `linear` | Alpha | Disabled | Uses a linear round timer for consensus rounds; takes precedence over `eager_double_linear` when both are active. |
+| `linear` | Alpha | Disabled | Uses a linear round timer for proposer consensus rounds; takes precedence over `eager_double_linear` when both are active. From the Gloas fork, it instead votes for the [Gloas proposer timer](consensus-protocols.md#gloas-proposer-timer) that gives three leaders a chance at a timely block, used by the whole cluster once a threshold of nodes enable it. |
 | `aggsigdb_v2` | Alpha | Disabled | Uses a newer, simpler implementation of the `aggsigdb` component. |
 | `json_requests` | Alpha | Disabled | Uses JSON (instead of SSZ) requests when talking to the eth2 beacon node client. |
 | `gnosis_block_hotfix` | Alpha | Disabled (auto-enabled on Gnosis/Chiado) | Applies an SSZ fix required by the Gnosis and Chiado networks. Charon automatically enables this feature when the configured network is Gnosis or Chiado, unless an operator explicitly disables it. |
