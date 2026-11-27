@@ -183,12 +183,12 @@ helm repo update
 helm search repo obol/dv-pod --versions | head
 ```
 
-Pass the version you choose with `--version` on every `helm install` and `helm upgrade`, so you never pick up a new chart by accident. The commands below use `0.22.0`.
+Pass the version you choose with `--version` on every `helm install` and `helm upgrade`, so you never pick up a new chart by accident. The commands below use `0.24.0`, which runs Charon `v1.11.4`.
 
 **2. Install the chart with your network and operator address:**
 
 ```sh
-helm upgrade --install my-dv-pod obol/dv-pod --version 0.23.0 \
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.24.0 \
   --namespace dv-pod --create-namespace \
   --set mode=launchpad \
   --set network=hoodi \
@@ -223,6 +223,10 @@ kubectl create secret generic my-dv-pod-enr-key -n dv-pod \
 ```
 
 Then add `--set charon.enr.existingSecret.name=my-dv-pod-enr-key` to the install command. The chart works out the public ENR from the key and writes it to the `my-dv-pod-enr` ConfigMap.
+:::
+
+:::tip[Creating the cluster with `charon create dkg` instead?]
+If your group will make the cluster definition with `charon create dkg` (the **CDVN** tabs in Step 2) and it doesn't exist yet, install with `--set mode=enr` instead of `mode=launchpad` and the operator address (chart 0.24.0 or later). The chart then only creates and publishes your ENR: no pod runs, nothing polls the Obol API, and the status reads `WaitingForDefinition`. In Step 3 you point the same release at the definition, and your ENR stays the same.
 :::
 
 For Step 2 of the quickstart:
@@ -465,15 +469,15 @@ The sidecar doesn't sign anything. You accept the cluster and sign with your ope
 
 **Cluster definition from the CLI (`mode=definition`):**
 
-If the creator made the cluster definition with `charon create dkg --publish` (the **CDVN** tab in Step 2) using your pod's ENR, point the same release at the definition's config hash instead:
+If the creator made the cluster definition with `charon create dkg --publish` (the **CDVN** tab in Step 2) using your pod's ENR, point the same release, in the same namespace, at the definition's config hash instead. This works from `mode=enr` or `mode=launchpad`:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod --reset-then-reuse-values \
+helm upgrade my-dv-pod obol/dv-pod --version 0.24.0 -n dv-pod --reset-then-reuse-values \
   --set mode=definition \
   --set dkg.definition.configHash=0x<CONFIG_HASH>
 ```
 
-The pod keeps its ENR across the upgrade. The chart can also take the definition from an HTTPS URL (`dkg.definition.url`) or from a ConfigMap holding `cluster-definition.json` (`dkg.definition.configMap`).
+The pod keeps its ENR across the upgrade. Never switch a running validator to `mode=enr`: it stops Charon and the validator client. The chart can also take the definition from an HTTPS URL (`dkg.definition.url`) or from a ConfigMap holding `cluster-definition.json` (`dkg.definition.configMap`).
 
 **Watch the DKG:**
 
@@ -484,7 +488,7 @@ kubectl get configmap my-dv-pod-dkg-status -n dv-pod \
   -o jsonpath='{.data.phase}{"\n"}{.data.message}{"\n"}{.data.signatures}{"\n"}'
 ```
 
-The phase moves from `WaitingForInvite` to `WaitingForSignatures` (with a `signatures` count such as `3/4`), then `DefinitionReady` and `Complete`. `Failed` comes with a `message` explaining why. For more detail, follow the init container logs:
+From `mode=enr` it starts at `WaitingForDefinition`. The phase moves from `WaitingForInvite` to `WaitingForSignatures` (with a `signatures` count such as `3/4`), then `DefinitionReady` and `Complete`. `Failed` comes with a `message` explaining why. For more detail, follow the init container logs:
 
 ```sh
 kubectl get pod my-dv-pod-0 -n dv-pod                        # Init:N/M until the DKG is done
@@ -513,7 +517,7 @@ kubectl create secret generic validator-keys -n dv-pod \
 kubectl create configmap cluster-lock -n dv-pod \
   --from-file=.charon/cluster-lock.json
 
-helm upgrade --install my-dv-pod obol/dv-pod --version 0.23.0 \
+helm upgrade --install my-dv-pod obol/dv-pod --version 0.24.0 \
   --namespace dv-pod --create-namespace \
   --set mode=lock \
   --set network=hoodi \
@@ -782,7 +786,7 @@ With the Prysm validator client (its image has no `tar`, which `kubectl cp` need
 You can customize your deployment by upgrading the release with additional parameters:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.24.0 -n dv-pod \
   --reset-then-reuse-values \
   --set='charon.beaconNodeEndpoints[0]=<BEACON_NODE_ENDPOINT>' \
   --set='charon.builderApi=true' \
@@ -798,7 +802,7 @@ The chart supports five validator client types: `lighthouse` (default), `teku`, 
 If you prefer to run your own validator client outside the chart, disable the integrated one and point your external client at the Charon validator API:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.24.0 -n dv-pod \
   --reset-then-reuse-values \
   --set='validatorClient.enabled=false'
 ```
@@ -814,7 +818,7 @@ http://<RELEASE_NAME>.<NAMESPACE>.svc.cluster.local:3600
 Enable Prometheus service monitoring:
 
 ```sh
-helm upgrade my-dv-pod obol/dv-pod --version 0.23.0 -n dv-pod \
+helm upgrade my-dv-pod obol/dv-pod --version 0.24.0 -n dv-pod \
   --reset-then-reuse-values \
   --set='serviceMonitor.enabled=true'
 ```

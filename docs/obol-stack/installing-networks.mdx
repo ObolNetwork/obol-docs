@@ -98,7 +98,27 @@ Deploy a full Ethereum node with configurable execution and consensus clients.
 | `--execution-memory` | Memory limit for the execution client | a size, e.g. `16Gi` | sized per network, mode and client |
 | `--consensus-memory` | Memory limit for the consensus client | a size, e.g. `8Gi` | sized per network and client |
 
-¹ [Silver](https://github.com/gattaca-com/silver) is in alpha and its image runs on x86-64 (amd64) machines only, not Apple Silicon. Try it on a testnet first. It needs Obol Stack v0.18.0 or later.
+¹ [Silver](https://github.com/gattaca-com/silver) is in alpha. Try it on a testnet first. It needs Obol Stack v0.18.0 or later. From v0.19.0 it runs on amd64 and arm64 machines, including Apple Silicon; v0.18 ran it on amd64 only. Moving a Silver node from v0.18 to v0.19 needs a fresh checkpoint sync, see [Upgrades and your own image tags](#upgrades-and-your-own-image-tags).
+
+### Client versions
+
+Each Obol Stack release pins one version of every client. `obol network sync` moves a node to the versions of the `obol` you run.
+
+| Execution client | v0.19.0 | Consensus client | v0.19.0 |
+| --- | --- | --- | --- |
+| reth (default) | v2.11.0 | lighthouse (default) | v8.3.3 |
+| geth | v1.17.10 | prysm | v7.3.2 |
+| nethermind | 2.3.0-rc | teku | 26.11.0 |
+| besu | 26.11.3 | nimbus | v26.10.2 |
+| erigon | v3.8.2 | lodestar | v1.51.0 |
+| | | grandine | 2.0.6 |
+| | | silver | v0.1.0-alpha.23 |
+
+Nethermind is on a release candidate because 2.2.2 doesn't know the Sepolia Amsterdam fork, which activated on 2026-10-06.
+
+:::warning[Hoodi's Gloas/Amsterdam fork]
+Hoodi's Gloas/Amsterdam fork is planned for epoch 143616, at 2026-12-15 19:12:24 UTC. In Obol Stack v0.19.0 only Besu 26.11.3 and Silver alpha.23 schedule it. The other clients, including the default reth and Lighthouse, need a later Obol Stack release. If you run a Hoodi node, upgrade the Obol Stack and run `obol network sync` before the fork, or your node stops following Hoodi.
+:::
 
 ### Examples
 
@@ -219,13 +239,37 @@ obol -o json network status ethereum/<id>
 
 For each Ethereum deployment it prints the pods, the execution client's sync state, head block, peers and version, the beacon node's sync distance, peers and version, and a one-line verdict such as `synced`, `syncing` (with progress), `el_offline` or `unreachable`. Wait for `synced` before you point validators at the node.
 
-The node's APIs aren't published on `obol.stack`; they are only reachable inside the cluster, at `http://ethereum-execution.ethereum-<id>.svc.cluster.local:8545` and `http://ethereum-beacon.ethereum-<id>.svc.cluster.local:5052`. To query them from your machine, port-forward:
+From v0.19.0, a node stopped with `obol network stop` shows since when it has been down, and roughly how many slots behind it will be when you start it again.
+
+The node's APIs aren't published on `obol.stack`; they are only reachable inside the cluster, at `http://ethereum-execution.ethereum-<id>.svc.cluster.local:8545` and `http://ethereum-beacon.ethereum-<id>.svc.cluster.local:5052`. To query them from your machine (v0.19.0 or later):
 
 ```shell
-obol kubectl -n ethereum-<id> port-forward svc/ethereum-execution 8545:8545 &
+obol network expose ethereum/<id> --execution &
 curl -s http://127.0.0.1:8545 -X POST -H 'Content-Type: application/json' \
   -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
+
+On older versions, port-forward instead: `obol kubectl -n ethereum-<id> port-forward svc/ethereum-execution 8545:8545 &`.
+
+### Use the node from Docker containers
+
+`obol network expose` (v0.19.0 or later) forwards a node's beacon API (`--beacon`, port 5052) and execution JSON-RPC (`--execution`, port 8545) to a local address, so Docker containers on the same machine can use it: a Charon node, a test validator client. With neither flag it forwards both. It runs in the foreground until Ctrl-C, checks the APIs every 15 seconds and reconnects when a pod restarts. It never exposes the engine API.
+
+```shell
+# Docker Desktop: containers reach 127.0.0.1 as host.docker.internal
+obol network expose ethereum/<id> --beacon
+#   charon --beacon-node-endpoints=http://host.docker.internal:5052
+
+# Linux: bind the docker0 bridge address and use it from the container
+obol network expose ethereum/<id> --beacon --bind 172.17.0.1 --beacon-port 15052
+#   charon --beacon-node-endpoints=http://172.17.0.1:15052
+```
+
+`--bind` accepts loopback and private addresses. Binding anything else, including `0.0.0.0`, needs `--allow-public`.
+
+:::danger
+The node APIs have no authentication. Don't use `--allow-public` unless a firewall keeps the port off the internet.
+:::
 
 To look at the pods and logs directly:
 
@@ -303,6 +347,62 @@ $EDITOR ~/.config/obol/networks/<network>/<id>/values.yaml
 # Re-deploy (auto-selects if only one deployment, otherwise specify)
 obol network sync <network>/<id>
 ```
+
+### Upgrades and your own image tags {#upgrades-and-your-own-image-tags}
+
+`obol network sync` renders each deployment from the network files built into your `obol`, so a new `obol` brings new client versions and template fixes. After upgrading the Obol Stack, run `obol network sync` for each node.
+
+From v0.19.0, sync checks the running images first:
+
+* **Hand changes are reverted.** If you changed a client's image in the cluster (`obol kubectl set image …`), sync names the image it is about to replace. To keep your own settings, put them in `overrides.yaml` next to the deployment's `values.yaml` (`~/.config/obol/networks/ethereum/<id>/overrides.yaml`). It is merged last into the node's chart values and kept across upgrades:
+
+  ```yaml
+  # Pin Silver to a specific release
+  silver:
+    image:
+      tag: v0.1.0-alpha.23
+  ```
+
+* **Some upgrades can't reuse the existing data.** Silver changed its storage format in v0.1.0-alpha.18, and Obol Stack v0.18 ran alpha.13, so every Silver node needs a fresh checkpoint sync when it moves to v0.19. Sync detects this, prints the steps and asks first; without a terminal it needs `--yes`. It never deletes data itself:
+
+  ```shell
+  obol network stop ethereum/<id>
+  obol network sync ethereum/<id> --yes   # new image, still stopped
+  sudo find ~/.local/share/obol/ethereum-<id>/consensus-silver-<network> -mindepth 1 -delete
+  obol network start ethereum/<id>        # Silver checkpoint-syncs from scratch
+  ```
+
+  Sync prints the exact data path for your deployment. Only the beacon node's data is removed; the execution client keeps its data.
+
+:::note
+A StatefulSet doesn't roll a pod that never became ready, so a client that was crash-looping before the upgrade would keep the old spec. From v0.19.0, `obol network sync` handles this: after up to a minute it deletes such pods (only ones that were never ready) so they are recreated from the new spec, and their data is kept. If you applied a change some other way, delete the pod yourself, for example `obol kubectl -n ethereum-<id> delete pod ethereum-beacon-0`.
+:::
+
+`obol doctor` warns when a node's client keeps restarting (three or more restarts, the last one within 24 hours) and prints the `obol kubectl … logs --previous` command that shows why.
+
+### Silver
+
+Silver is an alpha client. Notes for running it in the Obol Stack (v0.19.0):
+
+* Its beacon API only answers requests whose `Host` is an IP address, `localhost`, or a name the Stack configures: the deployment's `ethereum-beacon` service names and `host.docker.internal`. Other names get `403 host not allowed`. To allow more, set `silver.config` in `overrides.yaml`. It replaces the Stack's whole block, so repeat its lines:
+
+  ```yaml
+  silver:
+    config: |
+      beacon_api_allowed_hosts = ["ethereum-beacon", "ethereum-beacon.ethereum-<id>", "ethereum-beacon.ethereum-<id>.svc", "ethereum-beacon.ethereum-<id>.svc.cluster.local", "host.docker.internal", "my-name"]
+      metrics.enabled = true
+      metrics.bind = "0.0.0.0:5054"
+  ```
+
+* Its metrics are on port 5054, not on the API port. The Stack's Prometheus scrapes them there.
+* If Silver misbehaves, run a second node with the default consensus client next to it. It gets its own namespace and data:
+
+  ```shell
+  obol network install ethereum --network hoodi --consensus-client lighthouse --id hoodi-lighthouse
+  obol network sync ethereum/hoodi-lighthouse
+  ```
+
+  Then point whatever used the Silver node, such as a dv-pod's `charon.beaconNodeEndpoints`, at `ethereum-beacon.ethereum-hoodi-lighthouse`. On Hoodi, Lighthouse in v0.19.0 doesn't schedule the Gloas fork (see [Client versions](#client-versions)).
 
 ### Delete a deployment
 
